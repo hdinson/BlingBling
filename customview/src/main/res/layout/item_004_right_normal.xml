@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="3dp"
+                                    app:cardElevation="3dp"
+                                    app:cardCornerRadius="2dp">
+
+    <dinson.customview.weight.AspectRatioView.HeImageView
+        android:id="@id/iv_img"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:scaleType="centerCrop"
+        app:aspectRatio="1"/>
+
+
+    <TextView
+        android:id="@id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#66000000"
+        android:gravity="center_horizontal"
+        android:padding="2dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"/>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">BLingBLing</string>
+
+    <!--首页字段-->
+    <string name="test_layout_title">TestLayout</string>
+    <string name="test_layout_desc">An activity for testing.</string>
+    <string name="test_layout_img">http://ondlsj2sn.bkt.clouddn.com/FlA4kpg5v0ulNUEN0eAF00U1w4js.jpg</string>
+    <!--001-->
+    <string name="facebook_title">FaceBook-Shimmer</string>
+    <string name="facebook_desc">Add a shimmering effect to any view in your app.</string>
+    <string name="facebook_img">http://ondlsj2sn.bkt.clouddn.com/FteOs5Db3TGEC5PfiCwhCsTPdrx-.png</string>
+   <!--002-->
+    <string name="qqnavi_title">QQNaviView</string>
+    <string name="qqnavi_desc">Mimic QQ navigation bar</string>
+    <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FnRguu4R36sUey-iEdyqTIbXpQEa.jpg</string>
+   <!--003-->
+    <string name="diagonal_layout_title">DiagonalLayout</string>
+    <string name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design</string>
+    <string name="diagonal_layout_img">http://ondlsj2sn.bkt.clouddn.com/FsoyL8Ny12P4AUbz-4QP-URItTEW.png</string>
+    <!--004-->
+    <string name="ganged_recycle_title">GangedRecycleView</string>
+    <string name="ganged_recycle_desc">With Diagonal Layout explore new styles and approaches on material design</string>
+    <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/Fv0lWW2GgFzFgErKD7iIIlXPtAf8.jpg</string>
+
+
+    <string name="qz_introduce">\u3000\u3000Quanzhou was founded in 718, the sixth year of Kaiyuan in the Tang Dynasty, with other names \"Coraltree City\", \"Carp City\" and Wenling. Located on the lower reaches of the Jin River in the southeast of Fujian by the sea, it is a time-honoured city of civilization and a famous hometown for numerous overseas Chinese and Taiwan compatriots.
+\n\n\u3000\u3000From old Quanzhou Frefecture to today\'s Quanzhou City, it has always been a political , economic and cultural centre of the Jin River basin. The present city administrates Jinjiang, Nanan, Huian, Anxi, Yongchun and Dehua, covering an area of 10,865 km2,with 5,200,000 population.
+\n\n\u3000\u3000Quanzhou was a busy city for ocean transportation and foreign trades in anicent times. As early as the Neolithic Age, man began to settle here, and later developments enabled it to become a prosperous open port city in the Tang and five Dynasties.
+\n\n\u3000\u3000The Song and Yuan dynasties saw the old \"Coraltree Port\" become one of the World\'s major port and the starting point of the \"Silk Road on the Sea\", marking the golden age of ocean transportation and foreign trades, tieh its dealing with about a huandred nations.
+\n\n\u3000\u3000Quanzhou is well endowed with beautiful scenery and natural resources, and is distinctive for its ancient and unsophisticatted custom. The historic sites enjoying a long history of reputation include the East and Weat Pagodas at the Kaiyuan Temple, the He Zuo\'s Tomb at the Qingjing Mosque, Stone Old Saint, ruins of Manichaean church, Luoyang Bridge and Five-Mile Bridge, among the two huandred attracttions. The native products such as Tieguanyin Tea, Dehua porcelain and Huian stonecarving have long been sought after for their high quality and fame. The ancient Southern Music, Gaojia Opera and Liyuan Opera, like the melodious local dialect flavour of Jin and Tang Dynasties.</string>
+
+
+    <!--iconfont-->
+    <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
+
+</resources>
