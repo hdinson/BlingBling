@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="QQNaviView">
+    <attr name="iconWidth" format="dimension"/>
+    <attr name="iconHeight" format="dimension"/>
+    <attr name="bigIconSrc" format="reference"/>
+    <attr name="smallIconSrc" format="reference"/>
+    <attr name="bigIconSrcCheck" format="reference"/>
+    <attr name="smallIconSrcCheck" format="reference"/>
+    <attr name="range" format="float"/>
+  </declare-styleable>
+</resources>
