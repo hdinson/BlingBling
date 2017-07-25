@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpHelper {
 
 
-    private static final int DEFAULT_TIMEOUT = 30;
+    private static final int DEFAULT_TIMEOUT = 10;
 
     private Retrofit retrofit;
 
@@ -60,7 +60,6 @@ public class HttpHelper {
             LogUtils.i("====================================================================");
             LogUtils.i(request.toString());
             LogUtils.i(request.headers().toString());
-            LogUtils.i("body : " + request.body().contentLength());
             long t1 = System.nanoTime();
             okhttp3.Response response = chain.proceed(chain.request());
             long t2 = System.nanoTime();

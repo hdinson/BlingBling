@@ -81,12 +81,11 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
 
         Observable<DailyList> daily = mOneApi.getDaily();
-        daily.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        daily.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DailyList>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        LogUtils.i("onSubscribe() called with: d = [" + d + "]");
                     }
 
                     @Override
@@ -97,10 +96,12 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
                     @Override
                     public void onError(Throwable e) {
+                        LogUtils.i("onError() called with: e = [" + e + "]");
                     }
 
                     @Override
                     public void onComplete() {
+                        LogUtils.i("onComplete() called");
                     }
                 });
     }

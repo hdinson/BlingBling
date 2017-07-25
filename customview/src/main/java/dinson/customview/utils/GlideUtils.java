@@ -33,7 +33,7 @@ public class GlideUtils {
         }
 
         RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.default_image)
-                .error(R.drawable.default_image).diskCacheStrategy(DiskCacheStrategy.RESOURCE).dontAnimate();
+                .error(R.drawable.default_image).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate();
         Glide.with(context).load(url).apply(requestOptions).into(view);
     }
 

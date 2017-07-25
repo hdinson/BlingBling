@@ -4,8 +4,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@color/window_bg"
-          android:gravity="center_horizontal"
-          android:padding="2dp"
+          android:padding="5dp"
           android:textColor="@color/textSecond"
-          android:textSize="14sp"/>
+          android:textSize="16sp"/>
 
