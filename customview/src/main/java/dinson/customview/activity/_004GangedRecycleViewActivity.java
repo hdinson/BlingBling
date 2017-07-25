@@ -58,12 +58,12 @@ public class _004GangedRecycleViewActivity extends BaseActivity {
         RecyclerView rvRight = (RecyclerView) findViewById(R.id.rv_right);
 
         rvLeft.setLayoutManager(new LinearLayoutManager(this));
-        GridLayoutManager gridManager = new GridLayoutManager(this, 4);
+        GridLayoutManager gridManager = new GridLayoutManager(this, 3);
         rvRight.setLayoutManager(gridManager);
         gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                return rightDatas.get(position).isTitle()?4:1;
+                return rightDatas.get(position).isTitle()?3:1;
             }
         });
 

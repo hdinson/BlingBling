@@ -14,9 +14,9 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-           <ImageView
+            <ImageView
                 android:id="@+id/fiv_heard"
                 android:layout_width="match_parent"
                 android:layout_height="265dp"
@@ -48,80 +48,90 @@
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <dinson.customview.weight.diagonallayout.DiagonalLayout
-            android:id="@+id/diagonalLayout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:elevation="20dp"
-            app:diagonal_angle="10"
-            app:diagonal_direction="right"
-            app:diagonal_position="top">
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rv_follow"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@android:color/white">
-
-                <TextView
-                    android:id="@+id/follow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="32dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="Following"
-                    android:textColor="#3E3E3E"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/follow"
-                    android:layout_below="@id/follow"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="1.9K"
-                    android:textColor="#3E3E3E"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-
-
-                <TextView
-                    android:id="@+id/followers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/follow"
-                    android:layout_marginEnd="32dp"
-                    android:layout_toStartOf="@id/follow"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="Followers"
-                    android:textColor="#3E3E3E"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/followers"
-                    android:layout_below="@id/followers"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="3.5K"
-                    android:textColor="#3E3E3E"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
-
-            <TextView
+            <dinson.customview.weight.diagonallayout.DiagonalLayout
+                android:id="@+id/diagonalLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="20dp"
+                android:elevation="20dp"
+                app:diagonal_angle="10"
+                app:diagonal_direction="right"
+                app:diagonal_position="top">
+
+
+                <RelativeLayout
+                    android:id="@+id/rv_follow"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:id="@+id/follow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="32dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Following"
+                        android:textColor="#3E3E3E"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/follow"
+                        android:layout_below="@id/follow"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="1.9K"
+                        android:textColor="#3E3E3E"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/followers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/follow"
+                        android:layout_marginEnd="32dp"
+                        android:layout_toStartOf="@id/follow"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Followers"
+                        android:textColor="#3E3E3E"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/followers"
+                        android:layout_below="@id/followers"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="3.5K"
+                        android:textColor="#3E3E3E"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+                </RelativeLayout>
+
+
+            </dinson.customview.weight.diagonallayout.DiagonalLayout>
+
+            <TextView
+                android:id="@id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@android:color/white"
+                android:lineSpacingExtra="5dp"
                 android:padding="16dp"
-                android:text="@string/qz_introduce"
+                android:elevation="20dp"
                 android:textColor="@color/textPrimary"
-                android:textSize="14sp"/>
-        </dinson.customview.weight.diagonallayout.DiagonalLayout>
+                android:textSize="16sp"/>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
 
@@ -132,8 +142,8 @@
         android:layout_marginStart="32dp"
         android:background="@drawable/circle_white"
         android:elevation="10dp"
-        app:layout_behavior="@string/app_bar_behavior"
         app:layout_anchor="@id/rv_follow"
-        app:layout_anchorGravity="center_vertical"/>
+        app:layout_anchorGravity="center_vertical"
+        app:layout_behavior="@string/app_bar_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

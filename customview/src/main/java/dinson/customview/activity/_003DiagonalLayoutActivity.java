@@ -2,6 +2,7 @@ package dinson.customview.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.RelativeSizeSpan;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import dinson.customview.R;
 import dinson.customview._globle.BaseActivity;
+import dinson.customview.utils.FileUtils;
 import dinson.customview.utils.GlideUtils;
 import dinson.customview.weight.CircleImageView;
 
@@ -43,6 +45,10 @@ public class _003DiagonalLayoutActivity extends BaseActivity {
         String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FsoyL8Ny12P4AUbz-4QP-URItTEW.png";
         CircleImageView cv_circleview = (CircleImageView) findViewById(R.id.cv_circleview);
         GlideUtils.setCircleImage(this, imgUrl, cv_circleview);
+
+        TextView tv_content = (TextView) findViewById(R.id.tv_content);
+        String quanZhou = FileUtils.getTextFromAssets(this, "QuanZhou");
+        tv_content.setText(Html.fromHtml(quanZhou));
 
     }
 }
