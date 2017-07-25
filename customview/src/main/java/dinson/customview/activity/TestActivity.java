@@ -3,7 +3,13 @@ package dinson.customview.activity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -12,16 +18,38 @@ import javax.crypto.spec.SecretKeySpec;
 import dinson.customview.R;
 import dinson.customview._globle.BaseActivity;
 import dinson.customview.api.OneApi;
+import dinson.customview.api.QzBusApi;
+import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
+import dinson.customview.http.LoggingInterceptor;
+import dinson.customview.utils.LogUtils;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 
 public class TestActivity extends BaseActivity {
 
     private TextView mTvDesc;
+    //手动创建一个OkHttpClient并设置超时时间
+    OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(new LoggingInterceptor());//添加拦截器 日志;
+
+    QzBusApi mApi = new Retrofit.Builder()
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .baseUrl("http://wap.bus.qzjtjt.com")
+            .client(builder.build())
+            .build().create(QzBusApi.class);
+    private EditText mEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +61,8 @@ public class TestActivity extends BaseActivity {
 
     private void initUI() {
         mTvDesc = (TextView) findViewById(R.id.tv_desc);
+        mEditText = (EditText) findViewById(R.id.et_route);
+
 
 
     }
@@ -41,39 +71,79 @@ public class TestActivity extends BaseActivity {
     public void doPost(View view) {
 
 
+        //  qiniuyun();
+
+
+        // qzBus();
+
+
+          jsoupTest();
+
+
+    }
+
+    private void jsoupTest() {
+
+        Observable.just("http://www.dinson.win/")
+                .map(new Function<String, Document>() {
+                    @Override
+                    public Document apply(String s) throws Exception {
+                        Document document = Jsoup.connect(s).get();
+                        return document;
+                    }
+                }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Document>() {
+                    @Override
+                    public void accept(Document document) throws Exception {
+                        mTvDesc.setText("");
+                        mTvDesc.append(document.title());
+                        mTvDesc.append(document.body().toString());
+                    }
+                });
+    }
+
+    private void qzBus() {
+
+
+        Call<String> call = mApi.queryRoute(mEditText.getText().toString());
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                mTvDesc.setText(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                LogUtils.i("onFailure() called with: call = [" + call + "], t = [" + t + "]");
+            }
+        });
+    }
+
+    private void qiniuyun() {
         String url = "dinson-blog:mh_ic_323.png"; // 编码前
         String url_encode = Base64.encodeToString(url.getBytes(), Base64.DEFAULT).trim();//  编码后
 
-        String token ="QBox "+ getToken("/delete/"+url_encode+"\n");
-        mTvDesc.append("url_encode : "+url_encode +"\ntoken : "+token);
+        String token = "QBox " + getToken("/delete/" + url_encode + "\n");
+        mTvDesc.append("url_encode : " + url_encode + "\ntoken : " + token);
 
         OneApi oneApi = HttpHelper.getRetrofit().create(OneApi.class);
-        Observable<String> observable = oneApi.postDelete(url_encode  ,token.trim());
+        Observable<String> observable = oneApi.postDelete(url_encode, token.trim());
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
+                .subscribe(new BaseObserver<String>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(String value) {
+                    public void onHandlerSuccess(String value) {
                         mTvDesc.append(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mTvDesc.append(e.toString()+"\n");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        mTvDesc.append("onComplete\n");
+                        super.onError(e);
+                        mTvDesc.append(e.toString() + "\n");
                     }
                 });
-
-
-
     }
 
 
@@ -97,10 +167,10 @@ accessToken = "MY_ACCESS_KEY:FXsYh0wKHYPEsIAgdPD9OfjkeEM="*/
         String SecretKey = "CGBwKTzZTcaGcD0NZFocIrhKG5uJNL1yqEwYXdvN";
 
         String sha1 = hmac_sha1(url, SecretKey);
-        mTvDesc.append("sha1 : "+sha1 + "\n");
+        mTvDesc.append("sha1 : " + sha1 + "\n");
 
         String base64 = Base64.encodeToString(sha1.getBytes(), Base64.DEFAULT);
-        mTvDesc.append("base64 : "+base64 + "\n");
+        mTvDesc.append("base64 : " + base64 + "\n");
 
         return AccessKey + ":" + base64;
 

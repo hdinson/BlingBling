@@ -16,13 +16,13 @@ public class CacheUtils {
 
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.e("put to cache>>>"+json);
+        LogUtils.v("put to cache >> "+json);
         setCache("home_heardlist", json, 3600000);
     }
 
     public static DailyList getMainHeardCache() {
         String homelist = getCache("home_heardlist");
-        LogUtils.e("get from cache>>"+homelist);
+        LogUtils.v("get from cache >> "+homelist);
         if (homelist == null) return null;
         return new Gson().fromJson(homelist, DailyList.class);
     }
