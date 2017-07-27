@@ -1,5 +1,8 @@
 package dinson.customview.activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -9,6 +12,8 @@ import android.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.crypto.Mac;
@@ -22,7 +27,9 @@ import dinson.customview.api.QzBusApi;
 import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
 import dinson.customview.http.LoggingInterceptor;
+import dinson.customview.utils.DateUtils;
 import dinson.customview.utils.LogUtils;
+import dinson.customview.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -64,9 +71,6 @@ public class TestActivity extends BaseActivity {
         mEditText = (EditText) findViewById(R.id.et_route);
 
 
-
-
-
     }
 
 
@@ -79,10 +83,42 @@ public class TestActivity extends BaseActivity {
         // qzBus();
 
 
-          jsoupTest();
+        // jsoupTest();
+        AlarmTest();
 
 
     }
+
+    private void AlarmTest() {
+
+
+        if (StringUtils.isEmpty(mEditText.getText().toString())) return;
+
+        int time = Integer.parseInt(mEditText.getText().toString());
+
+
+        //设定一个五秒后的时间
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.SECOND, time);
+
+
+        // 获取AlarmManager对象
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        // 创建Intent对象，action为android.intent.action.ALARM_RECEIVER
+        Intent intent = new Intent("android.intent.action.ALARM_RECEIVER");
+        PendingIntent operation = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+//        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time*1000,operation);
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, time*1000, operation);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), operation);
+        LogUtils.i(DateUtils.int2Str(DateUtils.getCurrentTimeMillis10()));
+        LogUtils.i(String.format(Locale.CHINA, "设置了闹钟... %ds后", time));
+
+
+    }
+
 
     private void jsoupTest() {
 
