@@ -26,6 +26,7 @@ import dinson.customview.api.OneApi;
 import dinson.customview.entity.ClassBean;
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
+import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
 import dinson.customview.listener.MainItemTouchHelper;
 import dinson.customview.listener.OnItemTouchMoveListener;
@@ -35,10 +36,8 @@ import dinson.customview.utils.LogUtils;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -82,26 +81,11 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
         Observable<DailyList> daily = mOneApi.getDaily();
         daily.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DailyList>() {
+                .subscribe(new BaseObserver<DailyList>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-                        LogUtils.i("onSubscribe() called with: d = [" + d + "]");
-                    }
-
-                    @Override
-                    public void onNext(DailyList value) {
+                    public void onHandlerSuccess(DailyList value) {
                         CacheUtils.setMainHeardCache(value);
                         setHeardList(value);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.i("onError() called with: e = [" + e + "]");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        LogUtils.i("onComplete() called");
                     }
                 });
     }
@@ -139,25 +123,13 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     public void getHearDetailFromServer(Observable<DailyDetail>[] arrs) {
         Observable.mergeArray(arrs).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DailyDetail>() {
+                .subscribe(new BaseObserver<DailyDetail>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(DailyDetail value) {
+                    public void onHandlerSuccess(DailyDetail value) {
                         CacheUtils.setDailyDetail(value);
                         initListViews(value);
                         mPagerAdapter.setListViews(mViewPagerViews);// 重构adapter对象
                         mPagerAdapter.notifyDataSetChanged();// 刷新
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
                     }
                 });
     }
@@ -231,26 +203,14 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             if (position == mViewPager.getAdapter().getCount() - 1) {// 滑动到最后一页
                 mOneApi.getDetail(needLoadPagerId).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<DailyDetail>() {
+                        .subscribe(new BaseObserver<DailyDetail>() {
                             @Override
-                            public void onSubscribe(Disposable d) {
-                            }
-
-                            @Override
-                            public void onNext(DailyDetail value) {
+                            public void onHandlerSuccess(DailyDetail value) {
                                 CacheUtils.setDailyDetail(value);
                                 initListViews(value);// listViews添加数据
                                 mPagerAdapter.setListViews(mViewPagerViews);// 重构adapter对象  这是一个很重要
                                 mPagerAdapter.notifyDataSetChanged();// 刷新
                                 needLoadPagerId--;
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                            }
-
-                            @Override
-                            public void onComplete() {
                             }
                         });
             }

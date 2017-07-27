@@ -196,7 +196,6 @@ accessToken = "MY_ACCESS_KEY:FXsYh0wKHYPEsIAgdPD9OfjkeEM="*/
             reString = Base64.encodeToString(text1, Base64.DEFAULT);
 
         } catch (Exception e) {
-            // TODO: handle exception
         }
 
         return reString;
