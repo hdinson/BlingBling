@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
     int needLoadPagerId;
     private ItemTouchHelper mTouchHelper;//处理条目移动的帮助类
-    private MainAdapter mMainAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +155,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
      */
     private void initUI() {
         mRvList = (RecyclerView) findViewById(R.id.rvList);
-        mMainAdapter = new MainAdapter(this, mDatas, this);
+        MainAdapter mMainAdapter = new MainAdapter(this, mDatas, this);
         mTouchHelper = new ItemTouchHelper(new MainItemTouchHelper(mMainAdapter));
 
         mTouchHelper.attachToRecyclerView(mRvList);
@@ -247,9 +247,8 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                     @Override
                     public String apply(String s) throws Exception {
 
-                        String path = Glide.with(MainActivity.this).load(s).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get().getPath();
+                        return Glide.with(MainActivity.this).load(s).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get().getPath();
 
-                        return path;
                     }
                 }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<String>() {

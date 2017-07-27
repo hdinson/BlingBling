@@ -48,6 +48,7 @@ public class _003DiagonalLayoutActivity extends BaseActivity {
 
         TextView tv_content = (TextView) findViewById(R.id.tv_content);
         String quanZhou = FileUtils.getTextFromAssets(this, "QuanZhou");
+
         tv_content.setText(Html.fromHtml(quanZhou));
 
     }
