@@ -24,14 +24,6 @@
         <activity android:name=".activity._002QQNaviViewActivity"/>
         <activity android:name=".activity._003DiagonalLayoutActivity"/>
         <activity android:name=".activity._004GangedRecycleViewActivity"/>
-
-        <receiver android:name=".activity.AlarmReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.ALARM_RECEIVER" /><!-- 广播接收的Intent -->
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
     </application>
 
 </manifest>

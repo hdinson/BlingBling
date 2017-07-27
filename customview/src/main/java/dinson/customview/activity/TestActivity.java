@@ -84,7 +84,7 @@ public class TestActivity extends BaseActivity {
 
 
         // jsoupTest();
-        AlarmTest();
+        //AlarmTest();
 
 
     }
