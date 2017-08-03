@@ -1,22 +1,22 @@
 package dinson.customview.weight.AspectRatioView;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 /**
  * 自带宽高比属性的view
  */
 
-public class AspectRatioViewPager extends ViewPager {
+public class AspectRatioRecycleView extends RecyclerView {
 
     private AspectRatioSettings mSettings;
 
-    public AspectRatioViewPager(Context context) {
+    public AspectRatioRecycleView(Context context) {
         this(context, null);
     }
 
-    public AspectRatioViewPager(Context context, AttributeSet attrs) {
+    public AspectRatioRecycleView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mSettings = new AspectRatioSettings(context, attrs);
     }
