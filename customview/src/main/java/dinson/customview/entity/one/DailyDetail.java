@@ -86,7 +86,10 @@ public class DailyDetail {
         private int sharenum;
         private int commentnum;
 
-        protected DataBean(Parcel in) {
+        public DataBean() {
+        }
+
+        public DataBean(Parcel in) {
             hpcontent_id = in.readString();
             hp_title = in.readString();
             author_id = in.readString();

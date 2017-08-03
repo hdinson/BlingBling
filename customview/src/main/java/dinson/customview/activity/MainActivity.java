@@ -2,41 +2,31 @@ package dinson.customview.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import dinson.customview.R;
 import dinson.customview._globle.BaseActivity;
-import dinson.customview.adapter.MainAdapter;
-import dinson.customview.adapter.MainPagerAdapter;
+import dinson.customview.adapter.MainContentAdapter;
+import dinson.customview.adapter.MainHeadAdapter;
 import dinson.customview.api.OneApi;
 import dinson.customview.entity.ClassBean;
 import dinson.customview.entity.one.DailyDetail;
-import dinson.customview.entity.one.DailyList;
-import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
 import dinson.customview.listener.MainItemTouchHelper;
 import dinson.customview.listener.OnItemTouchMoveListener;
 import dinson.customview.utils.CacheUtils;
-import dinson.customview.utils.GlideUtils;
 import dinson.customview.utils.LogUtils;
+import dinson.customview.utils.SPUtils;
+import dinson.customview.weight.AspectRatioView.AspectRatioRecycleView;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -44,13 +34,16 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity implements OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
 
-    RecyclerView mRvList;
-    final int MAX_HEARD_PIC = 3;
-    private ArrayList<ClassBean> mDatas = new ArrayList<>(); //内容的数据集
-    private ArrayList<View> mViewPagerViews = new ArrayList<>(); //viewpager的数据集
+    private RecyclerView mRvContent;
+    private AspectRatioRecycleView mRvHead;
+
+    private ArrayList<ClassBean> mContentDatas = new ArrayList<>(); //内容的数据集
+    private ArrayList<DailyDetail> mHeadDatas = new ArrayList<>();
+
+    final int MAX_HEAD_PIC = 10;
+    //private ArrayList<View> mViewPagerViews = new ArrayList<>(); //viewpager的数据集
     private OneApi mOneApi = HttpHelper.getRetrofit().create(OneApi.class);
-    private ViewPager mViewPager;
-    private MainPagerAdapter mPagerAdapter = new MainPagerAdapter(mViewPagerViews);
+    //private MainPagerAdapter mPagerAdapter = new MainPagerAdapter(mViewPagerViews);
 
 
     int needLoadPagerId;
@@ -63,14 +56,149 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         setContentView(R.layout.activity_main);
 
 
-        initData();
-        initUI();
+        long start = System.currentTimeMillis();
 
+        initContent();
+        initHead();
 
-        initHeardList();
+        long end = System.currentTimeMillis();
+        LogUtils.e(String.format(Locale.CHINA, "HomeActivity started %d ms", end - start));
     }
 
-    private void initHeardList() {
+    /**
+     * 初始化内容
+     */
+    private void initContent() {
+        mContentDatas.add(new ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
+            _001ShimmerActivity.class, getString(R.string.facebook_img)));
+        mContentDatas.add(new ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
+            _002QQNaviViewActivity.class, getString(R.string.qqnavi_img)));
+        mContentDatas.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
+            _003DiagonalLayoutActivity.class, getString(R.string.diagonal_layout_img)));
+        mContentDatas.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
+            _004GangedRecycleViewActivity.class, getString(R.string.ganged_recycle_img)));
+        mContentDatas.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
+            TestActivity.class, getString(R.string.test_layout_img)));
+
+
+        mRvContent = (RecyclerView) findViewById(R.id.rv_content);
+        MainContentAdapter mMainAdapter = new MainContentAdapter(this, mContentDatas, this);
+        mTouchHelper = new ItemTouchHelper(new MainItemTouchHelper(mMainAdapter));
+
+        mTouchHelper.attachToRecyclerView(mRvContent);
+        mRvContent.setLayoutManager(new LinearLayoutManager(this));
+        mRvContent.addItemDecoration(new LinearItemDecoration(this));
+        mRvContent.setAdapter(mMainAdapter);
+        mRvContent.addOnItemTouchListener(new OnItemClickListener(this, mRvContent, this));
+    }
+
+
+    /**
+     * 初始化首页one的数据
+     */
+    private void initHead() {
+        mRvHead = (AspectRatioRecycleView) findViewById(R.id.rv_head);
+        mRvHead.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRvHead.setAdapter(new MainHeadAdapter(this, mHeadDatas));
+
+
+        SPUtils.setLastPostId(this, 1789);
+
+
+        //获取首页的最新id，根据id查找对应的缓存
+        final int lastPostId = SPUtils.getLastPostId(this);
+        if (lastPostId == 0) return;
+
+        /*for (int i = 0, j = lastPostId; i < 10; i++, j--) {
+            DailyDetail dailyDetail = CacheUtils.getDailyDetail(j);
+            if (dailyDetail != null) {
+                mHeadDatas.add(dailyDetail);
+            }
+
+        }*/
+
+        Observable.just(lastPostId)
+            .map(new Function<Integer, ArrayList<DailyDetail>>() {
+                @Override
+                public ArrayList<DailyDetail> apply(Integer integer) throws Exception {
+                    ArrayList<DailyDetail> result = new ArrayList<DailyDetail>();
+                    for (int i = 0, j = integer; i < MAX_HEAD_PIC; i++, j--) {
+                        DailyDetail dailyDetail = CacheUtils.getDailyDetail(j);
+                        if (dailyDetail == null) continue;
+                        result.add(dailyDetail);
+                    }
+                    return result;
+                }
+            }).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<ArrayList<DailyDetail>>() {
+                @Override
+                public void accept(ArrayList<DailyDetail> dailyDetails) throws Exception {
+                    mHeadDatas.addAll(dailyDetails);
+                    LogUtils.d(mHeadDatas.size() + "---?");
+                }
+            });
+
+
+        LogUtils.d(mHeadDatas.size() + "--");
+
+
+       /* Observable.range(lastPostId, MAX_HEAD_PIC)
+            .map(new Function<Integer, DailyDetail>() {
+                @Override
+                public DailyDetail apply(Integer integer) throws Exception {
+                    int id = lastPostId * 2 - integer;
+                    return CacheUtils.getDailyDetail(id);
+                }
+            })
+            .filter(new Predicate<DailyDetail>() {
+                @Override
+                public boolean test(DailyDetail dailyDetail) throws Exception {
+                    return dailyDetail != null;
+                }
+            })
+            .collect(new Callable<ArrayList<DailyDetail>>() {
+                @Override
+                public ArrayList<DailyDetail> call() throws Exception {
+                    return mHeadDatas;
+                }
+            }, new BiConsumer<ArrayList<DailyDetail>, DailyDetail>() {
+                @Override
+                public void accept(ArrayList<DailyDetail> list, DailyDetail bean) throws Exception {
+                    list.add(bean);
+                }
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<ArrayList<DailyDetail>>() {
+                @Override
+                public void accept(ArrayList<DailyDetail> dailyDetails) throws Exception {
+                    LogUtils.e(dailyDetails.size() + "---");
+                }
+            });*/
+
+
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        startActivity(new Intent(this, mContentDatas.get(position).getName()));
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+    }
+
+    @Override
+    public void onItemTouchMove(RecyclerView.ViewHolder viewHolder) {
+        mTouchHelper.startDrag(viewHolder);
+    }
+
+
+    //******************************************************************************************************************************
+
+
+    /*private void initHeardList() {
         DailyList result = CacheUtils.getMainHeardCache();
 
         if (result != null && result.getData() != null && result.getData().size() > 0) {
@@ -132,57 +260,16 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                         mPagerAdapter.notifyDataSetChanged();// 刷新
                     }
                 });
-    }
+    }*/
 
-    /**
-     * 初始化数据
-     */
-    private void initData() {
-        mDatas.add(new ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
-                _001ShimmerActivity.class, getString(R.string.facebook_img)));
-        mDatas.add(new ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
-                _002QQNaviViewActivity.class, getString(R.string.qqnavi_img)));
-        mDatas.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
-                _003DiagonalLayoutActivity.class, getString(R.string.diagonal_layout_img)));
-        mDatas.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
-                _004GangedRecycleViewActivity.class, getString(R.string.ganged_recycle_img)));
-        mDatas.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
-                TestActivity.class, getString(R.string.test_layout_img)));
-    }
 
-    /**
-     * 初始化
-     */
-    private void initUI() {
-        mRvList = (RecyclerView) findViewById(R.id.rvList);
-        MainAdapter mMainAdapter = new MainAdapter(this, mDatas, this);
-        mTouchHelper = new ItemTouchHelper(new MainItemTouchHelper(mMainAdapter));
+    /*private void initUI() {
+        *//*mRvHead.addOnPageChangeListener(mPageChangeListener);// 设置页面滑动监听*//*
+        *//*mRvHead.setAdapter(mPagerAdapter);*//*
+    }*/
 
-        mTouchHelper.attachToRecyclerView(mRvList);
-        mRvList.setLayoutManager(new LinearLayoutManager(this));
-        mRvList.addItemDecoration(new LinearItemDecoration(this));
-        mRvList.setAdapter(mMainAdapter);
-        mRvList.addOnItemTouchListener(new OnItemClickListener(this, mRvList, this));
 
-        mViewPager = (ViewPager) findViewById(R.id.vp_heard);
-        mViewPager.addOnPageChangeListener(mPageChangeListener);// 设置页面滑动监听
-        mViewPager.setAdapter(mPagerAdapter);
-
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-        startActivity(new Intent(this, mDatas.get(position).getName()));
-    }
-
-    @Override
-    public void onItemLongClick(View view, int position) {
-    }
-
-    /**
-     * 页面监听事件
-     */
-    private OnPageChangeListener mPageChangeListener = new OnPageChangeListener() {
+    /*private OnPageChangeListener mPageChangeListener = new OnPageChangeListener() {
         public void onPageSelected(int position) {// 页面选择响应函数
             // 如果需要实现页面滑动时动态添加 请在此判断arg0的值
             // 当然此方式在必须在初始化ViewPager的时候给的页数必须>2
@@ -200,7 +287,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             }
 
 
-            if (position == mViewPager.getAdapter().getCount() - 1) {// 滑动到最后一页
+            if (position == mRvHead.getAdapter().getCount() - 1) {// 滑动到最后一页
                 mOneApi.getDetail(needLoadPagerId).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new BaseObserver<DailyDetail>() {
@@ -224,12 +311,9 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
         public void onPageScrollStateChanged(int state) {// 滑动状态改变
         }
-    };
+    };*/
 
-    /**
-     * listViews添加ImageView对象
-     */
-    private void initListViews(final DailyDetail bean) {
+    /*private void initListViews(final DailyDetail bean) {
         final ImageView iv = new ImageView(this);// 构造textView对象
         // 设置布局
         iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -255,7 +339,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                             @Override
                             public void accept(String path) throws Exception {
 
-                                LogUtils.e("CurrentItem:" + mViewPager.getCurrentItem() + " imgUrl:" +
+                                LogUtils.e("CurrentItem:" + mRvHead.getCurrentItem() + " imgUrl:" +
                                         bean.getData().getHp_img_url() + "  imgPath:" + path);
 
                                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -267,18 +351,12 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         });
 
         mViewPagerViews.add(iv);// 添加view
-    }
-
-    @Override
+    }*/
+    /*@Override
     protected void onDestroy() {
         super.onDestroy();
-        mViewPager.removeOnPageChangeListener(mPageChangeListener);
-    }
-
-    @Override
-    public void onItemTouchMove(RecyclerView.ViewHolder viewHolder) {
-        mTouchHelper.startDrag(viewHolder);
-    }
+        *//*mRvHead.removeOnPageChangeListener(mPageChangeListener);*//*
+    }*/
 
 
 }
