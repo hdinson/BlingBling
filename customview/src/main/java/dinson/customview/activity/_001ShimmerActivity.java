@@ -22,7 +22,7 @@ public class _001ShimmerActivity extends BaseActivity {
         setContentView(R.layout.activity__001_shimmer);
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mTvTitle = (TextView) findViewById(R.id.title);
+        mTvTitle = (TextView) findViewById(R.id.tv_title);
 
         mPresetButtons = new Button[]{
                 (Button) findViewById(R.id.preset_button0),

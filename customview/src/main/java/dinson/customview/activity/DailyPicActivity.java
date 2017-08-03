@@ -44,17 +44,17 @@ public class DailyPicActivity extends BaseActivity implements View.OnClickListen
 
         DailyDetail.DataBean data = getIntent().getParcelableExtra(EXTRA_DATA);
         String path = getIntent().getStringExtra(EXTRA_PATH);
-        ImageView iv_pic = (ImageView) findViewById(R.id.iv_pic);
-        iv_pic.setOnClickListener(this);
+        ImageView iv_img = (ImageView) findViewById(R.id.iv_img);
+        iv_img.setOnClickListener(this);
 
         Bitmap bitmap = BitmapFactory.decodeFile(path);
         int screenWidth = UIUtils.getScreenWidth(DailyPicActivity.this);
         int height = screenWidth * bitmap.getHeight() / bitmap.getWidth();
-        ViewGroup.LayoutParams para = iv_pic.getLayoutParams();
+        ViewGroup.LayoutParams para = iv_img.getLayoutParams();
         para.height = height;
         para.width = screenWidth;
-        iv_pic.setImageBitmap(bitmap);
-        iv_pic.setOnClickListener(this);
+        iv_img.setImageBitmap(bitmap);
+        iv_img.setOnClickListener(this);
 
         String content = data.getHp_content();
         int indexOfStop = content.lastIndexOf("。");
