@@ -13,7 +13,7 @@ public class LogUtils {
     /**
      * 方便过滤
      */
-    private static String FLAG = "--------->";
+    private static String FLAG = ">   ";
 
     /**
      * 以级别为 d 的形式输出LOG

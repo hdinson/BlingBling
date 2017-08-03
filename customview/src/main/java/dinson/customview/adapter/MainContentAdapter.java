@@ -22,21 +22,21 @@ import static dinson.customview.R.id.iv_one;
 /**
  * 主页适配器
  */
-public class MainAdapter extends CommonAdapter<ClassBean> implements OnItemMoveListener {
+public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnItemMoveListener {
 
     private final OnItemTouchMoveListener mMoveListener;
     private int[] mNumberImgs = new int[]{R.drawable.n_0, R.drawable.n_1, R.drawable.n_2, R.drawable.n_3,
             R.drawable.n_4, R.drawable.n_5, R.drawable.n_6, R.drawable.n_7, R.drawable.n_8, R.drawable.n_9};
 
 
-    public MainAdapter(Context context, List<ClassBean> dataList, OnItemTouchMoveListener touchMoveListener) {
+    public MainContentAdapter(Context context, List<ClassBean> dataList, OnItemTouchMoveListener touchMoveListener) {
         super(context, dataList);
         mMoveListener = touchMoveListener;
     }
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.item_main;
+        return R.layout.item_main_content;
     }
 
     @Override
