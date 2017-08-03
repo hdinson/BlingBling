@@ -38,18 +38,6 @@ public class GlideUtils {
         Glide.with(context).load(url).apply(requestOptions).into(view);
     }
 
-
-    public static void setImageCacheData(Context context, String url, ImageView view) {
-        if (url.endsWith(".svg") || url.endsWith(".SVG")) {
-            setSvgImage(context, url, view);
-            return;
-        }
-
-        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.def_img)
-            .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA).dontAnimate();
-        Glide.with(context).load(url).apply(requestOptions).into(view);
-    }
-
     private static void setSvgImage(Context context, String url, ImageView view) {
         GlideApp.with(context)
             .as(PictureDrawable.class)

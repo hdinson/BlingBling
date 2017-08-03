@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Locale;
 
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
@@ -16,13 +17,17 @@ public class CacheUtils {
 
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.v("put to cache >> "+json);
-        setCache("home_heardlist", json, 3600000);
+        LogUtils.v("put to cache >> " + json);
+        long deathLine = (long) DateUtils.getDataTimestamp(1) * 1000-System.currentTimeMillis();
+        LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine));
+        setCache("home_heardlist", json, deathLine);
+
+        // TODO: 2017/8/4 deathline
     }
 
     public static DailyList getMainHeardCache() {
         String homelist = getCache("home_heardlist");
-        LogUtils.v("get from cache >> "+homelist);
+        LogUtils.v("get from cache >> " + homelist);
         if (homelist == null) return null;
         return new Gson().fromJson(homelist, DailyList.class);
     }
@@ -36,6 +41,12 @@ public class CacheUtils {
         String cache = getCache("home_heard_detail" + id);
         if (cache == null) return null;
         return new Gson().fromJson(cache, DailyDetail.class);
+    }
+
+    public static boolean dailyDetailExists(int id) {
+        File cacheDir = UIUtils.getContext().getCacheDir();
+        File cacheFile = new File(cacheDir, MD5.encode("home_heard_detail" + id));
+        return cacheFile.exists();
     }
 
     //////////////////////////////////分割线//////////////////////////////////////////////////////
