@@ -15,6 +15,14 @@ public class DailyList {
     private int res;
     private List<Integer> data;
 
+    @Override
+    public String toString() {
+        return "DailyList{" +
+            "res=" + res +
+            ", data=" + data.toString() +
+            '}';
+    }
+
     public int getRes() {
         return res;
     }

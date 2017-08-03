@@ -3,11 +3,16 @@ package dinson.customview.adapter;
 import android.content.Context;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import dinson.customview.R;
 import dinson.customview.entity.one.DailyDetail;
-import dinson.customview.utils.GlideUtils;
+import dinson.customview.utils.LogUtils;
 import dinson.customview.weight.recycleview.CommonAdapter;
 import dinson.customview.weight.recycleview.CommonViewHolder;
 
@@ -16,9 +21,15 @@ import dinson.customview.weight.recycleview.CommonViewHolder;
  */
 public class MainHeadAdapter extends CommonAdapter<DailyDetail> {
 
+    private final RequestOptions mOptions;
+    private final DrawableTransitionOptions mTransitionOptions;
 
     public MainHeadAdapter(Context context, List<DailyDetail> dataList) {
         super(context, dataList);
+        LogUtils.d("MainHeadAdapter init");
+        mOptions = new RequestOptions()
+            .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
+        mTransitionOptions = new DrawableTransitionOptions().crossFade(500);
     }
 
     @Override
@@ -28,6 +39,7 @@ public class MainHeadAdapter extends CommonAdapter<DailyDetail> {
 
     @Override
     public void convert(CommonViewHolder holder, DailyDetail bean, int position) {
-        GlideUtils.setImageCacheData(mContext, bean.getData().getHp_img_url(), (ImageView) holder.getView(R.id.iv_img));
+        Glide.with(mContext).load(bean.getData().getHp_img_url()).transition(mTransitionOptions)
+            .apply(mOptions).into((ImageView) holder.getView(R.id.iv_img));
     }
 }

@@ -1,8 +1,8 @@
 package dinson.customview;
 
-import android.util.Base64;
-
 import org.junit.Test;
+
+import dinson.customview.utils.DateUtils;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -23,8 +23,13 @@ public class ExampleUnitTest {
 //         byte[] m = Base64.decode(base64Token,Base64.DEFAULT);// 解码后
 //        System.out.println(m+"-->");
 
-        String encodedString = Base64.encodeToString("whoislcj".getBytes(), Base64.DEFAULT);
-        System.out.println( encodedString);
+//        String encodedString = Base64.encodeToString("whoislcj".getBytes(), Base64.DEFAULT);
+//        System.out.println( encodedString);
+
+
+        long dataTimestamp = (long)DateUtils.getDataTimestamp(1)*1000-System.currentTimeMillis();
+        System.out.println("data:"+dataTimestamp);
+
 
     }
 

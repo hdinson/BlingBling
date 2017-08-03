@@ -17,19 +17,20 @@ import dinson.customview.adapter.MainHeadAdapter;
 import dinson.customview.api.OneApi;
 import dinson.customview.entity.ClassBean;
 import dinson.customview.entity.one.DailyDetail;
+import dinson.customview.entity.one.DailyList;
 import dinson.customview.http.HttpHelper;
 import dinson.customview.listener.MainItemTouchHelper;
 import dinson.customview.listener.OnItemTouchMoveListener;
 import dinson.customview.utils.CacheUtils;
 import dinson.customview.utils.LogUtils;
-import dinson.customview.utils.SPUtils;
 import dinson.customview.weight.AspectRatioView.AspectRatioRecycleView;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity implements OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
@@ -48,21 +49,20 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
     int needLoadPagerId;
     private ItemTouchHelper mTouchHelper;//处理条目移动的帮助类
+    private MainHeadAdapter mMainHeadAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        long start = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        long start = System.currentTimeMillis();
 
         initContent();
         initHead();
 
         long end = System.currentTimeMillis();
-        LogUtils.e(String.format(Locale.CHINA, "HomeActivity started %d ms", end - start));
+        LogUtils.v(String.format(Locale.CHINA, "HomeActivity started %d ms", end - start));
     }
 
     /**
@@ -99,29 +99,52 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     private void initHead() {
         mRvHead = (AspectRatioRecycleView) findViewById(R.id.rv_head);
         mRvHead.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRvHead.setAdapter(new MainHeadAdapter(this, mHeadDatas));
+        mMainHeadAdapter = new MainHeadAdapter(this, mHeadDatas);
+        mRvHead.setAdapter(mMainHeadAdapter);
+
+        Flowable.just("")
+            .flatMap(new Function<Object, Flowable<DailyList>>() {
+                @Override
+                public Flowable<DailyList> apply(Object o) throws Exception {
+                    DailyList heardCache = CacheUtils.getMainHeardCache();
+                    return heardCache == null ? mOneApi.getDaily() : Flowable.just(heardCache);
+                }
+            })
+            .flatMap(new Function<DailyList, Flowable<Integer>>() {
+                @Override
+                public Flowable<Integer> apply(DailyList dailyList) throws Exception {
+                    CacheUtils.setMainHeardCache(dailyList);
+                    //SPUtils.setLastPostId(MainActivity.this, dailyList.getData().get(0));
+                    return Flowable.fromIterable(dailyList.getData());
+                }
+            })
+            .flatMap(new Function<Integer, Flowable<DailyDetail>>() {
+                @Override
+                public Flowable<DailyDetail> apply(Integer integer) throws Exception {
+                    DailyDetail detail = CacheUtils.getDailyDetail(integer);
+                    return detail == null ? mOneApi.getDetail(integer) : Flowable.just(detail);
+                }
+            })
+            .filter(new Predicate<DailyDetail>() {
+                @Override
+                public boolean test(DailyDetail integer) throws Exception {
+                    return integer.getData() == null;
+                }
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<DailyDetail>() {
+                @Override
+                public void accept(DailyDetail dailyDetail) throws Exception {
+                  LogUtils.e("-------------"+dailyDetail.getData().getHp_author());
+                }
+            });
 
 
-        SPUtils.setLastPostId(this, 1789);
-
-
-        //获取首页的最新id，根据id查找对应的缓存
-        final int lastPostId = SPUtils.getLastPostId(this);
-        if (lastPostId == 0) return;
-
-        /*for (int i = 0, j = lastPostId; i < 10; i++, j--) {
-            DailyDetail dailyDetail = CacheUtils.getDailyDetail(j);
-            if (dailyDetail != null) {
-                mHeadDatas.add(dailyDetail);
-            }
-
-        }*/
-
-        Observable.just(lastPostId)
-            .map(new Function<Integer, ArrayList<DailyDetail>>() {
+            /*.map(new Function<Integer, ArrayList<DailyDetail>>() {
                 @Override
                 public ArrayList<DailyDetail> apply(Integer integer) throws Exception {
-                    ArrayList<DailyDetail> result = new ArrayList<DailyDetail>();
+                    ArrayList<DailyDetail> result = new ArrayList<>();
                     for (int i = 0, j = integer; i < MAX_HEAD_PIC; i++, j--) {
                         DailyDetail dailyDetail = CacheUtils.getDailyDetail(j);
                         if (dailyDetail == null) continue;
@@ -135,15 +158,50 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                 @Override
                 public void accept(ArrayList<DailyDetail> dailyDetails) throws Exception {
                     mHeadDatas.addAll(dailyDetails);
+                    mMainHeadAdapter.notifyItemChanged(0);
                     LogUtils.d(mHeadDatas.size() + "---?");
                 }
             });
+              /*  subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new BaseObserver<DailyList>() {
+                @Override
+                public void onHandlerSuccess(DailyList value) {
+
+                }
+            });*/
 
 
-        LogUtils.d(mHeadDatas.size() + "--");
+        //获取首页的最新id，根据id查找对应的缓存
+       /* final int lastPostId = SPUtils.getLastPostId(this);
+        if (lastPostId == 0) return;*/
 
 
-       /* Observable.range(lastPostId, MAX_HEAD_PIC)
+        /*Observable.just(lastPostId)
+            .map(new Function<Integer, ArrayList<DailyDetail>>() {
+                @Override
+                public ArrayList<DailyDetail> apply(Integer integer) throws Exception {
+                    ArrayList<DailyDetail> result = new ArrayList<DailyDetail>();
+                    for (int i = 0, j = integer; i < MAX_HEAD_PIC; i++, j--) {
+                        DailyDetail dailyDetail = CacheUtils.getDailyDetail(j);
+                        if (dailyDetail == null) continue;
+                        result.add(dailyDetail);
+                    }
+                    return result;
+                }
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<ArrayList<DailyDetail>>() {
+                @Override
+                public void accept(ArrayList<DailyDetail> dailyDetails) throws Exception {
+                    mHeadDatas.addAll(dailyDetails);
+                    mMainHeadAdapter.notifyItemChanged(0);
+                    LogUtils.d(mHeadDatas.size() + "---?");
+                }
+            });*/
+
+
+        /*Observable.range(lastPostId, MAX_HEAD_PIC)
             .map(new Function<Integer, DailyDetail>() {
                 @Override
                 public DailyDetail apply(Integer integer) throws Exception {

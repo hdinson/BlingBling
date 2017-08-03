@@ -3,6 +3,7 @@ package dinson.customview.api;
 
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -17,10 +18,10 @@ import retrofit2.http.Path;
 public interface OneApi {
 
     @GET("http://v3.wufazhuce.com:8000/api/hp/idlist/0")
-    Observable<DailyList> getDaily();
+    Flowable<DailyList> getDaily();
 
     @GET("http://v3.wufazhuce.com:8000/api/hp/detail/{id}")
-    Observable<DailyDetail> getDetail(@Path("id") int id);
+    Flowable<DailyDetail> getDetail(@Path("id") int id);
 
     @GET("http://ondlsj2sn.bkt.clouddn.com/Fu9ecL8Yb9QueqV5YFAj9CO4-xdO.json")
     Observable<String> get();
