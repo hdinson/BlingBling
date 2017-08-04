@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import dinson.customview.R;
-import dinson.customview._globle.BaseActivity;
+import dinson.customview._global.BaseActivity;
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.utils.UIUtils;
 

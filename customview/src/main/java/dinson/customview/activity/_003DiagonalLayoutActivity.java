@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import dinson.customview.R;
-import dinson.customview._globle.BaseActivity;
+import dinson.customview._global.BaseActivity;
 import dinson.customview.utils.FileUtils;
 import dinson.customview.utils.GlideUtils;
 import dinson.customview.weight.CircleImageView;

@@ -21,7 +21,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import dinson.customview.R;
-import dinson.customview._globle.BaseActivity;
+import dinson.customview._global.BaseActivity;
 import dinson.customview.api.OneApi;
 import dinson.customview.api.QzBusApi;
 import dinson.customview.http.BaseObserver;

@@ -1,4 +1,4 @@
-package dinson.customview._globle;
+package dinson.customview._global;
 
 import android.content.Context;
 

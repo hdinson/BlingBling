@@ -2,7 +2,7 @@ package dinson.customview.utils;
 
 import android.util.Log;
 
-import dinson.customview._globle.GlobleApplication;
+import dinson.customview._global.GlobalApplication;
 
 public class LogUtils {
 
@@ -19,7 +19,7 @@ public class LogUtils {
      * 以级别为 d 的形式输出LOG
      */
     public static void v(String msg) {
-        if (GlobleApplication.IS_DEBUG) {
+        if (GlobalApplication.IS_DEBUG) {
             Log.v(mTag, FLAG + msg);
         }
     }
@@ -28,7 +28,7 @@ public class LogUtils {
      * 以级别为 d 的形式输出LOG
      */
     public static void d(String msg) {
-        if (GlobleApplication.IS_DEBUG) {
+        if (GlobalApplication.IS_DEBUG) {
             Log.d(mTag, FLAG + msg);
         }
     }
@@ -37,7 +37,7 @@ public class LogUtils {
      * 以级别为 i 的形式输出LOG
      */
     public static void i(String msg) {
-        if (GlobleApplication.IS_DEBUG) {
+        if (GlobalApplication.IS_DEBUG) {
             Log.i(mTag, FLAG + msg);
         }
     }
@@ -46,7 +46,7 @@ public class LogUtils {
      * 以级别为 w 的形式输出LOG
      */
     public static void w(String msg) {
-        if (GlobleApplication.IS_DEBUG) {
+        if (GlobalApplication.IS_DEBUG) {
             Log.w(mTag, FLAG + msg);
         }
     }
@@ -55,7 +55,7 @@ public class LogUtils {
      * 以级别为 w 的形式输出Throwable
      */
     public static void w(Throwable tr) {
-        if (GlobleApplication.IS_DEBUG) {
+        if (GlobalApplication.IS_DEBUG) {
             Log.w(mTag, "", tr);
         }
     }
@@ -64,7 +64,7 @@ public class LogUtils {
      * 以级别为 w 的形式输出LOG信息和Throwable
      */
     public static void w(String msg, Throwable tr) {
-        if (GlobleApplication.IS_DEBUG && null != msg) {
+        if (GlobalApplication.IS_DEBUG && null != msg) {
             Log.w(mTag, FLAG + msg, tr);
         }
     }
@@ -73,7 +73,7 @@ public class LogUtils {
      * 以级别为 e 的形式输出LOG
      */
     public static void e(String msg) {
-        if (GlobleApplication.IS_DEBUG) {
+        if (GlobalApplication.IS_DEBUG) {
             Log.e(mTag, FLAG + msg);
         }
     }
@@ -82,7 +82,7 @@ public class LogUtils {
      * 以级别为 e 的形式输出Throwable
      */
     public static void e(Throwable tr) {
-        if (GlobleApplication.IS_DEBUG) {
+        if (GlobalApplication.IS_DEBUG) {
             Log.e(mTag, "", tr);
         }
     }
@@ -91,7 +91,7 @@ public class LogUtils {
      * 以级别为 e 的形式输出LOG信息和Throwable
      */
     public static void e(String msg, Throwable tr) {
-        if (GlobleApplication.IS_DEBUG && null != msg) {
+        if (GlobalApplication.IS_DEBUG && null != msg) {
             Log.e(mTag, FLAG + msg, tr);
         }
     }
