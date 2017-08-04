@@ -27,7 +27,6 @@ public class GlideUtils {
     }
 
     public static void setImage(Context context, String url, ImageView view) {
-
         if (url.endsWith(".svg") || url.endsWith(".SVG")) {
             setSvgImage(context, url, view);
             return;
