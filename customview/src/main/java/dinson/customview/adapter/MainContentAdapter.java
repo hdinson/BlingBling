@@ -26,7 +26,7 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
 
     private final OnItemTouchMoveListener mMoveListener;
     private int[] mNumberImgs = new int[]{R.drawable.n_0, R.drawable.n_1, R.drawable.n_2, R.drawable.n_3,
-            R.drawable.n_4, R.drawable.n_5, R.drawable.n_6, R.drawable.n_7, R.drawable.n_8, R.drawable.n_9};
+        R.drawable.n_4, R.drawable.n_5, R.drawable.n_6, R.drawable.n_7, R.drawable.n_8, R.drawable.n_9};
 
 
     public MainContentAdapter(Context context, List<ClassBean> dataList, OnItemTouchMoveListener touchMoveListener) {
@@ -57,7 +57,7 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
     }
 
 
-    public static int[] formatPosition(int pos) {
+    private static int[] formatPosition(int pos) {
         if (pos < 10) {
             return new int[]{0, 0, pos};
         }
@@ -73,10 +73,10 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
     }
 
 
-   private class ViewHolderTouchListener implements View.OnTouchListener {
+    private class ViewHolderTouchListener implements View.OnTouchListener {
         private RecyclerView.ViewHolder mHolder;
 
-        public ViewHolderTouchListener(RecyclerView.ViewHolder viewHolder) {
+        private ViewHolderTouchListener(RecyclerView.ViewHolder viewHolder) {
             mHolder = viewHolder;
         }
 
@@ -94,7 +94,7 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(mDataList, fromPosition, toPosition);
-        notifyItemMoved(fromPosition,toPosition);
+        notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 

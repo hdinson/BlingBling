@@ -44,9 +44,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity implements OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
 
-    private RecyclerView mRvContent;
-    private AspectRatioRecycleView mRvHead;
-
     private ArrayList<ClassBean> mContentData = new ArrayList<>(); //内容的数据集
     private ArrayList<DailyDetail> mHeadData = new ArrayList<>();
 
@@ -84,7 +81,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
 
-        mRvContent = (RecyclerView) findViewById(R.id.rv_content);
+        RecyclerView mRvContent = (RecyclerView) findViewById(R.id.rv_content);
         MainContentAdapter mMainAdapter = new MainContentAdapter(this, mContentData, this);
         mTouchHelper = new ItemTouchHelper(new MainItemTouchHelper(mMainAdapter));
 
@@ -100,7 +97,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
      * 初始化首页one的数据
      */
     private void initHead() {
-        mRvHead = (AspectRatioRecycleView) findViewById(R.id.rv_head);
+        AspectRatioRecycleView mRvHead = (AspectRatioRecycleView) findViewById(R.id.rv_head);
         mRvHead.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mMainHeadAdapter = new MainHeadAdapter(this, mHeadData);
         mRvHead.setAdapter(mMainHeadAdapter);
