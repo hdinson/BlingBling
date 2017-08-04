@@ -32,7 +32,7 @@ public class _002QQNaviViewActivity extends BaseActivity {
         Glide.with(this).load(img_url).into(ivBg);
 
         QQNaviView bubble = (QQNaviView) findViewById(R.id.qq_view_bubble);
-        mManager = QQNaviViewManager.getInstance();
+        mManager = new QQNaviViewManager();
         mManager.setCheckedView(bubble);
     }
 

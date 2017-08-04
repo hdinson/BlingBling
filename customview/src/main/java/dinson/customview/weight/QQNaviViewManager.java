@@ -7,14 +7,6 @@ import android.view.View;
  * @date 2017/6/30
  */
 public class QQNaviViewManager {
-    private QQNaviViewManager() {
-    }
-
-    private static QQNaviViewManager mInstance = new QQNaviViewManager();
-
-    public static QQNaviViewManager getInstance() {
-        return mInstance;
-    }
 
     private QQNaviView currentCheckedView;
 
