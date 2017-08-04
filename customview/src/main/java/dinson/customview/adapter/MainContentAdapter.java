@@ -66,14 +66,14 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
             int first = pos % 10;
             return new int[]{0, second, first};
         }
-        int thrid = pos / 100;
+        int third = pos / 100;
         int second = (pos % 100) / 10;
         int first = (pos % 100) % 10;
-        return new int[]{thrid, second, first};
+        return new int[]{third, second, first};
     }
 
 
-    class ViewHolderTouchListener implements View.OnTouchListener {
+   private class ViewHolderTouchListener implements View.OnTouchListener {
         private RecyclerView.ViewHolder mHolder;
 
         public ViewHolderTouchListener(RecyclerView.ViewHolder viewHolder) {

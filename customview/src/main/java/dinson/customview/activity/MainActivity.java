@@ -35,7 +35,6 @@ import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
-import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Consumer;
@@ -166,13 +165,6 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                     LogUtils.e(bean.toString());
                     CacheUtils.setDailyDetail(bean);
                     list.add(bean);
-                }
-            })
-            .flatMap(new Function<ArrayList<DailyDetail>, SingleSource<?>>() {
-                @Override
-                public SingleSource<?> apply(ArrayList<DailyDetail> dailyDetails) throws Exception {
-
-                    return null;
                 }
             })
             .subscribeOn(Schedulers.io())
