@@ -10,21 +10,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import dinson.customview._globle.GlobleApplication;
+import dinson.customview._global.GlobalApplication;
 
 
 public class UIUtils {
 
     public static Context getContext() {
-        return GlobleApplication.getContext();
+        return GlobalApplication.getContext();
     }
 
     public static Handler getHandler() {
-        return GlobleApplication.getHandler();
+        return GlobalApplication.getHandler();
     }
 
     public static int getMainThreadId() {
-        return GlobleApplication.getMainThreadId();
+        return GlobalApplication.getMainThreadId();
     }
 
     // /////////////////加载资源文件 ///////////////////////////

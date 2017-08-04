@@ -18,7 +18,7 @@ import java.util.Locale;
 import java.util.concurrent.Callable;
 
 import dinson.customview.R;
-import dinson.customview._globle.BaseActivity;
+import dinson.customview._global.BaseActivity;
 import dinson.customview.adapter.MainContentAdapter;
 import dinson.customview.adapter.MainHeadAdapter;
 import dinson.customview.api.OneApi;

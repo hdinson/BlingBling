@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import dinson.customview.R;
-import dinson.customview._globle.BaseActivity;
+import dinson.customview._global.BaseActivity;
 import dinson.customview.weight.ShimmerFrameLayout;
 
 public class _001ShimmerActivity extends BaseActivity {

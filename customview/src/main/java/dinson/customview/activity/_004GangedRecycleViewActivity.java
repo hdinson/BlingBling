@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import dinson.customview.R;
-import dinson.customview._globle.BaseActivity;
+import dinson.customview._global.BaseActivity;
 import dinson.customview.adapter._004LeftAdapter;
 import dinson.customview.adapter._004RightAdapter;
 import dinson.customview.entity.MonsterHunter;

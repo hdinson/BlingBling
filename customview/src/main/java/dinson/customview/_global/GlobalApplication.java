@@ -1,4 +1,4 @@
-package dinson.customview._globle;
+package dinson.customview._global;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,7 +9,7 @@ import com.squareup.leakcanary.LeakCanary;
 import dinson.customview.BuildConfig;
 
 
-public class GlobleApplication extends Application {
+public class GlobalApplication extends Application {
 
     public static final Boolean IS_DEBUG = BuildConfig.DEBUG;
 
