@@ -18,18 +18,17 @@ public class CacheUtils {
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
         LogUtils.v("put to cache >> " + json);
-        long deathLine = (long) DateUtils.getDataTimestamp(1) * 1000-System.currentTimeMillis();
+        //缓存的时间是到凌晨4点
+        long deathLine = ((long) DateUtils.getDataTimestamp(1) + 14400) * 1000 - System.currentTimeMillis();
         LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine));
-        setCache("home_heardlist", json, deathLine);
-
-        // TODO: 2017/8/4 deathline
+        setCache("home_head_list", json, deathLine);
     }
 
     public static DailyList getMainHeardCache() {
-        String homelist = getCache("home_heardlist");
-        LogUtils.v("get from cache >> " + homelist);
-        if (homelist == null) return null;
-        return new Gson().fromJson(homelist, DailyList.class);
+        String homeList = getCache("home_head_list");
+        LogUtils.v("get from cache >> " + homeList);
+        if (homeList == null) return null;
+        return new Gson().fromJson(homeList, DailyList.class);
     }
 
     public static void setDailyDetail(DailyDetail bean) {
@@ -41,12 +40,6 @@ public class CacheUtils {
         String cache = getCache("home_heard_detail" + id);
         if (cache == null) return null;
         return new Gson().fromJson(cache, DailyDetail.class);
-    }
-
-    public static boolean dailyDetailExists(int id) {
-        File cacheDir = UIUtils.getContext().getCacheDir();
-        File cacheFile = new File(cacheDir, MD5.encode("home_heard_detail" + id));
-        return cacheFile.exists();
     }
 
     //////////////////////////////////分割线//////////////////////////////////////////////////////

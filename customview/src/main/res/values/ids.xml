@@ -10,6 +10,7 @@
     <item name="rv_content" type="id" />
     <item name="rv_head" type="id" />
 
+    <item name="vs_content" type="id" />
 
     <item name="glide_tag_id" type="id" />
 </resources>

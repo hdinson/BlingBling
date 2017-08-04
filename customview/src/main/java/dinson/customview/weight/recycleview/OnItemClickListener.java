@@ -12,17 +12,35 @@ import android.view.View;
  * @author Dinson-2017/7/4
  */
 public class OnItemClickListener implements RecyclerView.OnItemTouchListener {
+
     public interface OnClickListener {
         void onItemClick(View view, int position);
+    }
 
+    public interface onLongClickListener {
         void onItemLongClick(View view, int position);
     }
 
+
     private OnClickListener mListener;
+    private onLongClickListener mLongListener;
     private GestureDetector mGestureDetector;
 
-    public OnItemClickListener(Context context, final RecyclerView recyclerView, OnClickListener listener) {
+    public OnItemClickListener(Context context, RecyclerView recyclerView, OnClickListener listener) {
+        init(context, recyclerView, listener, null);
+    }
+
+    public OnItemClickListener(Context context, RecyclerView recyclerView, onLongClickListener listener) {
+        init(context, recyclerView, null, listener);
+    }
+
+    public OnItemClickListener(Context context, final RecyclerView recyclerView, OnClickListener listener, onLongClickListener longListener) {
+        init(context, recyclerView, listener, longListener);
+    }
+
+    private void init(Context context, final RecyclerView recyclerView, OnClickListener listener, onLongClickListener longListener) {
         mListener = listener;
+        mLongListener = longListener;
 
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -34,12 +52,13 @@ public class OnItemClickListener implements RecyclerView.OnItemTouchListener {
             public void onLongPress(MotionEvent e) {
                 View childView = recyclerView.findChildViewUnder(e.getX(), e.getY());
 
-                if (childView != null && mListener != null) {
-                    mListener.onItemLongClick(childView, recyclerView.getChildAdapterPosition(childView));
+                if (childView != null && mLongListener != null) {
+                    mLongListener.onItemLongClick(childView, recyclerView.getChildAdapterPosition(childView));
                 }
             }
         });
     }
+
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">BLingBLing</string>
-
     <!--首页字段-->
     <string name="test_layout_title">TestLayout</string>
     <string name="test_layout_desc">An activity for testing.</string>
@@ -21,9 +20,9 @@
     <string name="ganged_recycle_title">GangedRecycleView</string>
     <string name="ganged_recycle_desc">With Diagonal Layout explore new styles and approaches on material design</string>
     <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/Fv0lWW2GgFzFgErKD7iIIlXPtAf8.jpg</string>
-
-
     <!--iconfont-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
-
+    <!--image contentDescription-->
+    <string name="des_pic">图片</string>
+    <string name="des_num">数字</string>
 </resources>

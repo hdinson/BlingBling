@@ -8,25 +8,6 @@ import android.content.SharedPreferences;
  */
 public class SPUtils {
 
-//    /**
-//     * 设置首页one的最后一条的id
-//     *
-//     * @param context 上下文
-//     * @param id      id
-//     */
-//    public static void setLastPostId(Context context, int id) {
-//        SPUtils.putInt(context, "config", "mainId", id);
-//    }
-//
-//    /**
-//     * 获取首页one的最后一条的id
-//     *
-//     * @param context 上下文
-//     * @return 返回0表示没有该条数据
-//     */
-//    public static int getLastPostId(Context context) {
-//        return getInt(context, "config", "mainId", 0);
-//    }
 
     /////////////////////////////////// 分割线 /////////////////////////////////////////////////////
 

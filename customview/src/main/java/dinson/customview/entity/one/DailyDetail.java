@@ -16,6 +16,11 @@ public class DailyDetail {
     private int res;
     private DataBean data;
 
+    @Override
+    public String toString() {
+        return "DailyDetail{ data=" + data + '}';
+    }
+
     public int getRes() {
         return res;
     }
@@ -32,7 +37,7 @@ public class DailyDetail {
         this.data = data;
     }
 
-    public static class DataBean implements Parcelable{
+    public static class DataBean implements Parcelable {
         /**
          * hpcontent_id : 1736
          * hp_title : VOL.1711
@@ -42,7 +47,7 @@ public class DailyDetail {
          * hp_author : 绘画＆Hammer Chen大木耳 作品
          * ipad_url : http://image.wufazhuce.com/FlGKn4KQLvns6vJB5IwPoeE9y845
          * hp_content : 回忆和期待一样，是一种简化和剪辑现实的工具。
-         by 阿兰·德波顿
+         * by 阿兰·德波顿
          * hp_makettime : 2017-06-13 06:00:00
          * hide_flag : 0
          * last_update_date : 2017-06-12 00:07:01
@@ -86,7 +91,13 @@ public class DailyDetail {
         private int sharenum;
         private int commentnum;
 
-        public DataBean() {
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                "hpcontent_id='" + hpcontent_id + '\'' +
+                ", hp_img_url='" + hp_img_url + '\'' +
+                ", text_authors='" + text_authors + '\'' +
+                '}';
         }
 
         public DataBean(Parcel in) {
@@ -511,7 +522,7 @@ public class DailyDetail {
             public static class WeiboBean {
                 /**
                  * title : ONE一个 回忆和期待一样，是一种简化和剪辑现实的工具。
-                 by 阿兰·德波顿——阿兰·德波顿 下载ONE一个APP:http://weibo.com/p/100404157874
+                 * by 阿兰·德波顿——阿兰·德波顿 下载ONE一个APP:http://weibo.com/p/100404157874
                  * desc :
                  * link : http://m.wufazhuce.com/one/1736?channel=weibo
                  * imgUrl :

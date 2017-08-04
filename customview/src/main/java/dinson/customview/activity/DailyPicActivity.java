@@ -17,7 +17,6 @@ import android.widget.TextView;
 import dinson.customview.R;
 import dinson.customview._globle.BaseActivity;
 import dinson.customview.entity.one.DailyDetail;
-import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.UIUtils;
 
 public class DailyPicActivity extends BaseActivity implements View.OnClickListener {
@@ -75,8 +74,6 @@ public class DailyPicActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (top < 0) return;
-
-                LogUtils.i("onLayoutChange() called with: left = [" + left + "], top = [" + top + "], right = [" + right + "], bottom = [" + bottom + "], oldLeft = [" + oldLeft + "], oldTop = [" + oldTop + "], oldRight = [" + oldRight + "], oldBottom = [" + oldBottom + "]");
 
                 v.removeOnLayoutChangeListener(this);
                 //动画操作

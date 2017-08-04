@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dinson.customview.weight.AspectRatioView.AspectRatioImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/iv_img"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:scaleType="centerCrop"
+    app:aspectRatio="1.5"/>
+
+
