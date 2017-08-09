@@ -7,7 +7,7 @@
                                     app:cardElevation="3dp"
                                     app:cardCornerRadius="2dp">
 
-    <dinson.customview.weight.AspectRatioView.HeImageView
+    <dinson.customview.weight.aspectratioview.HeImageView
         android:id="@id/iv_img"
         android:layout_width="match_parent"
         android:layout_height="10dp"

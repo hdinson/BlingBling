@@ -30,7 +30,7 @@ import dinson.customview.listener.MainItemTouchHelper;
 import dinson.customview.listener.OnItemTouchMoveListener;
 import dinson.customview.utils.CacheUtils;
 import dinson.customview.utils.LogUtils;
-import dinson.customview.weight.AspectRatioView.AspectRatioRecycleView;
+import dinson.customview.weight.aspectratioview.AspectRatioRecycleView;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
 import io.reactivex.Flowable;
@@ -78,6 +78,8 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             _003DiagonalLayoutActivity.class, getString(R.string.diagonal_layout_img)));
         mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
             _004GangedRecycleViewActivity.class, getString(R.string.ganged_recycle_img)));
+        mContentData.add(new ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
+            _005LikeSmileView.class, getString(R.string.like_smile_img)));
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
 

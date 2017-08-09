@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LikeSmileView">
+        <attr name="percentSize" format="dimension"/>
+        <attr name="descSize" format="dimension"/>
+        <attr name="iconSize" format="dimension"/>
+        <attr name="iconMargin" format="dimension"/>
+    </declare-styleable>
+</resources>

@@ -1,5 +1,5 @@
 <resources>
-
+    <!--————————————————————————————————————————主题——————————————————————————————————————————————-->
     <style name="AppTheme" parent="Theme.Design.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -8,10 +8,61 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-
     <style name="AppTheme.SplashTheme">
         <item name="android:windowBackground">@drawable/splash_bg</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+    <!--005-->
+    <!--android:="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/circle_white"
+        android:backgroundTint="#1a1a1a"
+        android:gravity="center"
+        android:text="@string/if_share"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"-->
+    <!--12sp 小字提示
+    14sp（桌面端13sp） 正文/按钮文字
+    16sp（桌面端15sp） 小标题
+    20sp Appbar文字
+    24sp 大标题
+    34sp/45sp/56sp/112sp 超大号文字-->
+    <!--————————————————————————————————————————字体——————————————————————————————————————————————-->
+    <style name="font">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
 
+    <style name="font.small" parent="font">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="font.normal" parent="font">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="font.appTitle" parent="font">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="font.bigTitle" parent="font">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="font.large" parent="font">
+        <item name="android:textSize">34sp</item>
+    </style>
+    <!--————————————————————————————————————————其他——————————————————————————————————————————————-->
+    <!--_005-->
+    <style name="_005TopIcon" >
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:background">@drawable/circle_white</item>
+        <item name="android:backgroundTint">#1a1a1a</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

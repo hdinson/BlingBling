@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-            <dinson.customview.weight.AspectRatioView.AspectRatioRecycleView
+            <dinson.customview.weight.aspectratioview.AspectRatioRecycleView
                 android:id="@id/rv_head"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
