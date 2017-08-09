@@ -42,7 +42,7 @@ public class _003DiagonalLayoutActivity extends BaseActivity {
         tv_title.append(builder);
 
 
-        String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FsoyL8Ny12P4AUbz-4QP-URItTEW.png";
+        String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp";
         CircleImageView cv_circleview = (CircleImageView) findViewById(R.id.cv_circleview);
         GlideUtils.setCircleImage(this, imgUrl, cv_circleview);
 

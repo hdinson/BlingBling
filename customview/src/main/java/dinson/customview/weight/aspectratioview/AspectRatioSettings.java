@@ -1,4 +1,4 @@
-package dinson.customview.weight.AspectRatioView;
+package dinson.customview.weight.aspectratioview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

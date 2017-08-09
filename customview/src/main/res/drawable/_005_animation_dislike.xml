@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/_005_dislike_1" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_2" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_3" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_4" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_5" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_6" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_7" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_8" android:duration="60"/>
+    <item android:drawable="@drawable/_005_dislike_9" android:duration="60"/>
+</animation-list>

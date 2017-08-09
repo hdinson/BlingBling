@@ -11,53 +11,55 @@
         android:id="@id/iv_img"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/splash_bg"
+        android:contentDescription="@string/des_goods_pic"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <dinson.customview.weight.IconFontTextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/circle_white"
-        android:backgroundTint="#1a1a1a"
-        android:gravity="center"
+        style="@style/_005TopIcon"
         android:text="@string/if_share"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:layout_width="0dp"/>
 
     <dinson.customview.weight.IconFontTextView
         android:id="@id/tv_back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/circle_white"
-        android:backgroundTint="#1a1a1a"
-        android:gravity="center"
+        style="@style/_005TopIcon"
         android:text="@string/if_arrow_left"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:layout_width="0dp"/>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="#1a1a1a"
+        app:layout_constraintTop_toBottomOf="@+id/iv_img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
     <TextView
         android:id="@id/tv_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:padding="16sp"
-        android:text="Popup | 银制鹿头灯"
+        android:text="@string/_005_title"
         android:textColor="@color/textPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_img"/>
+        app:layout_constraintTop_toBottomOf="@+id/divider"/>
 
     <TextView
         android:layout_width="0dp"
@@ -65,10 +67,23 @@
         android:background="@android:color/white"
         android:lineSpacingExtra="8dp"
         android:padding="16sp"
-        android:text="• 材质：铝 / 钢\n• 电压：110-230V"
+        android:text="@string/_005_desc"
         android:textColor="@color/textPrimary"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+
+
+
+    <dinson.customview.weight.likesmileview.LikeSmileView
+        android:layout_width="0dp"
+        android:id="@+id/likeSmile"
+        android:layout_height="0dp"
+        android:gravity="right"
+        app:percentSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </android.support.constraint.ConstraintLayout>
