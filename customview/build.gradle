@@ -21,10 +21,10 @@ android {
     /*打包 gradlew resguardRelease*/
     signingConfigs {
         app {
-            keyAlias ''
-            keyPassword ''
+            keyAlias 'Dinson'
+            keyPassword 'Dinson9918'
             storeFile file('../Dinson.jks')
-            storePassword ''
+            storePassword 'Dinson9918'
         }
     }
     buildTypes {
@@ -66,7 +66,7 @@ dependencies {
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'com.github.bumptech.glide:compiler:4.0.0-RC1'
     compile 'org.jsoup:jsoup:1.10.3'
-    
+
     testCompile 'junit:junit:4.12'
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'

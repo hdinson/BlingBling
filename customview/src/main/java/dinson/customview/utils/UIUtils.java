@@ -59,17 +59,6 @@ public class UIUtils {
         return getContext().getResources().getDimensionPixelSize(id);// 返回具体像素值
     }
 
-    // /////////////////dip和px转换//////////////////////////
-
-    public static int dip2px(float dip) {
-        float density = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5f);
-    }
-
-    public static float px2dip(int px) {
-        float density = getContext().getResources().getDisplayMetrics().density;
-        return px / density;
-    }
 
     // /////////////////加载布局文件//////////////////////////
     public static View inflate(int id) {

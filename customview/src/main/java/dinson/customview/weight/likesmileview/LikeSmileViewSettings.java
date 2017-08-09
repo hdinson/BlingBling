@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
 import dinson.customview.R;
-import dinson.customview.utils.UIUtils;
 
 /**
  * @author Dinson - 2017/8/9
@@ -22,8 +21,8 @@ public class LikeSmileViewSettings {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LikeSmileView, 0, 0);
         mPercentSize = ta.getDimension(R.styleable.LikeSmileView_percentSize, sp2px(context, 20f));
         mDescSize = ta.getDimension(R.styleable.LikeSmileView_descSize, sp2px(context, 14f));
-        mIconSize = (int) ta.getDimension(R.styleable.LikeSmileView_iconSize, UIUtils.dip2px(25));
-        mIconMargin = (int) ta.getDimension(R.styleable.LikeSmileView_iconMargin, UIUtils.dip2px(25));
+        mIconSize = (int) ta.getDimension(R.styleable.LikeSmileView_iconSize, dip2px(context, 25));
+        mIconMargin = (int) ta.getDimension(R.styleable.LikeSmileView_iconMargin, dip2px(context, 25));
 
 
         ta.recycle();
@@ -48,5 +47,10 @@ public class LikeSmileViewSettings {
 
     public int getIconMargin() {
         return mIconMargin;
+    }
+
+    public static int dip2px(Context context, float dip) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return (int) (dip * density + 0.5f);
     }
 }

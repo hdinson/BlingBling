@@ -1,12 +1,10 @@
 package dinson.customview.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,9 +43,6 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
     public void convert(CommonViewHolder holder, ClassBean classBean, int position) {
 
         holder.setTvText(R.id.tv_title, classBean.getTitle());
-        TextView tv_title = holder.getView(R.id.tv_title);
-        Typeface typeFace =Typeface.createFromAsset(mContext.getAssets(),"fonts/FZLanTingHeiS_Regular.ttf");
-        tv_title.setTypeface(typeFace);
         holder.setTvText(R.id.tv_desc, classBean.getDesc());
         int[] ints = formatPosition(position + 1);
         ImageView ivImg = holder.getView(R.id.iv_img);
