@@ -20,8 +20,11 @@
     <string name="ganged_recycle_title">GangedRecycleView</string>
     <string name="ganged_recycle_desc">With Diagonal Layout explore new styles and approaches on material design</string>
     <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/Fv0lWW2GgFzFgErKD7iIIlXPtAf8.jpg</string>
-    <!--iconfont-->
+    <!--behavior-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
+    <!--iconfont-->
+    <string name="if_share">&#xe654;</string>
+    <string name="if_arrow_left">&#xe697;</string>
     <!--image contentDescription-->
     <string name="des_pic">图片</string>
     <string name="des_num">数字</string>

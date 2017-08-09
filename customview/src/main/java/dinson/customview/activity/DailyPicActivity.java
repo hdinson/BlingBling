@@ -80,7 +80,7 @@ public class DailyPicActivity extends BaseActivity implements View.OnClickListen
                 int height = bottom - top;
                 int width = right - left;
 
-                Animator animator = ViewAnimationUtils.createCircularReveal(v, 0, height, 0, (float) Math.hypot(height, width));
+                Animator animator = ViewAnimationUtils.createCircularReveal(v, 0, height, 0, (float) Math.hypot(width, height));
                 animator.setDuration(700);
                 animator.start();
             }

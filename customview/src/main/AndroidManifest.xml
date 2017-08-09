@@ -27,5 +27,6 @@
         <activity android:name=".activity._002QQNaviViewActivity"/>
         <activity android:name=".activity._003DiagonalLayoutActivity"/>
         <activity android:name=".activity._004GangedRecycleViewActivity"/>
+        <activity android:name=".activity._005LikeSmileView"></activity>
     </application>
 </manifest>

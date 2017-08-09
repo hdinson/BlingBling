@@ -14,7 +14,6 @@ import dinson.customview.weight.QQNaviViewManager;
 public class _002QQNaviViewActivity extends BaseActivity {
 
 
-    private final String img_url = "http://ondlsj2sn.bkt.clouddn.com/Fm71mrw6NECZAitx83iMnoBXUvgW.jpg";
     private QQNaviViewManager mManager;
 
     @Override
@@ -29,6 +28,7 @@ public class _002QQNaviViewActivity extends BaseActivity {
 
     private void initUI() {
         ImageView ivBg = (ImageView) findViewById(R.id.iv_bg);
+        String img_url = "http://ondlsj2sn.bkt.clouddn.com/Fm71mrw6NECZAitx83iMnoBXUvgW.jpg";
         Glide.with(this).load(img_url).into(ivBg);
 
         QQNaviView bubble = (QQNaviView) findViewById(R.id.qq_view_bubble);
