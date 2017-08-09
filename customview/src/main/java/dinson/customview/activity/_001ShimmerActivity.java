@@ -9,7 +9,7 @@ import android.widget.TextView;
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.weight.ShimmerFrameLayout;
-
+ 
 public class _001ShimmerActivity extends BaseActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
     private Button[] mPresetButtons;
@@ -25,11 +25,11 @@ public class _001ShimmerActivity extends BaseActivity {
         mTvTitle = (TextView) findViewById(R.id.tv_title);
 
         mPresetButtons = new Button[]{
-                (Button) findViewById(R.id.preset_button0),
-                (Button) findViewById(R.id.preset_button1),
-                (Button) findViewById(R.id.preset_button2),
-                (Button) findViewById(R.id.preset_button3),
-                (Button) findViewById(R.id.preset_button4),
+            (Button) findViewById(R.id.preset_button0),
+            (Button) findViewById(R.id.preset_button1),
+            (Button) findViewById(R.id.preset_button2),
+            (Button) findViewById(R.id.preset_button3),
+            (Button) findViewById(R.id.preset_button4),
         };
         for (int i = 0; i < mPresetButtons.length; i++) {
             final int preset = i;
