@@ -30,7 +30,7 @@ public class _005LikeSmileViewActivity extends BaseActivity implements View.OnCl
     private void initUI() {
         findViewById(R.id.tv_back).setOnClickListener(this);
         ImageView iv_img = (ImageView) findViewById(R.id.iv_img);
-        String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FlhcHSCLWCetf5xgIZ0J2Hj0M7EA.jpg";
+        String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Ft8BnkO6CU83GxS2ZaSWXtMc_AQm.webp";
         GlideUtils.setImage(this, imgUrl, iv_img);
 
         RequestOptions rOptions = new RequestOptions()

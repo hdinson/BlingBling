@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
@@ -68,7 +69,9 @@ public class TestActivity extends BaseActivity {
 
     private void initUI() {
         mTvDesc = (TextView) findViewById(R.id.tv_desc);
-        mEditText = (EditText) findViewById(R.id.et_route);
+       // mEditText = (EditText) findViewById(R.id.et_route);
+
+
 
 
     }
@@ -85,6 +88,19 @@ public class TestActivity extends BaseActivity {
 
         // jsoupTest();
         //AlarmTest();
+
+        Observable.just("")
+            .map(new Function<String, String>() {
+
+                @Override
+                public String apply(String s) throws Exception {
+                    SystemClock.sleep(200000);
+                    return "";
+                }
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe();
 
 
     }
