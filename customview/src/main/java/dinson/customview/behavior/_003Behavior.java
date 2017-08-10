@@ -5,11 +5,8 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.CoordinatorLayout.Behavior;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import dinson.customview.utils.LogUtils;
 import dinson.customview.weight.CircleImageView;
@@ -54,7 +51,6 @@ public class _003Behavior extends Behavior<CircleImageView> {
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, CircleImageView child, View dependency) {
         init(parent, child, dependency);
-        LogUtils.e("-------------");
         if (child.getY() <= 0) {
             if (percent != 0) {
                 ViewCompat.setScaleX(child, 0);
