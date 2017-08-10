@@ -14,12 +14,13 @@ import dinson.customview._global.BaseActivity;
 import dinson.customview.utils.GlideUtils;
 import dinson.customview.weight.likesmileview.LikeSmileView;
 
-public class _005LikeSmileView extends BaseActivity implements View.OnClickListener {
+public class _005LikeSmileViewActivity extends BaseActivity implements View.OnClickListener {
+
+    private LikeSmileView mLikeSmile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         overridePendingTransition(R.anim.activity_in_from_right, R.anim.activity_out_to_left);
         setContentView(R.layout.activity__005_like_smile_view);
@@ -38,17 +39,29 @@ public class _005LikeSmileView extends BaseActivity implements View.OnClickListe
         Glide.with(this).load(imgUrl).transition(tOptions).apply(rOptions).into(iv_img);
 
 
-        LikeSmileView likeSmile = (LikeSmileView) findViewById(R.id.likeSmile);
-        likeSmile.setNum(95,5);
+        mLikeSmile = (LikeSmileView) findViewById(R.id.likeSmile);
+        mLikeSmile.setNum(66, 25);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_back:
-                finish();
-                overridePendingTransition(R.anim.activity_in_from_left, R.anim.activity_out_to_right);
+                onBackPressed();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.activity_in_from_left, R.anim.activity_out_to_right);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLikeSmile.onDestroy();
     }
 }

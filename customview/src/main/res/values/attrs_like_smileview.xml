@@ -5,5 +5,6 @@
         <attr name="descSize" format="dimension"/>
         <attr name="iconSize" format="dimension"/>
         <attr name="iconMargin" format="dimension"/>
+        <attr name="showDivider" format="boolean"/>
     </declare-styleable>
 </resources>

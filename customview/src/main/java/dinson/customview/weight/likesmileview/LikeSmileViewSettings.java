@@ -16,40 +16,47 @@ public class LikeSmileViewSettings {
 
     private final int mIconSize;
     private final int mIconMargin;
+    private final boolean mShowDivider;
+
 
     LikeSmileViewSettings(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LikeSmileView, 0, 0);
-        mPercentSize = ta.getDimension(R.styleable.LikeSmileView_percentSize, sp2px(context, 20f));
-        mDescSize = ta.getDimension(R.styleable.LikeSmileView_descSize, sp2px(context, 14f));
-        mIconSize = (int) ta.getDimension(R.styleable.LikeSmileView_iconSize, dip2px(context, 25));
-        mIconMargin = (int) ta.getDimension(R.styleable.LikeSmileView_iconMargin, dip2px(context, 25));
+        mPercentSize = ta.getDimension(R.styleable.LikeSmileView_percentSize, sp2px(context, 18f));
+        mDescSize = ta.getDimension(R.styleable.LikeSmileView_descSize, sp2px(context, 12f));
+        mIconSize = (int) ta.getDimension(R.styleable.LikeSmileView_iconSize, dip2px(context, 30));
+        mIconMargin = (int) ta.getDimension(R.styleable.LikeSmileView_iconMargin, dip2px(context, 30));
 
+        mShowDivider = ta.getBoolean(R.styleable.LikeSmileView_showDivider, false);
 
         ta.recycle();
     }
 
-    public float getPercentSize() {
+    float getPercentSize() {
         return mPercentSize;
     }
 
-    public float getDescSize() {
+    float getDescSize() {
         return mDescSize;
     }
 
-    public static float sp2px(Context context, float spValue) {
+    private static float sp2px(Context context, float spValue) {
         float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return spValue * fontScale + 0.5f;
     }
 
-    public int getIconSize() {
+    int getIconSize() {
         return mIconSize;
     }
 
-    public int getIconMargin() {
+    int getIconMargin() {
         return mIconMargin;
     }
 
-    public static int dip2px(Context context, float dip) {
+    boolean isShowDivider() {
+        return mShowDivider;
+    }
+
+    private static int dip2px(Context context, float dip) {
         float density = context.getResources().getDisplayMetrics().density;
         return (int) (dip * density + 0.5f);
     }

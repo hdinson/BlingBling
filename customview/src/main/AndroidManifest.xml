@@ -20,13 +20,29 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.DailyPicActivity"/>
-        <activity android:name=".activity.TestActivity"/>
-        <activity android:name=".activity._001ShimmerActivity"/>
-        <activity android:name=".activity._002QQNaviViewActivity"/>
-        <activity android:name=".activity._003DiagonalLayoutActivity"/>
-        <activity android:name=".activity._004GangedRecycleViewActivity"/>
-        <activity android:name=".activity._005LikeSmileView"></activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.DailyPicActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.TestActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity._001ShimmerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity._002QQNaviViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity._003DiagonalLayoutActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity._004GangedRecycleViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity._005LikeSmileViewActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
