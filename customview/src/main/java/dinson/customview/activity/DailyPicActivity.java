@@ -56,12 +56,12 @@ public class DailyPicActivity extends BaseActivity implements View.OnClickListen
         iv_img.setOnClickListener(this);
 
         String content = data.getHp_content();
-        int indexOfStop = content.lastIndexOf("。");
-        int indexOfQm = content.lastIndexOf("？");
+        int indexOfStop = content.lastIndexOf("by");
+        int indexOfQm = content.lastIndexOf("from");
         int index = indexOfStop > indexOfQm ? indexOfStop : indexOfQm;
 
-        String subContent = content.substring(0, index + 1);
-        String subName = content.substring(index + 1).trim();
+        String subContent = content.substring(0, index);
+        String subName = content.substring(index).trim();
 
         TextView tv_content = (TextView) findViewById(R.id.tv_content);
         TextView tv_name = (TextView) findViewById(R.id.tv_title);
