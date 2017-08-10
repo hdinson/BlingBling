@@ -218,11 +218,13 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         switch (id) {
             case R.id.tv_like:
                 type = 0;
+                mIvDis.setBackground(null);
                 mIvDis.setBackgroundResource(R.drawable._005_animation_dislike);
                 animDis = (AnimationDrawable) mIvDis.getBackground();
                 break;
             case R.id.tv_dis:
                 type = 1; //设置动画对象
+                mIvLike.setBackground(null);
                 mIvLike.setBackgroundResource(R.drawable._005_animation_like);
                 animLike = (AnimationDrawable) mIvLike.getBackground();
                 break;
