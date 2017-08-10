@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
             _004GangedRecycleViewActivity.class, getString(R.string.ganged_recycle_img)));
         mContentData.add(new ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
-            _005LikeSmileView.class, getString(R.string.like_smile_img)));
+            _005LikeSmileViewActivity.class, getString(R.string.like_smile_img)));
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
 
