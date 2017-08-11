@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import dinson.customview.R;
 import dinson.customview.utils.LogUtils;
+import dinson.customview.utils.TypefaceUtils;
 
 /**
  * @author Dinson - 2017/8/9
@@ -111,7 +112,7 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         animDis = (AnimationDrawable) mIvDis.getBackground();
 
         //初始化文字
-        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/FZLanTingHeiS_Regular.ttf");
+        Typeface typeface = TypefaceUtils.get(getContext(), "fonts/FZLanTingHeiS_Regular.ttf");
         mTvLikeNum = new TextView(getContext());
         mTvLikeNum.setTypeface(typeface);
         mTvLikeNum.setTextColor(defTextColor);

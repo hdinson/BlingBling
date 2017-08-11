@@ -26,7 +26,10 @@
     <string name="like_smile_img">http://ondlsj2sn.bkt.clouddn.com/FpoNvqVck6N_pe45kqlb4bB00JRE.jpg</string>
     <string name="_005_title">Popup | 银制鹿头灯</string>
     <string name="_005_desc">• 材质：铝 / 钢 \n• 电压：110–230V \n• 重量：1.3 kg</string>
-
+    <!--006-->
+    <string name="floatingView_title">FloatingView</string>
+    <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool animation</string>
+    <string name="floatingView_img">http://ondlsj2sn.bkt.clouddn.com/FoswnjfkCoEaVY0Ijnnlur9BxYBl.webp</string>
     <!--behavior-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
     <!--iconfont-->
