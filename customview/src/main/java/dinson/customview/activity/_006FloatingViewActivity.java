@@ -1,10 +1,10 @@
 package dinson.customview.activity;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -16,6 +16,7 @@ import java.util.Locale;
 
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
+import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.TypefaceUtils;
 import dinson.customview.utils.UIUtils;
 import dinson.customview.weight.floatingview.Floating;
@@ -30,9 +31,9 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
 
     private Floating mFloating;
     private Typeface mTypeface;
-    private ConstraintLayout mRootLayout;
-    private int mScreenHeight;
-    private int mScreenWidth;
+    private View mRootBg, mRootLayout;//切换背景
+    private View mIvStar;//切换背景的点击view
+    private int mStarCenterX, mStarCenterY, mMaxWidth, mMaxHeight;//星星的中心点，和水波纹的最大半径
 
 
     @Override
@@ -47,16 +48,15 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
     }
 
     private void initUI() {
+        mRootLayout = findViewById(R.id.layout_root);
+        mRootBg = findViewById(R.id.root_bg);
+
+        mIvStar = findViewById(R.id.iv_star);
+        mIvStar.setOnClickListener(this);
         findViewById(R.id.iv_like).setOnClickListener(this);
-        findViewById(R.id.iv_star).setOnClickListener(this);
         findViewById(R.id.iv_school).setOnClickListener(this);
         findViewById(R.id.iv_earth).setOnClickListener(this);
         findViewById(R.id.iv_plane).setOnClickListener(this);
-
-        mRootLayout = (ConstraintLayout) findViewById(R.id.root);
-        mScreenHeight = UIUtils.getScreenHeight(this);
-        mScreenWidth = UIUtils.getScreenWidth(this);
-
     }
 
 
@@ -67,7 +67,7 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
     public void onClick(final View v) {
         switch (v.getId()) {
             case R.id.iv_like://点赞
-                View layout = LayoutInflater.from(this).inflate(R.layout.layout_006_like, null);
+                View layout = LayoutInflater.from(this).inflate(R.layout.layout_006_like, null, false);
                 TextView tvNum = (TextView) layout.findViewById(R.id.tv_num);
                 tvNum.setText(String.format(Locale.CHINA, "+%d", ++mCount));
                 FloatingElement floatingElement = new FloatingBuilder()
@@ -78,13 +78,32 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
                 mFloating.startFloating(floatingElement);
                 break;
             case R.id.iv_star://星星
-                mRootLayout.setBackgroundColor(toggle ? Color.parseColor("#62a465") : Color.parseColor("#6d5f88"));
-                Animator animator = ViewAnimationUtils.createCircularReveal(mRootLayout,
-                    (v.getBottom() - v.getTop()) / 2, (v.getRight() - v.getLeft()) / 2,
-                    0, (float) Math.hypot(mScreenWidth, mScreenHeight));
-                animator.setDuration(700);
-                animator.start();
+                mIvStar.setEnabled(false);
                 toggle = !toggle;
+                mRootBg.setBackgroundColor(toggle ? Color.parseColor("#6d5f88") : Color.parseColor("#62a465"));
+                mRootLayout.setBackgroundColor(toggle ? Color.parseColor("#62a465") : Color.parseColor("#6d5f88"));
+
+                if (mMaxWidth == 0 || mMaxHeight == 0) {
+                    mStarCenterY = (v.getBottom() - v.getTop()) / 2 + v.getTop();
+                    mStarCenterX = (v.getRight() - v.getLeft()) / 2 + v.getLeft();
+                    int mScreenHeight = UIUtils.getScreenHeight(this);
+                    int mScreenWidth = UIUtils.getScreenWidth(this);
+                    mMaxWidth = mStarCenterX >= mScreenWidth / 2 ? mStarCenterX : mScreenWidth - mStarCenterX;
+                    mMaxHeight = mStarCenterY >= mScreenHeight / 2 ? mStarCenterY : mScreenHeight - mStarCenterY;
+                    LogUtils.e(mStarCenterX + " " + mStarCenterY);
+                }
+
+                Animator mAnimator = ViewAnimationUtils.createCircularReveal(mRootBg,
+                    mStarCenterX, mStarCenterY, 0, (float) Math.hypot(mMaxWidth, mMaxHeight));
+                mAnimator.setDuration(700);
+                mAnimator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        mIvStar.setEnabled(true);
+                    }
+                });
+                mAnimator.start();
                 break;
             case R.id.iv_school://黑板
                 TextView textView = new TextView(_006FloatingViewActivity.this);

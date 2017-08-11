@@ -16,6 +16,7 @@
     <item name="rv_head" type="id"/>
 
     <item name="vs_content" type="id"/>
+    <item name="layout_root" type="id"/>
 
     <item name="glide_tag_id" type="id"/>
     <item name="floating_decor" type="id"/>
