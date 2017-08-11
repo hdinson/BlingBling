@@ -79,7 +79,8 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
                 break;
             case R.id.iv_star://星星
                 mRootLayout.setBackgroundColor(toggle ? Color.parseColor("#62a465") : Color.parseColor("#6d5f88"));
-                Animator animator = ViewAnimationUtils.createCircularReveal(mRootLayout, v.getTop(), v.getLeft(),
+                Animator animator = ViewAnimationUtils.createCircularReveal(mRootLayout,
+                    (v.getBottom() - v.getTop()) / 2, (v.getRight() - v.getLeft()) / 2,
                     0, (float) Math.hypot(mScreenWidth, mScreenHeight));
                 animator.setDuration(700);
                 animator.start();
