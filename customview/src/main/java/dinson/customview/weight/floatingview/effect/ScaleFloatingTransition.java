@@ -1,5 +1,7 @@
 package dinson.customview.weight.floatingview.effect;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 
@@ -41,6 +43,13 @@ public class ScaleFloatingTransition implements FloatingTransition {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 yumFloating.setAlpha((Float) valueAnimator.getAnimatedValue());
+            }
+        });
+        alphaAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                yumFloating.clear();
             }
         });
         alphaAnimator.start();

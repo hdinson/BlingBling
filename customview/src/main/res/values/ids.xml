@@ -7,6 +7,7 @@
     <item name="tv_back" type="id"/>
     <item name="tv_like" type="id"/>
     <item name="tv_dis" type="id"/>
+    <item name="tv_num" type="id"/>
 
     <item name="iv_img" type="id"/>
     <item name="iv_title" type="id"/>

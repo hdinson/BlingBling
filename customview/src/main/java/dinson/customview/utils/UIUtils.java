@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import dinson.customview.R;
 import dinson.customview._global.GlobalApplication;
 
 
@@ -93,10 +95,22 @@ public class UIUtils {
         if (null == mToast) {
             mToast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
             mToast.setGravity(Gravity.CENTER, 0, 0);
+            mToast.getView().setBackgroundResource(R.drawable.toast_bg);
         } else {
             mToast.setText(message);
         }
         mToast.show();
+    }
+
+    private static Snackbar mSnackbar;
+
+    public static void showSnackbar(View view, String message) {
+        if (null == mSnackbar) {
+            mSnackbar= Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
+        } else {
+            mSnackbar.setText(message);
+        }
+        mSnackbar.show();
     }
 
     public static int getScreenHeight(Context context) {
@@ -111,5 +125,9 @@ public class UIUtils {
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.widthPixels;
+    }
+    public static int dip2px(  float dip) {
+        float density = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dip * density + 0.5f);
     }
 }

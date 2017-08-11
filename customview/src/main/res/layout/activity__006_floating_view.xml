@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6d5f88"
@@ -12,7 +13,7 @@
         android:id="@id/iv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:src="@drawable/_006_floating_view_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -20,7 +21,8 @@
 
     <ImageView
         android:id="@+id/iv_like"
-        style="@style/_006Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/_006_like"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -30,7 +32,8 @@
 
     <ImageView
         android:id="@+id/iv_school"
-        style="@style/_006Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/_006_school"
         app:layout_constraintBottom_toBottomOf="@+id/iv_star"
         app:layout_constraintLeft_toRightOf="@+id/iv_star"
@@ -38,14 +41,15 @@
 
     <ImageView
         android:id="@+id/iv_star"
-        style="@style/_006Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/_006_star"
         app:layout_constraintBottom_toBottomOf="@+id/iv_like"
         app:layout_constraintLeft_toRightOf="@+id/iv_like"
         app:layout_constraintRight_toLeftOf="@+id/iv_school"/>
 
     <ImageView
-        android:id="@+id/icPlane"
+        android:id="@+id/iv_plane"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="32dp"
@@ -53,6 +57,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_earth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/_006_earth"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

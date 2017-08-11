@@ -66,9 +66,4 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <!--_006-->
-    <style name="_006Icon" >
-        <item name="android:layout_width">60dp</item>
-        <item name="android:layout_height">60dp</item>
-    </style>
 </resources>
