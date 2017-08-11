@@ -1,5 +1,3 @@
-
-
 package dinson.customview.weight.floatingview.effect;
 
 import android.animation.Animator;
@@ -8,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.Path;
 
+import dinson.customview.utils.UIUtils;
 import dinson.customview.weight.floatingview.spring.SimpleReboundListener;
 import dinson.customview.weight.floatingview.spring.SpringHelper;
 import dinson.customview.weight.floatingview.transition.BaseFloatingPathTransition;
@@ -15,37 +14,25 @@ import dinson.customview.weight.floatingview.transition.FloatingPath;
 import dinson.customview.weight.floatingview.transition.PathPosition;
 import dinson.customview.weight.floatingview.transition.YumFloating;
 
+/**
+ * @author Dinson - 2017/8/11
+ */
+public class PlaneFloatingTransition extends BaseFloatingPathTransition {
 
-public class CurveFloatingPathTransition extends BaseFloatingPathTransition {
-
-    private Path mPath;
-
-    public CurveFloatingPathTransition() {
-        
-    }
-
-    public CurveFloatingPathTransition(Path path) {
-        this.mPath = path;
-    }
-
+    private int mScreenHeight= UIUtils.getScreenHeight(UIUtils.getContext());
     @Override
     public FloatingPath getFloatingPath() {
-        if (mPath == null){
-            mPath = new Path();
-            mPath.moveTo(0, 0);
-            mPath.quadTo(-100, -200, 0, -300);
-            mPath.quadTo(200, -400, 0, -500);
-        }
-        return FloatingPath.create(mPath, false);
+        Path path = new Path();
+        path.moveTo(0, 0);
+        path.quadTo(100, -300, 0, -600);
+        path.rLineTo(0, -mScreenHeight - 300);
+        return FloatingPath.create(path, false);
     }
 
     @Override
     public void applyFloating(final YumFloating yumFloating) {
-        ValueAnimator translateAnimator;
-        ValueAnimator alphaAnimator;
 
-        
-        translateAnimator = ObjectAnimator.ofFloat(getStartPathPosition(), getEndPathPosition());
+        ValueAnimator translateAnimator = ObjectAnimator.ofFloat(getStartPathPosition(), getEndPathPosition());
         translateAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -68,28 +55,16 @@ public class CurveFloatingPathTransition extends BaseFloatingPathTransition {
         });
 
 
-        alphaAnimator = ObjectAnimator.ofFloat(1.0f, 0f);
-        alphaAnimator.setDuration(3000);
-        alphaAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                yumFloating.setAlpha((Float) valueAnimator.getAnimatedValue());
-            }
-        });
-        
-        SpringHelper.createWithBouncinessAndSpeed(0.0f, 1.0f,11, 15)
-                .reboundListener(new SimpleReboundListener(){
-                    @Override
-                    public void onReboundUpdate(double currentValue) {
-                        yumFloating.setScaleX((float) currentValue);
-                        yumFloating.setScaleY((float) currentValue);
-                    }
-                }).start(yumFloating);  
-        
+        SpringHelper.createWithBouncinessAndSpeed(0.0f, 1.0f, 14, 15)
+            .reboundListener(new SimpleReboundListener() {
+                @Override
+                public void onReboundUpdate(double currentValue) {
+                    yumFloating.setScaleX((float) currentValue);
+                    yumFloating.setScaleY((float) currentValue);
+                }
+            }).start(yumFloating);
+
         translateAnimator.setDuration(3000);
-        translateAnimator.setStartDelay(50);
         translateAnimator.start();
-        alphaAnimator.start();
     }
-    
 }

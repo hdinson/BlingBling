@@ -1,14 +1,9 @@
-
-
-
 package dinson.customview.weight.floatingview.effect;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-
-
 
 import dinson.customview.weight.floatingview.spring.SimpleReboundListener;
 import dinson.customview.weight.floatingview.spring.SpringHelper;
@@ -21,7 +16,7 @@ public class TranslateFloatingTransition implements FloatingTransition {
     private long mDuration;
 
     public TranslateFloatingTransition() {
-        mTranslateY = -200f;
+        mTranslateY = -300f;
         mDuration = 1500;
     }
 
@@ -34,7 +29,7 @@ public class TranslateFloatingTransition implements FloatingTransition {
     @Override
     public void applyFloating(final YumFloating yumFloating) {
         
-        ValueAnimator translateAnimator = ObjectAnimator.ofFloat(0, mTranslateY);
+        ValueAnimator translateAnimator = ObjectAnimator.ofFloat(-100, mTranslateY);
         translateAnimator.setDuration(mDuration);
         translateAnimator.setStartDelay(50);
         translateAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -70,7 +65,13 @@ public class TranslateFloatingTransition implements FloatingTransition {
                         yumFloating.setScaleY((float) currentValue);
                     }
                 }).start(yumFloating);
-        
+        alphaAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                yumFloating.clear();
+            }
+        });
         alphaAnimator.start();
         translateAnimator.start();
     }
