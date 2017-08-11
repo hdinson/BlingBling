@@ -44,5 +44,8 @@
         <activity
             android:name=".activity._005LikeSmileViewActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity._006FloatingViewActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
