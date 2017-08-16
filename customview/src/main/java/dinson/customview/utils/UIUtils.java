@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -102,16 +101,6 @@ public class UIUtils {
         mToast.show();
     }
 
-    private static Snackbar mSnackbar;
-
-    public static void showSnackbar(View view, String message) {
-        if (null == mSnackbar) {
-            mSnackbar= Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
-        } else {
-            mSnackbar.setText(message);
-        }
-        mSnackbar.show();
-    }
 
     public static int getScreenHeight(Context context) {
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
