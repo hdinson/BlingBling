@@ -147,7 +147,6 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
                     .build();
                 mFloating.startFloating(floatingPlane);
                 break;
-
         }
     }
 }
