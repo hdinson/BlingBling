@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="tv_name" type="id"/>
     <item name="tv_title" type="id"/>
+    <item name="tv_head" type="id"/>
+    <item name="tv_name" type="id"/>
     <item name="tv_desc" type="id"/>
     <item name="tv_content" type="id"/>
     <item name="tv_back" type="id"/>
     <item name="tv_like" type="id"/>
     <item name="tv_dis" type="id"/>
     <item name="tv_num" type="id"/>
+    <item name="tv_type" type="id"/>
 
     <item name="iv_img" type="id"/>
     <item name="iv_title" type="id"/>
