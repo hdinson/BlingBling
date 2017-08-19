@@ -30,6 +30,10 @@
     <string name="floatingView_title">FloatingView</string>
     <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool animation</string>
     <string name="floatingView_img">http://ondlsj2sn.bkt.clouddn.com/FoswnjfkCoEaVY0Ijnnlur9BxYBl.webp</string>
+    <!--007-->
+    <string name="spotlight_title">Spotlight</string>
+    <string name="spotlight_desc">Android Library that lights items for tutorials or walk-through etc…</string>
+    <string name="spotlight_img">http://ondlsj2sn.bkt.clouddn.com/FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp</string>
     <!--behavior-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
     <!--iconfont-->
