@@ -34,7 +34,8 @@
     <string name="spotlight_title">Spotlight</string>
     <string name="spotlight_desc">Android Library that lights items for tutorials or walk-through etc…</string>
     <string name="spotlight_img">http://ondlsj2sn.bkt.clouddn.com/FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp</string>
-    <string name="_007_content">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.</string>
+    <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.</string>
+    <string name="_007_tiny_attr">Seen: 1 Caught: 1 \nWeight: 9.0kg Height: 0.5m</string>
     <!--behavior-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
     <!--iconfont-->
@@ -45,4 +46,7 @@
     <string name="des_pic">图片</string>
     <string name="des_goods_pic">商品图片</string>
     <string name="des_num">数字</string>
+    <string name="_007_tiny">Tiny Turtle Pokémon</string>
+    <string name="_007_tiny_type">Type: Water</string>
+    <string name="_007_tiny_name">SQUIRTLE</string>
 </resources>

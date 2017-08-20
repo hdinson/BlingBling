@@ -19,7 +19,7 @@ import dinson.customview.R;
  * @author takusemba
  * @since 26/06/2017
  **/
-public class SimpleTarget implements Target {
+public class SimpleTarget extends Target {
 
     private PointF point;
     private float radius;
@@ -111,7 +111,7 @@ public class SimpleTarget implements Target {
             if (getContext() == null) {
                 throw new RuntimeException("context is null");
             }
-            View view = getContext().getLayoutInflater().inflate(R.layout.layout_007_spotlight, null);
+            View view = getContext().getLayoutInflater().inflate(R.layout.layout_007_spotlight_normal, null);
             ((TextView) view.findViewById(R.id.title)).setText(title);
             ((TextView) view.findViewById(R.id.description)).setText(description);
             PointF point = new PointF(startX, startY);
