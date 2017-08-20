@@ -11,7 +11,7 @@ import android.view.View;
  * @author takusemba
  * @since 26/06/2017
  **/
-public class CustomTarget implements Target {
+public class CustomTarget extends Target {
 
     private PointF point;
     private float radius;

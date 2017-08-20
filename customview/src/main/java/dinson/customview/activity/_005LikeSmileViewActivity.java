@@ -22,7 +22,6 @@ public class _005LikeSmileViewActivity extends BaseActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        overridePendingTransition(R.anim.activity_in_from_right, R.anim.activity_out_to_left);
         setContentView(R.layout.activity__005_like_smile_view);
         initUI();
     }
@@ -50,13 +49,6 @@ public class _005LikeSmileViewActivity extends BaseActivity implements View.OnCl
                 onBackPressed();
                 break;
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.activity_in_from_left, R.anim.activity_out_to_right);
     }
 
     @Override

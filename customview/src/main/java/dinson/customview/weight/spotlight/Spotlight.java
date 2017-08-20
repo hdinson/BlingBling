@@ -3,6 +3,7 @@ package dinson.customview.weight.spotlight;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -86,7 +87,7 @@ public class Spotlight {
      * @param targets targets to show
      * @return the SpotlightView
      */
-    public <T extends Target> Spotlight setTargets(@NonNull T... targets) {
+    public   Spotlight setTargets(@NonNull Target... targets) {
         this.targets = new ArrayList<>(Arrays.asList(targets));
         return this;
     }
@@ -188,7 +189,7 @@ public class Spotlight {
             Target target = targets.get(0);
             getSpotlightView().removeAllViews();
             getSpotlightView().addView(target.getView());
-            getSpotlightView().turnUp(target.getPoint().x, target.getPoint().y, target.getRadius(),
+            getSpotlightView().turnUp(target.getView(),target.getPoint().x, target.getPoint().y, target.getRadius(),
                     duration, animation);
             if (target.getListener() != null) target.getListener().onStarted(target);
         }
@@ -198,30 +199,33 @@ public class Spotlight {
      * show Spotlight
      */
     private void startSpotlight() {
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(getSpotlightView(), "alpha", 0f, 1f);
-        objectAnimator.setDuration(START_SPOTLIGHT_DURATION);
-        objectAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                if (startedListener != null) startedListener.onStarted();
-            }
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(1);
+        valueAnimator.setDuration(START_SPOTLIGHT_DURATION)
+            .addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    if (startedListener != null) startedListener.onStarted();
+                }
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                startTarget();
-            }
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    startTarget();
+                }
 
-            @Override
-            public void onAnimationCancel(Animator animation) {
+                @Override
+                public void onAnimationCancel(Animator animation) {
 
-            }
+                }
 
-            @Override
-            public void onAnimationRepeat(Animator animation) {
+                @Override
+                public void onAnimationRepeat(Animator animation) {
 
-            }
-        });
-        objectAnimator.start();
+                }
+            });
+        valueAnimator.start();
+        //ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(getSpotlightView(), "alpha", 0f, 1f);
+        //objectAnimator.setDuration(START_SPOTLIGHT_DURATION);
+        //objectAnimator.addListener();
     }
 
     /**
@@ -230,7 +234,7 @@ public class Spotlight {
     private void finishTarget() {
         if (targets != null && targets.size() > 0) {
             Target target = targets.get(0);
-            getSpotlightView().turnDown(target.getRadius(), duration, animation);
+            getSpotlightView().turnDown(target.getView(),target.getRadius(), duration, animation);
         }
     }
 

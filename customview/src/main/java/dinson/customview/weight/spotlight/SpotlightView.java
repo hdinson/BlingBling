@@ -17,6 +17,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import dinson.customview.utils.LogUtils;
+
 /**
  * Spotlight View
  *
@@ -85,6 +87,12 @@ class SpotlightView extends FrameLayout {
                 }
             }
         });
+
+//        paint.setColor(Color.parseColor());
+        LogUtils.e("设置背景");
+        setBackgroundColor(Color.parseColor("#E6000000"));
+
+//        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
     }
 
     /**
@@ -95,8 +103,6 @@ class SpotlightView extends FrameLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        paint.setColor(Color.parseColor("#E6000000"));
-        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
         if (animator != null) {
             canvas.drawCircle(point.x, point.y, (float) animator.getAnimatedValue(), spotPaint);
         }
@@ -105,18 +111,20 @@ class SpotlightView extends FrameLayout {
     /**
      * starts an animation to show a circle
      *
+     * @param view
      * @param x         initial position x where the circle is showing up
      * @param y         initial position y where the circle is showing up
      * @param radius    radius of the circle
      * @param duration  duration of the animation
      * @param animation type of the animation
      */
-    void turnUp(float x, float y, float radius, long duration, TimeInterpolator animation) {
+    void turnUp(final View view, float x, float y, final float radius, long duration, TimeInterpolator animation) {
         this.point.set(x, y);
         animator = ValueAnimator.ofFloat(0f, radius);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                view.setAlpha((Float) animation.getAnimatedValue() / radius);
                 SpotlightView.this.invalidate();
             }
         });
@@ -128,15 +136,17 @@ class SpotlightView extends FrameLayout {
     /**
      * starts an animation to close the circle
      *
+     * @param view
      * @param radius    radius of the circle
      * @param duration  duration of the animation
      * @param animation type of the animation
      */
-    void turnDown(float radius, long duration, TimeInterpolator animation) {
+    void turnDown(final View view, final float radius, long duration, TimeInterpolator animation) {
         animator = ValueAnimator.ofFloat(radius, 0f);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                view.setAlpha((float) animation.getAnimatedValue() / radius);
                 SpotlightView.this.invalidate();
             }
         });
