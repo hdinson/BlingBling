@@ -28,11 +28,8 @@ import java.util.List;
 import dinson.customview.weight.richeditor.model.InsertModel;
 
 /**
- * Created by MryU93 on 2017/6/13.
- * <p>
- * Desc:
+ * 富文本表情框输入框
  */
-
 public class RichEditor extends AppCompatEditText {
 
     private static String TAG = "RichEditor";

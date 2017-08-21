@@ -84,8 +84,8 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             _006FloatingViewActivity.class, getString(R.string.floatingView_img)));
         mContentData.add(new ClassBean(getString(R.string.spotlight_title), getString(R.string.spotlight_desc),
             _007SpotlightActivity.class, getString(R.string.spotlight_img)));
-        mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
-            _008_RichEditorActivity.class, getString(R.string.test_layout_img)));
+        mContentData.add(new ClassBean(getString(R.string.rich_editor_title), getString(R.string.rich_editor_desc),
+            _008_RichEditorActivity.class, getString(R.string.rich_editor_img)));
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
 
@@ -199,5 +199,10 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     @Override
     public void onItemTouchMove(RecyclerView.ViewHolder viewHolder) {
         mTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public boolean finishWithAnim() {
+        return false;
     }
 }
