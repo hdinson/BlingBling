@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa"
+        android:elevation="1dp"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            style="@style/font.normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/_008_cancel"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_008_post_blog"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+        <TextView
+            android:id="@id/tv_name"
+            style="@style/font.small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_008_user_name"
+            android:textColor="#333333"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/shape_008_send"
+            android:text="@string/_008_send"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+    <dinson.customview.weight.richeditor.widget.RichEditor
+        android:id="@+id/richEditor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:gravity="start"
+        android:hint="@string/_008_hint"
+        android:maxLength="2000"
+        android:padding="12dp"
+        android:textColor="@color/textPrimary"
+        android:textColorHint="@color/textHint"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_008_tab"
+            android:drawablePadding="3dp"
+            android:drawableStart="@drawable/_008_location"
+            android:gravity="center_vertical"
+            android:text="@string/_008_where_are_u"
+            android:textColor="@color/textHint"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:background="@drawable/shape_008_tab"
+            android:drawablePadding="3dp"
+            android:drawableStart="@drawable/_008_earth"
+            android:gravity="center_vertical"
+            android:text="@string/_008_open"
+            android:textColor="#4c7aab"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#f9f9f9"
+        android:orientation="horizontal">
+
+        <ImageButton
+            style="@style/_008Tab"
+            android:contentDescription="@string/des_tab"
+            android:src="@drawable/selector_008_tab1"/>
+        <ImageButton
+            style="@style/_008Tab"
+            android:contentDescription="@string/des_tab"
+            android:src="@drawable/selector_008_tab2"/>
+        <ImageButton
+            style="@style/_008Tab"
+            android:contentDescription="@string/des_tab"
+            android:src="@drawable/selector_008_tab3"/>
+        <ImageButton
+            style="@style/_008Tab"
+            android:id="@+id/ib_emoji"
+            android:contentDescription="@string/des_tab"
+            android:src="@drawable/selector_008_tab4"/>
+        <ImageButton
+            style="@style/_008Tab"
+            android:contentDescription="@string/des_tab"
+            android:src="@drawable/selector_008_tab5"/>
+    </LinearLayout>
+
+    <!-- <Button
+         android:id="@+id/btn_at"
+         android:layout_width="80dp"
+         android:layout_height="45dp"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/richEditor"
+         android:layout_marginLeft="11dp"
+         android:layout_marginStart="11dp"
+         android:layout_marginTop="14dp"
+         android:text="\@"/>
+
+     <Button
+         android:id="@+id/btn_topic"
+         android:layout_width="80dp"
+         android:layout_height="45dp"
+         android:layout_below="@+id/richEditor"
+         android:layout_marginLeft="11dp"
+         android:layout_marginStart="11dp"
+         android:layout_marginTop="14dp"
+         android:layout_toRightOf="@+id/btn_at"
+         android:text="\#"/>
+
+     <Button
+         android:id="@+id/btn_emoji"
+         android:layout_width="80dp"
+         android:layout_height="45dp"
+         android:layout_below="@+id/richEditor"
+         android:layout_marginLeft="11dp"
+         android:layout_marginStart="11dp"
+         android:layout_marginTop="14dp"
+         android:layout_toRightOf="@+id/btn_topic"
+         android:text="Emoji"/>
+
+     <Button
+         android:id="@+id/btn_get1"
+         android:layout_width="80dp"
+         android:layout_height="45dp"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/btn_at"
+         android:layout_marginLeft="11dp"
+         android:layout_marginStart="11dp"
+         android:layout_marginTop="14dp"
+         android:text="Text"/>
+
+     <TextView
+         android:id="@+id/tv_content"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/btn_get1"
+         android:textColor="@android:color/white"/>-->
+
+    <dinson.customview.weight.richeditor.widget.EmojiLayout
+        android:id="@+id/emojiLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true" />
+</LinearLayout>

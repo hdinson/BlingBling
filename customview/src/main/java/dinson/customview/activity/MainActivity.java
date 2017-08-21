@@ -85,6 +85,8 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         mContentData.add(new ClassBean(getString(R.string.spotlight_title), getString(R.string.spotlight_desc),
             _007SpotlightActivity.class, getString(R.string.spotlight_img)));
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
+            _008_RichEditorActivity.class, getString(R.string.test_layout_img)));
+        mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
 
         RecyclerView mRvContent = (RecyclerView) findViewById(R.id.rv_content);
