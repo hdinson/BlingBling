@@ -90,7 +90,8 @@ class SpotlightView extends FrameLayout {
 
 //        paint.setColor(Color.parseColor());
         LogUtils.e("设置背景");
-        setBackgroundColor(Color.parseColor("#E6000000"));
+        //setBackgroundColor(Color.parseColor("#E6000000"));
+        setBackgroundColor(Color.parseColor("#CC000000"));
 
 //        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
     }

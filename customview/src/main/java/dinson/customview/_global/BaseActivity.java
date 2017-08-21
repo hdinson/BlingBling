@@ -31,7 +31,15 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getWindow().setBackgroundDrawable(UIUtils.getDrawable(R.color.window_bg));
+        getWindow().setBackgroundDrawableResource(setWindowBackgroundColor());
+
+    }
+
+    /**
+     * 设置窗口背景颜色
+     */
+    public int setWindowBackgroundColor() {
+        return R.color.window_bg;
     }
 
 

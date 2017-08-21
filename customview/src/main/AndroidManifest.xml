@@ -48,7 +48,12 @@
         <activity
             android:name=".activity._006FloatingViewActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity._007SpotlightActivity"></activity>
+        <activity
+            android:name=".activity._007SpotlightActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity._008_RichEditorActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

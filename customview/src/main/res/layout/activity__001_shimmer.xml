@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-                                             android:layout_width="fill_parent"
-                                             android:layout_height="fill_parent"
-                                             android:orientation="vertical">
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="0dp"
@@ -19,12 +20,12 @@
         android:id="@+id/shimmer_view_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        shimmer:duration="1000"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        shimmer:duration="1000"
         shimmer:layout_constraintBottom_toTopOf="@+id/space"
         shimmer:layout_constraintLeft_toLeftOf="parent"
-        shimmer:layout_constraintRight_toRightOf="parent" >
+        shimmer:layout_constraintRight_toRightOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"

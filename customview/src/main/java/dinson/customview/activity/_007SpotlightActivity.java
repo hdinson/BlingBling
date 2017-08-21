@@ -97,4 +97,9 @@ public class _007SpotlightActivity extends BaseActivity implements View.OnClickL
                 break;
         }
     }
+
+    @Override
+    public int setWindowBackgroundColor() {
+        return R.drawable._007_activity_bg;
+    }
 }
