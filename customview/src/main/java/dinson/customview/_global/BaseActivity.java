@@ -22,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-         //getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         //activity的出现动画
         overridePendingTransition(R.anim.activity_in_from_right, R.anim.activity_out_to_left);
 
@@ -38,7 +38,11 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.activity_in_from_left, R.anim.activity_out_to_right);
+        if (finishWithAnim())
+            overridePendingTransition(R.anim.activity_in_from_left, R.anim.activity_out_to_right);
+    }
+
+    public boolean finishWithAnim() {
+        return true;
     }
 }

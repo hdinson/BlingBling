@@ -91,4 +91,9 @@ public class DailyPicActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         onBackPressed();
     }
+
+    @Override
+    public boolean finishWithAnim() {
+        return false;
+    }
 }
