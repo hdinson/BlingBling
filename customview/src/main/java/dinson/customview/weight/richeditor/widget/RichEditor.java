@@ -83,12 +83,12 @@ public class RichEditor extends AppCompatEditText {
         ImageSpan imageSpan = new ImageSpan(drawable);
         SpannableString spannableString = new SpannableString(name);
         spannableString.setSpan(imageSpan, 0, spannableString.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int index = Math.max(getSelectionStart(), 0);
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(getText());
-        spannableStringBuilder.insert(index, spannableString);
-
-        setText(spannableStringBuilder);
-        setSelection(index + spannableString.length());
+        //int index = Math.max(getSelectionStart(), 0);
+        //SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(getText());
+        //spannableStringBuilder.insert(index, spannableString);
+        append(spannableString);
+        //setText(spannableStringBuilder);
+        setSelection(curString.length() + spannableString.length());
     }
 
 

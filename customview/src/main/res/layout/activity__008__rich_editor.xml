@@ -15,6 +15,7 @@
         android:fitsSystemWindows="true">
 
         <TextView
+            android:id="@id/cancel"
             style="@style/font.normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
