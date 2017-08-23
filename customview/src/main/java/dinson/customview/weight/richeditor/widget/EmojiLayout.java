@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -45,6 +44,8 @@ public class EmojiLayout extends LinearLayout {
     private RichEditor editTextEmoji;
     private List<String> reslist = new ArrayList<>();
     private ImageView[] imageFaceViews;
+    private LinearLayout mContainer;
+    private ViewPager mVPager;
 
     public EmojiLayout(Context context) {
         super(context);
@@ -71,8 +72,30 @@ public class EmojiLayout extends LinearLayout {
 
     }
 
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
+        LogUtils.e("onLayout 调用了");
+
+        super.onLayout(changed, l, t, r, b);
+
+    }
+
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.layout_emoji_container, this, true);
+
+        setOrientation(VERTICAL);
+        mVPager = new ViewPager(context);
+        LayoutParams vpParams = new LayoutParams(LayoutParams.MATCH_PARENT,0);
+        vpParams.weight=4;
+        addView(mVPager,vpParams);
+
+        mContainer = new LinearLayout(context);
+        LayoutParams llParams = new LayoutParams(LayoutParams.MATCH_PARENT,0);
+        llParams.weight=1;
+        mContainer.setGravity(Gravity.CENTER);
+        mContainer.setOrientation(HORIZONTAL);
+        addView(mContainer,llParams);
+
         if (isInEditMode())
             return;
         LogUtils.e("init 调用了");
@@ -88,8 +111,8 @@ public class EmojiLayout extends LinearLayout {
 
         LogUtils.e("emoji 的高度："+getMeasuredHeight());
 
-        ViewPager edittextBarVPager = (ViewPager) findViewById(R.id.edittext_bar_vPager);
-        LinearLayout edittextBarViewGroupFace = (LinearLayout) findViewById(R.id.edittext_bar_viewGroup_face);
+       // ViewPager mVPager = (ViewPager) findViewById(R.id.edittext_bar_vPager);
+        //LinearLayout edittextBarViewGroupFace = (LinearLayout) findViewById(R.id.edittext_bar_viewGroup_face);
 
 
         int size =  dip2px(getContext(), 5);
@@ -119,10 +142,10 @@ public class EmojiLayout extends LinearLayout {
             } else {
                 imageFaceViews[i].setBackgroundResource(R.drawable.page_indicator_unfocused);
             }
-            edittextBarViewGroupFace.addView(imageFaceViews[i], margin);
+            mContainer.addView(imageFaceViews[i], margin);
         }
-        edittextBarVPager.setAdapter(new ExpressionPagerAdapter(views));
-        edittextBarVPager.addOnPageChangeListener(new GuidePageChangeListener());
+        mVPager.setAdapter(new ExpressionPagerAdapter(views));
+        mVPager.addOnPageChangeListener(new GuidePageChangeListener());
     }
 
     /**

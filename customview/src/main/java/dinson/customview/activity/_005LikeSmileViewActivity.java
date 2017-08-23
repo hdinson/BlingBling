@@ -40,6 +40,7 @@ public class _005LikeSmileViewActivity extends BaseActivity implements View.OnCl
 
         mLikeSmile = (LikeSmileView) findViewById(R.id.likeSmile);
         mLikeSmile.setNum(66, 25);
+
     }
 
     @Override

@@ -15,6 +15,7 @@
         android:fitsSystemWindows="true">
 
         <TextView
+            android:id="@id/cancel"
             style="@style/font.normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="@string/_008_post_blog"
             android:textColor="@color/textPrimary"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/tv_name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_008_user_name"
-            android:textColor="#333333"
+            android:textColor="@color/textHint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -111,7 +112,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="46dp"
         android:elevation="1dp"
         android:layout_marginTop="10dp"
         android:background="#f9f9f9"
@@ -139,59 +140,6 @@
             android:contentDescription="@string/des_tab"
             android:src="@drawable/selector_008_tab5"/>
     </LinearLayout>
-
-    <!-- <Button
-         android:id="@+id/btn_at"
-         android:layout_width="80dp"
-         android:layout_height="45dp"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentStart="true"
-         android:layout_below="@+id/richEditor"
-         android:layout_marginLeft="11dp"
-         android:layout_marginStart="11dp"
-         android:layout_marginTop="14dp"
-         android:text="\@"/>
-
-     <Button
-         android:id="@+id/btn_topic"
-         android:layout_width="80dp"
-         android:layout_height="45dp"
-         android:layout_below="@+id/richEditor"
-         android:layout_marginLeft="11dp"
-         android:layout_marginStart="11dp"
-         android:layout_marginTop="14dp"
-         android:layout_toRightOf="@+id/btn_at"
-         android:text="\#"/>
-
-     <Button
-         android:id="@+id/btn_emoji"
-         android:layout_width="80dp"
-         android:layout_height="45dp"
-         android:layout_below="@+id/richEditor"
-         android:layout_marginLeft="11dp"
-         android:layout_marginStart="11dp"
-         android:layout_marginTop="14dp"
-         android:layout_toRightOf="@+id/btn_topic"
-         android:text="Emoji"/>
-
-     <Button
-         android:id="@+id/btn_get1"
-         android:layout_width="80dp"
-         android:layout_height="45dp"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentStart="true"
-         android:layout_below="@+id/btn_at"
-         android:layout_marginLeft="11dp"
-         android:layout_marginStart="11dp"
-         android:layout_marginTop="14dp"
-         android:text="Text"/>
-
-     <TextView
-         android:id="@+id/tv_content"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/btn_get1"
-         android:textColor="@android:color/white"/>-->
 
     <dinson.customview.weight.richeditor.widget.EmojiLayout
         android:id="@+id/emojiLayout"
