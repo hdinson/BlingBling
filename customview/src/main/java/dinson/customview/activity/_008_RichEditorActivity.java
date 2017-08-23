@@ -32,6 +32,7 @@ public class _008_RichEditorActivity extends BaseActivity implements View.OnClic
 
     private void initUI() {
         findViewById(R.id.ib_emoji).setOnClickListener(this);
+        findViewById(R.id.cancel).setOnClickListener(this);
         mEmojiLayout = (EmojiLayout) findViewById(emojiLayout);
         RichEditor richEditor = (RichEditor) findViewById(R.id.richEditor);
         mEmojiLayout.setEditTextSmile(richEditor);
@@ -41,7 +42,6 @@ public class _008_RichEditorActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_emoji:
-
                 if (mEmojiLayout.getVisibility() == View.VISIBLE) {
                     mEmojiLayout.setVisibility(View.GONE);
                     mEmojiLayout.showKeyboard();
@@ -49,6 +49,9 @@ public class _008_RichEditorActivity extends BaseActivity implements View.OnClic
                     mEmojiLayout.setVisibility(View.VISIBLE);
                     mEmojiLayout.hideKeyboard();
                 }
+                break;
+            case R.id.cancel:
+                onBackPressed();
                 break;
         }
     }

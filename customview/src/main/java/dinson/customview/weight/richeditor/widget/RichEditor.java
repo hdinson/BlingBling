@@ -28,11 +28,8 @@ import java.util.List;
 import dinson.customview.weight.richeditor.model.InsertModel;
 
 /**
- * Created by MryU93 on 2017/6/13.
- * <p>
- * Desc:
+ * 富文本表情框输入框
  */
-
 public class RichEditor extends AppCompatEditText {
 
     private static String TAG = "RichEditor";
@@ -86,12 +83,12 @@ public class RichEditor extends AppCompatEditText {
         ImageSpan imageSpan = new ImageSpan(drawable);
         SpannableString spannableString = new SpannableString(name);
         spannableString.setSpan(imageSpan, 0, spannableString.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int index = Math.max(getSelectionStart(), 0);
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(getText());
-        spannableStringBuilder.insert(index, spannableString);
-
-        setText(spannableStringBuilder);
-        setSelection(index + spannableString.length());
+        //int index = Math.max(getSelectionStart(), 0);
+        //SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(getText());
+        //spannableStringBuilder.insert(index, spannableString);
+        append(spannableString);
+        //setText(spannableStringBuilder);
+        setSelection(curString.length() + spannableString.length());
     }
 
 
