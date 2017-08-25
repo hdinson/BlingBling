@@ -437,7 +437,10 @@ public class SystemBarTintUtils {
 	            } else {  
 	                // TODO this is not correct, but we don't really care pre-kitkat  
 	                activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);  
-	            }  
+	            }
+
+
+
 	            float widthDp = metrics.widthPixels / metrics.density;  
 	            float heightDp = metrics.heightPixels / metrics.density;  
 	            return Math.min(widthDp, heightDp);  
