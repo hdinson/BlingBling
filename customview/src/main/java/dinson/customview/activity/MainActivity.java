@@ -124,7 +124,6 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                     .subscribe(new Consumer<String>() {
                         @Override
                         public void accept(String path) throws Exception {
-
                             LogUtils.e("CurrentItem:" + position + " imgUrl:" +
                                 mHeadData.get(position).getData().getHp_img_url() + "  imgPath:" + path);
 
