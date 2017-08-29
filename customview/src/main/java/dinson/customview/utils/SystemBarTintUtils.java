@@ -439,8 +439,6 @@ public class SystemBarTintUtils {
 	                activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);  
 	            }
 
-
-
 	            float widthDp = metrics.widthPixels / metrics.density;  
 	            float heightDp = metrics.heightPixels / metrics.density;  
 	            return Math.min(widthDp, heightDp);  
