@@ -21,7 +21,6 @@ public class _005LikeSmileViewActivity extends BaseActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity__005_like_smile_view);
         initUI();
     }
