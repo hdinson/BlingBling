@@ -43,13 +43,17 @@
     <string name="rich_editor_title">RichEditor</string>
     <string name="rich_editor_desc">Rich text editor which enables users to insert/delete emoji and text into edit-view.</string>
     <string name="rich_editor_img">http://ondlsj2sn.bkt.clouddn.com/FkLRL9du9H1_jy2C1yFTmCGswQSZ.webp</string>
-    <string name="_008_hint">分享新鲜事…</string>
     <string name="_008_send">发送</string>
     <string name="_008_cancel">取消</string>
     <string name="_008_post_blog">发微博</string>
     <string name="_008_user_name">咸水猫丶</string>
     <string name="_008_open">公开</string>
     <string name="_008_where_are_u">你在哪里?</string>
+    <!--009-->
+    <string name="google_vr_title">Google VR</string>
+    <string name="google_vr_desc">Virtual reality for everyone.</string>
+    <string name="google_vr_img">http://ondlsj2sn.bkt.clouddn.com/FuAVy3cV-_oNaNbqhidirKgpR_Yd.webp</string>
+    <string name="_008_hint">分享新鲜事…</string>
     <!--behavior-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
     <!--iconfont-->
