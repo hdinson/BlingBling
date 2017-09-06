@@ -86,6 +86,8 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             _007SpotlightActivity.class, getString(R.string.spotlight_img)));
         mContentData.add(new ClassBean(getString(R.string.rich_editor_title), getString(R.string.rich_editor_desc),
             _008_RichEditorActivity.class, getString(R.string.rich_editor_img)));
+        mContentData.add(new ClassBean(getString(R.string.google_vr_title), getString(R.string.google_vr_desc),
+            _009GoogleVRActivity.class, getString(R.string.google_vr_img)));
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
 

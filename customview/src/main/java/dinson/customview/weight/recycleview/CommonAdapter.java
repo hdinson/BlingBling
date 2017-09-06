@@ -70,5 +70,4 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
         mDataList = null;
     }
 
-
 }
