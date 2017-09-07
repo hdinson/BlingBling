@@ -171,7 +171,6 @@ public class EmojiLayout extends LinearLayout {
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         gv.setLayoutParams(params);
 
-
         List<String> list = new ArrayList<>();
         int startInd = (i - 1) * 21;
         if ((startInd + 21) >= reslist.size()) {
