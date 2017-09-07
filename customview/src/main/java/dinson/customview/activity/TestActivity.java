@@ -1,21 +1,21 @@
 package dinson.customview.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Base64;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
+import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -24,71 +24,86 @@ import javax.crypto.spec.SecretKeySpec;
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.api.OneApi;
-import dinson.customview.api.QzBusApi;
 import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
-import dinson.customview.http.LoggingInterceptor;
-import dinson.customview.utils.DateUtils;
-import dinson.customview.utils.LogUtils;
-import dinson.customview.utils.StringUtils;
+import dinson.customview.utils.UIUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class TestActivity extends BaseActivity {
 
     private TextView mTvDesc;
-    //手动创建一个OkHttpClient并设置超时时间
-    OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
-            .addInterceptor(new LoggingInterceptor());//添加拦截器 日志;
+    //private static final String URL = "http://shouji.baidu.com/";
+    private static final String URL = "file:///android_asset/test.html";
+    private WebView webView;
+    public String tag = "MainActivity";
+    private Context mContext;
 
-    QzBusApi mApi = new Retrofit.Builder()
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .baseUrl("http://wap.bus.qzjtjt.com")
-            .client(builder.build())
-            .build().create(QzBusApi.class);
-    private EditText mEditText;
-
+    @SuppressLint("JavascriptInterface")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_test);
-        initUI();
+        // 进行全屏
 
+        mContext = this;
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        webView = (WebView) this.findViewById(R.id.webview);
+
+        webView.loadUrl(URL);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(new JSHook(), "hello");
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.d(tag, " url:" + url);
+                view.loadUrl(url);// 当打开新链接时，使用当前的 WebView，不会使用系统其他浏览器
+                return true;
+            }
+        });
     }
 
-    private void initUI() {
-        mTvDesc = (TextView) findViewById(R.id.tv_desc);
-       // mEditText = (EditText) findViewById(R.id.et_route);
+    public class JSHook {
+        @JavascriptInterface
+        public void javaMethod(String p) {
+            Log.d(tag, "JSHook.JavaMethod() called! + " + p);
+        }
 
+        @JavascriptInterface
+        public void showAndroid() {
+            final String info = "来自手机内的内容！！！";
+            UIUtils.runOnUIThread(() -> webView.loadUrl("javascript:show('" + info + "')"));
+        }
 
-
-
+        public String getInfo() {
+            return "获取手机内的信息！！dinson";
+        }
     }
 
+    @Override
+    //设置回退
+    //覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack(); //goBack()表示返回WebView的上一页面
+            this.finish();
+            return true;
+        }
+        return false;
+    }
 
+    ///////////////////////////////////////以下看情况删////////////////////////////////////////////////////////
     public void doPost(View view) {
-
-
         //  qiniuyun();
-
-
         // qzBus();
-
-
         // jsoupTest();
         //AlarmTest();
-
         Observable.just("")
             .map(new Function<String, String>() {
 
@@ -101,80 +116,23 @@ public class TestActivity extends BaseActivity {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe();
-
-
-    }
-
-    private void AlarmTest() {
-
-
-        if (StringUtils.isEmpty(mEditText.getText().toString())) return;
-
-        int time = Integer.parseInt(mEditText.getText().toString());
-
-
-        //设定一个五秒后的时间
-        Calendar calendar=Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, time);
-
-
-        // 获取AlarmManager对象
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-        // 创建Intent对象，action为android.intent.action.ALARM_RECEIVER
-        Intent intent = new Intent("android.intent.action.ALARM_RECEIVER");
-        PendingIntent operation = PendingIntent.getBroadcast(this, 0, intent, 0);
-
-//        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time*1000,operation);
-//        alarmManager.set(AlarmManager.RTC_WAKEUP, time*1000, operation);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), operation);
-        LogUtils.i(DateUtils.int2Str(DateUtils.getCurrentTimeMillis10()));
-        LogUtils.i(String.format(Locale.CHINA, "设置了闹钟... %ds后", time));
-
-
     }
 
 
     private void jsoupTest() {
-
         Observable.just("http://www.dinson.win/")
-                .map(new Function<String, Document>() {
-                    @Override
-                    public Document apply(String s) throws Exception {
-                        Document document = Jsoup.connect(s).get();
-                        return document;
-                    }
-                }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Document>() {
-                    @Override
-                    public void accept(Document document) throws Exception {
-                        mTvDesc.setText("");
-                        mTvDesc.append(document.title());
-                        mTvDesc.append(document.body().toString());
-                    }
-                });
+            .map(s -> {
+                Document document = Jsoup.connect(s).get();
+                return document;
+            }).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(document -> {
+                mTvDesc.setText("");
+                mTvDesc.append(document.title());
+                mTvDesc.append(document.body().toString());
+            });
     }
 
-    private void qzBus() {
-
-
-        Call<String> call = mApi.queryRoute(mEditText.getText().toString());
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                mTvDesc.setText(response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                LogUtils.i("onFailure() called with: call = [" + call + "], t = [" + t + "]");
-            }
-        });
-    }
 
     private void qiniuyun() {
         String url = "dinson-blog:mh_ic_323.png"; // 编码前
@@ -186,18 +144,18 @@ public class TestActivity extends BaseActivity {
         OneApi oneApi = HttpHelper.getRetrofit().create(OneApi.class);
         Observable<String> observable = oneApi.postDelete(url_encode, token.trim());
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<String>() {
-                    @Override
-                    public void onHandlerSuccess(String value) {
-                        mTvDesc.append(value);
-                    }
+            .subscribe(new BaseObserver<String>() {
+                @Override
+                public void onHandlerSuccess(String value) {
+                    mTvDesc.append(value);
+                }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        mTvDesc.append(e.toString() + "\n");
-                    }
-                });
+                @Override
+                public void onError(Throwable e) {
+                    super.onError(e);
+                    mTvDesc.append(e.toString() + "\n");
+                }
+            });
     }
 
 

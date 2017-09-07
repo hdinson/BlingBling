@@ -12,12 +12,18 @@
         android:id="@+id/vrPanoramaView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"/>
+        android:layout_weight="2">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/_001_bg"/>
+    </com.google.vr.sdk.widgets.pano.VrPanoramaView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@id/rv_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"/>
-
 </LinearLayout>

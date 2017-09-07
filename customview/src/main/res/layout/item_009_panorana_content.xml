@@ -10,7 +10,7 @@
     android:paddingRight="17dp"
     android:paddingTop="17dp">
 
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,9 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
-            android:layout_toLeftOf="@+id/prl_image"
-            android:textColor="@color/c1"
-            android:textSize="@dimen/f7"/>
+            android:layout_toLeftOf="@+id/prl_image" />
 
         <TextView
             android:id="@+id/tv_desc"
@@ -29,12 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="@dimen/d2"
             android:layout_toLeftOf="@+id/prl_image"
             android:ellipsize="end"
-            android:maxLines="5"
-            android:textColor="@color/c2"
-            android:textSize="@dimen/f10"/>
+            android:maxLines="5" />
 
         <android.support.percent.PercentRelativeLayout
             android:id="@+id/prl_image"
@@ -56,8 +51,6 @@
     <View
         android:id="@+id/bottom_divider"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="@dimen/d5"
-        android:background="@color/c3"/>
+        android:layout_height="1px" />-->
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 package dinson.customview.adapter;
 
 import android.content.Context;
-import android.widget.ImageView;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class _004RightAdapter extends CommonAdapter<MonsterBean> {
                 holder.setTvText(R.id.tv_title, monsterBean.getFamily());
                 break;
             case 1:
-                GlideUtils.setImage(mContext, monsterBean.getIcon(), (ImageView) holder.getView(R.id.iv_img));
+                GlideUtils.setImage(mContext, monsterBean.getIcon(),   holder.getView(R.id.iv_img));
                 holder.setTvText(R.id.tv_name, monsterBean.getName());
                 break;
         }
