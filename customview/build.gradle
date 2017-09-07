@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'AndResGuard'
 apply plugin: 'me.tatarka.retrolambda'
 
+
+Properties prop = new Properties()
+prop.load(new FileInputStream(file("../signing.properties")))
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -23,10 +27,10 @@ android {
     /*打包 gradlew resguardRelease*/
     signingConfigs {
         app {
-            keyAlias 'Dinson'
-            keyPassword 'Dinson9918'
-            storeFile file('../Dinson.jks')
-            storePassword 'Dinson9918'
+            storeFile file(prop['KEYSTORE_FILEPATH'])
+            storePassword prop['STORE_PASSWORD']
+            keyAlias prop['KEY_ALIAS']
+            keyPassword prop['KEY_PASSWORD']
         }
     }
     buildTypes {

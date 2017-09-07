@@ -3,7 +3,7 @@ package dinson.customview.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
@@ -14,10 +14,13 @@ import java.io.InputStream;
 import java.util.Random;
 
 import dinson.customview.R;
+import dinson.customview._global.BaseActivity;
+import dinson.customview.adapter._009ContentAdapter;
 import dinson.customview.model._009PanoramaImageModel;
 import dinson.customview.model._009_ModelUtil;
+import dinson.customview.weight.recycleview.LinearItemDecoration;
 
-public class _009GoogleVRActivity extends AppCompatActivity {
+public class _009GoogleVRActivity extends BaseActivity {
 
     private RecyclerView mRvContent;
     private VrPanoramaView vrPanoramaView;
@@ -43,13 +46,14 @@ public class _009GoogleVRActivity extends AppCompatActivity {
         loadPanoramaImage(model);
 
         mRvContent = (RecyclerView) findViewById(R.id.rv_content);
-        /*mAdapter = new PanoramaImageAdapter(this, _009_ModelUtil.getPanoramaImageList());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(mAdapter);*/
+        _009ContentAdapter mAdapter = new _009ContentAdapter(this, _009_ModelUtil.getPanoramaImageList());
+        mRvContent.addItemDecoration(new LinearItemDecoration(this));
+        mRvContent.setLayoutManager(new LinearLayoutManager(this));
+        mRvContent.setAdapter(mAdapter);
     }
 
     private void loadPanoramaImage(_009PanoramaImageModel model) {
-        loadPanoramaImage(getBitmapFromAssets(model.assetName));
+        loadPanoramaImage(getBitmapFromAssets(model.localPath));
     }
 
     private void loadPanoramaImage(Bitmap bitmap) {

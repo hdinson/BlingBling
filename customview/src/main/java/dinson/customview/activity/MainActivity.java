@@ -173,4 +173,5 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     public boolean finishWithAnim() {
         return false;
     }
+
 }

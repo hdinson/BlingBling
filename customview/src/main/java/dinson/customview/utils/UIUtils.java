@@ -17,6 +17,7 @@ import dinson.customview._global.GlobalApplication;
 public class UIUtils {
 
     public static Context getContext() {
+        LogUtils.i("uiutils 调用");
         return GlobalApplication.getContext();
     }
 

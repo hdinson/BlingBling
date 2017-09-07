@@ -1,56 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:orientation="vertical"
-    android:paddingLeft="17dp"
-    android:paddingRight="17dp"
-    android:paddingTop="17dp">
+    android:background="@drawable/ripple_main_white"
+    android:clickable="true"
+    android:padding="17dp">
 
-   <!-- <RelativeLayout
+    <TextView
+        android:id="@id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/iv_img"
+        android:textColor="@color/textPrimary"
+        android:textSize="14sp"/>
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
-            android:layout_toLeftOf="@+id/prl_image" />
-
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:layout_marginRight="12dp"
-            android:layout_toLeftOf="@+id/prl_image"
-            android:ellipsize="end"
-            android:maxLines="5" />
-
-        <android.support.percent.PercentRelativeLayout
-            android:id="@+id/prl_image"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:padding="1px"
-                android:scaleType="centerCrop"
-                app:layout_aspectRatio="150%"
-                app:layout_widthPercent="100%"/>
-        </android.support.percent.PercentRelativeLayout>
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/bottom_divider"
+    <TextView
+        android:id="@id/tv_desc"
         android:layout_width="match_parent"
-        android:layout_height="1px" />-->
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_toStartOf="@id/iv_img"
+        android:ellipsize="end"
+        android:maxLines="5"
+        android:textSize="8sp"
+        android:textColor="@color/textSecond"/>
 
-</LinearLayout>
+    <dinson.customview.weight.aspectratioview.AspectRatioImageView
+        android:id="@id/iv_img"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:scaleType="centerCrop"
+        app:aspectRatio="1.5"/>
+</RelativeLayout>
