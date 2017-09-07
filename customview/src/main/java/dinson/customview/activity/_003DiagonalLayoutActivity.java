@@ -47,9 +47,9 @@ public class _003DiagonalLayoutActivity extends BaseActivity {
         GlideUtils.setCircleImage(this, imgUrl, cv_circleview);
 
         TextView tv_content = (TextView) findViewById(R.id.tv_content);
-        String quanZhou = FileUtils.getTextFromAssets(this, "QuanZhou");
+        String qzStr = FileUtils.getTextFromAssets(this, "QuanZhou");
 
-        tv_content.setText(Html.fromHtml(quanZhou));
+        tv_content.setText(Html.fromHtml(qzStr));
 
     }
 }

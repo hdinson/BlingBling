@@ -3,7 +3,6 @@ package dinson.customview.utils;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
@@ -40,16 +39,13 @@ public class SoftHideKeyBoardUtil {
         //2､获取到setContentView放进去的View
         mChildOfContent = content.getChildAt(0);
         //3､给Activity的xml布局设置View树监听，当布局有变化，如键盘弹出或收起时，都会回调此监听
-        mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            //4､软键盘弹起会使GlobalLayout发生变化
-            public void onGlobalLayout() {
-                if (isfirst) {
-                    contentHeight = mChildOfContent.getHeight();//兼容华为等机型
-                    isfirst = false;
-                }
-                //5､当前布局发生变化时，对Activity的xml布局进行重绘
-                possiblyResizeChildOfContent();
+        mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            if (isfirst) {
+                contentHeight = mChildOfContent.getHeight();//兼容华为等机型
+                isfirst = false;
             }
+            //5､当前布局发生变化时，对Activity的xml布局进行重绘
+            possiblyResizeChildOfContent();
         });
         //6､获取到Activity的xml布局的放置参数
         frameLayoutParams = (FrameLayout.LayoutParams) mChildOfContent.getLayoutParams();

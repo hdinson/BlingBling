@@ -15,7 +15,6 @@ import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.concurrent.Callable;
 
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
@@ -36,10 +35,7 @@ import dinson.customview.weight.recycleview.OnItemClickListener;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.BiConsumer;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity implements OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
@@ -115,24 +111,16 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             @Override
             public void onItemClick(final View view, final int position) {
                 Single.just(mHeadData.get(position).getData().getHp_img_url())
-                    .map(new Function<String, String>() {
-                        @Override
-                        public String apply(String s) throws Exception {
-                            return Glide.with(MainActivity.this).load(s).downloadOnly(Target.SIZE_ORIGINAL
-                                , Target.SIZE_ORIGINAL).get().getPath();
-                        }
-                    })
+                    .map(s -> Glide.with(MainActivity.this).load(s).downloadOnly(Target.SIZE_ORIGINAL
+                        , Target.SIZE_ORIGINAL).get().getPath())
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<String>() {
-                        @Override
-                        public void accept(String path) throws Exception {
-                            LogUtils.e("CurrentItem:" + position + " imgUrl:" +
-                                mHeadData.get(position).getData().getHp_img_url() + "  imgPath:" + path);
+                    .subscribe(path -> {
+                        LogUtils.e("CurrentItem:" + position + " imgUrl:" +
+                            mHeadData.get(position).getData().getHp_img_url() + "  imgPath:" + path);
 
-                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                MainActivity.this, view, "dailyPic");
-                            DailyPicActivity.start(MainActivity.this, mHeadData.get(position).getData(), path, options);
-                        }
+                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            MainActivity.this, view, "dailyPic");
+                        DailyPicActivity.start(MainActivity.this, mHeadData.get(position).getData(), path, options);
                     });
             }
         }));
@@ -154,41 +142,20 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                     return detail == null ? mOneApi.getDetail(integer) : Flowable.just(detail);
                 }
             })
-            .filter(new Predicate<DailyDetail>() {
-                @Override
-                public boolean test(DailyDetail integer) throws Exception {
-                    return integer.getData() != null;
-                }
-            })
-            .collect(new Callable<ArrayList<DailyDetail>>() {
-                @Override
-                public ArrayList<DailyDetail> call() throws Exception {
-                    return mHeadData;
-                }
-            }, new BiConsumer<ArrayList<DailyDetail>, DailyDetail>() {
-                @Override
-                public void accept(ArrayList<DailyDetail> list, DailyDetail bean) throws Exception {
-                    LogUtils.e(bean.toString());
-                    CacheUtils.setDailyDetail(bean);
-                    list.add(bean);
-                }
+            .filter(integer -> integer.getData() != null)
+            .collect(() -> mHeadData, (list, bean) -> {
+                LogUtils.e(bean.toString());
+                CacheUtils.setDailyDetail(bean);
+                list.add(bean);
             })
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Consumer<Object>() {
-                @Override
-                public void accept(Object o) throws Exception {
-                    mMainHeadAdapter.notifyItemChanged(0);
-                }
-            }, new Consumer<Throwable>() {
-                @Override
-                public void accept(Throwable throwable) throws Exception {
-                    LogUtils.e(throwable.toString());
-                    ViewStub layout = (ViewStub) findViewById(R.id.vs_content);
-                    layout.inflate();
-                    ImageView iv_img = (ImageView) findViewById(R.id.iv_img);
-                    iv_img.setImageResource(R.drawable.def_img);
-                }
+            .subscribe(o -> mMainHeadAdapter.notifyItemChanged(0), throwable -> {
+                LogUtils.e(throwable.toString());
+                ViewStub layout = (ViewStub) findViewById(R.id.vs_content);
+                layout.inflate();
+                ImageView iv_img = (ImageView) findViewById(R.id.iv_img);
+                iv_img.setImageResource(R.drawable.def_img);
             });
     }
 

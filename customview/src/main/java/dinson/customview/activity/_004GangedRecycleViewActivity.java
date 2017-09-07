@@ -2,6 +2,7 @@ package dinson.customview.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -60,16 +61,15 @@ public class _004GangedRecycleViewActivity extends BaseActivity {
         rvLeft.setLayoutManager(new LinearLayoutManager(this));
         GridLayoutManager gridManager = new GridLayoutManager(this, 3);
         rvRight.setLayoutManager(gridManager);
-        gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+        gridManager.setSpanSizeLookup(new SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                return rightDatas.get(position).isTitle()?3:1;
+                return rightDatas.get(position).isTitle() ? 3 : 1;
             }
         });
 
         rvLeft.setAdapter(leftAdapter);
         rvRight.setAdapter(rightAdapter);
-
         rvLeft.addItemDecoration(new LinearItemDecoration(this));
     }
 

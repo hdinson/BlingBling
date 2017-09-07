@@ -2,30 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/activity_main"
               android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipChildren="true"
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-
-    <Button
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="doPost"
-        android:text="发送"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:src="@drawable/def_img"
-        android:layout_height="wrap_content"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@id/tv_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </ScrollView>
+        android:layout_height="match_parent"/>
 
 
 
