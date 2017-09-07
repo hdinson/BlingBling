@@ -15,7 +15,6 @@ import dinson.customview.weight.recycleview.CommonViewHolder;
  */
 public class _009ContentAdapter extends CommonAdapter<_009PanoramaImageModel> {
 
-
     public _009ContentAdapter(Context context, List<_009PanoramaImageModel> dataList) {
         super(context, dataList);
     }
@@ -24,7 +23,6 @@ public class _009ContentAdapter extends CommonAdapter<_009PanoramaImageModel> {
     public int getLayoutId(int viewType) {
         return R.layout.item_009_panorana_content;
     }
-
 
     @Override
     public void convert(CommonViewHolder holder, _009PanoramaImageModel bean, int position) {
