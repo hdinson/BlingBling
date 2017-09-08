@@ -4,11 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-class MD5 {
+public class MD5 {
 
     private final static String SALT = "hi,md5";//加盐
 
-    static String encode(String string) {
+    public static String encode(String string) {
 
         string += SALT;
 
