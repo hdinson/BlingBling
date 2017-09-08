@@ -53,7 +53,7 @@ public class _009GoogleVRActivity extends BaseActivity {
     }
 
     private void loadPanoramaImage(_009PanoramaImageModel model) {
-        loadPanoramaImage(getBitmapFromAssets(model.localPath));
+       // loadPanoramaImage(getBitmapFromAssets(model.localPath));
     }
 
     private void loadPanoramaImage(Bitmap bitmap) {

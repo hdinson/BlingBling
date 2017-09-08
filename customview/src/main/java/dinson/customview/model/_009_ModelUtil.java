@@ -76,7 +76,7 @@ public class _009_ModelUtil {
     public static List<_009PanoramaImageModel> getPanoramaImageList() {
         List<_009PanoramaImageModel> list = new ArrayList<>();
         for (int i = 0; i < titleArr.length; i++) {
-            list.add(new _009PanoramaImageModel(0, titleArr[i], descArr[i], localArr[i], urlArr[i]));
+            list.add(new _009PanoramaImageModel(  titleArr[i], descArr[i],   urlArr[i], urlArr[i]));
         }
         return list;
     }
