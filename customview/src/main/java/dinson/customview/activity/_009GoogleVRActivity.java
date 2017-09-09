@@ -50,6 +50,9 @@ public class _009GoogleVRActivity extends BaseActivity {
         mRvContent.addItemDecoration(new LinearItemDecoration(this));
         mRvContent.setLayoutManager(new LinearLayoutManager(this));
         mRvContent.setAdapter(mAdapter);
+
+        //获取cpu个数
+        int cpucount = Runtime.getRuntime().availableProcessors();
     }
 
     private void loadPanoramaImage(_009PanoramaImageModel model) {
