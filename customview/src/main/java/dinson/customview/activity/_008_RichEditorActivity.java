@@ -21,7 +21,6 @@ public class _008_RichEditorActivity extends BaseActivity implements View.OnClic
         setContentView(R.layout.activity__008__rich_editor);
         SoftHideKeyBoardUtil.assistActivity(this);
 
-
         initUI();
     }
 
