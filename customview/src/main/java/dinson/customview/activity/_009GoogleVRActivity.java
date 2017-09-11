@@ -7,8 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
-import com.google.vr.sdk.widgets.pano.VrPanoramaView;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
@@ -23,7 +21,7 @@ import dinson.customview.weight.recycleview.LinearItemDecoration;
 public class _009GoogleVRActivity extends BaseActivity {
 
     private RecyclerView mRvContent;
-    private VrPanoramaView vrPanoramaView;
+    //private VrPanoramaView vrPanoramaView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +34,11 @@ public class _009GoogleVRActivity extends BaseActivity {
     }
 
     private void initView() {
-        vrPanoramaView = (VrPanoramaView) findViewById(R.id.vrPanoramaView);
+        /*vrPanoramaView = (VrPanoramaView) findViewById(R.id.vrPanoramaView);
         vrPanoramaView.setTouchTrackingEnabled(true);
         vrPanoramaView.setFullscreenButtonEnabled(true);
         vrPanoramaView.setInfoButtonEnabled(false);
-        vrPanoramaView.setStereoModeButtonEnabled(false);
+        vrPanoramaView.setStereoModeButtonEnabled(false);*/
         int currPosition = new Random().nextInt(_009_ModelUtil.getPanoramaImageList().size());
         _009PanoramaImageModel model = _009_ModelUtil.getPanoramaImageList().get(currPosition);
         loadPanoramaImage(model);
@@ -60,10 +58,10 @@ public class _009GoogleVRActivity extends BaseActivity {
     }
 
     private void loadPanoramaImage(Bitmap bitmap) {
-        if (bitmap == null) return;
+        /*if (bitmap == null) return;
         VrPanoramaView.Options options = new VrPanoramaView.Options();
         options.inputType = VrPanoramaView.Options.TYPE_MONO;
-        vrPanoramaView.loadImageFromBitmap(bitmap, options);
+        vrPanoramaView.loadImageFromBitmap(bitmap, options);*/
     }
 
     private Bitmap getBitmapFromAssets(String fileName) {
@@ -77,7 +75,7 @@ public class _009GoogleVRActivity extends BaseActivity {
         return null;
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         vrPanoramaView.resumeRendering();
@@ -93,5 +91,5 @@ public class _009GoogleVRActivity extends BaseActivity {
     protected void onDestroy() {
         vrPanoramaView.shutdown();
         super.onDestroy();
-    }
+    }*/
 }

@@ -15,5 +15,13 @@
         android:layout_marginTop="40dp"
         android:padding="20dp"
         android:clickable="true"
-        android:text="fasdfasdf"/>
+        android:onClick="doDown"
+        android:text="点击下载"/>
+
+    <TextView
+        android:id="@id/tv_dis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="20dp" />
 </LinearLayout>

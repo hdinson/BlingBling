@@ -18,7 +18,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
-import dinson.customview._global.ConstantsUtils;
 import dinson.customview.api.OneApi;
 import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
@@ -46,18 +45,53 @@ public class TestActivity extends BaseActivity {
         setContentView(R.layout.activity_test);
         // 进行全屏
 
-        String str = "";
-        for (int i = 0; i < 10; i++) {
-            str += ConstantsUtils.SDCARD_PRIVATE;
-        }
-
-
-        TextView tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_title.setText(str);
+        mTvDesc = (TextView) findViewById(R.id.tv_dis);
 
 
     }
 
+    public void doDown(View view) {
+
+
+       // DownManager.getInstance().download(new _009PanoramaImageModel("111",));
+
+
+        /*DownLoadEntity entity = new DownLoadEntity("http://ondlsj2sn.bkt.clouddn.com/FqCreoHlRPVcwdNuyFSrLwYuF9wI.jpg",
+            ConstantsUtils.SDCARD_ROOT + "test1.jpg");
+
+        DownLoadManager.getInstance().downLoad(entity, "dflasd", new DownLoadBackListener() {
+            @Override
+            public void onStart(double percent) {
+                mTvDesc.append("开始下载\n");
+            }
+
+            @Override
+            public void onCancel() {
+                mTvDesc.append("下载取消\n");
+
+            }
+
+            @Override
+            public void onDownLoading(double percent) {
+                mTvDesc.append("正在下载中...\n");
+
+            }
+
+            @Override
+            public void onCompleted() {
+                mTvDesc.append("开始完成\n");
+
+            }
+
+            @Override
+            public void onError(DownLoadEntity downLoadEntity, Throwable throwable) {
+                mTvDesc.append("开始错误\n");
+            }
+        });*/
+
+
+
+    }
 
     ///////////////////////////////////////以下看情况删////////////////////////////////////////////////////////
     public void doPost(View view) {
@@ -173,4 +207,6 @@ accessToken = "MY_ACCESS_KEY:FXsYh0wKHYPEsIAgdPD9OfjkeEM="*/
 
         return reString;
     }
+
+
 }
