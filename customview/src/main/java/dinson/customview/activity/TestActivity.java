@@ -136,7 +136,7 @@ public class TestActivity extends BaseActivity {
         String token = "QBox " + getToken("/delete/" + url_encode + "\n");
         mTvDesc.append("url_encode : " + url_encode + "\ntoken : " + token);
 
-        OneApi oneApi = HttpHelper.getRetrofit().create(OneApi.class);
+        OneApi oneApi = HttpHelper.create(OneApi.class);
         Observable<String> observable = oneApi.postDelete(url_encode, token.trim());
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             .subscribe(new BaseObserver<String>() {

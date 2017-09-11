@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     private ArrayList<ClassBean> mContentData = new ArrayList<>(); //内容的数据集
     private ArrayList<DailyDetail> mHeadData = new ArrayList<>();
 
-    private OneApi mOneApi = HttpHelper.getRetrofit().create(OneApi.class);
+    private OneApi mOneApi = HttpHelper.create(OneApi.class);
 
     private ItemTouchHelper mTouchHelper;//处理条目移动的帮助类
     private MainHeadAdapter mMainHeadAdapter;

@@ -1,4 +1,4 @@
-package dinson.customview.download.helper;
+package dinson.customview.download1.helper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import dinson.customview.download.db.DownLoadDatabase;
-import dinson.customview.download.db.DownLoadEntity;
+import dinson.customview.download1.db.DownLoadDatabase;
+import dinson.customview.download1.db.DownLoadEntity;
 import dinson.customview.utils.UIUtils;
 
 /**

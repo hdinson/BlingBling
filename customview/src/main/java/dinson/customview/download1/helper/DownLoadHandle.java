@@ -1,4 +1,4 @@
-package dinson.customview.download.helper;
+package dinson.customview.download1.helper;
 
 import android.text.TextUtils;
 
@@ -9,8 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import dinson.customview.api.DownLoadApi;
-import dinson.customview.download.db.DownLoadDatabase;
-import dinson.customview.download.db.DownLoadEntity;
+import dinson.customview.download1.db.DownLoadDatabase;
+import dinson.customview.download1.db.DownLoadEntity;
 import dinson.customview.http.HttpHelper;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

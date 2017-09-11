@@ -1,4 +1,4 @@
-package dinson.customview.download.config;
+package dinson.customview.download1.config;
 
 import com.google.gson.Gson;
 

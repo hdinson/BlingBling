@@ -28,7 +28,7 @@
 #---------------------------------2.第三方包-------------------------------
 
 
-#retrofit2
+### retrofit2
 # Platform calls Class.forName on types which do not exist on Android to determine platform.
 -dontnote retrofit2.Platform
 # Platform used when running on Java 8 VMs. Will not be used at runtime.
@@ -40,7 +40,7 @@
 -dontwarn com.squareup.**
 -dontwarn okio.**
 
-#glide4.0
+### glide4.0
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.AppGlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
@@ -48,6 +48,15 @@
   public *;
 }
 
+### greenDAO 3
+-keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
+public static java.lang.String TABLENAME;
+}
+-keep class **$Properties
+# If you do not use SQLCipher:
+-dontwarn org.greenrobot.greendao.database.**
+# If you do not use RxJava:
+-dontwarn rx.**
 
 #-------------------------------------------------------------------------
 
