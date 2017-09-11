@@ -1,0 +1,124 @@
+package dinson.customview.download.subscribers;
+
+
+import java.lang.ref.SoftReference;
+
+import dinson.customview.download.DownState;
+import dinson.customview.download.db.DownInfo;
+import dinson.customview.download.listener.DownloadListener;
+import dinson.customview.download.listener.DownloadProgressListener;
+import dinson.customview.download.manager.DownloadManager;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+
+/**
+ * 断点下载处理类Subscriber
+ * 用于在Http请求开始时，自动显示一个ProgressDialog
+ * 在Http请求结束是，关闭ProgressDialog
+ * 调用者自己对请求数据进行处理
+ * Created by WZG on 2016/7/16.
+ */
+public class ProgressDownSubscriber<T> implements DownloadProgressListener, Observer<T> {
+    //弱引用结果回调
+    private SoftReference<DownloadListener> mSubscriberOnNextListener;
+    /*下载数据*/
+    private DownInfo downInfo;
+
+
+    public ProgressDownSubscriber(DownInfo downInfo) {
+        this.mSubscriberOnNextListener = new SoftReference<>(downInfo.getListener());
+        this.downInfo = downInfo;
+    }
+
+
+    public void setDownInfo(DownInfo downInfo) {
+        this.mSubscriberOnNextListener = new SoftReference<>(downInfo.getListener());
+        this.downInfo = downInfo;
+    }
+
+
+
+
+    @Override
+    public void onStart() {
+
+    }
+
+
+
+    /**
+     * 完成，隐藏ProgressDialog
+     */
+    @Override
+    public void onComplete() {
+        if (mSubscriberOnNextListener.get() != null) {
+            mSubscriberOnNextListener.get().onComplete();
+        }
+        DownloadManager.getInstance().remove(downInfo);
+        downInfo.setState(DownState.FINISH);
+        DbDownUtil.getInstance().update(downInfo);
+    }
+
+    /**
+     * 对错误进行统一处理
+     * 隐藏ProgressDialog
+     *
+     * @param e
+     */
+    @Override
+    public void onError(Throwable e) {
+        if (mSubscriberOnNextListener.get() != null) {
+            mSubscriberOnNextListener.get().onError(e);
+        }
+        DownloadManager.getInstance().remove(downInfo);
+        downInfo.setState(DownState.ERROR);
+        DbDownUtil.getInstance().update(downInfo);
+    }
+
+    /**
+     * 订阅开始时调用
+     * 显示ProgressDialog
+     */
+    @Override
+    public void onSubscribe(Disposable d) {
+        if (mSubscriberOnNextListener.get() != null) {
+            mSubscriberOnNextListener.get().onStart();
+        }
+        downInfo.setState(DownState.START);
+    }
+
+    /**
+     * 将onNext方法中的返回结果交给Activity或Fragment自己处理
+     *
+     * @param t 创建Subscriber时的泛型类型
+     */
+    @Override
+    public void onNext(T t) {
+        if (mSubscriberOnNextListener.get() != null) {
+            mSubscriberOnNextListener.get().onNext(t);
+        }
+    }
+
+    @Override
+    public void update(long read, long count, boolean done) {
+        if (downInfo.getCountLength() > count) {
+            read = downInfo.getCountLength() - count + read;
+        } else {
+            downInfo.setCountLength(count);
+        }
+        downInfo.setReadLength(read);
+        if (mSubscriberOnNextListener.get() != null) {
+            /*接受进度消息，造成UI阻塞，如果不需要显示进度可去掉实现逻辑，减少压力*/
+            Observable.just(read).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> {
+                         /*如果暂停或者停止状态延迟，不需要继续发送回调，影响显示*/
+                    if (downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP)
+                        return;
+                    downInfo.setState(DownState.DOWN);
+                    mSubscriberOnNextListener.get().updateProgress(aLong, downInfo.getCountLength());
+                });
+        }
+    }
+}

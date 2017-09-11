@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'AndResGuard'
 apply plugin: 'me.tatarka.retrolambda'
-
+apply plugin: 'org.greenrobot.greendao'
 
 Properties prop = new Properties()
 prop.load(new FileInputStream(file("../signing.properties")))
@@ -19,6 +19,12 @@ android {
 
         //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        /*针对greenDao的一些配置*//*
+        greendao {
+            schemaVersion 1 //数据库版本号
+            daoPackage 'com.usher.greendao_demo.greendao.gen' //自动生成的工具类的包名
+            targetGenDir 'src/main/java' //路径
+        }*/
 
 
         testOptions {
@@ -74,6 +80,7 @@ dependencies {
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'com.github.bumptech.glide:compiler:4.0.0-RC1'
     compile 'com.facebook.rebound:rebound:0.3.8'
+    compile 'org.greenrobot:greendao:3.2.2' // add library
     compile 'org.jsoup:jsoup:1.10.3'
     //compile 'com.google.vr:sdk-panowidget:1.80.0'
     testCompile 'junit:junit:4.12'

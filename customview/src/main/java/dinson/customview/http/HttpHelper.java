@@ -5,7 +5,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import dinson.customview._global.ConstantsUtils;
-import dinson.customview.download.config.CommonInterceptor;
+import dinson.customview.download1.config.CommonInterceptor;
 import dinson.customview.http.manager.AuthenticatorManager;
 import dinson.customview.http.manager.CookieManager;
 import dinson.customview.http.manager.LoggingInterceptor;

@@ -1,4 +1,4 @@
-package dinson.customview.download.db;
+package dinson.customview.download1.db;
 
 import android.os.Parcel;
 import android.os.Parcelable;

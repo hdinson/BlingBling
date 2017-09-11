@@ -1,4 +1,4 @@
-package dinson.customview.download.helper;
+package dinson.customview.download1.helper;
 
 
 
@@ -12,7 +12,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 import dinson.customview.api.DownLoadApi;
-import dinson.customview.download.db.DownLoadEntity;
+import dinson.customview.download1.db.DownLoadEntity;
 import dinson.customview.http.HttpHelper;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

@@ -1,7 +1,7 @@
-package dinson.customview.download.helper;
+package dinson.customview.download1.helper;
 
 
-import dinson.customview.download.db.DownLoadEntity;
+import dinson.customview.download1.db.DownLoadEntity;
 
 /**
  * Created by hly on 16/4/11.
