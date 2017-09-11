@@ -37,7 +37,7 @@ public class _009PanoramaImageModel {
     }
 
     public String getFilePath() {
-        return ConstantsUtils.SDCARD_PRIVATE_IMAGE + id;
+        return ConstantsUtils.SDCARD_ROOT + id;
     }
 
     public boolean localExist() {

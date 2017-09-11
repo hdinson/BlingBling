@@ -1,4 +1,4 @@
-package dinson.customview.http;
+package dinson.customview.http.manager;
 
 import java.io.IOException;
 import java.util.Locale;

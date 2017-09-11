@@ -120,7 +120,7 @@ public class DownManager {
             File file = new File(mDownLoadBean.getFilePath());
 
 
-            QiNiuApi qiNiuApi = HttpHelper.getRetrofit().create(QiNiuApi.class);
+            QiNiuApi qiNiuApi = HttpHelper.create(QiNiuApi.class);
 
             Response httpResult = null;
 
