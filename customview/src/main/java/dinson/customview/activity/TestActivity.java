@@ -24,7 +24,7 @@ import dinson.customview._global.BaseActivity;
 import dinson.customview.api.OneApi;
 import dinson.customview.download.DownloadManager;
 import dinson.customview.download.listener.HttpDownOnNextListener;
-import dinson.customview.download.model.DownInfo;
+import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadState;
 import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
@@ -65,16 +65,16 @@ public class TestActivity extends BaseActivity {
 
         File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "YVsZJj88m.jpg");
-        DownInfo apkApi = new DownInfo(Url);
+        DownloadInfo apkApi = new DownloadInfo(Url);
         apkApi.setId(1);
         apkApi.setState(DownloadState.START);
         apkApi.setSavePath(outputFile.getAbsolutePath());
 
 
-    /*下载回调*/
-        HttpDownOnNextListener<DownInfo> httpProgressOnNextListener=new HttpDownOnNextListener<DownInfo>() {
+        /*下载回调*/
+        HttpDownOnNextListener<DownloadInfo> httpProgressOnNextListener=new HttpDownOnNextListener<DownloadInfo>() {
             @Override
-            public void onNext(DownInfo baseDownEntity) {
+            public void onNext(DownloadInfo baseDownEntity) {
                 mTvDesc.append("提示：下载完成\n");
             }
 

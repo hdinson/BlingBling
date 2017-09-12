@@ -9,8 +9,8 @@ import java.util.List;
 
 import dinson.customview.download.model.DaoMaster;
 import dinson.customview.download.model.DaoSession;
-import dinson.customview.download.model.DownInfo;
-import dinson.customview.download.model.DownInfoDao;
+import dinson.customview.download.model.DownloadInfo;
+import dinson.customview.download.model.DownloadInfoDao;
 import dinson.customview.utils.UIUtils;
 
 
@@ -22,9 +22,9 @@ import dinson.customview.utils.UIUtils;
 
 public class DbDownUtil {
     private static DbDownUtil db;
-    private final static String dbName = "tests_db";
+    private final static String dbName = "Download";
     private DaoMaster.DevOpenHelper openHelper;
-    private Context context= UIUtils.getContext();
+    private Context context = UIUtils.getContext();
 
 
     public DbDownUtil() {
@@ -34,6 +34,7 @@ public class DbDownUtil {
 
     /**
      * 获取单例
+     *
      * @return
      */
     public static DbDownUtil getInstance() {
@@ -71,47 +72,40 @@ public class DbDownUtil {
     }
 
 
-    public void save(DownInfo info){
+    public void insertOrReplace(DownloadInfo info) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
-        downInfoDao.insert(info);
+        DownloadInfoDao downInfoDao = daoSession.getDownloadInfoDao();
+        downInfoDao.insertOrReplace(info);
     }
 
-    public void update(DownInfo info){
+    public void deleteDowninfo(DownloadInfo info) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
-       // downInfoDao.update(info);
-    }
-
-    public void deleteDowninfo(DownInfo info){
-        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
+        DownloadInfoDao downInfoDao = daoSession.getDownloadInfoDao();
         downInfoDao.delete(info);
     }
 
 
-    public DownInfo queryDownBy(long Id) {
+    public DownloadInfo queryDownBy(String url) {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
-        QueryBuilder<DownInfo> qb = downInfoDao.queryBuilder();
-        qb.where(DownInfoDao.Properties.Id.eq(Id));
-        List<DownInfo> list = qb.list();
-        if(list.isEmpty()){
+        DownloadInfoDao downInfoDao = daoSession.getDownloadInfoDao();
+        QueryBuilder<DownloadInfo> qb = downInfoDao.queryBuilder();
+        qb.where(DownloadInfoDao.Properties.Url.eq(url));
+        List<DownloadInfo> list = qb.list();
+        if (list.isEmpty()) {
             return null;
-        }else{
+        } else {
             return list.get(0);
         }
     }
 
-    public List<DownInfo> queryDownAll() {
+    public List<DownloadInfo> queryDownAll() {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
-        QueryBuilder<DownInfo> qb = downInfoDao.queryBuilder();
+        DownloadInfoDao downInfoDao = daoSession.getDownloadInfoDao();
+        QueryBuilder<DownloadInfo> qb = downInfoDao.queryBuilder();
         return qb.list();
     }
 }

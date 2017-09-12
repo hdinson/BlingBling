@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import dinson.customview.api.DownloadServiceApi;
-import dinson.customview.download.model.DownInfo;
+import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadState;
 import dinson.customview.download.subscribers.ProgressDownSubscriber;
 import dinson.customview.download.utils.DbDownUtil;
@@ -33,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class DownloadManager {
     /*记录下载数据*/
-    private Set< DownInfo> downInfos;
+    private Set<DownloadInfo> downInfos;
     /*回调sub队列*/
     private HashMap<String, ProgressDownSubscriber> subMap;
     /*单利对象*/
@@ -71,7 +71,7 @@ public class DownloadManager {
     /**
      * 开始下载
      */
-    public void startDown(final DownInfo info) {
+    public void startDown(final DownloadInfo info) {
         /*正在下载不处理*/
         if (info == null || subMap.get(info.getUrl()) != null) {
             subMap.get(info.getUrl()).setDownInfo(info);
@@ -110,9 +110,9 @@ public class DownloadManager {
                    /*失败后的retry配置*/
             //.retryWhen(new RetryWhenNetworkException())
                 /*读取下载写入文件*/
-            .map(new Function<ResponseBody, DownInfo>() {
+            .map(new Function<ResponseBody, DownloadInfo>() {
                 @Override
-                public DownInfo apply(ResponseBody responseBody) throws Exception {
+                public DownloadInfo apply(ResponseBody responseBody) throws Exception {
                     writeCaches(responseBody, new File(info.getSavePath()), info);
                     return info;
                 }
@@ -128,7 +128,7 @@ public class DownloadManager {
     /**
      * 停止下载
      */
-    public void stopDown(DownInfo info) {
+    public void stopDown(DownloadInfo info) {
         if (info == null) return;
         info.setState(DownloadState.STOP);
         info.getListener().onStop();
@@ -138,7 +138,7 @@ public class DownloadManager {
             subMap.remove(info.getUrl());
         }
         /*保存数据库信息和本地文件*/
-        db.save(info);
+        db.insertOrReplace(info);
     }
 
 
@@ -147,7 +147,7 @@ public class DownloadManager {
      *
      * @param info
      */
-    public void pause(DownInfo info) {
+    public void pause(DownloadInfo info) {
         if (info == null) return;
         info.setState(DownloadState.PAUSE);
         info.getListener().onPuase();
@@ -157,14 +157,14 @@ public class DownloadManager {
             subMap.remove(info.getUrl());
         }
         /*这里需要讲info信息写入到数据中，可自由扩展，用自己项目的数据库*/
-        db.update(info);
+        db.insertOrReplace(info);
     }
 
     /**
      * 停止全部下载
      */
     public void stopAllDown() {
-        for (DownInfo downInfo : downInfos) {
+        for (DownloadInfo downInfo : downInfos) {
             stopDown(downInfo);
         }
         subMap.clear();
@@ -175,7 +175,7 @@ public class DownloadManager {
      * 暂停全部下载
      */
     public void pauseAll() {
-        for (DownInfo downInfo : downInfos) {
+        for (DownloadInfo downInfo : downInfos) {
             pause(downInfo);
         }
         subMap.clear();
@@ -188,7 +188,7 @@ public class DownloadManager {
      *
      * @return
      */
-    public Set<DownInfo> getDownInfos() {
+    public Set<DownloadInfo> getDownInfos() {
         return downInfos;
     }
 
@@ -197,7 +197,7 @@ public class DownloadManager {
      *
      * @param info
      */
-    public void remove( DownInfo info) {
+    public void remove( DownloadInfo info) {
         subMap.remove(info.getUrl());
         downInfos.remove(info);
     }
@@ -210,7 +210,7 @@ public class DownloadManager {
      * @param info
      * @throws IOException
      */
-    public void writeCaches(ResponseBody responseBody, File file,  DownInfo info) {
+    public void writeCaches(ResponseBody responseBody, File file,  DownloadInfo info) {
         try {
             RandomAccessFile randomAccessFile = null;
             FileChannel channelOut = null;
