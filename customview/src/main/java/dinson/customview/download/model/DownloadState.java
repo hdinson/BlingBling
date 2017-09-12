@@ -1,11 +1,11 @@
-package dinson.customview.download;
+package dinson.customview.download.model;
 
 /**
  * 下载状态
  * Created by WZG on 2016/10/21.
  */
 
-public enum DownState {
+public enum DownloadState {
     START(0),
     DOWN(1),
     PAUSE(2),
@@ -22,7 +22,7 @@ public enum DownState {
         this.state = state;
     }
 
-    DownState(int state) {
+    DownloadState(int state) {
         this.state = state;
     }
 }

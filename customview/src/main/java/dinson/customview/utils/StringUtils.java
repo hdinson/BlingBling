@@ -1,7 +1,7 @@
 package dinson.customview.utils;
 
 /**
- *  字符串相关工具类
+ * 字符串相关工具类
  */
 public final class StringUtils {
 
@@ -182,4 +182,23 @@ public final class StringUtils {
         }
         return new String(chars);
     }
+
+    /**
+     * 读取baseurl
+     */
+    public static String getBasUrl(String url) {
+        String head = "";
+        int index = url.indexOf("://");
+        if (index != -1) {
+            head = url.substring(0, index + 3);
+            url = url.substring(index + 3);
+        }
+        index = url.indexOf("/");
+        if (index != -1) {
+            url = url.substring(0, index + 1);
+        }
+        LogUtils.e("Retrofit's baseUrl is : " + head + url);
+        return head + url;
+    }
+
 }

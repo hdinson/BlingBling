@@ -3,6 +3,7 @@ package dinson.customview.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Base64;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.io.File;
+
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -19,6 +22,10 @@ import javax.crypto.spec.SecretKeySpec;
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.api.OneApi;
+import dinson.customview.download.DownloadManager;
+import dinson.customview.download.listener.HttpDownOnNextListener;
+import dinson.customview.download.model.DownInfo;
+import dinson.customview.download.model.DownloadState;
 import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
 import io.reactivex.Observable;
@@ -35,6 +42,7 @@ public class TestActivity extends BaseActivity {
     private WebView webView;
     public String tag = "MainActivity";
     private Context mContext;
+    private DownloadManager manager;
 
     @SuppressLint("JavascriptInterface")
     @Override
@@ -46,17 +54,76 @@ public class TestActivity extends BaseActivity {
         // 进行全屏
 
         mTvDesc = (TextView) findViewById(R.id.tv_dis);
-
+        manager = DownloadManager.getInstance();
 
     }
 
     public void doDown(View view) {
 
 
-       // DownManager.getInstance().download(new _009PanoramaImageModel("111",));
+        String Url = "http://ondlsj2sn.bkt.clouddn.com/FvZG8R_rYVsZJj88meyFELWS5D7_.jpg";
+
+        File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+            "YVsZJj88m.jpg");
+        DownInfo apkApi = new DownInfo(Url);
+        apkApi.setId(1);
+        apkApi.setState(DownloadState.START);
+        apkApi.setSavePath(outputFile.getAbsolutePath());
 
 
-        /*DownLoadEntity entity = new DownLoadEntity("http://ondlsj2sn.bkt.clouddn.com/FqCreoHlRPVcwdNuyFSrLwYuF9wI.jpg",
+    /*下载回调*/
+        HttpDownOnNextListener<DownInfo> httpProgressOnNextListener=new HttpDownOnNextListener<DownInfo>() {
+            @Override
+            public void onNext(DownInfo baseDownEntity) {
+                mTvDesc.append("提示：下载完成\n");
+            }
+
+            @Override
+            public void onStart() {
+                mTvDesc.append("提示:开始下载\n");
+            }
+
+            @Override
+            public void onComplete() {
+                mTvDesc.append("提示：下载结束\n");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                mTvDesc.append("失败:"+e.toString());
+            }
+
+
+            @Override
+            public void onPuase() {
+                super.onPuase();
+                mTvDesc.append("提示:暂停\n");
+            }
+
+            @Override
+            public void onStop() {
+                super.onStop();
+            }
+
+            @Override
+            public void updateProgress(long readLength, long countLength) {
+                mTvDesc.append("提示:下载中\n");
+                mTvDesc.append("文件大小："+ countLength+"\n");
+                mTvDesc.append("写入大小："+readLength+"\n");
+            }
+        };
+
+
+        apkApi.setListener(httpProgressOnNextListener);
+        manager.startDown(apkApi);
+
+
+        // DownManager.getInstance().download(new _009PanoramaImageModel("111",));
+
+
+        /*DownLoadEntity entity = new DownLoadEntity("http://ondlsj2sn.bkt.clouddn.com/FqCreoHlRPVcwdNuyFSrLwYuF9wI
+        .jpg",
             ConstantsUtils.SDCARD_ROOT + "test1.jpg");
 
         DownLoadManager.getInstance().downLoad(entity, "dflasd", new DownLoadBackListener() {
@@ -88,7 +155,6 @@ public class TestActivity extends BaseActivity {
                 mTvDesc.append("开始错误\n");
             }
         });*/
-
 
 
     }

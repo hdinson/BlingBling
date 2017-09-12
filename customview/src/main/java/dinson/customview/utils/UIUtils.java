@@ -21,6 +21,7 @@ public class UIUtils {
         return GlobalApplication.getContext();
     }
 
+
     public static Handler getHandler() {
         return GlobalApplication.getHandler();
     }

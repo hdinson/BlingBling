@@ -5,7 +5,6 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import dinson.customview._global.ConstantsUtils;
-import dinson.customview.download1.config.CommonInterceptor;
 import dinson.customview.http.manager.AuthenticatorManager;
 import dinson.customview.http.manager.CookieManager;
 import dinson.customview.http.manager.LoggingInterceptor;
@@ -32,7 +31,7 @@ public class HttpHelper {
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-            .addInterceptor(new CommonInterceptor())
+            //.addInterceptor(new CommonInterceptor())
             .addInterceptor(new LoggingInterceptor())
             .cookieJar(new CookieManager())
             .authenticator(new AuthenticatorManager())
