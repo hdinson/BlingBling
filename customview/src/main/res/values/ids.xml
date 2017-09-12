@@ -21,8 +21,10 @@
     <item name="layout_root" type="id"/>
 
     <item name="cancel" type="id"/>
+    <item name="rootView" type="id"/>
     <item name="guideline" type="id"/>
 
+    <!--第三方或自定义控件-->
     <item name="glide_tag_id" type="id"/>
     <item name="floating_decor" type="id"/>
 </resources>

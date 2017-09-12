@@ -2,7 +2,7 @@ package dinson.customview;
 
 import org.junit.Test;
 
-import dinson.customview.utils.DateUtils;
+import dinson.customview.utils.StringUtils;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -27,8 +27,14 @@ public class ExampleUnitTest {
 //        System.out.println( encodedString);
 
 
-        long dataTimestamp = (long)DateUtils.getDataTimestamp(1)*1000-System.currentTimeMillis();
-        System.out.println("data:"+dataTimestamp);
+
+        String url="https:www/.baidu.com123456.apk";
+
+
+
+        String baseUrl = StringUtils.getUrlName(url);
+
+        System.out.println("ba:"+baseUrl);
 
 
     }

@@ -6,7 +6,7 @@ import java.lang.ref.SoftReference;
 import dinson.customview.download.DownloadManager;
 import dinson.customview.download.listener.DownloadProgressListener;
 import dinson.customview.download.listener.HttpDownOnNextListener;
-import dinson.customview.download.model.DownInfo;
+import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadState;
 import dinson.customview.download.utils.DbDownUtil;
 import io.reactivex.Observable;
@@ -26,16 +26,16 @@ public class ProgressDownSubscriber<T> implements DownloadProgressListener, Obse
     //弱引用结果回调
     private SoftReference<HttpDownOnNextListener> mSubscriberOnNextListener;
     /*下载数据*/
-    private DownInfo downInfo;
+    private DownloadInfo downInfo;
 
 
-    public ProgressDownSubscriber(DownInfo downInfo) {
+    public ProgressDownSubscriber(DownloadInfo downInfo) {
         this.mSubscriberOnNextListener = new SoftReference<>(downInfo.getListener());
         this.downInfo = downInfo;
     }
 
 
-    public void setDownInfo(DownInfo downInfo) {
+    public void setDownInfo(DownloadInfo downInfo) {
         this.mSubscriberOnNextListener = new SoftReference<>(downInfo.getListener());
         this.downInfo = downInfo;
     }
@@ -54,7 +54,7 @@ public class ProgressDownSubscriber<T> implements DownloadProgressListener, Obse
         }
         DownloadManager.getInstance().remove(downInfo);
         downInfo.setState(DownloadState.ERROR);
-        DbDownUtil.getInstance().update(downInfo);
+        DbDownUtil.getInstance().insertOrReplace(downInfo);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ProgressDownSubscriber<T> implements DownloadProgressListener, Obse
         }
         DownloadManager.getInstance().remove(downInfo);
         downInfo.setState(DownloadState.FINISH);
-        DbDownUtil.getInstance().update(downInfo);
+        DbDownUtil.getInstance().insertOrReplace(downInfo);
     }
 
     /**

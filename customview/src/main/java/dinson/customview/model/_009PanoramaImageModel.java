@@ -1,34 +1,30 @@
 package dinson.customview.model;
 
-import java.io.File;
-
-import dinson.customview._global.ConstantsUtils;
-import dinson.customview.manager.DownManager.DownloadState;
-import dinson.customview.utils.MD5;
+import dinson.customview.download.model.DownloadInfo;
+import dinson.customview.download.model.ITransformDownloadInfo;
+import dinson.customview.utils.StringUtils;
 
 /**
  * @author sunfusheng on 2017/8/25.
  */
-public class _009PanoramaImageModel {
+public class _009PanoramaImageModel implements ITransformDownloadInfo {
 
     public String title;
     public String desc;
     public String originalImg;
     public String smallImg;
+    public String localPath;
 
-    public String id;//title的md5值
-    public long size;
-    public long currentPos;
-    public DownloadState currentState;
+    private int size;
+    private int currentPos;
+
 
     public _009PanoramaImageModel(String title, String desc, String originalImg, String smallImg) {
         this.title = title;
         this.desc = desc;
         this.originalImg = originalImg;
         this.smallImg = smallImg;
-
-        //初始化
-        this.id = MD5.encode(title);
+        this.localPath = StringUtils.getUrlName(originalImg);
     }
 
     public float getProgress() {
@@ -36,11 +32,27 @@ public class _009PanoramaImageModel {
         return currentPos / (float) size;
     }
 
-    public String getFilePath() {
-        return ConstantsUtils.SDCARD_ROOT + id;
+    @Override
+    public DownloadInfo transform() {
+        DownloadInfo downloadInfo = new DownloadInfo();
+        downloadInfo.setSavePath(localPath);
+        downloadInfo.setUrl(originalImg);
+        return downloadInfo;
     }
 
-    public boolean localExist() {
-        return new File(getFilePath()).exists();
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getCurrentPos() {
+        return currentPos;
+    }
+
+    public void setCurrentPos(int currentPos) {
+        this.currentPos = currentPos;
     }
 }

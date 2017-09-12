@@ -186,7 +186,7 @@ public final class StringUtils {
     /**
      * 读取baseurl
      */
-    public static String getBasUrl(String url) {
+    public static String getBaseUrl(String url) {
         String head = "";
         int index = url.indexOf("://");
         if (index != -1) {
@@ -201,4 +201,14 @@ public final class StringUtils {
         return head + url;
     }
 
+    /**
+     * 读取baseurl
+     */
+    public static String getUrlName(String url) {
+        int index = url.lastIndexOf("/");
+        if (index != -1) {
+            url = url.substring(index + 1, url.length());
+        }
+        return url;
+    }
 }

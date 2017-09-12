@@ -1,23 +1,5 @@
 package dinson.customview.manager;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-
-import dinson.customview.api.QiNiuApi;
-import dinson.customview.http.HttpHelper;
-import dinson.customview.model._009PanoramaImageModel;
-import dinson.customview.utils.IOUtils;
-import dinson.customview.utils.LogUtils;
-import retrofit2.Response;
-
-import static dinson.customview.manager.DownManager.DownloadState.DOWNLOADING;
-import static dinson.customview.manager.DownManager.DownloadState.PAUSE;
-import static dinson.customview.manager.DownManager.DownloadState.WAITING;
-
 /**
  * 下载管理器 （观察者模式）
  *
@@ -25,7 +7,7 @@ import static dinson.customview.manager.DownManager.DownloadState.WAITING;
  */
 public class DownManager {
 
-    public enum DownloadState {
+   /* public enum DownloadState {
         UNDO, WAITING, DOWNLOADING, PAUSE, ERROR, SUCCESS
     }
 
@@ -172,5 +154,5 @@ public class DownManager {
         void onDownloadStateChanged(DownloadState state);
 
         void onDownloadProgressChanged(float currentProgress);
-    }
+    }*/
 }
