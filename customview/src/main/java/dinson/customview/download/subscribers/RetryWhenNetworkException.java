@@ -1,19 +1,10 @@
-package dinson.customview.download.exception;
-
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
-import io.reactivex.Observable;
-import io.reactivex.functions.Function;
-
+package dinson.customview.download.subscribers;
 
 /**
  * retry条件
  * Created by WZG on 2016/10/17.
  */
-public class RetryWhenNetworkException implements Function<Observable<? extends Throwable>, Observable<?>> {
+public class RetryWhenNetworkException{}/* implements Func1<Observable<? extends Throwable>, Observable<?>> {
 //    retry次数
     private int count = 3;
 //    延迟
@@ -69,4 +60,4 @@ public class RetryWhenNetworkException implements Function<Observable<? extends 
         }
     }
 
-}
+}*/

@@ -35,7 +35,6 @@ import dinson.customview.weight.recycleview.OnItemClickListener;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity implements OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
@@ -70,9 +69,11 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             _001ShimmerActivity.class, getString(R.string.facebook_img)));
         mContentData.add(new ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
             _002QQNaviViewActivity.class, getString(R.string.qqnavi_img)));
-        mContentData.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
+        mContentData.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string
+            .diagonal_layout_desc),
             _003DiagonalLayoutActivity.class, getString(R.string.diagonal_layout_img)));
-        mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
+        mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string
+            .ganged_recycle_desc),
             _004GangedRecycleViewActivity.class, getString(R.string.ganged_recycle_img)));
         mContentData.add(new ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
             _005LikeSmileViewActivity.class, getString(R.string.like_smile_img)));
@@ -107,40 +108,30 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         mRvHead.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mMainHeadAdapter = new MainHeadAdapter(this, mHeadData);
         mRvHead.setAdapter(mMainHeadAdapter);
-        mRvHead.addOnItemTouchListener(new OnItemClickListener(this, mRvHead, new OnItemClickListener.OnClickListener() {
-            @Override
-            public void onItemClick(final View view, final int position) {
-                Single.just(mHeadData.get(position).getData().getHp_img_url())
-                    .map(s -> Glide.with(MainActivity.this).load(s).downloadOnly(Target.SIZE_ORIGINAL
-                        , Target.SIZE_ORIGINAL).get().getPath())
-                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(path -> {
-                        LogUtils.e("CurrentItem:" + position + " imgUrl:" +
-                            mHeadData.get(position).getData().getHp_img_url() + "  imgPath:" + path);
+        mRvHead.addOnItemTouchListener(new OnItemClickListener(this, mRvHead, (OnItemClickListener.OnClickListener)
+            (view, position) -> Single.just(mHeadData.get(position).getData().getHp_img_url())
+                .map(s -> Glide.with(MainActivity.this).load(s).downloadOnly(Target.SIZE_ORIGINAL
+                    , Target.SIZE_ORIGINAL).get().getPath())
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(path -> {
+                    LogUtils.e("CurrentItem:" + position + " imgUrl:" +
+                        mHeadData.get(position).getData().getHp_img_url() + "  imgPath:" + path);
 
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                            MainActivity.this, view, "dailyPic");
-                        DailyPicActivity.start(MainActivity.this, mHeadData.get(position).getData(), path, options);
-                    });
-            }
-        }));
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        MainActivity.this, view, "dailyPic");
+                    DailyPicActivity.start(MainActivity.this, mHeadData.get(position).getData(), path, options);
+                })));
 
 
         DailyList heardCache = CacheUtils.getMainHeardCache();
         Flowable.fromPublisher(heardCache == null ? mOneApi.getDaily() : Flowable.just(heardCache))
-            .flatMap(new Function<DailyList, Flowable<Integer>>() {
-                @Override
-                public Flowable<Integer> apply(DailyList dailyList) throws Exception {
-                    CacheUtils.setMainHeardCache(dailyList);
-                    return Flowable.fromIterable(dailyList.getData());
-                }
+            .flatMap(dailyList -> {
+                CacheUtils.setMainHeardCache(dailyList);
+                return Flowable.fromIterable(dailyList.getData());
             })
-            .flatMap(new Function<Integer, Flowable<DailyDetail>>() {
-                @Override
-                public Flowable<DailyDetail> apply(Integer integer) throws Exception {
-                    DailyDetail detail = CacheUtils.getDailyDetail(integer);
-                    return detail == null ? mOneApi.getDetail(integer) : Flowable.just(detail);
-                }
+            .flatMap(integer -> {
+                DailyDetail detail = CacheUtils.getDailyDetail(integer);
+                return detail == null ? mOneApi.getDetail(integer) : Flowable.just(detail);
             })
             .filter(integer -> integer.getData() != null)
             .collect(() -> mHeadData, (list, bean) -> {

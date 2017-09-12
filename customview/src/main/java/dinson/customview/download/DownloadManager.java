@@ -1,4 +1,4 @@
-package dinson.customview.download.manager;
+package dinson.customview.download;
 
 
 import java.io.File;
@@ -10,18 +10,22 @@ import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
-import dinson.customview.download.DownState;
-import dinson.customview.download.api.DownloadServiceApi;
-import dinson.customview.download.db.DownInfo;
-import dinson.customview.download.exception.RetryWhenNetworkException;
+import dinson.customview.api.DownloadServiceApi;
+import dinson.customview.download.model.DownInfo;
+import dinson.customview.download.model.DownloadState;
 import dinson.customview.download.subscribers.ProgressDownSubscriber;
-import dinson.customview.http.BaseObserver;
-import dinson.customview.http.HttpHelper;
+import dinson.customview.download.utils.DbDownUtil;
+import dinson.customview.http.manager.DownloadInterceptor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * http下载处理类
@@ -29,7 +33,7 @@ import okhttp3.ResponseBody;
  */
 public class DownloadManager {
     /*记录下载数据*/
-    private Set<DownInfo> downInfos;
+    private Set< DownInfo> downInfos;
     /*回调sub队列*/
     private HashMap<String, ProgressDownSubscriber> subMap;
     /*单利对象*/
@@ -53,6 +57,10 @@ public class DownloadManager {
             synchronized (DownloadManager.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new DownloadManager();
+
+
+
+
                 }
             }
         }
@@ -78,25 +86,40 @@ public class DownloadManager {
         if (downInfos.contains(info)) {
             httpService = info.getService();
         } else {
-            httpService = HttpHelper.create(DownloadServiceApi.class);
+            DownloadInterceptor interceptor = new DownloadInterceptor(subscriber);
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            //手动创建一个OkHttpClient并设置超时时间
+            builder.connectTimeout(info.getConnectonTime(), TimeUnit.SECONDS);
+            builder.addInterceptor(interceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                .client(builder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl("http://192.168.8.8")
+                .build();
+            httpService = retrofit.create(DownloadServiceApi.class);
             info.setService(httpService);
             downInfos.add(info);
         }
         /*得到rx对象-上一次下載的位置開始下載*/
         httpService.download("bytes=" + info.getReadLength() + "-", info.getUrl())
-            /*指定线程*/
+                /*指定线程*/
             .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.io())
-            /*失败后的retry配置*/
-            .retryWhen(new RetryWhenNetworkException())
-            /*读取下载写入文件*/
-            .map(responseBody -> {
-                writeCaches(responseBody, new File(info.getSavePath()), info);
-                return info;
+                   /*失败后的retry配置*/
+            //.retryWhen(new RetryWhenNetworkException())
+                /*读取下载写入文件*/
+            .map(new Function<ResponseBody, DownInfo>() {
+                @Override
+                public DownInfo apply(ResponseBody responseBody) throws Exception {
+                    writeCaches(responseBody, new File(info.getSavePath()), info);
+                    return info;
+                }
             })
-            /*回调线程*/
+                /*回调线程*/
             .observeOn(AndroidSchedulers.mainThread())
-            /*数据回调*/
+                /*数据回调*/
             .subscribe(subscriber);
 
     }
@@ -107,11 +130,11 @@ public class DownloadManager {
      */
     public void stopDown(DownInfo info) {
         if (info == null) return;
-        info.setState(DownState.STOP);
+        info.setState(DownloadState.STOP);
         info.getListener().onStop();
         if (subMap.containsKey(info.getUrl())) {
             ProgressDownSubscriber subscriber = subMap.get(info.getUrl());
-            subscriber.unsubscribe();
+            subscriber.unSubscribe();
             subMap.remove(info.getUrl());
         }
         /*保存数据库信息和本地文件*/
@@ -126,11 +149,11 @@ public class DownloadManager {
      */
     public void pause(DownInfo info) {
         if (info == null) return;
-        info.setState(DownState.PAUSE);
+        info.setState(DownloadState.PAUSE);
         info.getListener().onPuase();
         if (subMap.containsKey(info.getUrl())) {
             ProgressDownSubscriber subscriber = subMap.get(info.getUrl());
-            subscriber.unsubscribe();
+            subscriber.unSubscribe();
             subMap.remove(info.getUrl());
         }
         /*这里需要讲info信息写入到数据中，可自由扩展，用自己项目的数据库*/
@@ -174,7 +197,7 @@ public class DownloadManager {
      *
      * @param info
      */
-    public void remove(DownInfo info) {
+    public void remove( DownInfo info) {
         subMap.remove(info.getUrl());
         downInfos.remove(info);
     }
@@ -187,7 +210,7 @@ public class DownloadManager {
      * @param info
      * @throws IOException
      */
-    public void writeCaches(ResponseBody responseBody, File file, DownInfo info) {
+    public void writeCaches(ResponseBody responseBody, File file,  DownInfo info) {
         try {
             RandomAccessFile randomAccessFile = null;
             FileChannel channelOut = null;
@@ -195,8 +218,9 @@ public class DownloadManager {
             try {
                 if (!file.getParentFile().exists())
                     file.getParentFile().mkdirs();
-                long allLength = 0 == info.getCountLength() ? responseBody.contentLength() : info.getReadLength() + responseBody
-                    .contentLength();
+                long allLength = 0 == info.getCountLength() ? responseBody.contentLength() : info.getReadLength() +
+                    responseBody
+                        .contentLength();
 
                 inputStream = responseBody.byteStream();
                 randomAccessFile = new RandomAccessFile(file, "rwd");
@@ -209,7 +233,7 @@ public class DownloadManager {
                     mappedBuffer.put(buffer, 0, len);
                 }
             } catch (IOException e) {
-                throw new HttpTimeException(e.getMessage());
+                throw new RuntimeException(e.getMessage());
             } finally {
                 if (inputStream != null) {
                     inputStream.close();
@@ -222,7 +246,7 @@ public class DownloadManager {
                 }
             }
         } catch (IOException e) {
-            throw new HttpTimeException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
