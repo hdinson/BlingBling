@@ -7,7 +7,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import dinson.customview.R;
-import dinson.customview.utils.UIUtils;
 
 /**
  * 所有activity的基类
@@ -32,7 +31,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         getWindow().setBackgroundDrawableResource(setWindowBackgroundColor());
-
     }
 
     /**

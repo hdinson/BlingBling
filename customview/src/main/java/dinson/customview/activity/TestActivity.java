@@ -61,12 +61,11 @@ public class TestActivity extends BaseActivity {
     public void doDown(View view) {
 
 
-        String Url = "http://ondlsj2sn.bkt.clouddn.com/FvZG8R_rYVsZJj88meyFELWS5D7_.jpg";
+        String Url = "http://ondlsj2sn.bkt.clouddn.com/FnRKaCfPjrnDwWQWkqF8MFJDCTca.jpg";
 
         File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "YVsZJj88m.jpg");
         DownloadInfo apkApi = new DownloadInfo(Url);
-        apkApi.setId(1);
         apkApi.setState(DownloadState.START);
         apkApi.setSavePath(outputFile.getAbsolutePath());
 

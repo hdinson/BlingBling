@@ -60,6 +60,7 @@
     <string name="if_share">&#xe654;</string>
     <string name="if_arrow_left">&#xe697;</string>
     <string name="if_pokemon">&#xe633;</string>
+    <string name="if_complete">&#xe619;</string>
     <!--image contentDescription-->
     <string name="des_pic">图片</string>
     <string name="des_goods_pic">商品图片</string>

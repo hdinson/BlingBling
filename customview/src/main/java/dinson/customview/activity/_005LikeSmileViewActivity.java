@@ -11,7 +11,6 @@ import com.bumptech.glide.request.RequestOptions;
 
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
-import dinson.customview.utils.GlideUtils;
 import dinson.customview.weight.likesmileview.LikeSmileView;
 
 public class _005LikeSmileViewActivity extends BaseActivity implements View.OnClickListener {
@@ -27,10 +26,10 @@ public class _005LikeSmileViewActivity extends BaseActivity implements View.OnCl
 
     private void initUI() {
         findViewById(R.id.tv_back).setOnClickListener(this);
+
+        //顶部图片
         ImageView iv_img = (ImageView) findViewById(R.id.iv_img);
         String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Ft8BnkO6CU83GxS2ZaSWXtMc_AQm.webp";
-        GlideUtils.setImage(this, imgUrl, iv_img);
-
         RequestOptions rOptions = new RequestOptions()
             .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
         DrawableTransitionOptions tOptions = new DrawableTransitionOptions().crossFade(500);
