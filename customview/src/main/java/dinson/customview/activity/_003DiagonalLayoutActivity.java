@@ -30,8 +30,10 @@ public class _003DiagonalLayoutActivity extends BaseActivity {
     private void initUI() {
 
         String hear_url = "http://ondlsj2sn.bkt.clouddn.com/FtT8Kk7HNbHE5FLf3U2dnXkOZtu7.jpeg";
-        ImageView fiv_heard = (ImageView) findViewById(R.id.fiv_heard);
-        GlideUtils.setImage(this, hear_url, fiv_heard);
+        GlideUtils.setImage(this, hear_url, (ImageView) findViewById(R.id.fiv_heard));
+
+        String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp";
+        GlideUtils.setCircleImage(this, imgUrl, (CircleImageView) findViewById(R.id.cv_circleview));
 
         TextView tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("Quan Zhou\n");
@@ -41,15 +43,9 @@ public class _003DiagonalLayoutActivity extends BaseActivity {
         builder.setSpan(new StyleSpan(Typeface.BOLD), 0, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_title.append(builder);
 
-
-        String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp";
-        CircleImageView cv_circleview = (CircleImageView) findViewById(R.id.cv_circleview);
-        GlideUtils.setCircleImage(this, imgUrl, cv_circleview);
-
         TextView tv_content = (TextView) findViewById(R.id.tv_content);
         String qzStr = FileUtils.getTextFromAssets(this, "QuanZhou");
 
         tv_content.setText(Html.fromHtml(qzStr));
-
     }
 }

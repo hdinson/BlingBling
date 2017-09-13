@@ -1,40 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@id/rootView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/rootView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/ripple_main_white"
     android:clickable="true"
+    android:focusable="true"
     android:padding="17dp">
 
     <TextView
         android:id="@id/tv_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/iv_img"
+        android:layout_marginEnd="12dp"
+        android:maxLength="10"
         android:textColor="@color/textPrimary"
         android:textSize="14sp"/>
+
+    <dinson.customview.weight.IconFontTextView
+        android:id="@+id/complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_title"
+        android:text="@string/if_complete"
+        android:textColor="#53A749"
+        android:textSize="14sp"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@id/tv_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title"
+        android:layout_marginEnd="12dp"
         android:layout_toStartOf="@id/iv_img"
         android:ellipsize="end"
         android:maxLines="5"
-        android:textSize="8sp"
-        android:textColor="@color/textSecond"/>
+        android:textColor="@color/textSecond"
+        android:textSize="8sp"/>
 
     <dinson.customview.weight.aspectratioview.AspectRatioImageView
         android:id="@id/iv_img"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="12dp"
+        android:layout_centerVertical="true"
         android:scaleType="centerCrop"
         app:aspectRatio="1.5"/>
+
+    <dinson.customview.weight.TasksCompletedView
+        android:id="@+id/progress"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@id/iv_img"
+        android:layout_centerVertical="true"
+        app:circleColor="#cc303741"
+        app:radius="23dp"
+        app:ringColor="#0EB6D2"
+        app:strokeWidth="2dp"/>
 </RelativeLayout>
