@@ -1,11 +1,21 @@
 package dinson.customview.activity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -13,7 +23,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import dinson.customview.R;
@@ -29,6 +41,7 @@ import dinson.customview.listener.MainItemTouchHelper;
 import dinson.customview.listener.OnItemTouchMoveListener;
 import dinson.customview.utils.CacheUtils;
 import dinson.customview.utils.LogUtils;
+import dinson.customview.utils.UIUtils;
 import dinson.customview.weight.aspectratioview.AspectRatioRecycleView;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
@@ -46,20 +59,28 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
     private ItemTouchHelper mTouchHelper;//处理条目移动的帮助类
     private MainHeadAdapter mMainHeadAdapter;
+    private LocationManager mLocationManager;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         long start = System.currentTimeMillis();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initContent();
         initHead();
+        getLocation();
 
         long end = System.currentTimeMillis();
         LogUtils.v(String.format(Locale.CHINA, "HomeActivity started %d ms", end - start));
     }
+
 
     /**
      * 初始化内容
@@ -87,7 +108,6 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             _009GoogleVRActivity.class, getString(R.string.google_vr_img)));
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
-
         RecyclerView mRvContent = (RecyclerView) findViewById(R.id.rv_content);
         MainContentAdapter mMainAdapter = new MainContentAdapter(this, mContentData, this);
         mTouchHelper = new ItemTouchHelper(new MainItemTouchHelper(mMainAdapter));
@@ -150,6 +170,80 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             });
     }
 
+    /**
+     * 获取天气数据
+     */
+    private void getLocation() {
+
+        LogUtils.e("正在验证权限...");
+        mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
+            .PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission
+            .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling 验证权限
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        LogUtils.e("权限验证通过，正在验证位置服务...");
+        assert mLocationManager != null;
+        LogUtils.e("位置服务通过，正在请求位置...");
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+    }
+
+
+    LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            LogUtils.e("location lat:" + location.getLatitude() + ",lon:" + location.getLongitude());
+            mLocationManager.removeUpdates(this);
+
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            List<Address> addresses = null;
+            try {
+                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude()
+                    , 1);
+            } catch (IOException e) {
+                UIUtils.showToast("位置服务不可用");
+            }
+
+            if (addresses == null || addresses.size() == 0) {
+                UIUtils.showToast("位置服务无相关地址");
+            } else {
+                Address address = addresses.get(0);
+                ArrayList<String> addressFragments = new ArrayList< >();
+                String curAddr = "";
+                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                    addressFragments.add(address.getAddressLine(i));
+                    curAddr = curAddr + address.getAddressLine(i);
+                }
+                if (!TextUtils.isEmpty(address.getFeatureName())
+                    && !addressFragments.isEmpty()
+                    && !addressFragments.get(addressFragments.size() - 1).equals(address.getFeatureName())) {
+                    addressFragments.add(address.getFeatureName());
+                    curAddr = curAddr + address.getFeatureName();
+                }
+                UIUtils.showToast("详情地址已经找到,地址:" + curAddr);
+            }
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            LogUtils.e("onStatusChanged");
+        }
+
+        public void onProviderEnabled(String provider) {
+            LogUtils.e("onProviderEnabled");
+        }
+
+        public void onProviderDisabled(String provider) {
+            LogUtils.e("onProviderDisabled");
+        }
+    };
+
     @Override
     public void onItemClick(View view, int position) {
         startActivity(new Intent(this, mContentData.get(position).getName()));
@@ -164,5 +258,4 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     public boolean finishWithAnim() {
         return false;
     }
-
 }

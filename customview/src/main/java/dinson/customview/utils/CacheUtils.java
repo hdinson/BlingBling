@@ -9,38 +9,85 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Locale;
 
+import dinson.customview.entity.HomeWeather;
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
 
 
 public class CacheUtils {
 
+    /**
+     * 设置首页头部one缓存
+     *
+     * @param bean entity
+     */
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.v("put to cache >> " + json);
+        LogUtils.v("<DailyList> put to cache >> " + json);
         //缓存的时间是到凌晨4点
         long deathLine = ((long) DateUtils.getDataTimestamp(1) + 14400) * 1000 - System.currentTimeMillis();
         LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine));
         setCache("home_head_list", json, deathLine);
     }
 
+    /**
+     * 获取首页头部one缓存
+     *
+     * @return null表示没有数据
+     */
     public static DailyList getMainHeardCache() {
         String homeList = getCache("home_head_list");
-        LogUtils.v("get from cache >> " + homeList);
+        LogUtils.v("<DailyList> get from cache >> " + homeList);
         if (homeList == null) return null;
         return new Gson().fromJson(homeList, DailyList.class);
     }
 
+    /**
+     * 设置首页头部one详情缓存
+     *
+     * @param bean entity
+     */
     public static void setDailyDetail(DailyDetail bean) {
         String json = new Gson().toJson(bean);
         setCache("home_heard_detail" + bean.getData().getHpcontent_id(), json);
     }
 
+    /**
+     * 根据id获取首页头部one详情缓存
+     *
+     * @param id 数据id
+     * @return null表示没有数据
+     */
     public static DailyDetail getDailyDetail(int id) {
         String cache = getCache("home_heard_detail" + id);
         if (cache == null) return null;
         return new Gson().fromJson(cache, DailyDetail.class);
     }
+
+
+    /**
+     * 设置首页头部one缓存
+     *
+     * @param bean entity
+     */
+    public static void setHomeWeatherCache(HomeWeather bean) {
+        String json = new Gson().toJson(bean);
+        LogUtils.v("<HomeWeather> put to cache >> " + json);
+        setCache(bean.getResults().get(0).getLocation().getName(), json, 3600000);//缓存时间1小时
+    }
+
+    /**
+     * 获取首页头部one缓存
+     *
+     * @return null表示没有数据
+     */
+    public static HomeWeather getHomeWeatherCache(String city) {
+        String homeList = getCache(city);
+        LogUtils.v("<HomeWeather> get from cache >> " + homeList);
+        if (homeList == null) return null;
+        return new Gson().fromJson(homeList, HomeWeather.class);
+    }
+
 
     //////////////////////////////////分割线//////////////////////////////////////////////////////
 
