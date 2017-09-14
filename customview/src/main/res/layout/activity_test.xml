@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:clickable="true"
-        android:onClick="doDown"
+        android:onClick="doGetNetTime"
         android:padding="20dp"
-        android:text="点击下载"/>
+        android:text="点击获取时间"/>
 
     <ScrollView
         android:layout_width="match_parent"

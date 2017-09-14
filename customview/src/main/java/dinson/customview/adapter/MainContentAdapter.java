@@ -48,10 +48,8 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
         ImageView ivImg = holder.getView(R.id.iv_img);
         GlideUtils.setCircleImage(mContext, classBean.getImgUrl(), ivImg);
         ivImg.setOnTouchListener(new ViewHolderTouchListener(holder));
-        if (ints[0] == 0)
-            holder.getView(iv_one).setVisibility(View.GONE);
-        else
-            holder.setIvSrc(iv_one, mNumberImgs[ints[0]]);
+        holder.getView(iv_one).setVisibility(ints[0] == 0 ? View.INVISIBLE : View.VISIBLE);
+        if (ints[0] != 0) holder.setIvSrc(iv_one, mNumberImgs[ints[0]]);
         holder.setIvSrc(R.id.iv_second, mNumberImgs[ints[1]]);
         holder.setIvSrc(R.id.iv_third, mNumberImgs[ints[2]]);
     }

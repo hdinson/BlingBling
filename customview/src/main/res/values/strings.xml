@@ -14,7 +14,8 @@
     <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FghQpL5VATXt6Wtlm575wiDseyvI.webp</string>
     <!--003-->
     <string name="diagonal_layout_title">DiagonalLayout</string>
-    <string name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design</string>
+    <string
+        name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design</string>
     <string name="diagonal_layout_img">http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp</string>
     <!--004-->
     <string name="ganged_recycle_title">GangedRecycleView</string>
@@ -41,7 +42,8 @@
     <string name="_007_tiny_name">SQUIRTLE</string>
     <!--008-->
     <string name="rich_editor_title">RichEditor</string>
-    <string name="rich_editor_desc">Rich text editor which enables users to insert/delete emoji and text into edit-view.</string>
+    <string
+        name="rich_editor_desc">Rich text editor which enables users to insert/delete emoji and text into edit-view.</string>
     <string name="rich_editor_img">http://ondlsj2sn.bkt.clouddn.com/FkLRL9du9H1_jy2C1yFTmCGswQSZ.webp</string>
     <string name="_008_send">发送</string>
     <string name="_008_cancel">取消</string>
@@ -61,6 +63,47 @@
     <string name="if_arrow_left">&#xe697;</string>
     <string name="if_pokemon">&#xe633;</string>
     <string name="if_complete">&#xe619;</string>
+    <!--天气图标-->
+    <string name="if_sunny_0">&#xe60b;</string>
+    <string name="if_clear_1">&#xe60b;</string>
+    <string name="if_fair_2">&#xe60b;</string>
+    <string name="if_fair_3">&#xe60b;</string>
+    <string name="if_cloudy_4">&#xe6a4;</string>
+    <string name="if_partly_cloudy_5">&#xe6a4;</string>
+    <string name="if_partly_cloudy_6">&#xe6a4;</string>
+    <string name="if_mostly_cloudy_7">&#xe6a4;</string>
+    <string name="if_mostly_cloudy_8">&#xe6a4;</string>
+    <string name="if_overcast_9">&#xe604;</string>
+    <string name="if_shower_10">&#xe610;</string>
+    <string name="if_thundershower_11">&#xe61b;</string>
+    <string name="if_thundershower_with_hail_12">&#xe61c;</string>
+    <string name="if_light_rain_13">&#xe60d;</string>
+    <string name="if_moderate_rain_14">&#xe611;</string>
+    <string name="if_heavy_rain_15">&#xe617;</string>
+    <string name="if_storm_16">&#xe618;</string>
+    <string name="if_heavy_storm_17">&#xe616;</string>
+    <string name="if_severe_storm_18">&#xe614;</string>
+    <string name="if_ice_rain_19">&#xe60f;</string>
+    <string name="if_sleet_20">&#xe60f;</string>
+    <string name="if_snow_flurry_21">&#xe612;</string>
+    <string name="if_light_snow_22">&#xe60e;</string>
+    <string name="if_moderate_snow_23">&#xe613;</string>
+    <string name="if_heavy_snow_24">&#xe61a;</string>
+    <string name="if_snowstorm_25">&#xe615;</string>
+    <string name="if_dust_26">&#xe61d;</string>
+    <string name="if_sand_27">&#xe60a;</string>
+    <string name="if_dust_storm_28">&#xe60a;</string>
+    <string name="if_sand_storm_29">&#xe60a;</string>
+    <string name="if_foggy_30">&#xe60c;</string>
+    <string name="if_haze_31">&#xe61e;</string>
+    <string name="if_windy_32">&#xe622;</string>
+    <string name="if_blustery_33">&#xe620;</string>
+    <string name="if_hurricane_34">&#xe61f;</string>
+    <string name="if_tropical_storm_35">&#xe621;</string>
+    <string name="if_tornado_36">&#xe621;</string>
+    <string name="if_cold_37">&#xe617;</string>
+    <string name="if_hot_38">&#xe60b;</string>
+    <string name="if_unknown_99">&#xe623;</string>
     <!--image contentDescription-->
     <string name="des_pic">图片</string>
     <string name="des_goods_pic">商品图片</string>

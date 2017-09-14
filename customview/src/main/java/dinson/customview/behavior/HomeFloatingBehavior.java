@@ -2,17 +2,15 @@ package dinson.customview.behavior;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.CoordinatorLayout.Behavior;
 import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import dinson.customview.utils.LogUtils;
-
 /**
- * UC首页自定义Behavior
+ * 首页监听recycleview的滑动
  */
-
-public class MainTvDrawerBehavior extends CoordinatorLayout.Behavior<View> {
+public class HomeFloatingBehavior extends Behavior<View> {
     private int mFrameMaxHeight = 100;
     private int mStartY;
 
@@ -21,19 +19,18 @@ public class MainTvDrawerBehavior extends CoordinatorLayout.Behavior<View> {
         return dependency instanceof NestedScrollView;
     }
 
-    public MainTvDrawerBehavior(Context context, AttributeSet attrs) {
+    public HomeFloatingBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
         if (mStartY == 0) {
-            mStartY = (int) dependency.getY() - child.getHeight();
+            mStartY = (int) dependency.getY();
         }
-        float percent = (dependency.getY() - child.getHeight()) / mStartY;
+        float percent = (mStartY - dependency.getY()) / 500;
         //改变child的坐标(从消失，到可见)
-        child.setY(-child.getHeight() * percent);
-        LogUtils.e("percent: " + percent + "  setY: " + (-child.getHeight() * percent));
+        child.setAlpha(1-percent);
         return true;
     }
 }

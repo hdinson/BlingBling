@@ -10,6 +10,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -22,6 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.api.OneApi;
+import dinson.customview.api.XinZhiWeatherApi;
 import dinson.customview.download.DownloadManager;
 import dinson.customview.download.listener.HttpDownOnNextListener;
 import dinson.customview.download.model.DownloadInfo;
@@ -58,6 +61,37 @@ public class TestActivity extends BaseActivity {
 
     }
 
+
+    public void doGetNetTime(View view) {
+
+       /* Observable.just("http://www.baidu.com")
+            .map(s -> {
+                URL url = new URL("http://www.baidu.com");
+                URLConnection uc = url.openConnection();//生成连接对象
+                uc.connect(); //发出连接
+                return uc.getDate();//取得网站日期时间
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(aLong -> mTvDesc.setText(DateUtils.long2Str(aLong) + " - " + aLong));*/
+
+
+       HttpHelper.create(XinZhiWeatherApi.class).getWeather("24.879364:118.643059")
+           .subscribeOn(Schedulers.io())
+           .observeOn(AndroidSchedulers.mainThread())
+           .subscribe(new BaseObserver<JsonObject>() {
+               @Override
+               public void onHandlerSuccess(JsonObject value) {
+
+
+                       mTvDesc.setText( value.toString());
+
+
+               }
+           });
+    }
+
+
     public void doDown(View view) {
 
 
@@ -71,7 +105,7 @@ public class TestActivity extends BaseActivity {
 
 
         /*下载回调*/
-        HttpDownOnNextListener<DownloadInfo> httpProgressOnNextListener=new HttpDownOnNextListener<DownloadInfo>() {
+        HttpDownOnNextListener<DownloadInfo> httpProgressOnNextListener = new HttpDownOnNextListener<DownloadInfo>() {
             @Override
             public void onNext(DownloadInfo baseDownEntity) {
                 mTvDesc.append("提示：下载完成\n");
@@ -90,7 +124,7 @@ public class TestActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mTvDesc.append("失败:"+e.toString());
+                mTvDesc.append("失败:" + e.toString());
             }
 
 
@@ -108,8 +142,8 @@ public class TestActivity extends BaseActivity {
             @Override
             public void updateProgress(long readLength, long countLength) {
                 mTvDesc.append("提示:下载中\n");
-                mTvDesc.append("文件大小："+ countLength+"\n");
-                mTvDesc.append("写入大小："+readLength+"\n");
+                mTvDesc.append("文件大小：" + countLength + "\n");
+                mTvDesc.append("写入大小：" + readLength + "\n");
             }
         };
 
