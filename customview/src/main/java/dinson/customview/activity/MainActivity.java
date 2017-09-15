@@ -193,7 +193,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         LogUtils.e("权限验证通过，正在验证位置服务...");
         assert mLocationManager != null;
         LogUtils.e("位置服务通过，正在请求位置...");
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
 
