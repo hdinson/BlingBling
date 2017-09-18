@@ -21,7 +21,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        LogUtils.i("onError() called with: [" + e.toString() + "]");
+        LogUtils.i("onError() called with: [" + e.toString() + "]",false);
     }
 
     @Override

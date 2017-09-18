@@ -17,5 +17,6 @@ public class ConstantsUtils {
 
     public static String SDCARD_ROOT = Environment.getExternalStorageDirectory() + File.separator;
 
-
+    public static String LOGCAT_TAG = "│ --> ";
+    public static String PACKAGE_NAME = "dinson.customview";
 }

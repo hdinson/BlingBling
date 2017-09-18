@@ -1,10 +1,17 @@
 package dinson.customview.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
 import android.view.View;
 import android.webkit.WebView;
@@ -25,12 +32,14 @@ import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.api.OneApi;
 import dinson.customview.api.XinZhiWeatherApi;
+import dinson.customview.api.wifi;
 import dinson.customview.download.DownloadManager;
 import dinson.customview.download.listener.HttpDownOnNextListener;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadState;
 import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
+import dinson.customview.utils.UIUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
@@ -76,19 +85,15 @@ public class TestActivity extends BaseActivity {
             .subscribe(aLong -> mTvDesc.setText(DateUtils.long2Str(aLong) + " - " + aLong));*/
 
 
-       HttpHelper.create(XinZhiWeatherApi.class).getWeather("24.879364:118.643059")
-           .subscribeOn(Schedulers.io())
-           .observeOn(AndroidSchedulers.mainThread())
-           .subscribe(new BaseObserver<JsonObject>() {
-               @Override
-               public void onHandlerSuccess(JsonObject value) {
-
-
-                       mTvDesc.setText( value.toString());
-
-
-               }
-           });
+        HttpHelper.create(XinZhiWeatherApi.class).getWeather("24.879364:118.643059")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new BaseObserver<JsonObject>() {
+                @Override
+                public void onHandlerSuccess(JsonObject value) {
+                    mTvDesc.setText(value.toString());
+                }
+            });
     }
 
 
@@ -307,5 +312,85 @@ accessToken = "MY_ACCESS_KEY:FXsYh0wKHYPEsIAgdPD9OfjkeEM="*/
         return reString;
     }
 
+
+    public void doGetLocation(View view) {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
+
+            @Override
+            public void onLocationChanged(Location location) {
+                //位置信息变化时触发
+                mTvDesc.append("\n纬度：" + location.getLatitude());
+                mTvDesc.append("\n经度：" + location.getLongitude());
+                mTvDesc.append("\n海拔：" + location.getAltitude());
+                mTvDesc.append("\n时间：" + location.getTime());
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+                //GPS状态变化时触发
+
+                mTvDesc.append("\nGPS状态变化");
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+                //GPS禁用时触发
+                mTvDesc.append("\nGPS禁用");
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                //GPS开启时触发
+                mTvDesc.append("\nGPS开启");
+            }
+        };
+        /**
+         * 绑定监听
+         * 参数1，设备：有GPS_PROVIDER和NETWORK_PROVIDER两种，前者是GPS,后者是GPRS以及WIFI定位
+         * 参数2，位置信息更新周期.单位是毫秒
+         * 参数3，位置变化最小距离：当位置距离变化超过此值时，将更新位置信息
+         * 参数4，监听
+         * 备注：参数2和3，如果参数3不为0，则以参数3为准；参数3为0，则通过时间来定时更新；两者为0，则随时刷新
+         */
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
+            .PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission
+            .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        UIUtils.showToast("开始定位");
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+
+    }
+
+    /**
+     * 通过WIFI获取定位信息
+     */
+    public   void fromWIFILocation(View view){
+       //WIFI的MAC地址
+        WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        String wifiAddress = manager.getConnectionInfo().getBSSID();
+        //根据WIFI信息定位
+
+        wifi wifi = new wifi(wifiAddress, "8", "0");
+        HttpHelper.create(OneApi.class).fromWIFILocation(wifi).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new BaseObserver<JsonObject>() {
+                @Override
+                public void onHandlerSuccess(JsonObject value) {
+                    mTvDesc.append(value.toString());
+                }
+            });
+
+    }
 
 }
