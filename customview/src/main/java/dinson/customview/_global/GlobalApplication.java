@@ -29,7 +29,6 @@ public class GlobalApplication extends Application {
         if (!IS_DEBUG) {
             CrashHandler.getInstance().init(getApplicationContext(), getApplicationContext().getCacheDir() + "/CrashTxt/");
         }
-
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.

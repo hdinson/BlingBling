@@ -62,23 +62,13 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     private LocationManager mLocationManager;
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        long start = System.currentTimeMillis();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initContent();
         initHead();
         getLocation();
-
-        long end = System.currentTimeMillis();
-        LogUtils.v(String.format(Locale.CHINA, "HomeActivity started %d ms", end - start));
     }
 
 
@@ -155,14 +145,14 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             })
             .filter(integer -> integer.getData() != null)
             .collect(() -> mHeadData, (list, bean) -> {
-                LogUtils.e(bean.toString());
+                LogUtils.d(bean.toString());
                 CacheUtils.setDailyDetail(bean);
                 list.add(bean);
             })
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(o -> mMainHeadAdapter.notifyItemChanged(0), throwable -> {
-                LogUtils.e(throwable.toString());
+                LogUtils.d(throwable.toString());
                 ViewStub layout = (ViewStub) findViewById(R.id.vs_content);
                 layout.inflate();
                 ImageView iv_img = (ImageView) findViewById(R.id.iv_img);
@@ -174,9 +164,9 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
      * 获取天气数据
      */
     private void getLocation() {
-
         LogUtils.e("正在验证权限...");
         mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
             .PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission
             .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -189,6 +179,9 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+        Location lastKnownLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LogUtils.e("获取最后的位置是：" + lastKnownLocation+"...");
 
         LogUtils.e("权限验证通过，正在验证位置服务...");
         assert mLocationManager != null;
@@ -215,19 +208,19 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                 UIUtils.showToast("位置服务无相关地址");
             } else {
                 Address address = addresses.get(0);
-                ArrayList<String> addressFragments = new ArrayList< >();
-                String curAddr = "";
+                ArrayList<String> addressFragments = new ArrayList<>();
+                StringBuilder curAddr = new StringBuilder();
                 for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                     addressFragments.add(address.getAddressLine(i));
-                    curAddr = curAddr + address.getAddressLine(i);
+                    curAddr.append(address.getAddressLine(i));
                 }
                 if (!TextUtils.isEmpty(address.getFeatureName())
                     && !addressFragments.isEmpty()
                     && !addressFragments.get(addressFragments.size() - 1).equals(address.getFeatureName())) {
                     addressFragments.add(address.getFeatureName());
-                    curAddr = curAddr + address.getFeatureName();
+                    curAddr.append(address.getFeatureName());
                 }
-                UIUtils.showToast("详情地址已经找到,地址:" + curAddr);
+                UIUtils.showToast("详情地址已经找到,地址:" + curAddr.toString());
             }
         }
 

@@ -23,10 +23,10 @@ public class CacheUtils {
      */
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.v("<DailyList> put to cache >> " + json);
+        LogUtils.d("<DailyList> Put To Cache >> " + json);
         //缓存的时间是到凌晨4点
         long deathLine = ((long) DateUtils.getDataTimestamp(1) + 14400) * 1000 - System.currentTimeMillis();
-        LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine));
+        LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine),false);
         setCache("home_head_list", json, deathLine);
     }
 
@@ -37,7 +37,7 @@ public class CacheUtils {
      */
     public static DailyList getMainHeardCache() {
         String homeList = getCache("home_head_list");
-        LogUtils.v("<DailyList> get from cache >> " + homeList);
+        LogUtils.d("<DailyList> Get From Cache << " + homeList);
         if (homeList == null) return null;
         return new Gson().fromJson(homeList, DailyList.class);
     }
@@ -72,7 +72,7 @@ public class CacheUtils {
      */
     public static void setHomeWeatherCache(HomeWeather bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.v("<HomeWeather> put to cache >> " + json);
+        LogUtils.d("<HomeWeather> Put To Cache >> " + json);
         setCache(bean.getResults().get(0).getLocation().getName(), json, 3600000);//缓存时间1小时
     }
 
@@ -83,7 +83,7 @@ public class CacheUtils {
      */
     public static HomeWeather getHomeWeatherCache(String city) {
         String homeList = getCache(city);
-        LogUtils.v("<HomeWeather> get from cache >> " + homeList);
+        LogUtils.d("<HomeWeather> Get From Cache << " + homeList);
         if (homeList == null) return null;
         return new Gson().fromJson(homeList, HomeWeather.class);
     }
@@ -109,7 +109,7 @@ public class CacheUtils {
             fw.write(json);
             fw.flush();
         } catch (IOException e) {
-            LogUtils.e(e);
+            e.printStackTrace();
         } finally {
             IOUtils.close(fw);
         }

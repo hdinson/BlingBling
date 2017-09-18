@@ -84,6 +84,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.3'
     compile 'com.google.vr:sdk-panowidget:1.80.0'
     testCompile 'junit:junit:4.12'
+    debugCompile 'com.orhanobut:logger:2.1.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 }
