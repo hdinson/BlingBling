@@ -1,13 +1,10 @@
 package dinson.customview.api;
 
 
-import com.google.gson.JsonObject;
-
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -57,7 +54,5 @@ Accept: *
     @POST("http://iovip-z2.qbox.me/delete/{url}")
     Observable<String> postDelete(@Path("url") String url, @Header("Authorization") String at);
 
-    @POST("http://www.google.com/loc/json&version=1.1.0&host=maps.google.com")
-    Observable<JsonObject> fromWIFILocation(@Body wifi fi);
 
 }

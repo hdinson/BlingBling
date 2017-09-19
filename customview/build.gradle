@@ -48,6 +48,9 @@ android {
             signingConfig signingConfigs.app
             debuggable false
         }
+        debug {
+            signingConfig signingConfigs.app
+        }
     }
 
 
@@ -87,6 +90,7 @@ dependencies {
     debugCompile 'com.orhanobut:logger:2.1.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    compile files('libs/AMap_Location_V3.6.0_20170918.jar')
 }
 
 

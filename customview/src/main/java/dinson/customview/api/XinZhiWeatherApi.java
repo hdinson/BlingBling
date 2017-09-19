@@ -1,7 +1,6 @@
 package dinson.customview.api;
 
-import com.google.gson.JsonObject;
-
+import dinson.customview.entity.HomeWeather;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -13,5 +12,5 @@ public interface XinZhiWeatherApi {
 
     /*https://api.seniverse.com/v3/weather/now.json?key=prusvbyhfmheej3x&location=24.879364:118.643059&language=zh-Hans&unit=c*/
     @GET("https://api.seniverse.com/v3/weather/now.json?key=prusvbyhfmheej3x&language=zh-Hans&unit=c")
-    Observable<JsonObject> getWeather(@Query("location") String location);
+    Observable<HomeWeather> getWeather(@Query("location") String location);
 }

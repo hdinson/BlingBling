@@ -23,10 +23,10 @@ public class CacheUtils {
      */
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.d("<DailyList> Put To Cache >> " + json);
+        LogUtils.d("<DailyList> Put To Cache >> " + json, false);
         //缓存的时间是到凌晨4点
         long deathLine = ((long) DateUtils.getDataTimestamp(1) + 14400) * 1000 - System.currentTimeMillis();
-        LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine),false);
+        LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine), false);
         setCache("home_head_list", json, deathLine);
     }
 
@@ -37,7 +37,7 @@ public class CacheUtils {
      */
     public static DailyList getMainHeardCache() {
         String homeList = getCache("home_head_list");
-        LogUtils.d("<DailyList> Get From Cache << " + homeList);
+        LogUtils.d("<DailyList> Get From Cache << " + homeList, false);
         if (homeList == null) return null;
         return new Gson().fromJson(homeList, DailyList.class);
     }
@@ -72,8 +72,8 @@ public class CacheUtils {
      */
     public static void setHomeWeatherCache(HomeWeather bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.d("<HomeWeather> Put To Cache >> " + json);
-        setCache(bean.getResults().get(0).getLocation().getName(), json, 3600000);//缓存时间1小时
+        LogUtils.d("<HomeWeather> Put To Cache >> " + json, false);
+        setCache("lastKnowWeather", json, 3600000);//缓存时间1小时
     }
 
     /**
@@ -82,10 +82,19 @@ public class CacheUtils {
      * @return null表示没有数据
      */
     public static HomeWeather getHomeWeatherCache(String city) {
-        String homeList = getCache(city);
-        LogUtils.d("<HomeWeather> Get From Cache << " + homeList);
-        if (homeList == null) return null;
-        return new Gson().fromJson(homeList, HomeWeather.class);
+        String homeList = getCache("lastKnowWeather");
+        if (homeList == null) {
+            LogUtils.d("<HomeWeather> is out of date or no exist !", false);
+            return null;
+        }
+        HomeWeather homeWeather = new Gson().fromJson(homeList, HomeWeather.class);
+        String cacheName = homeWeather.getResults().get(0).getLocation().getName();
+        if (cacheName.contains(city) || city.contains(cacheName)) {
+            LogUtils.d("<HomeWeather> Get From Cache << " + homeList, false);
+            return homeWeather;
+        }
+        LogUtils.d("<HomeWeather> LocationCity is change!", false);
+        return null;
     }
 
 

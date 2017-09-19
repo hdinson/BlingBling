@@ -150,7 +150,7 @@ public class BaseActivity extends AppCompatActivity {
         logShowActivity();
     }
 
-    public static void logShowActivity() {
+    private static void logShowActivity() {
         StackTraceElement[] stackTraceElement = Thread.currentThread()
             .getStackTrace();
         int currentIndex = -1;

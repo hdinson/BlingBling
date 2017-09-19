@@ -68,11 +68,11 @@
     <string name="if_clear_1">&#xe60b;</string>
     <string name="if_fair_2">&#xe60b;</string>
     <string name="if_fair_3">&#xe60b;</string>
-    <string name="if_cloudy_4">&#xe6a4;</string>
-    <string name="if_partly_cloudy_5">&#xe6a4;</string>
-    <string name="if_partly_cloudy_6">&#xe6a4;</string>
-    <string name="if_mostly_cloudy_7">&#xe6a4;</string>
-    <string name="if_mostly_cloudy_8">&#xe6a4;</string>
+    <string name="if_cloudy_4">&#xe624;</string>
+    <string name="if_partly_cloudy_5">&#xe624;</string>
+    <string name="if_partly_cloudy_6">&#xe624;</string>
+    <string name="if_mostly_cloudy_7">&#xe624;</string>
+    <string name="if_mostly_cloudy_8">&#xe624;</string>
     <string name="if_overcast_9">&#xe604;</string>
     <string name="if_shower_10">&#xe610;</string>
     <string name="if_thundershower_11">&#xe61b;</string>

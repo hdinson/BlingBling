@@ -1,51 +1,51 @@
 package dinson.customview.activity;
 
-import android.Manifest;
-import android.content.Context;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.adapter.MainContentAdapter;
 import dinson.customview.adapter.MainHeadAdapter;
 import dinson.customview.api.OneApi;
+import dinson.customview.api.XinZhiWeatherApi;
 import dinson.customview.entity.ClassBean;
+import dinson.customview.entity.HomeWeather;
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
+import dinson.customview.http.BaseObserver;
 import dinson.customview.http.HttpHelper;
 import dinson.customview.listener.MainItemTouchHelper;
 import dinson.customview.listener.OnItemTouchMoveListener;
+import dinson.customview.model.HomeWeatherModelUtil;
 import dinson.customview.utils.CacheUtils;
 import dinson.customview.utils.LogUtils;
-import dinson.customview.utils.UIUtils;
+import dinson.customview.utils.TypefaceUtils;
+import dinson.customview.weight.IconFontTextView;
 import dinson.customview.weight.aspectratioview.AspectRatioRecycleView;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
 
     private ItemTouchHelper mTouchHelper;//处理条目移动的帮助类
     private MainHeadAdapter mMainHeadAdapter;
-    private LocationManager mLocationManager;
+    private AMapLocationClient mAMapLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,78 +164,98 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
      * 获取天气数据
      */
     private void getLocation() {
-        LogUtils.e("正在验证权限...");
-        mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        mAMapLocationClient = new AMapLocationClient(this.getApplicationContext());
+        AMapLocationClientOption locationOption = getAmapOption();
+        mAMapLocationClient.setLocationOption(locationOption);//设置定位参数
+        mAMapLocationClient.setLocationListener(locationListener);//设置定位监听
+        mAMapLocationClient.startLocation();
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
-            .PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission
-            .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling 验证权限
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-
-        Location lastKnownLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        LogUtils.e("获取最后的位置是：" + lastKnownLocation+"...");
-
-        LogUtils.e("权限验证通过，正在验证位置服务...");
-        assert mLocationManager != null;
-        LogUtils.e("位置服务通过，正在请求位置...");
-        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
+    /**
+     * 默认的定位参数
+     */
+    private AMapLocationClientOption getAmapOption() {
+        AMapLocationClientOption mOption = new AMapLocationClientOption();
+        mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+        //可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
+        mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
+        mOption.setHttpTimeOut(30000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
+        mOption.setInterval(2000);//可选，设置定位间隔。默认为2秒
+        mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
+        mOption.setOnceLocation(true);//可选，设置是否单次定位。默认是false
+        mOption.setOnceLocationLatest(false);//可选，设置是否等待wifi刷新，默认为false.如果设置为true,会自动变为单次定位，持续定位时不要使用
+        AMapLocationClientOption.setLocationProtocol(AMapLocationClientOption.AMapLocationProtocol.HTTP);//可选，
+        // 设置网络请求的协议。可选HTTP或者HTTPS。默认为HTTP
+        mOption.setSensorEnable(false);//可选，设置是否使用传感器。默认是false
+        mOption.setWifiScan(true); //可选，设置是否开启wifi扫描。默认为true，如果设置为false会同时停止主动刷新，停止以后完全依赖于系统刷新，定位位置可能存在误差
+        mOption.setLocationCacheEnable(true); //可选，设置是否使用缓存定位，默认为true
+        return mOption;
+    }
 
-    LocationListener locationListener = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            LogUtils.e("location lat:" + location.getLatitude() + ",lon:" + location.getLongitude());
-            mLocationManager.removeUpdates(this);
+    /**
+     * 销毁定位
+     */
+    private void destroyLocation() {
+        if (null != mAMapLocationClient) {
+            mAMapLocationClient.onDestroy();
+            mAMapLocationClient = null;
+        }
+    }
 
-            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-            List<Address> addresses = null;
-            try {
-                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude()
-                    , 1);
-            } catch (IOException e) {
-                UIUtils.showToast("位置服务不可用");
-            }
+    /**
+     * 定位监听
+     */
+    AMapLocationListener locationListener = location -> {
+        destroyLocation();//只定位一次
+        if (null == location) return;
+        if (location.getErrorCode() != 0) return; //errCode等于0代表定位成功
 
-            if (addresses == null || addresses.size() == 0) {
-                UIUtils.showToast("位置服务无相关地址");
-            } else {
-                Address address = addresses.get(0);
-                ArrayList<String> addressFragments = new ArrayList<>();
-                StringBuilder curAddr = new StringBuilder();
-                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                    addressFragments.add(address.getAddressLine(i));
-                    curAddr.append(address.getAddressLine(i));
+        Observable.just(location.getCity())
+            .flatMap(city -> {
+                HomeWeather cache = CacheUtils.getHomeWeatherCache(city);
+                if (cache == null) return HttpHelper.create(XinZhiWeatherApi.class).getWeather(city);
+                return Observable.just(cache);
+            })
+            .map(homeWeather -> {
+                CacheUtils.setHomeWeatherCache(homeWeather);
+                return homeWeather;
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new BaseObserver<HomeWeather>() {
+                @Override
+                public void onHandlerSuccess(HomeWeather weather) {
+                    initWeatherLayout(weather);//设置数据
                 }
-                if (!TextUtils.isEmpty(address.getFeatureName())
-                    && !addressFragments.isEmpty()
-                    && !addressFragments.get(addressFragments.size() - 1).equals(address.getFeatureName())) {
-                    addressFragments.add(address.getFeatureName());
-                    curAddr.append(address.getFeatureName());
-                }
-                UIUtils.showToast("详情地址已经找到,地址:" + curAddr.toString());
-            }
-        }
-
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            LogUtils.e("onStatusChanged");
-        }
-
-        public void onProviderEnabled(String provider) {
-            LogUtils.e("onProviderEnabled");
-        }
-
-        public void onProviderDisabled(String provider) {
-            LogUtils.e("onProviderDisabled");
-        }
+            });
     };
+
+    /**
+     * 初始化天气布局
+     *
+     * @param weather 天气实体
+     */
+    private void initWeatherLayout(HomeWeather weather) {
+        LogUtils.e("." + weather.toString());
+        View weatherLayout = findViewById(R.id.weatherLayout);
+        weatherLayout.setVisibility(View.VISIBLE);
+        HomeWeather.ResultsBean resultsBean = weather.getResults().get(0);
+        IconFontTextView if_weather = (IconFontTextView) findViewById(R.id.if_weather);
+        if_weather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.getNow().getCode()));
+        TextView tv_weather = (TextView) findViewById(R.id.tv_weather);
+        tv_weather.setTypeface(TypefaceUtils.get(getApplicationContext(), "fonts/FZLanTingHeiS_Regular" +
+            ".ttf"));
+        tv_weather.setText(String.format("%s℃", resultsBean.getNow().getTemperature()));
+
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(weatherLayout, "alpha", 0f, 1.0f);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(weatherLayout, "scaleX", 0f, 1.0f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(weatherLayout, "scaleY", 0f, 1.0f);
+        AnimatorSet set = new AnimatorSet();
+        set.setInterpolator(new DecelerateInterpolator());
+        set.play(alpha).with(scaleX).with(scaleY);
+        set.start();
+    }
 
     @Override
     public void onItemClick(View view, int position) {
@@ -250,5 +270,11 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     @Override
     public boolean finishWithAnim() {
         return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        destroyLocation();
     }
 }

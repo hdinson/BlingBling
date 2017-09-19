@@ -6,6 +6,14 @@ import java.util.List;
  * @author Dinson - 2017/9/14
  */
 public class HomeWeather {
+    @Override
+    public String toString() {
+        return "XinZhiWeather{" +
+            "name=" + results.get(0).getLocation().name +
+            ", weather=" + results.get(0).getNow().getText() +
+            ", temperature=" + results.get(0).getNow().getTemperature() +
+            '}';
+    }
 
     private List<ResultsBean> results;
 
@@ -127,7 +135,7 @@ public class HomeWeather {
              */
 
             private String text;
-            private String code;
+            private int code;
             private String temperature;
 
             public String getText() {
@@ -138,11 +146,11 @@ public class HomeWeather {
                 this.text = text;
             }
 
-            public String getCode() {
+            public int getCode() {
                 return code;
             }
 
-            public void setCode(String code) {
+            public void setCode(int code) {
                 this.code = code;
             }
 
