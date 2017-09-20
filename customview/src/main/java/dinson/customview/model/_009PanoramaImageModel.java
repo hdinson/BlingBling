@@ -12,7 +12,7 @@ public class _009PanoramaImageModel implements ITransformDownloadInfo {
 
     public String title;
     public String desc;
-    public String originalImg;
+    private String originalImg;
     public String smallImg;
     public String localPath;
 
@@ -20,7 +20,7 @@ public class _009PanoramaImageModel implements ITransformDownloadInfo {
     private float currentPos;
 
 
-    public _009PanoramaImageModel(String title, String desc, String originalImg, String smallImg) {
+    _009PanoramaImageModel(String title, String desc, String originalImg, String smallImg) {
         this.title = title;
         this.desc = desc;
         this.originalImg = originalImg;
@@ -30,7 +30,7 @@ public class _009PanoramaImageModel implements ITransformDownloadInfo {
 
     public float getProgress() {
         if (size == 0) return 0;
-        return currentPos / (float) size;
+        return currentPos / size;
     }
 
     @Override

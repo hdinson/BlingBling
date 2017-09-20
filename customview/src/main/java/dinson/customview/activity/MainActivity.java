@@ -237,7 +237,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
      * @param weather 天气实体
      */
     private void initWeatherLayout(HomeWeather weather) {
-        LogUtils.e("." + weather.toString());
+        LogUtils.d("." + weather.toString());
         View weatherLayout = findViewById(R.id.weatherLayout);
         weatherLayout.setVisibility(View.VISIBLE);
         HomeWeather.ResultsBean resultsBean = weather.getResults().get(0);

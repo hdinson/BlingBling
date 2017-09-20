@@ -61,8 +61,8 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/shape_rec_r999"
         android:elevation="15dp"
-        android:visibility="invisible"
         android:gravity="center_vertical"
+        android:visibility="invisible"
         app:layout_anchor="@id/rv_content"
         app:layout_anchorGravity="end|right"
         app:layout_behavior="dinson.customview.behavior.HomeFloatingBehavior">
@@ -71,17 +71,17 @@
             android:id="@+id/if_weather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
-            android:layout_centerHorizontal="true" />
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/tv_weather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@android:color/white"
             android:layout_below="@id/if_weather"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
