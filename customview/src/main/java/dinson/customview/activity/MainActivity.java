@@ -80,11 +80,9 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             _001ShimmerActivity.class, getString(R.string.facebook_img)));
         mContentData.add(new ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
             _002QQNaviViewActivity.class, getString(R.string.qqnavi_img)));
-        mContentData.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string
-            .diagonal_layout_desc),
+        mContentData.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string .diagonal_layout_desc),
             _003DiagonalLayoutActivity.class, getString(R.string.diagonal_layout_img)));
-        mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string
-            .ganged_recycle_desc),
+        mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string  .ganged_recycle_desc),
             _004GangedRecycleViewActivity.class, getString(R.string.ganged_recycle_img)));
         mContentData.add(new ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
             _005LikeSmileViewActivity.class, getString(R.string.like_smile_img)));

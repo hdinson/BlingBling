@@ -14,8 +14,8 @@
     <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FghQpL5VATXt6Wtlm575wiDseyvI.webp</string>
     <!--003-->
     <string name="diagonal_layout_title">DiagonalLayout</string>
-    <string
-        name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design</string>
+    <string name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design
+    </string>
     <string name="diagonal_layout_img">http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp</string>
     <!--004-->
     <string name="ganged_recycle_title">GangedRecycleView</string>
@@ -29,21 +29,26 @@
     <string name="_005_desc">• 材质：铝 / 钢 \n• 电压：110–230V \n• 重量：1.3 kg</string>
     <!--006-->
     <string name="floatingView_title">FloatingView</string>
-    <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool animation</string>
+    <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool
+        animation
+    </string>
     <string name="floatingView_img">http://ondlsj2sn.bkt.clouddn.com/FoswnjfkCoEaVY0Ijnnlur9BxYBl.webp</string>
     <!--007-->
     <string name="spotlight_title">Spotlight</string>
     <string name="spotlight_desc">Android Library that lights items for tutorials or walk-through etc…</string>
     <string name="spotlight_img">http://ondlsj2sn.bkt.clouddn.com/FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp</string>
     <string name="_007_tiny_attr">Seen: 1 Caught: 1 \nWeight: 9.0kg Height: 0.5m</string>
-    <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.</string>
+    <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the
+        grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.
+    </string>
     <string name="_007_tiny">Tiny Turtle Pokémon</string>
     <string name="_007_tiny_type">Type: Water</string>
     <string name="_007_tiny_name">SQUIRTLE</string>
     <!--008-->
     <string name="rich_editor_title">RichEditor</string>
-    <string
-        name="rich_editor_desc">Rich text editor which enables users to insert/delete emoji and text into edit-view.</string>
+    <string name="rich_editor_desc">Rich text editor which enables users to insert/delete emoji and text into
+        edit-view.
+    </string>
     <string name="rich_editor_img">http://ondlsj2sn.bkt.clouddn.com/FkLRL9du9H1_jy2C1yFTmCGswQSZ.webp</string>
     <string name="_008_send">发送</string>
     <string name="_008_cancel">取消</string>
