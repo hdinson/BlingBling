@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         initContent();
         initHead();
         getLocation();
+
     }
 
 
