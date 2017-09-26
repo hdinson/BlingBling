@@ -74,8 +74,7 @@ public class _004GangedRecycleViewActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        getWindow().setBackgroundDrawableResource(android.R.color.white);
+    public int setWindowBackgroundColor() {
+        return android.R.color.white;
     }
 }

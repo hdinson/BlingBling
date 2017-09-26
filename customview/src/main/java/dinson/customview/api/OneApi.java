@@ -48,7 +48,7 @@ Accept: *
             */
 
     @Headers({"Host:ondlsj2sn.bkt.clouddn.com",
-            "Content-Type:application/x-www-form-urlencoded", "Accept: */*"
+        "Content-Type:application/x-www-form-urlencoded", "Accept: */*"
 
     })
     @POST("http://iovip-z2.qbox.me/delete/{url}")

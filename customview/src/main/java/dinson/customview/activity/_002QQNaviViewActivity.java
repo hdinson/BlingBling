@@ -27,9 +27,8 @@ public class _002QQNaviViewActivity extends BaseActivity {
     }
 
     private void initUI() {
-        ImageView ivBg = (ImageView) findViewById(R.id.iv_bg);
         String img_url = "http://ondlsj2sn.bkt.clouddn.com/Fm71mrw6NECZAitx83iMnoBXUvgW.jpg";
-        Glide.with(this).load(img_url).into(ivBg);
+        Glide.with(this).load(img_url).into((ImageView) findViewById(R.id.iv_bg));
 
         QQNaviView bubble = (QQNaviView) findViewById(R.id.qq_view_bubble);
         mManager = new QQNaviViewManager();

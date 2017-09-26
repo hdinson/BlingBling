@@ -15,6 +15,8 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="9dp"
+            app:contentScrim="@android:color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <dinson.customview.weight.aspectratioview.AspectRatioRecycleView
@@ -26,6 +28,13 @@
                 app:aspectRatio="1.5"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/main.toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
             <ViewStub
                 android:id="@id/vs_content"
@@ -44,4 +53,35 @@
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <RelativeLayout
+        android:id="@+id/weatherLayout"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_rec_r999"
+        android:elevation="15dp"
+        android:gravity="center_vertical"
+        android:visibility="invisible"
+        app:layout_anchor="@id/rv_content"
+        app:layout_anchorGravity="end|right"
+        app:layout_behavior="dinson.customview.behavior.HomeFloatingBehavior">
+
+        <dinson.customview.weight.IconFontTextView
+            android:id="@+id/if_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/tv_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/if_weather"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

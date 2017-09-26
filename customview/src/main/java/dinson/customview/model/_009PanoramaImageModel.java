@@ -1,5 +1,6 @@
 package dinson.customview.model;
 
+import dinson.customview._global.ConstantsUtils;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.ITransformDownloadInfo;
 import dinson.customview.utils.StringUtils;
@@ -11,25 +12,25 @@ public class _009PanoramaImageModel implements ITransformDownloadInfo {
 
     public String title;
     public String desc;
-    public String originalImg;
+    private String originalImg;
     public String smallImg;
     public String localPath;
 
-    private int size;
-    private int currentPos;
+    private float size;
+    private float currentPos;
 
 
-    public _009PanoramaImageModel(String title, String desc, String originalImg, String smallImg) {
+    _009PanoramaImageModel(String title, String desc, String originalImg, String smallImg) {
         this.title = title;
         this.desc = desc;
         this.originalImg = originalImg;
         this.smallImg = smallImg;
-        this.localPath = StringUtils.getUrlName(originalImg);
+        this.localPath = ConstantsUtils.SDCARD_PRIVATE_IMAGE + StringUtils.getUrlName(originalImg);
     }
 
     public float getProgress() {
         if (size == 0) return 0;
-        return currentPos / (float) size;
+        return currentPos / size;
     }
 
     @Override
@@ -40,19 +41,19 @@ public class _009PanoramaImageModel implements ITransformDownloadInfo {
         return downloadInfo;
     }
 
-    public int getSize() {
+    public float getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(float size) {
         this.size = size;
     }
 
-    public int getCurrentPos() {
+    public float getCurrentPos() {
         return currentPos;
     }
 
-    public void setCurrentPos(int currentPos) {
+    public void setCurrentPos(float currentPos) {
         this.currentPos = currentPos;
     }
 }

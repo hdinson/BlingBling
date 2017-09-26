@@ -7,40 +7,94 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Locale;
 
+import dinson.customview.entity.HomeWeather;
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
 
 
 public class CacheUtils {
 
+    /**
+     * 设置首页头部one缓存
+     *
+     * @param bean entity
+     */
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
-        LogUtils.v("put to cache >> " + json);
+        LogUtils.d("<DailyList> Put Cache >> " + json, false);
         //缓存的时间是到凌晨4点
         long deathLine = ((long) DateUtils.getDataTimestamp(1) + 14400) * 1000 - System.currentTimeMillis();
-        LogUtils.e(String.format(Locale.getDefault(), "The death-line is %d", deathLine));
         setCache("home_head_list", json, deathLine);
     }
 
+    /**
+     * 获取首页头部one缓存
+     *
+     * @return null表示没有数据
+     */
     public static DailyList getMainHeardCache() {
         String homeList = getCache("home_head_list");
-        LogUtils.v("get from cache >> " + homeList);
+        LogUtils.d("<DailyList> Get Cache << " + homeList, false);
         if (homeList == null) return null;
         return new Gson().fromJson(homeList, DailyList.class);
     }
 
+    /**
+     * 设置首页头部one详情缓存
+     *
+     * @param bean entity
+     */
     public static void setDailyDetail(DailyDetail bean) {
         String json = new Gson().toJson(bean);
         setCache("home_heard_detail" + bean.getData().getHpcontent_id(), json);
     }
 
+    /**
+     * 根据id获取首页头部one详情缓存
+     *
+     * @param id 数据id
+     * @return null表示没有数据
+     */
     public static DailyDetail getDailyDetail(int id) {
         String cache = getCache("home_heard_detail" + id);
         if (cache == null) return null;
         return new Gson().fromJson(cache, DailyDetail.class);
     }
+
+
+    /**
+     * 设置首页头部one缓存
+     *
+     * @param bean entity
+     */
+    public static void setHomeWeatherCache(HomeWeather bean) {
+        String json = new Gson().toJson(bean);
+        LogUtils.d("<HomeWeather> Put Cache >> " + json, false);
+        setCache("lastKnowWeather", json, 3600000);//缓存时间1小时
+    }
+
+    /**
+     * 获取首页头部one缓存
+     *
+     * @return null表示没有数据
+     */
+    public static HomeWeather getHomeWeatherCache(String city) {
+        String homeList = getCache("lastKnowWeather");
+        if (homeList == null) {
+            LogUtils.d("<HomeWeather> is out of date or no exist !", false);
+            return null;
+        }
+        HomeWeather homeWeather = new Gson().fromJson(homeList, HomeWeather.class);
+        String cacheName = homeWeather.getResults().get(0).getLocation().getName();
+        if (cacheName.contains(city) || city.contains(cacheName)) {
+            LogUtils.d("<HomeWeather> Get Cache << " + homeList, false);
+            return homeWeather;
+        }
+        LogUtils.d("<HomeWeather> LocationCity is change!", false);
+        return null;
+    }
+
 
     //////////////////////////////////分割线//////////////////////////////////////////////////////
 
@@ -62,7 +116,7 @@ public class CacheUtils {
             fw.write(json);
             fw.flush();
         } catch (IOException e) {
-            LogUtils.e(e);
+            e.printStackTrace();
         } finally {
             IOUtils.close(fw);
         }

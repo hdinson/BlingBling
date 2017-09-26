@@ -221,7 +221,7 @@ public class RichEditor extends AppCompatEditText {
         int index = getSelectionStart();//光标位置
         Editable editable = getText();//原先内容
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(editable);
-        Spanned htmlText = Html.fromHtml(String.format(String.format("<font color='%s'>" + insertContent + "</font>", insertColor)));
+        Spanned htmlText = Html.fromHtml(String.format("<font color='%s'>" + insertContent + "</font>", insertColor));
         spannableStringBuilder.insert(index, htmlText);
         spannableStringBuilder.insert(index + htmlText.length(), "\b");
         setText(spannableStringBuilder);
