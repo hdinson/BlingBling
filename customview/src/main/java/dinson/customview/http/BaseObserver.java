@@ -21,12 +21,12 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        LogUtils.i("onError() called with: [" + e.toString() + "]");
+        LogUtils.i("onError() called with: [" + e.toString() + "]",false);
     }
 
     @Override
     public void onComplete() {
-        LogUtils.i("onComplete");
+        LogUtils.i("onComplete",false);
     }
 
     public abstract void onHandlerSuccess(T value);

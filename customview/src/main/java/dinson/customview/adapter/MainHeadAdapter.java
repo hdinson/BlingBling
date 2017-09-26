@@ -12,7 +12,6 @@ import java.util.List;
 
 import dinson.customview.R;
 import dinson.customview.entity.one.DailyDetail;
-import dinson.customview.utils.LogUtils;
 import dinson.customview.weight.recycleview.CommonAdapter;
 import dinson.customview.weight.recycleview.CommonViewHolder;
 
@@ -26,7 +25,6 @@ public class MainHeadAdapter extends CommonAdapter<DailyDetail> {
 
     public MainHeadAdapter(Context context, List<DailyDetail> dataList) {
         super(context, dataList);
-        LogUtils.d("MainHeadAdapter init");
         mOptions = new RequestOptions()
             .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
         mTransitionOptions = new DrawableTransitionOptions().crossFade(500);

@@ -3,6 +3,9 @@ package dinson.customview.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import dinson.customview.download.model.DownloadInfo;
+import dinson.customview.download.utils.DbDownUtil;
+
 /**
  * google VR 数据模型
  */
@@ -86,7 +89,14 @@ public class _009_ModelUtil {
     public static List<_009PanoramaImageModel> getPanoramaImageList() {
         List<_009PanoramaImageModel> list = new ArrayList<>();
         for (int i = 0; i < titleArr.length; i++) {
-            list.add(new _009PanoramaImageModel(titleArr[i], descArr[i], originalImgArr[i], smallImgArr[i] ));
+            _009PanoramaImageModel entity = new _009PanoramaImageModel(titleArr[i], descArr[i], originalImgArr[i],
+                smallImgArr[i]);
+            DownloadInfo downloadInfo = DbDownUtil.getInstance().queryDownBy(originalImgArr[i]);
+            if (downloadInfo != null) {
+                entity.setSize(downloadInfo.getCountLength());
+                entity.setCurrentPos(downloadInfo.getReadLength());
+            }
+            list.add(entity);
         }
         return list;
     }

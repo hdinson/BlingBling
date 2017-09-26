@@ -16,9 +16,8 @@ import dinson.customview.download.listener.HttpDownOnNextListener;
 
 @Entity
 public class DownloadInfo {
-    @Id
-    private long id;
     /*url*/
+    @Id
     private String url;
     /*存储位置*/
     private String savePath;
@@ -33,9 +32,9 @@ public class DownloadInfo {
     @Transient
     private HttpDownOnNextListener listener;
     /*超时设置*/
-    private int connectonTime = 6;
+    private int connectOnTime = 6;
     /*state状态数据库保存*/
-    private int stateInte;
+    private int stateInt;
 
 
     public DownloadInfo(String url, HttpDownOnNextListener listener) {
@@ -54,16 +53,14 @@ public class DownloadInfo {
         setUrl(url);
     }
 
-    @Generated(hash = 1980428819)
-    public DownloadInfo(long id, String url, String savePath, long countLength, long readLength, int connectonTime,
-            int stateInte) {
-        this.id = id;
+    @Generated(hash = 1533039745)
+    public DownloadInfo(String url, String savePath, long countLength, long readLength, int connectOnTime, int stateInt) {
         this.url = url;
         this.savePath = savePath;
         this.countLength = countLength;
         this.readLength = readLength;
-        this.connectonTime = connectonTime;
-        this.stateInte = stateInte;
+        this.connectOnTime = connectOnTime;
+        this.stateInt = stateInt;
     }
 
     @Generated(hash = 327086747)
@@ -93,11 +90,11 @@ public class DownloadInfo {
     }
 
     public int getStateInte() {
-        return stateInte;
+        return stateInt;
     }
 
     public void setStateInte(int stateInte) {
-        this.stateInte = stateInte;
+        this.stateInt = stateInte;
     }
 
     public HttpDownOnNextListener getListener() {
@@ -150,19 +147,27 @@ public class DownloadInfo {
         this.readLength = readLength;
     }
 
-    public long getId() {
-        return this.id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public int getConnectonTime() {
-        return this.connectonTime;
+        return this.connectOnTime;
     }
 
     public void setConnectonTime(int connectonTime) {
-        this.connectonTime = connectonTime;
+        this.connectOnTime = connectonTime;
+    }
+
+    public int getConnectOnTime() {
+        return this.connectOnTime;
+    }
+
+    public void setConnectOnTime(int connectOnTime) {
+        this.connectOnTime = connectOnTime;
+    }
+
+    public int getStateInt() {
+        return this.stateInt;
+    }
+
+    public void setStateInt(int stateInt) {
+        this.stateInt = stateInt;
     }
 }

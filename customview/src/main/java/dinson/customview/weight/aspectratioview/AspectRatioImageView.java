@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-import dinson.customview.utils.LogUtils;
-
 
 /**
  * 自带宽高比属性的view
@@ -28,7 +26,6 @@ public class AspectRatioImageView extends AppCompatImageView {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int height = (int) (width / mSettings.getRatio());
-        LogUtils.e(height+" -- "+width);
         int heightMeasure = MeasureSpec.makeMeasureSpec(height, heightMode);
         super.onMeasure(widthMeasureSpec, heightMeasure);
     }
