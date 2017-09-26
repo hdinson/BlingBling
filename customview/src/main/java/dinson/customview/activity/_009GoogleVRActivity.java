@@ -16,12 +16,9 @@ import java.util.List;
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.adapter._009ContentAdapter;
-import dinson.customview.download.model.DownloadInfo;
-import dinson.customview.download.utils.DbDownUtil;
 import dinson.customview.model._009PanoramaImageModel;
 import dinson.customview.model._009_ModelUtil;
 import dinson.customview.utils.GlideUtils;
-import dinson.customview.utils.UIUtils;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
 import dinson.customview.weight.recycleview.OnItemClickListener;
 
@@ -95,17 +92,6 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
 
     @Override
     public void onItemClick(View view, int position) {
-        _009PanoramaImageModel selector = mListDatas.get(position);
-        DownloadInfo transform = selector.transform();
-        DownloadInfo downloadInfo = DbDownUtil.getInstance().queryDownBy(transform.getUrl());
-        if (downloadInfo == null) {
-            UIUtils.showToast("没找到");
-        } else {
-            UIUtils.showToast("找到了：" + downloadInfo.getUrl());
-
-            selector.title = "你真棒";
-            mAdapter.notifyItemChanged(position);
-        }
     }
 
     /*@Override
