@@ -131,7 +131,6 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
                     DailyPicActivity.start(MainActivity.this, mHeadData.get(position).getData(), path, options);
                 })));
 
-
         DailyList heardCache = CacheUtils.getMainHeardCache();
         Flowable.fromPublisher(heardCache == null ? mOneApi.getDaily() : Flowable.just(heardCache))
             .flatMap(dailyList -> {
@@ -168,7 +167,6 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         mAMapLocationClient.setLocationOption(locationOption);//设置定位参数
         mAMapLocationClient.setLocationListener(locationListener);//设置定位监听
         mAMapLocationClient.startLocation();
-
     }
 
     /**
@@ -206,6 +204,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
      * 定位监听
      */
     AMapLocationListener locationListener = location -> {
+        // TODO: 2017/9/27 定位权限判断
         destroyLocation();//只定位一次
         if (null == location) return;
         if (location.getErrorCode() != 0) return; //errCode等于0代表定位成功
