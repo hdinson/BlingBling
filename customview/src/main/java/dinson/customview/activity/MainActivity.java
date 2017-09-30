@@ -106,6 +106,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         mRvContent.addItemDecoration(new LinearItemDecoration(this));
         mRvContent.setAdapter(mMainAdapter);
         mRvContent.addOnItemTouchListener(new OnItemClickListener(this, mRvContent, this));
+
     }
 
 
