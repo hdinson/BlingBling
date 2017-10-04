@@ -13,14 +13,12 @@ import dinson.customview.weight.QQNaviViewManager;
 
 public class _002QQNaviViewActivity extends BaseActivity {
 
-
     private QQNaviViewManager mManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__002_qqnavi_view);
-
 
         initUI();
 
