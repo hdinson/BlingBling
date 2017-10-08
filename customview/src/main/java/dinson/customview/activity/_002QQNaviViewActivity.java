@@ -21,6 +21,7 @@ public class _002QQNaviViewActivity extends BaseActivity {
         setContentView(R.layout.activity__002_qqnavi_view);
 
         initUI();
+
     }
 
     private void initUI() {
