@@ -19,13 +19,13 @@ import dinson.customview._global.BaseActivity;
 import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.TypefaceUtils;
 import dinson.customview.utils.UIUtils;
-import dinson.customview.weight.floatingview.Floating;
-import dinson.customview.weight.floatingview.FloatingBuilder;
-import dinson.customview.weight.floatingview.FloatingElement;
-import dinson.customview.weight.floatingview.effect.EarthFloatingTransition;
-import dinson.customview.weight.floatingview.effect.PlaneFloatingTransition;
-import dinson.customview.weight.floatingview.effect.ScaleFloatingTransition;
-import dinson.customview.weight.floatingview.effect.TranslateFloatingTransition;
+import dinson.customview.weight._006floatingview.Floating;
+import dinson.customview.weight._006floatingview.FloatingBuilder;
+import dinson.customview.weight._006floatingview.FloatingElement;
+import dinson.customview.weight._006floatingview.effect.EarthFloatingTransition;
+import dinson.customview.weight._006floatingview.effect.PlaneFloatingTransition;
+import dinson.customview.weight._006floatingview.effect.ScaleFloatingTransition;
+import dinson.customview.weight._006floatingview.effect.TranslateFloatingTransition;
 
 public class _006FloatingViewActivity extends BaseActivity implements View.OnClickListener {
 

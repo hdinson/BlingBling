@@ -27,4 +27,6 @@
     <!--第三方或自定义控件-->
     <item name="glide_tag_id" type="id"/>
     <item name="floating_decor" type="id"/>
+    <item name="parallax_pager" type="id"/>
+    <item name="parallax_view_tag" type="id"/>
 </resources>

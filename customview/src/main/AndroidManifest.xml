@@ -61,10 +61,11 @@
             android:name=".activity._007SpotlightActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity._008_RichEditorActivity"
+            android:name=".activity._008RichEditorActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity._009GoogleVRActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity._010ParallaxActivity"></activity>
     </application>
 </manifest>

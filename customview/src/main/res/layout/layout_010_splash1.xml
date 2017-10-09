@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/_010_divider"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    android:weightSum="9">
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <ImageView
+            style="@style/_010_Item.Lv1"
+            android:src="@drawable/_010_img1" />
+
+        <ImageView
+            style="@style/_010_Item.Lv5"
+            android:src="@drawable/_010_img2" />
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <ImageView
+            style="@style/_010_Item.Lv1"
+            android:src="@drawable/_010_img3"/>
+
+        <ImageView
+            style="@style/_010_Item.Lv2"
+            android:src="@drawable/_010_img4"/>
+
+        <ImageView
+            style="@style/_010_Item.Lv3"
+            android:src="@drawable/_010_img5"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img6"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img7"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img8"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img9"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/_010_img10"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img11"/>
+
+        <android.support.v4.widget.Space
+            style="@style/_010_Item"
+            android:layout_weight="0"/>
+
+        <android.support.v4.widget.Space
+            style="@style/_010_Item"
+            android:layout_weight="0"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:layout_weight="3"
+            android:scaleType="center"
+            android:src="@drawable/_010_img_title"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img12"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img13"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img14"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img15"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img16"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img17"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img18"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img19"/>
+
+        <android.support.v4.widget.Space
+            style="@style/_010_Item"
+            android:layout_weight="0"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:layout_weight="2"
+            android:scaleType="center"
+            android:src="@drawable/_010_img_subtitle"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img20"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img21"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img22"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img23"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img24"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img25"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img26"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/_010_LinearLayout">
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <ImageView
+            style="@style/_010_Item"
+            android:src="@drawable/_010_img27"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+
+        <android.support.v4.widget.Space style="@style/_010_Item"/>
+    </LinearLayout>
+</LinearLayout>

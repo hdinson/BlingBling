@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide;
 
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
-import dinson.customview.weight.QQNaviView;
-import dinson.customview.weight.QQNaviViewManager;
+import dinson.customview.weight._002qqnaviview.QQNaviView;
+import dinson.customview.weight._002qqnaviview.QQNaviViewManager;
 
 public class _002QQNaviViewActivity extends BaseActivity {
 
