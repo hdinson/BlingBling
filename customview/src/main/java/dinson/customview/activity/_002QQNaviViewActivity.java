@@ -13,7 +13,6 @@ import dinson.customview.weight._002qqnaviview.QQNaviViewManager;
 
 public class _002QQNaviViewActivity extends BaseActivity {
 
-
     private QQNaviViewManager mManager;
 
     @Override
@@ -21,9 +20,7 @@ public class _002QQNaviViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__002_qqnavi_view);
 
-
         initUI();
-
     }
 
     private void initUI() {
