@@ -69,7 +69,6 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         initContent();
         initHead();
         getLocation();
-
     }
 
 
@@ -81,9 +80,9 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
             _001ShimmerActivity.class, getString(R.string.facebook_img)));
         mContentData.add(new ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
             _002QQNaviViewActivity.class, getString(R.string.qqnavi_img)));
-        mContentData.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string .diagonal_layout_desc),
+        mContentData.add(new ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
             _003DiagonalLayoutActivity.class, getString(R.string.diagonal_layout_img)));
-        mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string  .ganged_recycle_desc),
+        mContentData.add(new ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
             _004GangedRecycleViewActivity.class, getString(R.string.ganged_recycle_img)));
         mContentData.add(new ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
             _005LikeSmileViewActivity.class, getString(R.string.like_smile_img)));
@@ -92,9 +91,11 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         mContentData.add(new ClassBean(getString(R.string.spotlight_title), getString(R.string.spotlight_desc),
             _007SpotlightActivity.class, getString(R.string.spotlight_img)));
         mContentData.add(new ClassBean(getString(R.string.rich_editor_title), getString(R.string.rich_editor_desc),
-            _008_RichEditorActivity.class, getString(R.string.rich_editor_img)));
+            _008RichEditorActivity.class, getString(R.string.rich_editor_img)));
         mContentData.add(new ClassBean(getString(R.string.google_vr_title), getString(R.string.google_vr_desc),
             _009GoogleVRActivity.class, getString(R.string.google_vr_img)));
+        mContentData.add(new ClassBean(getString(R.string.parallax_animation_title), getString(R.string.parallax_animation_desc),
+            _010ParallaxActivity.class, getString(R.string.parallax_animation_img)));
         mContentData.add(new ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity.class, getString(R.string.test_layout_img)));
         RecyclerView mRvContent = (RecyclerView) findViewById(R.id.rv_content);
@@ -213,7 +214,8 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         Observable.just(location.getCity())
             .flatMap(city -> {
                 HomeWeather cache = CacheUtils.getHomeWeatherCache(city);
-                if (cache == null) return HttpHelper.create(XinZhiWeatherApi.class).getWeather(city);
+                if (cache == null)
+                    return HttpHelper.create(XinZhiWeatherApi.class).getWeather(city);
                 return Observable.just(cache);
             })
             .map(homeWeather -> {
@@ -243,8 +245,7 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
         IconFontTextView if_weather = (IconFontTextView) findViewById(R.id.if_weather);
         if_weather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.getNow().getCode()));
         TextView tv_weather = (TextView) findViewById(R.id.tv_weather);
-        tv_weather.setTypeface(TypefaceUtils.get(getApplicationContext(), "fonts/FZLanTingHeiS_Regular" +
-            ".ttf"));
+        tv_weather.setTypeface(TypefaceUtils.get(getApplicationContext(), "fonts/FZLanTingHeiS_Regular.ttf"));
         tv_weather.setText(String.format("%s℃", resultsBean.getNow().getTemperature()));
 
         ObjectAnimator alpha = ObjectAnimator.ofFloat(weatherLayout, "alpha", 0f, 1.0f);

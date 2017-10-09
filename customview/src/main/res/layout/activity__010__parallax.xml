@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dinson.customview.activity._010ParallaxActivity">
+
+    <dinson.customview.weight._010parallaxsplash.ParallaxContainer
+        android:id="@+id/parallax_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/iv_main"
+        android:layout_width="wrap_content"
+        android:background="@drawable/man_run"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_height="wrap_content" />
+</FrameLayout>

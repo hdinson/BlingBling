@@ -10,9 +10,9 @@ import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
 import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.TypefaceUtils;
-import dinson.customview.weight.spotlight.CustomTarget;
-import dinson.customview.weight.spotlight.SimpleTarget;
-import dinson.customview.weight.spotlight.Spotlight;
+import dinson.customview.weight._007spotlight.CustomTarget;
+import dinson.customview.weight._007spotlight.SimpleTarget;
+import dinson.customview.weight._007spotlight.Spotlight;
 
 import static dinson.customview.R.id.tv_type;
 
