@@ -13,12 +13,12 @@
         <android.support.v4.widget.Space style="@style/_010_Item"/>
 
         <ImageView
-            style="@style/_010_Item.Lv1"
-            android:src="@drawable/_010_img1" />
+            style="@style/_010_Item.XA.Lv1"
+            android:src="@drawable/_010_img1"/>
 
         <ImageView
-            style="@style/_010_Item.Lv5"
-            android:src="@drawable/_010_img2" />
+            style="@style/_010_Item.XA.Lv5"
+            android:src="@drawable/_010_img2"/>
 
         <android.support.v4.widget.Space style="@style/_010_Item"/>
 
@@ -28,15 +28,15 @@
     <LinearLayout style="@style/_010_LinearLayout">
 
         <ImageView
-            style="@style/_010_Item.Lv1"
+            style="@style/_010_Item.XA.Lv1"
             android:src="@drawable/_010_img3"/>
 
         <ImageView
-            style="@style/_010_Item.Lv2"
+            style="@style/_010_Item.XA.Lv2"
             android:src="@drawable/_010_img4"/>
 
         <ImageView
-            style="@style/_010_Item.Lv3"
+            style="@style/_010_Item.XA.Lv3"
             android:src="@drawable/_010_img5"/>
 
         <android.support.v4.widget.Space style="@style/_010_Item"/>
@@ -47,23 +47,23 @@
     <LinearLayout style="@style/_010_LinearLayout">
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
             android:src="@drawable/_010_img6"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv3"
             android:src="@drawable/_010_img7"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv1"
             android:src="@drawable/_010_img8"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv5"
             android:src="@drawable/_010_img9"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
             android:layout_marginRight="0dp"
             android:src="@drawable/_010_img10"/>
     </LinearLayout>
@@ -71,7 +71,8 @@
     <LinearLayout style="@style/_010_LinearLayout">
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
+            android:elevation="1dp"
             android:src="@drawable/_010_img11"/>
 
         <android.support.v4.widget.Space
@@ -89,41 +90,43 @@
             android:src="@drawable/_010_img_title"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv4"
             android:src="@drawable/_010_img12"/>
     </LinearLayout>
 
     <LinearLayout style="@style/_010_LinearLayout">
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv1"
             android:src="@drawable/_010_img13"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv4"
             android:src="@drawable/_010_img14"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv5"
             android:src="@drawable/_010_img15"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv3"
             android:src="@drawable/_010_img16"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
             android:src="@drawable/_010_img17"/>
     </LinearLayout>
 
     <LinearLayout style="@style/_010_LinearLayout">
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv1"
+            android:elevation="1dp"
             android:src="@drawable/_010_img18"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
+            android:elevation="1dp"
             android:src="@drawable/_010_img19"/>
 
         <android.support.v4.widget.Space
@@ -131,13 +134,13 @@
             android:layout_weight="0"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv1"
             android:layout_weight="2"
             android:scaleType="center"
             android:src="@drawable/_010_img_subtitle"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv3"
             android:src="@drawable/_010_img20"/>
     </LinearLayout>
 
@@ -146,19 +149,19 @@
         <android.support.v4.widget.Space style="@style/_010_Item"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
             android:src="@drawable/_010_img21"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv1"
             android:src="@drawable/_010_img22"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv4"
             android:src="@drawable/_010_img23"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv5"
             android:src="@drawable/_010_img24"/>
     </LinearLayout>
 
@@ -169,11 +172,11 @@
         <android.support.v4.widget.Space style="@style/_010_Item"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
             android:src="@drawable/_010_img25"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv4"
             android:src="@drawable/_010_img26"/>
 
         <android.support.v4.widget.Space style="@style/_010_Item"/>
@@ -186,7 +189,7 @@
         <android.support.v4.widget.Space style="@style/_010_Item"/>
 
         <ImageView
-            style="@style/_010_Item"
+            style="@style/_010_Item.XA.Lv2"
             android:src="@drawable/_010_img27"/>
 
         <android.support.v4.widget.Space style="@style/_010_Item"/>

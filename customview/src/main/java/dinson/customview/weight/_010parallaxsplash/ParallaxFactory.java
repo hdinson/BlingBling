@@ -8,12 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import dinson.customview.R;
-import dinson.customview.utils.LogUtils;
 
 /**
  * @author Dinson - 2017/10/9
  */
-public class ParallaxFactory implements LayoutInflaterFactory {
+class ParallaxFactory implements LayoutInflaterFactory {
     private ParallaxFragment fragment;
     private LayoutInflater inflater;
     private final String[] sClassPrefix = {
@@ -43,7 +42,6 @@ public class ParallaxFactory implements LayoutInflaterFactory {
             if (!tag.isBlank()) {
                 view.setTag(R.id.parallax_view_tag, tag);
                 fragment.getParallaxViews().add(view);
-                LogUtils.d("view:" + view);
             }
         }
 
@@ -51,7 +49,7 @@ public class ParallaxFactory implements LayoutInflaterFactory {
         a.recycle();
     }
 
-    private View createViewOrFailQuietly(String name, String prefix, Context context, AttributeSet attrs) {
+    private View createViewOrFailQuietly(String name, String prefix, AttributeSet attrs) {
         try {
             //通过系统的inflater创建视图，读取系统的属性
             return inflater.createView(name, prefix, attrs);
@@ -60,14 +58,14 @@ public class ParallaxFactory implements LayoutInflaterFactory {
         }
     }
 
-    private View createViewOrFailQuietly(String name, Context context, AttributeSet attrs) {
+    private View createViewOrFailQuietly(String name, AttributeSet attrs) {
         //1.自定义控件标签名称带点，所以创建时不需要前缀
         if (name.contains(".")) {
-            createViewOrFailQuietly(name, null, context, attrs);
+            createViewOrFailQuietly(name, null, attrs);
         }
         //2.系统视图需要加上前缀
         for (String prefix : sClassPrefix) {
-            View view = createViewOrFailQuietly(name, prefix, context, attrs);
+            View view = createViewOrFailQuietly(name, prefix, attrs);
             if (view != null) {
                 return view;
             }
@@ -77,11 +75,7 @@ public class ParallaxFactory implements LayoutInflaterFactory {
 
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
-        View view = null;
-        if (view == null) {
-            view = createViewOrFailQuietly(name, context, attrs);
-        }
-
+        View view = createViewOrFailQuietly(name, attrs);
         //实例化完成
         if (view != null) {
             //获取自定义属性，通过标签关联到视图上

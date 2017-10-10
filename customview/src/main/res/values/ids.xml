@@ -13,6 +13,7 @@
 
     <item name="iv_img" type="id"/>
     <item name="iv_title" type="id"/>
+    <item name="iv_subtitle" type="id"/>
 
     <item name="rv_content" type="id"/>
     <item name="rv_head" type="id"/>

@@ -57,10 +57,6 @@ public class DownloadManager {
             synchronized (DownloadManager.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new DownloadManager();
-
-
-
-
                 }
             }
         }

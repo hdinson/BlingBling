@@ -66,6 +66,9 @@
         <activity
             android:name=".activity._009GoogleVRActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity._010ParallaxActivity"></activity>
+        <activity
+            android:name=".activity._010ParallaxActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SplashTheme"/>
     </application>
 </manifest>
