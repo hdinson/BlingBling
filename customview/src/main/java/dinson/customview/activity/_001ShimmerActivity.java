@@ -3,12 +3,17 @@ package dinson.customview.activity;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
+import dinson.customview.utils.glide.BlurTransformation;
 import dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout;
- 
+
 public class _001ShimmerActivity extends BaseActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
     private Button[] mPresetButtons;
@@ -22,6 +27,13 @@ public class _001ShimmerActivity extends BaseActivity {
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         mTvTitle = (TextView) findViewById(R.id.tv_title);
+
+        //设置背景（高斯模糊）
+        RequestOptions options = new RequestOptions()
+            .transform(new BlurTransformation(this, 23));// “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+        ImageView img = (ImageView) findViewById(R.id.iv_img);
+        Glide.with(this) .load(R.drawable._001_bg) .apply(options)  .into(img);
+
 
         mPresetButtons = new Button[]{
             (Button) findViewById(R.id.preset_button0),

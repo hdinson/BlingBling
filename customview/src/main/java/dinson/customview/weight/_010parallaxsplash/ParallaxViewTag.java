@@ -3,26 +3,23 @@ package dinson.customview.weight._010parallaxsplash;
 /**
  * 视差动画播放时参数的控制
  */
-public class ParallaxViewTag {
-    protected int index;
-    protected float xIn;
-    protected float xOut;
-    protected float yIn;
-    protected float yOut;
-    protected float alphaIn;
-    protected float alphaOut;
+class ParallaxViewTag {
+    float xIn;
+    float xOut;
+    float yIn;
+    float yOut;
+    float alphaIn;
+    float alphaOut;
 
 
     @Override
     public String toString() {
-        return "ParallaxViewTag [index=" + index + ", xIn=" + xIn + ", xOut="
+        return "ParallaxViewTag [xIn=" + xIn + ", xOut="
             + xOut + ", yIn=" + yIn + ", yOut=" + yOut + ", alphaIn="
             + alphaIn + ", alphaOut=" + alphaOut + "]";
     }
 
-    public boolean isBlank() {
-        return (xIn + xOut + yIn + yOut + alphaIn + alphaOut)==0;
+    boolean isBlank() {
+        return xIn == 0 && xOut == 0 && yIn == 0 && yOut == 0 && alphaIn == 0 && alphaOut == 0;
     }
-
-
 }

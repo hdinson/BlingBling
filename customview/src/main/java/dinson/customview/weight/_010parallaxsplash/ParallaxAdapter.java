@@ -9,15 +9,12 @@ import java.util.List;
 /**
  * @author Dinson - 2017/10/9
  */
-public class ParallaxAdapter extends FragmentPagerAdapter {
+class ParallaxAdapter extends FragmentPagerAdapter {
     private List<ParallaxFragment> mFragments;
 
-    public ParallaxAdapter(FragmentManager fm) {
-        super(fm);
-    }
 
 
-    public ParallaxAdapter(FragmentManager supportFragmentManager, List<ParallaxFragment> fragments) {
+    ParallaxAdapter(FragmentManager supportFragmentManager, List<ParallaxFragment> fragments) {
         super(supportFragmentManager);
         this.mFragments = fragments;
     }

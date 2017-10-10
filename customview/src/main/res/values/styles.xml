@@ -1,4 +1,4 @@
-<resources xmlns:app="http://schemas.android.com/apk/res-auto">
+<resources>
     <!--————————————————————————————————————————主题——————————————————————————————————————————————-->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -99,37 +99,76 @@
         <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <style name="_010_Item.Lv5">
-        <item name="x_in">1.8</item>
-        <item name="x_out">1.8</item>
-        <item name="a_in">1.8</item>
-        <item name="a_out">1.8</item>
+    <style name="_010_Item.XA"/>
+
+    <style name="_010_Item.XA.Lv5">
+        <item name="x_in">-2.2</item>
+        <item name="x_out">-2.2</item>
+        <item name="a_in">2.2</item>
+        <item name="a_out">2.2</item>
     </style>
 
-    <style name="_010_Item.Lv4">
-        <item name="x_in">1.6</item>
-        <item name="x_out">1.6</item>
+    <style name="_010_Item.XA.Lv4">
+        <item name="x_in">-1.9</item>
+        <item name="x_out">-1.9</item>
+        <item name="a_in">1.9</item>
+        <item name="a_out">1.9</item>
+    </style>
+
+    <style name="_010_Item.XA.Lv3">
+        <item name="x_in">-1.6</item>
+        <item name="x_out">-1.6</item>
         <item name="a_in">1.6</item>
         <item name="a_out">1.6</item>
     </style>
 
-    <style name="_010_Item.Lv3">
-        <item name="x_in">1.4</item>
-        <item name="x_out">1.4</item>
-        <item name="a_in">1.4</item>
-        <item name="a_out">1.4</item>
+    <style name="_010_Item.XA.Lv2">
+        <item name="x_in">-1.3</item>
+        <item name="x_out">-1.3</item>
+        <item name="a_in">1.3</item>
+        <item name="a_out">1.3</item>
     </style>
 
-    <style name="_010_Item.Lv2">
-        <item name="x_in">1.2</item>
-        <item name="x_out">1.2</item>
-        <item name="a_in">1.2</item>
-        <item name="a_out">1.2</item>
+    <style name="_010_Item.XA.Lv1">
+        <item name="x_in">-1</item>
+        <item name="x_out">-1</item>
+        <item name="a_in">1</item>
+        <item name="a_out">1</item>
     </style>
 
-    <style name="_010_Item.Lv1">
-        <item name="x_in">1</item>
-        <item name="x_out">1</item>
+    <style name="_010_Item.YA"/>
+
+    <style name="_010_Item.YA.Lv5">
+        <item name="y_in">-2.2</item>
+        <item name="y_out">2.2</item>
+        <item name="a_in">2.2</item>
+        <item name="a_out">2.2</item>
+    </style>
+
+    <style name="_010_Item.YA.Lv4">
+        <item name="y_in">-1.9</item>
+        <item name="y_out">1.9</item>
+        <item name="a_in">1.9</item>
+        <item name="a_out">1.9</item>
+    </style>
+
+    <style name="_010_Item.YA.Lv3">
+        <item name="y_in">-1.6</item>
+        <item name="y_out">1.6</item>
+        <item name="a_in">1.6</item>
+        <item name="a_out">1.6</item>
+    </style>
+
+    <style name="_010_Item.YA.Lv2">
+        <item name="y_in">-1.3</item>
+        <item name="y_out">1.3</item>
+        <item name="a_in">1.3</item>
+        <item name="a_out">1.3</item>
+    </style>
+
+    <style name="_010_Item.YA.Lv1">
+        <item name="y_in">-1</item>
+        <item name="y_out">1</item>
         <item name="a_in">1</item>
         <item name="a_out">1</item>
     </style>

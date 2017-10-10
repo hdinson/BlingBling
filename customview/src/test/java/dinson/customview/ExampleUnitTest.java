@@ -2,8 +2,6 @@ package dinson.customview;
 
 import org.junit.Test;
 
-import dinson.customview.utils.StringUtils;
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -27,18 +25,13 @@ public class ExampleUnitTest {
 //        System.out.println( encodedString);
 
 
+//        String url = "https:www/.baidu.com123456.apk";
+//        String baseUrl = StringUtils.getUrlName(url);
+//        System.out.println("ba:" + baseUrl);
 
-        String url="https:www/.baidu.com123456.apk";
-
-
-
-        String baseUrl = StringUtils.getUrlName(url);
-
-        System.out.println("ba:"+baseUrl);
-
-
+        Integer i=null;
+        System.out.println(i==2);
     }
-
 
 
 }
