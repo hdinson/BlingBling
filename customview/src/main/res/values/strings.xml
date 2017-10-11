@@ -63,6 +63,7 @@
     <string name="parallax_animation_title">Parallax Animation Frame</string>
     <string name="parallax_animation_desc">Virtual reality for everyone.</string>
     <string name="parallax_animation_img">http://ondlsj2sn.bkt.clouddn.com/FtnPm05owdbcJC_7mf53nbOcq2Gy.webp</string>
+    <string name="_010_third_login">| 合作账号登录 |</string>
     <!--behavior-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
     <!--iconfont-->
@@ -116,4 +117,8 @@
     <string name="des_goods_pic">商品图片</string>
     <string name="des_num">数字</string>
     <string name="des_tab">标签</string>
+    <string name="_010_username">邮箱 / 手机号</string>
+    <string name="password">密码</string>
+    <string name="_010_register">注册</string>
+    <string name="_010_login">登录</string>
 </resources>
