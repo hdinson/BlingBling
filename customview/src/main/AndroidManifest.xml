@@ -70,5 +70,6 @@
             android:name=".activity._010ParallaxActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SplashTheme"/>
+        <activity android:name=".activity.Main2Activity"></activity>
     </application>
 </manifest>

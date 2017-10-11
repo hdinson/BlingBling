@@ -44,7 +44,7 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
         }
         mFragments = new ArrayList<>();
         for (int id : ids) {
-            ParallaxFragment f = new ParallaxFragment(id);
+            ParallaxFragment f = ParallaxFragment.newInstance(id);
             mFragments.add(f);
         }
 
@@ -53,6 +53,7 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
         mAdapter = new ParallaxAdapter(activity.getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOverScrollMode(OVER_SCROLL_NEVER);
+        mViewPager.setOffscreenPageLimit(5);
         mViewPager.setId(R.id.parallax_pager);
         mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
@@ -66,12 +67,10 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
 
-        //LogUtils.i("onPageScrolled() called with: position = [" + position + "], positionOffset = [" + positionOffset + "], positionOffsetPixels = [" + positionOffsetPixels + "]");
-
-
-        if (positionOffsetPixels == 0 && positionOffset == 0) return;
+        LogUtils.i("onPageScrolled() called with: position = [" + position + "], positionOffset = [" + positionOffset + "], positionOffsetPixels = [" + positionOffsetPixels + "]");
 
         checkScrollOrientation(position);
+
 
         if (mInFragment != null) {
             //获取Fragment上所有的视图，实现动画效果
@@ -79,6 +78,9 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
             boolean isLeftIn = (mInFragment.getCurrentOrientation() == ParallaxOrientation.LEFT);
 
             if (inViews != null) {
+
+                boolean isCurrentPagerChanged = positionOffset == 0 && positionOffsetPixels == 0;
+
                 for (View view : inViews) {
                     //获取标签，从标签上获取所有的动画参数
                     ParallaxViewTag tag = (ParallaxViewTag) view.getTag(R.id.parallax_view_tag);
@@ -86,22 +88,23 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
                         continue;
                     }
 
-
-                    if (!isLeftIn) {
+                    if (!isLeftIn && !isCurrentPagerChanged) {
                         //translationY改变view的偏移位置，translationY=100，代表view在其原始位置向下移动100
                         //仔细观察进入的fragment中view从远处过来，不断向下移动，最终停在原始位置
                         view.setTranslationY((positionOffsetPixels - containerWidth) * tag.yIn);
                         view.setTranslationX((positionOffsetPixels - containerWidth) * tag.xIn);
-                        if (tag.alphaIn!=0||tag.alphaOut!=0)
-                        view.setAlpha(positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
-                    } else {
+                        if (tag.alphaIn != 0 || tag.alphaOut != 0)
+                            view.setAlpha(positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
+                    } else if (isLeftIn && !isCurrentPagerChanged) {
                         view.setTranslationY(positionOffsetPixels * tag.yOut);
                         view.setTranslationX(positionOffsetPixels * tag.xOut);
-                        if (tag.alphaIn!=0||tag.alphaOut!=0)
-                        view.setAlpha(1 - positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
+                        if (tag.alphaIn != 0 || tag.alphaOut != 0)
+                            view.setAlpha(1 - positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
+                    } else {
+                        view.setAlpha(1);
+                        view.setTranslationX(0);
+                        view.setTranslationY(0);
                     }
-
-
                 }
             }
         }
@@ -121,13 +124,13 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
                         //仔细观察退出的fragment中view从原始位置开始向上移动，translationY应为负数
                         view.setTranslationY(positionOffsetPixels * tag.yOut);
                         view.setTranslationX(positionOffsetPixels * tag.xOut);
-                        if (tag.alphaIn!=0||tag.alphaOut!=0)
-                        view.setAlpha(1 - positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
+                        if (tag.alphaIn != 0 || tag.alphaOut != 0)
+                            view.setAlpha(1 - positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
                     } else {
                         view.setTranslationY((positionOffsetPixels - containerWidth) * tag.yIn);
                         view.setTranslationX((positionOffsetPixels - containerWidth) * tag.xIn);
-                        if (tag.alphaIn!=0||tag.alphaOut!=0)
-                        view.setAlpha(positionOffsetPixels / tag.alphaIn / containerWidth);
+                        if (tag.alphaIn != 0 || tag.alphaOut != 0)
+                            view.setAlpha(positionOffsetPixels / tag.alphaIn / containerWidth);
                     }
 
                 }
@@ -193,7 +196,7 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
                 mInFragment.setCurrentOrientation(isLeftPagerVisible() ? ParallaxOrientation.LEFT : ParallaxOrientation.RIGHT);
             if (mOutFragment != null)
                 mOutFragment.setCurrentOrientation(isLeftPagerVisible() ? ParallaxOrientation.RIGHT : ParallaxOrientation.LEFT);
-            LogUtils.e("mInFragment:" + mInFragment + "   mOutFragment:" + mOutFragment);
+            //LogUtils.e("mInFragment:" + mInFragment + "   mOutFragment:" + mOutFragment);
         }
     }
 

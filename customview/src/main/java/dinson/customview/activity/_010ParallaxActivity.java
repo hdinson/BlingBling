@@ -18,7 +18,7 @@ public class _010ParallaxActivity extends BaseActivity {
         ParallaxContainer container = (ParallaxContainer) findViewById(R.id.parallax_container);
         container.setUp(R.layout.layout_010_splash1, R.layout.layout_010_splash2);
 
-        ParallaxFragment f = new _010LoginFragment( R.layout.layout_010_splash3);
+        ParallaxFragment f = _010LoginFragment.newInstance(R.layout.layout_010_splash3);
         container.notifyDataSetChanged(f);
     }
 

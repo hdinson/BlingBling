@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import dinson.customview.utils.LogUtils;
-
 /**
  * @author Dinson - 2017/10/9
  */
@@ -21,12 +19,12 @@ public class ParallaxFragment extends Fragment {
 
     private ParallaxOrientation mCurrentOrientation;
 
-    public ParallaxFragment(int ids) {
+    public static ParallaxFragment newInstance(int ids) {
         Bundle args = new Bundle();
-        //页面索引
-        //Fragment中需要加载的布局文件id
         args.putInt("layoutId", ids);
-        setArguments(args);
+        ParallaxFragment fragment = new ParallaxFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class ParallaxFragment extends Fragment {
         LayoutInflaterCompat.setFactory(inflater, new ParallaxFactory(inflater, this));
 
 
-        LogUtils.e("ParallaxFragment init");
+        //LogUtils.e("ParallaxFragment init");
 
 
         return inflater.inflate(layoutId, null);
