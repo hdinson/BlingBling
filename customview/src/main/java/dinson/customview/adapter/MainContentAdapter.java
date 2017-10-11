@@ -41,7 +41,6 @@ public class MainContentAdapter extends CommonAdapter<ClassBean> implements OnIt
 
     @Override
     public void convert(CommonViewHolder holder, ClassBean classBean, int position) {
-
         holder.setTvText(R.id.tv_title, classBean.getTitle());
         holder.setTvText(R.id.tv_desc, classBean.getDesc());
         int[] ints = formatPosition(position + 1);
