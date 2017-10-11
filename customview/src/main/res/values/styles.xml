@@ -172,4 +172,15 @@
         <item name="a_in">1</item>
         <item name="a_out">1</item>
     </style>
+
+
+    <style name="_010_Item_ThirdLogin">
+        <item name="y_in">-1</item>
+        <item name="y_out">1</item>
+    </style>
+
+    <style name="_010_Item_Login">
+        <item name="x_in">-2</item>
+        <item name="x_out">2</item>
+    </style>
 </resources>

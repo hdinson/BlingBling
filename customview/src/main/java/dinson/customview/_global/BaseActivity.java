@@ -32,7 +32,6 @@ public class BaseActivity extends AppCompatActivity {
         /*logcat点击跳转对用activity*/
         logShowActivity();
     }
-
     @Override
     protected void onStart() {
         super.onStart();

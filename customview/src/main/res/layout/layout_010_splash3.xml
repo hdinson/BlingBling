@@ -3,173 +3,125 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/_010_login_bg">
 
     <ImageView
-        android:id="@id/iv_title"
-        style="@style/_010_Item.XA.Lv1"
+        android:id="@+id/qq"
+        style="@style/_010_Item_ThirdLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/_010_month_title"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-        android:id="@id/iv_subtitle"
-        style="@style/_010_Item.XA.Lv5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/_010_month_subtitile"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_title"/>
-
-    <ImageView
-        android:id="@id/iv_img"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/_010_login_qq"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/_010_month_img"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toLeftOf="@+id/weibo"/>
 
     <ImageView
-        android:id="@+id/month1"
-        style="@style/_010_Item.YA.Lv1"
+        android:id="@+id/weibo"
+        style="@style/_010_Item_ThirdLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/_010_month1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/month2"
-        app:layout_constraintTop_toTopOf="@id/iv_img"/>
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/_010_login_weibo"
+        app:layout_constraintLeft_toRightOf="@+id/qq"
+        app:layout_constraintRight_toLeftOf="@+id/weixin"
+        app:layout_constraintTop_toTopOf="@+id/qq"/>
 
     <ImageView
-        android:id="@+id/month2"
-        style="@style/_010_Item.YA.Lv2"
+        android:id="@+id/weixin"
+        style="@style/_010_Item_ThirdLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/_010_month2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/month1"
-        app:layout_constraintRight_toLeftOf="@+id/month10"
-        app:layout_constraintTop_toTopOf="@id/iv_img"
-        app:layout_constraintVertical_bias="0.25"/>
-
-    <ImageView
-        android:id="@+id/month10"
-        style="@style/_010_Item.YA.Lv5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/_010_month10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/month2"
-        app:layout_constraintRight_toLeftOf="@+id/month4"
-        app:layout_constraintTop_toTopOf="@id/iv_img"
-        app:layout_constraintVertical_bias="0.15"/>
-
-    <ImageView
-        android:id="@+id/month4"
-        style="@style/_010_Item.YA.Lv4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/_010_month4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/month10"
+        android:src="@drawable/_010_login_weixin"
+        app:layout_constraintLeft_toRightOf="@+id/weibo"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_img"/>
+        app:layout_constraintTop_toTopOf="@+id/qq"/>
 
-    <android.support.constraint.Guideline
-        android:id="@id/guideline"
+    <TextView
+        android:id="@+id/textView"
+        style="@style/_010_Item_ThirdLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/_010_third_login"
+        android:textColor="#C4996B"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/qq"
+        app:layout_constraintLeft_toLeftOf="@+id/qq"
+        app:layout_constraintRight_toRightOf="@+id/weixin"/>
 
-    <ImageView
-        android:id="@+id/month6"
-        style="@style/_010_Item.YA.Lv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/_010_month6"
-        app:layout_constraintBottom_toTopOf="@id/iv_img"
-        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+    <TextView
+        android:id="@+id/register"
+        style="@style/_010_Item_Login"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/_010_login_gray"
+        android:gravity="center"
+        android:text="@string/_010_register"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="@+id/username"
+        app:layout_constraintRight_toLeftOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/password"/>
 
-    <ImageView
-        android:id="@+id/month5"
-        style="@style/_010_Item.YA.Lv5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/_010_month5"
-        app:layout_constraintBottom_toTopOf="@+id/month6"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/month6"/>
+    <TextView
+        android:id="@+id/login"
+        style="@style/_010_Item_Login"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/_010_login_yellow"
+        android:gravity="center"
+        android:text="@string/_010_login"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/register"
+        app:layout_constraintRight_toRightOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/register"/>
 
-    <ImageView
-        android:id="@+id/month7"
-        style="@style/_010_Item.YA.Lv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/_010_month7"
-        app:layout_constraintBottom_toTopOf="@+id/month6"
-        app:layout_constraintLeft_toLeftOf="@+id/month6"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <ImageView
-        android:id="@+id/month11"
-        style="@style/_010_Item.YA.Lv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/_010_month11"
-        app:layout_constraintLeft_toRightOf="@+id/month7"
-        app:layout_constraintTop_toTopOf="@+id/month7"/>
-
-    <ImageView
-        android:id="@+id/month9"
-        style="@style/_010_Item.YA.Lv4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/_010_month9"
-        app:layout_constraintBottom_toTopOf="@+id/month5"
-        app:layout_constraintLeft_toRightOf="@+id/month5"
-        app:layout_constraintRight_toRightOf="@id/guideline"/>
-
-    <ImageView
-        android:id="@+id/month3"
-        style="@style/_010_Item.YA.Lv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/_010_month3"
-        app:layout_constraintBottom_toTopOf="@+id/month9"
-        app:layout_constraintLeft_toLeftOf="@+id/month10"/>
-
-    <ImageView
-        android:id="@+id/month8"
-        style="@style/_010_Item.YA.Lv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/username"
+        style="@style/_010_Item_Login"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/_010_month8"
-        app:layout_constraintBottom_toBottomOf="@+id/month3"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/_010_login_edit"
+        android:gravity="center"
+        android:hint="@string/_010_username"
+        android:textColor="#C4996B"
+        android:textColorHint="#838282"
+        android:textCursorDrawable="@drawable/shape_010_cursor_color"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/month3"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"/>
 
-    <ImageView
-        android:id="@+id/month12"
-        style="@style/_010_Item.YA.Lv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/_010_month12"
-        app:layout_constraintLeft_toRightOf="@+id/month3"
-        app:layout_constraintRight_toLeftOf="@+id/month8"
-        app:layout_constraintTop_toBottomOf="@id/iv_subtitle"/>
+    <EditText
+        android:id="@+id/password"
+        style="@style/_010_Item_Login"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/_010_login_edit"
+        android:gravity="center"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="#C4996B"
+        android:textColorHint="#838282"
+        android:textCursorDrawable="@drawable/shape_010_cursor_color"
+        app:layout_constraintBottom_toTopOf="@+id/register"
+        app:layout_constraintLeft_toLeftOf="@+id/username"
+        app:layout_constraintRight_toRightOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/username"/>
 </android.support.constraint.ConstraintLayout>

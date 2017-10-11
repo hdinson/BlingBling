@@ -8,6 +8,7 @@
     <color name="textSecond">#666</color>
     <color name="textHint">#929292</color>
     <color name="_008_system_bar">#fafafa</color>
+    <color name="_010_window_bg">#fefefe</color>
 
 
     <color name="preset_button_background">#00000000</color>

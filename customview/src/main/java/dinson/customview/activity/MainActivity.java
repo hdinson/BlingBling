@@ -72,6 +72,10 @@ public class MainActivity extends BaseActivity implements OnItemTouchMoveListene
     }
 
 
+    @Override
+    public int setWindowBackgroundColor() {
+        return R.color.transparent;
+    }
     /**
      * 初始化内容
      */

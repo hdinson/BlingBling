@@ -92,10 +92,12 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
                         //仔细观察进入的fragment中view从远处过来，不断向下移动，最终停在原始位置
                         view.setTranslationY((positionOffsetPixels - containerWidth) * tag.yIn);
                         view.setTranslationX((positionOffsetPixels - containerWidth) * tag.xIn);
+                        if (tag.alphaIn!=0||tag.alphaOut!=0)
                         view.setAlpha(positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
                     } else {
                         view.setTranslationY(positionOffsetPixels * tag.yOut);
                         view.setTranslationX(positionOffsetPixels * tag.xOut);
+                        if (tag.alphaIn!=0||tag.alphaOut!=0)
                         view.setAlpha(1 - positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
                     }
 
@@ -119,10 +121,12 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
                         //仔细观察退出的fragment中view从原始位置开始向上移动，translationY应为负数
                         view.setTranslationY(positionOffsetPixels * tag.yOut);
                         view.setTranslationX(positionOffsetPixels * tag.xOut);
+                        if (tag.alphaIn!=0||tag.alphaOut!=0)
                         view.setAlpha(1 - positionOffsetPixels * tag.alphaIn * 2 / containerWidth);
                     } else {
                         view.setTranslationY((positionOffsetPixels - containerWidth) * tag.yIn);
                         view.setTranslationX((positionOffsetPixels - containerWidth) * tag.xIn);
+                        if (tag.alphaIn!=0||tag.alphaOut!=0)
                         view.setAlpha(positionOffsetPixels / tag.alphaIn / containerWidth);
                     }
 

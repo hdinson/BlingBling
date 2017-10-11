@@ -20,10 +20,6 @@ public class _010LoginFragment extends ParallaxFragment {
         View view = super.onCreateView(original, container, savedInstanceState);
 
 
-
-
         return view;
-
-
     }
 }
