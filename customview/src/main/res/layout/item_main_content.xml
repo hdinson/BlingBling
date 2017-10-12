@@ -8,7 +8,7 @@
     android:background="@drawable/ripple_main_white">
 
     <ImageView
-        android:id="@id/iv_img"
+        android:id="@id/ivImg"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:contentDescription="@string/des_pic"
@@ -19,18 +19,18 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@id/tv_title"
+        android:id="@id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textPrimary"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_desc"
-        app:layout_constraintLeft_toRightOf="@id/iv_img"
+        app:layout_constraintBottom_toTopOf="@id/tvDesc"
+        app:layout_constraintLeft_toRightOf="@id/ivImg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread"/>
 
     <TextView
-        android:id="@id/tv_desc"
+        android:id="@id/tvDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -40,9 +40,9 @@
         android:textColor="@color/textSecond"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/iv_img"
+        app:layout_constraintLeft_toRightOf="@id/ivImg"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
 
     <ImageView
         android:id="@+id/iv_third"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="18dp"
         android:contentDescription="@string/des_num"
         android:src="@drawable/n_3"
-        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_goneMarginEnd="18dp"/>
 
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/des_num"
         android:src="@drawable/n_2"
-        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintRight_toLeftOf="@id/iv_third"/>
 
     <ImageView
@@ -70,6 +70,6 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/des_num"
         android:src="@drawable/n_1"
-        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintRight_toLeftOf="@id/iv_second"/>
 </android.support.constraint.ConstraintLayout>

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="tv_title" type="id"/>
-    <item name="tv_head" type="id"/>
-    <item name="tv_name" type="id"/>
-    <item name="tv_desc" type="id"/>
-    <item name="tv_content" type="id"/>
-    <item name="tv_back" type="id"/>
-    <item name="tv_like" type="id"/>
-    <item name="tv_dis" type="id"/>
-    <item name="tv_num" type="id"/>
-    <item name="tv_type" type="id"/>
+    <item name="tvTitle" type="id"/>
+    <item name="tvHead" type="id"/>
+    <item name="tvName" type="id"/>
+    <item name="tvDesc" type="id"/>
+    <item name="tvContent" type="id"/>
+    <item name="tvBack" type="id"/>
+    <item name="tvLike" type="id"/>
+    <item name="tvDis" type="id"/>
+    <item name="tvNum" type="id"/>
+    <item name="tvType" type="id"/>
 
-    <item name="iv_img" type="id"/>
-    <item name="iv_title" type="id"/>
-    <item name="iv_subtitle" type="id"/>
+    <item name="ivImg" type="id"/>
+    <item name="ivTitle" type="id"/>
+    <item name="ivSubtitle" type="id"/>
 
-    <item name="rv_content" type="id"/>
-    <item name="rv_head" type="id"/>
+    <item name="rvContent" type="id"/>
+    <item name="rvHead" type="id"/>
 
-    <item name="vs_content" type="id"/>
-    <item name="layout_root" type="id"/>
+    <item name="vsContent" type="id"/>
+    <item name="layoutRoot" type="id"/>
 
     <item name="cancel" type="id"/>
     <item name="rootView" type="id"/>
     <item name="guideline" type="id"/>
 
     <!--第三方或自定义控件-->
-    <item name="glide_tag_id" type="id"/>
-    <item name="floating_decor" type="id"/>
-    <item name="parallax_pager" type="id"/>
-    <item name="parallax_view_tag" type="id"/>
+    <item name="glideTagId" type="id"/>
+    <item name="floatingDecor" type="id"/>
+    <item name="parallaxPager" type="id"/>
+    <item name="parallaxViewTag" type="id"/>
 </resources>

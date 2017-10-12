@@ -35,17 +35,17 @@ public class _003DiagonalLayoutActivity extends BaseActivity {
         String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp";
         GlideUtils.setCircleImage(this, imgUrl, (CircleImageView) findViewById(R.id.cv_circleview));
 
-        TextView tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_title.setText("Quan Zhou\n");
+        TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle.setText("Quan Zhou\n");
 
         SpannableStringBuilder builder = new SpannableStringBuilder("Eastern Asia culture");
         builder.setSpan(new RelativeSizeSpan(0.56f), 0, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new StyleSpan(Typeface.BOLD), 0, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv_title.append(builder);
+        tvTitle.append(builder);
 
-        TextView tv_content = (TextView) findViewById(R.id.tv_content);
+        TextView tvContent = (TextView) findViewById(R.id.tvContent);
         String qzStr = FileUtils.getTextFromAssets(this, "QuanZhou");
 
-        tv_content.setText(Html.fromHtml(qzStr));
+        tvContent.setText(Html.fromHtml(qzStr));
     }
 }

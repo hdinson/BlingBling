@@ -26,6 +26,6 @@ public class _004LeftAdapter extends CommonAdapter<DataBean> {
 
     @Override
     public void convert(CommonViewHolder holder, DataBean dataBean, int position) {
-        holder.setTvText(R.id.tv_name, dataBean.getFamily());
+        holder.setTvText(R.id.tvName, dataBean.getFamily());
     }
 }

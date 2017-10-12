@@ -3,7 +3,6 @@ package dinson.customview.activity
 import android.os.Bundle
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.utils.UIUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,23 +15,18 @@ class TestActivity : BaseActivity() {
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_test)
 
-        tv_title.text = "kotlin"
-
-
-        tv_title.setOnClickListener { v -> UIUtils.showToast("Hello") }
-        tv_title.setOnClickListener() { v -> UIUtils.showToast("Hello") }
-
+        tvTitle.text = "kotlin"
     }
 
     private fun jsoupTest() {
         Observable.just("http://www.dinson.win/")
-                .map { s ->
-                    val document = Jsoup.connect(s).get()
-                    document
-                }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { document ->
+            .map { s ->
+                val document = Jsoup.connect(s).get()
+                document
+            }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { document ->
 
-                }
+            }
     }
 }

@@ -40,7 +40,7 @@ class ParallaxFactory implements LayoutInflaterFactory {
 
             //index
             if (!tag.isBlank()) {
-                view.setTag(R.id.parallax_view_tag, tag);
+                view.setTag(R.id.parallaxViewTag, tag);
                 fragment.getParallaxViews().add(view);
             }
         }

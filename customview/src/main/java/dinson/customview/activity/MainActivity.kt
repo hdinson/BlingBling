@@ -1,13 +1,18 @@
 package dinson.customview.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.AMapLocationListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
 import dinson.customview.R
@@ -15,35 +20,40 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.adapter.MainHeadAdapter
 import dinson.customview.api.OneApi
+import dinson.customview.api.XinZhiWeatherApi
 import dinson.customview.entity.ClassBean
+import dinson.customview.entity.HomeWeather
 import dinson.customview.entity.one.DailyDetail
+import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
+import dinson.customview.model.HomeWeatherModelUtil
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.LogUtils
+import dinson.customview.utils.TypefaceUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
 import dinson.customview.weight.recycleview.OnItemClickListener
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity__001_shimmer.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
 
+class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
 
-class Main2Activity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
-
-    val mContentData = ArrayList<ClassBean>() //内容的数据集
-    val mHeadData = ArrayList<DailyDetail>()
+    private val mContentData = ArrayList<ClassBean>() //内容的数据集
+    private val mHeadData = ArrayList<DailyDetail>()
     private var mMainHeadAdapter: MainHeadAdapter? = null
     private var mAMapLocationClient: AMapLocationClient? = null
+    private var mTouchHelper: ItemTouchHelper? = null
     private val mOneApi = HttpHelper.create(OneApi::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         initContent()
         initHead()
@@ -77,39 +87,36 @@ class Main2Activity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListen
 
 
         val mainAdapter = MainContentAdapter(this, mContentData, this)
-        val mTouchHelper = ItemTouchHelper(MainItemTouchHelper(mainAdapter))
-        rv_content.adapter = mainAdapter
-
-
-        mTouchHelper.attachToRecyclerView(rv_content)
-        rv_content.layoutManager = LinearLayoutManager(this)
-        rv_content.addItemDecoration(LinearItemDecoration(this))
-        rv_content.addOnItemTouchListener(OnItemClickListener(this, rv_content, this))
-
+        mTouchHelper = ItemTouchHelper(MainItemTouchHelper(mainAdapter))
+        mTouchHelper!!.attachToRecyclerView(rvContent)
+        rvContent.adapter = mainAdapter
+        rvContent.layoutManager = LinearLayoutManager(this)
+        rvContent.addItemDecoration(LinearItemDecoration(this))
+        rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent, this))
     }
 
     private fun initHead() {
-        rv_head.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvHead.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         mMainHeadAdapter = MainHeadAdapter(this, mHeadData)
-        rv_head.adapter = mMainHeadAdapter
+        rvHead.adapter = mMainHeadAdapter
         //点击轮播图片，获取源文件，执行跳转动画
-        rv_head.addOnItemTouchListener(OnItemClickListener(this,
-            rv_head, OnItemClickListener.OnClickListener { view, position ->
+        rvHead.addOnItemTouchListener(OnItemClickListener(this,
+            rvHead, OnItemClickListener.OnClickListener { view, position ->
             Single.just(mHeadData[position].data.hp_img_url)
                 .map { s ->
-                    Glide.with(this@Main2Activity).load(s).downloadOnly(Target.SIZE_ORIGINAL,
+                    Glide.with(this@MainActivity).load(s).downloadOnly(Target.SIZE_ORIGINAL,
                         Target.SIZE_ORIGINAL).get().path
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { path ->
                     LogUtils.e("CurrentItem:" + position + " imgUrl:" + mHeadData[position].data.hp_img_url + "  imgPath:" + path)
-                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@Main2Activity, view, "dailyPic")
-                    DailyPicActivity.start(this@Main2Activity, mHeadData[position].data, path, options)
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, view, "dailyPic")
+                    DailyPicActivity.start(this@MainActivity, mHeadData[position].data, path, options)
                 }
         }))
 
-        var mainHeardCache = CacheUtils.getMainHeardCache()
+        val mainHeardCache = CacheUtils.getMainHeardCache()
         Flowable.fromPublisher(if (mainHeardCache == null) mOneApi.daily else Flowable.just(mainHeardCache))
             .flatMap { list ->
                 CacheUtils.setMainHeardCache(list)
@@ -127,40 +134,33 @@ class Main2Activity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListen
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ list -> mMainHeadAdapter!!.notifyDataSetChanged() }) { throwable ->
+            .subscribe({ _ -> mMainHeadAdapter!!.notifyDataSetChanged() }) { throwable ->
                 LogUtils.d(throwable.toString())
-                vs_content.inflate()
-                iv_img.setImageResource(R.drawable.def_img)
+                vsContent.inflate()
+                ivImg.setImageResource(R.drawable.def_img)
             }
     }
 
     private fun getLocation() {
-        mAMapLocationClient=AMapLocationClient(this.applicationContext)
+        mAMapLocationClient = AMapLocationClient(this.applicationContext)
         val locationOption = getAmapOption()
         mAMapLocationClient!!.setLocationOption(locationOption)//设置定位参数
-        //mAMapLocationClient!!.setLocationListener(locationListener)//设置定位监听
+        mAMapLocationClient!!.setLocationListener(locationListener)//设置定位监听
         mAMapLocationClient!!.startLocation()
     }
 
 
-
-
-   /* internal var locationListener1 = { location ->
+    private var locationListener = AMapLocationListener { location ->
         // TODO: 2017/9/27 定位权限判断
         destroyLocation()//只定位一次
-        if (null == location) return
-        if (location!!.getErrorCode() != 0) return  //errCode等于0代表定位成功
+        if (null == location) return@AMapLocationListener
+        if (location.errorCode != 0) return@AMapLocationListener  //errCode等于0代表定位成功
 
-        Observable.just<String>(location!!.getCity())
+        Observable.just<String>(location.city)
             .flatMap { city ->
                 val cache = CacheUtils.getHomeWeatherCache(city)
-
-                if (cache==null) Observable.just() else
-
-                if (cache == null)
-                    return@Observable.just(location.getCity())
-                        .flatMap HttpHelper . create < XinZhiWeatherApi >(XinZhiWeatherApi::class.java).getWeather(city)
-                Observable.just(cache!!)
+                if (cache == null) HttpHelper.create(XinZhiWeatherApi::class.java).getWeather(city)
+                else Observable.just(cache)
             }
             .map { homeWeather ->
                 CacheUtils.setHomeWeatherCache(homeWeather)
@@ -170,17 +170,35 @@ class Main2Activity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListen
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : BaseObserver<HomeWeather>() {
                 override fun onHandlerSuccess(weather: HomeWeather) {
-                    initWeatherLayout(weather)//设置数据
+                    initWeatherLayout(weather) //设置数据
                 }
             })
-    }*/
+    }
+
+    private fun initWeatherLayout(weather: HomeWeather) {
+        LogUtils.d("." + weather.toString())
+        weatherLayout.visibility = View.VISIBLE
+        val resultsBean = weather.results[0]
+        if_weather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
+        tvWeather.typeface = TypefaceUtils.get(this, "fonts/FZLanTingHeiS_Regular.ttf")
+        tvWeather.text = String.format("%s℃", resultsBean.now.temperature)
+
+        val alphaAnimator = ObjectAnimator.ofFloat(weatherLayout, "alpha", 0f, 1f)
+        val scaleX = ObjectAnimator.ofFloat(weatherLayout, "scaleX", 0f, 1.0f)
+        val scaleY = ObjectAnimator.ofFloat(weatherLayout, "scaleY", 0f, 1.0f)
+        val set = AnimatorSet()
+        set.interpolator = DecelerateInterpolator()
+        set.play(alphaAnimator).with(scaleX).with(scaleY)
+        set.start()
+    }
+
     /**
      * 销毁定位
      */
     private fun destroyLocation() {
         if (null != mAMapLocationClient) {
             mAMapLocationClient!!.onDestroy()
-            mAMapLocationClient  = null
+            mAMapLocationClient = null
         }
     }
 
@@ -206,15 +224,12 @@ class Main2Activity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListen
     }
 
     override fun onItemTouchMove(viewHolder: RecyclerView.ViewHolder?) {
-
-
+        mTouchHelper?.startDrag(viewHolder)
     }
 
     override fun onItemClick(view: View?, position: Int) {
-
+        startActivity(Intent(this, mContentData[position].name))
     }
 
-    override fun setWindowBackgroundColor(): Int {
-        return R.color.transparent
-    }
+    override fun setWindowBackgroundColor(): Int = R.color.transparent
 }

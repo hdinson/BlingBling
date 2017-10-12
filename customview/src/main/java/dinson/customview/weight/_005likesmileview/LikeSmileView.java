@@ -207,8 +207,8 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
      * mMinHeight = 50
      */
     private void bindListener() {
-        mIvDis.setId(R.id.tv_dis);
-        mIvLike.setId(R.id.tv_like);
+        mIvDis.setId(R.id.tvDis);
+        mIvLike.setId(R.id.tvLike);
         mIvDis.setOnClickListener(this);
         mIvLike.setOnClickListener(this);
     }
@@ -221,21 +221,21 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        int tempLike = id == R.id.tv_like ? mLikeNum + 1 : mLikeNum;
-        int tempDis = id == R.id.tv_like ? mDisLikeNum : mDisLikeNum + 1;
+        int tempLike = id == R.id.tvLike ? mLikeNum + 1 : mLikeNum;
+        int tempDis = id == R.id.tvLike ? mDisLikeNum : mDisLikeNum + 1;
         calculateLikeAndDis(tempLike, tempDis);
 
-        mFlLikeBg.setBackgroundResource(id == R.id.tv_like ? R.drawable._005_yellow_bg : R.drawable._005_white_bg);
-        mFlDisBg.setBackgroundResource(id == R.id.tv_like ? R.drawable._005_white_bg : R.drawable._005_yellow_bg);
+        mFlLikeBg.setBackgroundResource(id == R.id.tvLike ? R.drawable._005_yellow_bg : R.drawable._005_white_bg);
+        mFlDisBg.setBackgroundResource(id == R.id.tvLike ? R.drawable._005_white_bg : R.drawable._005_yellow_bg);
 
         switch (id) {
-            case R.id.tv_like:
+            case R.id.tvLike:
                 type = 0;
                 mIvDis.setBackground(null);
                 mIvDis.setBackgroundResource(R.drawable._005_animation_dislike);
                 animDis = (AnimationDrawable) mIvDis.getBackground();
                 break;
-            case R.id.tv_dis:
+            case R.id.tvDis:
                 type = 1; //设置动画对象
                 mIvLike.setBackground(null);
                 mIvLike.setBackgroundResource(R.drawable._005_animation_like);

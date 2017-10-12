@@ -25,7 +25,7 @@ public class MainHeadAdapter extends CommonAdapter<DailyDetail> {
 
     public MainHeadAdapter(Context context, List<DailyDetail> dataList) {
         super(context, dataList);
-        mOptions = new RequestOptions()
+        mOptions = new RequestOptions().placeholder(R.drawable.def_img)
             .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
         mTransitionOptions = new DrawableTransitionOptions().crossFade(500);
     }
@@ -38,6 +38,6 @@ public class MainHeadAdapter extends CommonAdapter<DailyDetail> {
     @Override
     public void convert(CommonViewHolder holder, DailyDetail bean, int position) {
         Glide.with(mContext).load(bean.getData().getHp_img_url()).transition(mTransitionOptions)
-            .apply(mOptions).into((ImageView) holder.getView(R.id.iv_img));
+            .apply(mOptions).into((ImageView) holder.getView(R.id.ivImg));
     }
 }

@@ -30,12 +30,12 @@ public class Floating {
         }
 
         ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
-        View decorView = rootView.findViewById(R.id.floating_decor);
+        View decorView = rootView.findViewById(R.id.floatingDecor);
         if (decorView instanceof  FloatingDecorView){
             mFloatingDecorView = (FloatingDecorView) decorView;
         }else {
             mFloatingDecorView = new FloatingDecorView(activity);
-            mFloatingDecorView.setId(R.id.floating_decor);
+            mFloatingDecorView.setId(R.id.floatingDecor);
             rootView.addView(mFloatingDecorView);
         }
 
