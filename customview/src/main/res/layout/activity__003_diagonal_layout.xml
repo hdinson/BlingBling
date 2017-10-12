@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -17,7 +18,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
-                android:id="@+id/fiv_heard"
+                android:id="@id/ivImg"
                 android:layout_width="match_parent"
                 android:layout_height="265dp"
                 android:scaleType="centerCrop"
@@ -35,9 +36,7 @@
                 android:textSize="25sp"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7"/>
-
         </android.support.design.widget.CollapsingToolbarLayout>
-
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -62,7 +61,6 @@
                 app:diagonal_angle="10"
                 app:diagonal_direction="right"
                 app:diagonal_position="top">
-
 
                 <RelativeLayout
                     android:id="@+id/rv_follow"
@@ -93,7 +91,6 @@
                         android:textSize="14sp"
                         android:textStyle="bold"/>
 
-
                     <TextView
                         android:id="@+id/followers"
                         android:layout_width="wrap_content"
@@ -117,8 +114,6 @@
                         android:textSize="14sp"
                         android:textStyle="bold"/>
                 </RelativeLayout>
-
-
             </dinson.customview.weight._003diagonallayout.DiagonalLayout>
 
             <TextView
@@ -126,17 +121,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
+                android:elevation="20dp"
                 android:lineSpacingExtra="5dp"
                 android:padding="16dp"
-                android:elevation="20dp"
                 android:textColor="@color/textPrimary"
                 android:textSize="16sp"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-
     <dinson.customview.weight.CircleImageView
-        android:id="@+id/cv_circleview"
+        android:id="@+id/cvCircleView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
@@ -145,5 +139,4 @@
         app:layout_anchor="@id/rv_follow"
         app:layout_anchorGravity="center_vertical"
         app:layout_behavior="@string/app_bar_behavior"/>
-
 </android.support.design.widget.CoordinatorLayout>

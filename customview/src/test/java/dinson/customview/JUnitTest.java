@@ -7,7 +7,7 @@ import org.junit.Test;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class JUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
 
@@ -29,8 +29,6 @@ public class ExampleUnitTest {
 //        String baseUrl = StringUtils.getUrlName(url);
 //        System.out.println("ba:" + baseUrl);
 
-        Integer i=null;
-        System.out.println(i==2);
     }
 
 
