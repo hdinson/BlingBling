@@ -96,7 +96,6 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
         int childCount = vrPanoramaView.getChildCount();
         if (childCount > 1) for (int i = 1; i < childCount; i++) vrPanoramaView.removeViewAt(i);
         vrPanoramaView.loadImageFromBitmap(bitmap, options);
-
     }
 
     @Override

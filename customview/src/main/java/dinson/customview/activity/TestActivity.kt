@@ -3,6 +3,7 @@ package dinson.customview.activity
 import android.os.Bundle
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.utils.UIUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,6 +17,14 @@ class TestActivity : BaseActivity() {
         setContentView(R.layout.activity_test)
 
         tvTitle.text = "kotlin"
+        tvTitle.setOnClickListener {
+            UIUtils.showToast("")
+            UIUtils.showToast("")
+            UIUtils.showToast("")
+            UIUtils.showToast("")
+            UIUtils.showToast("")
+            UIUtils.showToast("")
+        }
     }
 
     private fun jsoupTest() {

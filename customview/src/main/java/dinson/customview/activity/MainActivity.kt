@@ -46,9 +46,9 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
 
     private val mContentData = ArrayList<ClassBean>() //内容的数据集
     private val mHeadData = ArrayList<DailyDetail>()
-    private var mMainHeadAdapter: MainHeadAdapter? = null
+    private lateinit var mMainHeadAdapter: MainHeadAdapter
     private var mAMapLocationClient: AMapLocationClient? = null
-    private var mTouchHelper: ItemTouchHelper? = null
+    private lateinit var mTouchHelper: ItemTouchHelper
     private val mOneApi = HttpHelper.create(OneApi::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +88,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
 
         val mainAdapter = MainContentAdapter(this, mContentData, this)
         mTouchHelper = ItemTouchHelper(MainItemTouchHelper(mainAdapter))
-        mTouchHelper!!.attachToRecyclerView(rvContent)
+        mTouchHelper.attachToRecyclerView(rvContent)
         rvContent.adapter = mainAdapter
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.addItemDecoration(LinearItemDecoration(this))
@@ -134,7 +134,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ _ -> mMainHeadAdapter!!.notifyDataSetChanged() }) { throwable ->
+            .subscribe({ _ -> mMainHeadAdapter.notifyDataSetChanged() }) { throwable ->
                 LogUtils.d(throwable.toString())
                 vsContent.inflate()
                 ivImg.setImageResource(R.drawable.def_img)
@@ -224,7 +224,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     override fun onItemTouchMove(viewHolder: RecyclerView.ViewHolder?) {
-        mTouchHelper?.startDrag(viewHolder)
+        mTouchHelper.startDrag(viewHolder)
     }
 
     override fun onItemClick(view: View?, position: Int) {
@@ -232,4 +232,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     override fun setWindowBackgroundColor(): Int = R.color.transparent
+
+    override fun finishWithAnim(): Boolean = false
+
 }
