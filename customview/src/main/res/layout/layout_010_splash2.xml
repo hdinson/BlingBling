@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@id/iv_title"
+        android:id="@id/ivTitle"
         style="@style/_010_Item.XA.Lv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@id/iv_subtitle"
+        android:id="@id/ivSubtitle"
         style="@style/_010_Item.XA.Lv5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,10 +25,10 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/_010_month_subtitile"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_title"/>
+        app:layout_constraintTop_toBottomOf="@id/ivTitle"/>
 
     <ImageView
-        android:id="@id/iv_img"
+        android:id="@id/ivImg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -45,7 +45,7 @@
         android:src="@drawable/_010_month1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/month2"
-        app:layout_constraintTop_toTopOf="@id/iv_img"/>
+        app:layout_constraintTop_toTopOf="@id/ivImg"/>
 
     <ImageView
         android:id="@+id/month2"
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/month1"
         app:layout_constraintRight_toLeftOf="@+id/month10"
-        app:layout_constraintTop_toTopOf="@id/iv_img"
+        app:layout_constraintTop_toTopOf="@id/ivImg"
         app:layout_constraintVertical_bias="0.25"/>
 
     <ImageView
@@ -68,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/month2"
         app:layout_constraintRight_toLeftOf="@+id/month4"
-        app:layout_constraintTop_toTopOf="@id/iv_img"
+        app:layout_constraintTop_toTopOf="@id/ivImg"
         app:layout_constraintVertical_bias="0.15"/>
 
     <ImageView
@@ -80,7 +80,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/month10"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_img"/>
+        app:layout_constraintTop_toTopOf="@id/ivImg"/>
 
     <android.support.constraint.Guideline
         android:id="@id/guideline"
@@ -95,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/_010_month6"
-        app:layout_constraintBottom_toTopOf="@id/iv_img"
+        app:layout_constraintBottom_toTopOf="@id/ivImg"
         app:layout_constraintRight_toLeftOf="@id/guideline"/>
 
     <ImageView
@@ -171,5 +171,5 @@
         android:src="@drawable/_010_month12"
         app:layout_constraintLeft_toRightOf="@+id/month3"
         app:layout_constraintRight_toLeftOf="@+id/month8"
-        app:layout_constraintTop_toBottomOf="@id/iv_subtitle"/>
+        app:layout_constraintTop_toBottomOf="@id/ivSubtitle"/>
 </android.support.constraint.ConstraintLayout>

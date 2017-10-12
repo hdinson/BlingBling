@@ -48,7 +48,7 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
     }
 
     private void initUI() {
-        mRootLayout = findViewById(R.id.layout_root);
+        mRootLayout = findViewById(R.id.layoutRoot);
         mRootBg = findViewById(R.id.root_bg);
 
         mIvStar = findViewById(R.id.iv_star);
@@ -68,7 +68,7 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.iv_like://点赞
                 View layout = LayoutInflater.from(this).inflate(R.layout.layout_006_like, null, false);
-                TextView tvNum = (TextView) layout.findViewById(R.id.tv_num);
+                TextView tvNum = (TextView) layout.findViewById(R.id.tvNum);
                 tvNum.setText(String.format(Locale.CHINA, "+%d", ++mCount));
                 FloatingElement floatingElement = new FloatingBuilder()
                     .anchorView(v)

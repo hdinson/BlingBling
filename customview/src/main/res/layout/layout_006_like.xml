@@ -14,7 +14,7 @@
         android:src="@drawable/_006_like"/>
 
     <TextView
-        android:id="@id/tv_num"
+        android:id="@id/tvNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

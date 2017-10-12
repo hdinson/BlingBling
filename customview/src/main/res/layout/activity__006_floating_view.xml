@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/layout_root"
+    android:id="@id/layoutRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="dinson.customview.activity._006FloatingViewActivity">
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@id/iv_title"
+        android:id="@id/ivTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/iv_star"
-        app:layout_constraintTop_toBottomOf="@+id/iv_title"/>
+        app:layout_constraintTop_toBottomOf="@+id/ivTitle"/>
 
     <ImageView
         android:id="@+id/iv_school"

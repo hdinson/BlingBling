@@ -8,7 +8,7 @@
     tools:context="dinson.customview.activity._005LikeSmileViewActivity">
 
     <ImageView
-        android:id="@id/iv_img"
+        android:id="@id/ivImg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/des_goods_pic"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <dinson.customview.weight.IconFontTextView
-        android:id="@id/tv_back"
+        android:id="@id/tvBack"
         style="@style/_005TopIcon"
         android:text="@string/if_arrow_left"
         android:textColor="@android:color/white"
@@ -45,10 +45,10 @@
         android:background="#1a1a1a"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_img"/>
+        app:layout_constraintTop_toBottomOf="@+id/ivImg"/>
 
     <TextView
-        android:id="@id/tv_title"
+        android:id="@id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -74,7 +74,7 @@
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
 
     <dinson.customview.weight._005likesmileview.LikeSmileView
         android:id="@+id/likeSmile"

@@ -54,7 +54,7 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOverScrollMode(OVER_SCROLL_NEVER);
         mViewPager.setOffscreenPageLimit(5);
-        mViewPager.setId(R.id.parallax_pager);
+        mViewPager.setId(R.id.parallaxPager);
         mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         addView(mViewPager, 0);
@@ -83,7 +83,7 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
 
                 for (View view : inViews) {
                     //获取标签，从标签上获取所有的动画参数
-                    ParallaxViewTag tag = (ParallaxViewTag) view.getTag(R.id.parallax_view_tag);
+                    ParallaxViewTag tag = (ParallaxViewTag) view.getTag(R.id.parallaxViewTag);
                     if (tag == null) {
                         continue;
                     }
@@ -115,7 +115,7 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
 
             if (outViews != null) {
                 for (View view : outViews) {
-                    ParallaxViewTag tag = (ParallaxViewTag) view.getTag(R.id.parallax_view_tag);
+                    ParallaxViewTag tag = (ParallaxViewTag) view.getTag(R.id.parallaxViewTag);
                     if (tag == null) {
                         continue;
                     }

@@ -37,14 +37,14 @@ public class SmileImageExpressionAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             //convertView = View.inflate(getContext(), R.layout.smile_image_row_expression, null);
             convertView = new ImageView(getContext());
-            convertView.setId(R.id.iv_img);
+            convertView.setId(R.id.ivImg);
 
             int width =  dip2px(getContext(), 38);
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width, width);
             convertView.setLayoutParams(params);
         }
 
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_img);
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.ivImg);
 
         String filename = getItem(position);
         int resId = RichEditor.ParseIconResId(filename);

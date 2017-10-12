@@ -8,14 +8,14 @@
                                     app:cardCornerRadius="2dp">
 
     <dinson.customview.weight.aspectratioview.AspectRatioImageView
-        android:id="@id/iv_img"
+        android:id="@id/ivImg"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:scaleType="centerCrop"
         app:aspectRatio="1"/>
 
     <TextView
-        android:id="@id/tv_name"
+        android:id="@id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

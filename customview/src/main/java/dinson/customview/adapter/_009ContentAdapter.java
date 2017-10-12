@@ -31,9 +31,9 @@ public class _009ContentAdapter extends CommonAdapter<_009PanoramaImageModel> {
 
     @Override
     public void convert(CommonViewHolder holder, _009PanoramaImageModel bean, int position) {
-        holder.setTvText(R.id.tv_title, bean.title);
-        holder.setTvText(R.id.tv_desc, bean.desc);
-        GlideUtils.setImage(mContext, bean.smallImg, holder.getView(R.id.iv_img));
+        holder.setTvText(R.id.tvTitle, bean.title);
+        holder.setTvText(R.id.tvDesc, bean.desc);
+        GlideUtils.setImage(mContext, bean.smallImg, holder.getView(R.id.ivImg));
 
         TasksCompletedView progress = holder.getView(R.id.progress);
         int current = (int) (bean.getProgress() * 100);

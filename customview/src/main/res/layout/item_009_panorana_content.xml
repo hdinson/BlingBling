@@ -11,7 +11,7 @@
     android:padding="17dp">
 
     <TextView
-        android:id="@id/tv_title"
+        android:id="@id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
@@ -23,26 +23,26 @@
         android:id="@+id/complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tv_title"
+        android:layout_toEndOf="@id/tvTitle"
         android:text="@string/if_complete"
         android:textColor="#53A749"
         android:textSize="14sp"
         android:visibility="invisible"/>
 
     <TextView
-        android:id="@id/tv_desc"
+        android:id="@id/tvDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_title"
+        android:layout_below="@id/tvTitle"
         android:layout_marginEnd="12dp"
-        android:layout_toStartOf="@id/iv_img"
+        android:layout_toStartOf="@id/ivImg"
         android:ellipsize="end"
         android:maxLines="5"
         android:textColor="@color/textSecond"
         android:textSize="8sp"/>
 
     <dinson.customview.weight.aspectratioview.AspectRatioImageView
-        android:id="@id/iv_img"
+        android:id="@id/ivImg"
         android:layout_width="100dp"
         android:layout_height="0dp"
         android:layout_alignParentEnd="true"
@@ -54,7 +54,7 @@
         android:id="@+id/progress"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@id/iv_img"
+        android:layout_alignStart="@id/ivImg"
         android:layout_centerVertical="true"
         app:circleColor="#cc303741"
         app:radius="23dp"

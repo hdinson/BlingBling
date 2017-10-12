@@ -34,11 +34,11 @@ public class _004RightAdapter extends CommonAdapter<MonsterBean> {
 
         switch (getItemViewType(position)) {
             case 0:
-                holder.setTvText(R.id.tv_title, monsterBean.getFamily());
+                holder.setTvText(R.id.tvTitle, monsterBean.getFamily());
                 break;
             case 1:
-                GlideUtils.setImage(mContext, monsterBean.getIcon(),   holder.getView(R.id.iv_img));
-                holder.setTvText(R.id.tv_name, monsterBean.getName());
+                GlideUtils.setImage(mContext, monsterBean.getIcon(),   holder.getView(R.id.ivImg));
+                holder.setTvText(R.id.tvName, monsterBean.getName());
                 break;
         }
     }

@@ -53,7 +53,7 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
     private void initView() {
 
         //顶部图片
-        ImageView iv_img = (ImageView) findViewById(R.id.iv_img);
+        ImageView iv_img = (ImageView) findViewById(R.id.ivImg);
         String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Fqp3F7wLs2rjSrMlA-9bSIIi27Of.webp";
         RequestOptions rOptions = new RequestOptions()
             .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
@@ -66,7 +66,7 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
         vrPanoramaView.setInfoButtonEnabled(false);
         vrPanoramaView.setStereoModeButtonEnabled(false);
 
-        RecyclerView rvContent = (RecyclerView) findViewById(R.id.rv_content);
+        RecyclerView rvContent = (RecyclerView) findViewById(R.id.rvContent);
         mListDatas = _009_ModelUtil.getPanoramaImageList();
         mAdapter = new _009ContentAdapter(this, mListDatas);
         rvContent.addItemDecoration(new LinearItemDecoration(this));

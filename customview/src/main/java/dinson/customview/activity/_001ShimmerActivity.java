@@ -26,12 +26,12 @@ public class _001ShimmerActivity extends BaseActivity {
         setContentView(R.layout.activity__001_shimmer);
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mTvTitle = (TextView) findViewById(R.id.tv_title);
+        mTvTitle = (TextView) findViewById(R.id.tvTitle);
 
         //设置背景（高斯模糊）
         RequestOptions options = new RequestOptions()
             .transform(new BlurTransformation(this, 23));// “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
-        ImageView img = (ImageView) findViewById(R.id.iv_img);
+        ImageView img = (ImageView) findViewById(R.id.ivImg);
         Glide.with(this).load(R.drawable._001_bg).apply(options).into(img);
 
         mPresetButtons = new Button[]{
