@@ -42,8 +42,8 @@ class DailyPicActivity : BaseActivity() {
 
         val subContent = content.substring(0, index)
         val subName = content.substring(index).trim { it <= ' ' }
-        tvContent.text = subName
-        tvTitle.text = subContent
+        tvTitle.text = subName
+        tvContent.text = subContent
 
         llContent.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
             override fun onLayoutChange(v: View, left: Int, top: Int, right: Int, bottom: Int,

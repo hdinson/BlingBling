@@ -16,7 +16,7 @@
         android:clickable="true"
         android:onClick="fromWIFILocation"
         android:padding="20dp"
-        android:text="点击获取时间"/>
+        android:text="点击获取数据"/>
 
 
     <ScrollView
@@ -24,7 +24,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@id/tvDis"
+            android:id="@id/tvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"

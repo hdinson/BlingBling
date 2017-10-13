@@ -12,11 +12,10 @@
     <string name="qqnavi_title">QQNaviView</string>
     <string name="qqnavi_desc">Mimic QQ navigation bar</string>
     <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FghQpL5VATXt6Wtlm575wiDseyvI.webp</string>
-    <!--003-->
-    <string name="diagonal_layout_title">DiagonalLayout</string>
-    <string name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design
-    </string>
-    <string name="diagonal_layout_img">http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp</string>
+   <!--003-->
+    <string name="exchange_rate_title">汇率兑换还没写完</string>
+    <string name="exchange_rate_desc">汇率兑换还没写完</string>
+    <string name="exchange_rate_img">http://ondlsj2sn.bkt.clouddn.com/Fos8aWM3lzyxB621rEmzMhgTUn-p.webp</string>
     <!--004-->
     <string name="ganged_recycle_title">GangedRecycleView</string>
     <string name="ganged_recycle_desc">Two RecycleViews Joint sliding …</string>
@@ -64,6 +63,10 @@
     <string name="parallax_animation_desc">Virtual reality for everyone.</string>
     <string name="parallax_animation_img">http://ondlsj2sn.bkt.clouddn.com/FtnPm05owdbcJC_7mf53nbOcq2Gy.webp</string>
     <string name="_010_third_login">| 合作账号登录 |</string>
+    <!--011-->
+    <string name="diagonal_layout_title">DiagonalLayout</string>
+    <string name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design</string>
+    <string name="diagonal_layout_img">http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp</string>
     <!--behavior-->
     <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
     <!--iconfont-->

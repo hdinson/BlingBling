@@ -46,7 +46,7 @@
             android:name=".activity._002QQNaviViewActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity._003DiagonalLayoutActivity"
+            android:name=".activity._011DiagonalLayoutActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity._004GangedRecycleViewActivity"
@@ -70,5 +70,6 @@
             android:name=".activity._010ParallaxActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SplashTheme"/>
+        <activity android:name=".activity._003ExchangeActivity"></activity>
     </application>
 </manifest>

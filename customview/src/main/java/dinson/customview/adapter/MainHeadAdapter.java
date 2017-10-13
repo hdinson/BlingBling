@@ -25,7 +25,7 @@ public class MainHeadAdapter extends CommonAdapter<DailyDetail> {
 
     public MainHeadAdapter(Context context, List<DailyDetail> dataList) {
         super(context, dataList);
-        mOptions = new RequestOptions().placeholder(R.drawable.def_img)
+        mOptions = new RequestOptions()
             .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
         mTransitionOptions = new DrawableTransitionOptions().crossFade(500);
     }
