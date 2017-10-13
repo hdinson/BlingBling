@@ -11,13 +11,13 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.utils.FileUtils
 import dinson.customview.utils.GlideUtils
-import kotlinx.android.synthetic.main.activity__003_diagonal_layout.*
+import kotlinx.android.synthetic.main.activity__011_diagonal_layout.*
 
-class _003DiagonalLayoutActivity : BaseActivity() {
+class _011DiagonalLayoutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__003_diagonal_layout)
+        setContentView(R.layout.activity__011_diagonal_layout)
 
         initUI()
     }

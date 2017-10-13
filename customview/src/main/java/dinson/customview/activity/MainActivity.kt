@@ -66,8 +66,10 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             _001ShimmerActivity::class.java, getString(R.string.facebook_img)))
         mContentData.add(ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
             _002QQNaviViewActivity::class.java, getString(R.string.qqnavi_img)))
+        mContentData.add(ClassBean(getString(R.string.exchange_rate_title), getString(R.string.exchange_rate_desc),
+            _003ExchangeActivity::class.java, getString(R.string.exchange_rate_img)))
         mContentData.add(ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
-            _003DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)))
+            _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)))
         mContentData.add(ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
             _004GangedRecycleViewActivity::class.java, getString(R.string.ganged_recycle_img)))
         mContentData.add(ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
@@ -82,6 +84,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             _009GoogleVRActivity::class.java, getString(R.string.google_vr_img)))
         mContentData.add(ClassBean(getString(R.string.parallax_animation_title), getString(R.string.parallax_animation_desc),
             _010ParallaxActivity::class.java, getString(R.string.parallax_animation_img)))
+        mContentData.add(ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
+            _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)))
         mContentData.add(ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
             TestActivity::class.java, getString(R.string.test_layout_img)))
 
