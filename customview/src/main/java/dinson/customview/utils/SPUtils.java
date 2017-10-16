@@ -3,10 +3,42 @@ package dinson.customview.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.BiConsumer;
+
 /**
  * SharePreference封装
  */
 public class SPUtils {
+
+
+    public static void setUserCurrency(String... currency) {
+        if (currency.length != 5) return;
+        String value = "";
+        for (int i = 0; i < currency.length; i++) {
+            if (i != currency.length - 1)
+                value += i + ",";
+            else value += i;
+        }
+        putString(UIUtils.getContext(), "config", "currency", value);
+    }
+
+    public static List<String> getUserCurrency() {
+        String value = getString(UIUtils.getContext(), "config", "currency", null);
+        if (value != null) {
+            List<String> result = Arrays.asList(value.split(","));
+            Observable.fromIterable(result)
+                .filter(s -> !StringUtils.isEmpty(s))
+                .collect(ArrayList::new, (BiConsumer<ArrayList<String>, String>) ArrayList::add)
+                .subscribe();
+            return result;
+        }
+        return null;
+    }
 
 
     /////////////////////////////////// 分割线 /////////////////////////////////////////////////////

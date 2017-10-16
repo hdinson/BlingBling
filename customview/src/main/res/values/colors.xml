@@ -7,15 +7,15 @@
     <color name="textPrimary">#333</color>
     <color name="textSecond">#666</color>
     <color name="textHint">#929292</color>
+    <color name="_003_window_bg">#ff37474f</color>
+    <color name="_003_window_bg_dark">#ff2c383f</color>
     <color name="_008_system_bar">#fafafa</color>
     <color name="_010_window_bg">#fefefe</color>
-
 
     <color name="preset_button_background">#00000000</color>
     <color name="preset_button_background_selected">#66000000</color>
 
     <color name="common_divider">#ddd</color>
-
 
     <color name="window_bg">#fafafa</color>
 
