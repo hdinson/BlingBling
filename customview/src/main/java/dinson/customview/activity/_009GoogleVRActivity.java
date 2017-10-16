@@ -25,7 +25,7 @@ import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadState;
 import dinson.customview.download.utils.DbDownUtil;
 import dinson.customview.model._009PanoramaImageModel;
-import dinson.customview.model._009_ModelUtil;
+import dinson.customview.model._009ModelUtil;
 import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.UIUtils;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
@@ -67,7 +67,7 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
         vrPanoramaView.setStereoModeButtonEnabled(false);
 
         RecyclerView rvContent = (RecyclerView) findViewById(R.id.rvContent);
-        mListDatas = _009_ModelUtil.getPanoramaImageList();
+        mListDatas = _009ModelUtil.getPanoramaImageList();
         mAdapter = new _009ContentAdapter(this, mListDatas);
         rvContent.addItemDecoration(new LinearItemDecoration(this));
         rvContent.setLayoutManager(new LinearLayoutManager(this));

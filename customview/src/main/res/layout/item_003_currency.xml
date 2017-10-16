@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dinson.customview.weight.swipelayout.SwipeItemLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/deleteLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="left"
+        android:background="@color/_003_window_bg_dark"
+        android:scaleType="center"
+        android:src="@drawable/_003_delete_ic"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@color/_003_window_bg"
+        android:elevation="10dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@id/ivImg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tvCurrencyCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/ivImg"
+            android:alpha="0.4"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="2dp"
+            android:background="@color/transparent"
+            android:fontFamily="sans-serif-thin"
+            android:text="fasdfasdfa"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tvCal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="2dp"
+            android:alpha="0.34"
+            android:fontFamily="sans-serif-thin"
+            android:text="asdfasdfasd"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"/>
+
+        <TextView
+            android:id="@+id/tvCurrencyCn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:alpha="0.4"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
+
+        <View
+            android:id="@+id/lFocusView"
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/white"/>
+
+        <View
+            android:id="@+id/sFocusView"
+            android:layout_width="1dp"
+            android:layout_height="9dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/tvCal"
+            android:alpha="0.34"
+            android:background="@android:color/white"/>
+    </RelativeLayout>
+</dinson.customview.weight.swipelayout.SwipeItemLayout>
