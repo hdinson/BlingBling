@@ -19,8 +19,8 @@ import dinson.customview.weight.swipelayout.SwipeItemLayout;
  */
 public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> {
 
-
     private OnItemSwipeOpen mListener;
+    private int mCurrentSelect = 1;
 
     public _003CurrencyAdapter(Context context, List<_003CurrencyModel> dataList, OnItemSwipeOpen listener) {
         super(context, dataList);
@@ -42,7 +42,8 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> {
         SwipeItemLayout delete = holder.getView(R.id.deleteLayout);
         delete.setSwipeEnable(true);
         delete.addSwipeListener((view, isOpen) -> {
-            if (isOpen) mListener.onOpen(view,position);
+            if (isOpen) mListener.onOpen(view, position);
         });
+
     }
 }
