@@ -12,9 +12,7 @@ import dinson.customview.utils.LogUtils
 import dinson.customview.weight.swipelayout.SwipeItemLayout
 import kotlinx.android.synthetic.main.activity__003_exchange.*
 
-
 class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListener {
-
 
     override fun onOpen(view: SwipeItemLayout, position: Int) {
         view.close()
@@ -64,6 +62,4 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
     }
 
     override fun setWindowBackgroundColor(): Int = R.color._003_window_bg
-
-
 }
