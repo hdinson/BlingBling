@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import dinson.customview._global.GlobalApplication;
+import dinson.customview.entity.ExchangeBean;
 import dinson.customview.entity.HomeWeather;
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
@@ -95,6 +97,36 @@ public class CacheUtils {
         return null;
     }
 
+    /**
+     * 设置汇率兑换比率缓存
+     *
+     * @param beanStr entity序列化后
+     */
+    public static void setExangeRateCache(String beanStr) {
+        if (GlobalApplication.IS_DEBUG) {
+            String json = new Gson().toJson(beanStr);
+            LogUtils.d("<ExchangeBean> Put Cache >> " + json, false);
+        }
+        setCache("lastKnowExchangeRate", beanStr);//缓存永久有效
+    }
+
+    /**
+     * 获取首页头部one缓存
+     *
+     * @return null表示没有数据
+     */
+    public static String getExchangeRateCache() {
+        String exchangeRate = getCache("lastKnowExchangeRate");
+        if (exchangeRate == null) {
+            LogUtils.d("<ExchangeBean> is out of date or no exist !", false);
+            return null;
+        }
+        if (GlobalApplication.IS_DEBUG) {
+            ExchangeBean exchangeBean = new Gson().fromJson(exchangeRate, ExchangeBean.class);
+            LogUtils.d("<ExchangeBean> Get Cache << " + exchangeBean, false);
+        }
+        return exchangeRate;
+    }
 
     //////////////////////////////////分割线//////////////////////////////////////////////////////
 

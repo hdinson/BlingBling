@@ -2,7 +2,6 @@ package dinson.customview.weight.recycleview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -10,17 +9,9 @@ import java.util.List;
 /**
  * 单一布局通用数据适配器
  */
-public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>   {
-    private final String TAG = "LGRecycleViewAdapter";
-    //存储监听回调
-
+public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
     public List<T> mDataList;
     public Context mContext;
-
-
-    public interface ItemClickListener {
-        void onItemClicked(View view, int position);
-    }
 
     public CommonAdapter(Context context, List<T> dataList) {
         this.mDataList = dataList;
@@ -29,9 +20,6 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
 
     /**
      * 获取列表控件的视图id(由子类负责完成)
-     *
-     * @param viewType
-     * @return
      */
     public abstract int getLayoutId(int viewType);
 
@@ -47,8 +35,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
     @Override
     public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int layoutId = getLayoutId(viewType);
-        CommonViewHolder viewHolder = CommonViewHolder.getViewHolder(parent, layoutId);
-        return viewHolder;
+        return CommonViewHolder.getViewHolder(parent, layoutId);
     }
 
     @Override
@@ -69,5 +56,4 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
             mDataList.clear();
         mDataList = null;
     }
-
 }

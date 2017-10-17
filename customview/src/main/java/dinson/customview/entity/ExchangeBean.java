@@ -4,6 +4,14 @@ package dinson.customview.entity;
  * @author Dinson - 2017/10/13
  */
 public class ExchangeBean {
+    @Override
+    public String toString() {
+        return "ExchangeBean{" +
+            "timestamp=" + timestamp +
+            ", base='" + base + '\'' +
+            ", rates=" + rates +
+            '}';
+    }
 
     /**
      * disclaimer : Usage subject to terms: https://openexchangerates.org/terms
@@ -60,6 +68,17 @@ public class ExchangeBean {
     }
 
     public static class RatesBean {
+
+        @Override
+        public String toString() {
+            return "RatesBean{" +
+                "CNY=" + CNY +
+                ", HKD=" + HKD +
+                ", XAG=" + XAG +
+                ", XAU=" + XAU +
+                '}';
+        }
+
         /**
          * AED : 3.673014
          * AFN : 68.3715

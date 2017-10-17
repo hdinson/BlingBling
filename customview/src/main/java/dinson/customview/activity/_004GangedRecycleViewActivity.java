@@ -34,7 +34,6 @@ public class _004GangedRecycleViewActivity extends BaseActivity {
         GlideUtils.setImage(this, "http://ondlsj2sn.bkt.clouddn.com/FpUVRI5ACAX7YkTOXLuD7mP_3BPg.webp", ivImg);
 
         initUI();
-
     }
 
     private void initUI() {

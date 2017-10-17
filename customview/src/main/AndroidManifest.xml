@@ -47,7 +47,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity._003ExchangeActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity._004GangedRecycleViewActivity"
             android:screenOrientation="portrait"/>
