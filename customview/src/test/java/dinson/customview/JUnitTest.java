@@ -2,6 +2,8 @@ package dinson.customview;
 
 import org.junit.Test;
 
+import dinson.customview.utils.StringUtils;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -29,7 +31,21 @@ public class JUnitTest {
 //        String baseUrl = StringUtils.getUrlName(url);
 //        System.out.println("ba:" + baseUrl);
 
+
+
+//        double a =;
+
+        String s="1111111111111111111112222.2333333444333333333333333333333333333333333333333333333333333333";
+        String[] split =s.split("\\.");
+        System.out.println("len:"+split.length);
+        if (split.length==1){
+            System.out.println("1:"+split[0].length());
+        }else{
+            System.out.println("2:"+split[0].length()+" "+split[0]+" "+split[1].length()+" "+split[1]);
+        }
     }
 
-
+    static String formatMoney(float money) {
+        return StringUtils.formatMoney(money);
+    }
 }

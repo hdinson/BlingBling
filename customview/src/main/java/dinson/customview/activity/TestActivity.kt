@@ -18,7 +18,6 @@ class TestActivity : BaseActivity() {
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_test)
 
-        tvTitle.setOnClickListener { getCurrencyData() }
     }
 
 

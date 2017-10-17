@@ -45,7 +45,7 @@ public class SwipeMenuRecyclerView extends RecyclerView {
                 }
             }
         } else if (action == MotionEvent.ACTION_POINTER_DOWN) {
-            // FIXME: 2017/3/22 不知道怎么解决多点触控导致可以同时打开多个菜单的bug，先暂时禁止多点触控
+            // TODO 不知道怎么解决多点触控导致可以同时打开多个菜单的bug，先暂时禁止多点触控
             return false;
         }
         return super.dispatchTouchEvent(ev);

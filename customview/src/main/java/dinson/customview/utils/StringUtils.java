@@ -1,5 +1,7 @@
 package dinson.customview.utils;
 
+import java.text.DecimalFormat;
+
 /**
  * 字符串相关工具类
  */
@@ -210,5 +212,14 @@ public final class StringUtils {
             url = url.substring(index + 1, url.length());
         }
         return url;
+    }
+
+    /**格式化成货币（保留两位小数）
+     * @param money 金额
+     * @return str
+     */
+    public static String formatMoney(double money) {
+        DecimalFormat df = new DecimalFormat("###,##0.00");
+        return df.format(money);
     }
 }

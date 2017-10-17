@@ -31,7 +31,7 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
      */
     @Override
     public T convert(ResponseBody responseBody) throws IOException {
-        String response = responseBody.string();
+        String response = responseBody.string().replaceAll("\n","");
         LogUtils.d("│ response body:" + response,false);
         LogUtils.d("└────────────────────────────────────────────────────────────────────────────────────────────────────────────────",false);
         return adapter.fromJson(response);
