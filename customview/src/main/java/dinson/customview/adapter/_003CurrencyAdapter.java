@@ -31,7 +31,7 @@ import dinson.customview.weight.swipelayout.SwipeItemLayout;
  * @author Dinson - 2017/7/21
  */
 public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implements _003OnCalculatorInput,
-    _003OnRvItemChangeListener {
+        _003OnRvItemChangeListener {
 
     private OnItemSwipeOpen mListener;
     private double mTargetMoney = Integer.MAX_VALUE;
@@ -40,6 +40,7 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
     public int mCurrentSelect = 0;
 
     private final Animation mCursorAnimation;
+    private final Animation mShakeAnimation;
 
     public _003CurrencyAdapter(Context context, List<_003CurrencyModel> dataList, OnItemSwipeOpen listener) {
         super(context, dataList);
@@ -48,6 +49,12 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         mCursorAnimation = AnimationUtils.loadAnimation(UIUtils.getContext(), R.anim._003_cursor_alpha);
         mCursorAnimation.setRepeatCount(Animation.INFINITE);
         mCursorAnimation.setRepeatMode(Animation.REVERSE);
+
+        mShakeAnimation = AnimationUtils.loadAnimation(UIUtils.getContext(), R.anim._003_item_shake);
+        mShakeAnimation.setRepeatMode(Animation.REVERSE);
+        mShakeAnimation.setRepeatCount(5);
+
+
     }
 
     @Override
@@ -60,7 +67,8 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         GlideUtils.setImage(mContext, dataBean.getImgUrl(), holder.getView(R.id.ivImg));
         holder.setTvText(R.id.tvCurrencyCode, dataBean.getCurrencyCode());
         holder.setTvText(R.id.tvEquation, dataBean.getEquation()
-            .replaceAll("\\+", "﹢").replaceAll("-", "﹣").replaceAll("\\*", "×").replaceAll("/", "÷"));
+                .replaceAll("\\+", "＋").replaceAll("-", "－")
+                .replaceAll("\\*", "×").replaceAll("/", "÷"));
         holder.setTvText(R.id.tvCurrencyCn, String.format(Locale.CHINA, "%s %s", dataBean.getCurrencyCn(), dataBean.getSign()));
         holder.getView(R.id.contentLayout).setEnabled(position == mCurrentSelect);
 
@@ -73,7 +81,7 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         } else {
             if (mCurrentSelect == position && StringUtils.isEmpty(dataBean.getEquation())) {
                 tvResult.setHint("");
-                tvResult.setText(new BigDecimal(mTargetMoney).toString());
+                tvResult.setText(mEquationStr);
             } else {
                 tvResult.setHint("");
                 tvResult.setText(dataBean.getTargetMoney(mTargetMoney));
@@ -90,42 +98,35 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         View lCursor = holder.getView(R.id.lFocusView);
         View sCursor = holder.getView(R.id.sFocusView);
         if (position != mCurrentSelect) {
+            lCursor.clearAnimation();
+            sCursor.clearAnimation();
             lCursor.setVisibility(View.GONE);
             sCursor.setVisibility(View.GONE);
             return;
         }
 
         if (StringUtils.isEmpty(dataBean.getEquation())) {
+            sCursor.clearAnimation();
             sCursor.setVisibility(View.GONE);
             lCursor.setVisibility(View.VISIBLE);
             lCursor.startAnimation(mCursorAnimation);
         } else {
+            lCursor.clearAnimation();
             lCursor.setVisibility(View.GONE);
             sCursor.setVisibility(View.VISIBLE);
             sCursor.startAnimation(mCursorAnimation);
-
         }
     }
 
     @Override
     public void onInput(@NonNull CalculatorKey key) {
-        /*String[] split = String.valueOf(mTargetMoney).split("\\.");
-
-        LogUtils.e("1:"+split[0]+" "+split[1]);
-        if (split.length == 2 && split[1].length() == 2) {
-            //小数点超过2位，晃动提示
-            mCurrentTv.startAnimation(mShakeAnimation);
-            return;
-        }
-        if (split.length == 1 && split[0].length() > 11) {
-            //整数位超过12位，晃动提示
-            mCurrentTv.startAnimation(mShakeAnimation);
-            return;
-        }*/
-
         if (!validateInput(key)) {
             //验证不过,晃动提示
-            UIUtils.showToast("验证不过,晃动提示");
+            if (StringUtils.isEmpty(mDataList.get(mCurrentSelect).getEquation())) {
+                getCommonViewHolder(mCurrentSelect).getView(R.id.tvResult).startAnimation(mShakeAnimation);
+            } else {
+                getCommonViewHolder(mCurrentSelect).getView(R.id.tvEquation).startAnimation(mShakeAnimation);
+            }
             return;
         }
 
@@ -164,49 +165,69 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
                 break;
             case ADD:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "+"
-                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "+";
+                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "+";
                 break;
             case SUB:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "-"
-                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "-";
+                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "-";
                 break;
             case MUL:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "*"
-                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "*";
+                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "*";
                 break;
             case DIV:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "/"
-                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "/";
+                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "/";
                 break;
             case DOT:
                 mEquationStr += ".";
                 break;
             case DELETE:
                 if (mEquationStr.length() == 0) return;
-                String equation = mEquationStr.substring(0, mEquationStr.length() - 1);
-                char end = equation.charAt(equation.length() - 1);
-                if (end != '-' || end != '+' || end != '*' || end != '/') {
-                    LogUtils.e("不相等");
+                String tempEquation = mEquationStr.substring(0, mEquationStr.length() - 1);
+                mEquationStr = tempEquation;
+                if (StringUtils.isEmpty(tempEquation)) tempEquation = "0";
+                if (isEndWithNum(tempEquation)) {
+                    mTargetMoney = ArithmeticUtils.simpleCalculate(tempEquation);
                 } else {
-                    LogUtils.e("相等");
+                    String tempEquation2 = tempEquation.substring(0, tempEquation.length() - 1);
+                    mTargetMoney = ArithmeticUtils.simpleCalculate(tempEquation2);
                 }
-                //mTargetMoney = ArithmeticUtils.simpleCalculate(mEquationStr + "9");
                 break;
             case CLEAR:
-                mTargetMoney = 0;
+                mTargetMoney = Integer.MAX_VALUE;
+                mEquationStr = "";
+                mDataList.get(mCurrentSelect).setEquation(mEquationStr);
                 break;
         }
-        if (containsOperator(mEquationStr)) {
-            mDataList.get(mCurrentSelect).setEquation(mEquationStr);
-            notifyItemChanged(mCurrentSelect);
-        }
+        mDataList.get(mCurrentSelect).setEquation(containsOperator(mEquationStr) ? mEquationStr : "");
         if (temp != mTargetMoney) {
             notifyDataSetChanged();
+        } else {
+            notifyItemChanged(mCurrentSelect);
         }
     }
 
     private boolean validateInput(CalculatorKey key) {
-        return true;
+        boolean flag = true;
+        switch (key) {
+            case N0:
+                if (mEquationStr.equals("0")) flag = false;
+                break;
+            case ADD:
+            case SUB:
+            case MUL:
+            case DIV:
+                if (StringUtils.isEmpty(mEquationStr)) flag = false;
+                break;
+            case DOT:
+                if (!isEndWithNum(mEquationStr)) flag = false;
+                break;
+
+        }
+
+
+        return flag;
     }
 
     /**
@@ -226,6 +247,7 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
 
     @Override
     public void OnItemChange(int position) {
+        if (position == mCurrentSelect) return;
         //删除旧算式表达式赋给选中项
         _003CurrencyModel oldBean = mDataList.get(mCurrentSelect);
         _003CurrencyModel newBean = mDataList.get(position);

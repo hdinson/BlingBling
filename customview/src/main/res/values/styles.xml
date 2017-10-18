@@ -8,7 +8,7 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme"/>
+    <style name="AppTheme" parent="AppBaseTheme" />
 
     <style name="AppTheme.SplashTheme">
         <item name="android:windowBackground">@drawable/splash_bg</item>
@@ -55,7 +55,16 @@
         <item name="android:textSize">34sp</item>
     </style>
     <!--————————————————————————————————————————其他——————————————————————————————————————————————-->
-    <!--_005-->
+    <!--003-->
+    <style name="_003IvKeyboard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ripple_main_white</item>
+
+    </style>
+    <!--005-->
     <style name="_005TopIcon">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
@@ -99,7 +108,7 @@
         <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <style name="_010_Item.XA"/>
+    <style name="_010_Item.XA" />
 
     <style name="_010_Item.XA.Lv5">
         <item name="x_in">-2.2</item>
@@ -136,7 +145,7 @@
         <item name="a_out">1</item>
     </style>
 
-    <style name="_010_Item.YA"/>
+    <style name="_010_Item.YA" />
 
     <style name="_010_Item.YA.Lv5">
         <item name="y_in">-2.2</item>
