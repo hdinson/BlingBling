@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:overScrollMode="never"/>
+        android:overScrollMode="never" />
 
     <TableLayout
         android:id="@+id/tableLayout"
@@ -32,32 +31,24 @@
 
             <ImageView
                 android:id="@+id/n7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_7"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_7" />
 
             <ImageView
                 android:id="@+id/n8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_8"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_8" />
 
             <ImageView
                 android:id="@+id/n9"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_9"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_9" />
 
             <ImageView
                 android:id="@+id/add"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/_003IvKeyboard"
                 android:paddingStart="10dp"
-                android:scaleType="center"
-                android:src="@drawable/number_11"/>
+                android:src="@drawable/number_11" />
         </TableRow>
 
         <TableRow
@@ -67,31 +58,23 @@
 
             <ImageView
                 android:id="@+id/n4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_4"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_4" />
 
             <ImageView
                 android:id="@+id/n5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_5"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_5" />
 
             <ImageView
                 android:id="@+id/n6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_6"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_6" />
 
             <ImageView
                 android:id="@+id/sub"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_12"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_12" />
         </TableRow>
 
         <TableRow
@@ -101,31 +84,23 @@
 
             <ImageView
                 android:id="@+id/n1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_1"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_1" />
 
             <ImageView
                 android:id="@+id/n2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_2"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_2" />
 
             <ImageView
                 android:id="@+id/n3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_3"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_3" />
 
             <ImageView
                 android:id="@+id/mul"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_13"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_13" />
         </TableRow>
 
         <TableRow
@@ -135,31 +110,23 @@
 
             <ImageView
                 android:id="@+id/dot"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_15"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_15" />
 
             <ImageView
                 android:id="@+id/n0"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_0"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_0" />
 
             <ImageView
                 android:id="@+id/delete"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_16"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_16" />
 
             <ImageView
                 android:id="@+id/div"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/number_14"/>
+                style="@style/_003IvKeyboard"
+                android:src="@drawable/number_14" />
         </TableRow>
     </TableLayout>
 </LinearLayout>
