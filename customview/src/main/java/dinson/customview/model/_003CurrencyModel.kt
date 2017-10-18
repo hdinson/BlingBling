@@ -9,12 +9,14 @@ data class _003CurrencyModel(val currencyCn: String, val currencyCode: String, v
     /**
      * 与美元的兑换比率
      */
-    var baseRate = 1f
+    var baseRate = 1.0
 
     /**
      * 目标货币与美元的兑换比率
      */
-    var targetRate = 1f
+    var targetRate = 1.0
+
+    var equation: String = ""
 
     /**
      * 与目标货币的兑换

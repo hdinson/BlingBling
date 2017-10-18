@@ -222,4 +222,5 @@ public final class StringUtils {
         DecimalFormat df = new DecimalFormat("###,##0.00");
         return df.format(money);
     }
+
 }

@@ -17,7 +17,6 @@ import dinson.customview.utils.UIUtils;
  * google VR 数据模型
  */
 public class _003ModelUtil {
-
     public static List<_003CurrencyModel> getCurrencyList(int limit) {
         return getFileFromAssets("currency.txt", limit);
     }
@@ -65,8 +64,6 @@ public class _003ModelUtil {
             IOUtils.close(in);
         }
     }
-
-
 }
 
 
