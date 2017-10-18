@@ -2,6 +2,7 @@ package dinson.customview.weight.recycleview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
     public List<T> mDataList;
     public Context mContext;
+    private SparseArray<CommonViewHolder> mViewHolder = new SparseArray<>();
 
     public CommonAdapter(Context context, List<T> dataList) {
         this.mDataList = dataList;
@@ -41,6 +43,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
     @Override
     public void onBindViewHolder(CommonViewHolder holder, final int position) {
         T itemModel = getItem(position);
+        mViewHolder.put(position, holder);
         convert(holder, itemModel, position);//更新itemView视图
     }
 
@@ -55,5 +58,9 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
         if (mDataList != null)
             mDataList.clear();
         mDataList = null;
+    }
+
+    public CommonViewHolder getCommonViewHolder(int position) {
+        return mViewHolder.get(position);
     }
 }

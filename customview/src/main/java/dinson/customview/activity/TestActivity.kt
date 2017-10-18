@@ -17,7 +17,6 @@ class TestActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_test)
-
     }
 
 

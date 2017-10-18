@@ -2,6 +2,7 @@ package dinson.customview.activity
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SimpleItemAnimator
 import android.view.View
 import com.google.gson.Gson
 import dinson.customview.R
@@ -69,7 +70,10 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.adapter = mAdapter
         rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent, this))
+        //recycleview notifyItemChanged刷新时闪烁问题
+        (rvContent.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
+        n0.setOnClickListener(this)
         n1.setOnClickListener(this)
         n2.setOnClickListener(this)
         n3.setOnClickListener(this)
@@ -116,8 +120,11 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
 
     private fun setAdapterRate(exchangeStr: String) {
         val rates = JSONObject(exchangeStr).getJSONObject("rates")
-        mAdapter.mDataList.forEach {
-            it.baseRate = rates.get(it.currencyCode).toString().toFloat()
+        var targetRate = 0.0
+        mAdapter.mDataList.forEachIndexed { index, it ->
+            if (index == 0) targetRate = rates.get(it.currencyCode).toString().toDouble()
+            it.targetRate = targetRate
+            it.baseRate = rates.get(it.currencyCode).toString().toDouble()
         }
         mAdapter.notifyDataSetChanged()
     }
