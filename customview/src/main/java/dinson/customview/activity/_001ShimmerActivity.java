@@ -50,20 +50,7 @@ public class _001ShimmerActivity extends BaseActivity {
             final int preset = i;
             mPresetButtons[i].setOnClickListener(view -> selectPreset(preset));
         }
-
-
-        //TODO 排序测试
-        ArrayList<_003CurrencyModel> currencyModels = new ArrayList<>();
-        Observable.fromArray(currencyModels).toSortedList(new Comparator<ArrayList<_003CurrencyModel>>() {
-            @Override
-            public int compare(ArrayList<_003CurrencyModel> o1, ArrayList<_003CurrencyModel> o2) {
-                return 0;
-            }
-        });
-
     }
-
-
 
     @Override
     public int setWindowBackgroundColor() {

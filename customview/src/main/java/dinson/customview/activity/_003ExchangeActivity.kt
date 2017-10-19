@@ -20,12 +20,16 @@ import dinson.customview.listener.OnItemSwipeOpen
 import dinson.customview.model._003CurrencyModel
 import dinson.customview.model._003ModelUtil
 import dinson.customview.utils.CacheUtils
+import dinson.customview.utils.LogUtils
 import dinson.customview.utils.SPUtils
 import dinson.customview.utils.UIUtils
 import dinson.customview.weight.recycleview.OnItemClickListener
 import dinson.customview.weight.swipelayout.SwipeItemLayout
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.BiConsumer
+import io.reactivex.functions.Consumer
+import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__003_exchange.*
 import org.json.JSONObject
@@ -71,9 +75,6 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
     }
 
     private fun initUI() {
-
-        //TODO 排序
-
         mCurrencyData = _003ModelUtil.getCurrencyList()
         val userCurrency = SPUtils.getUserCurrency()
         if (userCurrency == null) {
@@ -81,18 +82,14 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         } else {
             Observable.fromIterable(mCurrencyData)
                 .filter {
-                    val indexOf = userCurrency.indexOf(it.currencyCode)
-                    if (indexOf == -1) {
-                        return@filter false
-                    } else {
-                        it.tag = indexOf
-                        return@filter true
-                    }
+                    it.tag = userCurrency.indexOf(it.currencyCode)
+                    it.tag != -1
                 }
-                .collect({ mUserCurrencyData }, { t1, t2 ->
-                    t1.add(t2)
-                }).subscribe()
+                .collect({ mUserCurrencyData }, { t1, t2 -> t1.add(t2) })
+                .flatMap { Observable.fromIterable(it).toSortedList { t1, t2 -> t1.tag!! - t2.tag!! } }
+                .subscribe(Consumer { mUserCurrencyData = it as ArrayList<_003CurrencyModel> })
         }
+
         mAdapter = _003CurrencyAdapter(this, mUserCurrencyData, this)
 
         rvContent.layoutManager = LinearLayoutManager(this)
