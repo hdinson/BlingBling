@@ -21,7 +21,7 @@ class TestActivity : BaseActivity() {
 
 
     private fun getCurrencyData() {
-        var currencyList = _003ModelUtil.getCurrencyList(8)
+        var currencyList = _003ModelUtil.getCurrencyList()
         Observable.fromIterable(currencyList)
             .subscribe { tvContent.append("$it\n") }
     }

@@ -15,9 +15,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * Created by AItsuki on 2017/2/23.
@@ -56,7 +54,7 @@ public class SwipeItemLayout extends FrameLayout {
      */
     private LinkedHashMap<Integer, View> mMenus = new LinkedHashMap<>();
 
-    private List<SwipeListener> mListeners;
+    private SwipeListener mListeners;
 
     public SwipeItemLayout(Context context) {
         this(context, null);
@@ -311,10 +309,7 @@ public class SwipeItemLayout extends FrameLayout {
         mDragHelper.smoothSlideViewTo(getContentView(), getPaddingLeft(), getPaddingTop());
         mIsOpen = false;
         if (mListeners != null) {
-            int listenerCount = mListeners.size();
-            for (int i = listenerCount - 1; i >= 0; i--) {
-                mListeners.get(i).onSwipe(this, false);
-            }
+            mListeners.onSwipe(this, false);
         }
         invalidate();
     }
@@ -335,10 +330,8 @@ public class SwipeItemLayout extends FrameLayout {
         }
         mIsOpen = true;
         if (mListeners != null) {
-            int listenerCount = mListeners.size();
-            for (int i = listenerCount - 1; i >= 0; i--) {
-                mListeners.get(i).onSwipe(this, true);
-            }
+            mListeners.onSwipe(this, true);
+
         }
         invalidate();
     }
@@ -420,11 +413,7 @@ public class SwipeItemLayout extends FrameLayout {
         if (listener == null) {
             return;
         }
-
-        if (mListeners == null) {
-            mListeners = new ArrayList<>();
-        }
-        mListeners.add(listener);
+        mListeners = listener;
     }
 
     /**
@@ -434,12 +423,10 @@ public class SwipeItemLayout extends FrameLayout {
         if (listener == null) {
             return;
         }
-
         if (mListeners == null) {
             return;
         }
-
-        mListeners.remove(listener);
+        mListeners = null;
     }
 
     @Override

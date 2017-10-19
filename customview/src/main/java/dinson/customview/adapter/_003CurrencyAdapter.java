@@ -7,7 +7,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -20,7 +19,7 @@ import dinson.customview.listener._003OnRvItemChangeListener;
 import dinson.customview.model._003CurrencyModel;
 import dinson.customview.utils.ArithmeticUtils;
 import dinson.customview.utils.GlideUtils;
-import dinson.customview.utils.LogUtils;
+import dinson.customview.utils.SPUtils;
 import dinson.customview.utils.StringUtils;
 import dinson.customview.utils.UIUtils;
 import dinson.customview.weight.recycleview.CommonAdapter;
@@ -31,7 +30,7 @@ import dinson.customview.weight.swipelayout.SwipeItemLayout;
  * @author Dinson - 2017/7/21
  */
 public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implements _003OnCalculatorInput,
-        _003OnRvItemChangeListener {
+    _003OnRvItemChangeListener {
 
     private OnItemSwipeOpen mListener;
     private double mTargetMoney = Integer.MAX_VALUE;
@@ -53,8 +52,6 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         mShakeAnimation = AnimationUtils.loadAnimation(UIUtils.getContext(), R.anim._003_item_shake);
         mShakeAnimation.setRepeatMode(Animation.REVERSE);
         mShakeAnimation.setRepeatCount(5);
-
-
     }
 
     @Override
@@ -67,8 +64,8 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         GlideUtils.setImage(mContext, dataBean.getImgUrl(), holder.getView(R.id.ivImg));
         holder.setTvText(R.id.tvCurrencyCode, dataBean.getCurrencyCode());
         holder.setTvText(R.id.tvEquation, dataBean.getEquation()
-                .replaceAll("\\+", "＋").replaceAll("-", "－")
-                .replaceAll("\\*", "×").replaceAll("/", "÷"));
+            .replaceAll("\\+", "＋").replaceAll("-", "－")
+            .replaceAll("\\*", "×").replaceAll("/", "÷"));
         holder.setTvText(R.id.tvCurrencyCn, String.format(Locale.CHINA, "%s %s", dataBean.getCurrencyCn(), dataBean.getSign()));
         holder.getView(R.id.contentLayout).setEnabled(position == mCurrentSelect);
 
@@ -130,7 +127,6 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
             return;
         }
 
-
         double temp = mTargetMoney;
         switch (key) {
             case N0:
@@ -165,19 +161,19 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
                 break;
             case ADD:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "+"
-                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "+";
+                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "+";
                 break;
             case SUB:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "-"
-                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "-";
+                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "-";
                 break;
             case MUL:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "*"
-                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "*";
+                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "*";
                 break;
             case DIV:
                 mEquationStr = isEndWithNum(mEquationStr) ? mEquationStr + "/"
-                        : mEquationStr.substring(0, mEquationStr.length() - 1) + "/";
+                    : mEquationStr.substring(0, mEquationStr.length() - 1) + "/";
                 break;
             case DOT:
                 mEquationStr += ".";
@@ -223,10 +219,7 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
             case DOT:
                 if (!isEndWithNum(mEquationStr)) flag = false;
                 break;
-
         }
-
-
         return flag;
     }
 
@@ -259,6 +252,28 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         for (_003CurrencyModel currencyModel : mDataList) {
             currencyModel.setTargetRate(baseRate);
         }
+        notifyDataSetChanged();
+    }
+
+
+    /**
+     * 条目被替换时调用
+     *
+     * @param position 替换的条目位置
+     * @param bean     替换的实体
+     */
+    public void onItemReplaced(int position, _003CurrencyModel bean) {
+        mDataList.set(position, bean);
+        double targetRate = mDataList.get(mCurrentSelect).getBaseRate();
+
+        String[] userCurrency = new String[mDataList.size()];
+
+        for (int i = 0; i < mDataList.size(); i++) {
+            _003CurrencyModel temp = mDataList.get(i);
+            temp.setTargetRate(targetRate);
+            userCurrency[i] = temp.getCurrencyCode();
+        }
+        SPUtils.setUserCurrency(userCurrency);
         notifyDataSetChanged();
     }
 }
