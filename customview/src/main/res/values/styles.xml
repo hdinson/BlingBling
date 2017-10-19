@@ -61,6 +61,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:scaleType">center</item>
         <item name="android:clickable">true</item>
+        <item name="android:longClickable">false</item>
         <item name="android:background">@drawable/ripple_main_white</item>
 
     </style>

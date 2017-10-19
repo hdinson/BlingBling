@@ -9,10 +9,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
+import dinson.customview.model._003CurrencyModel;
 import dinson.customview.utils.glide.BlurTransformation;
 import dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout;
+import io.reactivex.Observable;
 
 public class _001ShimmerActivity extends BaseActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -45,6 +50,16 @@ public class _001ShimmerActivity extends BaseActivity {
             final int preset = i;
             mPresetButtons[i].setOnClickListener(view -> selectPreset(preset));
         }
+
+
+        //TODO 排序测试
+        ArrayList<_003CurrencyModel> currencyModels = new ArrayList<>();
+        Observable.fromArray(currencyModels).toSortedList(new Comparator<ArrayList<_003CurrencyModel>>() {
+            @Override
+            public int compare(ArrayList<_003CurrencyModel> o1, ArrayList<_003CurrencyModel> o2) {
+                return 0;
+            }
+        });
 
     }
 

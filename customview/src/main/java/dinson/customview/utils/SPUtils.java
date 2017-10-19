@@ -15,14 +15,13 @@ import io.reactivex.functions.BiConsumer;
  */
 public class SPUtils {
 
-
     public static void setUserCurrency(String... currency) {
         if (currency.length != 5) return;
         String value = "";
         for (int i = 0; i < currency.length; i++) {
             if (i != currency.length - 1)
-                value += i + ",";
-            else value += i;
+                value += currency[i].toUpperCase() + ",";
+            else value += currency[i].toUpperCase();
         }
         putString(UIUtils.getContext(), "config", "currency", value);
     }

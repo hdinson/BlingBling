@@ -29,7 +29,6 @@ public class _004GangedRecycleViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__004_ganged_recycle_view);
 
-
         ImageView ivImg = (ImageView) findViewById(R.id.ivImg);
         GlideUtils.setImage(this, "http://ondlsj2sn.bkt.clouddn.com/FpUVRI5ACAX7YkTOXLuD7mP_3BPg.webp", ivImg);
 

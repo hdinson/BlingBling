@@ -18,6 +18,8 @@ data class _003CurrencyModel(val currencyCn: String, val currencyCode: String, v
 
     var equation: String = ""
 
+    var tag: Int? = null
+
     /**
      * 与目标货币的兑换
      *

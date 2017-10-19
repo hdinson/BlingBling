@@ -1,6 +1,8 @@
 package dinson.customview.activity
 
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SimpleItemAnimator
 import android.view.View
@@ -8,29 +10,33 @@ import com.google.gson.Gson
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._003CurrencyAdapter
+import dinson.customview.adapter._003LeftDrawerAdapter
 import dinson.customview.api.ExchangeApi
 import dinson.customview.entity.ExchangeBean
 import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
 import dinson.customview.listener.CalculatorKey
 import dinson.customview.listener.OnItemSwipeOpen
+import dinson.customview.model._003CurrencyModel
 import dinson.customview.model._003ModelUtil
 import dinson.customview.utils.CacheUtils
-import dinson.customview.utils.LogUtils
+import dinson.customview.utils.SPUtils
 import dinson.customview.utils.UIUtils
 import dinson.customview.weight.recycleview.OnItemClickListener
 import dinson.customview.weight.swipelayout.SwipeItemLayout
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__003_exchange.*
 import org.json.JSONObject
 
+class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListener, OnItemClickListener.OnClickListener, View.OnLongClickListener, DrawerLayout.DrawerListener {
 
-class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListener, OnItemClickListener.OnClickListener, View.OnLongClickListener {
-
-
-    private val mAdapter = _003CurrencyAdapter(this, _003ModelUtil.getCurrencyList(5), this)
-    private var mExchangeData: ExchangeBean? = null
+    private lateinit var mAdapter: _003CurrencyAdapter
+    private var mCurrencyData = ArrayList<_003CurrencyModel>()      //存储所有支持汇率的数据
+    private var mUserCurrencyData = ArrayList<_003CurrencyModel>()  //存储用户需要计算的汇率数据
+    private var mNeedChangeItem = -1    //侧滑时记录需要被替换的条目
+    private var mAllDataRates: JSONObject? = null //存储接口所有的汇率的json
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +51,6 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
 
         //显示本地数据
         if (exchangeStr != null) {
-            mExchangeData = Gson().fromJson(exchangeStr, ExchangeBean::class.java)
             setAdapterRate(exchangeStr)
         } else {
             // TODO 用控件实现
@@ -58,7 +63,6 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : BaseObserver<ExchangeBean?>() {
                 override fun onHandlerSuccess(value: ExchangeBean?) {
-                    mExchangeData = value
                     val json = Gson().toJson(value)
                     CacheUtils.setExangeRateCache(json)
                     setAdapterRate(json)
@@ -67,11 +71,49 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
     }
 
     private fun initUI() {
+
+        //TODO 排序
+
+        mCurrencyData = _003ModelUtil.getCurrencyList()
+        val userCurrency = SPUtils.getUserCurrency()
+        if (userCurrency == null) {
+            mCurrencyData.take(5).toCollection(mUserCurrencyData)
+        } else {
+            Observable.fromIterable(mCurrencyData)
+                .filter {
+                    val indexOf = userCurrency.indexOf(it.currencyCode)
+                    if (indexOf == -1) {
+                        return@filter false
+                    } else {
+                        it.tag = indexOf
+                        return@filter true
+                    }
+                }
+                .collect({ mUserCurrencyData }, { t1, t2 ->
+                    t1.add(t2)
+                }).subscribe()
+        }
+        mAdapter = _003CurrencyAdapter(this, mUserCurrencyData, this)
+
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.adapter = mAdapter
         rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent, this))
         //recycleview notifyItemChanged刷新时闪烁问题
         (rvContent.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+
+        rvLeft.adapter = _003LeftDrawerAdapter(this, mCurrencyData)
+        rvLeft.layoutManager = LinearLayoutManager(this)
+        rvLeft.addOnItemTouchListener(OnItemClickListener(this, rvContent
+            , OnItemClickListener.OnClickListener { _, position ->
+            val bean = mCurrencyData[position]
+            bean.baseRate = mAllDataRates?.get(bean.currencyCode).toString().toDouble()
+            mAdapter.onItemReplaced(mNeedChangeItem, bean)
+            drawerLayout.closeDrawers()
+        }))
+
+        //侧滑布局禁止手势滑动
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        drawerLayout.addDrawerListener(this)
 
         n0.setOnClickListener(this)
         n1.setOnClickListener(this)
@@ -118,13 +160,14 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         return true
     }
 
+
     private fun setAdapterRate(exchangeStr: String) {
-        val rates = JSONObject(exchangeStr).getJSONObject("rates")
+        mAllDataRates = JSONObject(exchangeStr).getJSONObject("rates")
         var targetRate = 0.0
         mAdapter.mDataList.forEachIndexed { index, it ->
-            if (index == 0) targetRate = rates.get(it.currencyCode).toString().toDouble()
+            if (index == 0) targetRate = mAllDataRates!!.get(it.currencyCode).toString().toDouble()
             it.targetRate = targetRate
-            it.baseRate = rates.get(it.currencyCode).toString().toDouble()
+            it.baseRate = mAllDataRates!!.get(it.currencyCode).toString().toDouble()
         }
         mAdapter.notifyDataSetChanged()
     }
@@ -134,13 +177,23 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
      */
     override fun onItemClick(view: View?, position: Int) {
         mAdapter.OnItemChange(position)
-
     }
 
     override fun onOpen(view: SwipeItemLayout, position: Int) {
         view.close()
-        LogUtils.e("open position: " + position)
+        mNeedChangeItem = position
+        drawerLayout.openDrawer(GravityCompat.START)
     }
 
+    override fun onDrawerClosed(drawerView: View?) {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    override fun onDrawerOpened(drawerView: View?) {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    }
+
+    override fun onDrawerSlide(drawerView: View?, slideOffset: Float) {}
+    override fun onDrawerStateChanged(newState: Int) {}
     override fun setWindowBackgroundColor(): Int = R.color._003_window_bg
 }
