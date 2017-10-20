@@ -13,8 +13,8 @@
     <string name="qqnavi_desc">Mimic QQ navigation bar</string>
     <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FghQpL5VATXt6Wtlm575wiDseyvI.webp</string>
    <!--003-->
-    <string name="exchange_rate_title">汇率兑换还没写完</string>
-    <string name="exchange_rate_desc">汇率兑换还没写完</string>
+    <string name="exchange_rate_title">Exchange Rate</string>
+    <string name="exchange_rate_desc">Support to exchange currency around the world</string>
     <string name="exchange_rate_img">http://ondlsj2sn.bkt.clouddn.com/FgoM0tniC1eDMUOLrI3-P89zk3yt.webp</string>
     <!--004-->
     <string name="ganged_recycle_title">GangedRecycleView</string>
