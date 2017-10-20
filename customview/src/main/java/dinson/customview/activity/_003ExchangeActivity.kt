@@ -22,14 +22,11 @@ import dinson.customview.model._003ModelUtil
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.SPUtils
-import dinson.customview.utils.UIUtils
 import dinson.customview.weight.recycleview.OnItemClickListener
 import dinson.customview.weight.swipelayout.SwipeItemLayout
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.BiConsumer
 import io.reactivex.functions.Consumer
-import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__003_exchange.*
 import org.json.JSONObject
@@ -37,6 +34,7 @@ import org.json.JSONObject
 class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListener, OnItemClickListener.OnClickListener, View.OnLongClickListener, DrawerLayout.DrawerListener {
 
     private lateinit var mAdapter: _003CurrencyAdapter
+    private lateinit var mDrawerAdapter: _003LeftDrawerAdapter
     private var mCurrencyData = ArrayList<_003CurrencyModel>()      //存储所有支持汇率的数据
     private var mUserCurrencyData = ArrayList<_003CurrencyModel>()  //存储用户需要计算的汇率数据
     private var mNeedChangeItem = -1    //侧滑时记录需要被替换的条目
@@ -57,8 +55,8 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         if (exchangeStr != null) {
             setAdapterRate(exchangeStr)
         } else {
-            // TODO 用控件实现
-            UIUtils.showToast("正在获取汇率...")
+            //TODO 顶部提示，等想到好的效果再进行替换
+            LogUtils.e("正在获取汇率")
         }
 
         //获取最新数据
@@ -77,6 +75,7 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
     private fun initUI() {
         mCurrencyData = _003ModelUtil.getCurrencyList()
         val userCurrency = SPUtils.getUserCurrency()
+
         if (userCurrency == null) {
             mCurrencyData.take(5).toCollection(mUserCurrencyData)
         } else {
@@ -89,6 +88,8 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
                 .flatMap { Observable.fromIterable(it).toSortedList { t1, t2 -> t1.tag!! - t2.tag!! } }
                 .subscribe(Consumer { mUserCurrencyData = it as ArrayList<_003CurrencyModel> })
         }
+        //在总货币里面删除用户已选择的货币
+        mUserCurrencyData.forEach { mCurrencyData.remove(it) }
 
         mAdapter = _003CurrencyAdapter(this, mUserCurrencyData, this)
 
@@ -98,11 +99,14 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         //recycleview notifyItemChanged刷新时闪烁问题
         (rvContent.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
-        rvLeft.adapter = _003LeftDrawerAdapter(this, mCurrencyData)
+        mDrawerAdapter = _003LeftDrawerAdapter(this, mCurrencyData)
+        rvLeft.adapter = mDrawerAdapter
         rvLeft.layoutManager = LinearLayoutManager(this)
         rvLeft.addOnItemTouchListener(OnItemClickListener(this, rvContent
             , OnItemClickListener.OnClickListener { _, position ->
             val bean = mCurrencyData[position]
+            mCurrencyData[position] = mAdapter.mDataList[mNeedChangeItem]
+            mDrawerAdapter.notifyItemChanged(position)
             bean.baseRate = mAllDataRates?.get(bean.currencyCode).toString().toDouble()
             mAdapter.onItemReplaced(mNeedChangeItem, bean)
             drawerLayout.closeDrawers()
@@ -173,7 +177,7 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
      * 条目的选中改变，更换货币基数
      */
     override fun onItemClick(view: View?, position: Int) {
-        mAdapter.OnItemChange(position)
+        mAdapter.onItemChange(position)
     }
 
     override fun onOpen(view: SwipeItemLayout, position: Int) {
@@ -193,4 +197,12 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
     override fun onDrawerSlide(drawerView: View?, slideOffset: Float) {}
     override fun onDrawerStateChanged(newState: Int) {}
     override fun setWindowBackgroundColor(): Int = R.color._003_window_bg
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawers()
+            return
+        }
+        super.onBackPressed()
+    }
 }

@@ -9,15 +9,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-
 import dinson.customview.R;
 import dinson.customview._global.BaseActivity;
-import dinson.customview.model._003CurrencyModel;
 import dinson.customview.utils.glide.BlurTransformation;
 import dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout;
-import io.reactivex.Observable;
 
 public class _001ShimmerActivity extends BaseActivity {
     private ShimmerFrameLayout mShimmerViewContainer;

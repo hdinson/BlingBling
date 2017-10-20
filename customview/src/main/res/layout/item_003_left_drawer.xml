@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/deleteLayout"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="70dp"
     android:background="@color/_003_window_bg"
     android:paddingEnd="16dp"
     android:paddingStart="16dp">

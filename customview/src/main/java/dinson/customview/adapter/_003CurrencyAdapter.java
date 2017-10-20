@@ -239,7 +239,7 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
 
 
     @Override
-    public void OnItemChange(int position) {
+    public void onItemChange(int position) {
         if (position == mCurrentSelect) return;
         //删除旧算式表达式赋给选中项
         _003CurrencyModel oldBean = mDataList.get(mCurrentSelect);
@@ -276,4 +276,5 @@ public class _003CurrencyAdapter extends CommonAdapter<_003CurrencyModel> implem
         SPUtils.setUserCurrency(userCurrency);
         notifyDataSetChanged();
     }
+
 }

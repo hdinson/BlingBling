@@ -15,7 +15,6 @@ import dinson.customview.weight.recycleview.CommonViewHolder;
  */
 public class _003LeftDrawerAdapter extends CommonAdapter<_003CurrencyModel> {
 
-
     public _003LeftDrawerAdapter(Context context, List<_003CurrencyModel> dataList) {
         super(context, dataList);
     }
@@ -30,6 +29,5 @@ public class _003LeftDrawerAdapter extends CommonAdapter<_003CurrencyModel> {
         holder.setTvText(R.id.tvTitle, currencyModel.getCurrencyCn());
         holder.setTvText(R.id.tvDesc, currencyModel.getCurrencyCode());
         GlideUtils.setImage(mContext, currencyModel.getImgUrl(), holder.getView(R.id.ivImg));
-
     }
 }

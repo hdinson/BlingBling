@@ -3,15 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
-    android:clickable="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:clipToPadding="true">
 
     <LinearLayout
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
         tools:context="dinson.customview.activity._003ExchangeActivity">
 
@@ -19,7 +20,6 @@
             android:id="@id/rvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             android:overScrollMode="never"/>
 
         <TableLayout
@@ -140,12 +140,31 @@
         </TableLayout>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvLeft"
+    <LinearLayout
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#111"
-        android:choiceMode="singleChoice"
-        android:overScrollMode="never"/>
+        android:background="@color/_003_window_bg"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <dinson.customview.weight.LanTingFontTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:paddingBottom="20dp"
+            android:paddingStart="16dp"
+            android:paddingTop="40dp"
+            android:textStyle="italic"
+            android:text="Please Select Currency"
+            android:background="@drawable/_003_list_undercover"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvLeft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
