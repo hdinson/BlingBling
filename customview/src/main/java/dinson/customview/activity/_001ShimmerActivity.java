@@ -64,6 +64,7 @@ public class _001ShimmerActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+
         mShimmerViewContainer.startShimmerAnimation();
     }
 
