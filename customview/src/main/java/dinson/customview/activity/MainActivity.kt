@@ -60,7 +60,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         getLocation()
     }
 
-
     private fun initContent() {
         mContentData.add(ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
             _001ShimmerActivity::class.java, getString(R.string.facebook_img)))
