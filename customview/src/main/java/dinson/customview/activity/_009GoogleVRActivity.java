@@ -24,8 +24,8 @@ import dinson.customview.download.listener.HttpDownOnNextListener;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadState;
 import dinson.customview.download.utils.DbDownUtil;
-import dinson.customview.model._009PanoramaImageModel;
 import dinson.customview.model._009ModelUtil;
+import dinson.customview.model._009PanoramaImageModel;
 import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.UIUtils;
 import dinson.customview.weight.recycleview.LinearItemDecoration;
@@ -51,7 +51,6 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
     }
 
     private void initView() {
-
         //顶部图片
         ImageView iv_img = (ImageView) findViewById(R.id.ivImg);
         String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Fqp3F7wLs2rjSrMlA-9bSIIi27Of.webp";

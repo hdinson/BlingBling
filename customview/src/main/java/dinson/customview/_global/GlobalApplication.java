@@ -26,9 +26,9 @@ public class GlobalApplication extends Application {
         handler = new Handler();
         mainThreadId = android.os.Process.myTid();
 
-        if (!IS_DEBUG) {
-            CrashHandler.getInstance().init(getApplicationContext(), getApplicationContext().getCacheDir() + "/CrashTxt/");
-        }
+
+        CrashHandler.getInstance().init(getApplicationContext(), ConstantsUtils.SDCARD_PRIVATE );
+
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
