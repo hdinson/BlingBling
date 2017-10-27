@@ -38,7 +38,9 @@ public class LogUtils {
      * 以级别为 v 的形式输出LOG
      */
     public static void v(String msg) {
-        Log.v(mTag, FLAG + getLineNumber("v") + msg);
+        if (GlobalApplication.IS_DEBUG) {
+            Log.v(mTag, FLAG + getLineNumber("v") + msg);
+        }
     }
 
     /**
@@ -54,7 +56,9 @@ public class LogUtils {
      * 以级别为 d 的形式输出LOG
      */
     public static void d(String msg) {
-        Log.d(mTag, FLAG + getLineNumber("d") + msg);
+        if (GlobalApplication.IS_DEBUG) {
+            Log.d(mTag, FLAG + getLineNumber("d") + msg);
+        }
     }
 
     /**
@@ -70,7 +74,9 @@ public class LogUtils {
      * 以级别为 i 的形式输出LOG
      */
     public static void i(String msg) {
-        Log.i(mTag, FLAG + getLineNumber("i") + msg);
+        if (GlobalApplication.IS_DEBUG) {
+            Log.i(mTag, FLAG + getLineNumber("i") + msg);
+        }
     }
 
     /**
@@ -87,7 +93,9 @@ public class LogUtils {
      * 以级别为 w 的形式输出LOG
      */
     public static void w(String msg) {
-        Log.w(mTag, FLAG + getLineNumber("w") + msg);
+        if (GlobalApplication.IS_DEBUG) {
+            Log.w(mTag, FLAG + getLineNumber("w") + msg);
+        }
     }
 
     /**
@@ -106,7 +114,9 @@ public class LogUtils {
 
 
     public static void e(String msg) {
-        Log.e(mTag, FLAG + getLineNumber("e") + msg);
+        if (GlobalApplication.IS_DEBUG) {
+            Log.e(mTag, FLAG + getLineNumber("e") + msg);
+        }
     }
 
     /**
