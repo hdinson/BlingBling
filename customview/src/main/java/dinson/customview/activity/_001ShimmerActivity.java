@@ -2,8 +2,6 @@ package dinson.customview.activity;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,11 +46,6 @@ public class _001ShimmerActivity extends BaseActivity {
             mPresetButtons[i].setOnClickListener(view -> selectPreset(preset));
         }
 
-    }
-
-    @Override
-    public int setWindowBackgroundColor() {
-        return R.color.transparent;
     }
 
     @Override
