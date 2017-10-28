@@ -55,11 +55,11 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         initContent()
         initHead()
         getLocation()
     }
-
 
     private fun initContent() {
         mContentData.add(ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),

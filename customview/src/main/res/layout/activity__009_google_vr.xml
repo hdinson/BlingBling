@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="dinson.customview.activity._009GoogleVRActivity">
-
     <com.google.vr.sdk.widgets.pano.VrPanoramaView
         android:id="@+id/vrPanoramaView"
         android:layout_width="match_parent"
