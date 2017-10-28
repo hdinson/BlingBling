@@ -2,6 +2,10 @@ package dinson.customview;
 
 import org.junit.Test;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
@@ -15,9 +19,24 @@ public class JUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
 
-        Observable.range(1,5).subscribe(integer -> {
-            System.out.println(" "+integer);
-        });
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 10; i++) {
+            final int index = i;
+
+            fixedThreadPool.execute(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        System.out.println(index);
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
 
 
 
