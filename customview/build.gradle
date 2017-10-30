@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'AndResGuard'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -9,29 +8,21 @@ Properties prop = new Properties()
 prop.load(new FileInputStream(file("../signing.properties")))
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "dinson.customview"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-
-        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        /*针对greenDao的一些配置*//*
-        greendao {
-            schemaVersion 1 //数据库版本号
-            daoPackage 'com.usher.greendao_demo.greendao.gen' //自动生成的工具类的包名
-            targetGenDir 'src/main/java' //路径
-        }*/
 
         multiDexEnabled true
         testOptions {
             unitTests.returnDefaultValues = true
         }
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
     /*打包 gradlew resguardRelease*/
     signingConfigs {
@@ -66,7 +57,6 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.3'
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
@@ -134,4 +124,5 @@ andResGuard {
 }
 repositories {
     mavenCentral()
+    google()
 }
