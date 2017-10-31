@@ -55,7 +55,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         initContent()
         initHead()
         getLocation()
