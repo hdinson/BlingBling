@@ -29,7 +29,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * http下载处理类
- * Created by WZG on 2016/7/16.
  */
 public class DownloadManager {
     /*记录下载数据*/
