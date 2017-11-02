@@ -15,6 +15,7 @@ import dinson.customview.utils.UIUtils;
  * google VR 数据模型
  */
 public class _003ModelUtil {
+
     public static ArrayList<_003CurrencyModel> getCurrencyList() {
         return getFileFromAssets("currency.txt");
     }
