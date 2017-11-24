@@ -52,20 +52,20 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
 
     private void initView() {
         //顶部图片
-        ImageView iv_img = (ImageView) findViewById(R.id.ivImg);
+        ImageView iv_img = findViewById(R.id.ivImg);
         String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Fqp3F7wLs2rjSrMlA-9bSIIi27Of.webp";
-        RequestOptions rOptions = new RequestOptions()
-            .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
+        RequestOptions rOptions = new RequestOptions().error(R.drawable.def_img)
+            .diskCacheStrategy(DiskCacheStrategy.DATA);
         DrawableTransitionOptions tOptions = new DrawableTransitionOptions().crossFade(500);
         Glide.with(this).load(imgUrl).transition(tOptions).apply(rOptions).into(iv_img);
 
-        vrPanoramaView = (VrPanoramaView) findViewById(R.id.vrPanoramaView);
+        vrPanoramaView = findViewById(R.id.vrPanoramaView);
         vrPanoramaView.setTouchTrackingEnabled(true);
         vrPanoramaView.setFullscreenButtonEnabled(true);
         vrPanoramaView.setInfoButtonEnabled(false);
         vrPanoramaView.setStereoModeButtonEnabled(false);
 
-        RecyclerView rvContent = (RecyclerView) findViewById(R.id.rvContent);
+        RecyclerView rvContent = findViewById(R.id.rvContent);
         mListDatas = _009ModelUtil.getPanoramaImageList();
         mAdapter = new _009ContentAdapter(this, mListDatas);
         rvContent.addItemDecoration(new LinearItemDecoration(this));
@@ -78,13 +78,12 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
 
     private void loadPanoramaImage(_009PanoramaImageModel model) {
         File file = new File(model.localPath);
-        LogUtils.e(String.format("File exists? %s and the path is %s", file.exists(), file.getAbsoluteFile()));
+        LogUtils
+            .e(String.format("File exists? %s and the path is %s", file.exists(), file.getAbsoluteFile()));
 
-        Observable.just(model.localPath)
-            .map(s -> Glide.with(UIUtils.getContext()).asBitmap().load(s)
-                .submit(SIZE_ORIGINAL, SIZE_ORIGINAL).get())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        Observable.just(model.localPath).map(
+            s -> Glide.with(UIUtils.getContext()).asBitmap().load(s).submit(SIZE_ORIGINAL, SIZE_ORIGINAL)
+                .get()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::loadPanoramaImage);
     }
 

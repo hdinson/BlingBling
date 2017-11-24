@@ -28,14 +28,14 @@ public class _005LikeSmileViewActivity extends BaseActivity implements View.OnCl
         findViewById(R.id.tvBack).setOnClickListener(this);
 
         //顶部图片
-        ImageView iv_img = (ImageView) findViewById(R.id.ivImg);
+        ImageView iv_img = findViewById(R.id.ivImg);
         String imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Ft8BnkO6CU83GxS2ZaSWXtMc_AQm.webp";
-        RequestOptions rOptions = new RequestOptions()
-            .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.DATA);
+        RequestOptions rOptions = new RequestOptions().error(R.drawable.def_img)
+            .diskCacheStrategy(DiskCacheStrategy.DATA);
         DrawableTransitionOptions tOptions = new DrawableTransitionOptions().crossFade(500);
         Glide.with(this).load(imgUrl).transition(tOptions).apply(rOptions).into(iv_img);
 
-        mLikeSmile = (LikeSmileView) findViewById(R.id.likeSmile);
+        mLikeSmile = findViewById(R.id.likeSmile);
         mLikeSmile.setNum(66, 25);
     }
 

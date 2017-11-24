@@ -32,8 +32,8 @@ public class _008RichEditorActivity extends BaseActivity implements View.OnClick
     private void initUI() {
         findViewById(R.id.ib_emoji).setOnClickListener(this);
         findViewById(R.id.cancel).setOnClickListener(this);
-        mEmojiLayout = (EmojiLayout) findViewById(emojiLayout);
-        RichEditor richEditor = (RichEditor) findViewById(R.id.richEditor);
+        mEmojiLayout = findViewById(emojiLayout);
+        RichEditor richEditor = findViewById(R.id.richEditor);
         mEmojiLayout.setEditTextSmile(richEditor);
     }
 
