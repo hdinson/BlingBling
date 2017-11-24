@@ -115,6 +115,7 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
                     selector.setCurrentPos(readLength);
                     selector.setSize(countLength);
                     mAdapter.notifyItemChanged(position);
+
                 }
             });
             DownloadManager.getInstance().startDown(transform);
