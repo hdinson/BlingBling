@@ -42,7 +42,6 @@ public class _001ShimmerActivity extends BaseActivity {
             final int preset = i;
             mPresetButtons[i].setOnClickListener(view -> selectPreset(preset));
         }
-
     }
 
     @Override

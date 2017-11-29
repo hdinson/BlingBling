@@ -6,6 +6,7 @@ import dinson.customview._global.BaseActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_test.*
 import org.jsoup.Jsoup
 
 class TestActivity : BaseActivity() {
@@ -15,7 +16,12 @@ class TestActivity : BaseActivity() {
         setContentView(R.layout.activity_test)
 
 
-     }
+
+        tvTitle.setOnClickListener {
+
+        }
+
+    }
 
 
 
