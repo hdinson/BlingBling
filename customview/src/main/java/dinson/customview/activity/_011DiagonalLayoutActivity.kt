@@ -22,7 +22,6 @@ class _011DiagonalLayoutActivity : BaseActivity() {
         initUI()
     }
 
-
     private fun initUI() {
         val hearUrl = "http://ondlsj2sn.bkt.clouddn.com/FtT8Kk7HNbHE5FLf3U2dnXkOZtu7.jpeg"
         GlideUtils.setImage(this, hearUrl, ivImg)
