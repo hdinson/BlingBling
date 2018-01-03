@@ -18,6 +18,7 @@ class _011DiagonalLayoutActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__011_diagonal_layout)
+
         initUI()
     }
 
