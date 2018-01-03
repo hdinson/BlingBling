@@ -32,5 +32,5 @@ fun Lang.sayBye() {
         Lang.JAPANESE -> Lang.JAPANESE
         Lang.KOREAN -> Lang.KOREAN
     }
-    print("$bye 3")
+    print("$bye  3")
 }
