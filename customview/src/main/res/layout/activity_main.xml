@@ -68,7 +68,7 @@
         app:layout_behavior="dinson.customview.behavior.HomeFloatingBehavior">
 
         <dinson.customview.weight.IconFontTextView
-            android:id="@+id/if_weather"
+            android:id="@+id/iconFontWeather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -79,7 +79,7 @@
             android:id="@+id/tvWeather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/if_weather"
+            android:layout_below="@id/iconFontWeather"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:textColor="@android:color/white"/>
