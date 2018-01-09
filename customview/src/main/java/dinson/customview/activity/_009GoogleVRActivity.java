@@ -73,7 +73,6 @@ public class _009GoogleVRActivity extends BaseActivity implements OnItemClickLis
         rvContent.setItemAnimator(null);
         rvContent.addOnItemTouchListener(new OnItemClickListener(this, rvContent, this));
         rvContent.setAdapter(mAdapter);
-
     }
 
     private void loadPanoramaImage(_009PanoramaImageModel model) {
