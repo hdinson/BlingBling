@@ -27,7 +27,6 @@ class _011DiagonalLayoutActivity : BaseActivity() {
         val imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp"
         GlideUtils.setCircleImage(this, imgUrl, cvCircleView)
 
-
         tvTitle.text = "Quan Zhou\n"
         val builder = SpannableStringBuilder("Eastern Asia culture")
         builder.setSpan(RelativeSizeSpan(0.56f), 0, builder.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
