@@ -28,7 +28,7 @@ data class _003CurrencyModel(val currencyCn: String, val currencyCode: String, v
     /**
      * 与目标货币的兑换
      *
-     * @param money 货币金额
+     * @param targetMoney 货币金额
      * @return 目标货币金额（保留两位小数）
      */
     fun getTargetMoney(targetMoney: Double): String =
