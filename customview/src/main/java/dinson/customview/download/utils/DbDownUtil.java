@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.query.QueryBuilder;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class DbDownUtil {
         downInfoDao.delete(info);
     }
 
-
+    @Nullable
     public DownloadInfo queryDownBy(String url) {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
