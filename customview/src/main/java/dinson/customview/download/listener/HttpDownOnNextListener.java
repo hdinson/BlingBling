@@ -47,7 +47,7 @@ public class HttpDownOnNextListener<T> {
     /**
      * 暂停下载
      */
-    public void onPuase() {
+    public void onPause() {
     }
 
     /**

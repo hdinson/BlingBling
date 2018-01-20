@@ -190,8 +190,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         LogUtils.d("." + weather.toString())
         weatherLayout.visibility = View.VISIBLE
         val resultsBean = weather.results[0]
-        iconFontWeather.apply {
-            setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
+        iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
+        tvWeather.apply {
             typeface = TypefaceUtils.get(this@MainActivity, "fonts/FZLanTingHeiS_Regular.ttf")
             text = String.format("%s℃", resultsBean.now.temperature)
         }
@@ -247,7 +247,5 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         startActivity(Intent(this, mContentData[position].name))
     }
 
-
     override fun finishWithAnim(): Boolean = false
-
 }
