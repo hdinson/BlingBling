@@ -161,7 +161,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         }
     }
 
-
     private var locationListener = AMapLocationListener { location ->
         // TODO: 2017/9/27 定位权限判断
         destroyLocation()//只定位一次
