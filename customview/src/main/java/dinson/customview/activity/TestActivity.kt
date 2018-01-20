@@ -3,6 +3,8 @@ package dinson.customview.activity
 import android.os.Bundle
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.api.OneApi
+import dinson.customview.http.HttpHelper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -18,7 +20,13 @@ class TestActivity : BaseActivity() {
 
 
         tvTitle.setOnClickListener {
-
+           // jsoupTest()
+            HttpHelper.create(OneApi::class.java).get()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    tvContent.text=it.string()
+                }
         }
 
     }
@@ -27,14 +35,15 @@ class TestActivity : BaseActivity() {
 
 
     private fun jsoupTest() {
-        Observable.just("http://www.dinson.win/")
+        Observable.just("https://github.com/DinsonCat/SomeDoc/blob/master/mh.json")
             .map { s ->
                 val document = Jsoup.connect(s).get()
                 document
             }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _ ->
-
+            .subscribe { s ->
+                tvContent.text = s.body()
+                    .toString()
             }
     }
 
