@@ -145,7 +145,7 @@ public class DownloadManager {
     public void pause(DownloadInfo info) {
         if (info == null) return;
         info.setState(DownloadState.PAUSE);
-        info.getListener().onPuase();
+        info.getListener().onPause();
         if (subMap.containsKey(info.getUrl())) {
             ProgressDownSubscriber subscriber = subMap.get(info.getUrl());
             subscriber.unSubscribe();

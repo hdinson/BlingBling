@@ -70,18 +70,17 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
                 View layout = LayoutInflater.from(this).inflate(R.layout.layout_006_like, null, false);
                 TextView tvNum = (TextView) layout.findViewById(R.id.tvNum);
                 tvNum.setText(String.format(Locale.CHINA, "+%d", ++mCount));
-                FloatingElement floatingElement = new FloatingBuilder()
-                    .anchorView(v)
-                    .targetView(layout)
-                    .floatingTransition(new TranslateFloatingTransition())
-                    .build();
+                FloatingElement floatingElement = new FloatingBuilder().anchorView(v).targetView(layout)
+                    .floatingTransition(new TranslateFloatingTransition()).build();
                 mFloating.startFloating(floatingElement);
                 break;
             case R.id.iv_star://星星
                 mIvStar.setEnabled(false);
                 toggle = !toggle;
-                mRootBg.setBackgroundColor(toggle ? Color.parseColor("#6d5f88") : Color.parseColor("#62a465"));
-                mRootLayout.setBackgroundColor(toggle ? Color.parseColor("#62a465") : Color.parseColor("#6d5f88"));
+                mRootBg
+                    .setBackgroundColor(toggle ? Color.parseColor("#6d5f88") : Color.parseColor("#62a465"));
+                mRootLayout
+                    .setBackgroundColor(toggle ? Color.parseColor("#62a465") : Color.parseColor("#6d5f88"));
 
                 if (mMaxWidth == 0 || mMaxHeight == 0) {
                     mStarCenterY = (v.getBottom() - v.getTop()) / 2 + v.getTop();
@@ -93,8 +92,9 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
                     LogUtils.e(mStarCenterX + " " + mStarCenterY);
                 }
 
-                Animator mAnimator = ViewAnimationUtils.createCircularReveal(mRootBg,
-                    mStarCenterX, mStarCenterY, 0, (float) Math.hypot(mMaxWidth, mMaxHeight));
+                Animator mAnimator = ViewAnimationUtils
+                    .createCircularReveal(mRootBg, mStarCenterX, mStarCenterY, 0,
+                                          (float) Math.hypot(mMaxWidth, mMaxHeight));
                 mAnimator.setDuration(700);
                 mAnimator.addListener(new AnimatorListenerAdapter() {
                     @Override
@@ -115,36 +115,29 @@ public class _006FloatingViewActivity extends BaseActivity implements View.OnCli
                 textView.setPadding(left, top, left, top);
                 textView.setTypeface(mTypeface);
 
-                FloatingElement floatingSchool = new FloatingBuilder()
-                    .anchorView(v)
-                    .targetView(textView)
-                    .offsetY(-v.getMeasuredHeight())
-                    .floatingTransition(new ScaleFloatingTransition(2000))
+                FloatingElement floatingSchool = new FloatingBuilder().anchorView(v).targetView(textView)
+                    .offsetY(-v.getMeasuredHeight()).floatingTransition(new ScaleFloatingTransition(2000))
                     .build();
                 mFloating.startFloating(floatingSchool);
                 break;
             case R.id.iv_earth:
                 ImageView imageView = new ImageView(this);
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(v.getMeasuredWidth(), v.getMeasuredHeight()));
+                imageView
+                    .setLayoutParams(new ViewGroup.LayoutParams(v.getMeasuredWidth(), v.getMeasuredHeight()));
                 imageView.setImageResource(R.drawable._006_moon);
 
-                FloatingElement floatingEarth = new FloatingBuilder()
-                    .anchorView(v)
-                    .targetView(imageView)
-                    .floatingTransition(new EarthFloatingTransition())
-                    .build();
+                FloatingElement floatingEarth = new FloatingBuilder().anchorView(v).targetView(imageView)
+                    .floatingTransition(new EarthFloatingTransition()).build();
                 mFloating.startFloating(floatingEarth);
                 break;
             case R.id.iv_plane:
                 ImageView plane = new ImageView(this);
-                plane.setLayoutParams(new ViewGroup.LayoutParams(v.getMeasuredWidth(), v.getMeasuredHeight()));
+                plane
+                    .setLayoutParams(new ViewGroup.LayoutParams(v.getMeasuredWidth(), v.getMeasuredHeight()));
                 plane.setImageResource(R.drawable._006_plane);
 
-                FloatingElement floatingPlane = new FloatingBuilder()
-                    .anchorView(v)
-                    .targetView(plane)
-                    .floatingTransition(new PlaneFloatingTransition())
-                    .build();
+                FloatingElement floatingPlane = new FloatingBuilder().anchorView(v).targetView(plane)
+                    .floatingTransition(new PlaneFloatingTransition()).build();
                 mFloating.startFloating(floatingPlane);
                 break;
         }

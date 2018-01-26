@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import dinson.customview.R;
+
 
 /**
  * 线性布局分割线
@@ -22,15 +24,15 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
     private int mDividerHeight = 2;//分割线高度，默认为2px
     private int mOrientation;//列表的方向：LinearLayoutManager.VERTICAL或LinearLayoutManager.HORIZONTAL
-    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
+    //private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
     /**
      * 默认分割线：高度为2px，颜色为灰色
      */
     public LinearItemDecoration(Context context) {
-        final TypedArray a = context.obtainStyledAttributes(ATTRS);
-        mDivider = a.getDrawable(0);
-        a.recycle();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setColor(ContextCompat.getColor(context,R.color.common_divider));
+        mPaint.setStyle(Paint.Style.FILL);
     }
 
 

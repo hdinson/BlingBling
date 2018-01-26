@@ -25,27 +25,23 @@ public class _001ShimmerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__001_shimmer);
 
-        mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mTvTitle = (TextView) findViewById(R.id.tvTitle);
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+        mTvTitle = findViewById(R.id.tvTitle);
 
         //设置背景（高斯模糊）
         RequestOptions options = new RequestOptions().dontAnimate()
-            .transform(new BlurTransformation(this, 23));// “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
-        ImageView img = (ImageView) findViewById(R.id.ivImg);
+                                                     .transform(new BlurTransformation(this, 23));
+        // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+        ImageView img = findViewById(R.id.ivImg);
         Glide.with(this).load(R.drawable._001_bg).apply(options).into(img);
 
-        mPresetButtons = new Button[]{
-            (Button) findViewById(R.id.preset_button0),
-            (Button) findViewById(R.id.preset_button1),
-            (Button) findViewById(R.id.preset_button2),
-            (Button) findViewById(R.id.preset_button3),
-            (Button) findViewById(R.id.preset_button4),
-        };
+        mPresetButtons = new Button[]{findViewById(R.id.preset_button0), findViewById(
+            R.id.preset_button1), findViewById(R.id.preset_button2), findViewById(
+            R.id.preset_button3), findViewById(R.id.preset_button4),};
         for (int i = 0; i < mPresetButtons.length; i++) {
             final int preset = i;
             mPresetButtons[i].setOnClickListener(view -> selectPreset(preset));
         }
-
     }
 
     @Override

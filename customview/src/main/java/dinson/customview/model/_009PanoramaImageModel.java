@@ -1,5 +1,7 @@
 package dinson.customview.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import dinson.customview._global.ConstantsUtils;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.ITransformDownloadInfo;
@@ -33,6 +35,7 @@ public class _009PanoramaImageModel implements ITransformDownloadInfo {
         return currentPos / size;
     }
 
+    @NotNull
     @Override
     public DownloadInfo transform() {
         DownloadInfo downloadInfo = new DownloadInfo();
