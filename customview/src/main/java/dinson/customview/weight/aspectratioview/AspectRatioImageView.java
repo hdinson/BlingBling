@@ -16,6 +16,7 @@ public class AspectRatioImageView extends AppCompatImageView {
         this(context, null);
     }
 
+
     public AspectRatioImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mSettings = new AspectRatioSettings(context, attrs);
