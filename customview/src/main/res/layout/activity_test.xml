@@ -5,33 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <FrameLayout
+    <dinson.customview.weight.banner.BannerView
+        android:id="@+id/banner"
+        app:canLoop="true"
+        app:indicatorAlign="left"
+        app:open_mz_mode="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <FrameLayout
-        android:id="@+id/flAlertBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        android:clickable="true"
-        android:foreground="@drawable/ripple_main_white"
-        android:visibility="visible"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:clickable="true"
-            android:padding="20dp"
-            android:text="点击获取数据"/>
-    </FrameLayout>
+        android:layout_height="300dp"/>
 </FrameLayout>
