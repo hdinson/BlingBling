@@ -11,6 +11,7 @@
         android:layout_gravity="start"
         android:background="@drawable/_003_list_undercover"
         android:scaleType="center"
+        android:contentDescription="@string/des_pic"
         android:src="@drawable/_003_delete_ic" />
 
     <RelativeLayout
@@ -20,6 +21,7 @@
         android:layout_gravity="center"
         android:background="@drawable/selector_003_window_bg"
         android:clickable="true"
+        android:focusable="true"
         android:elevation="10dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">

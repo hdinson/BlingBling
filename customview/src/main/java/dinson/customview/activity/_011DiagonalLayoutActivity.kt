@@ -18,7 +18,6 @@ class _011DiagonalLayoutActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__011_diagonal_layout)
-
         initUI()
     }
 
@@ -27,7 +26,6 @@ class _011DiagonalLayoutActivity : BaseActivity() {
         GlideUtils.setImage(this, hearUrl, ivImg)
         val imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp"
         GlideUtils.setCircleImage(this, imgUrl, cvCircleView)
-
 
         tvTitle.text = "Quan Zhou\n"
         val builder = SpannableStringBuilder("Eastern Asia culture")

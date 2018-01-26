@@ -96,7 +96,7 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.adapter = mAdapter
         rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent, this))
-        //recycleview notifyItemChanged刷新时闪烁问题
+            //recycleView notifyItemChanged刷新时闪烁问题
         (rvContent.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
         mDrawerAdapter = _003LeftDrawerAdapter(this, mCurrencyData)

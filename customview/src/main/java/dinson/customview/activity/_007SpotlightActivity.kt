@@ -61,5 +61,5 @@ class _007SpotlightActivity : BaseActivity() {
     }
 
 
-    override fun setWindowBackgroundColor(): Int = R.drawable._007_activity_bg
+    override fun setWindowBackgroundColor() = R.drawable._007_activity_bg
 }

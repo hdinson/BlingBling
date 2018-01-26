@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--6.0以上，首页的状态栏模式为白色-->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
-</resources>
