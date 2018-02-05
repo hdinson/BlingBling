@@ -1,21 +1,26 @@
 package dinson.customview.activity
 
+import android.Manifest
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import android.widget.Toast
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
+import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
+import dinson.customview.R.id.*
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.adapter.MainHeadAdapter
@@ -60,6 +65,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         initHead()
         getLocation()
 
+
     }
 
     /**
@@ -89,7 +95,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
                 _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
-                TestActivity::class.java, getString(R.string.test_layout_img))
+                Main2Activity::class.java, getString(R.string.test_layout_img))
         )
     }
 
@@ -153,16 +159,19 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     private fun getLocation() {
-        mAMapLocationClient = AMapLocationClient(this.applicationContext)
-        mAMapLocationClient?.let {
-            it.setLocationListener(locationListener)//设置定位监听
-            it.setLocationOption(getAmapOption())//设置定位参数
-            it.startLocation()//开始定位
-        }
+        RxPermissions(this).request(Manifest.permission.ACCESS_COARSE_LOCATION)
+            .subscribe {
+                if (!it) return@subscribe
+                mAMapLocationClient = AMapLocationClient(this.applicationContext)
+                mAMapLocationClient?.let {
+                    it.setLocationListener(locationListener)//设置定位监听
+                    it.setLocationOption(getAmapOption())//设置定位参数
+                    it.startLocation()//开始定位
+                }
+            }
     }
 
     private var locationListener = AMapLocationListener { location ->
-        // TODO: 2017/9/27 定位权限判断
         destroyLocation()//只定位一次
         if (null == location) return@AMapLocationListener
         if (location.errorCode != 0) return@AMapLocationListener  //errCode等于0代表定位成功
