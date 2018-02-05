@@ -19,7 +19,7 @@ public class JUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
 
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+        /*ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 10; i++) {
             final int index = i;
 
@@ -36,7 +36,8 @@ public class JUnitTest {
                     }
                 }
             });
-        }
+        }*/
+        System.out.println("dafsdfas");
     }
 
     /**
