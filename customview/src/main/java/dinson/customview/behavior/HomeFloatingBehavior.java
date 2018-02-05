@@ -11,7 +11,7 @@ import android.view.View;
  * 首页监听recycleview的滑动
  */
 public class HomeFloatingBehavior extends Behavior<View> {
-    private int mFrameMaxHeight = 100;
+
     private int mStartY;
 
     @Override
@@ -30,7 +30,9 @@ public class HomeFloatingBehavior extends Behavior<View> {
         }
         float percent = (mStartY - dependency.getY()) / 500;
         //改变child的坐标(从消失，到可见)
-        child.setAlpha(1-percent);
+        if (percent>1)percent=1;
+        child.setScaleX(1-percent);
+        child.setScaleY(1-percent);
         return true;
     }
 }
