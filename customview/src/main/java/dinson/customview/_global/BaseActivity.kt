@@ -1,6 +1,7 @@
 package dinson.customview._global
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -25,6 +26,7 @@ open class BaseActivity : AppCompatActivity() {
         //getSupportActionBar().hide();
         /*activity的出现动画*/
         overridePendingTransition(R.anim.activity_in_from_right, R.anim.activity_out_to_left)
+        requestedOrientation=ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         /*logcat点击跳转对用activity*/
         logShowActivity()
     }
@@ -40,9 +42,7 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * 设置窗口背景颜色
      */
-    open fun setWindowBackgroundColor(): Int? {
-        return R.color.window_bg
-    }
+    open fun setWindowBackgroundColor(): Int? = R.color.window_bg
 
 
     override fun onBackPressed() {
@@ -51,9 +51,7 @@ open class BaseActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.activity_in_from_left, R.anim.activity_out_to_right)
     }
 
-    open fun finishWithAnim(): Boolean {
-        return true
-    }
+    open fun finishWithAnim()  = true
 
     override fun onResumeFragments() {
         super.onResumeFragments()
