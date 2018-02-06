@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 
-public interface MZViewHolder<T> {
+public interface BannerViewHolder<T> {
     /**
      *  创建View
      */
@@ -13,5 +13,5 @@ public interface MZViewHolder<T> {
     /**
      * 绑定数据
      */
-    void onBind(Context context, int position, T data);
+    void onBind(Context context, int position, T data );
 }

@@ -23,7 +23,6 @@ import dinson.customview.R
 import dinson.customview.R.id.*
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter.MainContentAdapter
-import dinson.customview.adapter.MainHeadAdapter
 import dinson.customview.api.OneApi
 import dinson.customview.api.XinZhiWeatherApi
 import dinson.customview.entity.ClassBean
@@ -31,12 +30,15 @@ import dinson.customview.entity.HomeWeather
 import dinson.customview.entity.one.DailyDetail
 import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
+import dinson.customview.kotlin.main
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.TypefaceUtils
+import dinson.customview.weight.banner.BannerPageClickListener
+import dinson.customview.weight.banner.holder.MainBannerHolder
 import dinson.customview.weight.recycleview.LinearItemDecoration
 import dinson.customview.weight.recycleview.OnItemClickListener
 import io.reactivex.Flowable
@@ -45,13 +47,13 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
 
     //private val mContentData = ArrayList<ClassBean>()
     private val mHeadData = ArrayList<DailyDetail>()
-    private lateinit var mMainHeadAdapter: MainHeadAdapter
     private var mAMapLocationClient: AMapLocationClient? = null
     private lateinit var mTouchHelper: ItemTouchHelper
     private val mOneApi = HttpHelper.create(OneApi::class.java)
@@ -113,12 +115,10 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     private fun initHead() {
-        rvHead.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        mMainHeadAdapter = MainHeadAdapter(this, mHeadData)
-        rvHead.adapter = mMainHeadAdapter
-        //点击轮播图片，获取源文件，执行跳转动画
-        rvHead.addOnItemTouchListener(OnItemClickListener(this,
-            rvHead, OnItemClickListener.OnClickListener { view, position ->
+        mainBanner.setPages(mHeadData, MainBannerHolder())
+        mainBanner.setDuration(500)
+        mainBanner.setIndicatorVisibility(View.GONE)
+        mainBanner.setBannerPageClickListener(BannerPageClickListener { view, position ->
             Single.just(mHeadData[position].data.hp_img_url)
                 .map { s ->
                     Glide.with(this@MainActivity).load(s).downloadOnly(Target.SIZE_ORIGINAL,
@@ -131,7 +131,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                     val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, view, "dailyPic")
                     DailyPicActivity.start(this@MainActivity, mHeadData[position].data, path, options)
                 }
-        }))
+        })
+        mainBanner.start()
 
         val mainHeardCache = CacheUtils.getMainHeardCache()
         Flowable.fromPublisher(if (mainHeardCache == null) mOneApi.daily else Flowable.just(mainHeardCache))
@@ -151,7 +152,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ _ -> mMainHeadAdapter.notifyDataSetChanged() }) { throwable ->
+            .subscribe({ _ -> mainBanner.setPages(mHeadData,MainBannerHolder()) }) { throwable ->
                 LogUtils.d(throwable.toString())
                 vsContent.inflate()
                 ivImg.setImageResource(R.drawable.def_img)
@@ -257,4 +258,15 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     override fun finishWithAnim(): Boolean = false
+
+    override fun onPause() {
+        mainBanner.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        mainBanner.start()
+        super.onResume()
+    }
 }
+
