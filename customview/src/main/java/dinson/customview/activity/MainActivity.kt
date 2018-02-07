@@ -6,13 +6,11 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.widget.Toast
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
@@ -20,7 +18,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
-import dinson.customview.R.id.*
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.api.OneApi
@@ -30,7 +27,6 @@ import dinson.customview.entity.HomeWeather
 import dinson.customview.entity.one.DailyDetail
 import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
-import dinson.customview.kotlin.main
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
@@ -152,7 +148,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ _ -> mainBanner.setPages(mHeadData,MainBannerHolder()) }) { throwable ->
+            .subscribe({ _ -> mainBanner.setPages(mHeadData, MainBannerHolder()) }) { throwable ->
                 LogUtils.d(throwable.toString())
                 vsContent.inflate()
                 ivImg.setImageResource(R.drawable.def_img)

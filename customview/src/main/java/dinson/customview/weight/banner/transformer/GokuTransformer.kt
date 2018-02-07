@@ -11,7 +11,7 @@ class GokuTransformer : ViewPager.PageTransformer {
         private const val MIN_SCALE = 0.75f
     }
 
-    override fun transformPage(page: View?, pos: Float) {
+    override fun transformPage(page: View, pos: Float) {
         if (page == null) return
 
         when {

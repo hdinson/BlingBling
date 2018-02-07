@@ -44,7 +44,7 @@ public class QQNaviViewSettings {
         mRange = ta.getFloat(R.styleable.QQNaviView_range, 1);
         mBottomText = ta.getString(R.styleable.QQNaviView_bottomText);
         mTextPadding = ta.getDimension(R.styleable.QQNaviView_textPadding, 0);
-        mBottomTextSize = ta.getDimension(R.styleable.QQNaviView_bottomTextSize, 12);
+        mBottomTextSize = ta.getDimension(R.styleable.QQNaviView_bottomTextSize, dip2px(context,12));
         ta.recycle();
     }
 

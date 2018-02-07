@@ -38,7 +38,7 @@
         app:bigIconSrc="@drawable/_002_pre_person_big"
         app:bigIconSrcCheck="@drawable/_002_person_big"
         app:bottomText="呵呵达"
-        app:bottomTextSize="12sp"
+        app:bottomTextSize="10sp"
         app:smallIconSrc="@drawable/_002_pre_person_small"
         app:smallIconSrcCheck="@drawable/_002_person_small">
         <TextView

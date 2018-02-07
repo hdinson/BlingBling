@@ -1,6 +1,7 @@
 package dinson.customview.weight._002qqnaviview
 
 import android.view.View
+import dinson.customview.utils.LogUtils
 import java.util.*
 
 
@@ -11,13 +12,13 @@ class QQNaviViewManager(vararg views: QQNaviView) {
 
     private lateinit var currentCheckedView: QQNaviView
     private val mList = ArrayList<QQNaviView>()
-    private var mOffsetOrientation = OffsetOrientation.Horizontal
+    private var mIsHorizontal = true
 
     /**
      * 设置图像的偏移方向
      */
-    fun setOrientation(orientation: OffsetOrientation) {
-        mOffsetOrientation = orientation
+    fun setOrientation(isHorizontal: Boolean) {
+        mIsHorizontal = isHorizontal
     }
 
     init {
@@ -34,48 +35,38 @@ class QQNaviViewManager(vararg views: QQNaviView) {
     fun setCheckedView(view: QQNaviView) {
         if (currentCheckedView != view) {
             if (!mList.contains(view)) mList.add(view)
+            currentCheckedView.setChecked(false)
+            view.setChecked(true)
+            currentCheckedView=view
+            val pos = mList.indexOf(view)
+            mList.forEachIndexed { index, it ->
+                if (index==pos)return@forEachIndexed
+                LogUtils.e("index:$index")
+                if (index < pos) {
+                    if (mIsHorizontal) {
+                        it.setOffsetOrientation(OffsetOrientation.RIGHT)
+                    } else {
+                        it.setOffsetOrientation(OffsetOrientation.BOTTOM)
+                    }
+                } else {
+                    if (mIsHorizontal) {
+                        it.setOffsetOrientation(OffsetOrientation.LEFT)
+                    } else {
+                        it.setOffsetOrientation(OffsetOrientation.TOP)
+                    }
 
-        }
+                }
 
-
-
-        when {
-            mList.contains(view) && currentCheckedView != view -> {
-                currentCheckedView.setChecked(false)
-                currentCheckedView = view
-                currentCheckedView.setChecked(true)
             }
-
         }
-
-
-        this.currentCheckedView = view
-        view.setChecked(true)
-    }
-/*
-    *//**
-     * 清除当前点击的控件
-     *//*
-    fun clearCurrentCheckedView() {
-        if (currentCheckedView != null)
-            this.currentCheckedView!!.setChecked(false)
-        this.currentCheckedView = null
     }
 
-    *//**
+
+    /**
      * 判断当前是否可以选中
-     *//*
+     */
     fun isCanCheck(view: View): Boolean {
         return currentCheckedView != view
     }
 
-
-    *//**
-     * 初始化
-     *//*
-    fun initCurrentLayout() {
-        if (currentCheckedView != null) {
-            currentCheckedView = null
-        }
-    }*/
 }
