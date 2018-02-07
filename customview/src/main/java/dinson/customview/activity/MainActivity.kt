@@ -97,7 +97,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
                 _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
-                Main2Activity::class.java, getString(R.string.test_layout_img))
+                TestActivity::class.java, getString(R.string.test_layout_img))
         )
     }
 
