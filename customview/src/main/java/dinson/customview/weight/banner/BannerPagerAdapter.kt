@@ -17,6 +17,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
                             private val mViewHolder: BannerViewHolder<T>,
                             private val canLoop: Boolean) : PagerAdapter() {
 
+
     companion object {
         private const val LOOPERCOUNTFACTOR = 1000
     }
@@ -33,7 +34,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
         val realPosition = position % getRealCount()
         var view = mViewList.get(realPosition)
         if (view == null) {
-             view = mViewHolder.createView(container.context)
+            view = mViewHolder.createView(container.context)
             mViewList.put(realPosition, view)
             mViewHolder.onBind(container.context, realPosition, mDatas[realPosition])
         }
@@ -55,7 +56,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
      */
     private fun getVirtualCount() = getRealCount() * LOOPERCOUNTFACTOR
 
-    override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
         if (container == null) return super.instantiateItem(container, position)
         val view = getView(position, container)
         container.removeView(view)
@@ -63,16 +64,12 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
         return view
     }
 
-    override fun isViewFromObject(view: View?, obj: Any?) = view == obj
+    override fun isViewFromObject(view: View, obj: Any) = view == obj
 
-    override fun destroyItem(container: ViewGroup?, position: Int, obj: Any?) {
+    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
         LogUtils.e("container: ${container?.childCount}")
 
     }
-
-
-
-
 
 
     /******************************************************************************************************/
@@ -85,7 +82,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
      */
     fun setUpViewViewPager(viewPager: ViewPager) {
         viewPager.adapter = this
-        viewPager.adapter.notifyDataSetChanged()
+        this.notifyDataSetChanged()
         val currentItem = if (canLoop) getVirtualCount() / 2 - getVirtualCount() / 2 % getRealCount() else 0
         //设置当前选中的Item
         viewPager.currentItem = currentItem

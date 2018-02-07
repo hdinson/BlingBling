@@ -96,7 +96,7 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.adapter = mAdapter
         rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent, this))
-            //recycleView notifyItemChanged刷新时闪烁问题
+        //recycleView notifyItemChanged刷新时闪烁问题
         (rvContent.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
         mDrawerAdapter = _003LeftDrawerAdapter(this, mCurrencyData)
@@ -186,15 +186,15 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         drawerLayout.openDrawer(GravityCompat.START)
     }
 
-    override fun onDrawerClosed(drawerView: View?) {
+    override fun onDrawerClosed(drawerView: View) {
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
-    override fun onDrawerOpened(drawerView: View?) {
+    override fun onDrawerOpened(drawerView: View) {
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
-    override fun onDrawerSlide(drawerView: View?, slideOffset: Float) {}
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
     override fun onDrawerStateChanged(newState: Int) {}
     override fun setWindowBackgroundColor(): Int = R.color._003_window_bg
 

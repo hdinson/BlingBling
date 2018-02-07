@@ -2,6 +2,7 @@ package dinson.customview.weight._002qqnaviview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -41,11 +42,9 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val paramsIcon = FrameLayout.LayoutParams(mSettings.iconWidth.toInt(), mSettings.iconHeight.toInt())
         mIvBig = ImageView(context)
         mIvBig.setImageResource(mSettings.bigIconSrc)
-        mIvBig.setBackgroundResource(R.color.green)
 
         mIvSmall = ImageView(context)
         mIvSmall.setImageResource(mSettings.smallIconSrc)
-
 
         mImageContainer.addView(mIvBig, paramsIcon)
         mImageContainer.addView(mIvSmall, paramsIcon)
@@ -54,11 +53,8 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         if (mSettings.bottomText.isNotEmpty()) {
             //底部有文字
             val bottomText = TextView(context)
-
-            bottomText.setBackgroundResource(R.color.gray)
-
             bottomText.text = mSettings.bottomText
-            bottomText.textSize = mSettings.bottomTextSize
+            bottomText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mSettings.bottomTextSize)
             val textParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             textParams.topMargin = mSettings.textPadding.toInt()
             addView(bottomText, textParams)
@@ -76,8 +72,8 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
      */
     private fun setupView() {
         //根据view的宽高确定可拖动半径的大小
-        mSmallRadius = 0.1f * Math.min(mImageContainer.measuredWidth, mImageContainer.measuredHeight).toFloat() * mSettings.range
-        mBigRadius = 1.5f * mSmallRadius
+        mSmallRadius = 0.05f * Math.min(mImageContainer.measuredWidth, mImageContainer.measuredHeight).toFloat() * mSettings.range
+        mBigRadius = 1f * mSmallRadius
         //设置imageView的padding，不然拖动时图片边缘部分会消失
         val padding = mBigRadius.toInt()
         mIvBig.setPadding(padding, padding, padding, padding)
@@ -91,10 +87,12 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val y = event.y
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
+                LogUtils.e("ACTION_DOWN")
                 lastX = x
                 lastY = y
             }
             MotionEvent.ACTION_MOVE -> {
+                LogUtils.e("ACTION_MOVE")
                 val deltaX = x - lastX
                 val deltaY = y - lastY
                 moveEvent(mIvBig, deltaX, deltaY, mSmallRadius)
@@ -109,7 +107,7 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 mIvSmall.y = 0f
             }
         }
-        return true
+        return super.onTouchEvent(event)
     }
 
     /**
@@ -140,5 +138,26 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     fun setChecked(checked: Boolean) {
         mIvBig.setImageResource(if (checked) mSettings.bigIconSrcCheck else mSettings.bigIconSrc)
         mIvSmall.setImageResource(if (checked) mSettings.smallIconSrcCheck else mSettings.smallIconSrc)
+    }
+
+    fun setOffsetOrientation(orientation: OffsetOrientation) {
+        when (orientation) {
+            OffsetOrientation.LEFT -> {
+                mIvBig.x = mIvBig.left - mSmallRadius
+                mIvSmall.x = mIvBig.left - mBigRadius
+            }
+            OffsetOrientation.RIGHT -> {
+                mIvBig.x = mIvBig.left + mSmallRadius
+                mIvSmall.x = mIvBig.left + mBigRadius
+            }
+            OffsetOrientation.TOP -> {
+                mIvBig.y = mIvBig.top - mSmallRadius
+                mIvSmall.y = mIvBig.top - mBigRadius
+            }
+            OffsetOrientation.BOTTOM -> {
+                mIvBig.y = mIvBig.top + mSmallRadius
+                mIvSmall.y = mIvBig.top + mBigRadius
+            }
+        }
     }
 }
