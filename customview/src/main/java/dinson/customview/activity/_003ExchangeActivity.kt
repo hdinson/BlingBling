@@ -63,13 +63,16 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         HttpHelper.create(ExchangeApi::class.java).getRate()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : BaseObserver<ExchangeBean?>() {
+            .subscribe(Consumer {
+
+            })
+            /*.subscribe(object : BaseObserver<ExchangeBean?>() {
                 override fun onHandlerSuccess(value: ExchangeBean?) {
                     val json = Gson().toJson(value)
                     CacheUtils.setExangeRateCache(json)
                     setAdapterRate(json)
                 }
-            })
+            })*/
     }
 
     private fun initUI() {

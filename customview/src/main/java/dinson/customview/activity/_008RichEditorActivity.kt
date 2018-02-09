@@ -26,12 +26,12 @@ class _008RichEditorActivity : BaseActivity() {
     private fun initUI() {
         cancel.setOnClickListener { onBackPressed() }
         ib_emoji.setOnClickListener {
-            if (emojiLayout.getVisibility() == View.VISIBLE) {
-                emojiLayout.setVisibility(View.GONE);
-                emojiLayout.showKeyboard();
+            if (emojiLayout.visibility == View.VISIBLE) {
+                emojiLayout.visibility = View.GONE
+                emojiLayout.showKeyboard()
             } else {
-                emojiLayout.setVisibility(View.VISIBLE);
-                emojiLayout.hideKeyboard();
+                emojiLayout.visibility = View.VISIBLE
+                emojiLayout.hideKeyboard()
             }
         }
         emojiLayout.setEditTextSmile(richEditor)
