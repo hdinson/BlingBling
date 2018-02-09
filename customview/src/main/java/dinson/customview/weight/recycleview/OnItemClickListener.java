@@ -6,6 +6,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * RecyclerView的点击监听
  *
@@ -15,7 +17,7 @@ public class OnItemClickListener implements RecyclerView.OnItemTouchListener {
 
 
     public interface OnClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(@NotNull View view, int position);
     }
 
     public interface onLongClickListener {

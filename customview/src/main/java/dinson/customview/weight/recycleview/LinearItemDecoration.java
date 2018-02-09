@@ -1,7 +1,6 @@
 package dinson.customview.weight.recycleview;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -31,7 +30,7 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
      */
     public LinearItemDecoration(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(ContextCompat.getColor(context,R.color.common_divider));
+        mPaint.setColor(ContextCompat.getColor(context, R.color.common_divider));
         mPaint.setStyle(Paint.Style.FILL);
     }
 
@@ -48,6 +47,17 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
         mDividerHeight = mDivider.getIntrinsicHeight();
     }
 
+
+    /**
+     * 自定义分割线
+     *
+     * @param context       context
+     * @param dividerHeight 分割线高度
+     */
+    public LinearItemDecoration(Context context, float dividerHeight) {
+        this(context, dividerHeight, ContextCompat.getColor(context, R.color.common_divider));
+    }
+
     /**
      * 自定义分割线
      *
@@ -55,9 +65,9 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
      * @param dividerHeight 分割线高度
      * @param dividerColor  分割线颜色
      */
-    public LinearItemDecoration(Context context, int dividerHeight, int dividerColor) {
+    public LinearItemDecoration(Context context, float dividerHeight, int dividerColor) {
         this(context);
-        mDividerHeight = dividerHeight;
+        mDividerHeight = (int) dividerHeight;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(dividerColor);
         mPaint.setStyle(Paint.Style.FILL);

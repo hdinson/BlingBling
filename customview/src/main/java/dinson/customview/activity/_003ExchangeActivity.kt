@@ -63,16 +63,13 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         HttpHelper.create(ExchangeApi::class.java).getRate()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(Consumer {
-
-            })
-            /*.subscribe(object : BaseObserver<ExchangeBean?>() {
-                override fun onHandlerSuccess(value: ExchangeBean?) {
+            .subscribe(object : BaseObserver<ExchangeBean?>() {
+                override fun onHandlerSuccess(value: ExchangeBean) {
                     val json = Gson().toJson(value)
                     CacheUtils.setExangeRateCache(json)
                     setAdapterRate(json)
                 }
-            })*/
+            })
     }
 
     private fun initUI() {
@@ -179,7 +176,7 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
     /**
      * 条目的选中改变，更换货币基数
      */
-    override fun onItemClick(view: View?, position: Int) {
+    override fun onItemClick(view: View, position: Int) {
         mAdapter.onItemChange(position)
     }
 
