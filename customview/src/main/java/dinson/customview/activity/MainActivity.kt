@@ -62,8 +62,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         initContent()
         initHead()
         getLocation()
-
-
     }
 
     /**
@@ -92,6 +90,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _010ParallaxActivity::class.java, getString(R.string.parallax_animation_img)),
             ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
                 _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)),
+            ClassBean(getString(R.string.bilibili_title), getString(R.string.bilibili_desc),
+                _012BiliBiliListActivity::class.java, getString(R.string.bilibili_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
@@ -248,7 +248,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         mTouchHelper.startDrag(viewHolder)
     }
 
-    override fun onItemClick(view: View?, position: Int) {
+    override fun onItemClick(view: View , position: Int) {
         startActivity(Intent(this, mContentData[position].name))
     }
 

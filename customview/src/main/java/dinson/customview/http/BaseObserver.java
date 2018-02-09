@@ -1,5 +1,7 @@
 package dinson.customview.http;
 
+import org.jetbrains.annotations.NotNull;
+
 import dinson.customview.utils.LogUtils;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -28,5 +30,5 @@ public abstract class BaseObserver<T> implements Observer<T> {
         LogUtils.i("onComplete",false);
     }
 
-    public abstract void onHandlerSuccess(T value);
+    public abstract void onHandlerSuccess(@NotNull T value);
 }
