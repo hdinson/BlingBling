@@ -113,7 +113,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     private fun initHead() {
         mainBanner.setPages(mHeadData, MainBannerHolder())
         mainBanner.setDuration(500)
-        mainBanner.setIndicatorVisibility(View.GONE)
         mainBanner.setBannerPageClickListener(BannerPageClickListener { view, position ->
             Single.just(mHeadData[position].data.hp_img_url)
                 .map { s ->

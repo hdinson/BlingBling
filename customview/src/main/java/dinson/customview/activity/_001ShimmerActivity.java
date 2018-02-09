@@ -29,8 +29,7 @@ public class _001ShimmerActivity extends BaseActivity {
         mTvTitle = findViewById(R.id.tvTitle);
 
         //设置背景（高斯模糊）
-        RequestOptions options = new RequestOptions().dontAnimate()
-                                                     .transform(new BlurTransformation(this, 23));
+        RequestOptions options = new RequestOptions().transform(new BlurTransformation(this, 23));
         // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
         ImageView img = findViewById(R.id.ivImg);
         Glide.with(this).load(R.drawable._001_bg).apply(options).into(img);
