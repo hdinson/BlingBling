@@ -97,16 +97,16 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     private fun initContent() {
-         val mainAdapter = MainContentAdapter(this, mContentData, this)
+        val mainAdapter = MainContentAdapter(this, mContentData, this)
         mTouchHelper = ItemTouchHelper(MainItemTouchHelper(mainAdapter))
         mTouchHelper.attachToRecyclerView(rvContent)
         rvContent.apply {
             adapter = mainAdapter
-             val layoutManager =   LinearLayoutManager(this@MainActivity)
-            layoutManager.isSmoothScrollbarEnabled = true
-            layoutManager.isAutoMeasureEnabled = true
-         setHasFixedSize(true)
-            isNestedScrollingEnabled = false
+            val layoutManager = LinearLayoutManager(this@MainActivity)
+            //layoutManager.isSmoothScrollbarEnabled = true
+            //layoutManager.isAutoMeasureEnabled = true
+            //setHasFixedSize(true)
+            //isNestedScrollingEnabled = false
             setLayoutManager(layoutManager)
             addItemDecoration(LinearItemDecoration(this@MainActivity))
             addOnItemTouchListener(OnItemClickListener(this@MainActivity, rvContent, this@MainActivity))
@@ -251,7 +251,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         mTouchHelper.startDrag(viewHolder)
     }
 
-    override fun onItemClick(view: View , position: Int) {
+    override fun onItemClick(view: View, position: Int) {
         startActivity(Intent(this, mContentData[position].name))
     }
 

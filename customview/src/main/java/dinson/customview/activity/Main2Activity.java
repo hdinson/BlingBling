@@ -31,11 +31,9 @@ public class Main2Activity extends BaseNfcActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        mNfcText = (TextView) findViewById(R.id.nfcTextView);
+        mNfcText = findViewById(R.id.nfcTextView);
        new  RxPermissions(this).request(Manifest.permission.NFC)
-           .subscribe(aBoolean -> {
-               Toast.makeText(this,"已同意nfc权限",Toast.LENGTH_SHORT).show();
-           });
+           .subscribe(aBoolean -> Toast.makeText(this,"已同意nfc权限",Toast.LENGTH_SHORT).show());
     }
     @Override
     public void onNewIntent(Intent intent) {

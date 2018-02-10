@@ -12,7 +12,6 @@ class GokuTransformer : ViewPager.PageTransformer {
     }
 
     override fun transformPage(page: View, pos: Float) {
-        if (page == null) return
 
         when {
             pos < -1 -> {
