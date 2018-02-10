@@ -54,8 +54,6 @@ class _004GangedRecycleViewActivity : BaseActivity() {
         }
         val rightAdapter = _004RightAdapter(this, rightDatas)
 
-        val rvLeft = findViewById<RecyclerView>(R.id.rv_left)
-        val rvRight = findViewById<RecyclerView>(R.id.rv_right)
 
         rvLeft.layoutManager = LinearLayoutManager(this)
         val gridManager = GridLayoutManager(this, 3)

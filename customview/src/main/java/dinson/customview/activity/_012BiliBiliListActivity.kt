@@ -25,8 +25,7 @@ class _012BiliBiliListActivity : AppCompatActivity() {
         rvContent.adapter = _012VideoListAdapter(this, mData)
         rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent,
             OnItemClickListener.OnClickListener { _, position ->
-//                _012BiliBiliVideoActivity.start(this, mData[position].title, mData[position].url)
-                VideoActivity.intentTo(this, mData[position].url, mData[position].url)
+                _012BiliBiliVideoActivity.start(this, mData[position].title, mData[position].url)
             }))
     }
 
