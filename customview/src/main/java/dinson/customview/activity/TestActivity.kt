@@ -24,34 +24,12 @@ import java.util.concurrent.TimeUnit
 import android.content.pm.PackageManager
 import android.content.ComponentName
 
-
-
 class TestActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-
-
-        tvTitle.setOnClickListener {
-            changeIcon("dinson.customview.activity.SplashActivity")
-        }
-
-        tvContent.setOnClickListener {
-            changeIcon("dinson.customview.activity.SplashAliasActivity")
-        }
-
-
     }
 
-    fun changeIcon(activityPath: String) {
-        val pm = packageManager
-        pm.setComponentEnabledSetting(componentName,
-            PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
-        pm.setComponentEnabledSetting(ComponentName(this, activityPath),
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
-        //重启桌面 加速显示
-        //        restartSystemLauncher(pm);
-    }
     private fun jsoupTest() {
         Observable.just("https://github.com/DinsonCat/SomeDoc/blob/master/mh.json")
             .map { s ->
@@ -64,5 +42,4 @@ class TestActivity : BaseActivity() {
                     .toString()
             }
     }
-
 }

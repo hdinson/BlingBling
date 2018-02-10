@@ -43,7 +43,6 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
@@ -98,13 +97,17 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     private fun initContent() {
-        val mainAdapter = MainContentAdapter(this, mContentData, this)
+         val mainAdapter = MainContentAdapter(this, mContentData, this)
         mTouchHelper = ItemTouchHelper(MainItemTouchHelper(mainAdapter))
         mTouchHelper.attachToRecyclerView(rvContent)
-
         rvContent.apply {
             adapter = mainAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
+             val layoutManager =   LinearLayoutManager(this@MainActivity)
+            layoutManager.isSmoothScrollbarEnabled = true
+            layoutManager.isAutoMeasureEnabled = true
+         setHasFixedSize(true)
+            isNestedScrollingEnabled = false
+            setLayoutManager(layoutManager)
             addItemDecoration(LinearItemDecoration(this@MainActivity))
             addOnItemTouchListener(OnItemClickListener(this@MainActivity, rvContent, this@MainActivity))
         }
