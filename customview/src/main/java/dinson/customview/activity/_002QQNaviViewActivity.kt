@@ -24,7 +24,7 @@ class _002QQNaviViewActivity : BaseActivity() {
 
     private fun initUI() {
         val imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Fm71mrw6NECZAitx83iMnoBXUvgW.jpg"
-        Glide.with(this).load(imgUrl).into(findViewById (R.id.iv_bg) as ImageView)
+        Glide.with(this).load(imgUrl).into(ivBg)
 
 
         val manager = QQNaviViewManager(qqViewBubble, qqViewPerson, qqViewStar)

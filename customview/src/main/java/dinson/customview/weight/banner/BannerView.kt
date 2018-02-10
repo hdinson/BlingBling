@@ -328,9 +328,4 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         mIndicatorContainer.visibility = visibility
     }
 
-    fun <T> notifyDataSetChanged(it: ArrayList<T>) {
-
-
-    }
-
 }
