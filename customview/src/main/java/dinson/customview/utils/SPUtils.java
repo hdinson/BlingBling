@@ -40,6 +40,16 @@ public class SPUtils {
     }
 
 
+    /**
+     * 判断是否应该加载默认的应用图标
+     */
+    public static boolean isDefaultAppIcon(Context context) {
+        boolean aBoolean = getBoolean(context, "config", "icon", false);
+        putBoolean(context, "config", "icon", !aBoolean);
+        return aBoolean;
+    }
+
+
     /////////////////////////////////// 分割线 /////////////////////////////////////////////////////
 
     public static boolean getBoolean(Context ctx, String fileName, String key, boolean defValue) {

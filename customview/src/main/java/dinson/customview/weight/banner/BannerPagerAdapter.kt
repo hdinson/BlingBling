@@ -57,7 +57,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
     private fun getVirtualCount() = getRealCount() * LOOPERCOUNTFACTOR
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        if (container == null) return super.instantiateItem(container, position)
+
         val view = getView(position, container)
         container.removeView(view)
         container.addView(view)
@@ -67,7 +67,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
     override fun isViewFromObject(view: View, obj: Any) = view == obj
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
-        LogUtils.e("container: ${container?.childCount}")
+        LogUtils.e("container: ${container .childCount}")
 
     }
 

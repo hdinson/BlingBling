@@ -6,11 +6,15 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:listDivider">@color/common_divider</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColor">@color/textPrimary</item>
     </style>
 
 
     <style name="AppTheme.SplashTheme">
         <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="AppTheme.FullScreen">
         <item name="android:windowFullscreen">true</item>
     </style>
     <!--005-->

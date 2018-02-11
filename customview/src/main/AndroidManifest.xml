@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dinson.customview">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 
     <application
         android:name="._global.GlobalApplication"
@@ -25,7 +26,6 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="f16432f8253935bdaa564c4ad9288fbe"/>
-
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
@@ -34,6 +34,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity-alias
+            android:name=".activity.SplashAliasActivity"
+            android:enabled="false"
+            android:icon="@mipmap/app_icon"
+            android:targetActivity=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity-alias>
+
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.DailyPicActivity"/>
         <activity android:name=".activity.TestActivity"/>
@@ -48,20 +59,20 @@
         <activity android:name=".activity._009GoogleVRActivity"/>
         <activity
             android:name=".activity._010ParallaxActivity"
-            android:theme="@style/AppTheme.SplashTheme" />
+            android:theme="@style/AppTheme.FullScreen"/>
+        <activity android:name=".activity._011DiagonalLayoutActivity"/>
+        <activity android:name=".activity._012BiliBiliListActivity"/>
         <activity
-            android:name=".activity._011DiagonalLayoutActivity"  />
+            android:name=".activity._012BiliBiliVideoActivity"
+            android:theme="@style/AppTheme.FullScreen"/>
         <activity
             android:name=".activity.Main2Activity"
             android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
             </intent-filter>
-
-
         </activity>
     </application>
 </manifest>

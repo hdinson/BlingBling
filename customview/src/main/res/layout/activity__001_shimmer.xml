@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@id/ivImg"
@@ -17,13 +16,13 @@
         shimmer:layout_constraintTop_toTopOf="parent"/>
 
     <dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
+        android:id="@+id/shimmerContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         shimmer:duration="1000"
-        shimmer:layout_constraintBottom_toTopOf="@+id/space"
+        shimmer:layout_constraintBottom_toTopOf="@id/guideline"
         shimmer:layout_constraintLeft_toLeftOf="parent"
         shimmer:layout_constraintRight_toRightOf="parent">
 
@@ -50,35 +49,25 @@
         </LinearLayout>
     </dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout>
 
-    <dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout
-        android:id="@+id/shimmerFrameLayout"
+    <TextView
+        android:id="@id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        shimmer:duration="1000"
+        android:fontFamily="sans-serif-thin"
+        android:text="Default"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
         shimmer:layout_constraintBottom_toBottomOf="parent"
         shimmer:layout_constraintLeft_toLeftOf="parent"
         shimmer:layout_constraintRight_toRightOf="parent"
-        shimmer:layout_constraintTop_toBottomOf="@+id/settings_container">
+        shimmer:layout_constraintTop_toBottomOf="@+id/settings_container"/>
 
-        <TextView
-            android:id="@id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
-            android:text="Default"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"/>
-
-    </dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout>
-
-    <Space
-        android:id="@+id/space"
-        android:layout_width="328dp"
-        android:layout_height="1dp"
-        shimmer:layout_constraintBottom_toBottomOf="parent"
-        shimmer:layout_constraintLeft_toLeftOf="parent"
-        shimmer:layout_constraintRight_toRightOf="parent"
-        shimmer:layout_constraintTop_toTopOf="parent"/>
+    <android.support.constraint.Guideline
+        android:id="@id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        shimmer:layout_constraintGuide_percent="0.5"/>
 
     <LinearLayout
         android:id="@+id/settings_container"
@@ -88,7 +77,7 @@
         shimmer:layout_constraintBottom_toBottomOf="parent"
         shimmer:layout_constraintLeft_toLeftOf="parent"
         shimmer:layout_constraintRight_toRightOf="parent"
-        shimmer:layout_constraintTop_toBottomOf="@+id/space">
+        shimmer:layout_constraintTop_toBottomOf="@id/guideline">
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,7 +90,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/preset_button0"
+            android:id="@+id/presetButton0"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
@@ -112,7 +101,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/preset_button1"
+            android:id="@+id/presetButton1"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
@@ -123,7 +112,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/preset_button2"
+            android:id="@+id/presetButton2"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
@@ -134,7 +123,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/preset_button3"
+            android:id="@+id/presetButton3"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
@@ -145,7 +134,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/preset_button4"
+            android:id="@+id/presetButton4"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
