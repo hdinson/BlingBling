@@ -43,7 +43,6 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
@@ -62,8 +61,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         initContent()
         initHead()
         getLocation()
-
-
     }
 
     /**
@@ -92,6 +89,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _010ParallaxActivity::class.java, getString(R.string.parallax_animation_img)),
             ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
                 _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)),
+            ClassBean(getString(R.string.bilibili_title), getString(R.string.bilibili_desc),
+                _012BiliBiliListActivity::class.java, getString(R.string.bilibili_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
@@ -101,10 +100,14 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         val mainAdapter = MainContentAdapter(this, mContentData, this)
         mTouchHelper = ItemTouchHelper(MainItemTouchHelper(mainAdapter))
         mTouchHelper.attachToRecyclerView(rvContent)
-
         rvContent.apply {
             adapter = mainAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            val layoutManager = LinearLayoutManager(this@MainActivity)
+            //layoutManager.isSmoothScrollbarEnabled = true
+            //layoutManager.isAutoMeasureEnabled = true
+            //setHasFixedSize(true)
+            //isNestedScrollingEnabled = false
+            setLayoutManager(layoutManager)
             addItemDecoration(LinearItemDecoration(this@MainActivity))
             addOnItemTouchListener(OnItemClickListener(this@MainActivity, rvContent, this@MainActivity))
         }
@@ -113,7 +116,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     private fun initHead() {
         mainBanner.setPages(mHeadData, MainBannerHolder())
         mainBanner.setDuration(500)
-        mainBanner.setIndicatorVisibility(View.GONE)
         mainBanner.setBannerPageClickListener(BannerPageClickListener { view, position ->
             Single.just(mHeadData[position].data.hp_img_url)
                 .map { s ->
@@ -249,7 +251,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         mTouchHelper.startDrag(viewHolder)
     }
 
-    override fun onItemClick(view: View?, position: Int) {
+    override fun onItemClick(view: View, position: Int) {
         startActivity(Intent(this, mContentData[position].name))
     }
 

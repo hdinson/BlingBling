@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/iv_bg"
+        android:id="@+id/ivBg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:scaleType="fitStart" />
+        android:scaleType="fitStart"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="1dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
 
@@ -26,9 +28,11 @@
             app:bigIconSrc="@drawable/_002_pre_bubble_big"
             app:bigIconSrcCheck="@drawable/_002_bubble_big"
             app:bottomText="消息"
+            app:bottomTextSize="12sp"
+            app:iconHeight="32dp"
+            app:iconWidth="32dp"
             app:smallIconSrc="@drawable/_002_pre_bubble_small"
-            app:smallIconSrcCheck="@drawable/_002_bubble_small" />
-
+            app:smallIconSrcCheck="@drawable/_002_bubble_small"/>
 
         <dinson.customview.weight._002qqnaviview.QQNaviView
             android:id="@+id/qqViewPerson"
@@ -38,9 +42,11 @@
             app:bigIconSrc="@drawable/_002_pre_person_big"
             app:bigIconSrcCheck="@drawable/_002_person_big"
             app:bottomText="联系人"
+            app:bottomTextSize="12sp"
+            app:iconHeight="32dp"
+            app:iconWidth="32dp"
             app:smallIconSrc="@drawable/_002_pre_person_small"
-            app:smallIconSrcCheck="@drawable/_002_person_small" />
-
+            app:smallIconSrcCheck="@drawable/_002_person_small"/>
 
         <dinson.customview.weight._002qqnaviview.QQNaviView
             android:id="@+id/qqViewStar"
@@ -50,10 +56,10 @@
             app:bigIconSrc="@drawable/_002_pre_star_big"
             app:bigIconSrcCheck="@drawable/_002_star_big"
             app:bottomText="动态"
+            app:bottomTextSize="12sp"
+            app:iconHeight="32dp"
+            app:iconWidth="32dp"
             app:smallIconSrc="@null"
-            app:smallIconSrcCheck="@drawable/_002_star_small" />
-
-
+            app:smallIconSrcCheck="@drawable/_002_star_small"/>
     </LinearLayout>
-
 </LinearLayout>

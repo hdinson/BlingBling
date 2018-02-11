@@ -80,6 +80,8 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         containerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
         mIndicatorContainer.orientation = LinearLayout.HORIZONTAL
         addView(mIndicatorContainer, containerParams)
+        //隐藏指示器
+        if (mSettings.isHiddenIndicator) mIndicatorContainer.visibility = View.GONE
     }
 
 
@@ -109,9 +111,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         // 2017.7.20 fix：将Indicator初始化放在Adapter的初始化之前，解决更新数据变化更新时crush.
         //初始化Indicator
-        if (!mSettings.isHiddenIndicator) {
-            initIndicator(datas.size)
-        }
+        initIndicator(datas.size)
         setDuration(1000)
 
 
@@ -227,7 +227,6 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
 
-
     /******************************************************************************************************/
     /**                             对外API                                                               **/
     /******************************************************************************************************/
@@ -327,11 +326,6 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     fun setIndicatorVisibility(visibility: Int) {
         mIndicatorContainer.visibility = visibility
-    }
-
-    fun <T> notifyDataSetChanged(it: ArrayList<T>) {
-
-
     }
 
 }

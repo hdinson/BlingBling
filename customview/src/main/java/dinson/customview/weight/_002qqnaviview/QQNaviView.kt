@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
-import dinson.customview.R
 import dinson.customview.utils.LogUtils
 
 /**
@@ -23,6 +22,7 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private val mSettings = QQNaviViewSettings(context, attrs, defStyleAttr)
     private val mIvBig: ImageView
     private val mIvSmall: ImageView
+    private var mBottomText: TextView? = null
     private val mImageContainer: FrameLayout
 
     /* 拖动幅度较大半径 */
@@ -51,12 +51,12 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         if (mSettings.bottomText.isNotEmpty()) {
             //底部有文字
-            val bottomText = TextView(context)
-            bottomText.text = mSettings.bottomText
-            bottomText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mSettings.bottomTextSize)
+            mBottomText = TextView(context)
+            mBottomText!!.text = mSettings.bottomText
+            mBottomText!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, mSettings.bottomTextSize)
             val textParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             textParams.topMargin = mSettings.textPadding.toInt()
-            addView(bottomText, textParams)
+            addView(mBottomText, textParams)
         }
     }
 
@@ -71,12 +71,13 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
      */
     private fun setupView() {
         //根据view的宽高确定可拖动半径的大小
-        mSmallRadius = 0.05f * Math.min(mImageContainer.measuredWidth, mImageContainer.measuredHeight).toFloat() * mSettings.range
-        mBigRadius = 1f * mSmallRadius
+        mBigRadius = 0.1f * Math.min(mImageContainer.measuredWidth, mImageContainer.measuredHeight).toFloat() * mSettings.range
+        mSmallRadius = mBigRadius / 1.5f
         //设置imageView的padding，不然拖动时图片边缘部分会消失
-        val padding = mBigRadius.toInt()
+        val padding = mSmallRadius.toInt()
         mIvBig.setPadding(padding, padding, padding, padding)
         mIvSmall.setPadding(padding, padding, padding, padding)
+        mBottomText?.setPadding(0, 0, 0, padding)
     }
 
     private var lastX = 0f

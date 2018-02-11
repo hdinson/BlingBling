@@ -32,13 +32,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_left"
+            android:id="@+id/rvLeft"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_right"
+            android:id="@+id/rvRight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3.5"/>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,42 +8,21 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:clickable="true"
-            android:padding="20dp"
-            android:text="点击获取数据"/>
-
-        <TextView
-            android:id="@+id/tvContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:visibility="gone"/>
-    </FrameLayout>
-
-    <dinson.customview.weight._002qqnaviview.QQNaviView
+    <Button
+        android:id="@id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange"
-        android:padding="@dimen/spacing_huge"
-        app:bigIconSrc="@drawable/_002_pre_person_big"
-        app:bigIconSrcCheck="@drawable/_002_person_big"
-        app:bottomText="呵呵达"
-        app:bottomTextSize="10sp"
-        app:smallIconSrc="@drawable/_002_pre_person_small"
-        app:smallIconSrcCheck="@drawable/_002_person_small">
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="呵呵哒"
-            android:textSize="10sp"
-            android:layout_height="wrap_content"/>
-    </dinson.customview.weight._002qqnaviview.QQNaviView>
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:padding="20dp"
+        android:text="安卓"/>
+
+    <Button
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:padding="20dp"
+        android:text="新的"/>
 </LinearLayout>
