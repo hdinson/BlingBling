@@ -74,5 +74,6 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity._013StepViewActivity"></activity>
     </application>
 </manifest>

@@ -15,7 +15,9 @@
     <color name="_003_text_color_hint">#66ffffff</color>
     <color name="_008_system_bar">#fafafa</color>
     <color name="_010_window_bg">#fefefe</color>
-
+    <color name="_013_title_bg">#ff00beaf</color>
+    <color name="_013_uncompleted_color">#FFFF00</color>
+    <color name="_013_uncompleted_text_color">#008000</color>
 
     <color name="transparent">#00000000</color>
     <color name="transparent05">#0B000000</color>

@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 import dinson.customview.utils.GlideUtils;
 import dinson.customview.utils.LogUtils;
-import dinson.customview.weight.banner.holder.BannerViewHolder;
 
 /**
  * @author Dinson - 2017/9/28

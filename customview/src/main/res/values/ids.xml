@@ -22,6 +22,7 @@
 
     <item name="vsContent" type="id"/>
     <item name="layoutRoot" type="id"/>
+    <item name="toolbar" type="id"/>
 
     <item name="cancel" type="id"/>
     <item name="rootView" type="id"/>
