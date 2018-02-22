@@ -20,7 +20,6 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     : LinearLayout(context, attrs, defStyleAttr) {
 
     private val mSettings = QQNaviViewSettings(context, attrs, defStyleAttr)
-
     private val mIvBig: ImageView
     private val mIvSmall: ImageView
     private var mBottomText: TextView? = null
