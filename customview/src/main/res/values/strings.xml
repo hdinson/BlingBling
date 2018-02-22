@@ -71,6 +71,10 @@
     <string name="bilibili_title">IJKPlayer</string>
     <string name="bilibili_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
     <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
+    <!--013-->
+    <string name="step_view_title">StepView</string>
+    <string name="step_view_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
+    <string name="step_view_img">http://ondlsj2sn.bkt.clouddn.com/Fm0fTIwMIZyoJZDpAOnARBLN0vCZ.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>

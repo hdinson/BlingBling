@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
@@ -184,7 +185,7 @@ public class SystemBarTintUtils {
 	     */  
 	    public void setStatusBarTintColor(int color) {  
 	        if (mStatusBarAvailable) {  
-	            mStatusBarTintView.setBackgroundColor(color);  
+	            mStatusBarTintView.setBackgroundColor(color);
 	        }  
 	    }  
 	  
@@ -240,8 +241,8 @@ public class SystemBarTintUtils {
 	     * @param res The identifier of the resource.  
 	     */  
 	    public void setNavigationBarTintResource(int res) {  
-	        if (mNavBarAvailable) {  
-	            mNavBarTintView.setBackgroundResource(res);  
+	        if (mNavBarAvailable) {
+				mNavBarTintView.setBackgroundResource(res);
 	        }  
 	    }  
 	  

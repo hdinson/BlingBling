@@ -7,9 +7,8 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,21 +19,21 @@ import java.util.Arrays;
 import dinson.customview.R;
 import dinson.customview._global.BaseNfcActivity;
 import dinson.customview.utils.LogUtils;
-import io.reactivex.Scheduler;
-import io.reactivex.functions.Consumer;
 
 public class Main2Activity extends BaseNfcActivity {
     private TextView mNfcText;
     private String mTagText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
         mNfcText = findViewById(R.id.nfcTextView);
-       new  RxPermissions(this).request(Manifest.permission.NFC)
-           .subscribe(aBoolean -> Toast.makeText(this,"已同意nfc权限",Toast.LENGTH_SHORT).show());
+        new RxPermissions(this).request(Manifest.permission.NFC)
+            .subscribe(aBoolean -> Toast.makeText(this, "已同意nfc权限", Toast.LENGTH_SHORT).show());
     }
+
     @Override
     public void onNewIntent(Intent intent) {
         //1.获取Tag对象
@@ -49,6 +48,7 @@ public class Main2Activity extends BaseNfcActivity {
         readNfcTag(intent);
         mNfcText.setText(mTagText);
     }
+
     /**
      * 读取NFC标签文本数据
      */
@@ -73,13 +73,14 @@ public class Main2Activity extends BaseNfcActivity {
                 }
             } catch (Exception e) {
             }
-        }else{
+        } else {
             mNfcText.append("不懂你说什么\n");
         }
     }
 
     /**
      * 解析NDEF文本数据，从第三个字节开始，后面的文本数据
+     *
      * @param ndefRecord
      * @return
      */

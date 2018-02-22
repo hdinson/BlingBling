@@ -3,10 +3,13 @@ package dinson.customview._global
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Window
+import android.view.WindowManager
 import dinson.customview.R
+import dinson.customview.utils.SystemBarTintUtils
 
 /**
  * 所有activity的基类
@@ -26,7 +29,7 @@ open class BaseActivity : AppCompatActivity() {
         //getSupportActionBar().hide();
         /*activity的出现动画*/
         overridePendingTransition(R.anim.activity_in_from_right, R.anim.activity_out_to_left)
-        requestedOrientation=ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         /*logcat点击跳转对用activity*/
         logShowActivity()
     }
@@ -51,7 +54,45 @@ open class BaseActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.activity_in_from_left, R.anim.activity_out_to_right)
     }
 
-    open fun finishWithAnim()  = true
+    open fun finishWithAnim() = true
+
+    /**
+     * 状态栏透明之后，状态栏不会顶上去，标题栏多大就是多大
+     * SystemBarTintManager，这时可以通过框架设置标题栏的颜色
+     *
+     *  @param color The color of the background tint.
+     */
+    fun setStatusBarTintColor(color: Int) {
+        //透明状态栏
+        val win = window
+        val winParams = win.attributes
+        val bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+        winParams.flags = winParams.flags or bits
+        win.attributes = winParams
+        val tintManager = SystemBarTintUtils(this)
+        tintManager.isStatusBarTintEnabled = true
+        tintManager.setStatusBarTintColor(color)// 通知栏所需颜色
+    }
+
+
+    /**
+     *状态栏透明之后，状态栏不会顶上去，标题栏多大就是多大
+     * SystemBarTintManager，这时可以通过框架设置标题栏的颜色
+     *
+     * @param res The identifier of the resource.
+     */
+    fun setStatusBarTintResource(res: Int) {
+        //透明状态栏
+        val win = window
+        val winParams = win.attributes
+        val bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+        winParams.flags = winParams.flags or bits
+        win.attributes = winParams
+        val tintManager = SystemBarTintUtils(this)
+        tintManager.isStatusBarTintEnabled = true
+        tintManager.setNavigationBarTintResource( res )// 通知栏所需颜色
+    }
+
 
     override fun onResumeFragments() {
         super.onResumeFragments()

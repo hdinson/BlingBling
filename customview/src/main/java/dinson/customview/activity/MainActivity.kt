@@ -91,6 +91,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)),
             ClassBean(getString(R.string.bilibili_title), getString(R.string.bilibili_desc),
                 _012BiliBiliListActivity::class.java, getString(R.string.bilibili_img)),
+           ClassBean(getString(R.string.step_view_title), getString(R.string.step_view_desc),
+                _013StepViewActivity::class.java, getString(R.string.step_view_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )

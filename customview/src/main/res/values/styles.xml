@@ -7,6 +7,8 @@
         <item name="android:listDivider">@color/common_divider</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textColor">@color/textPrimary</item>
+        <!-- 溢出菜单图标颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
 

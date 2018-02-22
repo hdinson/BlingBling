@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import dinson.customview.R
+import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._012VideoListAdapter
 import dinson.customview.model._012VideoBean
 import dinson.customview.weight.recycleview.LinearItemDecoration
@@ -13,7 +14,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.*
 
-class _012BiliBiliListActivity : AppCompatActivity() {
+class _012BiliBiliListActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

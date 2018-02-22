@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="true"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <Button
         android:id="@id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_marginTop="40dp"
         android:clickable="true"
         android:padding="20dp"
@@ -19,10 +20,10 @@
 
     <Button
         android:id="@+id/tvContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginTop="40dp"
         android:clickable="true"
         android:padding="20dp"
         android:text="新的"/>
-</LinearLayout>
+</RelativeLayout>

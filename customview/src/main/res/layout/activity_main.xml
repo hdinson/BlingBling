@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:elevation="9dp"
             app:contentScrim="#661DBAF1"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <dinson.customview.weight.banner.BannerView
                 android:id="@+id/mainBanner"
