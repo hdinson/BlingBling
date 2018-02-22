@@ -5,6 +5,9 @@ import android.graphics.*
 import android.util.TypedValue
 import android.view.View
 import dinson.customview.utils.LogUtils
+import com.loc.v
+
+
 
 
 /**
@@ -13,7 +16,7 @@ import dinson.customview.utils.LogUtils
 class VerticalStepViewIndicator(context: Context, pos: Position, state: State,private val mSettings: StepViewSettings) : View(context) {
 
     //默认最小高度或者宽度
-    private val mMinWidthOrHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, resources.displayMetrics).toInt()
+    private val mMinWidthOrHeight = 300
 
     private var mCompletedLineHeight: Float = 0.toFloat()//完成线的高度     definition completed line height
     /**
@@ -78,17 +81,39 @@ class VerticalStepViewIndicator(context: Context, pos: Position, state: State,pr
     }
 
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         LogUtils.i("VerticalStepViewIndicator onMeasure")
-        var width = MeasureSpec.getSize(widthMeasureSpec)
-        var height = MeasureSpec.getSize(heightMeasureSpec)
-
-        if (width < mMinWidthOrHeight) width = mMinWidthOrHeight
-        if (height < mMinWidthOrHeight) height = mMinWidthOrHeight
-
-        setMeasuredDimension(width, height)
-        LogUtils.e(" $width :  $height")
+         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)   //获取宽的模式
+         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec) //获取高的模式
+         val widthSize = View.MeasureSpec.getSize(widthMeasureSpec)   //获取宽的尺寸
+         val heightSize = View.MeasureSpec.getSize(heightMeasureSpec) //获取高的尺寸
+         LogUtils.v( "宽的模式:" + widthMode)
+         LogUtils.v( "高的模式:" + heightMode)
+         LogUtils.v( "宽的尺寸:" + widthSize)
+         LogUtils.v( "高的尺寸:" + heightSize)
+         val width: Int
+         val height: Int
+         if (widthMode == View.MeasureSpec.EXACTLY) {
+             //如果match_parent或者具体的值，直接赋值
+             width = widthSize
+         } else {
+             //如果是wrap_content，我们要得到控件需要多大的尺寸
+             val textWidth = getWidth()   //文本的宽度
+             //控件的宽度就是文本的宽度加上两边的内边距。内边距就是padding值，在构造方法执行完就被赋值
+             width = (paddingLeft.toFloat() + textWidth + paddingRight.toFloat()).toInt()
+             LogUtils.v( "文本的宽度:" + textWidth + "控件的宽度：" + width)
+         }
+         //高度跟宽度处理方式一样
+         if (heightMode == View.MeasureSpec.EXACTLY) {
+             height = heightSize
+         } else {
+             val textHeight =  getHeight()
+             height = (paddingTop.toFloat() + textHeight + paddingBottom.toFloat()).toInt()
+             LogUtils.v( "文本的高度:" + textHeight + "控件的高度：" + height)
+         }
+         //保存测量宽度和测量高度
+         setMeasuredDimension(width, height)
     }
 
     /*override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -159,8 +184,8 @@ class VerticalStepViewIndicator(context: Context, pos: Position, state: State,pr
         //-----------------------画图标-----draw icon-----------------------------------------------*/
 
 
-        mSettings.indicatorCompleteIcon.setBounds(0,0,mSettings.indicatorCompleteIcon.minimumWidth,mSettings.indicatorCompleteIcon.minimumHeight)
-        mSettings.indicatorCompleteIcon.draw(canvas)
+        mSettings.indicatorAttentionIcon.setBounds(0,0,mSettings.indicatorCompleteIcon.minimumWidth,mSettings.indicatorCompleteIcon.minimumHeight)
+        mSettings.indicatorAttentionIcon.draw(canvas)
 
     }
 
