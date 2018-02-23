@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import java.util.List;
 
 import dinson.customview.R;
@@ -24,8 +23,7 @@ import dinson.customview.weight._013stepview.bean.StepBean;
  * <p/>
  * 描述：StepView
  */
-public class HorizontalStepView extends LinearLayout implements HorizontalStepsViewIndicator.OnDrawIndicatorListener
-{
+public class HorizontalStepView extends LinearLayout implements HorizontalStepsViewIndicator.OnDrawIndicatorListener {
     private RelativeLayout mTextContainer;
     private HorizontalStepsViewIndicator mStepsViewIndicator;
     private List<StepBean> mStepBeanList;
@@ -35,24 +33,20 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
     private int mTextSize = 14;//default textSize
     private TextView mTextView;
 
-    public HorizontalStepView(Context context)
-    {
+    public HorizontalStepView(Context context) {
         this(context, null);
     }
 
-    public HorizontalStepView(Context context, AttributeSet attrs)
-    {
+    public HorizontalStepView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public HorizontalStepView(Context context, AttributeSet attrs, int defStyleAttr)
-    {
+    public HorizontalStepView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.widget_013_horizontal_stepsview, this);
         mStepsViewIndicator = (HorizontalStepsViewIndicator) rootView.findViewById(R.id.steps_indicator);
         mStepsViewIndicator.setOnDrawListener(this);
@@ -65,8 +59,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      * @param stepsBeanList
      * @return
      */
-    public HorizontalStepView setStepViewTexts(List<StepBean> stepsBeanList)
-    {
+    public HorizontalStepView setStepViewTexts(List<StepBean> stepsBeanList) {
         mStepBeanList = stepsBeanList;
         mStepsViewIndicator.setStepNum(mStepBeanList);
         return this;
@@ -79,8 +72,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      * @param unCompletedTextColor
      * @return
      */
-    public HorizontalStepView setStepViewUnCompletedTextColor(int unCompletedTextColor)
-    {
+    public HorizontalStepView setStepViewUnCompletedTextColor(int unCompletedTextColor) {
         mUnCompletedTextColor = unCompletedTextColor;
         return this;
     }
@@ -91,8 +83,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      * @param complectedTextColor
      * @return
      */
-    public HorizontalStepView setStepViewCompletedTextColor(int complectedTextColor)
-    {
+    public HorizontalStepView setStepViewCompletedTextColor(int complectedTextColor) {
         this.mCompletedTextColor = complectedTextColor;
         return this;
     }
@@ -103,8 +94,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      * @param unCompletedLineColor
      * @return
      */
-    public HorizontalStepView setStepsViewIndicatorUnCompletedLineColor(int unCompletedLineColor)
-    {
+    public HorizontalStepView setStepsViewIndicatorUnCompletedLineColor(int unCompletedLineColor) {
         mStepsViewIndicator.setUnCompletedLineColor(unCompletedLineColor);
         return this;
     }
@@ -115,8 +105,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      * @param completedLineColor
      * @return
      */
-    public HorizontalStepView setStepsViewIndicatorCompletedLineColor(int completedLineColor)
-    {
+    public HorizontalStepView setStepsViewIndicatorCompletedLineColor(int completedLineColor) {
         mStepsViewIndicator.setCompletedLineColor(completedLineColor);
         return this;
     }
@@ -126,8 +115,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      *
      * @param defaultIcon
      */
-    public HorizontalStepView setStepsViewIndicatorDefaultIcon(Drawable defaultIcon)
-    {
+    public HorizontalStepView setStepsViewIndicatorDefaultIcon(Drawable defaultIcon) {
         mStepsViewIndicator.setDefaultIcon(defaultIcon);
         return this;
     }
@@ -137,8 +125,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      *
      * @param completeIcon
      */
-    public HorizontalStepView setStepsViewIndicatorCompleteIcon(Drawable completeIcon)
-    {
+    public HorizontalStepView setStepsViewIndicatorCompleteIcon(Drawable completeIcon) {
         mStepsViewIndicator.setCompleteIcon(completeIcon);
         return this;
     }
@@ -148,8 +135,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      *
      * @param attentionIcon
      */
-    public HorizontalStepView setStepsViewIndicatorAttentionIcon(Drawable attentionIcon)
-    {
+    public HorizontalStepView setStepsViewIndicatorAttentionIcon(Drawable attentionIcon) {
         mStepsViewIndicator.setAttentionIcon(attentionIcon);
         return this;
     }
@@ -160,26 +146,20 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
      * @param textSize
      * @return
      */
-    public HorizontalStepView setTextSize(int textSize)
-    {
-        if(textSize > 0)
-        {
+    public HorizontalStepView setTextSize(int textSize) {
+        if (textSize > 0) {
             mTextSize = textSize;
         }
         return this;
     }
 
     @Override
-    public void ondrawIndicator()
-    {
-        if(mTextContainer != null)
-        {
+    public void ondrawIndicator() {
+        if (mTextContainer != null) {
             mTextContainer.removeAllViews();
             List<Float> complectedXPosition = mStepsViewIndicator.getCircleCenterPointPositionList();
-            if(mStepBeanList != null && complectedXPosition != null && complectedXPosition.size() > 0)
-            {
-                for(int i = 0; i < mStepBeanList.size(); i++)
-                {
+            if (mStepBeanList != null && complectedXPosition != null && complectedXPosition.size() > 0) {
+                for (int i = 0; i < mStepBeanList.size(); i++) {
                     mTextView = new TextView(getContext());
                     mTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize);
                     mTextView.setText(mStepBeanList.get(i).getName());
@@ -190,12 +170,10 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
                     mTextView.setX(complectedXPosition.get(i) - measuredWidth / 2);
                     mTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                    if(i <= mComplectingPosition)
-                    {
+                    if (i <= mComplectingPosition) {
                         mTextView.setTypeface(null, Typeface.BOLD);
                         mTextView.setTextColor(mCompletedTextColor);
-                    } else
-                    {
+                    } else {
                         mTextView.setTextColor(mUnCompletedTextColor);
                     }
 
@@ -204,5 +182,4 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
             }
         }
     }
-
 }

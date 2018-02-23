@@ -25,6 +25,10 @@
         <dinson.customview.weight._013stepview.VerticalStepView
             android:id="@+id/step_view0"
             android:layout_width="match_parent"
+            app:IndicatorHeight="30dp"
+            app:IndicatorWidth="30dp"
+            app:IndicatorLineWidth="2dp"
+            android:background="@color/_013_title_bg"
             android:layout_height="match_parent" />
     </android.support.v4.widget.NestedScrollView>
 </FrameLayout>

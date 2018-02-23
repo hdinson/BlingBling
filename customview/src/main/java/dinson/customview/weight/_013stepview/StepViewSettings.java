@@ -8,39 +8,57 @@ import android.util.AttributeSet;
 
 import dinson.customview.R;
 
-
 /**
  * 广告轮播图setting
  */
 public class StepViewSettings {
 
-    private boolean mIsReverseDraw;
-    private float mLinePaddingProportion;
-    private int mIndicatorCompletedLineColor;
-    private int mIndicatorUnCompletedLineColor;
-    private int mCompletedTextColor;
-    private int mUnCompletedTextColor;
-    private Drawable mIndicatorCompleteIcon;
-    private Drawable mIndicatorDefaultIcon;
-    private Drawable mIndicatorAttentionIcon;
-    private boolean mIsVertical;
+    private int mIndicatorPaddingLeftAndRight;      //指示器左右的padding
+    private float mIndicatorHeight;                 //指示器的高
+    private float mIndicatorWidth;                  //指示器的宽
+    private float mIndicatorLineWidth;              //指示器的线宽
+    private boolean mIsReverseDraw;                 //是否倒序
+    private float mDashLineIntervals;               //虚线的虚实间隔
+    private int mIndicatorCompletedLineColor;       //指示器已完成的线的颜色
+    private int mIndicatorUnCompletedLineColor;     //指示器未完成的线的颜色
+    private Drawable mIndicatorCompleteIcon;        //指示器已完成的图标
+    private Drawable mIndicatorDefaultIcon;         //指示器未完成的图标
+    private Drawable mIndicatorAttentionIcon;       //指示器正在进行的图标
+    private boolean mIsVertical;                    //指示器的方向是否为垂直
 
     StepViewSettings(Context context, AttributeSet attrs) {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.VerticalStepView, 0, 0);
 
         mIndicatorCompletedLineColor = attr.getColor(R.styleable.VerticalStepView_IndicatorCompletedLineColor, getColor(context, R.color.common_divider));
         mIndicatorUnCompletedLineColor = attr.getColor(R.styleable.VerticalStepView_IndicatorUnCompletedLineColor, getColor(context, R.color.common_divider));
-        mCompletedTextColor = attr.getColor(R.styleable.VerticalStepView_CompletedTextColor, getColor(context, R.color.textSecond));
-        mUnCompletedTextColor = attr.getColor(R.styleable.VerticalStepView_UnCompletedTextColor, getColor(context, R.color.textHint));
         mIndicatorCompleteIcon = attr.getDrawable(R.styleable.VerticalStepView_IndicatorCompleteIcon);
         mIndicatorDefaultIcon = attr.getDrawable(R.styleable.VerticalStepView_IndicatorDefaultIcon);
         mIndicatorAttentionIcon = attr.getDrawable(R.styleable.VerticalStepView_IndicatorAttentionIcon);
-        mLinePaddingProportion = attr.getFloat(R.styleable.VerticalStepView_LinePaddingProportion, 1);
-        mIsReverseDraw = attr.getBoolean(R.styleable.VerticalStepView_ReverseDraw, true);
+        mDashLineIntervals = attr.getDimension(R.styleable.VerticalStepView_LinePaddingProportion, dip2px(context, 16));
+        mIsReverseDraw = attr.getBoolean(R.styleable.VerticalStepView_ReverseDraw, false);
         mIsVertical = attr.getInt(R.styleable.VerticalStepView_IndicatorOrientation, 1) == 1;
-
+        mIndicatorHeight = attr.getDimension(R.styleable.VerticalStepView_IndicatorHeight, Float.MAX_VALUE);
+        mIndicatorWidth = attr.getDimension(R.styleable.VerticalStepView_IndicatorWidth, Float.MAX_VALUE);
+        mIndicatorLineWidth = attr.getDimension(R.styleable.VerticalStepView_IndicatorLineWidth, dip2px(context, 1));
+        mIndicatorPaddingLeftAndRight = (int) attr.getDimension(R.styleable.VerticalStepView_IndicatorPaddingLeftAndRight, dip2px(context, 16));
 
         attr.recycle();
+    }
+
+    public Drawable getIndicatorIcon(State state) {
+        switch (state) {
+            case Completed:
+                return mIndicatorCompleteIcon;
+            case Completing:
+                return mIndicatorAttentionIcon;
+            default:
+                return mIndicatorDefaultIcon;
+        }
+    }
+
+    private int dip2px(Context context, float dip) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return (int) (dip * density + 0.5f);
     }
 
     private int getColor(Context context, int res) {
@@ -63,41 +81,24 @@ public class StepViewSettings {
         mIndicatorUnCompletedLineColor = indicatorUnCompletedLineColor;
     }
 
-    public int getCompletedTextColor() {
-        return mCompletedTextColor;
+    public int getIndicatorPaddingLeftAndRight() {
+        return mIndicatorPaddingLeftAndRight;
     }
 
-    public void setCompletedTextColor(int complectedTextColor) {
-        mCompletedTextColor = complectedTextColor;
+    public void setIndicatorPaddingLeftAndRight(int indicatorPaddingLeftAndRight) {
+        mIndicatorPaddingLeftAndRight = indicatorPaddingLeftAndRight;
     }
 
-    public int getUnCompletedTextColor() {
-        return mUnCompletedTextColor;
-    }
-
-    public void setUnCompletedTextColor(int unCompletedTextColor) {
-        mUnCompletedTextColor = unCompletedTextColor;
-    }
-
-    public Drawable getIndicatorCompleteIcon() {
-        return mIndicatorCompleteIcon;
-    }
 
     public void setIndicatorCompleteIcon(Drawable indicatorCompleteIcon) {
         mIndicatorCompleteIcon = indicatorCompleteIcon;
     }
 
-    public Drawable getIndicatorDefaultIcon() {
-        return mIndicatorDefaultIcon;
-    }
 
     public void setIndicatorDefaultIcon(Drawable indicatorDefaultIcon) {
         mIndicatorDefaultIcon = indicatorDefaultIcon;
     }
 
-    public Drawable getIndicatorAttentionIcon() {
-        return mIndicatorAttentionIcon;
-    }
 
     public void setIndicatorAttentionIcon(Drawable indicatorAttentionIcon) {
         mIndicatorAttentionIcon = indicatorAttentionIcon;
@@ -111,12 +112,12 @@ public class StepViewSettings {
         mIsVertical = vertical;
     }
 
-    public void setLinePaddingProportion(float linePaddingProportion) {
-        mLinePaddingProportion = linePaddingProportion;
+    public float getDashLineIntervals() {
+        return mDashLineIntervals;
     }
 
-    public float getLinePaddingProportion() {
-        return mLinePaddingProportion;
+    public void setDashLineIntervals(float dashLineIntervals) {
+        mDashLineIntervals = dashLineIntervals;
     }
 
     public boolean isReverseDraw() {
@@ -125,5 +126,29 @@ public class StepViewSettings {
 
     public void setReverseDraw(boolean reverseDraw) {
         mIsReverseDraw = reverseDraw;
+    }
+
+    public float getIndicatorHeight() {
+        return mIndicatorHeight;
+    }
+
+    public void setIndicatorHeight(float indicatorHeight) {
+        mIndicatorHeight = indicatorHeight;
+    }
+
+    public float getIndicatorWidth() {
+        return mIndicatorWidth;
+    }
+
+    public void setIndicatorWidth(float indicatorWidth) {
+        mIndicatorWidth = indicatorWidth;
+    }
+
+    public float getIndicatorLineWidth() {
+        return mIndicatorLineWidth;
+    }
+
+    public void setIndicatorLineWidth(float indicatorLineWidth) {
+        mIndicatorLineWidth = indicatorLineWidth;
     }
 }
