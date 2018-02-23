@@ -3,11 +3,13 @@
     <declare-styleable name="VerticalStepView">
         <attr name="IndicatorCompletedLineColor" format="reference"/>
         <attr name="IndicatorUnCompletedLineColor" format="reference"/>
-        <attr name="CompletedTextColor" format="reference"/>
-        <attr name="UnCompletedTextColor" format="reference"/>
         <attr name="IndicatorCompleteIcon" format="reference"/>
         <attr name="IndicatorDefaultIcon" format="reference"/>
         <attr name="IndicatorAttentionIcon" format="reference"/>
+        <attr name="IndicatorLineWidth" format="dimension"/>
+        <attr name="IndicatorHeight" format="dimension"/>
+        <attr name="IndicatorWidth" format="dimension"/>
+        <attr name="IndicatorPaddingLeftAndRight" format="dimension"/>
         <attr name="LinePaddingProportion" format="float"/>
         <attr name="ReverseDraw" format="boolean"/>
         <attr name="IndicatorOrientation" format="enum">

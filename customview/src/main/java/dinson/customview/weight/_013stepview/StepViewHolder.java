@@ -10,5 +10,5 @@ public interface StepViewHolder<T> {
     /**
      * 创建View并绑定数据
      */
-      View onBind(@NotNull Context context,@NotNull T data);
+    View onBind(@NotNull Context context, @NotNull T data, @NotNull Position pos, @NotNull State state);
 }
