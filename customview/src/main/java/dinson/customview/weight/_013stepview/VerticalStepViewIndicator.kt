@@ -133,12 +133,12 @@ class VerticalStepViewIndicator(context: Context,
         }
         //虚线路径
         mDashedLinePathTop = Path().apply {
-            moveTo(mCenterX - mSettings.indicatorLineWidth / 2, 0f)
+            moveTo(mCenterX.toFloat()  , 0f)
             rLineTo(0f, mPaddingTop.toFloat())
         }
         //虚线路径
         mDashedLinePathBottom = Path().apply {
-            moveTo(mCenterX - mSettings.indicatorLineWidth / 2, (iconHeight + mPaddingTop).toFloat())
+            moveTo(mCenterX .toFloat()  , (iconHeight + mPaddingTop).toFloat())
             rLineTo(0f, height - (iconHeight + mPaddingTop).toFloat())
         }
 
