@@ -73,8 +73,12 @@
     <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
     <!--013-->
     <string name="step_view_title">StepView</string>
-    <string name="step_view_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
+    <string name="step_view_desc">Step by step. Step indicator. Flow indicator</string>
     <string name="step_view_img">http://ondlsj2sn.bkt.clouddn.com/Fm0fTIwMIZyoJZDpAOnARBLN0vCZ.webp</string>
+     <!--014-->
+    <string name="honor_clock_title">HonorClock</string>
+    <string name="honor_clock_desc">Step by step. Step indicator. Flow indicator</string>
+    <string name="honor_clock_img">http://ondlsj2sn.bkt.clouddn.com/Fknk1q5piAA00DmqxUUGEaK4OGyh.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>
@@ -209,4 +213,5 @@
     <string name="permission_contacts_rationale">Contacts permissions are needed to demonstrate access to the contacts database.</string>
     <string name="permission_camera_denied">Camera permission was denied. Please consider granting it in order to access the camera!</string>
     <string name="permission_camera_never_ask_again">Camera permission was denied with never ask again.</string>
+    <string name="china_time">中国标准时间</string>
 </resources>

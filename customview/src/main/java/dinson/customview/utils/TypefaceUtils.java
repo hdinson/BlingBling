@@ -5,12 +5,26 @@ import android.graphics.Typeface;
 import android.support.v4.util.SimpleArrayMap;
 
 /**
- * @author Dinson - 2017/8/11
+ * 字体工具（优化向）
  */
 public class TypefaceUtils {
-    private static final SimpleArrayMap<String, Typeface> TYPEFACE_CACHE = new SimpleArrayMap<String, Typeface>();
+    private static final SimpleArrayMap<String, Typeface> TYPEFACE_CACHE = new SimpleArrayMap<>();
 
-    public static Typeface get(Context context, String name) {
+    /**
+     * 获取兰亭字体
+     */
+    public static Typeface getAppleFont(Context context) {
+        return get(context, "fonts/AppleFontWithoutChinese.ttf");
+    }
+
+    /**
+     * 获取IconFont字体
+     */
+    public static Typeface getIconFont(Context context) {
+        return get(context, "iconfont/iconfont.ttf");
+    }
+
+    private static Typeface get(Context context, String name) {
         synchronized (TYPEFACE_CACHE) {
             if (!TYPEFACE_CACHE.containsKey(name)) {
 
@@ -25,4 +39,5 @@ public class TypefaceUtils {
             return TYPEFACE_CACHE.get(name);
         }
     }
+
 }

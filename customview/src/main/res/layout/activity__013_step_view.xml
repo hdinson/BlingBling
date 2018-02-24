@@ -23,7 +23,7 @@
         android:overScrollMode="never">
 
         <dinson.customview.weight._013stepview.VerticalStepView
-            android:id="@+id/step_view0"
+            android:id="@+id/stepView"
             android:layout_width="match_parent"
             app:IndicatorHeight="30dp"
             app:IndicatorWidth="30dp"

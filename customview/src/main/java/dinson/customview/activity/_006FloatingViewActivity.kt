@@ -51,7 +51,7 @@ class _006FloatingViewActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__006_floating_view)
 
-        mTypeface = TypefaceUtils.get(this, "fonts/FZLanTingHeiS_Regular.ttf")
+        mTypeface = TypefaceUtils.getAppleFont(this)
         mFloating = Floating(this)
 
         initUI()

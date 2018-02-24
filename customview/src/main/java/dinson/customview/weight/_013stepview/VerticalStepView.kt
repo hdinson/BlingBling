@@ -17,7 +17,7 @@ import org.jetbrains.anko.dip
 class VerticalStepView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : LinearLayout(context, attrs, defStyleAttr) {
 
-    private var mSetting: StepViewSettings = StepViewSettings(context, attrs)
+    private val mSetting: StepViewSettings = StepViewSettings(context, attrs)
     private var mCompletingPosition: Int = -1   //当前的位置
     private val mItemMinHeight = 150            //每个步骤最小的高度
     private val mItemPaddingTopAndBottom = 50     //每个步骤的item都有一个paddingTop和paddingBottom
@@ -72,7 +72,6 @@ class VerticalStepView @JvmOverloads constructor(context: Context, attrs: Attrib
             params1.addRule(RelativeLayout.ALIGN_BOTTOM, view.id)
             container.addView(indicator, params1)
             //添加绑定后的布局
-            LogUtils.e("------------$index $any-----------------")
             val params2 = RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             params2.addRule(RelativeLayout.RIGHT_OF, indicator.id)
             view.setPadding(view.left, mItemPaddingTopAndBottom, mItemPaddingTopAndBottom, mItemPaddingTopAndBottom)

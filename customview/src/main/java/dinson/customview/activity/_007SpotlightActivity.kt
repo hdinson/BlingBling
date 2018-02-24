@@ -20,7 +20,7 @@ class _007SpotlightActivity : BaseActivity() {
     }
 
     private fun initUI() {
-        val typeface = TypefaceUtils.get(this, "fonts/FZLanTingHeiS_Regular.ttf")
+        val typeface = TypefaceUtils.getAppleFont(this)
         tvTitle.typeface = typeface
         tvDis.typeface = typeface
         tvType.typeface = typeface

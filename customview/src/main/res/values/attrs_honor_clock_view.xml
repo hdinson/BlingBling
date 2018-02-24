@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HonorClockView">
+        <attr name="RingWidth" format="reference"/>
+        <attr name="PointColor" format="color"/>
+        <attr name="TimeTextColor" format="color"/>
+        <attr name="TimeScaleColor" format="color"/>
+        <attr name="TimeTextSize" format="dimension"/>
+    </declare-styleable>
+</resources>
