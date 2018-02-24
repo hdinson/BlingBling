@@ -74,6 +74,7 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity._013StepViewActivity"></activity>
+        <activity android:name=".activity._013StepViewActivity"/>
+        <activity android:name=".activity._014HonorClockActivity"></activity>
     </application>
 </manifest>

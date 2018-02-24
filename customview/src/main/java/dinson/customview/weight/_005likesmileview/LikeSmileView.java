@@ -112,7 +112,7 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         animDis = (AnimationDrawable) mIvDis.getBackground();
 
         //初始化文字
-        Typeface typeface = TypefaceUtils.get(getContext(), "fonts/FZLanTingHeiS_Regular.ttf");
+        Typeface typeface = TypefaceUtils.getAppleFont(getContext());
         mTvLikeNum = new TextView(getContext());
         mTvLikeNum.setTypeface(typeface);
         mTvLikeNum.setTextColor(defTextColor);

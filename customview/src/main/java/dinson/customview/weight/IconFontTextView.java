@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 import dinson.customview.utils.TypefaceUtils;
+
 /**
  * IconFont支持
  */
@@ -27,7 +28,7 @@ public class IconFontTextView extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface typeface = TypefaceUtils.get(getContext(), "iconfont/iconfont.ttf");
+        Typeface typeface = TypefaceUtils.getIconFont(getContext());
         setTypeface(typeface);
     }
 }

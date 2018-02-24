@@ -15,6 +15,7 @@ class _013StepViewActivity : BaseActivity() {
         setStatusBarTintColor(ContextCompat.getColor(this, R.color._013_title_bg))
         setContentView(R.layout.activity__013_step_view)
         setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -33,7 +34,7 @@ class _013StepViewActivity : BaseActivity() {
             "您的订单在京东【北京中关村大厦站】验货完成，正在分配配送员",
             "配送员【包牙齿】已出发，联系电话【130-0000-0000】，感谢您的耐心等待，参加评价还能赢取好多礼物哦配送员【包牙齿】已出发，联系电话",
             "感谢你在京东购物，欢迎你下次光临！")
-        step_view0.setStepsViewIndicatorCompletingPosition(list0.size - 6)//设置完成的步数
+        stepView.setStepsViewIndicatorCompletingPosition(list0.size - 6)//设置完成的步数
             .setDashLineIntervals(8)
             .setReverseDraw(true)
             .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, android.R.color.white))//设置StepsViewIndicator完成线的颜色

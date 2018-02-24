@@ -28,7 +28,7 @@ public class LanTingFontTextView extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface typeface = TypefaceUtils.get(getContext(), "fonts/FZLanTingHeiS_Regular.ttf");
+        Typeface typeface = TypefaceUtils.getAppleFont(getContext());
         setTypeface(typeface);
     }
 }
