@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#303030"
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
 
@@ -11,10 +11,18 @@
         android:id="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/_013_title_bg"
         android:elevation="10dp"
-        app:title="订单查询"
-        app:titleTextColor="@color/white"/>
+        app:title="海贼大事件"
+        android:background="#303030"
+        app:titleTextColor="@color/white" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:scaleType="center"
+        android:alpha="0.7"
+        android:src="@drawable/_013_activity_bg" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -25,10 +33,9 @@
         <dinson.customview.weight._013stepview.VerticalStepView
             android:id="@+id/stepView"
             android:layout_width="match_parent"
-            app:IndicatorHeight="30dp"
-            app:IndicatorWidth="30dp"
+            android:layout_height="match_parent"
+            app:IndicatorHeight="44dp"
             app:IndicatorLineWidth="2dp"
-            android:background="@color/_013_title_bg"
-            android:layout_height="match_parent" />
+            app:IndicatorWidth="60dp" />
     </android.support.v4.widget.NestedScrollView>
 </FrameLayout>

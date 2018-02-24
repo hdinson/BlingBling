@@ -19,7 +19,7 @@ class VerticalStepView @JvmOverloads constructor(context: Context, attrs: Attrib
 
     private val mSetting: StepViewSettings = StepViewSettings(context, attrs)
     private var mCompletingPosition: Int = -1   //当前的位置
-    private val mItemMinHeight = 150            //每个步骤最小的高度
+    private val mItemMinHeight = 170            //每个步骤最小的高度
     private val mItemPaddingTopAndBottom = 50     //每个步骤的item都有一个paddingTop和paddingBottom
 
     init {
