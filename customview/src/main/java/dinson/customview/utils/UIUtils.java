@@ -116,6 +116,7 @@ public class UIUtils {
         manager.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.widthPixels;
     }
+
     public static int dip2px(  float dip) {
         float density = getContext().getResources().getDisplayMetrics().density;
         return (int) (dip * density + 0.5f);

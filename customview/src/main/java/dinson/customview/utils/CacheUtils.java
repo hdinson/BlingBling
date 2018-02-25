@@ -150,7 +150,7 @@ public class CacheUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            IOUtils.close(fw);
+            IOUtils.INSTANCE.close(fw);
         }
     }
 
@@ -177,7 +177,7 @@ public class CacheUtils {
             } catch (Exception e) {
                 return null;
             } finally {
-                IOUtils.close(reader);
+                IOUtils.INSTANCE.close(reader);
             }
         }
         return null;

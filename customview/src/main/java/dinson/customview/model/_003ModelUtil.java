@@ -46,8 +46,8 @@ public class _003ModelUtil {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.close(br);
-            IOUtils.close(in);
+            IOUtils.INSTANCE.close(br);
+            IOUtils.INSTANCE.close(in);
         }
     }
 }

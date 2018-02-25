@@ -118,7 +118,7 @@ public final class ShellUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            IOUtils.close(os, successResult, errorResult);
+            IOUtils.INSTANCE.close(os, successResult, errorResult);
             if (process != null) {
                 process.destroy();
             }

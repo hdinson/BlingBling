@@ -89,7 +89,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return false;
         } finally {
-            IOUtils.close(is, os);
+            IOUtils.INSTANCE.close(is, os);
         }
     }
 
@@ -146,7 +146,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return false;
         } finally {
-            IOUtils.close(bos);
+            IOUtils.INSTANCE.close(bos);
         }
     }
 
@@ -209,7 +209,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return false;
         } finally {
-            IOUtils.close(fc);
+            IOUtils.INSTANCE.close(fc);
         }
     }
 
@@ -272,7 +272,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return false;
         } finally {
-            IOUtils.close(fc);
+            IOUtils.INSTANCE.close(fc);
         }
     }
 
@@ -330,7 +330,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return false;
         } finally {
-            IOUtils.close(bw);
+            IOUtils.INSTANCE.close(bw);
         }
     }
 
@@ -449,7 +449,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.close(reader);
+            IOUtils.INSTANCE.close(reader);
         }
     }
 
@@ -511,7 +511,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.close(reader);
+            IOUtils.INSTANCE.close(reader);
         }
     }
 
@@ -548,7 +548,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.close(fis, os);
+            IOUtils.INSTANCE.close(fis, os);
         }
     }
 
@@ -582,7 +582,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.close(fc);
+            IOUtils.INSTANCE.close(fc);
         }
     }
 
@@ -616,7 +616,7 @@ public class FileIOUtils {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.close(fc);
+            IOUtils.INSTANCE.close(fc);
         }
     }
 

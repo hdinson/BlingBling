@@ -772,7 +772,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            IOUtils.close(is);
+            IOUtils.INSTANCE.close(is);
         }
         switch (p) {
             case 0xefbb:
@@ -826,7 +826,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            IOUtils.close(is);
+            IOUtils.INSTANCE.close(is);
         }
         return count;
     }
@@ -980,7 +980,7 @@ public class FileUtils {
         } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         } finally {
-            IOUtils.close(dis);
+            IOUtils.INSTANCE.close(dis);
         }
         return null;
     }
@@ -1170,8 +1170,8 @@ public class FileUtils {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.close(br);
-            IOUtils.close(in);
+            IOUtils.INSTANCE.close(br);
+            IOUtils.INSTANCE.close(in);
         }
     }
 
