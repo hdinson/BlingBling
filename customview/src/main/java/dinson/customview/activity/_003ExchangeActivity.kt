@@ -31,7 +31,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__003_exchange.*
 import org.json.JSONObject
 
-class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListener, OnItemClickListener.OnClickListener, View.OnLongClickListener, DrawerLayout.DrawerListener {
+class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen,
+    OnItemClickListener.OnClickListener, DrawerLayout.DrawerListener {
 
     private lateinit var mAdapter: _003CurrencyAdapter
     private lateinit var mDrawerAdapter: _003LeftDrawerAdapter
@@ -116,51 +117,24 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, View.OnClickListen
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         drawerLayout.addDrawerListener(this)
 
-        n0.setOnClickListener(this)
-        n1.setOnClickListener(this)
-        n2.setOnClickListener(this)
-        n3.setOnClickListener(this)
-        n4.setOnClickListener(this)
-        n5.setOnClickListener(this)
-        n6.setOnClickListener(this)
-        n7.setOnClickListener(this)
-        n8.setOnClickListener(this)
-        n9.setOnClickListener(this)
-        add.setOnClickListener(this)
-        sub.setOnClickListener(this)
-        mul.setOnClickListener(this)
-        div.setOnClickListener(this)
-        dot.setOnClickListener(this)
-        delete.setOnClickListener(this)
-        delete.setOnLongClickListener(this)
+        n0.setOnClickListener { mAdapter.onInput(CalculatorKey.N0) }
+        n1.setOnClickListener { mAdapter.onInput(CalculatorKey.N1) }
+        n2.setOnClickListener { mAdapter.onInput(CalculatorKey.N2) }
+        n3.setOnClickListener { mAdapter.onInput(CalculatorKey.N3) }
+        n4.setOnClickListener { mAdapter.onInput(CalculatorKey.N4) }
+        n5.setOnClickListener { mAdapter.onInput(CalculatorKey.N5) }
+        n6.setOnClickListener { mAdapter.onInput(CalculatorKey.N6) }
+        n7.setOnClickListener { mAdapter.onInput(CalculatorKey.N7) }
+        n8.setOnClickListener { mAdapter.onInput(CalculatorKey.N8) }
+        n9.setOnClickListener { mAdapter.onInput(CalculatorKey.N9) }
+        add.setOnClickListener { mAdapter.onInput(CalculatorKey.ADD) }
+        sub.setOnClickListener { mAdapter.onInput(CalculatorKey.SUB) }
+        mul.setOnClickListener { mAdapter.onInput(CalculatorKey.MUL) }
+        div.setOnClickListener { mAdapter.onInput(CalculatorKey.DIV) }
+        dot.setOnClickListener { mAdapter.onInput(CalculatorKey.DOT) }
+        delete.setOnClickListener { mAdapter.onInput(CalculatorKey.DELETE) }
+        delete.setOnLongClickListener { mAdapter.onInput(CalculatorKey.CLEAR);true }
     }
-
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.n0 -> mAdapter.onInput(CalculatorKey.N0)
-            R.id.n1 -> mAdapter.onInput(CalculatorKey.N1)
-            R.id.n2 -> mAdapter.onInput(CalculatorKey.N2)
-            R.id.n3 -> mAdapter.onInput(CalculatorKey.N3)
-            R.id.n4 -> mAdapter.onInput(CalculatorKey.N4)
-            R.id.n5 -> mAdapter.onInput(CalculatorKey.N5)
-            R.id.n6 -> mAdapter.onInput(CalculatorKey.N6)
-            R.id.n7 -> mAdapter.onInput(CalculatorKey.N7)
-            R.id.n8 -> mAdapter.onInput(CalculatorKey.N8)
-            R.id.n9 -> mAdapter.onInput(CalculatorKey.N9)
-            R.id.add -> mAdapter.onInput(CalculatorKey.ADD)
-            R.id.sub -> mAdapter.onInput(CalculatorKey.SUB)
-            R.id.mul -> mAdapter.onInput(CalculatorKey.MUL)
-            R.id.div -> mAdapter.onInput(CalculatorKey.DIV)
-            R.id.dot -> mAdapter.onInput(CalculatorKey.DOT)
-            R.id.delete -> mAdapter.onInput(CalculatorKey.DELETE)
-        }
-    }
-
-    override fun onLongClick(v: View?): Boolean {
-        mAdapter.onInput(CalculatorKey.CLEAR)
-        return true
-    }
-
 
     private fun setAdapterRate(exchangeStr: String) {
         mAllDataRates = JSONObject(exchangeStr).getJSONObject("rates")

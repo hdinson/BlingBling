@@ -218,4 +218,5 @@
     <string name="permission_camera_denied">Camera permission was denied. Please consider granting it in order to access the camera!</string>
     <string name="permission_camera_never_ask_again">Camera permission was denied with never ask again.</string>
     <string name="china_time">中国标准时间</string>
+    <string name="not_point">Don\'t point</string>
 </resources>
