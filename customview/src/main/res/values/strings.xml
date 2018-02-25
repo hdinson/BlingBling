@@ -75,10 +75,14 @@
     <string name="step_view_title">StepView</string>
     <string name="step_view_desc">Step by step. Step indicator. Flow indicator</string>
     <string name="step_view_img">http://ondlsj2sn.bkt.clouddn.com/Fm0fTIwMIZyoJZDpAOnARBLN0vCZ.webp</string>
-     <!--014-->
+    <!--014-->
     <string name="honor_clock_title">HonorClock</string>
     <string name="honor_clock_desc">Step by step. Step indicator. Flow indicator</string>
     <string name="honor_clock_img">http://ondlsj2sn.bkt.clouddn.com/Fknk1q5piAA00DmqxUUGEaK4OGyh.webp</string>
+     <!--015-->
+    <string name="explosion_field_title">ExplosionField</string>
+    <string name="explosion_field_desc">explosive dust effect for views</string>
+    <string name="explosion_field_img">http://ondlsj2sn.bkt.clouddn.com/FlSTZDl1fCGGNNqrauOAm8hEqn7y.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>

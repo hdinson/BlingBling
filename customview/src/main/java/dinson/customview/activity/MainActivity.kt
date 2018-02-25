@@ -95,6 +95,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _013StepViewActivity::class.java, getString(R.string.step_view_img)),
             ClassBean(getString(R.string.honor_clock_title), getString(R.string.honor_clock_desc),
                 _014HonorClockActivity::class.java, getString(R.string.honor_clock_img)),
+            ClassBean(getString(R.string.explosion_field_title), getString(R.string.explosion_field_desc),
+                _015ExplosionFieldActivity::class.java, getString(R.string.explosion_field_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
