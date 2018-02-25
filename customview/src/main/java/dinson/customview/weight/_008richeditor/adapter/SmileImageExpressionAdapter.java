@@ -39,7 +39,7 @@ public class SmileImageExpressionAdapter extends ArrayAdapter<String> {
             convertView = new ImageView(getContext());
             convertView.setId(R.id.ivImg);
 
-            int width =  dip2px(getContext(), 38);
+            int width = dip2px(getContext(), 38);
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width, width);
             convertView.setLayoutParams(params);
         }
@@ -51,6 +51,7 @@ public class SmileImageExpressionAdapter extends ArrayAdapter<String> {
         imageView.setImageResource(resId);
         return convertView;
     }
+
     /**
      * dip转为PX
      */

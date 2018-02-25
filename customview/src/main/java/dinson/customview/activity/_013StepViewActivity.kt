@@ -112,7 +112,7 @@ class _013StepViewActivity : BaseActivity() {
             "「4年前」\n①克比成为“金刚棒”亚尔丽塔船上的奴役\n②阿拉巴斯坦港口那哈巴发现跳舞粉，叛乱军起义，薇薇(14)与伊卡莱姆潜入巴洛克工作社\n③艾斯(18)成为自然系能力者，以黑桃海贼团船长的身份名扬大海；面见“红发”香克斯(35)，与王下七武海“海侠”甚平(42)大战五天，挑战“白胡子”爱德华.纽结特(70)失败，成为“白胡子”的义子，随后成为白胡子海贼团第二队队长，同时海军察觉到艾斯的身份\n④贝加班克博士在庞克哈萨德岛领导的巨人实验无法取得进展；疯狂科学家凯撒.克朗被贝加班克博士开除出研究队伍，凯撒.克朗引爆毒气炸弹摧毁庞克哈萨德岛；海军与世界政府人员撤离，大量用于实验的囚犯被留在岛上，由于暴露在毒气中导致残疾；贝加班克成为事件的责任人，凯撒被逮捕\n⑤海军科学家为泽法(70)装上机械臂\n⑥世界政府会议",
             "「3年前」\n①可雅父母去世，乌索普(16)开始给可雅讲故事\n②寇沙进入阿拉巴斯坦叛乱军，沙沙团成为叛乱军首脑\n③凯撒从监狱船越狱成功，回到庞克哈萨德，将毒瓦斯回收成宠物Smily，成为囚犯们的救世主，并将爆炸污蔑为贝加班克所为\n④凯撒开始抓捕小孩子做实验，维尔戈中将将“诱拐事件”隐藏为“海难事故”定案\n⑤雷利外出赌钱不归\n⑥海贼“白马”卡文迪许进入新世界，成为备受瞩目的新人",
             "「现在」\n草帽海贼团开始冒险")
-            stepView.setStepsViewIndicatorCompletingPosition(list0.size - 1)//设置完成的步数
+            stepView.setStepsViewIndicatorCompletingPosition(list0.size - 2)//设置完成的步数
                 .setDashLineIntervals(8)
                 .setReverseDraw(true)
                 .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, android.R.color.white))//设置StepsViewIndicator完成线的颜色

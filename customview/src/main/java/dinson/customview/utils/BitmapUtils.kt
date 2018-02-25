@@ -8,8 +8,7 @@ import android.widget.ImageView
 
 
 /**
- * Bitmap工具类
- * （从view中创建视图）
+ * Bitmap工具类（从view中创建视图）
  */
 object BitmapUtils {
     private val sCanvas = Canvas()

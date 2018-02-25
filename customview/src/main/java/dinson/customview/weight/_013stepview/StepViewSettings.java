@@ -89,16 +89,13 @@ public class StepViewSettings {
         mIndicatorPaddingLeftAndRight = indicatorPaddingLeftAndRight;
     }
 
-
     public void setIndicatorCompleteIcon(Drawable indicatorCompleteIcon) {
         mIndicatorCompleteIcon = indicatorCompleteIcon;
     }
 
-
     public void setIndicatorDefaultIcon(Drawable indicatorDefaultIcon) {
         mIndicatorDefaultIcon = indicatorDefaultIcon;
     }
-
 
     public void setIndicatorAttentionIcon(Drawable indicatorAttentionIcon) {
         mIndicatorAttentionIcon = indicatorAttentionIcon;

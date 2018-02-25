@@ -48,5 +48,5 @@
         android:lineSpacingExtra="4dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
 </android.support.constraint.ConstraintLayout>

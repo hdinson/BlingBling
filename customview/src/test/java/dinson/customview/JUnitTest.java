@@ -2,6 +2,7 @@ package dinson.customview;
 
 import org.junit.Test;
 
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,7 +37,12 @@ public class JUnitTest {
                 }
             });
         }*/
-        System.out.println("dafsdfas");
+        Random random = new Random();
+        System.out.println(random.nextInt());
+        System.out.println(random.nextInt());
+        System.out.println(random.nextInt());
+        System.out.println(random.nextInt());
+        System.out.println(random.nextInt());
     }
 
     /**

@@ -1,6 +1,7 @@
 package dinson.customview.weight._015explosionview;
 
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,13 +15,17 @@ import java.util.Random;
 
 public class ExplosionAnimator extends ValueAnimator {
 
+    private static float dip(int dp){
+        return Resources.getSystem().getDisplayMetrics().density*dp+0.5f;
+    }
+
     static long DEFAULT_DURATION = 0x400;
     private static final Interpolator DEFAULT_INTERPOLATOR = new AccelerateInterpolator(0.6f);
     private static final float END_VALUE = 1.4f;
-    private static final float X = 5;
-    private static final float Y = 20;
-    private static final float V = 2;
-    private static final float W = 1;
+    private static final float X = dip(5);
+    private static final float Y = dip(20);
+    private static final float V = dip(2);
+    private static final float W = dip(1);
     private Paint mPaint;
     private Particle[] mParticles;
     private Rect mBound;
