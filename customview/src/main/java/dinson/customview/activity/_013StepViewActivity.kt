@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.holder._013StepViewHolder
+import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__013_step_view.*
 
 
@@ -14,6 +15,7 @@ class _013StepViewActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setStatusBarTintColor(ContextCompat.getColor(this, R.color._013_title_bg))
         setContentView(R.layout.activity__013_step_view)
+        SystemBarModeUtils.setPaddingTop(this, toolbar, nestedScrollView)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { onBackPressed() }
         supportActionBar?.setHomeButtonEnabled(true)
@@ -88,7 +90,7 @@ class _013StepViewActivity : BaseActivity() {
             "「24年前」\n①罗杰自首，将妻儿托付给海军本部中将蒙奇.D.卡普\n②“金狮子”史基闯入海军本部，独战海军本部大将佛之战国，本部中将蒙其.D.卡普，败北后被投入大监狱因佩尔\n③罗杰在出生的地方，东海罗格镇被处刑，大海贼时代开幕；月光.莫利亚(26)，克罗克代尔(22)，德古拉.米霍克(19)，香克斯(15)，巴基，堂吉诃德.多弗拉明哥(17)，蒙其.D.龙等人在行刑现场见证了这一幕\n④与罗杰有关的人开始被追捕处死\n⑤汤姆先生由于给罗杰造船被判处死刑，作为设计建造海列车的条件缓期十年执行，汤姆工作室开始建造海列车\n⑥泽法(50)严厉的教导学生，学生包括鼯鼠，鬼蜘蛛，道伯曼，古米尔，山火，史多佩里等人\n⑦迪巴鲁出生，被称为“被诅咒的孩子”\n⑧世界政府会议",
             "「22-24年前之间」\n①海贼王的右手，“冥王”西尔巴兹.雷利在海上遇难被年幼的章鱼鱼人小八搭救，隐居香波地群岛\n②波特卡斯.D.露修忍住身孕躲避世界政府追杀",
             "「23年前」\n①尤斯塔斯.基德出生于南海\n②达斯其出生\n③克尔拉出生\n④古伊娜出生（猜测）于东海霜月村",
-            "「22年前」\n①历史文本探险队被世界政府歼灭，妮可.奥尔维亚被捕。海军本部中将哈格瓦.D.萨乌罗私自释放奥尔维亚后叛逃\n②罗宾(8)自学成为考古学家，成为奥哈拉学者的一员，萨乌罗与奥尔维亚先后来到奥哈拉\n③海军本部大将战国下令发动发动屠魔令袭击奥哈拉；奥尔维亚，克洛巴博士，萨乌罗，以及全部学者死亡\n④海军本部中将库赞(27)放走罗宾；海军本部中将萨卡斯基(33)击毁平民避难船。罗宾(8)被悬赏7900万\n⑤哥尔.D.艾斯出生于南海巴特利拉岛，生下艾斯后波特卡斯.D.露修死亡\n⑥卡普将艾斯托付给东海黎明岛哥亚王国科尔波山的山贼首领卡利.达旦，改名波特卡斯.D.艾斯\n⑦“金狮子”史基斩断双脚越狱离开大监狱因佩尔，来到密境梅露维尤，策划复仇\n⑧幸四郎对妻子说考虑让古伊娜(1)继承剑道场\n⑨香克斯(17)来到东海果子露村，邀请耶稣布上船\n⑩库洛卡斯（51）回到双子峡\n①①萨波出生在东海哥亚王国的贵族家庭\n1②诺奇高出生",
+            "「22年前」\n①历史文本探险队被世界政府歼灭，妮可.奥尔维亚被捕。海军本部中将哈格瓦.D.萨乌罗私自释放奥尔维亚后叛逃\n②罗宾(8)自学成为考古学家，成为奥哈拉学者的一员，萨乌罗与奥尔维亚先后来到奥哈拉\n③海军本部大将战国下令发动发动屠魔令袭击奥哈拉；奥尔维亚，克洛巴博士，萨乌罗，以及全部学者死亡\n④海军本部中将库赞(27)放走罗宾；海军本部中将萨卡斯基(33)击毁平民避难船。罗宾(8)被悬赏7900万\n⑤哥尔.D.艾斯出生于南海巴特利拉岛，生下艾斯后波特卡斯.D.露修死亡\n⑥卡普将艾斯托付给东海黎明岛哥亚王国科尔波山的山贼首领卡利.达旦，改名波特卡斯.D.艾斯\n⑦“金狮子”史基斩断双脚越狱离开大监狱因佩尔，来到密境梅露维尤，策划复仇\n⑧幸四郎对妻子说考虑让古伊娜(1)继承剑道场\n⑨香克斯(17)来到东海果子露村，邀请耶稣布上船\n⑩库洛卡斯（51）回到双子峡\n①①萨波出生在东海哥亚王国的贵族家庭\n①②诺奇高出生",
             "「21年前」\n①罗罗诺亚.索隆出生于东海霜月村\n②山治出生于北海",
             "「20年前」\n①大海贼“白胡子”爱德华.纽结特与鱼人岛龙宫王国国王，“海之大骑士”尼普顿喝了象征友谊的交杯酒，鱼人岛归于“白胡子”之名的守护下\n②剑斗士居鲁士活跃于德雷斯罗萨斗牛竞技场，创造了“三千战全胜的不败之男”的传说\n③娜美出生于东海\n④世界政府会议",
             "「约20年前」\n①贝尔梅尔从海军退伍，收养诺奇高和娜美,回到故乡东海可可西亚村\n②红发海贼团于东海航行（猜测）",
@@ -112,14 +114,14 @@ class _013StepViewActivity : BaseActivity() {
             "「4年前」\n①克比成为“金刚棒”亚尔丽塔船上的奴役\n②阿拉巴斯坦港口那哈巴发现跳舞粉，叛乱军起义，薇薇(14)与伊卡莱姆潜入巴洛克工作社\n③艾斯(18)成为自然系能力者，以黑桃海贼团船长的身份名扬大海；面见“红发”香克斯(35)，与王下七武海“海侠”甚平(42)大战五天，挑战“白胡子”爱德华.纽结特(70)失败，成为“白胡子”的义子，随后成为白胡子海贼团第二队队长，同时海军察觉到艾斯的身份\n④贝加班克博士在庞克哈萨德岛领导的巨人实验无法取得进展；疯狂科学家凯撒.克朗被贝加班克博士开除出研究队伍，凯撒.克朗引爆毒气炸弹摧毁庞克哈萨德岛；海军与世界政府人员撤离，大量用于实验的囚犯被留在岛上，由于暴露在毒气中导致残疾；贝加班克成为事件的责任人，凯撒被逮捕\n⑤海军科学家为泽法(70)装上机械臂\n⑥世界政府会议",
             "「3年前」\n①可雅父母去世，乌索普(16)开始给可雅讲故事\n②寇沙进入阿拉巴斯坦叛乱军，沙沙团成为叛乱军首脑\n③凯撒从监狱船越狱成功，回到庞克哈萨德，将毒瓦斯回收成宠物Smily，成为囚犯们的救世主，并将爆炸污蔑为贝加班克所为\n④凯撒开始抓捕小孩子做实验，维尔戈中将将“诱拐事件”隐藏为“海难事故”定案\n⑤雷利外出赌钱不归\n⑥海贼“白马”卡文迪许进入新世界，成为备受瞩目的新人",
             "「现在」\n草帽海贼团开始冒险")
-            stepView.setStepsViewIndicatorCompletingPosition(list0.size - 2)//设置完成的步数
-                .setDashLineIntervals(8)
-                .setReverseDraw(true)
-                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, android.R.color.white))//设置StepsViewIndicator完成线的颜色
-                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable._013_complted))//设置StepsViewIndicator CompleteIcon
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable._013_default_icon))//设置StepsViewIndicator DefaultIcon
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable._013_attention))//设置StepsViewIndicator AttentionIcon
-                .setStepView(list0, _013StepViewHolder())//总步骤
+        stepView.setStepsViewIndicatorCompletingPosition(list0.size - 2)//设置完成的步数
+            .setDashLineIntervals(8)
+            .setReverseDraw(true)
+            .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, android.R.color.white))//设置StepsViewIndicator完成线的颜色
+            .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
+            .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable._013_complted))//设置StepsViewIndicator CompleteIcon
+            .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable._013_default_icon))//设置StepsViewIndicator DefaultIcon
+            .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable._013_attention))//设置StepsViewIndicator AttentionIcon
+            .setStepView(list0, _013StepViewHolder())//总步骤
     }
 }

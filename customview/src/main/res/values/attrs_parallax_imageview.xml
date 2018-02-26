@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ParallaxImageView">
+        <attr name="enableParallaxMode" format="boolean" />
+        <attr name="invertScrollDirection" format="boolean" />
+        <attr name="showScrollbar" format="boolean" />
+    </declare-styleable>
+</resources>

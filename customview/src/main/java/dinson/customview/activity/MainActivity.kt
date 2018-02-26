@@ -97,6 +97,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _014HonorClockActivity::class.java, getString(R.string.honor_clock_img)),
             ClassBean(getString(R.string.explosion_field_title), getString(R.string.explosion_field_desc),
                 _015ExplosionFieldActivity::class.java, getString(R.string.explosion_field_img)),
+            ClassBean(getString(R.string.explosion_field_title), getString(R.string.explosion_field_desc),
+                _016ParallaxImgViewActivity::class.java, getString(R.string.explosion_field_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
@@ -203,6 +205,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     private fun initWeatherLayout(weather: HomeWeather) {
         LogUtils.d("." + weather.toString())
         weatherLayout.visibility = View.VISIBLE
+        weatherLayout.setOnClickListener { rvContent.smoothScrollToPosition(0) }
         val resultsBean = weather.results[0]
         iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
         tvWeather.apply {

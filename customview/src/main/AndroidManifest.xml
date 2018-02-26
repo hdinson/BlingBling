@@ -76,6 +76,7 @@
         </activity>
         <activity android:name=".activity._013StepViewActivity"/>
         <activity android:name=".activity._014HonorClockActivity"/>
-        <activity android:name=".activity._015ExplosionFieldActivity"></activity>
+        <activity android:name=".activity._015ExplosionFieldActivity"/>
+        <activity android:name=".activity._016ParallaxImgViewActivity"></activity>
     </application>
 </manifest>
