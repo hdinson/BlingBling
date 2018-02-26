@@ -29,6 +29,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private val mSettings: BannerViewSettings = BannerViewSettings(context, attrs)
     private val mIndicatorContainer: LinearLayout
     private val mViewPager = BannerViewPager(context)
+    private var mAdapter: BannerPagerAdapter<*>? = null
     private val mPagerPadding = dip(30)//左右漏出模式下的padding值
     private var mDelayedTime = 3000// Banner 切换时间间隔
     private val mIndicatorRes = intArrayOf(R.drawable.indicator_normal, R.drawable.indicator_selected)
@@ -86,13 +87,9 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
 
     /**
-     * 设置数据，这是最重要的一个方法。
-     * 其他的配置应该在这个方法之前调用
-     *
-     * @param datas  Banner 展示的数据集合
-     * @param holder ViewHolder生成器
+     * 初始化数据
      */
-    fun <T> setPages(datas: ArrayList<T>, holder: BannerViewHolder<T>) {
+    private fun <T> initData(datas: ArrayList<T>, holder: BannerViewHolder<T>) {
         when (datas.size) {
             0 -> return
             1 -> {
@@ -119,9 +116,9 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
             datas.addAll(datas)
         }
 
-        val mAdapter = BannerPagerAdapter(datas, holder, mSettings.isCanLoop)
-        mAdapter.setUpViewViewPager(mViewPager)
-        mAdapter.setPageClickListener(mBannerPageClickListener)
+        mAdapter = BannerPagerAdapter(datas, holder, mSettings.isCanLoop)
+        mAdapter!!.setUpViewViewPager(mViewPager)
+        mAdapter!!.setPageClickListener(mBannerPageClickListener)
 
         mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -230,6 +227,18 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     /******************************************************************************************************/
     /**                             对外API                                                               **/
     /******************************************************************************************************/
+
+    /**
+     * 设置数据，这是最重要的一个方法。
+     * 其他的配置应该在这个方法之前调用
+     *
+     * @param datas  Banner 展示的数据集合
+     * @param holder ViewHolder生成器
+     */
+    fun <T> setPages(datas: ArrayList<T>, holder: BannerViewHolder<T>) {
+        initData(datas, holder)
+    }
+
     /**
      * 开始轮播
      *

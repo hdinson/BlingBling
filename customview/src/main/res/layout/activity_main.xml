@@ -62,7 +62,7 @@
         android:layout_margin="@dimen/spacing_medium"
         android:background="@drawable/shape_rec_r999"
         android:elevation="15dp"
-        android:layout_gravity="right|bottom"
+        android:layout_gravity="end|bottom"
         android:gravity="center_vertical"
         android:visibility="invisible"  >
 

@@ -1,31 +1,22 @@
 package dinson.customview.adapter
 
 import android.content.Context
-import android.text.TextUtils.substring
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.TextView
-import java.util.Locale
-import java.util.regex.Pattern
-
 import dinson.customview.R
-import dinson.customview.R.id.delete
-import dinson.customview.R.id.tvResult
 import dinson.customview.listener.CalculatorKey
 import dinson.customview.listener.OnItemSwipeOpen
 import dinson.customview.listener._003OnCalculatorInput
 import dinson.customview.listener._003OnRvItemChangeListener
 import dinson.customview.model._003CurrencyModel
-import dinson.customview.utils.ArithmeticUtils
-import dinson.customview.utils.GlideUtils
-import dinson.customview.utils.SPUtils
-import dinson.customview.utils.StringUtils
-import dinson.customview.utils.UIUtils
+import dinson.customview.utils.*
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
 import dinson.customview.weight.swipelayout.SwipeItemLayout
+import java.util.*
+import java.util.regex.Pattern
 
 /**
  * @author Dinson - 2017/7/21
@@ -214,14 +205,12 @@ class _003CurrencyAdapter(context: Context,
         mDataList[position] = bean
         val targetRate = mDataList[mCurrentSelect].baseRate
 
-        val userCurrency = arrayOfNulls<String>(mDataList.size)
-
-        for (i in mDataList.indices) {
-            val temp = mDataList[i]
-            temp.targetRate = targetRate
-            userCurrency[i] = temp.currencyCode
+        val userCurrency = arrayOf<String>()
+        mDataList.forEachIndexed { index, currency ->
+            currency.targetRate = targetRate
+            userCurrency[index] = currency.currencyCode
         }
-        SPUtils.setUserCurrency(*userCurrency)
+        SPUtils.setUserCurrency(userCurrency)
         notifyDataSetChanged()
     }
 
