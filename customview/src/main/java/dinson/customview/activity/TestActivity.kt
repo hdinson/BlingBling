@@ -28,6 +28,17 @@ class TestActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+
+
+        btnLocal.setOnClickListener {
+            ivImg.setImageResource(R.drawable._001_bg)
+        }
+
+        btnDong.setOnClickListener {
+            ivImg.setImageResource(R.drawable._002_pre_bubble_small)
+        }
+
+
     }
 
     private fun jsoupTest() {
@@ -38,8 +49,8 @@ class TestActivity : BaseActivity() {
             }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { s ->
-                tvContent.text = s.body()
-                    .toString()
+                //tvContent.text = s.body()
+                  //  .toString()
             }
     }
 }

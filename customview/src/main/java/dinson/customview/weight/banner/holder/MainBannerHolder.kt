@@ -23,8 +23,6 @@ class MainBannerHolder : BannerViewHolder<DailyDetail> {
     private lateinit var mTransitionOptions: DrawableTransitionOptions
 
     override fun createView(context: Context): View {
-
-        LogUtils.e("创建视图")
         mImageView = ImageView(context).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             scaleType = ImageView.ScaleType.CENTER_CROP

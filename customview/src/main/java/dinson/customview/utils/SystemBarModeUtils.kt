@@ -25,11 +25,11 @@ object SystemBarModeUtils {
      */
     fun darkMode(activity: Activity, isDark: Boolean) {
         when {
-            isFlyme4LaterInner() -> setDarkModeForFlyme4(activity.window, isDark)
-            isMIUI6LaterInner() -> setDarkModeForMIUI6(activity.window, isDark)
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setDarkModeForM(activity.window, isDark)
             }
+            isFlyme4LaterInner() -> setDarkModeForFlyme4(activity.window, isDark)
+            isMIUI6LaterInner() -> setDarkModeForMIUI6(activity.window, isDark)
         }
     }
 
