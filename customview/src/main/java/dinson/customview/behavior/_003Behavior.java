@@ -7,14 +7,14 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 
 import dinson.customview.utils.LogUtils;
-import dinson.customview.weight.CircleImageView;
 
 /**
  * 首页监听recycleview的滑动
  */
-public class _003Behavior extends Behavior<CircleImageView> {
+public class _003Behavior extends Behavior<ImageView> {
 
 
     private float mOriginHeight;
@@ -35,7 +35,7 @@ public class _003Behavior extends Behavior<CircleImageView> {
      * @return
      */
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, CircleImageView child, View dependency) {
+    public boolean layoutDependsOn(CoordinatorLayout parent, ImageView child, View dependency) {
         return dependency instanceof NestedScrollView;
     }
 
@@ -49,7 +49,7 @@ public class _003Behavior extends Behavior<CircleImageView> {
      * @return
      */
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, CircleImageView child, View dependency) {
+    public boolean onDependentViewChanged(CoordinatorLayout parent, ImageView child, View dependency) {
         init(parent, child, dependency);
         if (child.getY() <= 0) {
             if (percent != 0) {
@@ -73,7 +73,7 @@ public class _003Behavior extends Behavior<CircleImageView> {
 
     }
 
-    private void init(CoordinatorLayout parent, CircleImageView child, View dependency) {
+    private void init(CoordinatorLayout parent, ImageView child, View dependency) {
         if (mOriginHeight == 0) mOriginHeight = dependency.getY();
         if (mAvatorHeight == 0) mAvatorHeight = child.getY();
     }

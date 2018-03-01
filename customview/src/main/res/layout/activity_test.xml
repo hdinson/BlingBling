@@ -3,23 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <dinson.customview.weight._016parallaximgview.ParallaxImageView
-        android:id="@+id/ivImg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <Button
-        android:id="@+id/btnLocal"
+        android:id="@+id/iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="本地文件"/>
-
-    <Button
-        android:id="@+id/btnDong"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="动态设置"/>
+        android:text="隐藏"/>
 </LinearLayout>

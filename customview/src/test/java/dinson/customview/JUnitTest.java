@@ -52,4 +52,15 @@ public class JUnitTest {
         boolean matches = Pattern.matches("(.*\\d+$)", str);
         return matches;
     }
+
+    /*  Observable.just("https://github.com/DinsonCat/SomeDoc/blob/master/mh.json")
+            .map { s ->
+                val document = Jsoup.connect(s).get()
+                document
+            }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { s ->
+                //tvContent.text = s.body()
+                //  .toString()
+            }*/
 }

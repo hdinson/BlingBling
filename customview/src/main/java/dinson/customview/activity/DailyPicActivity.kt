@@ -10,6 +10,7 @@ import android.view.ViewAnimationUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.entity.one.DailyDetail
+import dinson.customview.kotlin.screenWidth
 import dinson.customview.utils.UIUtils
 import kotlinx.android.synthetic.main.activity_daily_pic.*
 
@@ -27,7 +28,7 @@ class DailyPicActivity : BaseActivity() {
         val path = intent.getStringExtra(EXTRA_PATH)
 
         val bitmap = BitmapFactory.decodeFile(path)
-        val screenWidth = UIUtils.getScreenWidth(this@DailyPicActivity)
+        val screenWidth = screenWidth()
         val height = screenWidth * bitmap.height / bitmap.width
         val para = ivImg.layoutParams
         para.height = height

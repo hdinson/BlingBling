@@ -29,8 +29,10 @@ class _007SpotlightActivity : BaseActivity() {
         cancel.setOnClickListener({ onBackPressed() })
     }
 
+
+    private var isSpotLightShowed = false
     override fun onWindowFocusChanged(hasFocus: Boolean) {
-        if (!hasFocus) return
+        if (!hasFocus || isSpotLightShowed) return
         val radius = Math.hypot(ivImg.width.toDouble(), ivImg.height.toDouble()).toFloat() / 2f
         val firstTarget = SimpleTarget.Builder(this).setPoint(ivImg)
             .setRadius(radius)
@@ -57,9 +59,14 @@ class _007SpotlightActivity : BaseActivity() {
             .setDuration(1000L)
             .setAnimation(DecelerateInterpolator(2f))
             .setTargets(firstTarget, secondTarget, thirdTarget)
+            .setOnSpotlightStartedListener { isSpotLightShowed = true }
             .start()
     }
 
+    override fun onBackPressed() {
+        if (!isSpotLightShowed) return
+        super.onBackPressed()
+    }
 
     override fun setWindowBackgroundColor() = R.drawable._007_activity_bg
 }

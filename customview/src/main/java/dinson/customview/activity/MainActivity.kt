@@ -3,6 +3,7 @@ package dinson.customview.activity
 import android.Manifest
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
@@ -27,6 +28,7 @@ import dinson.customview.entity.HomeWeather
 import dinson.customview.entity.one.DailyDetail
 import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
+import dinson.customview.kotlin.*
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
@@ -97,8 +99,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _014HonorClockActivity::class.java, getString(R.string.honor_clock_img)),
             ClassBean(getString(R.string.explosion_field_title), getString(R.string.explosion_field_desc),
                 _015ExplosionFieldActivity::class.java, getString(R.string.explosion_field_img)),
-            ClassBean(getString(R.string.explosion_field_title), getString(R.string.explosion_field_desc),
-                _016ParallaxImgViewActivity::class.java, getString(R.string.explosion_field_img)),
+            ClassBean(getString(R.string.parallax_iv_title), getString(R.string.parallax_iv_desc),
+                _016ParallaxImgViewActivity::class.java, getString(R.string.parallax_iv_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
@@ -205,7 +207,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     private fun initWeatherLayout(weather: HomeWeather) {
         LogUtils.d("." + weather.toString())
         weatherLayout.visibility = View.VISIBLE
-        weatherLayout.setOnClickListener { rvContent.smoothScrollToPosition(0) }
         val resultsBean = weather.results[0]
         iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
         tvWeather.apply {
@@ -220,6 +221,39 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         set.interpolator = DecelerateInterpolator()
         set.play(alphaAnimator).with(scaleX).with(scaleY)
         set.start()
+        weatherLayout.setOnClickListener {
+            if (isFrist) {
+                isFrist = false
+                val deltaX = 300f
+                val deltaY =  300f
+                val path = it.createArcPath(deltaX, deltaY)
+                val alpha = ObjectAnimator.ofInt(it, "alpha", 1, 0)
+                ValueAnimator.ofFloat(0f, 1f).apply {
+                    addUpdateListener(it.getArcListener(path))
+                    onEnd { debug("动画结束") }
+                }.playWith(alpha).start()
+            } else {
+                isFrist = true
+                //adjustButton()
+                val deltaX = 600f
+                val deltaY =  600f
+                val path = it.createArcPath(deltaX, deltaY)
+                val alpha = ObjectAnimator.ofInt(it, "alpha", 1, 0)
+                ValueAnimator.ofFloat(0f, 1f).apply {
+                    addUpdateListener(it.getArcListener(path))
+                    onEnd { debug("动画结束") }
+                }.playWith(alpha).start()
+            }
+        }
+    }
+
+    private var isFrist = true
+    private fun adjustButton() {
+        val path = weatherLayout.createArcPath(0f, 0f)
+        val alphaAnimator = ObjectAnimator.ofInt(weatherLayout, "alpha", 0, 1)
+        ValueAnimator.ofFloat(0f, 1f).apply {
+            addUpdateListener(weatherLayout.getArcListener(path))
+        }.playWith(alphaAnimator).start()
     }
 
     /**

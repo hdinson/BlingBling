@@ -12,13 +12,13 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import dinson.customview.kotlin.dip
 
 import java.util.ArrayList
 import java.util.Arrays
 import java.util.Random
 
 import dinson.customview.utils.BitmapUtils
-import org.jetbrains.anko.dip
 
 
 class ExplosionField constructor(context: Context) : View(context) {

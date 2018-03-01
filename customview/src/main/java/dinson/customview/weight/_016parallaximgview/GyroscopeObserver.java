@@ -1,12 +1,15 @@
 package dinson.customview.weight._016parallaximgview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import java.util.LinkedList;
+
+import dinson.customview.utils.LogUtils;
 
 /**
  * Created by gjz on 21/12/2016.
@@ -77,7 +80,11 @@ public class GyroscopeObserver implements SensorEventListener {
 
         if (rotateY > rotateX + rotateZ) {
             final float dT = (event.timestamp - mLastTimestamp) * NS2S;
+
+            LogUtils.e(dT+"-------"+(event.timestamp - mLastTimestamp));
             mRotateRadianY += event.values[1] * dT;
+
+
             if (mRotateRadianY > mMaxRotateRadian) {
                 mRotateRadianY = mMaxRotateRadian;
             } else if (mRotateRadianY < -mMaxRotateRadian) {
@@ -85,6 +92,9 @@ public class GyroscopeObserver implements SensorEventListener {
             } else {
                 for (ParallaxImageView view : mViews) {
                     if (view != null && view.getOrientation() == ParallaxScrollOrientation.HORIZONTAL) {
+
+                        LogUtils.e("1：mRotateRadianY:"+mRotateRadianY+" mMaxRotateRadian:"+mMaxRotateRadian);
+
                         view.updateProgress((float) (mRotateRadianY / mMaxRotateRadian));
                     }
                 }
@@ -92,6 +102,8 @@ public class GyroscopeObserver implements SensorEventListener {
         } else if (rotateX > rotateY + rotateZ) {
             final float dT = (event.timestamp - mLastTimestamp) * NS2S;
             mRotateRadianX += event.values[0] * dT;
+
+
             if (mRotateRadianX > mMaxRotateRadian) {
                 mRotateRadianX = mMaxRotateRadian;
             } else if (mRotateRadianX < -mMaxRotateRadian) {
@@ -99,6 +111,7 @@ public class GyroscopeObserver implements SensorEventListener {
             } else {
                 for (ParallaxImageView view : mViews) {
                     if (view != null && view.getOrientation() == ParallaxScrollOrientation.VERTICAL) {
+                        LogUtils.e("2：mRotateRadianY:"+mRotateRadianY+" mMaxRotateRadian:"+mMaxRotateRadian);
                         view.updateProgress((float) (mRotateRadianX / mMaxRotateRadian));
                     }
                 }

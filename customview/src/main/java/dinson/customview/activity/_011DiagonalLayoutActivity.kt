@@ -25,7 +25,7 @@ class _011DiagonalLayoutActivity : BaseActivity() {
         val hearUrl = "http://ondlsj2sn.bkt.clouddn.com/FtT8Kk7HNbHE5FLf3U2dnXkOZtu7.jpeg"
         GlideUtils.setImage(this, hearUrl, ivImg)
         val imgUrl = "http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp"
-        GlideUtils.setCircleImage(this, imgUrl, cvCircleView)
+        GlideUtils.setCircleImage(this, imgUrl, author)
 
         tvTitle.text = "Quan Zhou\n"
         val builder = SpannableStringBuilder("Eastern Asia culture")
@@ -35,7 +35,6 @@ class _011DiagonalLayoutActivity : BaseActivity() {
 
 
         val qzStr = FileUtils.getTextFromAssets(this, "QuanZhou")
-
         tvContent.text = Html.fromHtml(qzStr)
     }
 }
