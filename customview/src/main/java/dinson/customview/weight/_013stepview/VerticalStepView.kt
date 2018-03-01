@@ -8,8 +8,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import dinson.customview.utils.LogUtils
-import org.jetbrains.anko.dip
+import dinson.customview.kotlin.dip
 
 /**
  * 步骤指示器

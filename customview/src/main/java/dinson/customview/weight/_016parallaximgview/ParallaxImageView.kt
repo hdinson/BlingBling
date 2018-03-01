@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.widget.ImageView
 import dinson.customview.kotlin.dip
+import dinson.customview.utils.LogUtils
 
 /**
  *  带有视差的图片层
@@ -177,6 +178,9 @@ class ParallaxImageView @JvmOverloads constructor(context: Context, attrs: Attri
 
 
     fun updateProgress(progress: Float) {
+
+        LogUtils.e("------:$progress")
+
         if (!mSetting.isEnableParallaxMode) return
         mProgress = if (mSetting.isInvertScrollDirection) progress else -progress
 
@@ -194,7 +198,7 @@ class ParallaxImageView @JvmOverloads constructor(context: Context, attrs: Attri
     private fun initScrollbarPaint() {
         mScrollbarPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mScrollbarPaint!!.color = Color.WHITE
-        mScrollbarPaint!!.strokeWidth = dip(1.5f)
+        mScrollbarPaint!!.strokeWidth = dip(1.5f).toFloat()
     }
 
     private fun drawScrollBar(canvas: Canvas) {

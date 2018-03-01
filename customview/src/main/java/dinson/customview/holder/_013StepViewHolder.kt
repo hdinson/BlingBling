@@ -8,11 +8,11 @@ import android.widget.LinearLayout.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import dinson.customview.kotlin.dip
 import dinson.customview.utils.GlideUtils
 import dinson.customview.weight._013stepview.Position
 import dinson.customview.weight._013stepview.State
 import dinson.customview.weight._013stepview.StepViewHolder
-import org.jetbrains.anko.dip
 
 /**
  * @author Dinson - 2018/2/22
@@ -29,7 +29,7 @@ class _013StepViewHolder : StepViewHolder<String> {
             val llContainer = LinearLayout(context)
             llContainer.orientation = LinearLayout.VERTICAL
             val params = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            params.bottomMargin = context.dip(16)
+            params.bottomMargin =  dip(16)
             val ivImg = ImageView(context)
             ivImg.adjustViewBounds = true
             GlideUtils.setImage(context, "http://ondlsj2sn.bkt.clouddn.com/FoxNtdwL6G0wdXUos7WNhswu1M_f.webp", ivImg)

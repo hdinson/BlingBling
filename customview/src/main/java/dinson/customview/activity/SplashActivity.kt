@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        changeIcon(if (SPUtils.isDefaultAppIcon(this)) defaultIconPath else newIconPath)
+        //changeIcon(if (SPUtils.isDefaultAppIcon(this)) defaultIconPath else newIconPath)
         onBackPressed()
     }
 

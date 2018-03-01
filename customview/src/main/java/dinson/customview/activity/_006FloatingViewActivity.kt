@@ -11,8 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.kotlin.dip
+import dinson.customview.kotlin.screenHeight
+import dinson.customview.kotlin.screenWidth
 import dinson.customview.utils.TypefaceUtils
-import dinson.customview.utils.UIUtils
 import dinson.customview.weight._006floatingview.Floating
 import dinson.customview.weight._006floatingview.FloatingBuilder
 import dinson.customview.weight._006floatingview.effect.EarthFloatingTransition
@@ -20,7 +22,6 @@ import dinson.customview.weight._006floatingview.effect.PlaneFloatingTransition
 import dinson.customview.weight._006floatingview.effect.ScaleFloatingTransition
 import dinson.customview.weight._006floatingview.effect.TranslateFloatingTransition
 import kotlinx.android.synthetic.main.activity__006_floating_view.*
-import org.jetbrains.anko.dip
 import java.util.*
 
 class _006FloatingViewActivity : BaseActivity() {
@@ -39,10 +40,8 @@ class _006FloatingViewActivity : BaseActivity() {
     }
     //背景变换半径
     private val mBgChangeRadio by lazy {
-        val screenHeight = UIUtils.getScreenHeight(this)
-        val screenWidth = UIUtils.getScreenWidth(this)
-        val maxWidth = maxOf(screenWidth - mStartCenter[0], mStartCenter[0])
-        val maxHeight = maxOf(screenHeight - mStartCenter[1], mStartCenter[1])
+        val maxWidth = maxOf(screenWidth() - mStartCenter[0], mStartCenter[0])
+        val maxHeight = maxOf(screenHeight() - mStartCenter[1], mStartCenter[1])
         Math.hypot(maxWidth.toDouble(), maxHeight.toDouble()).toFloat()
     }
 

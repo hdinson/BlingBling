@@ -14,11 +14,11 @@ import android.widget.RelativeLayout
 import android.widget.RelativeLayout.LayoutParams.MATCH_PARENT
 import android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT
 import dinson.customview.R
-import dinson.customview.utils.UIUtils.getScreenWidth
+import dinson.customview.kotlin.dip
+import dinson.customview.kotlin.screenWidth
 import dinson.customview.weight.banner.holder.BannerViewHolder
 import dinson.customview.weight.banner.transformer.CoverModeTransformer
 import dinson.customview.weight.banner.transformer.ScaleYTransformer
-import org.jetbrains.anko.dip
 
 /**
  *  广告轮播图控件
@@ -206,7 +206,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 val paddingLeft = mViewPager.left
                 val touchX = ev.rawX
                 // 如果是魅族模式，去除两边的区域
-                if (touchX >= paddingLeft && touchX < getScreenWidth(context) - paddingLeft) {
+                if (touchX >= paddingLeft && touchX < context.screenWidth() - paddingLeft) {
                     pause()
                 }
             }

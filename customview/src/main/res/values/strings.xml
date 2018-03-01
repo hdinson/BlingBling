@@ -82,7 +82,11 @@
     <!--015-->
     <string name="explosion_field_title">ExplosionField</string>
     <string name="explosion_field_desc">explosive dust effect for views</string>
-    <string name="explosion_field_img">http://ondlsj2sn.bkt.clouddn.com/FgwMJZ8Y0KswSkjINvGnOgRR96u3.webp</string>
+    <string name="explosion_field_img">http://ondlsj2sn.bkt.clouddn.com/FlSTZDl1fCGGNNqrauOAm8hEqn7y.webp</string>
+    <!--016-->
+    <string name="parallax_iv_title">ParallaxImageView</string>
+    <string name="parallax_iv_desc">An imageView can auto scroll with device rotating.</string>
+    <string name="parallax_iv_img">http://ondlsj2sn.bkt.clouddn.com/FgwMJZ8Y0KswSkjINvGnOgRR96u3.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>
