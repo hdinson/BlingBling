@@ -15,8 +15,8 @@ class _017TetrisActivity : AppCompatActivity() {
 
         btnLeft.click { game.moveLeft() }
         btnRight.click { game.moveRight() }
-        btnUp.click { game.moveUp() }
-        btnDown.click { game.moveDown() }
+        btnDown.click { game.smoothMoveDown() }
+        btnDownFast.click { game.fastMoveDown() }
         btnRotate.click { game.rotate() }
     }
 }
