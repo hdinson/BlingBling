@@ -126,6 +126,7 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
             val x = mBoxSize * it.toFloat()
             canvas.drawLine(x, 0f, x, height.toFloat(), mLinePaint)
         }
+
         (0..mMaps[1].size).forEach {
             val y = mBoxSize * it.toFloat()
             canvas.drawLine(0f, y, width.toFloat(), y, mLinePaint)
