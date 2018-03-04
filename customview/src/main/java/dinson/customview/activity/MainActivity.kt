@@ -101,6 +101,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _015ExplosionFieldActivity::class.java, getString(R.string.explosion_field_img)),
             ClassBean(getString(R.string.parallax_iv_title), getString(R.string.parallax_iv_desc),
                 _016ParallaxImgViewActivity::class.java, getString(R.string.parallax_iv_img)),
+            ClassBean(getString(R.string.tetris_title), getString(R.string.tetris_desc),
+                _017TetrisActivity::class.java, getString(R.string.tetris_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )

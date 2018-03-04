@@ -87,6 +87,10 @@
     <string name="parallax_iv_title">ParallaxImageView</string>
     <string name="parallax_iv_desc">An imageView can auto scroll with device rotating.</string>
     <string name="parallax_iv_img">http://ondlsj2sn.bkt.clouddn.com/FgwMJZ8Y0KswSkjINvGnOgRR96u3.webp</string>
+    <!--017-->
+    <string name="tetris_title">Tetris</string>
+    <string name="tetris_desc">Soviet tile-matching puzzle video game released in June 1984.</string>
+    <string name="tetris_img">http://ondlsj2sn.bkt.clouddn.com/FoiBsBwQR4vTQJ6A0FiHLaxcqjIK.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>
