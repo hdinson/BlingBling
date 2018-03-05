@@ -110,12 +110,6 @@ public class UIUtils {
         return outMetrics.heightPixels;
     }
 
-    public static int getScreenWidth(Context context) {
-        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
-    }
 
     public static int dip2px(  float dip) {
         float density = getContext().getResources().getDisplayMetrics().density;

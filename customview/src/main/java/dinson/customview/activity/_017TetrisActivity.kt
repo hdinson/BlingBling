@@ -15,8 +15,18 @@ class _017TetrisActivity : AppCompatActivity() {
 
         btnLeft.click { game.moveLeft() }
         btnRight.click { game.moveRight() }
-        btnDown.click { game.smoothMoveDown() }
         btnDownFast.click { game.fastMoveDown() }
         btnRotate.click { game.rotate() }
+        btnReset.click { game.reSetGame() }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        game.pauseGame()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        game.startGame()
     }
 }

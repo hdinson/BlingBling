@@ -10,7 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null" >
+        android:background="@null">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -59,11 +59,11 @@
         android:id="@+id/weatherLayout"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/spacing_medium"
         android:background="@drawable/shape_rec_r999"
         android:elevation="15dp"
-        android:layout_gravity="start|top"
-        android:gravity="center_vertical"  >
+        android:gravity="center_vertical">
 
         <dinson.customview.weight.IconFontTextView
             android:id="@+id/iconFontWeather"
@@ -82,4 +82,10 @@
             android:layout_marginTop="5dp"
             android:textColor="@android:color/white"/>
     </RelativeLayout>
+
+    <ViewStub
+        android:id="@+id/vsAndroidInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_main_android_info"/>
 </android.support.design.widget.CoordinatorLayout>

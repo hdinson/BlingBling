@@ -4,14 +4,29 @@ import android.Manifest
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.net.wifi.WifiManager
+import android.os.Build
+import android.os.Build.*
+import android.os.Build.VERSION.RELEASE
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.telephony.TelephonyManager
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewAnimationUtils
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.widget.TableRow
+import android.widget.TextView
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
@@ -32,9 +47,7 @@ import dinson.customview.kotlin.*
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
-import dinson.customview.utils.CacheUtils
-import dinson.customview.utils.LogUtils
-import dinson.customview.utils.TypefaceUtils
+import dinson.customview.utils.*
 import dinson.customview.weight.banner.BannerPageClickListener
 import dinson.customview.weight.banner.holder.MainBannerHolder
 import dinson.customview.weight.recycleview.LinearItemDecoration
@@ -46,6 +59,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
+import kotlinx.android.synthetic.main.layout_main_android_info.*
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
 
@@ -207,7 +221,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     private fun initWeatherLayout(weather: HomeWeather) {
-        LogUtils.d("." + weather.toString())
+        debug(".$weather")
         weatherLayout.visibility = View.VISIBLE
         val resultsBean = weather.results[0]
         iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
@@ -223,39 +237,134 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         set.interpolator = DecelerateInterpolator()
         set.play(alphaAnimator).with(scaleX).with(scaleY)
         set.start()
-        weatherLayout.setOnClickListener {
-            if (isFrist) {
-                isFrist = false
-                val deltaX = 300f
-                val deltaY =  300f
-                val path = it.createArcPath(deltaX, deltaY)
-                val alpha = ObjectAnimator.ofInt(it, "alpha", 1, 0)
+        weatherLayout.setOnClickListener { view ->
+
+            RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE).subscribe {
+                val offsetX = screenWidth() / 2f - view.x - view.halfWidth()
+                val offsetY = screenHeight() / 2f - view.y - view.halfHeight()
+                val path = view.createArcPath(offsetX, offsetY)
                 ValueAnimator.ofFloat(0f, 1f).apply {
-                    addUpdateListener(it.getArcListener(path))
-                    onEnd { debug("动画结束") }
-                }.playWith(alpha).start()
-            } else {
-                isFrist = true
-                //adjustButton()
-                val deltaX = 600f
-                val deltaY =  600f
-                val path = it.createArcPath(deltaX, deltaY)
-                val alpha = ObjectAnimator.ofInt(it, "alpha", 1, 0)
-                ValueAnimator.ofFloat(0f, 1f).apply {
-                    addUpdateListener(it.getArcListener(path))
-                    onEnd { debug("动画结束") }
-                }.playWith(alpha).start()
+                    addUpdateListener(view.getArcListener(path))
+                    onEnd { revealAndShowAndroidInfo() }
+                }.start()
             }
         }
     }
 
-    private var isFrist = true
-    private fun adjustButton() {
+    /**
+     * 水波纹扩散，显示Android设备信息
+     */
+    private fun revealAndShowAndroidInfo() {
+        val cx = weatherLayout.x + weatherLayout.halfWidth()
+        val cy = weatherLayout.y + weatherLayout.halfHeight()
+        val endRadius = Math.hypot(screenHeight().toDouble(), screenWidth().toDouble()).toFloat()
+        val startRadius = weatherLayout.height.toFloat()
+        weatherLayout.hide()
+
+        vsAndroidInfo?.apply {
+            vsAndroidInfo.inflate()
+            createTableRows().forEach { tableLayout.addView(it) }
+            tableLayout.setOnClickListener { concealAndHiddenAndroidInfo() }
+        }
+        scrollView.show()
+        ViewAnimationUtils.createCircularReveal(scrollView, cx.toInt(), cy.toInt(), startRadius, endRadius).apply {
+            duration = 500
+            interpolator = AccelerateInterpolator()
+        }.start()
+    }
+
+    /**
+     * 水波纹收缩，隐藏Android设备信息
+     */
+    private fun concealAndHiddenAndroidInfo() {
+        val cx = weatherLayout.x + weatherLayout.halfWidth()
+        val cy = weatherLayout.y + weatherLayout.halfHeight()
+        val startRadius = Math.hypot(screenHeight().toDouble(), screenWidth().toDouble()).toFloat()
+        val endRadius = weatherLayout.height.toFloat()
+        ViewAnimationUtils.createCircularReveal(scrollView, cx.toInt(), cy.toInt(), startRadius, endRadius).onEnd {
+            scrollView.hide()
+            weatherLayout.show()
+            resetWeatherLayout()
+        }.animator().apply {
+            duration = 500
+            interpolator = AccelerateInterpolator()
+        }.start()
+    }
+
+
+    /**
+     * 创建 AndroidInfo 行
+     */
+    private fun createTableRows() = getAndroidInfoData().map {
+        val tableRow = TableRow(this)
+        val whiteColor = getCompatColor(R.color.white)
+        val padding = dip(8)
+        val paddingHalf = dip(4)
+
+        tableRow.addView(TextView(this).apply {
+            setTextColor(whiteColor)
+            text = it.key
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+            setPadding(padding, paddingHalf, padding, paddingHalf)
+        })
+
+        tableRow.addView(TextView(this).apply {
+            setTextColor(whiteColor)
+            text = it.value
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+            setPadding(padding, paddingHalf, padding, paddingHalf)
+        })
+
+        tableRow
+    }
+
+    @SuppressLint("HardwareIds", "MissingPermission")
+    private fun getAndroidInfoData(): LinkedHashMap<String, String> {
+
+        val phone = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val display = windowManager.defaultDisplay
+        val outMetrics = DisplayMetrics()
+        display.getMetrics(outMetrics)
+
+        return LinkedHashMap<String, String>().apply {
+            put("系统版本", "Android $RELEASE SDK$SDK_INT")
+            put("品牌型号", "$BRAND $MODEL")
+            put("AndroidID", Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID))//不可靠
+            put("设备指纹", FINGERPRINT)
+            put("Root状态", isDeviceRooted() then "已root" ?: "未root")
+            put("分辨率", "${outMetrics.heightPixels}x${outMetrics.widthPixels}")
+            put("屏幕密度", "density: ${outMetrics.density}/${outMetrics.scaledDensity} dpi:${outMetrics.densityDpi}")
+            put("状态栏高度", "${getStatusBarHeight()}px")
+            put("IMEI", getIMEI(phone))
+            put("CPU型号", getCpuInfo())
+            put("CPU架构", Build.SUPPORTED_ABIS.joinToString(","))
+            val value = getSDCardMemory()
+            put("SDCard", "${StringUtils.byte2FileSize(value[1])}可用 / ${StringUtils.byte2FileSize(value[0])}总容量")
+
+            //添加sim卡信息
+            (phone.simState == TelephonyManager.SIM_STATE_READY) then {
+                put("SIM状态", getSimState(phone))
+                put("手机号码", getLine1Number(phone))
+                put("SIM卡序列号", getSubscriberId(phone))
+                put("IMSI", getSimSerialNumber(phone))
+                put("服务商", getSimOperatorName(phone))
+                put("SIM卡国家码", getSimCountryIso(phone))
+                put("漫游", isNetworkRoaming(phone) then "漫游中" ?: "未使用漫游服务")
+                put("数据活动状态", getDataActivity(phone))
+                put("数据连接状态", getDataState(phone))
+            }
+        }
+    }
+
+    /**
+     * 重置天气布局
+     */
+    private fun resetWeatherLayout() {
         val path = weatherLayout.createArcPath(0f, 0f)
-        val alphaAnimator = ObjectAnimator.ofInt(weatherLayout, "alpha", 0, 1)
         ValueAnimator.ofFloat(0f, 1f).apply {
+            startDelay = 100L
             addUpdateListener(weatherLayout.getArcListener(path))
-        }.playWith(alphaAnimator).start()
+        }.start()
     }
 
     /**
@@ -298,6 +407,10 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
 
     override fun onItemClick(view: View, position: Int) {
         startActivity(Intent(this, mContentData[position].name))
+    }
+
+    override fun onBackPressed() {
+        (weatherLayout.visibility != View.VISIBLE).then({ concealAndHiddenAndroidInfo() }, { super.onBackPressed() })
     }
 
     override fun finishWithAnim(): Boolean = false
