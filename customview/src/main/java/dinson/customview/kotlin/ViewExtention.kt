@@ -30,15 +30,15 @@ fun View.show() {
     visibility = View.VISIBLE
 }
 
-fun View.createArcPath(endX: Float, endY: Float): Path {
+fun View.createArcPath(offsetX: Float, offsetY: Float): Path {
     val startX = translationX
     val startY = translationY
-    val dY = endY - translationY
-    val pointX = (dY < 0) then endX ?: startX
-    val pointY = (dY < 0) then startY ?: endY
+    val dY = offsetY - translationY
+    val pointX = (dY < 0) then offsetX ?: startX
+    val pointY = (dY < 0) then startY ?: offsetY
     return Path().apply {
         moveTo(startX, startY)
-        quadTo(pointX, pointY, endX, endY)
+        quadTo(pointX, pointY, offsetX, offsetY)
     }
 }
 

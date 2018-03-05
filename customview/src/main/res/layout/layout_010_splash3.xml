@@ -41,7 +41,6 @@
         app:layout_constraintTop_toTopOf="@+id/qq"/>
 
     <TextView
-        android:id="@+id/textView"
         style="@style/_010_Item_ThirdLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

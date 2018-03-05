@@ -205,10 +205,10 @@ class _003CurrencyAdapter(context: Context,
         mDataList[position] = bean
         val targetRate = mDataList[mCurrentSelect].baseRate
 
-        val userCurrency = arrayOf<String>()
-        mDataList.forEachIndexed { index, currency ->
-            currency.targetRate = targetRate
-            userCurrency[index] = currency.currencyCode
+        val userCurrency = arrayListOf<String>()
+        mDataList.forEach {
+            it.targetRate = targetRate
+            userCurrency.add(it.currencyCode)
         }
         SPUtils.setUserCurrency(userCurrency)
         notifyDataSetChanged()

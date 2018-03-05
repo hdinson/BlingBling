@@ -13,7 +13,7 @@ import kotlin.collections.ArrayList
 object SPUtils {
 
     /** 设置当前用户设置的币种 */
-    fun setUserCurrency(currency: Array<String>) {
+    fun setUserCurrency(currency: ArrayList<String>) {
         if (currency.size != 5) return
         putString(UIUtils.getContext(), "config", "currency", currency.joinToString(","))
     }
