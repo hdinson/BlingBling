@@ -184,7 +184,7 @@ open class BaseActivity : AppCompatActivity() {
         val className = fullClassName.substring(fullClassName.lastIndexOf(".") + 1)
         val methodName = stackTraceElement[currentIndex].methodName
         val lineNumber = stackTraceElement[currentIndex].lineNumber.toString()
-        Log.v("dd", ConstantsUtils.LOGCAT_TAG + "at " + fullClassName + "." + methodName + "("
+        Log.v("BaseActivity", ConstantsUtils.LOGCAT_TAG + "at " + fullClassName + "." + methodName + "("
             + className + ".java:" + lineNumber + ")")
     }
 }

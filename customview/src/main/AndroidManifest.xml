@@ -14,8 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /><!--IMEI-->
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- IMEI -->
     <application
         android:name="._global.GlobalApplication"
         android:allowBackup="true"
@@ -76,10 +76,20 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity._013StepViewActivity" />
-        <activity android:name=".activity._014HonorClockActivity" />
-        <activity android:name=".activity._015ExplosionFieldActivity" />
-        <activity android:name=".activity._016ParallaxImgViewActivity" />
-        <activity android:name=".activity._017TetrisActivity" />
+        <activity android:name=".activity._013StepViewActivity"/>
+        <activity android:name=".activity._014HonorClockActivity"/>
+        <activity android:name=".activity._015ExplosionFieldActivity"/>
+        <activity android:name=".activity._016ParallaxImgViewActivity"/>
+        <activity android:name=".activity._017TetrisActivity"/>
+        <activity
+            android:name=".activity._018NFCActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/toolBar_back_icon_color_black">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

@@ -25,9 +25,15 @@ public class CacheUtils {
     public static void setMainHeardCache(DailyList bean) {
         String json = new Gson().toJson(bean);
         LogUtils.d("<DailyList> Put Cache >> " + json, false);
+
         //缓存的时间是到凌晨4点
-        long deathLine = ((long) DateUtils.getDataTimestamp(1) + 14400) * 1000 - System.currentTimeMillis();
-        setCache("home_head_list", json, deathLine);
+        long now = System.currentTimeMillis();
+        long today4 = DateUtils.getDataTimestamp(0) * 1000L + 14400000;
+        if (now < today4) setCache("home_head_list", json, today4 - now);
+        else {
+            long deathLine = (DateUtils.getDataTimestamp(1) + 14400L) * 1000 - now;
+            setCache("home_head_list", json, deathLine);
+        }
     }
 
     /**

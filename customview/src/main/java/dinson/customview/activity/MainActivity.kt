@@ -31,10 +31,17 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview._global.BaseNfcActivity
 import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.api.OneApi
 import dinson.customview.api.XinZhiWeatherApi
@@ -60,6 +67,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
 import kotlinx.android.synthetic.main.layout_main_android_info.*
+import java.io.File
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
 
@@ -117,6 +125,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _016ParallaxImgViewActivity::class.java, getString(R.string.parallax_iv_img)),
             ClassBean(getString(R.string.tetris_title), getString(R.string.tetris_desc),
                 _017TetrisActivity::class.java, getString(R.string.tetris_img)),
+           ClassBean(getString(R.string.nfc_title), getString(R.string.nfc_desc),
+                _018NFCActivity::class.java, getString(R.string.nfc_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
@@ -145,7 +155,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         mainBanner.setBannerPageClickListener(BannerPageClickListener { view, position ->
             Single.just(mHeadData[position].data.hp_img_url)
                 .map { s ->
-                    Glide.with(this@MainActivity).load(s).downloadOnly(Target.SIZE_ORIGINAL,
+                    Glide.with(this@MainActivity).downloadOnly().load(s).downloadOnly(Target.SIZE_ORIGINAL,
                         Target.SIZE_ORIGINAL).get().path
                 }
                 .subscribeOn(Schedulers.io())
@@ -238,8 +248,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         set.play(alphaAnimator).with(scaleX).with(scaleY)
         set.start()
         weatherLayout.setOnClickListener { view ->
-
             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE).subscribe {
+                if (!it)return@subscribe
                 val offsetX = screenWidth() / 2f - view.x - view.halfWidth()
                 val offsetY = screenHeight() / 2f - view.y - view.halfHeight()
                 val path = view.createArcPath(offsetX, offsetY)

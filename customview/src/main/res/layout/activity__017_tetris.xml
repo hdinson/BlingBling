@@ -5,74 +5,155 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/_014_activity_bg"
+    android:background="@drawable/_017_activity_bg"
     tools:context="dinson.customview.activity._017TetrisActivity">
 
     <android.support.constraint.Guideline
-        android:id="@id/guideline"
+        android:id="@+id/guidelineControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6"/>
+        app:layout_constraintGuide_percent="0.58"/>
 
     <android.support.constraint.Guideline
-        android:id="@+id/glCenter"
+        android:id="@+id/guidelineLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_begin="67dp"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.79"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.09"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.39"/>
 
     <dinson.customview.weight._017tetris.TetrisGameView
         android:id="@+id/game"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineBottom"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineLeft"
+        app:layout_constraintRight_toRightOf="@id/guidelineRight"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"/>
 
-    <Button
-        android:id="@+id/btnDownFast"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="快下"
-        app:layout_constraintLeft_toLeftOf="@+id/btnLeft"
-        app:layout_constraintRight_toRightOf="@+id/btnRight"
-        app:layout_constraintTop_toBottomOf="@+id/btnLeft"/>
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="重置"
-        app:layout_constraintLeft_toLeftOf="@+id/btnLeft"
-        app:layout_constraintRight_toRightOf="@+id/btnRight"
-        app:layout_constraintBottom_toTopOf="@+id/btnLeft"/>
-    <Button
+    <TextView
+        android:id="@+id/btnUp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_rec_r5"
+        android:backgroundTint="#232f2f"
+        app:layout_constraintLeft_toLeftOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@id/guidelineControl"/>
+
+    <TextView
         android:id="@+id/btnLeft"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="左"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnRotate"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/btnRight"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_rec_r5"
+        android:backgroundTint="#232f2f"
+        app:layout_constraintRight_toLeftOf="@+id/btnUp"
+        app:layout_constraintTop_toBottomOf="@+id/btnUp"/>
 
-    <Button
+    <TextView
         android:id="@+id/btnRight"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="右"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnRotate"
-        app:layout_constraintLeft_toRightOf="@+id/btnLeft"
-        app:layout_constraintRight_toRightOf="@+id/glCenter"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_rec_r5"
+        android:backgroundTint="#232f2f"
+        app:layout_constraintLeft_toRightOf="@+id/btnUp"
+        app:layout_constraintTop_toBottomOf="@+id/btnUp"/>
 
-    <Button
-        android:id="@+id/btnRotate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="转"
+    <TextView
+        android:id="@+id/btnCenter"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#232f2f"
+        app:layout_constraintLeft_toLeftOf="@+id/btnUp"
+        app:layout_constraintTop_toBottomOf="@+id/btnUp"/>
+
+    <TextView
+        android:id="@+id/btnDownFast"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_rec_r5"
+        android:backgroundTint="#232f2f"
+        app:layout_constraintLeft_toLeftOf="@+id/btnUp"
+        app:layout_constraintTop_toBottomOf="@+id/btnLeft"/>
+
+    <TextView
+        android:id="@+id/btnA"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:background="@drawable/shape_rec_r999"
+        android:backgroundTint="#232f2f"
+        android:gravity="center"
+        android:text="A"
+        android:textColor="@color/gray"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toRightOf="@+id/guidelineRight"
+        app:layout_constraintTop_toTopOf="@id/guidelineControl"/>
+
+    <TextView
+        android:id="@+id/btnB"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:background="@drawable/shape_rec_r999"
+        android:backgroundTint="#232f2f"
+        android:gravity="center"
+        android:text="B"
+        android:textColor="@color/gray"
+        android:textSize="24sp"
+        app:layout_constraintRight_toLeftOf="@+id/btnA"
+        app:layout_constraintTop_toTopOf="@+id/btnA"/>
+
+    <TextView
+        android:id="@+id/btnNothing"
+        android:layout_width="25dp"
+        android:layout_height="8dp"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:background="@drawable/shape_rec_r999"
+        android:backgroundTint="#232f2f"
+        android:gravity="center"
+        android:text="B"
+        android:textColor="@color/gray"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/glCenter"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnReset"
+        app:layout_constraintTop_toTopOf="@+id/btnCenter"/>
+
+    <TextView
+        android:id="@+id/btnReset"
+        android:layout_width="25dp"
+        android:layout_height="8dp"
+        android:background="@drawable/shape_rec_r999"
+        android:backgroundTint="#232f2f"
+        android:gravity="center"
+        android:text="B"
+        android:textColor="@color/gray"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toRightOf="@+id/btnNothing"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline"/>
+        app:layout_constraintTop_toTopOf="@+id/btnNothing"/>
 </android.support.constraint.ConstraintLayout>

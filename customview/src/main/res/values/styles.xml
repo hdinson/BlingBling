@@ -198,4 +198,8 @@
         <item name="x_in">-2</item>
         <item name="x_out">2</item>
     </style>
+
+    <style name="toolBar_back_icon_color_black" parent="AppTheme">
+        <item name="colorControlNormal">@color/black</item>
+    </style>
 </resources>

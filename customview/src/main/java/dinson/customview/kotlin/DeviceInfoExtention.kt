@@ -1,6 +1,8 @@
 package dinson.customview.kotlin
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.nfc.NfcManager
 import android.os.Build
 import android.os.Environment
 import android.os.StatFs
@@ -11,6 +13,15 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 
+/**
+ * 判断nfc是否开启
+ * @return true已开启  false未开启
+ */
+fun NfcIsEnable(context: Context): Boolean {
+    val manager = context.getSystemService(Context.NFC_SERVICE) as NfcManager
+    val adapter = manager.defaultAdapter
+    return adapter != null && adapter.isEnabled
+}
 
 /**
  *  设备信息相关
