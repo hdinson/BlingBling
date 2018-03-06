@@ -34,13 +34,6 @@ public class Main2Activity extends BaseNfcActivity {
             .subscribe(aBoolean -> Toast.makeText(this, "已同意nfc权限", Toast.LENGTH_SHORT).show());
 
 
-
-
-        for (int y=10 ;y >0;y--){
-            if (y==5){
-                y++;
-            }
-        }
     }
 
     @Override

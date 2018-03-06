@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
+import dinson.customview.R
 import dinson.customview.kotlin.debug
 import dinson.customview.kotlin.dip
 import dinson.customview.kotlin.info
@@ -33,17 +34,20 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     /**向左移动*/
     fun moveLeft() {
+        if (reSetting) return
         mBoxModel.move(-1, 0)
     }
 
     /**向右移动*/
     fun moveRight() {
+        if (reSetting) return
         mBoxModel.move(1, 0)
     }
 
 
     /**向下移动*/
     fun smoothMoveDown() {
+        if (reSetting)return
         if (!mBoxModel.moveDown(false)) {
             if (mMapModel.checkOver(mBoxModel.mBoxes)) reSetGame()
         }
@@ -51,6 +55,7 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     /**向下移动*/
     fun fastMoveDown() {
+        if (reSetting)return
         if (!mBoxModel.moveDown(true)) {
             if (mMapModel.checkOver(mBoxModel.mBoxes)) reSetGame()
         }
@@ -58,6 +63,7 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     /**旋转*/
     fun rotate() {
+        if (reSetting)return
         mBoxModel.rotate()
     }
 
@@ -84,7 +90,11 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
     /**
      * 重启游戏
      */
+    private var reSetting = false
+
     fun reSetGame() {
+        if (reSetting) return
+        reSetting = true
         mMoveDownInterval.dispose()
         Observable.timer(100, TimeUnit.MILLISECONDS).subscribe {
 
@@ -95,6 +105,7 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
             mMoveDownInterval = Observable.interval(500, TimeUnit.MILLISECONDS).subscribe {
                 mBoxModel.moveDown(false)
             }
+            reSetting = false
         }
     }
 
@@ -104,7 +115,7 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private var mIsDrawing = false
 
-    private   val mMapModel= MapModel()
+    private val mMapModel = MapModel()
     private lateinit var mBoxModel: BoxModel
 
 
@@ -117,6 +128,7 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
         holder.addCallback(this)
         isFocusable = true
         isFocusableInTouchMode = true
+        setBackgroundResource(R.color.white)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -131,12 +143,12 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
         val height = width.toFloat() / mMapModel.maps.size * mMapModel.maps[0].size
 
         //保存测量宽度和测量高度
-        setMeasuredDimension(width, height.toInt())
+        setMeasuredDimension(width, width)
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
         mIsDrawing = true
-        val boxSize = width / mMapModel.maps.size
+        val boxSize = height / mMapModel.maps[0].size
         mBoxModel = BoxModel(mMapModel, boxSize)
     }
 

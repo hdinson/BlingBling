@@ -90,7 +90,7 @@ public class DateUtils {
      * 得到日期
      *
      * @param offset 偏移天数，0表示今天，-1表示昨天，1表示明天
-     * @return yyyy-MM-dd
+     * @return yyyy-MM-_dd
      */
     public static String getDate(int offset) {
         Calendar calendar = Calendar.getInstance();
