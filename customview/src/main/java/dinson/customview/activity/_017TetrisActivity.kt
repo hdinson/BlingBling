@@ -1,6 +1,5 @@
 package dinson.customview.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
