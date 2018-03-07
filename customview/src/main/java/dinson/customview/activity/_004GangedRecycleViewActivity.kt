@@ -1,17 +1,11 @@
 package dinson.customview.activity
 
+
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.widget.ImageView
-
 import com.google.gson.Gson
-
-import java.util.ArrayList
-
-
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._004LeftAdapter
@@ -23,6 +17,7 @@ import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
 import kotlinx.android.synthetic.main.activity__004_ganged_recycle_view.*
+import java.util.*
 
 class _004GangedRecycleViewActivity : BaseActivity() {
 
@@ -31,7 +26,7 @@ class _004GangedRecycleViewActivity : BaseActivity() {
         setContentView(R.layout.activity__004_ganged_recycle_view)
 
         val url = "http://ondlsj2sn.bkt.clouddn.com/FpUVRI5ACAX7YkTOXLuD7mP_3BPg.webp"
-        GlideUtils .setImage(this, url, ivImg)
+        GlideUtils.setImage(this, url, ivImg)
 
         initUI()
     }
@@ -59,9 +54,8 @@ class _004GangedRecycleViewActivity : BaseActivity() {
         val gridManager = GridLayoutManager(this, 3)
         rvRight.layoutManager = gridManager
         gridManager.spanSizeLookup = object : SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (rightDatas[position].isTitle) 3 else 1
-            }
+            override fun getSpanSize(position: Int): Int =
+                if (rightDatas[position].isTitle) 3 else 1
         }
 
         rvLeft.adapter = leftAdapter
@@ -69,6 +63,6 @@ class _004GangedRecycleViewActivity : BaseActivity() {
         rvLeft.addItemDecoration(LinearItemDecoration(this))
     }
 
-    override fun setWindowBackgroundColor()= android.R.color.white
+    override fun setWindowBackgroundColor() = android.R.color.white
 
 }

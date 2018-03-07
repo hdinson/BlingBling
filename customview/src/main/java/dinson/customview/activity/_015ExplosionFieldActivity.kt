@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import dinson.customview.R
+import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._015AppIconAdapter
 import dinson.customview.model._015AppIcon
 import dinson.customview.weight._015explosionview.ExplosionField
@@ -13,7 +14,7 @@ import dinson.customview.weight.recycleview.OnItemClickListener
 import kotlinx.android.synthetic.main.activity__015_explosion_field.*
 
 
-class _015ExplosionFieldActivity : AppCompatActivity() {
+class _015ExplosionFieldActivity : BaseActivity() {
 
     private lateinit var mExplosionField: ExplosionField
 

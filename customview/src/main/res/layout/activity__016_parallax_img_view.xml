@@ -7,7 +7,7 @@
     android:background="@color/white">
 
     <dinson.customview.weight._016parallaximgview.ParallaxImageView
-        android:id="@+id/panorama_image_view"
+        android:id="@+id/parallaxView"
         android:layout_width="match_parent"
         app:showScrollbar="false"
         android:layout_height="match_parent"/>

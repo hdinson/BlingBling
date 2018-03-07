@@ -15,13 +15,10 @@ import dinson.customview.utils.SystemBarTintUtils
  * 所有activity的基类
  */
 open class BaseActivity : AppCompatActivity() {
-    private var mStartTime: Long = 0
-    //private val mEndTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        mStartTime = System.currentTimeMillis()
         super.onCreate(savedInstanceState)
-
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         /*共享元素*/
         window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         /*透明状态栏*/

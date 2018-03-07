@@ -11,12 +11,38 @@
         android:id="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:elevation="10dp"
+        android:background="@color/white"
+        android:elevation="4dp"
         app:title="NFC识别和读取"
-        android:background="@color/white" />
+        app:titleTextColor="@color/textSecond"/>
 
     <ImageView
+        android:id="@id/ivImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/_018_activity_bg"/>
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:src="@drawable/_018_activity_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+    <TextView
+        android:id="@id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_large"
+        android:text="fadsfasdfasdfad"
+        android:textColor="@color/textPrimary"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivImg"/>
+
+    <TextView
+        android:id="@id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
 </android.support.constraint.ConstraintLayout>
