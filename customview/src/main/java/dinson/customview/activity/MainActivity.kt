@@ -7,7 +7,6 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Build.*
 import android.os.Build.VERSION.RELEASE
@@ -31,17 +30,11 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.jakewharton.rxbinding2.view.RxView
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview._global.BaseNfcActivity
 import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.api.OneApi
 import dinson.customview.api.XinZhiWeatherApi
@@ -54,7 +47,10 @@ import dinson.customview.kotlin.*
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
-import dinson.customview.utils.*
+import dinson.customview.utils.CacheUtils
+import dinson.customview.utils.LogUtils
+import dinson.customview.utils.StringUtils
+import dinson.customview.utils.TypefaceUtils
 import dinson.customview.weight.banner.BannerPageClickListener
 import dinson.customview.weight.banner.holder.MainBannerHolder
 import dinson.customview.weight.recycleview.LinearItemDecoration
@@ -67,7 +63,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
 import kotlinx.android.synthetic.main.layout_main_android_info.*
-import java.io.File
+import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
 
@@ -81,6 +77,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         initContent()
         initHead()
@@ -125,7 +122,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _016ParallaxImgViewActivity::class.java, getString(R.string.parallax_iv_img)),
             ClassBean(getString(R.string.tetris_title), getString(R.string.tetris_desc),
                 _017TetrisActivity::class.java, getString(R.string.tetris_img)),
-           ClassBean(getString(R.string.nfc_title), getString(R.string.nfc_desc),
+            ClassBean(getString(R.string.nfc_title), getString(R.string.nfc_desc),
                 _018NFCActivity::class.java, getString(R.string.nfc_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
@@ -249,7 +246,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         set.start()
         weatherLayout.setOnClickListener { view ->
             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE).subscribe {
-                if (!it)return@subscribe
+                if (!it) return@subscribe
                 val offsetX = screenWidth() / 2f - view.x - view.halfWidth()
                 val offsetY = screenHeight() / 2f - view.y - view.halfHeight()
                 val path = view.createArcPath(offsetX, offsetY)
@@ -274,7 +271,9 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         vsAndroidInfo?.apply {
             vsAndroidInfo.inflate()
             createTableRows().forEach { tableLayout.addView(it) }
-            tableLayout.setOnClickListener { concealAndHiddenAndroidInfo() }
+            RxView.clicks(tableLayout).throttleFirst(1, TimeUnit.SECONDS).subscribe {
+                concealAndHiddenAndroidInfo()
+            }
         }
         scrollView.show()
         ViewAnimationUtils.createCircularReveal(scrollView, cx.toInt(), cy.toInt(), startRadius, endRadius).apply {
@@ -420,19 +419,10 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     override fun onBackPressed() {
-        (weatherLayout.visibility != View.VISIBLE).then({ concealAndHiddenAndroidInfo() }, { super.onBackPressed() })
+        (scrollView?.visibility == View.VISIBLE).then({ concealAndHiddenAndroidInfo() }, { super.onBackPressed() })
     }
 
     override fun finishWithAnim(): Boolean = false
 
-    override fun onPause() {
-        mainBanner.pause()
-        super.onPause()
-    }
-
-    override fun onResume() {
-        mainBanner.start()
-        super.onResume()
-    }
 }
 
