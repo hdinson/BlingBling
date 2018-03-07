@@ -68,16 +68,8 @@
         <activity android:name=".activity._012BiliBiliListActivity"/>
         <activity
             android:name=".activity._012BiliBiliVideoActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.FullScreen"/>
-        <activity
-            android:name=".activity.Main2Activity"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/plain"/>
-            </intent-filter>
-        </activity>
         <activity android:name=".activity._013StepViewActivity"/>
         <activity android:name=".activity._014HonorClockActivity"/>
         <activity android:name=".activity._015ExplosionFieldActivity"/>
