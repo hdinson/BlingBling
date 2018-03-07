@@ -15,6 +15,9 @@ import dinson.customview.kotlin.then
 import dinson.customview.utils.NfcUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__018_nfc.*
+import android.content.ComponentName
+
+
 
 
 /**
@@ -61,5 +64,46 @@ class _018NFCActivity : BaseNfcActivity() {
             tvTitle.text = getString(R.string.nfc_unable_toast_msg)
             tvTitle.click { startActivity(Intent(Settings.ACTION_NFC_SETTINGS)) }
         })
+    }
+
+    /**
+     * 为程序创建桌面快捷方式
+     */
+    private fun addShortcut() {
+        val shortcut = Intent("com.android.launcher.action.INSTALL_SHORTCUT")
+
+        //快捷方式的名称
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name))
+        shortcut.putExtra("duplicate", false) //不允许重复创建
+
+        //指定当前的Activity为快捷方式启动的对象: 如 com.everest.video.VideoPlayer
+        //注意: ComponentName的第二个参数必须加上点号(.)，否则快捷方式无法启动相应程序
+        val comp = ComponentName(this.packageName, "." + this.localClassName)
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, Intent(Intent.ACTION_MAIN).setComponent(comp))
+
+        //快捷方式的图标
+        val iconRes = Intent.ShortcutIconResource.fromContext(this, R.mipmap.app_icon)
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes)
+        sendBroadcast(shortcut)
+    }
+
+
+    /**
+     * 删除程序的快捷方式
+     */
+    private fun delShortcut() {
+        val shortcut = Intent("com.android.launcher.action.UNINSTALL_SHORTCUT")
+
+        //快捷方式的名称
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name))
+
+        //指定当前的Activity为快捷方式启动的对象: 如 com.everest.video.VideoPlayer
+        //注意: ComponentName的第二个参数必须是完整的类名（包名+类名），否则无法删除快捷方式
+        val appClass = this.packageName + "." + this.localClassName
+        val comp = ComponentName(this.packageName, appClass)
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, Intent(Intent.ACTION_MAIN).setComponent(comp))
+
+        sendBroadcast(shortcut)
+
     }
 }
