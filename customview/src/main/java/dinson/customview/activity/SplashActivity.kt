@@ -14,8 +14,8 @@ import dinson.customview.utils.SPUtils
 class SplashActivity : AppCompatActivity() {
 
     companion object {
-        private val defaultIconPath = "dinson.customview.activity.SplashActivity"
-        private val newIconPath = "dinson.customview.activity.SplashAliasActivity"
+        private const val defaultIconPath = "dinson.customview.activity.SplashActivity"
+        private const val newIconPath = "dinson.customview.activity.SplashAliasActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
