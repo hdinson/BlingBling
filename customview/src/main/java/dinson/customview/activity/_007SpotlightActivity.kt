@@ -68,5 +68,5 @@ class _007SpotlightActivity : BaseActivity() {
         super.onBackPressed()
     }
 
-    override fun setWindowBackgroundColor() = R.drawable._007_activity_bg
+    override fun setWindowBackgroundColor(): Nothing? = null
 }

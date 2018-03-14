@@ -2,6 +2,7 @@ package dinson.customview.activity
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -14,8 +15,8 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer
 class _012BiliBiliVideoActivity : BaseActivity() {
 
     companion object {
-        private val EXTRA_TITLE = "title"
-        private val EXTRA_URL = "url"
+        private const val EXTRA_TITLE = "title"
+        private const val EXTRA_URL = "url"
         fun start(context: Context, title: String, url: String) {
             val intent = Intent(context, _012BiliBiliVideoActivity::class.java)
             intent.putExtra(EXTRA_TITLE, title)
@@ -27,6 +28,7 @@ class _012BiliBiliVideoActivity : BaseActivity() {
       override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
          setContentView(R.layout.activity__012_bili_bili_video)
+          requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
          val mVideoPath = intent.getStringExtra(EXTRA_URL)
          if (StringUtils.isEmpty(mVideoPath)) {

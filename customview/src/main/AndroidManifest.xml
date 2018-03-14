@@ -21,6 +21,7 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
@@ -70,7 +71,9 @@
             android:name=".activity._012BiliBiliVideoActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.FullScreen"/>
-        <activity android:name=".activity._013StepViewActivity"/>
+        <activity
+            android:name=".activity._013StepViewActivity"
+            android:theme="@style/toolBar_back_icon_color_white"/>
         <activity android:name=".activity._014HonorClockActivity"/>
         <activity android:name=".activity._015ExplosionFieldActivity"/>
         <activity android:name=".activity._016ParallaxImgViewActivity"/>
