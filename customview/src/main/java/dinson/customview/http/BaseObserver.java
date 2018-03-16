@@ -18,11 +18,13 @@ public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onNext(T value) {
         onHandlerSuccess(value);
+        onFinal();
     }
 
     @Override
     public void onError(Throwable e) {
         LogUtils.i("onError() called with: [" + e.toString() + "]",false);
+        onFinal();
     }
 
     @Override
@@ -31,4 +33,10 @@ public abstract class BaseObserver<T> implements Observer<T> {
     }
 
     public abstract void onHandlerSuccess(@NotNull T value);
+
+    /**
+     * 不管网络是否请求成功或者失败都会回调
+     */
+    public void onFinal(){
+    }
 }
