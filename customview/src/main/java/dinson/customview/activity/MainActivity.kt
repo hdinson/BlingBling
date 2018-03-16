@@ -91,11 +91,11 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         listOf(ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
             _001ShimmerActivity::class.java, getString(R.string.facebook_img)),
             ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
-                _002QQNaviViewActivity::class.java, getString(R.string.qqnavi_img)),
+                _012QQNaviViewActivity::class.java, getString(R.string.qqnavi_img)),
             ClassBean(getString(R.string.exchange_rate_title), getString(R.string.exchange_rate_desc),
                 _003ExchangeActivity::class.java, getString(R.string.exchange_rate_img)),
-            ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
-                _004GangedRecycleViewActivity::class.java, getString(R.string.ganged_recycle_img)),
+            ClassBean(getString(R.string.bilibili_title), getString(R.string.bilibili_desc),
+                _004BiliBiliListActivity::class.java, getString(R.string.bilibili_img)),
             ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
                 _005LikeSmileViewActivity::class.java, getString(R.string.like_smile_img)),
             ClassBean(getString(R.string.floatingView_title), getString(R.string.floatingView_desc),
@@ -110,8 +110,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _010ParallaxActivity::class.java, getString(R.string.parallax_animation_img)),
             ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
                 _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)),
-            ClassBean(getString(R.string.bilibili_title), getString(R.string.bilibili_desc),
-                _012BiliBiliListActivity::class.java, getString(R.string.bilibili_img)),
             ClassBean(getString(R.string.step_view_title), getString(R.string.step_view_desc),
                 _013StepViewActivity::class.java, getString(R.string.step_view_img)),
             ClassBean(getString(R.string.honor_clock_title), getString(R.string.honor_clock_desc),
@@ -124,6 +122,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _017TetrisActivity::class.java, getString(R.string.tetris_img)),
             ClassBean(getString(R.string.nfc_title), getString(R.string.nfc_desc),
                 _018NFCActivity::class.java, getString(R.string.nfc_img)),
+            ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
+                _019GangedRecycleViewActivity::class.java, getString(R.string.ganged_recycle_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
@@ -158,7 +158,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { path ->
-                    LogUtils.e("CurrentItem:" + position + " imgUrl:" + mHeadData[position].data.hp_img_url + "  imgPath:" + path)
+                    debug("CurrentItem:" + position + " imgUrl:" + mHeadData[position].data.hp_img_url + "  imgPath:" + path)
                     val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, view, "dailyPic")
                     DailyPicActivity.start(this@MainActivity, mHeadData[position].data, path, options)
                 }
@@ -229,7 +229,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
 
     private fun initWeatherLayout(weather: HomeWeather) {
         debug(".$weather")
-        weatherLayout.visibility = View.VISIBLE
         val resultsBean = weather.results[0]
         iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
         tvWeather.apply {
@@ -237,13 +236,14 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             text = String.format("%s℃", resultsBean.now.temperature)
         }
 
-        val alphaAnimator = ObjectAnimator.ofFloat(weatherLayout, "alpha", 0f, 1f)
+        /*val alphaAnimator = ObjectAnimator.ofFloat(weatherLayout, "alpha", 0f, 1f)
         val scaleX = ObjectAnimator.ofFloat(weatherLayout, "scaleX", 0f, 1.0f)
         val scaleY = ObjectAnimator.ofFloat(weatherLayout, "scaleY", 0f, 1.0f)
         val set = AnimatorSet()
         set.interpolator = DecelerateInterpolator()
         set.play(alphaAnimator).with(scaleX).with(scaleY)
-        set.start()
+        set.start()*/
+
         weatherLayout.setOnClickListener { view ->
             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE).subscribe {
                 if (!it) return@subscribe
@@ -277,7 +277,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         }
         scrollView.show()
         ViewAnimationUtils.createCircularReveal(scrollView, cx.toInt(), cy.toInt(), startRadius, endRadius).apply {
-            duration = 500
+            duration = 300
             interpolator = AccelerateInterpolator()
         }.start()
     }

@@ -12,7 +12,7 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._003CurrencyAdapter
 import dinson.customview.adapter._003LeftDrawerAdapter
 import dinson.customview.api.ExchangeApi
-import dinson.customview.entity.ExchangeBean
+import dinson.customview.entity.exchange.ExchangeBean
 import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
 import dinson.customview.listener.CalculatorKey

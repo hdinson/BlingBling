@@ -54,9 +54,9 @@
         <activity android:name=".activity.DailyPicActivity"/>
         <activity android:name=".activity.TestActivity"/>
         <activity android:name=".activity._001ShimmerActivity"/>
-        <activity android:name=".activity._002QQNaviViewActivity"/>
+        <activity android:name=".activity._012QQNaviViewActivity"/>
         <activity android:name=".activity._003ExchangeActivity"/>
-        <activity android:name=".activity._004GangedRecycleViewActivity"/>
+        <activity android:name=".activity._019GangedRecycleViewActivity"/>
         <activity android:name=".activity._005LikeSmileViewActivity"/>
         <activity android:name=".activity._006FloatingViewActivity"/>
         <activity android:name=".activity._007SpotlightActivity"/>
@@ -66,9 +66,9 @@
             android:name=".activity._010ParallaxActivity"
             android:theme="@style/AppTheme.FullScreen"/>
         <activity android:name=".activity._011DiagonalLayoutActivity"/>
-        <activity android:name=".activity._012BiliBiliListActivity"/>
+        <activity android:name=".activity._004BiliBiliListActivity"/>
         <activity
-            android:name=".activity._012BiliBiliVideoActivity"
+            android:name=".activity._004BiliBiliVideoActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.FullScreen"/>
         <activity
@@ -88,5 +88,6 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity._002ZhihuTucaoListActivity"></activity>
     </application>
 </manifest>
