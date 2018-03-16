@@ -1,6 +1,6 @@
 package dinson.customview.api
 
-import dinson.customview.entity.ExchangeBean
+import dinson.customview.entity.exchange.ExchangeBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 

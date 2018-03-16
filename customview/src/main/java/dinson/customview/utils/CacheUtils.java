@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import dinson.customview._global.GlobalApplication;
-import dinson.customview.entity.ExchangeBean;
+import dinson.customview.entity.exchange.ExchangeBean;
 import dinson.customview.entity.HomeWeather;
 import dinson.customview.entity.one.DailyDetail;
 import dinson.customview.entity.one.DailyList;
