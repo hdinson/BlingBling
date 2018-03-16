@@ -2,6 +2,8 @@ package dinson.customview.entity.zhihu;
 
 import java.util.List;
 
+import dinson.customview.db.model.ZhihuTucao;
+
 /**
  * 知乎瞎扯服务器返回response
  */
@@ -42,6 +44,17 @@ public class ZhihuTucaoListResponse {
     }
 
     public static class StoriesBean {
+
+        public ZhihuTucao convertToZhihuTucao() {
+            ZhihuTucao zhihuTucao = new ZhihuTucao();
+            zhihuTucao.setDate(this.date);
+            zhihuTucao.setDisplay_date(this.display_date);
+            zhihuTucao.setId(this.id);
+            zhihuTucao.setTitle(this.title);
+            zhihuTucao.setImages(this.getImages().get(0));
+            return zhihuTucao;
+        }
+
         /**
          * images : ["https://pic1.zhimg.com/v2-bbb227a4e2e284bbebb8bd8f8d5b89a0.jpg"]
          * date : 20180316
@@ -50,17 +63,17 @@ public class ZhihuTucaoListResponse {
          * title : 瞎扯 · 如何正确地吐槽
          */
 
-        private String date;
+        private int date;
         private String display_date;
-        private int id;
+        private long id;
         private String title;
         private List<String> images;
 
-        public String getDate() {
+        public int getDate() {
             return date;
         }
 
-        public void setDate(String date) {
+        public void setDate(int date) {
             this.date = date;
         }
 
@@ -72,11 +85,11 @@ public class ZhihuTucaoListResponse {
             this.display_date = display_date;
         }
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
