@@ -1,8 +1,6 @@
 package dinson.customview.activity
 
 import android.Manifest
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
@@ -23,7 +21,6 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import android.widget.TableRow
 import android.widget.TextView
 import com.amap.api.location.AMapLocationClient
@@ -91,7 +88,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         listOf(ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
             _001ShimmerActivity::class.java, getString(R.string.facebook_img)),
             ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
-                _012QQNaviViewActivity::class.java, getString(R.string.qqnavi_img)),
+                _002ZhihuTucaoListActivity::class.java, getString(R.string.qqnavi_img)),
             ClassBean(getString(R.string.exchange_rate_title), getString(R.string.exchange_rate_desc),
                 _003ExchangeActivity::class.java, getString(R.string.exchange_rate_img)),
             ClassBean(getString(R.string.bilibili_title), getString(R.string.bilibili_desc),
@@ -110,6 +107,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _010ParallaxActivity::class.java, getString(R.string.parallax_animation_img)),
             ClassBean(getString(R.string.diagonal_layout_title), getString(R.string.diagonal_layout_desc),
                 _011DiagonalLayoutActivity::class.java, getString(R.string.diagonal_layout_img)),
+            ClassBean(getString(R.string.qqnavi_title), getString(R.string.qqnavi_desc),
+                _012QQNaviViewActivity::class.java, getString(R.string.qqnavi_img)),
             ClassBean(getString(R.string.step_view_title), getString(R.string.step_view_desc),
                 _013StepViewActivity::class.java, getString(R.string.step_view_img)),
             ClassBean(getString(R.string.honor_clock_title), getString(R.string.honor_clock_desc),
