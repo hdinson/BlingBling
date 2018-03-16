@@ -55,6 +55,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
             }
         })
         flCustomRefreshView.isRefreshing = true
+        flCustomRefreshView.setEmptyView("")
     }
 
     /**
@@ -74,7 +75,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
                     mAdapter.notifyDataSetChanged()
                 }
 
-                override fun onComplete() {
+                override fun onFinal() {
                     flCustomRefreshView.complete()
                 }
             })
@@ -110,7 +111,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
                     mAdapter.notifyItemChanged(index)
                 }
 
-                override fun onComplete() {
+                override fun onFinal() {
                     flCustomRefreshView.complete()
                 }
             })
