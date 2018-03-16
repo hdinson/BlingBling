@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase
 import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.download.model.DaoMaster
 import dinson.customview.kotlin.getContext
+import java.sql.Array
 
 /**
  * app数据库相关工具类
