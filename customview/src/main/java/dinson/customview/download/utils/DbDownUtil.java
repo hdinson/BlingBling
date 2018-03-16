@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import dinson.customview.download.model.DaoMaster;
-import dinson.customview.download.model.DaoSession;
+import dinson.customview.db.model.DaoMaster;
+import dinson.customview.db.model.DaoSession;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadInfoDao;
 import dinson.customview.utils.UIUtils;
@@ -23,7 +23,7 @@ import dinson.customview.utils.UIUtils;
 
 public class DbDownUtil {
     private static DbDownUtil db;
-    private final static String dbName = "Download";
+    private final static String dbName = "AppDb";
     private DaoMaster.DevOpenHelper openHelper;
     private Context context = UIUtils.getContext();
 

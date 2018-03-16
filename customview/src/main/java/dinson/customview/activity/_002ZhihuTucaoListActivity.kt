@@ -44,8 +44,8 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         mAdapter = _002ZhihuListAdapter(this, mData)
 
         flCustomRefreshView.setAdapter(mAdapter)
-        flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
+
             override fun onRefresh() {
                 getServiceData()
             }
@@ -54,6 +54,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
                 loadMoreData()
             }
         })
+        flCustomRefreshView.isRefreshing = true
     }
 
     /**
@@ -67,10 +68,14 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
                     if (mData.isNotEmpty() && mData[0].date >= response.stories[0].date) return
 
                     val map = response.stories.map { it.convertToZhihuTucao() }
-                    AppDbUtils.insertMultZhihuTucao(map)
+                    AppDbUtils.insertMultiZhihuTucao(map)
                     mData.clear()
                     mData.addAll(map)
                     mAdapter.notifyDataSetChanged()
+                }
+
+                override fun onComplete() {
+                    flCustomRefreshView.complete()
                 }
             })
     }
@@ -87,6 +92,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
             val index = mData.size
             mData.addAll(datas)
             mAdapter.notifyItemChanged(index)
+            flCustomRefreshView.complete()
             return
         }
         //请求网络加载更多数据
@@ -98,11 +104,17 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
             .subscribe(object : BaseObserver<ZhihuTucaoListResponse?>() {
                 override fun onHandlerSuccess(response: ZhihuTucaoListResponse) {
                     val map = response.stories.map { it.convertToZhihuTucao() }
-                    AppDbUtils.insertMultZhihuTucao(map)
-                    mData.clear()
+                    AppDbUtils.insertMultiZhihuTucao(map)
+                    val index = mData.size
                     mData.addAll(map)
-                    mAdapter.notifyDataSetChanged()
+                    mAdapter.notifyItemChanged(index)
+                }
+
+                override fun onComplete() {
+                    flCustomRefreshView.complete()
                 }
             })
     }
+
+    override fun setWindowBackgroundColor() = R.color._002_window_bg
 }

@@ -3,16 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/spacing_small"
+    android:layout_marginBottom="4dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginTop="@dimen/spacing_small"
+    android:layout_marginTop="4dp"
     android:background="@drawable/shape_rec_r5"
     android:backgroundTint="@color/white"
-    android:paddingBottom="@dimen/spacing_small"
+    android:paddingBottom="10dp"
     android:paddingLeft="@dimen/spacing_medium"
     android:paddingRight="@dimen/spacing_medium"
-    android:paddingTop="@dimen/spacing_small">
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@id/ivImg"
@@ -25,6 +25,7 @@
     <TextView
         android:id="@id/tvTitle"
         android:layout_width="wrap_content"
+        android:textColor="@color/textPrimary"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/ivImg"
         android:textSize="16sp"/>
@@ -33,5 +34,6 @@
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/textPrimary"
         android:layout_alignBottom="@id/ivImg" />
 </RelativeLayout>

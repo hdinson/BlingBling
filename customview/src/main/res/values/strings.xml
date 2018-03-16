@@ -9,18 +9,18 @@
     <string name="facebook_desc">Add a shimmering effect to any view in your app.</string>
     <string name="facebook_img">http://ondlsj2sn.bkt.clouddn.com/FsghEYkztX6HGcQufyUmB9N-DvRI.webp</string>
     <!--002-->
-    <string name="qqnavi_title">QQNaviView</string>
-    <string name="qqnavi_desc">Mimic QQ navigation bar</string>
-    <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FghQpL5VATXt6Wtlm575wiDseyvI.webp</string>
+    <string name="zhihu_title">QQNaviView</string>
+    <string name="zhihu_desc">Mimic QQ navigation bar</string>
+    <string name="zhihu_img">http://ondlsj2sn.bkt.clouddn.com/Fi8e4rUvYUC3tp5UzU6mUQh4SkTK.webp</string>
     <!--003-->
     <string name="exchange_rate_title">Exchange Rate</string>
     <string name="exchange_rate_desc">Support to exchange currency around the world</string>
     <string name="exchange_rate_img">http://ondlsj2sn.bkt.clouddn.com/FgoM0tniC1eDMUOLrI3-P89zk3yt.webp</string>
     <!--004-->
-    <string name="ganged_recycle_title">GangedRecycleView</string>
-    <string name="ganged_recycle_desc">Two RecycleViews Joint sliding …</string>
-    <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/FnLyI2fmB2ykukTQfKY6uBTKVdjB.webp</string>
-    <!--005-->
+    <string name="bilibili_title">IJKPlayer</string>
+    <string name="bilibili_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
+    <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
+   <!--005-->
     <string name="like_smile_title">LikeSmileView</string>
     <string name="like_smile_desc">Imitating ZuiWorld\'s application of thumb up function</string>
     <string name="like_smile_img">http://ondlsj2sn.bkt.clouddn.com/FpoNvqVck6N_pe45kqlb4bB00JRE.jpg</string>
@@ -68,9 +68,9 @@
     <string name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design</string>
     <string name="diagonal_layout_img">http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp</string>
     <!--012-->
-    <string name="bilibili_title">IJKPlayer</string>
-    <string name="bilibili_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
-    <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
+    <string name="qqnavi_title">QQNaviView</string>
+    <string name="qqnavi_desc">Mimic QQ navigation bar</string>
+    <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FghQpL5VATXt6Wtlm575wiDseyvI.webp</string>
     <!--013-->
     <string name="step_view_title">StepView</string>
     <string name="step_view_desc">Step by step. Step indicator. Flow indicator</string>
@@ -95,6 +95,10 @@
     <string name="nfc_title">NFC Tools</string>
     <string name="nfc_desc">Near-field communication (NFC) is a set of communication protocols that enable two electronic devices</string>
     <string name="nfc_img">http://ondlsj2sn.bkt.clouddn.com/FuEdGMh6ReHpM2hTK0_MZ39xTjX1.webp</string>
+    <!--？-->
+    <string name="ganged_recycle_title">GangedRecycleView</string>
+    <string name="ganged_recycle_desc">Two RecycleViews Joint sliding …</string>
+    <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/FnLyI2fmB2ykukTQfKY6uBTKVdjB.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>
