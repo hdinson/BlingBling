@@ -1,10 +1,10 @@
 package dinson.customview.db
 
 import android.database.sqlite.SQLiteDatabase
+import dinson.customview.db.model.DaoMaster
 import dinson.customview.db.model.ZhihuTucao
-import dinson.customview.download.model.DaoMaster
+import dinson.customview.db.model.ZhihuTucaoDao
 import dinson.customview.kotlin.getContext
-import java.sql.Array
 
 /**
  * app数据库相关工具类
@@ -37,7 +37,7 @@ object AppDbUtils {
     /**
      * 插入多条知乎吐槽数据
      */
-    fun insertMultZhihuTucao(zhihuTucaoList: List<ZhihuTucao>) {
+    fun insertMultiZhihuTucao(zhihuTucaoList: List<ZhihuTucao>) {
         DaoMaster(getWritableDatabase()).newSession().zhihuTucaoDao.insertOrReplaceInTx(zhihuTucaoList)
     }
 

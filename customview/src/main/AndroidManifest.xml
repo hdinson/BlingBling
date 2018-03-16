@@ -88,6 +88,8 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity._002ZhihuTucaoListActivity"></activity>
+        <activity
+            android:name=".activity._002ZhihuTucaoListActivity"
+            android:theme="@style/toolBar_back_icon_color_white"/>
     </application>
 </manifest>
