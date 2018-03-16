@@ -17,15 +17,8 @@
         app:title="瞎扯"
         app:titleTextColor="@color/white"/>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <dinson.customview.weight.refreshview.CustomRefreshView
+        android:id="@+id/flCustomRefreshView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@id/rvContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"/>
 </LinearLayout>
