@@ -90,7 +90,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         //显示本地数据
         if (datas.isNotEmpty()) {
             debug("本地有更多数据")
-            val index = mData.size
+            val index = mData.size-1
             mData.addAll(datas)
             mAdapter.notifyItemChanged(index)
             flCustomRefreshView.complete()
@@ -104,9 +104,14 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         mZhihuTucaoApi.getStoriesListBeforeData(timestamp).compose(RxSchedulers.io_main())
             .subscribe(object : BaseObserver<ZhihuTucaoListResponse?>() {
                 override fun onHandlerSuccess(response: ZhihuTucaoListResponse) {
+                    if (response.stories.isEmpty()){
+                        //没有更多的数据了
+                        flCustomRefreshView.onNoMore()
+                        return
+                    }
                     val map = response.stories.map { it.convertToZhihuTucao() }
                     AppDbUtils.insertMultiZhihuTucao(map)
-                    val index = mData.size
+                    val index = mData.size-1
                     mData.addAll(map)
                     mAdapter.notifyItemChanged(index)
                 }
