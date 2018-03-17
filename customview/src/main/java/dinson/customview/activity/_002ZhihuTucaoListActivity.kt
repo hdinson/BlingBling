@@ -1,6 +1,8 @@
 package dinson.customview.activity
 
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.*
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._002ZhihuListAdapter
@@ -14,8 +16,12 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.debug
 import dinson.customview.utils.DateUtils
 import dinson.customview.utils.SystemBarModeUtils
+import dinson.customview.weight.recycleview.OnItemClickListener
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
+import com.bumptech.glide.Glide
+import dinson.customview.R.id.flCustomRefreshView
+
 
 class _002ZhihuTucaoListActivity : BaseActivity() {
 
@@ -56,6 +62,13 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         })
         flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
+        val listener = OnItemClickListener(this, flCustomRefreshView.recyclerView,
+            OnItemClickListener.OnClickListener(
+                { _, position ->
+                    _002ZhihuTucaoContentActivity.start(this, mData[position])
+                }
+            ))
+        flCustomRefreshView.recyclerView.addOnItemTouchListener(listener)
     }
 
     /**
@@ -90,7 +103,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         //显示本地数据
         if (datas.isNotEmpty()) {
             debug("本地有更多数据")
-            val index = mData.size-1
+            val index = mData.size-2
             mData.addAll(datas)
             mAdapter.notifyItemChanged(index)
             flCustomRefreshView.complete()
@@ -104,14 +117,14 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         mZhihuTucaoApi.getStoriesListBeforeData(timestamp).compose(RxSchedulers.io_main())
             .subscribe(object : BaseObserver<ZhihuTucaoListResponse?>() {
                 override fun onHandlerSuccess(response: ZhihuTucaoListResponse) {
-                    if (response.stories.isEmpty()){
+                    if (response.stories.isEmpty()) {
                         //没有更多的数据了
                         flCustomRefreshView.onNoMore()
                         return
                     }
                     val map = response.stories.map { it.convertToZhihuTucao() }
                     AppDbUtils.insertMultiZhihuTucao(map)
-                    val index = mData.size-1
+                    val index = mData.size - 2
                     mData.addAll(map)
                     mAdapter.notifyItemChanged(index)
                 }
