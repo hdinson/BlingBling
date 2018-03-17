@@ -20,7 +20,7 @@
     <string name="bilibili_title">IJKPlayer</string>
     <string name="bilibili_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
     <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
-   <!--005-->
+    <!--005-->
     <string name="like_smile_title">LikeSmileView</string>
     <string name="like_smile_desc">Imitating ZuiWorld\'s application of thumb up function</string>
     <string name="like_smile_img">http://ondlsj2sn.bkt.clouddn.com/FpoNvqVck6N_pe45kqlb4bB00JRE.jpg</string>
