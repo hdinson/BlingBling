@@ -3,7 +3,6 @@ package dinson.customview.adapter
 import android.content.Context
 import dinson.customview.R
 import dinson.customview.db.model.ZhihuTucao
-import dinson.customview.kotlin.getContext
 import dinson.customview.utils.GlideUtils
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
@@ -19,6 +18,6 @@ class _002ZhihuListAdapter(context: Context, dataList: List<ZhihuTucao>)
     override fun convert(holder: CommonViewHolder, dataBean: ZhihuTucao, position: Int) {
         holder.setTvText(R.id.tvTitle, dataBean.title)
         holder.setTvText(R.id.tvTime, dataBean.display_date)
-        GlideUtils.setImage(getContext(), dataBean.images, holder.getView(R.id.ivImg))
+        GlideUtils.setImage(mContext, dataBean.images, holder.getView(R.id.ivImg))
     }
 }

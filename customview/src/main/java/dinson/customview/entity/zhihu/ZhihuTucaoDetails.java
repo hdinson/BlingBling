@@ -8,9 +8,17 @@ public class ZhihuTucaoDetails {
     private String body;
     private ArrayList<String> css;
     private Long id;
-    private String image;
+    private String image="";
+    private String image_source="";
     private String title;
-    private ArrayList<String> images;
+
+    public String getImage_source() {
+        return image_source;
+    }
+
+    public void setImage_source(String image_source) {
+        this.image_source = image_source;
+    }
 
     public String getTitle() {
         return title;
@@ -50,13 +58,5 @@ public class ZhihuTucaoDetails {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public ArrayList<String> getImages() {
-        return images;
-    }
-
-    public void setImages(ArrayList<String> images) {
-        this.images = images;
     }
 }

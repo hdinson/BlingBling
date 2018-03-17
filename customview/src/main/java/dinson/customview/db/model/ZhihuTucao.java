@@ -40,7 +40,7 @@ public class ZhihuTucao implements Parcelable {
 
     @Generated(hash = 1030154321)
     public ZhihuTucao(Long id, int date, @NotNull String display_date, @NotNull String images,
-            @NotNull String title, String content) {
+                      @NotNull String title, String content) {
         this.id = id;
         this.date = date;
         this.display_date = display_date;
@@ -48,6 +48,42 @@ public class ZhihuTucao implements Parcelable {
         this.title = title;
         this.content = content;
     }
+
+    protected ZhihuTucao(Parcel in) {
+        id = in.readLong();
+        date = in.readInt();
+        display_date = in.readString();
+        images = in.readString();
+        title = in.readString();
+        content = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeInt(date);
+        dest.writeString(display_date);
+        dest.writeString(images);
+        dest.writeString(title);
+        dest.writeString(content);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ZhihuTucao> CREATOR = new Creator<ZhihuTucao>() {
+        @Override
+        public ZhihuTucao createFromParcel(Parcel in) {
+            return new ZhihuTucao(in);
+        }
+
+        @Override
+        public ZhihuTucao[] newArray(int size) {
+            return new ZhihuTucao[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -123,44 +159,5 @@ public class ZhihuTucao implements Parcelable {
     // 3.实现Parcelable.Creator接口对象名必须为CREATOR，不如同样会报错上面所提到的错；
     // 4.在读取Parcel容器里的数据事，必须按成员变量声明的顺序读取数据，不然会出现获取数据出错
     // 5.反序列化对象
-    protected ZhihuTucao(Parcel in) {
-        date = in.readInt();
-        display_date = in.readString();
-        images = in.readString();
-        title = in.readString();
-        content = in.readString();
-    }
 
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        if (id == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeLong(id);
-        }
-        dest.writeInt(date);
-        dest.writeString(display_date);
-        dest.writeString(images);
-        dest.writeString(title);
-        dest.writeString(content);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<ZhihuTucao> CREATOR = new Creator<ZhihuTucao>() {
-        @Override
-        public ZhihuTucao createFromParcel(Parcel in) {
-            return new ZhihuTucao(in);
-        }
-
-        @Override
-        public ZhihuTucao[] newArray(int size) {
-            return new ZhihuTucao[size];
-        }
-    };
 }

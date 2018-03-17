@@ -17,6 +17,7 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.error
 import dinson.customview.kotlin.then
 import dinson.customview.utils.GlideUtils
+import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_content.*
 
 class _002ZhihuTucaoContentActivity : BaseActivity() {
@@ -30,12 +31,10 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
         }
     }
 
-    private lateinit var mZhuhuApi: ZhihuTucaoApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__002_zhihu_tucao_content)
-
-        mZhuhuApi = HttpHelper.create(mZhuhuApi::class.java)
+        SystemBarModeUtils.darkMode(this, true)
 
         initUI()
         initData()
@@ -52,15 +51,17 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
         //自适应屏幕
         webSettings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
 
-        wvContent.setOnscrollChangeCallback { l, t, oldl, oldt ->
-            if (t <= ivHeight * 1.5) {
-                val layoutParams = ivImg.layoutParams
-                layoutParams.height = ivHeight - t
-                if (layoutParams.height < 0) {
-                    layoutParams.height = 0
-                }
-                ivImg.layoutParams = layoutParams
+        wvContent.setOnscrollChangeCallback { _, t, _, _ ->
+            if (t > ivHeight * 1.5) return@setOnscrollChangeCallback
+
+            val layoutParams = ivImg.layoutParams
+            layoutParams.height = ivHeight - t
+            val alphaTv = (ivHeight - t * 1.2f) / ivHeight
+            tvTitle.alpha = alphaTv
+            if (layoutParams.height < 0) {
+                layoutParams.height = 0
             }
+            ivImg.layoutParams = layoutParams
         }
     }
 
@@ -75,7 +76,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
         val content = mData.content
         (content == null || content.isEmpty()).then({
             //加载网络
-            mZhuhuApi.getStoriesDetails(extraData.id)
+            HttpHelper.create(ZhihuTucaoApi::class.java).getStoriesDetails(extraData.id)
                 .compose(RxSchedulers.io_main())
                 .subscribe({
                     //本地数据库存储
@@ -83,7 +84,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
                     AppDbUtils.updateZhihuTucao(mData)
 
                     //解析数据，设置数据
-                    parseJsonAndSetData(it.string())
+                    parseJsonAndSetData(mData.content)
                 }, {
                     error("知乎请求详情数据失败")
                     onBackPressed()
@@ -107,6 +108,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
         builder.append(bean.body)
         //加载图片
         GlideUtils.setImage(this, bean.image, ivImg)
+        tvTitle.text = bean.image_source
         wvContent.loadDataWithBaseURL(null, builder.toString(),
             "text/html", "utf-8", null)
     }
