@@ -85,8 +85,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
      * 内容的数据集
      */
     private val mContentData: List<ClassBean> by lazy {
-        listOf(ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
-            _020ShimmerActivity::class.java, getString(R.string.facebook_img)),
+        listOf(ClassBean(getString(R.string.wan_android_title), getString(R.string.wan_android_desc),
+            _001WanAndroidActivity::class.java, getString(R.string.wan_android_img)),
             ClassBean(getString(R.string.zhihu_title), getString(R.string.zhihu_desc),
                 _002ZhihuTucaoListActivity::class.java, getString(R.string.zhihu_img)),
             ClassBean(getString(R.string.exchange_rate_title), getString(R.string.exchange_rate_desc),
@@ -123,6 +123,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _018NFCActivity::class.java, getString(R.string.nfc_img)),
             ClassBean(getString(R.string.ganged_recycle_title), getString(R.string.ganged_recycle_desc),
                 _019GangedRecycleViewActivity::class.java, getString(R.string.ganged_recycle_img)),
+            ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
+                _020ShimmerActivity::class.java, getString(R.string.facebook_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )

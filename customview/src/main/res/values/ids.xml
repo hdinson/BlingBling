@@ -10,6 +10,7 @@
     <item name="tvDis" type="id"/>
     <item name="tvNum" type="id"/>
     <item name="tvType" type="id"/>
+    <item name="tvTime" type="id"/>
 
     <item name="ivImg" type="id"/>
     <item name="ivTitle" type="id"/>

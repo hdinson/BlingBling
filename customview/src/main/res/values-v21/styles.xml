@@ -9,6 +9,9 @@
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowTitleBackgroundStyle">@null</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <!-- 溢出菜单图标颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="AppTheme.SplashTheme">

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <com.jaren.lib.view.LikeView
+        android:id="@+id/lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cirRadius="10dp"
+        app:cycleTime="2000"
+        app:defaultColor="#ff657487"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/lv"/>
+
+    <TextView
+        android:id="@+id/tvTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/_001_tag_wireframe"
+        android:textColor="#22AD79"
+        android:visibility="gone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChapter"
+        app:layout_constraintLeft_toRightOf="@id/lv"/>
+
+    <TextView
+        android:id="@+id/tvChapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:textColor="@color/textSecond"
+        app:layout_constraintLeft_toRightOf="@+id/tvTag"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
+
+    <TextView
+        android:id="@id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:textColor="@color/textSecond"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChapter"
+        app:layout_constraintLeft_toRightOf="@+id/tvChapter"/>
+</android.support.constraint.ConstraintLayout>

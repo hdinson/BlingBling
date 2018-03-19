@@ -20,20 +20,20 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@id/tvTitle"
         android:layout_width="wrap_content"
-        android:textColor="@color/textPrimary"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/ivImg"
+        android:textColor="@color/textPrimary"
         android:textSize="16sp"/>
 
     <TextView
-        android:id="@+id/tvTime"
+        android:id="@id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/textPrimary"
-        android:layout_alignBottom="@id/ivImg" />
+        android:layout_alignBottom="@id/ivImg"
+        android:textColor="@color/textPrimary"/>
 </RelativeLayout>
