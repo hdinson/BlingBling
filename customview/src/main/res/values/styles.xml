@@ -203,8 +203,4 @@
         <!-- 溢出菜单图标颜色-->
         <item name="colorControlNormal">@color/black</item>
     </style>
-    <style name="toolBar_back_icon_color_white" parent="AppTheme">
-        <!-- 溢出菜单图标颜色-->
-        <item name="colorControlNormal">@color/white</item>
-    </style>
 </resources>

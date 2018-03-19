@@ -5,9 +5,9 @@
     <string name="test_layout_desc">An activity for testing.</string>
     <string name="test_layout_img">http://ondlsj2sn.bkt.clouddn.com/Fos8aWM3lzyxB621rEmzMhgTUn-p.webp</string>
     <!--001-->
-    <string name="facebook_title">FaceBook-Shimmer</string>
-    <string name="facebook_desc">Add a shimmering effect to any view in your app.</string>
-    <string name="facebook_img">http://ondlsj2sn.bkt.clouddn.com/FsghEYkztX6HGcQufyUmB9N-DvRI.webp</string>
+    <string name="wan_android_title">FaceBook-Shimmer</string>
+    <string name="wan_android_desc">Add a shimmering effect to any view in your app.</string>
+    <string name="wan_android_img">http://ondlsj2sn.bkt.clouddn.com/FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp</string>
     <!--002-->
     <string name="zhihu_title">QQNaviView</string>
     <string name="zhihu_desc">Mimic QQ navigation bar</string>
@@ -99,6 +99,10 @@
     <string name="ganged_recycle_title">GangedRecycleView</string>
     <string name="ganged_recycle_desc">Two RecycleViews Joint sliding …</string>
     <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/FnLyI2fmB2ykukTQfKY6uBTKVdjB.webp</string>
+    <!--020-->
+    <string name="facebook_title">FaceBook-Shimmer</string>
+    <string name="facebook_desc">Add a shimmering effect to any view in your app.</string>
+    <string name="facebook_img">http://ondlsj2sn.bkt.clouddn.com/FsghEYkztX6HGcQufyUmB9N-DvRI.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>
