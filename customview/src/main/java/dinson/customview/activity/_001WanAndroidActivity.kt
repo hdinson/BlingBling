@@ -10,7 +10,6 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
-import dinson.customview.weight.recycleview.OnItemClickListener
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 
@@ -42,7 +41,6 @@ class _001WanAndroidActivity : BaseActivity() {
 
         flCustomRefreshView.setAdapter(mAdapter)
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
-
             override fun onRefresh() {
                 getServiceData(true)
             }
@@ -53,11 +51,6 @@ class _001WanAndroidActivity : BaseActivity() {
         })
         flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
-        val listener = OnItemClickListener(this, flCustomRefreshView.recyclerView,
-            OnItemClickListener.OnClickListener({ _, position ->
-                _001WanAndroidWebActivity.start(this, mData[position].link)
-            }))
-        flCustomRefreshView.recyclerView.addOnItemTouchListener(listener)
         flCustomRefreshView.recyclerView.addItemDecoration(LinearItemDecoration(this))
     }
 
