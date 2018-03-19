@@ -8,9 +8,9 @@ import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.then
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
+import dinson.customview.weight.recycleview.OnItemClickListener
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 
@@ -53,13 +53,11 @@ class _001WanAndroidActivity : BaseActivity() {
         })
         flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
-        /*val listener = OnItemClickListener(this, flCustomRefreshView.recyclerView,
-            OnItemClickListener.OnClickListener(
-                { _, position ->
-                    _002ZhihuTucaoContentActivity.start(this, mData[position])
-                }
-            ))
-        flCustomRefreshView.recyclerView.addOnItemTouchListener(listener)*/
+        val listener = OnItemClickListener(this, flCustomRefreshView.recyclerView,
+            OnItemClickListener.OnClickListener({ _, position ->
+                _001WanAndroidWebActivity.start(this, mData[position].link)
+            }))
+        flCustomRefreshView.recyclerView.addOnItemTouchListener(listener)
         flCustomRefreshView.recyclerView.addItemDecoration(LinearItemDecoration(this))
     }
 
@@ -68,13 +66,13 @@ class _001WanAndroidActivity : BaseActivity() {
      * @param isRefresh 是否刷新
      */
     private fun getServiceData(isRefresh: Boolean) {
+        if (isRefresh) mPageIndex = 0
         mWanAndroidApi.getMainArticleList(mPageIndex).compose(RxSchedulers.io_main())
             .subscribe({
                 flCustomRefreshView.complete()
-                isRefresh then mData.clear()
-                val index = mData.size - 1
+                if (isRefresh) mData.clear()
                 val article = it.data.datas
-                article.isEmpty() then flCustomRefreshView.onNoMore()
+                if (article.isEmpty()) flCustomRefreshView.onNoMore()
 
                 mData.addAll(article)
                 mAdapter.notifyDataSetChanged()
@@ -82,6 +80,5 @@ class _001WanAndroidActivity : BaseActivity() {
             }, {
                 flCustomRefreshView.complete()
             })
-
     }
 }

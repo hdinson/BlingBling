@@ -11,15 +11,23 @@
         android:id="@+id/iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="隐藏"/>
+        android:text="登陆"/>
+
     <Button
         android:id="@+id/iv2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="隐藏2"/>
+        android:text="收藏"/>
+
+    <Button
+        android:id="@+id/iv3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加收藏"/>
+
     <Button
         android:id="@+id/clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="隐藏3"/>
+        android:text="清楚cookie"/>
 </LinearLayout>

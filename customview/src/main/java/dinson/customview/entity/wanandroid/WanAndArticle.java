@@ -16,7 +16,7 @@ public class WanAndArticle implements Parcelable {
      * author : niniloveyou
      * chapterId : 331
      * chapterName : TextView
-     * collect : false
+     * collectList : false
      * courseId : 13
      * desc : 自定义控件 ：drawable 跟随TextView居中 The drawable follows the text centered
 
