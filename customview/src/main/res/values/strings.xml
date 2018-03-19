@@ -223,4 +223,6 @@
     <string name="nfc_unable_toast_msg">NFC模块未启用，点击设置</string>
     <string name="nfc_enable_toast_msg">请将卡片放到手机背面的NFC感应区</string>
     <string name="retry">重试</string>
+    <string name="search">搜索</string>
+    <string name="like">喜欢</string>
 </resources>

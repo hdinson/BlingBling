@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/_001_like" android:state_checked="true"/>
-    <item android:drawable="@drawable/_001_unlike"/>
+    <item android:drawable="@drawable/_001_action_like" android:state_checked="true"/>
+    <item android:drawable="@drawable/_001_action_unlike"/>
 </selector>
