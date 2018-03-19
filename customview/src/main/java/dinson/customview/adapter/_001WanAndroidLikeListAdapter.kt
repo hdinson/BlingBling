@@ -17,9 +17,9 @@ import dinson.customview.weight.recycleview.CommonViewHolder
 import java.util.concurrent.TimeUnit
 
 /**
- *玩安卓列表适配器
+ *玩安卓 "我的喜欢" 列表适配器
  */
-  class _001WanAndroidMainListAdapter(context: Context, dataList: List<WanAndArticle>)
+class _001WanAndroidLikeListAdapter(context: Context, dataList: List<WanAndArticle>)
     : CommonAdapter<WanAndArticle>(context, dataList) {
 
     private val mWanAndroidApi = HttpHelper.create(WanAndroidApi::class.java)
@@ -28,7 +28,11 @@ import java.util.concurrent.TimeUnit
 
     override fun convert(holder: CommonViewHolder, dataBean: WanAndArticle, position: Int) {
         holder.setTvText(R.id.tvTitle, dataBean.title)
-        holder.setTvText(R.id.tvChapter, "${dataBean.superChapterName}/${dataBean.chapterName}")
+
+        val chapterStr = if (dataBean.superChapterName == null) dataBean.chapterName
+        else "${dataBean.superChapterName}/${dataBean.chapterName}"
+        holder.setTvText(R.id.tvChapter, chapterStr)
+
         val tag = holder.getView<TextView>(R.id.tvTag)
         if (dataBean.tags != null && dataBean.tags.isNotEmpty()) {
             tag.show()
@@ -36,14 +40,15 @@ import java.util.concurrent.TimeUnit
         } else {
             tag.hide(true)
         }
-        holder.setTvText(R.id.tvTime, DateUtils.long2Str(dataBean.publishTime, "MM/dd HH:mm"))
-        val likeView = holder.getView<CheckBox>(R.id.likeView)
-        likeView.isChecked = dataBean.isCollect
 
+        holder.setTvText(R.id.tvTime, DateUtils.long2Str(dataBean.publishTime, "MM/dd HH:mm"))
+
+        val likeView = holder.getView<CheckBox>(R.id.likeView)
+        likeView.isChecked = true
         RxView.clicks(likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
                 verbose(likeView.isChecked then "添加收藏" ?: "取消收藏")
-                post2Server(likeView.isChecked, dataBean)
+                post2Server(dataBean, position)
             }
 
         holder.rootView.click {
@@ -51,12 +56,14 @@ import java.util.concurrent.TimeUnit
         }
     }
 
-    private fun post2Server(checked: Boolean, dataBean: WanAndArticle) {
-        val observable = checked then mWanAndroidApi.addCollect(dataBean.id)
-            ?: mWanAndroidApi.delCollectFromMainList(dataBean.id)
-        observable.compose(RxSchedulers.io_main())
+    private fun post2Server(dataBean: WanAndArticle, position: Int) {
+        mWanAndroidApi.delCollectFromCollectList(dataBean.id).compose(RxSchedulers.io_main())
             .subscribe({
-
+                mDataList.remove(dataBean)
+                notifyItemRemoved(position)
+                if (position != mDataList.size) {
+                    notifyItemRangeChanged(position, mDataList.size - position)
+                }
             }, {
                 error(it.toString())
             })

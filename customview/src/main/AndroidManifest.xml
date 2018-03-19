@@ -88,6 +88,7 @@
         </activity>
         <activity android:name=".activity._019GangedRecycleViewActivity"/>
         <activity android:name=".activity._020ShimmerActivity"/>
-        <activity android:name=".activity._001WanAndroidWebActivity"></activity>
+        <activity android:name=".activity._001WanAndroidWebActivity"/>
+        <activity android:name=".activity._001WanAndroidLikeActivity"></activity>
     </application>
 </manifest>
