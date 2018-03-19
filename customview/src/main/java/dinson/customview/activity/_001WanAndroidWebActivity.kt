@@ -4,10 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebSettings
+import com.just.agentweb.AgentWeb
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__001_wan_android_web.*
+
 
 class _001WanAndroidWebActivity : BaseActivity() {
 
@@ -20,26 +24,49 @@ class _001WanAndroidWebActivity : BaseActivity() {
         }
     }
 
+    private lateinit var mAgentWeb: AgentWeb
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__001_wan_android_web)
+        SystemBarModeUtils.setPaddingTop(this,flContainer)
+        SystemBarModeUtils.darkMode(this, true)
 
 
-        initWeb()
         initData()
-    }
-
-    private fun initWeb() {
-        wvContent.overScrollMode = View.OVER_SCROLL_NEVER
-        wvContent.scrollBarStyle = View.SCROLLBARS_OUTSIDE_INSET
-        val webSettings = wvContent.settings
-        webSettings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN     //自适应屏幕
     }
 
     private fun initData() {
         val link = intent.getStringExtra(EXTRA_LINK)
-        wvContent.loadUrl(link)
+
+        mAgentWeb = AgentWeb.with(this)
+            .setAgentWebParent(flContainer, ViewGroup.LayoutParams(-1, -1))
+            .useDefaultIndicator()
+            .createAgentWeb()
+            .ready()
+            .go(link)
+        mAgentWeb.webCreator.webView.apply {
+            overScrollMode = View.OVER_SCROLL_NEVER
+            settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+        }
     }
 
+    override fun onBackPressed() {
+        if (!mAgentWeb.back())
+            super.onBackPressed()
+    }
 
+    override fun onPause() {
+        mAgentWeb.webLifeCycle.onPause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        mAgentWeb.webLifeCycle.onResume()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        mAgentWeb.webLifeCycle.onDestroy()
+        super.onDestroy()
+    }
 }

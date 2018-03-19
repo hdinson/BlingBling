@@ -5,6 +5,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
+import dinson.customview.activity._001WanAndroidWebActivity
 import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
@@ -44,6 +45,10 @@ class _001WanAndroidMainListAdapter(context: Context, dataList: List<WanAndArtic
                 verbose(likeView.isChecked then "添加收藏" ?: "取消收藏")
                 post2Server(likeView.isChecked, dataBean)
             }
+
+        holder.rootView.click {
+            _001WanAndroidWebActivity.start(mContext, dataBean.link)
+        }
     }
 
     private fun post2Server(checked: Boolean, dataBean: WanAndArticle) {

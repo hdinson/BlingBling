@@ -38,7 +38,15 @@ public static java.lang.String TABLENAME;
 # If you do not use RxJava:
 -dontwarn rx.**
 
+#Google VR
 -keep class com.google.vr.*
+
+#轻量级的WebView代理
+-keep class com.just.agentweb.** {
+    *;
+}
+-dontwarn com.just.agentweb.**
+
 
 #-------------------------------------------------------------------------
 
