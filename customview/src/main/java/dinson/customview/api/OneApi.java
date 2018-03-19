@@ -31,5 +31,10 @@ public interface OneApi {
     Observable<ResponseBody> login(@Query("username") String username, @Query("password") String password);
 
     @GET("http://www.wanandroid.com/lg/collect/list/0/json")
-    Observable<ResponseBody> login2();
+    Observable<ResponseBody> collectList();
+
+    @POST("http://www.wanandroid.com/lg/collect/{id}/json")
+    Observable<ResponseBody> addCollect(@Path("id") int id);
+
+
 }

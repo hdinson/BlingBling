@@ -27,7 +27,15 @@ class TestActivity : BaseActivity() {
                 })
         }
         iv2.click {
-            HttpHelper.create(OneApi::class.java).login2().compose(RxSchedulers.io_main())
+            HttpHelper.create(OneApi::class.java).collectList().compose(RxSchedulers.io_main())
+                .subscribe({
+                    error(it.string())
+                }, {
+                    error("请求错误")
+                })
+        }
+        iv3.click {
+            HttpHelper.create(OneApi::class.java).addCollect(2674).compose(RxSchedulers.io_main())
                 .subscribe({
                     error(it.string())
                 }, {
