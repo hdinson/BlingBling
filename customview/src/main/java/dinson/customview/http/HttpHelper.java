@@ -23,7 +23,7 @@ public class HttpHelper {
 
     private static HttpHelper sHttpHelper;
     private static Retrofit mRetrofit;
-    private OkHttpClient mOkHttpClient;
+    private static OkHttpClient mOkHttpClient;
 
     private HttpHelper() {
         mOkHttpClient = new OkHttpClient.Builder()
@@ -59,7 +59,7 @@ public class HttpHelper {
         return getRetrofit().create(tClass);
     }
 
-    public void clearCookie() {
+    public  static void clearCookie() {
         ((CookieManager) mOkHttpClient.cookieJar()).clearCookie();
     }
 }

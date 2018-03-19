@@ -8,21 +8,21 @@ import com.bumptech.glide.request.RequestOptions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.utils.glide.BlurTransformation
-import dinson.customview.weight._001shimmerlayout.ShimmerFrameLayout
-import kotlinx.android.synthetic.main.activity__001_shimmer.*
+import dinson.customview.weight._020shimmerlayout.ShimmerFrameLayout
+import kotlinx.android.synthetic.main.activity__020_shimmer.*
 
-class _001ShimmerActivity : BaseActivity() {
+class _020ShimmerActivity : BaseActivity() {
     private lateinit var mPresetButtons: Array<Button>
     private var mCurrentPreset = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__001_shimmer)
+        setContentView(R.layout.activity__020_shimmer)
 
         //设置背景（高斯模糊）
         val options = RequestOptions().transform(BlurTransformation(this, 23))
         // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
-        Glide.with(this).load(R.drawable._001_bg).apply(options).into(ivImg)
+        Glide.with(this).load(R.drawable._020_bg).apply(options).into(ivImg)
 
         mPresetButtons = arrayOf(presetButton0, presetButton1, presetButton2, presetButton3, presetButton4)
         for (i in mPresetButtons.indices) {

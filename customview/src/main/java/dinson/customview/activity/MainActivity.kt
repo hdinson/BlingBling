@@ -86,7 +86,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
      */
     private val mContentData: List<ClassBean> by lazy {
         listOf(ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
-            _001ShimmerActivity::class.java, getString(R.string.facebook_img)),
+            _020ShimmerActivity::class.java, getString(R.string.facebook_img)),
             ClassBean(getString(R.string.zhihu_title), getString(R.string.zhihu_desc),
                 _002ZhihuTucaoListActivity::class.java, getString(R.string.zhihu_img)),
             ClassBean(getString(R.string.exchange_rate_title), getString(R.string.exchange_rate_desc),

@@ -10,8 +10,7 @@ import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 
 /**
- * Created by hly on 16/4/1.
- * email hugh_hly@sina.cn
+ * Cookie缓存管理
  */
 public class CookieManager implements CookieJar {
     private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
@@ -24,7 +23,7 @@ public class CookieManager implements CookieJar {
     @Override
     public List<Cookie> loadForRequest(HttpUrl url) {
         List<Cookie> cookies = cookieStore.get(url.host());
-        return cookies != null ? cookies : new ArrayList<Cookie>();
+        return cookies != null ? cookies : new ArrayList();
     }
 
     public void clearCookie() {

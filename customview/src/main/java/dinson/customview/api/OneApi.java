@@ -7,10 +7,9 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * one一个api
@@ -27,4 +26,10 @@ public interface OneApi {
     @GET("http://p2c0m2mi6.bkt.clouddn.com/cntv.txt")
     Observable<ResponseBody> get();
 
+
+    @POST("http://www.wanandroid.com/user/login")
+    Observable<ResponseBody> login(@Query("username") String username, @Query("password") String password);
+
+    @GET("http://www.wanandroid.com/lg/collect/list/0/json")
+    Observable<ResponseBody> login2();
 }

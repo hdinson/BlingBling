@@ -1,6 +1,6 @@
 // Copyright 2004-present Facebook. All Rights Reserved.
 
-package dinson.customview.weight._001shimmerlayout;
+package dinson.customview.weight._020shimmerlayout;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

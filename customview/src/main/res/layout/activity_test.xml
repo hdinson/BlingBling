@@ -12,4 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="隐藏"/>
+    <Button
+        android:id="@+id/iv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="隐藏2"/>
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="隐藏3"/>
 </LinearLayout>
