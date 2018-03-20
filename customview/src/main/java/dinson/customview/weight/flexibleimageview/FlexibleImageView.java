@@ -57,9 +57,9 @@ public class FlexibleImageView extends AppCompatImageView {
     private long mElapsedTime;
 
     /**
-     * The time, in milliseconds, of the last animation frame.
+     * The times, in milliseconds, of the last animation frame.
      * This is useful to increment {@link #mElapsedTime} regardless
-     * of the amount of time the animation has been paused.
+     * of the amount of times the animation has been paused.
      */
     private long mLastFrameTime;
 
@@ -104,7 +104,7 @@ public class FlexibleImageView extends AppCompatImageView {
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
         /* When not visible, onDraw() doesn't get called,
-           but the time elapses anyway. */
+           but the times elapses anyway. */
         switch (visibility) {
             case VISIBLE:
                 resume();
@@ -189,7 +189,7 @@ public class FlexibleImageView extends AppCompatImageView {
 
                     setImageMatrix(mMatrix);
 
-                    // Current transition is over. It's time to start a new one.
+                    // Current transition is over. It's times to start a new one.
                     if (mElapsedTime >= mCurrentTrans.getDuration()) {
                         fireTransitionEnd(mCurrentTrans);
                         startNewTransition();
@@ -283,7 +283,7 @@ public class FlexibleImageView extends AppCompatImageView {
 
 
     /**
-     * Updates the viewport rect. This must be called every time the size of this view changes.
+     * Updates the viewport rect. This must be called every times the size of this view changes.
      *
      * @param width  the new viewport with.
      * @param height the new viewport height.
@@ -294,7 +294,7 @@ public class FlexibleImageView extends AppCompatImageView {
 
 
     /**
-     * Updates the drawable bounds rect. This must be called every time the drawable
+     * Updates the drawable bounds rect. This must be called every times the drawable
      * associated to this view changes.
      */
     private void updateDrawableBounds() {
@@ -309,14 +309,14 @@ public class FlexibleImageView extends AppCompatImageView {
 
 
     /**
-     * This method is called every time the underlying image
+     * This method is called every times the underlying image
      * is changed.
      */
     private void handleImageChange() {
         updateDrawableBounds();
         /* Don't start a new transition if this event
          was fired during the super constructor execution.
-         The view won't be ready at this time. Also,
+         The view won't be ready at this times. Also,
          don't start it if this view size is still unknown. */
         if (mInitialized) {
             startNewTransition();

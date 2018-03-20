@@ -6,9 +6,11 @@ import java.util.concurrent.TimeUnit;
 
 import dinson.customview._global.ConstantsUtils;
 import dinson.customview.http.manager.AuthenticatorManager;
-import dinson.customview.http.manager.CookieManager;
+import dinson.customview.http.manager.CookieManagerOld;
+import dinson.customview.http.manager.CookieManger;
 import dinson.customview.http.manager.JsonConverterFactory;
 import dinson.customview.http.manager.LoggingInterceptor;
+import dinson.customview.utils.UIUtils;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -31,9 +33,8 @@ public class HttpHelper {
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-            //.addInterceptor(new CommonInterceptor())
             .addInterceptor(new LoggingInterceptor())
-            .cookieJar(new CookieManager())
+            .cookieJar(new CookieManger(UIUtils.getContext()))
             .authenticator(new AuthenticatorManager())
             .build();
         mRetrofit = new Retrofit.Builder()
@@ -59,7 +60,7 @@ public class HttpHelper {
         return getRetrofit().create(tClass);
     }
 
-    public  static void clearCookie() {
-        ((CookieManager) mOkHttpClient.cookieJar()).clearCookie();
+    public static void clearCookie() {
+        ((CookieManagerOld) mOkHttpClient.cookieJar()).clearCookie();
     }
 }

@@ -318,7 +318,7 @@ public class ShimmerFrameLayout extends FrameLayout {
     }
 
     /**
-     * Get the duration of the current animation i.e. the time it takes for the highlight to move from one end
+     * Get the duration of the current animation i.e. the times it takes for the highlight to move from one end
      * of the layout to the other. The default value is 1000 ms.
      *
      * @return Duration of the animation, in milliseconds
@@ -328,7 +328,7 @@ public class ShimmerFrameLayout extends FrameLayout {
     }
 
     /**
-     * Set the duration of the animation i.e. the time it will take for the highlight to move from one end of the layout
+     * Set the duration of the animation i.e. the times it will take for the highlight to move from one end of the layout
      * to the other.
      *
      * @param duration Duration of the animation, in milliseconds
@@ -940,7 +940,7 @@ public class ShimmerFrameLayout extends FrameLayout {
      * Creates a bitmap with the given width and height.
      * <p/>
      * If it fails with an OutOfMemory error, it will force a GC and then try to create the bitmap
-     * one more time.
+     * one more times.
      *
      * @param width  width of the bitmap
      * @param height height of the bitmap

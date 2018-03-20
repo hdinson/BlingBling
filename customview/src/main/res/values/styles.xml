@@ -197,22 +197,58 @@
         <item name="x_out">2</item>
     </style>
 
-    <style name="toolBar_back_icon_color_black" parent="AppTheme">
-        <!-- 溢出菜单图标颜色-->
-        <item name="colorControlNormal">@color/black</item>
+    <style name="BaseToolBarTheme" parent="AppTheme">
+        <!--  <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
     </style>
-
+    <!--设置toolbar弹出菜单的位置-->
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>  <!--设置为false即可使menu位置位于toolbar之下-->
+    </style>
+    <!--修改toolbar弹出剩余隐藏菜单条目按钮的样式-->
+    <!--<style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:src">@mipmap/ic_menu_setting</item>
+    </style>-->
+    <!--Toolbar白色主题-->
+    <style name="BaseToolBarTheme.White">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:colorBackground">#ffffff</item>
+        <item name="colorControlNormal">@color/textPrimary</item><!-- 溢出菜单图标颜色-->
+    </style>
+    <!--Toolbar黑色主题-->
+    <style name="BaseToolBarTheme.Black">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:colorBackground">#2f2f2f</item>
+        <item name="colorControlNormal">@color/white</item><!-- 溢出菜单图标颜色-->
+    </style>
+    <!--水平线-->
     <style name="HorizontalLine">
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/common_divider</item>
     </style>
-
+    <!--垂直线-->
     <style name="VerticalLine">
-        <!-- 溢出菜单图标颜色-->
-        <item name="colorControlNormal">@color/black</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">1dp</item>
         <item name="android:background">@color/common_divider</item>
+    </style>
+
+    <!-- 自定义对话框样式 -->
+    <style name="BaseDialogTheme" >
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <!--001登陆界面替换主题色-->
+    <style name="AppTheme.AccentGreen">
+        <item name="colorAccent">@color/_001_accent_green</item>
+    </style>
+
+    <style name="AppTheme.AccentGold">
+        <item name="colorControlActivated">#FFCC00</item>
     </style>
 </resources>

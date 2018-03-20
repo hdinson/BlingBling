@@ -214,6 +214,7 @@
     <string name="des_goods_pic">商品图片</string>
     <string name="des_num">数字</string>
     <string name="des_tab">标签</string>
+    <string name="des_bg">背景图片</string>
     <string name="_010_username">邮箱 / 手机号</string>
     <string name="password">密码</string>
     <string name="_010_register">注册</string>

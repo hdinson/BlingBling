@@ -73,7 +73,7 @@ public class Transition {
     /**
      * Gets the current rect that represents the part of the image to take the scene
      * in the current frame.
-     * @param elapsedTime the elapsed time since this transition started.
+     * @param elapsedTime the elapsed times since this transition started.
      */
     public RectF getInterpolatedRect(long elapsedTime) {
         float elapsedTimeFraction = elapsedTime / (float) mDuration;

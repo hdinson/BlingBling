@@ -61,8 +61,10 @@ class _001WanAndroidLikeListAdapter(context: Context, dataList: List<WanAndArtic
             .subscribe({
                 mDataList.remove(dataBean)
                 notifyItemRemoved(position)
-                if (position != mDataList.size) {
-                    notifyItemRangeChanged(position, mDataList.size - position)
+                when (mDataList.size) {
+                    0 -> notifyDataSetChanged()
+                    position -> Unit
+                    else -> notifyItemRangeChanged(position, mDataList.size - position)
                 }
             }, {
                 error(it.toString())

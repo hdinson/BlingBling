@@ -11,9 +11,9 @@ import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.weight.recycleview.LinearItemDecoration
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__001_wan_android_like.*
+
 
 class _001WanAndroidLikeActivity : BaseActivity() {
 
