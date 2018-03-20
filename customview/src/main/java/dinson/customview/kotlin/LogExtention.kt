@@ -8,79 +8,97 @@ import dinson.customview.BuildConfig
  */
 
 private val Any.tag get() = javaClass.simpleName
-private val filterTag = "│ --> "
+private const val filterTag = "│ --> "
 val isDebug = BuildConfig.DEBUG
 
 fun Any.debug(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.d(tag, "$filterTag${showLine then getLineNumber("debug")}${message.toString()}")
+    isDebug then Log.d(tag, "$filterTag${showLine then getLineNumber("debug")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.error(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.e(tag, "$filterTag${showLine then getLineNumber("error")}${message.toString()}")
+    isDebug then Log.e(tag, "$filterTag${showLine then getLineNumber("error")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.wtf(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.wtf(tag, "$filterTag${showLine then getLineNumber("wtf")}${message.toString()}")
+    isDebug then Log.wtf(tag, "$filterTag${showLine then getLineNumber("wtf")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.warning(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.w(tag, "$filterTag${showLine then getLineNumber("warning")}${message.toString()}")
+    isDebug then Log.w(tag, "$filterTag${showLine then getLineNumber("warning")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.info(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.i(tag, "$filterTag${showLine then getLineNumber("info")}${message.toString()}")
+    isDebug then Log.i(tag, "$filterTag${showLine then getLineNumber("info")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.verbose(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.v(tag, "$filterTag${showLine then getLineNumber("verbose")}${message.toString()}")
+    isDebug then Log.v(tag, "$filterTag${showLine then getLineNumber("verbose")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.debug(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.d(tag, "$filterTag${showLine then getLineNumber("debug")}${message.toString()}")
+    isDebug then Log.d(tag, "$filterTag${showLine then getLineNumber("debug")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.error(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.e(tag, "$filterTag${showLine then getLineNumber("error")}${message.toString()}")
+    isDebug then Log.e(tag, "$filterTag${showLine then getLineNumber("error")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.wtf(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.wtf(tag, "$filterTag${showLine then getLineNumber("wtf")}${message.toString()}")
+    isDebug then Log.wtf(tag, "$filterTag${showLine then getLineNumber("wtf")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.warning(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.w(tag, "$filterTag${showLine then getLineNumber("warning")}${message.toString()}")
+    isDebug then Log.w(tag, "$filterTag${showLine then getLineNumber("warning")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.info(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.i(tag, "$filterTag${showLine then getLineNumber("info")}${message.toString()}")
+    isDebug then Log.i(tag, "$filterTag${showLine then getLineNumber("info")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.verbose(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.v(tag, "$filterTag${showLine then getLineNumber("verbose")}${message.toString()}")
+    isDebug then Log.v(tag, "$filterTag${showLine then getLineNumber("verbose")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.debug(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.d(context.tag, "$filterTag${showLine then getLineNumber("debug")}${message.toString()}")
+    isDebug then Log.d(context.tag, "$filterTag${showLine then getLineNumber("debug")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.error(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.e(context.tag, "$filterTag${showLine then getLineNumber("error")}${message.toString()}")
+    isDebug then Log.e(context.tag, "$filterTag${showLine then getLineNumber("error")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.wtf(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.wtf(context.tag, "$filterTag${showLine then getLineNumber("wtf")}${message.toString()}")
+    isDebug then Log.wtf(context.tag, "$filterTag${showLine then getLineNumber("wtf")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.warning(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.w(context.tag, "$filterTag${showLine then getLineNumber("warning")}${message.toString()}")
+    isDebug then Log.w(context.tag, "$filterTag${showLine then getLineNumber("warning")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.info(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.i(context.tag, "$filterTag${showLine then getLineNumber("info")}${message.toString()}")
+    isDebug then Log.i(context.tag, "$filterTag${showLine then getLineNumber("info")
+        ?: ""}${message.toString()}")
 }
 
 fun Any.verbose(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.v(context.tag, "$filterTag${showLine then getLineNumber("verbose")}${message.toString()}")
+    isDebug then Log.v(context.tag, "$filterTag${showLine then getLineNumber("verbose")
+        ?: ""}${message.toString()}")
 }
 
 inline fun Any.debug(message: () -> Any?) = debug(message())
@@ -124,10 +142,9 @@ private fun getLineNumber(methodName: String): String {
     val stackTraceElement = Thread.currentThread().stackTrace
     val currentIndex = stackTraceElement.indices
         .firstOrNull { stackTraceElement[it].methodName.compareTo(methodName) == 0 }
-        ?.let { it + 1 }
+        ?.let { it + 2 }
         ?: -1
-    val fullClassName = stackTraceElement[currentIndex].className
-    val className = fullClassName.substring(fullClassName.lastIndexOf(".") + 1)
+    val fileName = stackTraceElement[currentIndex].fileName
     val lineNumber = stackTraceElement[currentIndex].lineNumber.toString()
-    return ".($className.java:$lineNumber)"
+    return "($fileName:$lineNumber)"
 }

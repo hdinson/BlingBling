@@ -5,7 +5,6 @@ import com.google.gson.TypeAdapter;
 
 import java.io.IOException;
 
-import dinson.customview.utils.LogUtils;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
@@ -31,9 +30,6 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
      */
     @Override
     public T convert(ResponseBody responseBody) throws IOException {
-        String response = responseBody.string().replaceAll("\n","");
-        LogUtils.d("│ response body:" + response,false);
-        LogUtils.d("└────────────────────────────────────────────────────────────────────────────────────────────────────────────────",false);
-        return adapter.fromJson(response);
+        return adapter.fromJson(responseBody.string());
     }
 }

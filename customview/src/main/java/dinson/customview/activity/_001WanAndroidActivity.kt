@@ -1,8 +1,10 @@
 package dinson.customview.activity
 
 import android.os.Bundle
+import android.support.v7.view.menu.MenuBuilder
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._001WanAndroidMainListAdapter
@@ -12,7 +14,7 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.error
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.weight.recycleview.LinearItemDecoration
+import dinson.customview.weight.dialog._001DialogLogin
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 
@@ -85,7 +87,9 @@ open class _001WanAndroidActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_like -> {
-                _001WanAndroidLikeActivity.start(this)
+//                _001WanAndroidLikeActivity.start(this)
+
+                _001DialogLogin(this).show()
             }
             R.id.action_search -> {
                 error("search")
@@ -96,4 +100,19 @@ open class _001WanAndroidActivity : BaseActivity() {
         return true
     }
 
+    /**
+     * 显示item中的图片；
+     */
+    override fun onPrepareOptionsPanel(view: View?, menu: Menu?): Boolean {
+        if (menu?.javaClass == MenuBuilder::class.java) {
+            try {
+                val m = menu.javaClass.getDeclaredMethod("setOptionalIconsVisible", java.lang.Boolean.TYPE)
+                m.isAccessible = true
+                m.invoke(menu, true)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        return true
+    }
 }

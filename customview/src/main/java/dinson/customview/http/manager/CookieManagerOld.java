@@ -12,7 +12,7 @@ import okhttp3.HttpUrl;
 /**
  * Cookie缓存管理
  */
-public class CookieManager implements CookieJar {
+public class CookieManagerOld implements CookieJar {
     private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
 
     @Override

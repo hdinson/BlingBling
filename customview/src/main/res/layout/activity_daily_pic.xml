@@ -11,7 +11,7 @@
         android:scaleType="centerCrop"
         android:transitionName="dailyPic"/>
     <LinearLayout
-        android:id="@+id/llContent"
+        android:id="@+id/llLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="-11.5dp"

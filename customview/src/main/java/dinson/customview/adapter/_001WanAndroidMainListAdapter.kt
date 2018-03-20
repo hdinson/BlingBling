@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 /**
  *玩安卓列表适配器
  */
-  class _001WanAndroidMainListAdapter(context: Context, dataList: List<WanAndArticle>)
+class _001WanAndroidMainListAdapter(context: Context, dataList: List<WanAndArticle>)
     : CommonAdapter<WanAndArticle>(context, dataList) {
 
     private val mWanAndroidApi = HttpHelper.create(WanAndroidApi::class.java)
@@ -55,9 +55,7 @@ import java.util.concurrent.TimeUnit
         val observable = checked then mWanAndroidApi.addCollect(dataBean.id)
             ?: mWanAndroidApi.delCollectFromMainList(dataBean.id)
         observable.compose(RxSchedulers.io_main())
-            .subscribe({
-
-            }, {
+            .subscribe({}, {
                 error(it.toString())
             })
     }

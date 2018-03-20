@@ -21,7 +21,7 @@ public class GyroscopeObserver implements SensorEventListener {
     // For translate nanosecond to second.
     private static final float NS2S = 1.0f / 1000000000.0f;
 
-    // The time in nanosecond when last sensor event happened.
+    // The times in nanosecond when last sensor event happened.
     private long mLastTimestamp;
 
     // The radian the device already rotate along y-axis.

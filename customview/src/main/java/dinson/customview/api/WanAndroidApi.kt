@@ -4,10 +4,7 @@ package dinson.customview.api
 import dinson.customview.entity.wanandroid.WanAndArticleResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * 玩安卓的开放api
@@ -18,7 +15,8 @@ interface WanAndroidApi {
      * 登陆
      */
     @POST("http://www.wanandroid.com/user/login")
-    fun login(@Query("username") username: String, @Query("password") password: String): Observable<ResponseBody>
+    @FormUrlEncoded
+    fun login(@Field("username") username: String, @Field("password") password: String): Observable<ResponseBody>
 
     /**
      * 获取首页所有最新的文章
@@ -50,5 +48,6 @@ interface WanAndroidApi {
      * 文章列表和收藏列表的id不同
      */
     @POST("http://www.wanandroid.com/lg/uncollect/{id}/json")
-    fun delCollectFromCollectList(@Path("id") id: Int, @Query("originId") field: Int = -1): Observable<ResponseBody>
+    @FormUrlEncoded
+    fun delCollectFromCollectList(@Path("id") id: Int, @Field("originId") field: Int = -1): Observable<ResponseBody>
 }

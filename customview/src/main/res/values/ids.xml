@@ -36,4 +36,8 @@
     <item name="floatingDecor" type="id"/>
     <item name="parallaxPager" type="id"/>
     <item name="parallaxViewTag" type="id"/>
+
+    <!--TextInputLayout渲染报错解决办法-->
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 </resources>

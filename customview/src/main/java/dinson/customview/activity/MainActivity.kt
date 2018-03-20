@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.telephony.TelephonyManager
+import android.transition.Explode
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
@@ -178,7 +179,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             }
             .filter { detail -> detail.data != null }
             .collect({ mHeadData }) { list, bean ->
-                LogUtils.d(bean.toString())
+                verbose(bean.toString())
                 CacheUtils.setDailyDetail(bean)
                 list.add(bean)
             }

@@ -11,6 +11,8 @@
     <color name="window_bg">#fafafa</color>
 
     <color name="_002_window_bg">#ececec</color>
+    <color name="_001_accent_green">#2fa881</color>
+    <color name="_001_accent_gold">#ffcc00</color>
     <color name="_003_window_bg">#ff37474f</color>
     <color name="_003_window_bg_light">#ff405158</color>
     <color name="_003_text_color_hint">#66ffffff</color>

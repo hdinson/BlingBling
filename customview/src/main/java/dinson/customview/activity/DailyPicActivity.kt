@@ -11,7 +11,6 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.entity.one.DailyDetail
 import dinson.customview.kotlin.screenWidth
-import dinson.customview.utils.UIUtils
 import kotlinx.android.synthetic.main.activity_daily_pic.*
 
 class DailyPicActivity : BaseActivity() {
@@ -46,7 +45,7 @@ class DailyPicActivity : BaseActivity() {
         tvTitle.text = subName
         tvContent.text = subContent
 
-        llContent.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+        llLogin.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
             override fun onLayoutChange(v: View, left: Int, top: Int, right: Int, bottom: Int,
                                         oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
                 if (top < 0) return

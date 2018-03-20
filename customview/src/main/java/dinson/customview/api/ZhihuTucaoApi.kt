@@ -28,6 +28,4 @@ interface ZhihuTucaoApi {
      */
     @GET("http://news-at.zhihu.com/api/4/story/{id}")
     fun getStoriesDetails(@Path("id") id: Long): Observable<ResponseBody>
-
-
 }
