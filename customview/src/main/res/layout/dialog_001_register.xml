@@ -14,6 +14,7 @@
     <LinearLayout
         android:id="@+id/llRegister"
         android:layout_width="320dp"
+        android:visibility="invisible"
         android:layout_height="320dp"
         android:layout_below="@id/guideline"
         android:layout_centerHorizontal="true"

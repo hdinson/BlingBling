@@ -7,7 +7,11 @@ import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.util.DisplayMetrics
+import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+
 
 /**
  * Context的扩展方法
@@ -42,4 +46,14 @@ fun Context.screenWidth(): Int {
     val outMetrics = DisplayMetrics()
     manager.defaultDisplay.getMetrics(outMetrics)
     return outMetrics.widthPixels
+}
+
+
+/**
+ * 关闭软键盘
+ *
+ */
+fun Context.closeKeybord(view: View) {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    if (imm?.isActive == true) imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }
