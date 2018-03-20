@@ -2,6 +2,8 @@ package dinson.customview;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
+import okhttp3.Cookie;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -37,12 +40,19 @@ public class JUnitTest {
                 }
             });
         }*/
-        Random random = new Random();
+        /*Random random = new Random();
         System.out.println(random.nextInt());
         System.out.println(random.nextInt());
         System.out.println(random.nextInt());
         System.out.println(random.nextInt());
-        System.out.println(random.nextInt());
+        System.out.println(random.nextInt());*/
+        HashMap<Integer, String> cookieStore = new HashMap<>();
+        cookieStore.put(1, "111111111111");
+        cookieStore.put(1, "122222222222");
+        cookieStore.put(2, "222222222222");
+        cookieStore.put(3, "333333333333");
+        System.out.println(cookieStore.get(1));
+
     }
 
     /**

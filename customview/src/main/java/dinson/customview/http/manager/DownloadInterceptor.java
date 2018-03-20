@@ -11,7 +11,7 @@ import okhttp3.Response;
  * 成功回调处理
  * Created by WZG on 2016/10/20.
  */
-public class DownloadInterceptor implements Interceptor {
+public class  DownloadInterceptor implements Interceptor {
 
     private DownloadProgressListener listener;
 
