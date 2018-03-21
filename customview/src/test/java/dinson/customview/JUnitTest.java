@@ -2,17 +2,9 @@ package dinson.customview;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-import io.reactivex.Observable;
-import okhttp3.Cookie;
+import dinson.customview.utils.AESUtils;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -46,13 +38,16 @@ public class JUnitTest {
         System.out.println(random.nextInt());
         System.out.println(random.nextInt());
         System.out.println(random.nextInt());*/
-        HashMap<Integer, String> cookieStore = new HashMap<>();
-        cookieStore.put(1, "111111111111");
-        cookieStore.put(1, "122222222222");
-        cookieStore.put(2, "222222222222");
-        cookieStore.put(3, "333333333333");
-        System.out.println(cookieStore.get(1));
 
+        String str = "jtef:/dfas[23ajfkav8293.12!@#$%^&*()_+}{:ha";
+        System.out.println(str);
+
+
+        String code = AESUtils.encrypt("YWJjZGVmZ2hpamt", str);
+        System.out.println(code);
+
+        String code2 = AESUtils.decrypt("YWJjZGVmZ2hpamt", code);
+        System.out.println(code2);
     }
 
     /**
@@ -62,15 +57,4 @@ public class JUnitTest {
         boolean matches = Pattern.matches("(.*\\d+$)", str);
         return matches;
     }
-
-    /*  Observable.just("https://github.com/DinsonCat/SomeDoc/blob/master/mh.json")
-            .map { s ->
-                val document = Jsoup.connect(s).get()
-                document
-            }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { s ->
-                //tvContent.text = s.body()
-                //  .toString()
-            }*/
 }

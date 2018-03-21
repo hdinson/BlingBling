@@ -30,9 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="清楚cookie"/>
+
     <Button
         android:id="@+id/dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="对话框"/>
+
+    <Button
+        android:id="@+id/output"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="输出"/>
 </LinearLayout>

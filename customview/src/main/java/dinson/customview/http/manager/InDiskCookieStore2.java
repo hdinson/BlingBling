@@ -23,7 +23,7 @@ import okhttp3.HttpUrl;
 /**
  * @author Dinson - 2018/3/20
  */
-public class InDiskCookieStore {
+public class InDiskCookieStore2 {
     private static final String LOG_TAG = "PersistentCookieStore";
     private static final String COOKIE_PREFS = "Cookies_Prefs";
 
@@ -31,7 +31,7 @@ public class InDiskCookieStore {
     private final SharedPreferences cookiePrefs;
 
 
-    public InDiskCookieStore(Context context) {
+    public InDiskCookieStore2(Context context) {
         cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, 0);
         cookies = new HashMap<>();
 

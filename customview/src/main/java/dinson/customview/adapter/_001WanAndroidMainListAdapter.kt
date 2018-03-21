@@ -6,11 +6,9 @@ import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
 import dinson.customview.activity._001WanAndroidWebActivity
-import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
-import dinson.customview.http.HttpHelper
-import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.*
+import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.DateUtils
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
@@ -19,10 +17,12 @@ import java.util.concurrent.TimeUnit
 /**
  *玩安卓列表适配器
  */
-class _001WanAndroidMainListAdapter(context: Context, dataList: List<WanAndArticle>)
+class _001WanAndroidMainListAdapter(context: Context,
+                                    dataList: List<WanAndArticle>,
+                                    private val likeClickListener: _001OnLikeViewClickListener)
     : CommonAdapter<WanAndArticle>(context, dataList) {
 
-    private val mWanAndroidApi = HttpHelper.create(WanAndroidApi::class.java)
+    //private val mWanAndroidApi = HttpHelper.create(WanAndroidApi::class.java)
 
     override fun getLayoutId(viewType: Int) = R.layout.item_001_wan_android_main
 
@@ -43,20 +43,12 @@ class _001WanAndroidMainListAdapter(context: Context, dataList: List<WanAndArtic
         RxView.clicks(likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
                 verbose(likeView.isChecked then "添加收藏" ?: "取消收藏")
-                post2Server(likeView.isChecked, dataBean)
+                //post2Server(likeView.isChecked, dataBean)
+                likeClickListener.onClick(likeView, dataBean)
             }
 
         holder.rootView.click {
             _001WanAndroidWebActivity.start(mContext, dataBean.link)
         }
-    }
-
-    private fun post2Server(checked: Boolean, dataBean: WanAndArticle) {
-        val observable = checked then mWanAndroidApi.addCollect(dataBean.id)
-            ?: mWanAndroidApi.delCollectFromMainList(dataBean.id)
-        observable.compose(RxSchedulers.io_main())
-            .subscribe({}, {
-                error(it.toString())
-            })
     }
 }

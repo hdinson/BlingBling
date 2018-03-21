@@ -5,6 +5,7 @@ import android.support.v7.view.menu.MenuBuilder
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CheckBox
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._001WanAndroidMainListAdapter
@@ -13,12 +14,16 @@ import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.error
+import dinson.customview.kotlin.then
+import dinson.customview.listener._001OnLikeViewClickListener
+import dinson.customview.utils.SPUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog._001DialogLogin
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 
-open class _001WanAndroidActivity : BaseActivity() {
+open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener {
+
 
     private lateinit var mWanAndroidApi: WanAndroidApi
     private lateinit var mAdapter: _001WanAndroidMainListAdapter
@@ -41,8 +46,7 @@ open class _001WanAndroidActivity : BaseActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
-        mAdapter = _001WanAndroidMainListAdapter(this, mData)
+        mAdapter = _001WanAndroidMainListAdapter(this, mData, this)
 
         flCustomRefreshView.setAdapter(mAdapter)
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
@@ -79,6 +83,22 @@ open class _001WanAndroidActivity : BaseActivity() {
             })
     }
 
+    /**
+     * 收藏的点击事件
+     */
+    override fun onClick(likeView: CheckBox, dataBean: WanAndArticle) {
+
+
+
+
+        val observable = likeView.isChecked then mWanAndroidApi.addCollect(dataBean.id)
+            ?: mWanAndroidApi.delCollectFromMainList(dataBean.id)
+        observable.compose(RxSchedulers.io_main())
+            .subscribe({}, {
+                error(it.toString())
+            })
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu._001_main_toolbar, menu)
         return true
@@ -88,7 +108,6 @@ open class _001WanAndroidActivity : BaseActivity() {
         when (item?.itemId) {
             R.id.action_like -> {
 //                _001WanAndroidLikeActivity.start(this)
-
                 _001DialogLogin(this).show()
             }
             R.id.action_search -> {
