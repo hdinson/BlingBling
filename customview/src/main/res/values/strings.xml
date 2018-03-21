@@ -226,4 +226,5 @@
     <string name="retry">重试</string>
     <string name="search">搜索</string>
     <string name="like">喜欢</string>
+    <string name="logout">退出登录</string>
 </resources>

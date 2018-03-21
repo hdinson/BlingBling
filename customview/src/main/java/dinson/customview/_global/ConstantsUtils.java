@@ -19,4 +19,5 @@ public class ConstantsUtils {
 
     public static String LOGCAT_TAG = "│ --> ";
     public static String PACKAGE_NAME = "dinson.customview";
+    public static String WANANDROID_DOMAIN = "www.wanandroid.com";
 }

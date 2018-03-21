@@ -2,6 +2,7 @@ package dinson.customview.api
 
 
 import dinson.customview.entity.wanandroid.WanAndArticleResponse
+import dinson.customview.entity.wanandroid.WanAndroidLoginResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -16,7 +17,8 @@ interface WanAndroidApi {
      */
     @POST("http://www.wanandroid.com/user/login")
     @FormUrlEncoded
-    fun login(@Field("username") username: String, @Field("password") password: String): Observable<ResponseBody>
+    fun login(@Field("username") username: String, @Field("password") password: String)
+        : Observable<WanAndroidLoginResponse>
 
     /**
      * 获取首页所有最新的文章

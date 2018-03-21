@@ -2,18 +2,18 @@ package dinson.customview.activity
 
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.WindowManager
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview._global.ConstantsUtils
 import dinson.customview.api.OneApi
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.click
 import dinson.customview.kotlin.error
-import kotlinx.android.synthetic.main.activity_test.*
-import android.view.WindowManager
-import android.view.LayoutInflater
-import dinson.customview._global.ConstantsUtils
 import dinson.customview.utils.AESUtils
+import kotlinx.android.synthetic.main.activity_test.*
 
 
 class TestActivity : BaseActivity() {
@@ -48,7 +48,7 @@ class TestActivity : BaseActivity() {
                 })
         }
         clear.click {
-            HttpHelper.clearCookie()
+            HttpHelper.clearAllCookie()
         }
         dialog.click {
             val layoutInflater = LayoutInflater.from(this)
@@ -56,7 +56,7 @@ class TestActivity : BaseActivity() {
             val dialog = AlertDialog.Builder(this).create()
             dialog.show()
             dialog.window.setContentView(layout)
-           // dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+            // dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
             dialog.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
         }

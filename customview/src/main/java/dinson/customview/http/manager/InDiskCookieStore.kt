@@ -17,11 +17,11 @@ import kotlin.collections.ArrayList
  */
 class InDiskCookieStore {
     companion object {
-        private const val COOKIE_PREFS_FLIE_NAME = "Cookies_Prefs666"
+        private const val COOKIE_PREFS_FILE_NAME = "Cookies_Prefs"
     }
 
     private val cookiePrefs = GlobalApplication.getContext()
-        .getSharedPreferences(COOKIE_PREFS_FLIE_NAME, Context.MODE_PRIVATE)
+        .getSharedPreferences(COOKIE_PREFS_FILE_NAME, Context.MODE_PRIVATE)
     private val cookies = HashMap<String, ConcurrentHashMap<String, Cookie>>()
 
     init {
@@ -45,24 +45,23 @@ class InDiskCookieStore {
     fun addCookie(url: HttpUrl, cookie: Cookie) {
         val name = getCookieToken(cookie)
         //将cookies缓存到内存中 如果缓存过期 就重置此cookie
-        if (!cookie.persistent()) {
+        if (cookie.persistent()) {
             if (!cookies.containsKey(url.host())) {
                 cookies[url.host()] = ConcurrentHashMap()
             }
-            //todo 待验证，可能要存带@的name
             cookies[url.host()]!![cookie.name()] = cookie
+            //将cookies持久化到本地
+            cookiePrefs.edit().putString(name, AESUtils.encrypt(ConstantsUtils.PACKAGE_NAME, encodeCookie(cookie))).apply()
         } else {
             if (cookies.containsKey(url.host())) {
-                cookies[url.host()]!!.remove(name)
+                cookies[url.host()]!!.remove(cookie.name())
             }
         }
-        //将cookies持久化到本地
-        cookiePrefs.edit().putString(name, AESUtils.encrypt(ConstantsUtils.PACKAGE_NAME, encodeCookie(cookie))).apply()
     }
 
 
     /**
-     * 获取单个cookie
+     * 获取某个域名下的Cookie
      */
     fun getCookies(url: HttpUrl): List<Cookie> {
         val ret = ArrayList<Cookie>()
@@ -71,17 +70,43 @@ class InDiskCookieStore {
         return ret
     }
 
+    /**
+     * 获取某个域名下的Cookie
+     */
+    fun getCookies(domain: String): List<Cookie> {
+        val ret = ArrayList<Cookie>()
+        if (cookies.containsKey(domain))
+            ret.addAll(cookies[domain]!!.values)
+        return ret
+    }
+
 
     /**
      * 获取所有的cookie
      */
-    fun getCookies(): List<Cookie> {
+    fun getAllCookies(): List<Cookie> {
         val ret = ArrayList<Cookie>()
         for (key in cookies.keys)
             ret.addAll(cookies[key]!!.values)
         return ret
     }
 
+    /**
+     * 删除某个域名下的Cookie
+     */
+    fun removeCookies(domain: String) {
+        cookiePrefs.all.keys.filter { it.contains("@") && it.split("@")[1] == domain }
+            .forEach { cookiePrefs.edit().remove(it).apply() }
+        if (cookies.containsKey(domain)) cookies[domain]?.clear()
+    }
+
+    /**
+     * 删除所有的Cookie
+     */
+    fun removeAllCookies() {
+        cookies.clear()
+        cookiePrefs.edit().clear().apply()
+    }
 
     /**
      * 格式化cookie名称

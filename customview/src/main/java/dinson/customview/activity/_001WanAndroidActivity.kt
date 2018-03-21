@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.CheckBox
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview._global.ConstantsUtils
 import dinson.customview.adapter._001WanAndroidMainListAdapter
 import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
@@ -16,7 +17,6 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.error
 import dinson.customview.kotlin.then
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.utils.SPUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog._001DialogLogin
 import dinson.customview.weight.refreshview.CustomRefreshView
@@ -25,11 +25,18 @@ import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener {
 
 
+    companion object {
+        /**
+         * 判断当前是否登录
+         */
+        fun isLogin() = HttpHelper.getCookie(ConstantsUtils.WANANDROID_DOMAIN)
+            .filter { it.name() == "loginUserPassword" || it.name() == "loginUserName" }.count() == 2
+    }
+
     private lateinit var mWanAndroidApi: WanAndroidApi
     private lateinit var mAdapter: _001WanAndroidMainListAdapter
     private val mData = ArrayList<WanAndArticle>()
     private var mPageIndex = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,10 +94,11 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
      * 收藏的点击事件
      */
     override fun onClick(likeView: CheckBox, dataBean: WanAndArticle) {
-
-
-
-
+        if (!isLogin()) {
+            likeView.isChecked = !likeView.isChecked
+            _001DialogLogin(this).show()
+            return
+        }
         val observable = likeView.isChecked then mWanAndroidApi.addCollect(dataBean.id)
             ?: mWanAndroidApi.delCollectFromMainList(dataBean.id)
         observable.compose(RxSchedulers.io_main())
@@ -105,13 +113,20 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+        viewClick@ when (item?.itemId) {
             R.id.action_like -> {
-//                _001WanAndroidLikeActivity.start(this)
-                _001DialogLogin(this).show()
+                val login = isLogin()
+                if (!login) {
+                    _001DialogLogin(this).show()
+                    return@viewClick
+                }
+                _001WanAndroidLikeActivity.start(this)
             }
             R.id.action_search -> {
                 error("search")
+            }
+            R.id.action_logout -> {
+
             }
             else -> {
             }

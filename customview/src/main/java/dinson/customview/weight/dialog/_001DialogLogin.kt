@@ -88,9 +88,15 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             mWanAndroidApi.login(etUsername.text.toString(), etPassword.text.toString())
                 .compose(RxSchedulers.io_main())
                 .subscribe({
-                    this.dismiss()
-                    mSuccessListener?.onSuccess(true)
-                }, {})
+                    if (it.errorCode == 0) {
+                        this.dismiss()
+                        mSuccessListener?.onSuccess(true, "登录成功")
+                    } else {
+                        mSuccessListener?.onSuccess(true, it.errorMsg)
+                    }
+                }, {
+                    mSuccessListener?.onSuccess(true, it.toString())
+                })
         }
     }
 

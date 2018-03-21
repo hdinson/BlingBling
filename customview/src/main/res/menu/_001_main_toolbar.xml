@@ -10,4 +10,7 @@
     <item
         android:id="@+id/action_search" android:icon="@drawable/_001_action_search"
         android:title="@string/search" app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_logout" android:icon="@drawable/_001_action_logout"
+        android:title="@string/logout" app:showAsAction="never"/>
 </menu>
