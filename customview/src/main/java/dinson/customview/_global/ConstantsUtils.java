@@ -7,7 +7,7 @@ import java.io.File;
 import dinson.customview.utils.UIUtils;
 
 /**
- * @author Dinson - 2017/9/7
+ * 常量类
  */
 public class ConstantsUtils {
     public static String SDCARD_PRIVATE = UIUtils.getContext().getExternalCacheDirs()[0].getPath();

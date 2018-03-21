@@ -39,7 +39,7 @@ public class HttpHelper {
             .build();
         mRetrofit = new Retrofit.Builder()
             .addConverterFactory(JsonConverterFactory.create())//对http请求结果进行统一的预处理
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//对rxjava提供支持
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//对rxJava提供支持
             .baseUrl("http://192.168.8.8")
             .client(mOkHttpClient)
             .build();

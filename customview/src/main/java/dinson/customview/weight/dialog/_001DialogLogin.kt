@@ -8,8 +8,10 @@ import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
 import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
+import dinson.customview.api.WanAndroidApi
+import dinson.customview.http.HttpHelper
+import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.*
-import dinson.customview.utils.SoftHideKeyBoardUtil
 import kotlinx.android.synthetic.main.dialog_001_login.*
 import kotlinx.android.synthetic.main.dialog_001_register.*
 import java.util.concurrent.TimeUnit
@@ -20,19 +22,39 @@ import java.util.concurrent.TimeUnit
  */
 class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : Dialog(context, theme) {
 
-    init {
-        init()
+    /******************************************************************************************************/
+    /**                             对外API                                                               **/
+    /******************************************************************************************************/
+
+    /**
+     * 设置登陆是否成功的监听
+     */
+    fun setOnLoginSuccessListener(listener: OnLoginSuccessListener) {
+        mSuccessListener = listener
     }
 
-    private fun init() {
+    /******************************************************************************************************/
+    /**                             内部实现                                                              **/
+    /******************************************************************************************************/
+
+    private val mWanAndroidApi by lazy {
+        HttpHelper.create(WanAndroidApi::class.java)
+    }
+
+    private var mSuccessListener: OnLoginSuccessListener? = null
+
+    init {
         //设置是否可取消
         setCancelable(true)
         setCanceledOnTouchOutside(true)
         setContentView(R.layout.dialog_001_login)
-        initList()
+        initClick()
     }
 
-    private fun initList() {
+    /**
+     * 初始化各按钮的点击事件
+     */
+    private fun initClick() {
         RxView.clicks(fabButton).throttleFirst(1, TimeUnit.SECONDS).subscribe {
             context.closeKeybord(this@_001DialogLogin.currentFocus)
             if (llRegister?.visibility == View.VISIBLE) {
@@ -52,10 +74,28 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
                 }
             }.start()
         }
+
+        btnDoLogin.click {
+            if (etUsername.text.isEmpty()) {
+                "Username must not null".toast()
+                return@click
+            }
+            if (etPassword.text.isEmpty()) {
+                "Password must not null".toast()
+                return@click
+            }
+            btnDoLogin.isEnabled = false
+            mWanAndroidApi.login(etUsername.text.toString(), etPassword.text.toString())
+                .compose(RxSchedulers.io_main())
+                .subscribe({
+                    this.dismiss()
+                    mSuccessListener?.onSuccess(true)
+                }, {})
+        }
     }
 
     /**
-     * 水波纹开启
+     * 注册界面水波纹开启
      */
     private fun animateRevealShow() {
         llRegister.show()
@@ -68,7 +108,7 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
     }
 
     /**
-     * 关闭水波纹
+     * 注册界面关闭水波纹
      */
     private fun animateRevealClose() {
         val startRadius = Math.hypot(llRegister.halfWidth().toDouble(), llRegister.height.toDouble()).toFloat()

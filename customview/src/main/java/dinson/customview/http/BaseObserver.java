@@ -23,6 +23,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
+        e.printStackTrace();
         LogUtils.i("onError() called with: [" + e.toString() + "]",false);
         onFinal();
     }

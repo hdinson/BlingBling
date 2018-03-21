@@ -11,10 +11,9 @@ import dinson.customview.kotlin.click
 import dinson.customview.kotlin.error
 import kotlinx.android.synthetic.main.activity_test.*
 import android.view.WindowManager
-import android.widget.RelativeLayout
 import android.view.LayoutInflater
-
-
+import dinson.customview._global.ConstantsUtils
+import dinson.customview.utils.AESUtils
 
 
 class TestActivity : BaseActivity() {
@@ -60,6 +59,18 @@ class TestActivity : BaseActivity() {
            // dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
             dialog.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
+        }
+
+        output.click {
+            val str = "jtef:/dfas[23ajfkav8293.12!@#$%^&*()_+}{:ha"
+            error(str)
+
+
+            val code = AESUtils.encrypt(ConstantsUtils.PACKAGE_NAME, str)
+            error(code)
+
+            val code2 = AESUtils.decrypt(ConstantsUtils.PACKAGE_NAME, code)
+            error(code2)
         }
     }
 }

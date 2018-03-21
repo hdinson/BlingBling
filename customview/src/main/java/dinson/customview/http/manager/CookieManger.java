@@ -19,12 +19,12 @@ public class CookieManger implements CookieJar {
 
     private static Context mContext;
 
-    private static InDiskCookieStore cookieStore;
+    private static InDiskCookieStore  cookieStore;
 
     public CookieManger(Context context) {
         mContext = context;
         if (cookieStore == null) {
-            cookieStore = new InDiskCookieStore(mContext);
+            cookieStore = new InDiskCookieStore ( );
         }
 
     }
@@ -33,14 +33,14 @@ public class CookieManger implements CookieJar {
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
         if (cookies != null && cookies.size() > 0) {
             for (Cookie item : cookies) {
-                cookieStore.add(url, item);
+                cookieStore.addCookie(url, item);
             }
         }
     }
 
     @Override
     public List<Cookie> loadForRequest(HttpUrl url) {
-        List<Cookie> cookies = cookieStore.get(url);
+        List<Cookie> cookies = cookieStore.getCookies(url);
         return cookies;
     }
 }

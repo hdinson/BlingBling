@@ -92,5 +92,4 @@ class ExplosionField constructor(context: Context) : View(context) {
             return explosionField
         }
     }
-
 }
