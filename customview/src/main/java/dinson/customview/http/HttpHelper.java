@@ -2,16 +2,16 @@ package dinson.customview.http;
 
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import dinson.customview._global.ConstantsUtils;
 import dinson.customview.http.manager.AuthenticatorManager;
-import dinson.customview.http.manager.CookieManagerOld;
-import dinson.customview.http.manager.CookieManger;
+import dinson.customview.http.manager.CookieManager;
 import dinson.customview.http.manager.JsonConverterFactory;
 import dinson.customview.http.manager.LoggingInterceptor;
-import dinson.customview.utils.UIUtils;
 import okhttp3.Cache;
+import okhttp3.Cookie;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -34,7 +34,7 @@ public class HttpHelper {
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(new LoggingInterceptor())
-            .cookieJar(new CookieManger(UIUtils.getContext()))
+            .cookieJar(new CookieManager())
             .authenticator(new AuthenticatorManager())
             .build();
         mRetrofit = new Retrofit.Builder()
@@ -45,7 +45,7 @@ public class HttpHelper {
             .build();
     }
 
-    public static Retrofit getRetrofit() {
+    private static Retrofit getRetrofit() {
         if (sHttpHelper == null) {
             synchronized (HttpHelper.class) {
                 if (sHttpHelper == null) {
@@ -60,7 +60,24 @@ public class HttpHelper {
         return getRetrofit().create(tClass);
     }
 
-    public static void clearCookie() {
-        ((CookieManagerOld) mOkHttpClient.cookieJar()).clearCookie();
+    /**
+     * 清楚所有的Cookie
+     */
+    public static void clearAllCookie() {
+        ((CookieManager) mOkHttpClient.cookieJar()).getCookieStore().removeAllCookies();
+    }
+
+    /**
+     * 清楚所有的Cookie
+     */
+    public static void clearCookie(String domain) {
+        ((CookieManager) mOkHttpClient.cookieJar()).getCookieStore().removeCookies(domain);
+    }
+
+    /**
+     * 清楚所有的Cookie
+     */
+    public static List<Cookie> getCookie(String domain) {
+        return ((CookieManager) mOkHttpClient.cookieJar()).getCookieStore().getCookies(domain);
     }
 }

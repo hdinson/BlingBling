@@ -227,7 +227,6 @@ public class AESUtils {
             e.printStackTrace();  // To change body of catch statement use File |
             // Settings | File Templates.
         } catch (InvalidAlgorithmParameterException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return cipher;
