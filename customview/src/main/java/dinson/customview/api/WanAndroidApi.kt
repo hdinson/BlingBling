@@ -31,6 +31,7 @@ interface WanAndroidApi {
     /**
      * 获取首页所有最新的文章
      */
+    @Headers("Cache-Control:public,max-age=20")
     @GET("http://www.wanandroid.com/article/list/{index}/json")
     fun getMainArticleList(@Path("index") pageIndex: Int): Observable<WanAndArticleResponse>
 

@@ -10,6 +10,7 @@ import dinson.customview.http.manager.AuthenticatorManager;
 import dinson.customview.http.manager.CookieManager;
 import dinson.customview.http.manager.JsonConverterFactory;
 import dinson.customview.http.manager.LoggingInterceptor;
+import dinson.customview.http.manager.NetworkInterceptor;
 import okhttp3.Cache;
 import okhttp3.Cookie;
 import okhttp3.OkHttpClient;
@@ -35,6 +36,7 @@ public class HttpHelper {
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(new LoggingInterceptor())
+            .addNetworkInterceptor(new NetworkInterceptor())
             .cookieJar(new CookieManager())
             .authenticator(new AuthenticatorManager())
             .build();
