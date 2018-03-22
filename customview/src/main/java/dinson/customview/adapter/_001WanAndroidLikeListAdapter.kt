@@ -11,6 +11,7 @@ import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.*
+import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.DateUtils
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
@@ -19,7 +20,9 @@ import java.util.concurrent.TimeUnit
 /**
  *玩安卓 "我的喜欢" 列表适配器
  */
-class _001WanAndroidLikeListAdapter(context: Context, dataList: List<WanAndArticle>)
+class _001WanAndroidLikeListAdapter(context: Context,
+                                    dataList: List<WanAndArticle>,
+                                    private val likeClickListener: _001OnLikeViewClickListener)
     : CommonAdapter<WanAndArticle>(context, dataList) {
 
     private val mWanAndroidApi = HttpHelper.create(WanAndroidApi::class.java)
@@ -48,7 +51,7 @@ class _001WanAndroidLikeListAdapter(context: Context, dataList: List<WanAndArtic
         RxView.clicks(likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
                 verbose(likeView.isChecked then "添加收藏" ?: "取消收藏")
-                post2Server(dataBean, position)
+                post2Server(likeView, dataBean, position)
             }
 
         holder.rootView.click {
@@ -56,7 +59,7 @@ class _001WanAndroidLikeListAdapter(context: Context, dataList: List<WanAndArtic
         }
     }
 
-    private fun post2Server(dataBean: WanAndArticle, position: Int) {
+    private fun post2Server(likeView: CheckBox, dataBean: WanAndArticle, position: Int) {
         mWanAndroidApi.delCollectFromCollectList(dataBean.id).compose(RxSchedulers.io_main())
             .subscribe({
                 mDataList.remove(dataBean)
@@ -66,6 +69,7 @@ class _001WanAndroidLikeListAdapter(context: Context, dataList: List<WanAndArtic
                     position -> Unit
                     else -> notifyItemRangeChanged(position, mDataList.size - position)
                 }
+                likeClickListener.onClickLikeView(likeView, dataBean, position)
             }, {
                 error(it.toString())
             })

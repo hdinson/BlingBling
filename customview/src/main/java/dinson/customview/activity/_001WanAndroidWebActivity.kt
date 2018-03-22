@@ -9,6 +9,8 @@ import android.webkit.WebSettings
 import com.just.agentweb.AgentWeb
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.kotlin.then
+import dinson.customview.utils.NetworkUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__001_wan_android_web.*
 
@@ -28,7 +30,7 @@ class _001WanAndroidWebActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__001_wan_android_web)
-        SystemBarModeUtils.setPaddingTop(this,flContainer)
+        SystemBarModeUtils.setPaddingTop(this, flContainer)
         SystemBarModeUtils.darkMode(this, true)
 
 
@@ -46,7 +48,9 @@ class _001WanAndroidWebActivity : BaseActivity() {
             .go(link)
         mAgentWeb.webCreator.webView.apply {
             overScrollMode = View.OVER_SCROLL_NEVER
-            settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+            //根据cache-control决定是否从网络上取数据。没网，则从本地获取，即离线加载
+            settings.cacheMode = NetworkUtils.isNetworkAvailable() then WebSettings.LOAD_DEFAULT
+                ?: WebSettings.LOAD_CACHE_ELSE_NETWORK
         }
     }
 

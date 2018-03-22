@@ -14,14 +14,14 @@
     <LinearLayout
         android:id="@+id/llRegister"
         android:layout_width="320dp"
-        android:visibility="invisible"
         android:layout_height="320dp"
         android:layout_below="@id/guideline"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-144dp"
         android:background="@drawable/shape_rec_r5"
         android:backgroundTint="#2ea67f"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,14 +43,14 @@
             android:theme="@style/AppTheme.AccentGold">
 
             <EditText
-                android:id="@+id/et_username"
+                android:id="@+id/etRegisterUsername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/selector_001_bg_edit_gold"
                 android:hint="Username"
                 android:inputType="textPersonName"
                 android:textColor="#f0f7f4"
-                android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
+                android:textCursorDrawable="@drawable/_001_bg_input_cursor_gold"
                 android:textSize="15sp"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -64,14 +64,14 @@
             android:theme="@style/AppTheme.AccentGold">
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/etRegisterPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/selector_001_bg_edit_gold"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="#f0f7f4"
-                android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
+                android:textCursorDrawable="@drawable/_001_bg_input_cursor_gold"
                 android:textSize="15sp"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -85,19 +85,19 @@
             android:theme="@style/AppTheme.AccentGold">
 
             <EditText
-                android:id="@+id/et_repeat_password"
+                android:id="@+id/etRegisterRepeatPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/selector_001_bg_edit_gold"
                 android:hint="Repeat Password"
                 android:inputType="textPassword"
                 android:textColor="#f0f7f4"
-                android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
+                android:textCursorDrawable="@drawable/_001_bg_input_cursor_gold"
                 android:textSize="15sp"/>
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/bt_go"
+            android:id="@+id/btnDoRegister"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"

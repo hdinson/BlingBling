@@ -1,6 +1,7 @@
 package dinson.customview.weight.dialog
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.view.View
@@ -20,7 +21,8 @@ import java.util.concurrent.TimeUnit
 /**
  *  玩安卓登录框
  */
-class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : Dialog(context, theme) {
+class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : Dialog(context, theme), View.OnClickListener {
+
 
     /******************************************************************************************************/
     /**                             对外API                                                               **/
@@ -61,7 +63,10 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
                 animateRevealClose()
                 return@subscribe
             }
-            vsContent?.let { vsContent.inflate() }
+            vsContent?.let {
+                vsContent.inflate()
+                btnDoRegister.setOnClickListener(this)
+            }
             val offsetX = llLogin.x + llLogin.halfWidth() - fabButton.x - fabButton.halfWidth()
             val offsetY = llLogin.y + 20 - fabButton.y - fabButton.halfHeight()
             val path = fabButton.createArcPath(offsetX, offsetY)
@@ -75,29 +80,8 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             }.start()
         }
 
-        btnDoLogin.click {
-            if (etUsername.text.isEmpty()) {
-                "Username must not null".toast()
-                return@click
-            }
-            if (etPassword.text.isEmpty()) {
-                "Password must not null".toast()
-                return@click
-            }
-            btnDoLogin.isEnabled = false
-            mWanAndroidApi.login(etUsername.text.toString(), etPassword.text.toString())
-                .compose(RxSchedulers.io_main())
-                .subscribe({
-                    if (it.errorCode == 0) {
-                        this.dismiss()
-                        mSuccessListener?.onSuccess(true, "登录成功")
-                    } else {
-                        mSuccessListener?.onSuccess(true, it.errorMsg)
-                    }
-                }, {
-                    mSuccessListener?.onSuccess(true, it.toString())
-                })
-        }
+        btnDoLogin.setOnClickListener(this)
+        tvForgotPsw.setOnClickListener(this)
     }
 
     /**
@@ -126,6 +110,62 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             duration = 500
             interpolator = AccelerateInterpolator()
         }.start()
+    }
+
+    /**
+     * 点击事件
+     */
+    @SuppressLint("SetTextI18n")
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btnDoLogin -> {
+                if (etLoginUsername.text.isEmpty()) {
+                    "Username must not null".toast();return
+                }
+                if (etLoginPassword.text.isEmpty()) {
+                    "Password must not null".toast();return
+                }
+                btnDoLogin.isEnabled = false
+                mWanAndroidApi.login(etLoginUsername.text.toString(), etLoginPassword.text.toString())
+                    .compose(RxSchedulers.io_main())
+                    .subscribe({
+                        if (it.errorCode == 0) {
+                            this.dismiss()
+                            mSuccessListener?.onSuccess(true, "登录成功")
+                        } else {
+                            mSuccessListener?.onSuccess(false, it.errorMsg)
+                        }
+                    }, {
+                        mSuccessListener?.onSuccess(false, it.toString())
+                    }, {}, { btnDoLogin.isEnabled = true })
+            }
+            R.id.btnDoRegister -> {
+                if (etRegisterUsername.text.isEmpty()) {
+                    "Username must not null".toast();return
+                }
+                if (etRegisterPassword.text.isEmpty()) {
+                    "Password must not null".toast();return
+                }
+                if (etRegisterRepeatPassword.text.isEmpty()
+                    || etRegisterPassword.text.toString() != etRegisterRepeatPassword.text.toString()) {
+                    "Two different input".toast();return
+                }
+                btnDoRegister.isEnabled = false
+                mWanAndroidApi.register(etRegisterUsername.text.toString(), etRegisterPassword.text.toString(),
+                    etRegisterRepeatPassword.text.toString()).compose(RxSchedulers.io_main())
+                    .subscribe({
+                        if (it.errorCode == 0) animateRevealClose()
+                        else it.errorMsg.toast()
+                    }, {
+                        it.printStackTrace()
+                        it.toString().toast()
+                    }, {}, { btnDoRegister.isEnabled = true })
+            }
+            R.id.tvForgotPsw -> {
+                etLoginUsername.setText("dinson")
+                etLoginPassword.setText("Aa123456")
+            }
+        }
     }
 
     /**
