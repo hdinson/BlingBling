@@ -95,8 +95,10 @@ class InDiskCookieStore {
      * 删除某个域名下的Cookie
      */
     fun removeCookies(domain: String) {
+        //本地删除
         cookiePrefs.all.keys.filter { it.contains("@") && it.split("@")[1] == domain }
             .forEach { cookiePrefs.edit().remove(it).apply() }
+        //内存删除
         if (cookies.containsKey(domain)) cookies[domain]?.clear()
     }
 

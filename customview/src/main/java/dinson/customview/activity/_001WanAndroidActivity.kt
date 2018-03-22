@@ -1,5 +1,6 @@
 package dinson.customview.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.view.menu.MenuBuilder
 import android.view.Menu
@@ -16,16 +17,20 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.error
 import dinson.customview.kotlin.then
+import dinson.customview.kotlin.toast
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
+import dinson.customview.weight.dialog.OnLoginSuccessListener
 import dinson.customview.weight.dialog._001DialogLogin
 import dinson.customview.weight.refreshview.CustomRefreshView
-import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
+import kotlinx.android.synthetic.main.activity__001_wan_android.*
 
 open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener {
 
 
     companion object {
+        private const val REQUEST_CODE_LIKE = 0x1000
+
         /**
          * 判断当前是否登录
          */
@@ -52,6 +57,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
         toolbar.setNavigationOnClickListener { onBackPressed() }
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        initToolbarTitle()//设置title
 
         mAdapter = _001WanAndroidMainListAdapter(this, mData, this)
 
@@ -67,6 +73,14 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
         })
         flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
+    }
+
+    /**
+     * 设置toolbarTitle
+     */
+    private fun initToolbarTitle() {
+        toolbar.title = "玩安卓 - ${HttpHelper.getCookie(ConstantsUtils.WANANDROID_DOMAIN)
+            .firstOrNull { it.name() == "loginUserName" }?.value() ?: "未登录"}"
     }
 
     /**
@@ -93,16 +107,22 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
     /**
      * 收藏的点击事件
      */
-    override fun onClick(likeView: CheckBox, dataBean: WanAndArticle) {
+    override fun onClickLikeView(likeView: CheckBox, dataBean: WanAndArticle, position: Int) {
         if (!isLogin()) {
             likeView.isChecked = !likeView.isChecked
-            _001DialogLogin(this).show()
+            showLoginDialog()
             return
         }
         val observable = likeView.isChecked then mWanAndroidApi.addCollect(dataBean.id)
             ?: mWanAndroidApi.delCollectFromMainList(dataBean.id)
         observable.compose(RxSchedulers.io_main())
-            .subscribe({}, {
+            .subscribe({
+                //接口请求成功
+                if (it.errorCode == 0) {
+                    dataBean.isCollect = likeView.isChecked
+                    mData[position] = dataBean
+                }
+            }, {
                 error(it.toString())
             })
     }
@@ -117,21 +137,55 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
             R.id.action_like -> {
                 val login = isLogin()
                 if (!login) {
-                    _001DialogLogin(this).show()
+                    showLoginDialog()
                     return@viewClick
                 }
-                _001WanAndroidLikeActivity.start(this)
+                _001WanAndroidLikeActivity.start(this, REQUEST_CODE_LIKE)
             }
             R.id.action_search -> {
                 error("search")
             }
             R.id.action_logout -> {
-
+                HttpHelper.clearCookie(ConstantsUtils.WANANDROID_DOMAIN)
+                flCustomRefreshView.isRefreshing = true
+                initToolbarTitle()
             }
             else -> {
             }
         }
         return true
+    }
+
+
+    /**
+     * 显示登录对话框
+     */
+    private val mLoginSuccessListener by lazy {
+        OnLoginSuccessListener({ isSuccess, errorMsg ->
+            if (isSuccess) {
+                initToolbarTitle()
+                flCustomRefreshView.isRefreshing = true
+            } else {
+                errorMsg.toast()
+            }
+        })
+    }
+
+    /**
+     * 显示登录对话框
+     */
+    private fun showLoginDialog() {
+        _001DialogLogin(this).apply {
+            setOnLoginSuccessListener(mLoginSuccessListener)
+            show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_LIKE) {
+            flCustomRefreshView.isRefreshing = true
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     /**

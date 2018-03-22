@@ -5,8 +5,8 @@
     <string name="test_layout_desc">An activity for testing.</string>
     <string name="test_layout_img">http://ondlsj2sn.bkt.clouddn.com/Fos8aWM3lzyxB621rEmzMhgTUn-p.webp</string>
     <!--001-->
-    <string name="wan_android_title">FaceBook-Shimmer</string>
-    <string name="wan_android_desc">Add a shimmering effect to any view in your app.</string>
+    <string name="wan_android_title">WanAndroid</string>
+    <string name="wan_android_desc">WanAndroid is a BBS created by many passionate youth who love Android.</string>
     <string name="wan_android_img">http://ondlsj2sn.bkt.clouddn.com/FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp</string>
     <!--002-->
     <string name="zhihu_title">QQNaviView</string>
@@ -227,4 +227,9 @@
     <string name="search">搜索</string>
     <string name="like">喜欢</string>
     <string name="logout">退出登录</string>
+    <string name="forgot_your_password_en">Forgot your password ?</string>
+    <string name="go_en">GO</string>
+    <string name="password_en">Password</string>
+    <string name="username_en">Username</string>
+    <string name="login_en">LOGIN</string>
 </resources>

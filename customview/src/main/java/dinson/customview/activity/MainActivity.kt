@@ -16,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.telephony.TelephonyManager
-import android.transition.Explode
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View

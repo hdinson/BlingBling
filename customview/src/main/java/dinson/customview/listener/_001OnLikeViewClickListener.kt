@@ -7,5 +7,5 @@ import dinson.customview.entity.wanandroid.WanAndArticle
  *  玩安卓收藏点击监听
  */
 interface _001OnLikeViewClickListener {
-    fun onClick(likeView: CheckBox, dataBean: WanAndArticle)
+    fun onClickLikeView(likeView: CheckBox, dataBean: WanAndArticle, position:Int)
 }

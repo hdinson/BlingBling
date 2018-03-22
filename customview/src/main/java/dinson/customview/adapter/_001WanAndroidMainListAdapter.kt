@@ -22,8 +22,6 @@ class _001WanAndroidMainListAdapter(context: Context,
                                     private val likeClickListener: _001OnLikeViewClickListener)
     : CommonAdapter<WanAndArticle>(context, dataList) {
 
-    //private val mWanAndroidApi = HttpHelper.create(WanAndroidApi::class.java)
-
     override fun getLayoutId(viewType: Int) = R.layout.item_001_wan_android_main
 
     override fun convert(holder: CommonViewHolder, dataBean: WanAndArticle, position: Int) {
@@ -44,7 +42,7 @@ class _001WanAndroidMainListAdapter(context: Context,
             .subscribe {
                 verbose(likeView.isChecked then "添加收藏" ?: "取消收藏")
                 //post2Server(likeView.isChecked, dataBean)
-                likeClickListener.onClick(likeView, dataBean)
+                likeClickListener.onClickLikeView(likeView, dataBean,position)
             }
 
         holder.rootView.click {

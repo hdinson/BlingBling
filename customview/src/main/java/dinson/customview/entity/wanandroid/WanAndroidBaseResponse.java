@@ -1,9 +1,9 @@
 package dinson.customview.entity.wanandroid;
 
 /**
- * 玩安卓登录Response
+ * 玩安卓基础统一返回Response
  */
-public class WanAndroidLoginResponse {
+public class WanAndroidBaseResponse {
     /**
      * data : {"collectIds":[],"email":"","icon":"","id":3924,"password":"Aa123456","type":0,"username":"dinson"}
      * errorCode : 0

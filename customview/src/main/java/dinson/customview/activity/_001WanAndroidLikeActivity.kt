@@ -1,8 +1,9 @@
 package dinson.customview.activity
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.CheckBox
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._001WanAndroidLikeListAdapter
@@ -10,20 +11,20 @@ import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
+import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__001_wan_android_like.*
 
 
-class _001WanAndroidLikeActivity : BaseActivity() {
+class _001WanAndroidLikeActivity : BaseActivity(), _001OnLikeViewClickListener {
 
     companion object {
-        fun start(context: Context) {
+        fun start(context: Activity, requestCode: Int) {
             val intent = Intent(context, _001WanAndroidLikeActivity::class.java)
-            context.startActivity(intent)
+            context.startActivityForResult(intent, requestCode)
         }
     }
-
 
     private lateinit var mWanAndroidApi: WanAndroidApi
     private lateinit var mAdapter: _001WanAndroidLikeListAdapter
@@ -46,7 +47,7 @@ class _001WanAndroidLikeActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        mAdapter = _001WanAndroidLikeListAdapter(this, mData)
+        mAdapter = _001WanAndroidLikeListAdapter(this, mData, this)
 
         flCustomRefreshView.setAdapter(mAdapter)
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
@@ -76,5 +77,13 @@ class _001WanAndroidLikeActivity : BaseActivity() {
             }, {
                 flCustomRefreshView.complete()
             })
+    }
+
+    /**
+     * 点击了取消收藏
+     * 通知上一个界面刷新界面
+     */
+    override fun onClickLikeView(likeView: CheckBox, dataBean: WanAndArticle, position: Int) {
+        setResult(Activity.RESULT_OK)
     }
 }
