@@ -21,6 +21,8 @@ import dinson.customview.utils.QiNiuUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__001_wan_android.*
 import java.io.File
 import kotlin.concurrent.thread
@@ -55,6 +57,7 @@ class _005QiNiuYunActivity : BaseActivity() {
         mAdapter = _005MainPicAdapter(this, mData, domain)
 
         flCustomRefreshView.setAdapter(mAdapter)
+        flCustomRefreshView.recyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         flCustomRefreshView.onNoMore()
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
@@ -66,7 +69,6 @@ class _005QiNiuYunActivity : BaseActivity() {
         })
         flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
-        flCustomRefreshView.recyclerView.layoutManager= StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL)
     }
 
     /**
@@ -88,15 +90,21 @@ class _005QiNiuYunActivity : BaseActivity() {
         val delimiter = ""
         Observable.just(bucket)
             .map { bucketManager.createFileListIterator(bucket, prefix, limit, delimiter) }
-            .compose(RxSchedulers.io_main())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 mData.clear()
                 while (it.hasNext()) {
-                    it.next().forEach { mData.add(it) }
+                    it.next().forEach {
+                        debug(it.toString())
+                        mData.add(it)
+                    }
                 }
                 mAdapter.notifyDataSetChanged()
+                flCustomRefreshView.complete()
             }, {
                 it.printStackTrace()
+                flCustomRefreshView.complete()
             })
     }
 
