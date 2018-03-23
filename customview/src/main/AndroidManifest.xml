@@ -52,17 +52,18 @@
             android:launchMode="singleTask"/>
         <activity android:name=".activity.DailyPicActivity"/>
         <activity android:name=".activity.TestActivity"/>
-        <activity android:name=".activity._001WanAndroidActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity._001WanAndroidActivity"/>
+        <activity android:name=".activity._001WanAndroidWebActivity"/>
+        <activity android:name=".activity._001WanAndroidLikeActivity"/>
         <activity android:name=".activity._002ZhihuTucaoListActivity"/>
         <activity android:name=".activity._002ZhihuTucaoContentActivity"/>
         <activity android:name=".activity._003ExchangeActivity"/>
         <activity android:name=".activity._004BiliBiliListActivity"/>
+        <activity android:name=".activity._005QiNiuYunActivity"/>
         <activity
             android:name=".activity._004BiliBiliVideoActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.FullScreen"/>
-        <activity android:name=".activity._005LikeSmileViewActivity"/>
         <activity android:name=".activity._006FloatingViewActivity"/>
         <activity android:name=".activity._007SpotlightActivity"/>
         <activity android:name=".activity._008RichEditorActivity"/>
@@ -79,7 +80,7 @@
         <activity android:name=".activity._017TetrisActivity"/>
         <activity
             android:name=".activity._018NFCActivity"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -88,7 +89,6 @@
         </activity>
         <activity android:name=".activity._019GangedRecycleViewActivity"/>
         <activity android:name=".activity._020ShimmerActivity"/>
-        <activity android:name=".activity._001WanAndroidWebActivity"/>
-        <activity android:name=".activity._001WanAndroidLikeActivity"/>
+        <activity android:name=".activity._021LikeSmileViewActivity"/>
     </application>
 </manifest>

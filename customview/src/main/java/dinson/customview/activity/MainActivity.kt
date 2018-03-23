@@ -93,8 +93,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _003ExchangeActivity::class.java, getString(R.string.exchange_rate_img)),
             ClassBean(getString(R.string.bilibili_title), getString(R.string.bilibili_desc),
                 _004BiliBiliListActivity::class.java, getString(R.string.bilibili_img)),
-            ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
-                _005LikeSmileViewActivity::class.java, getString(R.string.like_smile_img)),
+            ClassBean(getString(R.string.qi_niu_title), getString(R.string.qi_niu_desc),
+                _005QiNiuYunActivity::class.java, getString(R.string.qi_niu_img)),
             ClassBean(getString(R.string.floatingView_title), getString(R.string.floatingView_desc),
                 _006FloatingViewActivity::class.java, getString(R.string.floatingView_img)),
             ClassBean(getString(R.string.spotlight_title), getString(R.string.spotlight_desc),
@@ -125,6 +125,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                 _019GangedRecycleViewActivity::class.java, getString(R.string.ganged_recycle_img)),
             ClassBean(getString(R.string.facebook_title), getString(R.string.facebook_desc),
                 _020ShimmerActivity::class.java, getString(R.string.facebook_img)),
+            ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
+                _021LikeSmileViewActivity::class.java, getString(R.string.like_smile_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )

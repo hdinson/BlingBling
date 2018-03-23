@@ -47,6 +47,9 @@ public static java.lang.String TABLENAME;
 }
 -dontwarn com.just.agentweb.**
 
+#七牛云
+-keep class com.qiniu.**{*;}
+-keep class com.qiniu.**{public <init>();}
 
 #-------------------------------------------------------------------------
 

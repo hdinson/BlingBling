@@ -70,7 +70,7 @@
         <item name="android:background">@drawable/ripple_main_white</item>
     </style>
     <!--005-->
-    <style name="_005TopIcon">
+    <style name="_021TopIcon">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_marginLeft">8dp</item>

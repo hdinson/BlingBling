@@ -1,4 +1,4 @@
-package dinson.customview.weight._005likesmileview;
+package dinson.customview.weight._021likesmileview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -104,11 +104,11 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         mIvLike = new ImageView(getContext());
         mIvLike.setScaleType(ImageView.ScaleType.FIT_XY);
         //添加动画资源  获得帧动画
-        mIvLike.setBackgroundResource(R.drawable._005_animation_like);
+        mIvLike.setBackgroundResource(R.drawable._021_animation_like);
         animLike = (AnimationDrawable) mIvLike.getBackground();
         mIvDis = new ImageView(getContext());
         mIvDis.setScaleType(ImageView.ScaleType.FIT_XY);
-        mIvDis.setBackgroundResource(R.drawable._005_animation_dislike);
+        mIvDis.setBackgroundResource(R.drawable._021_animation_dislike);
         animDis = (AnimationDrawable) mIvDis.getBackground();
 
         //初始化文字
@@ -141,8 +141,8 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         LayoutParams ivParams = new LayoutParams(mSettings.getIconSize(), mSettings.getIconSize());
         mFlLikeBg.addView(mIvLike, ivParams);
         mFlDisBg.addView(mIvDis, ivParams);
-        mFlDisBg.setBackgroundResource(R.drawable._005_white_bg);
-        mFlLikeBg.setBackgroundResource(R.drawable._005_white_bg);
+        mFlDisBg.setBackgroundResource(R.drawable._021_white_bg);
+        mFlLikeBg.setBackgroundResource(R.drawable._021_white_bg);
 
         //单列总布局
         LinearLayout mLikeLayout = new LinearLayout(getContext());
@@ -225,20 +225,20 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         int tempDis = id == R.id.tvLike ? mDisLikeNum : mDisLikeNum + 1;
         calculateLikeAndDis(tempLike, tempDis);
 
-        mFlLikeBg.setBackgroundResource(id == R.id.tvLike ? R.drawable._005_yellow_bg : R.drawable._005_white_bg);
-        mFlDisBg.setBackgroundResource(id == R.id.tvLike ? R.drawable._005_white_bg : R.drawable._005_yellow_bg);
+        mFlLikeBg.setBackgroundResource(id == R.id.tvLike ? R.drawable._021_yellow_bg : R.drawable._021_white_bg);
+        mFlDisBg.setBackgroundResource(id == R.id.tvLike ? R.drawable._021_white_bg : R.drawable._021_yellow_bg);
 
         switch (id) {
             case R.id.tvLike:
                 type = 0;
                 mIvDis.setBackground(null);
-                mIvDis.setBackgroundResource(R.drawable._005_animation_dislike);
+                mIvDis.setBackgroundResource(R.drawable._021_animation_dislike);
                 animDis = (AnimationDrawable) mIvDis.getBackground();
                 break;
             case R.id.tvDis:
                 type = 1; //设置动画对象
                 mIvLike.setBackground(null);
-                mIvLike.setBackgroundResource(R.drawable._005_animation_like);
+                mIvLike.setBackgroundResource(R.drawable._021_animation_like);
                 animLike = (AnimationDrawable) mIvLike.getBackground();
                 break;
         }
