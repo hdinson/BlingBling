@@ -7,13 +7,13 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import kotlinx.android.synthetic.main.activity__005_like_smile_view.*
+import kotlinx.android.synthetic.main.activity__021_like_smile_view.*
 
-class _005LikeSmileViewActivity : BaseActivity() {
+class _021LikeSmileViewActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__005_like_smile_view)
+        setContentView(R.layout.activity__021_like_smile_view)
         initUI()
     }
 

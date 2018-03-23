@@ -21,11 +21,10 @@
     <string name="bilibili_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
     <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
     <!--005-->
-    <string name="like_smile_title">LikeSmileView</string>
-    <string name="like_smile_desc">Imitating ZuiWorld\'s application of thumb up function</string>
-    <string name="like_smile_img">http://ondlsj2sn.bkt.clouddn.com/FpoNvqVck6N_pe45kqlb4bB00JRE.jpg</string>
-    <string name="_005_title">Popup | 银制鹿头灯</string>
-    <string name="_005_desc">• 材质：铝 / 钢 \n• 电压：110–230V \n• 重量：1.3 kg</string>
+    <string name="qi_niu_title">七牛云</string>
+    <string name="qi_niu_desc">七牛云上传下载</string>
+    <!--<string name="qi_niu_img">http://p2c0m2mi6.bkt.clouddn.com/Fg873GxilLa4Gxx78lloLg96Igvs.webp</string>-->
+    <string name="qi_niu_img">http://ondlsj2sn.bkt.clouddn.com/Fg873GxilLa4Gxx78lloLg96Igvs.webp</string>
     <!--006-->
     <string name="floatingView_title">FloatingView</string>
     <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool
@@ -95,7 +94,7 @@
     <string name="nfc_title">NFC Tools</string>
     <string name="nfc_desc">Near-field communication (NFC) is a set of communication protocols that enable two electronic devices</string>
     <string name="nfc_img">http://ondlsj2sn.bkt.clouddn.com/FuEdGMh6ReHpM2hTK0_MZ39xTjX1.webp</string>
-    <!--？-->
+    <!--019-->
     <string name="ganged_recycle_title">GangedRecycleView</string>
     <string name="ganged_recycle_desc">Two RecycleViews Joint sliding …</string>
     <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/FnLyI2fmB2ykukTQfKY6uBTKVdjB.webp</string>
@@ -103,6 +102,12 @@
     <string name="facebook_title">FaceBook-Shimmer</string>
     <string name="facebook_desc">Add a shimmering effect to any view in your app.</string>
     <string name="facebook_img">http://ondlsj2sn.bkt.clouddn.com/FsghEYkztX6HGcQufyUmB9N-DvRI.webp</string>
+    <!--021-->
+    <string name="like_smile_title">LikeSmileView</string>
+    <string name="like_smile_desc">Imitating ZuiWorld\'s application of thumb up function</string>
+    <string name="like_smile_img">http://ondlsj2sn.bkt.clouddn.com/FpoNvqVck6N_pe45kqlb4bB00JRE.jpg</string>
+    <string name="_021_title">Popup | 银制鹿头灯</string>
+    <string name="_021_desc">• 材质：铝 / 钢 \n• 电压：110–230V \n• 重量：1.3 kg</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>
@@ -232,4 +237,5 @@
     <string name="password_en">Password</string>
     <string name="username_en">Username</string>
     <string name="login_en">LOGIN</string>
+    <string name="unknown">未知</string>
 </resources>

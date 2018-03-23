@@ -1,5 +1,9 @@
 package dinson.customview.utils;
 
+
+import com.qiniu.common.Constants;
+
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 
 /**
@@ -20,6 +24,7 @@ public final class StringUtils {
     public static boolean isEmpty(final CharSequence s) {
         return s == null || s.length() == 0;
     }
+
     /**
      * 判断字符串是否为null或长度为0
      *
@@ -223,7 +228,9 @@ public final class StringUtils {
         return url;
     }
 
-    /**格式化成货币（保留两位小数）
+    /**
+     * 格式化成货币（保留两位小数）
+     *
      * @param money 金额
      * @return str
      */
@@ -232,7 +239,7 @@ public final class StringUtils {
         return df.format(money);
     }
 
-    public static String byte2FileSize(long size){
+    public static String byte2FileSize(long size) {
         //如果字节数少于1024，则直接以B为单位，否则先除于1024，后3位因太少无意义
         if (size < 1024) {
             return String.valueOf(size) + "B";
@@ -259,5 +266,31 @@ public final class StringUtils {
             return String.valueOf((size / 100)) + "."
                 + String.valueOf((size % 100)) + "GB";
         }
+    }
+
+    public static byte[] utf8Bytes(String data) {
+        try {
+            return data.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String utf8String(byte[] data) {
+        try {
+            return new String(data, Constants.UTF_8);
+        } catch ( Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    public static boolean inStringArray(String s, String[] array) {
+        for (String x : array) {
+            if (x.equals(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

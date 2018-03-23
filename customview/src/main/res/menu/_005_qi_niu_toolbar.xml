@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="dinson.customview.activity._001WanAndroidActivity">
+    <item
+        android:id="@+id/action_add_repository"
+        android:title="添加仓库" app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/search" app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/logout" app:showAsAction="never"/>
+</menu>
