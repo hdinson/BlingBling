@@ -32,7 +32,6 @@ import dinson.customview.utils.GlideUtils;
  */
 public class DriverView extends RelativeLayout   {
     private _005FileInfo mResult;
-    private SizeModel mSizeModel;
     private Item005ViewDriverFeedBinding mBinding;
     private DriverViewTarget mViewTarget;
 
@@ -56,13 +55,12 @@ public class DriverView extends RelativeLayout   {
         mBinding = Item005ViewDriverFeedBinding.inflate(inflater, this, true);
     }
 
-    public void setData(final _005FileInfo data, SizeModel sizeModel) {
+    public void setData(final _005FileInfo data ) {
         mResult = data;
         mBinding.setFileInfo(data);
-        mSizeModel = sizeModel;
         mViewTarget = new DriverViewTarget(mBinding.viewImgFeed);
-        if (!mSizeModel.isNull()) {
-            setCardViewLayoutParams(mSizeModel.getWidth(), mSizeModel.getHeight());
+        if (!data.isNull()) {
+            setCardViewLayoutParams(data.getWidth(), data.getHeight());
         }
 
         this.post(() -> Glide.with(getContext()).asBitmap().load("http://ondlsj2sn.bkt.clouddn.com/" + data.getKey())
@@ -101,12 +99,12 @@ public class DriverView extends RelativeLayout   {
 
         @Override
         public void onResourceReady(Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-            if (mSizeModel.isNull()) {
+            if (mResult.isNull()) {
                 int viewWidth = mBinding.viewImgFeed.getWidth();
                 float scale = resource.getWidth() / (viewWidth * 1.0f);
                 int viewHeight = (int) (resource.getHeight() * scale);
                 setCardViewLayoutParams(viewWidth, viewHeight);
-                mSizeModel.setSize(viewWidth, viewHeight);
+                mResult.setSize(viewWidth, viewHeight);
             }
             super.onResourceReady(resource, transition);
         }

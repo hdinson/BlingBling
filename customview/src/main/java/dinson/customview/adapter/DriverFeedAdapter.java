@@ -39,7 +39,7 @@ public class DriverFeedAdapter extends RecyclerView.Adapter<DriverFeedAdapter.It
 
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-        holder.driverView.setData(list.get(position),mSizeModel.get(position));
+        holder.driverView.setData(list.get(position) );
     }
 
     @Override
