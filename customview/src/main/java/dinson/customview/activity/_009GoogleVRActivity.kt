@@ -3,9 +3,7 @@ package dinson.customview.activity
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ImageView
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -20,7 +18,6 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._009ContentAdapter
 import dinson.customview.download.DownloadManager
 import dinson.customview.download.listener.HttpDownOnNextListener
-import dinson.customview.download.model.DownloadInfo
 import dinson.customview.download.model.DownloadState
 import dinson.customview.download.utils.DbDownUtil
 import dinson.customview.model._009ModelUtil
@@ -34,8 +31,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
-import com.loc.s
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity__009_google_vr.*
 import kotlinx.android.synthetic.main.activity__009_google_vr.view.*
 

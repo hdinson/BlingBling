@@ -1,6 +1,8 @@
 package dinson.customview.utils
 
 import android.content.Context
+import com.google.gson.Gson
+import dinson.customview.model._005QiNiuConfig
 import io.reactivex.Observable
 import io.reactivex.functions.BiConsumer
 import java.util.*
@@ -39,6 +41,12 @@ object SPUtils {
         val aBoolean = getBoolean(context, "config", "icon", false)
         putBoolean(context, "config", "icon", !aBoolean)
         return aBoolean
+    }
+
+    fun addQiNiuConfig(config: _005QiNiuConfig){
+        Gson()
+
+
     }
 
 

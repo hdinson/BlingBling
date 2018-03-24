@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,7 +42,7 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
      * @param context    context
      * @param drawableId 图片id
      */
-    public LinearItemDecoration(Context context, int drawableId) {
+    public LinearItemDecoration(Context context, @DrawableRes int drawableId) {
         this(context);
         mDivider = ContextCompat.getDrawable(context, drawableId);
         mDividerHeight = mDivider.getIntrinsicHeight();

@@ -212,12 +212,14 @@
     <!--Toolbar白色主题-->
     <style name="BaseToolBarTheme.White">
         <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:actionMenuTextColor">@color/textPrimary</item>
         <item name="android:colorBackground">#ffffff</item>
         <item name="colorControlNormal">@color/textPrimary</item><!-- 溢出菜单图标颜色-->
     </style>
     <!--Toolbar黑色主题-->
     <style name="BaseToolBarTheme.Black">
         <item name="android:textColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:colorBackground">#2f2f2f</item>
         <item name="colorControlNormal">@color/white</item><!-- 溢出菜单图标颜色-->
     </style>

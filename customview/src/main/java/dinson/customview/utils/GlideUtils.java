@@ -17,13 +17,21 @@ import dinson.customview.utils.svg.GlideApp;
  */
 public class GlideUtils {
 
+    public static RequestOptions getDefaultOptions() {
+        return new RequestOptions()
+                .placeholder(R.drawable.def_img)
+                .error(R.drawable.def_img)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .centerCrop().dontAnimate();
+    }
+
     public static void setCircleImage(Context context, String url, ImageView view) {
-        RequestOptions requestOptions = new RequestOptions()
-            .placeholder(R.drawable.def_img_round_holder)
-            .error(R.drawable.def_img_round_error)
-            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-            .circleCrop().dontAnimate();
-        Glide.with(context).load(url).apply(requestOptions).into(view);
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.def_img_round_holder)
+                .error(R.drawable.def_img_round_error)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .circleCrop().dontAnimate();
+        Glide.with(context).load(url).apply(options).into(view);
     }
 
     public static void setImage(Context context, String url, ImageView view) {
@@ -32,14 +40,12 @@ public class GlideUtils {
             return;
         }
 
-        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.def_img)
-            .error(R.drawable.def_img).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).dontAnimate();
-        Glide.with(context).load(url).apply(requestOptions).into(view);
+        Glide.with(context).load(url).apply(getDefaultOptions()).into(view);
     }
 
     private static void setSvgImage(Context context, String url, ImageView view) {
         GlideApp.with(context)
-            .as(PictureDrawable.class)
-            .error(R.drawable.def_img).load(url).into(view);
+                .as(PictureDrawable.class)
+                .error(R.drawable.def_img).load(url).into(view);
     }
 }
