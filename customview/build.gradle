@@ -54,6 +54,9 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    dataBinding {
+        enabled = true
+    }
 }
 buildscript {
     repositories {
@@ -96,13 +99,12 @@ dependencies {
     implementation 'com.facebook.rebound:rebound:0.3.8'/*Facebook闪光控件*/
     implementation 'org.greenrobot:greendao:3.2.2'/*数据库*/
     implementation 'org.jsoup:jsoup:1.10.3'/*网页解析*/
+    /*轻量的WebView框架https://github.com/Justson/AgentWeb*/
     implementation 'com.just.agentweb:agentweb:4.0.2'
-/*轻量的WebView框架https://github.com/Justson/AgentWeb*/
     implementation 'com.qiniu:qiniu-java-sdk:7.2.1'/*七牛云*/
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-
 }
 
 

@@ -22,7 +22,7 @@ import dinson.customview.R;
  * SwipeRefreshLayout + recyclerView
  */
 public class CustomRefreshView extends FrameLayout
-    implements SwipeRefreshLayout.OnRefreshListener {
+        implements SwipeRefreshLayout.OnRefreshListener {
 
     private View mEmptyView;
     //private TextView mEmptyText;
@@ -220,9 +220,7 @@ public class CustomRefreshView extends FrameLayout
      * @param footerView footerView
      */
     public void setFooterView(BaseFooterView footerView) {
-        if (footerView != null) {
             this.mFootView = footerView;
-        }
     }
 
 
@@ -400,7 +398,7 @@ public class CustomRefreshView extends FrameLayout
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if (TYPE_FOOTER == viewType) {
+            if (TYPE_FOOTER == viewType && mFootView != null) {
                 //当出现nomore或onerror，主动改变footerView样式
 //                mFootView.onLoadingMore();
                 return new FooterViewHolder(mFootView);

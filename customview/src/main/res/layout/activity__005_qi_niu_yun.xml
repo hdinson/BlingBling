@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="24dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="dinson.customview.activity._005QiNiuYunActivity">
 
     <android.support.v7.widget.Toolbar
@@ -15,12 +13,13 @@
         android:layout_height="?actionBarSize"
         android:background="#2f2f2f"
         android:elevation="10dp"
-        app:title="七牛云存储"
         android:theme="@style/BaseToolBarTheme.Black"
-        app:titleTextColor="@color/white"/>
+        app:title="七牛云存储"
+        app:titleTextColor="@color/white" />
 
     <dinson.customview.weight.refreshview.CustomRefreshView
         android:id="@+id/flCustomRefreshView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
 </LinearLayout>
