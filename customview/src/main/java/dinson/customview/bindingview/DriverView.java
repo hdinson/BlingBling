@@ -1,15 +1,10 @@
 package dinson.customview.bindingview;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,21 +13,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.qiniu.storage.model.FileInfo;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 import dinson.customview.databinding.Item005ViewDriverFeedBinding;
-import dinson.customview.model.SizeModel;
 import dinson.customview.model._005FileInfo;
-import dinson.customview.utils.GlideUtils;
 
 
 /**
  * Created by wrh on 16/2/15.
  */
-public class DriverView extends RelativeLayout   {
+public class DriverView extends RelativeLayout {
     private _005FileInfo mResult;
-    private SizeModel mSizeModel;
     private Item005ViewDriverFeedBinding mBinding;
     private DriverViewTarget mViewTarget;
 
@@ -56,16 +49,18 @@ public class DriverView extends RelativeLayout   {
         mBinding = Item005ViewDriverFeedBinding.inflate(inflater, this, true);
     }
 
-    public void setData(final _005FileInfo data, SizeModel sizeModel) {
+    public void setData(final _005FileInfo data) {
         mResult = data;
         mBinding.setFileInfo(data);
-        mSizeModel = sizeModel;
         mViewTarget = new DriverViewTarget(mBinding.viewImgFeed);
-        if (!mSizeModel.isNull()) {
-            setCardViewLayoutParams(mSizeModel.getWidth(), mSizeModel.getHeight());
+        if (!mResult.isNull()) {
+            setCardViewLayoutParams(mResult.getWidth(), mResult.getHeight());
         }
 
-        this.post(() -> Glide.with(getContext()).asBitmap().load("http://ondlsj2sn.bkt.clouddn.com/" + data.getKey())
+        String host = mResult.getDomain().startsWith("http") ? mResult.getDomain() + File.separator
+                : "http://" + mResult.getDomain() + File.separator;
+
+        this.post(() -> Glide.with(getContext()).asBitmap().load(host + data.getKey())
                 .apply(new RequestOptions().centerCrop()
                         .override(mBinding.viewImgFeed.getWidth(), BitmapImageViewTarget.SIZE_ORIGINAL))
                 .into(mViewTarget));
@@ -101,12 +96,12 @@ public class DriverView extends RelativeLayout   {
 
         @Override
         public void onResourceReady(Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-            if (mSizeModel.isNull()) {
+            if (mResult.isNull()) {
                 int viewWidth = mBinding.viewImgFeed.getWidth();
                 float scale = resource.getWidth() / (viewWidth * 1.0f);
                 int viewHeight = (int) (resource.getHeight() * scale);
                 setCardViewLayoutParams(viewWidth, viewHeight);
-                mSizeModel.setSize(viewWidth, viewHeight);
+                mResult.setSize(viewWidth, viewHeight);
             }
             super.onResourceReady(resource, transition);
         }

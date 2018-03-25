@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
 import android.view.Window
 import android.view.WindowManager
 import dinson.customview.R
@@ -87,7 +88,7 @@ open class BaseActivity : AppCompatActivity() {
         win.attributes = winParams
         val tintManager = SystemBarTintUtils(this)
         tintManager.isStatusBarTintEnabled = true
-        tintManager.setNavigationBarTintResource( res )// 通知栏所需颜色
+        tintManager.setNavigationBarTintResource(res)// 通知栏所需颜色
     }
 
 
@@ -165,6 +166,12 @@ open class BaseActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         logShowActivity()
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        logShowActivity()
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun logShowActivity() {

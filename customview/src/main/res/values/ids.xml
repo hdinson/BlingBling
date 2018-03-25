@@ -30,6 +30,7 @@
     <item name="cancel" type="id"/>
     <item name="rootView" type="id"/>
     <item name="guideline" type="id"/>
+    <item name="iconGroup" type="id"/>
 
     <!--第三方或自定义控件-->
     <item name="glideTagId" type="id"/>

@@ -220,7 +220,7 @@ public class CustomRefreshView extends FrameLayout
      * @param footerView footerView
      */
     public void setFooterView(BaseFooterView footerView) {
-            this.mFootView = footerView;
+        this.mFootView = footerView;
     }
 
 

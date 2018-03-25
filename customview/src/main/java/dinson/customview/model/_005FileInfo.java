@@ -5,9 +5,8 @@ import com.qiniu.storage.model.FileInfo;
 import java.io.File;
 
 /**
- * Created by DINSON on 2018/3/24.
+ * 七牛云服务器文件实体
  */
-
 public class _005FileInfo {
     private String key;
     private String hash;
@@ -20,13 +19,17 @@ public class _005FileInfo {
     private int height;
     private int width;
 
-    public _005FileInfo(FileInfo info) {
+    private String domain;
+
+    public _005FileInfo(FileInfo info, String domain) {
         this.key = info.key;
         this.endUser = info.endUser;
         this.fsize = info.fsize;
         this.putTime = info.putTime;
         this.mimeType = info.mimeType;
         this.hash = info.hash;
+
+        this.domain = domain;//域名
     }
 
     public String getKey() {
@@ -93,5 +96,9 @@ public class _005FileInfo {
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public String getDomain() {
+        return domain;
     }
 }

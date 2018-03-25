@@ -74,7 +74,7 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             ValueAnimator.ofFloat(0f, 1f).apply {
                 addUpdateListener(fabButton.getArcListener(path))
                 onEnd {
-                    fabButton.setImageResource(R.drawable.plus_x)
+                    fabButton.rotation=45f
                     animateRevealShow()
                 }
             }.start()
@@ -172,7 +172,7 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
      * 重置fab按钮
      */
     private fun resetFabBtn() {
-        fabButton.setImageResource(R.drawable.plus)
+        fabButton.rotation=0f
         val path = fabButton.createArcPath(0f, 0f)
         ValueAnimator.ofFloat(0f, 1f).apply {
             startDelay = 100L

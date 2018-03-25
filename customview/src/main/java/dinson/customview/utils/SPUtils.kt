@@ -2,6 +2,7 @@ package dinson.customview.utils
 
 import android.content.Context
 import com.google.gson.Gson
+import dinson.customview.kotlin.then
 import dinson.customview.model._005QiNiuConfig
 import io.reactivex.Observable
 import io.reactivex.functions.BiConsumer
@@ -43,10 +44,80 @@ object SPUtils {
         return aBoolean
     }
 
-    fun addQiNiuConfig(config: _005QiNiuConfig){
-        Gson()
+    /**
+     * 获取当前所有的七牛云的设置文件
+     */
+    fun getQiNiuConfig(ctx: Context): Pair<ArrayList<_005QiNiuConfig>?, String?> {
+        val sp = ctx.getSharedPreferences("QiNiu", Context.MODE_PRIVATE)
+        val domain = getQiuNiuDefaultDomain(ctx)
+        if (domain.isEmpty()) {
+            sp.edit().clear().apply()
+            return Pair(null, null)
+        }
 
+        val ret = ArrayList<_005QiNiuConfig>()
+        val gson = Gson()
+        var isContainCurrent = false
+        sp.all.keys.forEach {
+            sp.getString(it, "").let {
+                if (it.isNotEmpty()) {
+                    val element = gson.fromJson(it, _005QiNiuConfig::class.java)
+                    if (element.Domain == domain) isContainCurrent = true
+                    ret.add(element)
+                }
+            }
+        }
+        return isContainCurrent then Pair(ret, domain) ?: Pair(null, null)
+    }
 
+    /**
+     * 添加七牛云的设置信息到sp
+     */
+    fun addQiNiuConfig(ctx: Context, config: _005QiNiuConfig) {
+        val toJson = Gson().toJson(config)
+        val sp = ctx.getSharedPreferences("QiNiu", Context.MODE_PRIVATE)
+        if (sp.all.isEmpty()) {
+            setQiuNiuDefaultDomain(ctx, config.Domain)
+        }
+        sp.edit().putString(config.Domain, toJson).apply()
+    }
+
+    /**
+     * 删除七牛云的设置信息
+     */
+    fun removeQiNiuConfig(ctx: Context, config: _005QiNiuConfig) {
+        val sp = ctx.getSharedPreferences("QiNiu", Context.MODE_PRIVATE)
+        if (!sp.all.containsKey(config.Domain)) return
+        val domain = getQiuNiuDefaultDomain(ctx)
+        if (domain.isEmpty()) {
+            sp.edit().clear().apply()
+            return
+        }
+        sp.edit().remove(config.Domain).apply()
+        if (config.Domain == domain) {
+            if (sp.all.isEmpty()) clearQiuNiuDefaultDomain(ctx)
+            else setQiuNiuDefaultDomain(ctx, sp.all.keys.first())
+        }
+    }
+
+    /**
+     * 设置七牛云默认选中的设置信息
+     */
+    fun setQiuNiuDefaultDomain(ctx: Context, domain: String) {
+        putString(ctx, "config", "QiNiu", domain)
+    }
+
+    /**
+     * 获取七牛云默认选中的设置信息
+     */
+    fun getQiuNiuDefaultDomain(ctx: Context) = getString(ctx, "config", "QiNiu", "")
+
+    /**
+     * 获取七牛云默认选中的设置信息
+     */
+    fun clearQiuNiuDefaultDomain(ctx: Context) {
+        val sp = ctx.getSharedPreferences("config", Context.MODE_PRIVATE)
+        sp.edit().remove("QiNiu").apply()
     }
 
 

@@ -1,53 +1,66 @@
 package dinson.customview.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.qiniu.common.FixedZone
 import com.qiniu.common.Zone
 import com.qiniu.storage.BucketManager
 import com.qiniu.storage.Configuration
 import com.qiniu.storage.UploadManager
-import com.qiniu.storage.model.FileInfo
 import com.qiniu.util.Auth
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview._global.ConstantsUtils
 import dinson.customview.adapter.DriverFeedAdapter
-import dinson.customview.adapter._005MainPicAdapter
+import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.debug
 import dinson.customview.kotlin.error
-import dinson.customview.model.SizeModel
 import dinson.customview.model._005FileInfo
+import dinson.customview.model._005QiNiuConfig
 import dinson.customview.utils.QiNiuUtils
+import dinson.customview.utils.SPUtils
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.utils.UIUtils
+import dinson.customview.weight.dialog._005DialogQiNiuConfig
 import dinson.customview.weight.refreshview.CustomRefreshView
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity__005_qi_niu_yun.*
 import java.io.File
+import javax.crypto.SecretKey
 import kotlin.concurrent.thread
 
 
 class _005QiNiuYunActivity : BaseActivity() {
 
-    companion object {
-        val AccessKey = "Pxox-Sf-S5bz21TEX6gB6d9x7H05hZLkJtTMJI3y"
-        val SecretKey = "CGBwKTzZTcaGcD0NZFocIrhKG5uJNL1yqEwYXdvN"
-        val domain = "http://p2c0m2mi6.bkt.clouddn.com/"
-    }
+    private val mListData = ArrayList<_005FileInfo>()
+    private val mConfigList = ArrayList<_005QiNiuConfig>()
+    private var mCurrentConfig: _005QiNiuConfig? = null
 
-    private val mData = ArrayList<_005FileInfo>()
-    private val mSizeData = ArrayList<SizeModel>()
-    //    private lateinit var mAdapter: _005MainPicAdapter
     private lateinit var mAdapter: DriverFeedAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__005_qi_niu_yun)
 
+        initConfig()
         initView()
+    }
+
+    /**
+     * 初始化七牛云设置
+     */
+    private fun initConfig() {
+        val (arrayList, i) = SPUtils.getQiNiuConfig(this)
+        if (arrayList != null && i != null) {
+            arrayList.forEach {
+                if (it.Domain == i) mCurrentConfig = it
+                mConfigList.add(it)
+            }
+        }
     }
 
     private fun initView() {
@@ -57,30 +70,24 @@ class _005QiNiuYunActivity : BaseActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-//        mAdapter = _005MainPicAdapter(this, mData, domain)
-        mAdapter = DriverFeedAdapter(this, mData,mSizeData)
-
+        mAdapter = DriverFeedAdapter(this, mListData)
         flCustomRefreshView.setAdapter(mAdapter)
+        flCustomRefreshView.setFooterView(null)
         val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        //manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         flCustomRefreshView.recyclerView.apply {
             layoutManager = manager
             overScrollMode = View.OVER_SCROLL_NEVER
-            // addItemDecoration(StaggeredItemDecoration(this@_005QiNiuYunActivity))
-            /*addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    manager.invalidateSpanAssignments()
-                }
-            })*/
         }
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
-                getDataFromServer()
+                if (mCurrentConfig != null) {
+                    getDataFromServer(mCurrentConfig!!)
+                } else {
+                    flCustomRefreshView.complete()
+                }
             }
 
             override fun onLoadMore() {
-                getDataFromServer()
             }
         })
         flCustomRefreshView.isRefreshing = true
@@ -90,98 +97,81 @@ class _005QiNiuYunActivity : BaseActivity() {
     /**
      * 获取数据
      */
-    private fun getDataFromServer() {
-        val auth = Auth.create(AccessKey, SecretKey)
-        //实例化一个BucketManager对象
-        val configuration = Configuration(Zone.zone2())
-        val bucketManager = BucketManager(auth, configuration)
-        //要列举文件的空间名
-        val bucket = "dinson-blog"
-
-        //文件名前缀
-        val prefix = ""
-        //每次迭代的长度限制，最大1000，推荐值 1000
-        val limit = 1000
-        //指定目录分隔符，列出所有公共前缀（模拟列出目录效果）。缺省值为空字符串
-        val delimiter = ""
-        error("1.onNext: -" + Thread.currentThread().name)
-        /*Observable.just(bucket)
-            .flatMap {
-                error("2.onNext: -" + Thread.currentThread().name)
-                val iterator = bucketManager.createFileListIterator(bucket, prefix, limit, delimiter)
-                //mData.clear()
-                while (iterator.hasNext()) {
-                    iterator.next().forEach {
-                        debug(it.toString())
-                        mData.add(it)
-                    }
-                }
-                Observable.just("eee")
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                it.toast()
-                error("3.onNext: -" + Thread.currentThread().name)
-                mAdapter.notifyDataSetChanged()
-                flCustomRefreshView.complete()
-            }, {
-                it.printStackTrace()
-                flCustomRefreshView.complete()
-            })*/
-        error("1.onNext: -" + Thread.currentThread().name)
-        thread {
-            error("2.onNext: -" + Thread.currentThread().name)
-            val iterator = bucketManager.createFileListIterator(bucket, prefix, limit, delimiter)
-            while (iterator.hasNext()) {
-                val next = iterator.next()
-                next.forEach {
-                    debug(it.toString())
-                    mData.add(_005FileInfo(it))
-
-                    val sizeModel = SizeModel()
-                    sizeModel.url = it.key
-                    mSizeData.add(sizeModel)
-
-                }
-            }
-            UIUtils.runOnUIThread {
-                error("3.onNext: -" + Thread.currentThread().name)
-                mAdapter.notifyDataSetChanged()
-                flCustomRefreshView.complete()
-            }
+    @SuppressLint("SwitchIntDef")
+    private fun getDataFromServer(config: _005QiNiuConfig) {
+        val auth = Auth.create(config.AccessKey, config.SecretKey)
+        val zone = when (config.Area) {
+            _005QiNiuConfig.HUA_DONG -> Zone.zone0()
+            _005QiNiuConfig.HUA_BEI -> Zone.zone1()
+            _005QiNiuConfig.HUA_NAN -> Zone.zone2()
+            else -> Zone.autoZone()
         }
+        Observable.just(BucketManager(auth, Configuration(zone))).map {
+            val iterator = it.createFileListIterator(config.Bucket, "", 1000, "")
+            mListData.clear()
+            while (iterator.hasNext()) {
+                iterator.next().forEach { mListData.add(_005FileInfo(it, config.Domain)) }
+            }
+            mListData.sortBy { it.putTime }
+            mListData.reverse()
+        }.compose(RxSchedulers.io_main()).subscribe({
+            mAdapter.notifyDataSetChanged()
+            flCustomRefreshView.complete()
+        }, {
+            it.printStackTrace()
+            flCustomRefreshView.complete()
+        })
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu._005_qi_niu_toolbar, menu)
-
-        menu?.apply {
-            add(Menu.NONE, R.id.tvLike, 0, R.string.des_bg)
-                .setEnabled(true)
-                .setIcon(R.drawable._001_action_search)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+        if (menu != null && mConfigList.isNotEmpty()) {
+            mConfigList.forEachIndexed { index, it ->
+                menu.add(R.id.iconGroup, index, 0, it.Bucket)
+                    .setEnabled(true)
+                    .setIcon(R.drawable.action_icon_search)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
+            }
         }
-
+        menuInflater.inflate(R.menu._005_qi_niu_toolbar, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        viewClick@ when (item?.itemId) {
-            R.id.action_add_repository -> {
-
-            }
-            else -> {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.groupId == R.id.iconGroup) {
+            //点击七牛云的配置条目
+            _005DialogQiNiuConfig(this, mConfigList[item.itemId]).show()
+        } else {
+            when (item.itemId) {
+            //点击添加七牛云配置
+                R.id.action_add_repository -> showAddQiNiuConfigDialog()
             }
         }
         return true
+    }
+
+    /**
+     * 显示添加七牛配置对话框
+     */
+    private fun showAddQiNiuConfigDialog() {
+        val dialog = _005DialogQiNiuConfig(this)
+        dialog.setOnDismissListener {
+            if (mCurrentConfig != null) return@setOnDismissListener
+            val (list, domain) = SPUtils.getQiNiuConfig(this)
+            if (list == null || domain == null) return@setOnDismissListener
+            list.forEach {
+                if (it.Domain == domain) mCurrentConfig = it
+                mConfigList.add(it)
+            }
+            invalidateOptionsMenu()
+            flCustomRefreshView.isRefreshing = true
+        }
+        dialog.show()
     }
 
     private fun uploadImg2QiNiu() {
         /* val config = Configuration.Builder()
              .zone(Zone.autoZone())
-             .build()*/
+             .build()
         val configuration = Configuration(Zone.autoZone())
         val uploadManager = UploadManager(configuration)
         // 设置图片名字
@@ -202,6 +192,6 @@ class _005QiNiuYunActivity : BaseActivity() {
             } else {
                 error("info is not ok")
             }
-        }
+        }*/
     }
 }
