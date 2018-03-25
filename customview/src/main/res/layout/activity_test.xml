@@ -1,45 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.TestActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#2f2f2f"
+        android:elevation="10dp"
+        android:theme="@style/BaseToolBarTheme.Black"
+        app:title="测试"
+        app:titleTextColor="@color/white" />
+
 
     <Button
-        android:id="@+id/iv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="登陆"/>
+        style="@style/TestBtn"
+        android:onClick="onEncryption"
+        android:text="加解密" />
 
     <Button
-        android:id="@+id/iv2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="收藏"/>
-
-    <Button
-        android:id="@+id/iv3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="添加收藏"/>
-
-    <Button
-        android:id="@+id/clear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="清楚cookie"/>
-
-    <Button
-        android:id="@+id/dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="对话框"/>
-
-    <Button
-        android:id="@+id/output"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="输出"/>
+        style="@style/TestBtn"
+        android:onClick="onQiNiuQuery"
+        android:text="七牛云查询" />
 </LinearLayout>

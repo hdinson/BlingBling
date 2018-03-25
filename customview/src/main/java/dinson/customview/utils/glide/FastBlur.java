@@ -39,13 +39,13 @@ public class FastBlur {
         // I called it Stack Blur because this describes best how this
         // filter works internally: it creates a kind of moving stack
         // of colors whilst scanning through the image. Thereby it
-        // just has to add one new block of color to the right side
+        // just has to action_icon_add one new block of color to the right side
         // of the stack and remove the leftmost color. The remaining
         // colors on the topmost layer of the stack are either added on
         // or reduced by one, depending on if they are on the right or
         // on the left side of the stack.
         //
-        // If you are using this algorithm in your code please add
+        // If you are using this algorithm in your code please action_icon_add
         // the following line:
         //
         // Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>

@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="dinson.customview.activity._001WanAndroidActivity">
     <item
-        android:id="@+id/action_like" android:icon="@drawable/_001_action_like"
+        android:id="@+id/action_like" android:icon="@drawable/action_icon_like"
         android:title="@string/like" app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/action_search" android:icon="@drawable/_001_action_search"
+        android:id="@+id/action_search" android:icon="@drawable/action_icon_search"
         android:title="@string/search" app:showAsAction="never"/>
     <item
-        android:id="@+id/action_logout" android:icon="@drawable/_001_action_logout"
+        android:id="@+id/action_logout" android:icon="@drawable/action_icon_logout"
         android:title="@string/logout" app:showAsAction="never"/>
 </menu>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llLogin"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_rec_r5"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/_005_config_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/spacing_medium"
+            android:text="七牛云参数"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            style="@style/_005TextView"
+            android:text="Access Key(AK)" />
+
+        <EditText
+            android:id="@+id/etAK"
+            style="@style/_005EditView" />
+
+        <TextView
+            style="@style/_005TextView"
+            android:text="Secret Key(SK)" />
+
+        <EditText
+            android:id="@+id/etSK"
+            style="@style/_005EditView" />
+
+        <TextView
+            style="@style/_005TextView"
+            android:text="存储空间名称" />
+
+        <EditText
+            android:id="@+id/etBucket"
+            style="@style/_005EditView" />
+
+        <TextView
+            style="@style/_005TextView"
+            android:text="存储空间域名" />
+
+        <EditText
+            android:id="@+id/etDomain"
+            style="@style/_005EditView" />
+
+        <TextView
+            style="@style/_005TextView"
+            android:paddingBottom="0dp"
+            android:text="存储空间区域" />
+
+        <RadioGroup
+            android:id="@+id/rgArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_small"
+            android:paddingEnd="@dimen/spacing_medium"
+            android:paddingStart="@dimen/spacing_medium"
+            android:theme="@style/AppTheme.Accent005">
+
+            <RadioButton
+                android:id="@+id/rb1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/_005_config_bg"
+                android:checked="true"
+                android:text="华东" />
+
+            <RadioButton
+                android:id="@+id/rb2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/_005_config_bg"
+                android:text="华北" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/_005_config_bg"
+                android:text="华南" />
+
+            <RadioButton
+                android:id="@+id/rb4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/_005_config_bg"
+                android:text="北美" />
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/spacing_medium">
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:background="@drawable/shape_rec_r5"
+                android:backgroundTint="@color/_005_config_bg"
+                android:text="保存"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnDel"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:background="@drawable/shape_rec_r5"
+                android:backgroundTint="@color/orange_comfy"
+                android:text="删除"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
