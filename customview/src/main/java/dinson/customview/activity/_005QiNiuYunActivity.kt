@@ -1,36 +1,34 @@
 package dinson.customview.activity
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.qiniu.common.FixedZone
 import com.qiniu.common.Zone
 import com.qiniu.storage.BucketManager
 import com.qiniu.storage.Configuration
-import com.qiniu.storage.UploadManager
 import com.qiniu.util.Auth
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview._global.ConstantsUtils
 import dinson.customview.adapter.DriverFeedAdapter
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.debug
-import dinson.customview.kotlin.error
+import dinson.customview.kotlin.toast
+import dinson.customview.kotlin.verbose
 import dinson.customview.model._005FileInfo
 import dinson.customview.model._005QiNiuConfig
-import dinson.customview.utils.QiNiuUtils
 import dinson.customview.utils.SPUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog._005DialogQiNiuConfig
+import dinson.customview.weight.recycleview.OnItemClickListener
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity__005_qi_niu_yun.*
 import java.io.File
-import javax.crypto.SecretKey
-import kotlin.concurrent.thread
 
 
 class _005QiNiuYunActivity : BaseActivity() {
@@ -41,13 +39,13 @@ class _005QiNiuYunActivity : BaseActivity() {
 
     private lateinit var mAdapter: DriverFeedAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__005_qi_niu_yun)
 
-        initConfig()
+        mAdapter = DriverFeedAdapter(this, mListData)
         initView()
+        initConfig()
     }
 
     /**
@@ -55,13 +53,9 @@ class _005QiNiuYunActivity : BaseActivity() {
      */
     private fun initConfig() {
         val (arrayList, i) = SPUtils.getQiNiuConfig(this)
-        if (arrayList != null && i != null) {
-            arrayList.forEach {
-                if (it.Domain == i) mCurrentConfig = it
-                mConfigList.add(it)
-            }
-        }
+        dealQiNiuConfig(arrayList, i)
     }
+
 
     private fun initView() {
         SystemBarModeUtils.setPaddingTop(this, toolbar)
@@ -70,13 +64,21 @@ class _005QiNiuYunActivity : BaseActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        mAdapter = DriverFeedAdapter(this, mListData)
         flCustomRefreshView.setAdapter(mAdapter)
-        flCustomRefreshView.setFooterView(null)
         val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         flCustomRefreshView.recyclerView.apply {
             layoutManager = manager
             overScrollMode = View.OVER_SCROLL_NEVER
+            addOnItemTouchListener(OnItemClickListener(context, this,
+                OnItemClickListener.OnClickListener { _, position ->
+                    val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val bean = mListData[position]
+                    var domain = bean.domain
+                    if (!domain.startsWith("http")) domain = "http://" + domain + File.separator
+                    val data = ClipData.newPlainText("Label", "$domain${bean.key}")
+                    cm.primaryClip = data
+                    "已复制".toast()
+                }))
         }
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
@@ -90,7 +92,6 @@ class _005QiNiuYunActivity : BaseActivity() {
             override fun onLoadMore() {
             }
         })
-        flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
     }
 
@@ -110,15 +111,18 @@ class _005QiNiuYunActivity : BaseActivity() {
             val iterator = it.createFileListIterator(config.Bucket, "", 1000, "")
             mListData.clear()
             while (iterator.hasNext()) {
-                iterator.next().forEach { mListData.add(_005FileInfo(it, config.Domain)) }
+                iterator.next().filter { it.mimeType.contains("image") }
+                    .forEach { mListData.add(_005FileInfo(it, config.Domain)) }
             }
             mListData.sortBy { it.putTime }
             mListData.reverse()
+            verbose("Load ${mListData.size} pic")
         }.compose(RxSchedulers.io_main()).subscribe({
             mAdapter.notifyDataSetChanged()
             flCustomRefreshView.complete()
         }, {
             it.printStackTrace()
+            mAdapter.notifyDataSetChanged()
             flCustomRefreshView.complete()
         })
     }
@@ -138,12 +142,17 @@ class _005QiNiuYunActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.groupId == R.id.iconGroup) {
-            //点击七牛云的配置条目
-            _005DialogQiNiuConfig(this, mConfigList[item.itemId]).show()
+            //点击切换七牛云的配置条目
+            if (mConfigList[item.itemId].equals(mCurrentConfig)) return true
+            mCurrentConfig = mConfigList[item.itemId]
+            resetTitleBarText()
+            SPUtils.setQiuNiuDefaultDomain(this, mCurrentConfig!!.Domain)
+            flCustomRefreshView.isRefreshing = true
         } else {
             when (item.itemId) {
             //点击添加七牛云配置
                 R.id.action_add_repository -> showAddQiNiuConfigDialog()
+                R.id.action_edit_repository -> showAddQiNiuConfigDialog(mCurrentConfig)
             }
         }
         return true
@@ -152,20 +161,49 @@ class _005QiNiuYunActivity : BaseActivity() {
     /**
      * 显示添加七牛配置对话框
      */
-    private fun showAddQiNiuConfigDialog() {
-        val dialog = _005DialogQiNiuConfig(this)
+    private fun showAddQiNiuConfigDialog(config: _005QiNiuConfig? = null) {
+        val dialog = _005DialogQiNiuConfig(this, config)
         dialog.setOnDismissListener {
-            if (mCurrentConfig != null) return@setOnDismissListener
             val (list, domain) = SPUtils.getQiNiuConfig(this)
-            if (list == null || domain == null) return@setOnDismissListener
-            list.forEach {
-                if (it.Domain == domain) mCurrentConfig = it
-                mConfigList.add(it)
-            }
-            invalidateOptionsMenu()
-            flCustomRefreshView.isRefreshing = true
+            dealQiNiuConfig(list, domain)
         }
         dialog.show()
+    }
+
+    /**
+     * 处理变更数据（包括title，和menu）
+     */
+    private fun dealQiNiuConfig(configList: ArrayList<_005QiNiuConfig>?, domain: String?) {
+        if (configList == null || domain == null) {
+            mCurrentConfig = null
+            mConfigList.clear()
+            invalidateOptionsMenu()
+            mListData.clear()
+            resetTitleBarText()
+            mAdapter.notifyDataSetChanged()
+            return
+        }
+
+        mConfigList.clear()
+        mConfigList.addAll(configList)
+        invalidateOptionsMenu()
+
+        val newConfig = configList.find { it.Domain == domain }
+        if (!newConfig!!.equals(mCurrentConfig)) {
+            mCurrentConfig = newConfig
+            flCustomRefreshView.isRefreshing = true
+        }
+        resetTitleBarText()
+
+
+    }
+
+    /**
+     * 根据当前的配置文件动态修改标题栏文字
+     * 在当前配置变动的时候都应该调一下，更改标题
+     */
+    private fun resetTitleBarText() {
+        toolbar.title = if (mCurrentConfig != null) mCurrentConfig!!.Bucket else "七牛云"
     }
 
     private fun uploadImg2QiNiu() {

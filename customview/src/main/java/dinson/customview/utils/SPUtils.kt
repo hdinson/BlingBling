@@ -46,12 +46,14 @@ object SPUtils {
 
     /**
      * 获取当前所有的七牛云的设置文件
+     * @return 第一个参数为配置列表。第二个参数为当前选中的域名，要么同时存在，要么同时为null
      */
     fun getQiNiuConfig(ctx: Context): Pair<ArrayList<_005QiNiuConfig>?, String?> {
         val sp = ctx.getSharedPreferences("QiNiu", Context.MODE_PRIVATE)
         val domain = getQiuNiuDefaultDomain(ctx)
         if (domain.isEmpty()) {
             sp.edit().clear().apply()
+            clearQiuNiuDefaultDomain(ctx)
             return Pair(null, null)
         }
 
@@ -64,10 +66,20 @@ object SPUtils {
                     val element = gson.fromJson(it, _005QiNiuConfig::class.java)
                     if (element.Domain == domain) isContainCurrent = true
                     ret.add(element)
+                } else {
+                    sp.edit().remove(it).apply()
                 }
             }
         }
-        return isContainCurrent then Pair(ret, domain) ?: Pair(null, null)
+        if (ret.isEmpty()) {
+            sp.edit().clear().apply()
+            clearQiuNiuDefaultDomain(ctx)
+            return Pair(null, null)
+        }
+        return if (!isContainCurrent) {
+            setQiuNiuDefaultDomain(ctx, ret[0].Domain)
+            Pair(ret, ret[0].Domain)
+        } else Pair(ret, domain)
     }
 
     /**
@@ -110,14 +122,31 @@ object SPUtils {
     /**
      * 获取七牛云默认选中的设置信息
      */
-    fun getQiuNiuDefaultDomain(ctx: Context) = getString(ctx, "config", "QiNiu", "")
+    private fun getQiuNiuDefaultDomain(ctx: Context) = getString(ctx, "config", "QiNiu", "")
 
     /**
      * 获取七牛云默认选中的设置信息
      */
-    fun clearQiuNiuDefaultDomain(ctx: Context) {
+    private fun clearQiuNiuDefaultDomain(ctx: Context) {
         val sp = ctx.getSharedPreferences("config", Context.MODE_PRIVATE)
         sp.edit().remove("QiNiu").apply()
+    }
+
+    /**
+     * 更新七牛云配置信息，只支持对当前选中的配置信息进行修改
+     */
+    fun updateQiNiuDefault(ctx: Context, config: _005QiNiuConfig) {
+        val sp = ctx.getSharedPreferences("QiNiu", Context.MODE_PRIVATE)
+        val domain = getQiuNiuDefaultDomain(ctx)
+        if (domain.isEmpty()) {
+            sp.edit().clear().apply()
+            return
+        }
+        if (sp.all.containsKey(domain)) {
+            sp.edit().remove(domain).apply()
+        }
+        setQiuNiuDefaultDomain(ctx, config.Domain)
+        sp.edit().putString(config.Domain, Gson().toJson(config)).apply()
     }
 
 

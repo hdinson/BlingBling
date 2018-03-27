@@ -57,7 +57,12 @@ class _005DialogQiNiuConfig(context: Context, private val mConfig: _005QiNiuConf
             }
             val config = _005QiNiuConfig(etAK.text.toString(), etSK.text.toString(), etDomain.text.toString(),
                 etBucket.text.toString(), getArea(rgArea.checkedRadioButtonId))
-            SPUtils.addQiNiuConfig(context, config)
+
+            if (mConfig == null) {
+                SPUtils.addQiNiuConfig(context, config)
+            } else {
+                SPUtils.updateQiNiuDefault(context, config)
+            }
             dismiss()
         }
 
