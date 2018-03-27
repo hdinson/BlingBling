@@ -5,7 +5,12 @@
     tools:context="dinson.customview.activity._001WanAndroidActivity">
     <item
         android:id="@+id/action_add_repository"
+        android:title="添加"
         android:icon="@drawable/action_icon_add"
-        android:title="添加仓库"
+        app:showAsAction="ifRoom" />
+    <item
+        android:title="编辑"
+        android:id="@+id/action_edit_repository"
+        android:icon="@drawable/action_icon_edit"
         app:showAsAction="ifRoom" />
 </menu>
