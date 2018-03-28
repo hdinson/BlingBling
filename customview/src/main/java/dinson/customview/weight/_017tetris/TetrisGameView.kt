@@ -140,7 +140,7 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
         //如果是wrap_content，我们要得到控件需要多大的尺寸
         val width = if (widthMode == View.MeasureSpec.EXACTLY) widthSize / mMapModel.maps.size * mMapModel.maps.size
         else dip(200) / mMapModel.maps.size * mMapModel.maps.size
-        val height = width.toFloat() / mMapModel.maps.size * mMapModel.maps[0].size
+        //val height = width.toFloat() / mMapModel.maps.size * mMapModel.maps[0].size
 
         //保存测量宽度和测量高度
         setMeasuredDimension(width, width)
