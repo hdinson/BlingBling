@@ -194,8 +194,6 @@ class _005QiNiuYunActivity : BaseActivity() {
             flCustomRefreshView.isRefreshing = true
         }
         resetTitleBarText()
-
-
     }
 
     /**
@@ -207,21 +205,19 @@ class _005QiNiuYunActivity : BaseActivity() {
     }
 
     private fun uploadImg2QiNiu() {
-        /* val config = Configuration.Builder()
+        /*val config = Configuration.Builder()
              .zone(Zone.autoZone())
              .build()
         val configuration = Configuration(Zone.autoZone())
         val uploadManager = UploadManager(configuration)
         // 设置图片名字
         val key = "icons_wireless.png"
-//        val picPath = getOutputMediaFile().toString()
+        //val picPath = getOutputMediaFile().toString()
         val picPath = ConstantsUtils.SDCARD_ROOT + "wireless.png"
         debug("picPath: $picPath fileIsExists: ${File(picPath).exists()}")
 
         val bucket = "ijkplayer"
-
         val token = QiNiuUtils.create(AccessKey, SecretKey).uploadToken(bucket)//生成token
-
         thread {
             val put = uploadManager.put(picPath, key, token)
             if (put.isOK) {

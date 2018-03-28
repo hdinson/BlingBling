@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="dinson.customview.activity._001WanAndroidActivity">
     <item
-        android:id="@+id/action_add_repository"
-        android:title="添加"
-        android:icon="@drawable/action_icon_add"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/action_add_repository" android:icon="@drawable/action_icon_add"
+        android:title="添加" app:showAsAction="always"/>
     <item
-        android:title="编辑"
-        android:id="@+id/action_edit_repository"
-        android:icon="@drawable/action_icon_edit"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/action_edit_repository" android:icon="@drawable/action_icon_edit"
+        android:title="编辑" app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_upload_pic" android:icon="@drawable/action_icon_upload"
+        android:title="上传图片" app:showAsAction="always"/>
 </menu>
