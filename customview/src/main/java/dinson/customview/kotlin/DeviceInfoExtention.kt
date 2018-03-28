@@ -38,15 +38,17 @@ fun isDeviceRooted(): Boolean {
 
 // 获取手机CPU信息
 fun getCpuInfo(): String {
-    try {
+    var reader: BufferedReader? = null
+    return try {
         val fr = FileReader("/proc/cpuinfo")
-        val localBufferedReader = BufferedReader(fr, 8192)
-        val str2 = localBufferedReader.readLine()
-        return str2.split(":")[1].trim()
-        localBufferedReader.close()
+        reader = BufferedReader(fr, 8192)
+        val str2 = reader.readLine()
+        str2.split(":")[1].trim()
     } catch (e: Exception) {
         e.printStackTrace()
-        return "unknown"
+        "unknown"
+    } finally {
+        reader?.close()
     }
 }
 

@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.TestActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@id/toolbar"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="dinsonFile"
+            type="dinson.customview.model._005FileInfo" />
+
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="#2f2f2f"
-        android:elevation="10dp"
-        android:theme="@style/BaseToolBarTheme.Black"
-        app:title="测试"
-        app:titleTextColor="@color/white" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.TestActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#2f2f2f"
+            android:elevation="10dp"
+            android:theme="@style/BaseToolBarTheme.Black"
+            app:title="测试"
+            app:titleTextColor="@color/white" />
 
 
-    <Button
-        style="@style/TestBtn"
-        android:onClick="onEncryption"
-        android:text="加解密" />
+        <Button
+            style="@style/TestBtn"
+            android:onClick="onEncryption"
+            android:text="加解密" />
 
-    <Button
-        style="@style/TestBtn"
-        android:onClick="onQiNiuQuery"
-        android:text="七牛云查询" />
-</LinearLayout>
+        <Button
+            style="@style/TestBtn"
+            android:onClick="onQiNiuQuery"
+            android:text="七牛云查询" />
+
+        <Button
+            style="@style/TestBtn"
+            android:onClick="onQiNiuQuery"
+            android:text="@{dinsonFile.fsize}" />
+    </LinearLayout>
+
+</layout>

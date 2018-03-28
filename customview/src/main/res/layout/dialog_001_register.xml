@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_centerInParent="true">
 
     <Space
@@ -18,10 +18,10 @@
         android:layout_below="@id/guideline"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-144dp"
+        android:visibility="invisible"
         android:background="@drawable/shape_rec_r5"
         android:backgroundTint="#2ea67f"
-        android:orientation="vertical"
-        android:visibility="invisible">
+        android:orientation="vertical" >
 
         <TextView
             android:layout_width="wrap_content"

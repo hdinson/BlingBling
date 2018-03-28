@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/llLogin"
@@ -23,7 +23,7 @@
                 android:layout_width="8dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
-                android:background="@color/_001_accent_green"/>
+                android:background="@color/_001_accent_green" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                 android:text="@string/login_en"
                 android:textColor="#FFCC00"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -54,7 +54,7 @@
                 android:inputType="textPersonName"
                 android:textColor="@color/_001_accent_green"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -75,7 +75,7 @@
                 android:inputType="textPassword"
                 android:textColor="@color/_001_accent_green"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -87,7 +87,7 @@
             android:background="@drawable/_001_btn_wireframe"
             android:stateListAnimator="@drawable/animator_001_btn_z"
             android:text="@string/go_en"
-            android:textColor="#d3d3d3"/>
+            android:textColor="#d3d3d3" />
 
         <TextView
             android:id="@+id/tvForgotPsw"
@@ -95,7 +95,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/forgot_your_password_en"
-            android:textColor="@color/textHint"/>
+            android:textColor="@color/textHint" />
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -106,13 +106,13 @@
         android:layout_alignTop="@+id/llLogin"
         android:layout_marginEnd="-20dp"
         android:layout_marginTop="25dp"
-        android:src="@drawable/action_icon_add"
+        android:src="@drawable/action_icon_plus"
         app:backgroundTint="@color/_001_accent_green"
-        app:fabSize="normal"/>
+        app:fabSize="normal" />
 
     <ViewStub
         android:id="@id/vsContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/dialog_001_register"/>
+        android:layout="@layout/dialog_001_register" />
 </RelativeLayout>
