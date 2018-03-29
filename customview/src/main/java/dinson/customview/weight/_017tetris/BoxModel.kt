@@ -4,13 +4,12 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Point
-import dinson.customview.kotlin.then
 import java.util.*
 
 /**
  * 方块模型
  */
-class BoxModel(private val mapModel: MapModel,   val mBoxSize: Int) {
+class BoxModel(private val mapModel: MapModel, val mBoxSize: Int) {
 
     private var mType = 0
     private val rowCount: Int = mapModel.maps.size
@@ -77,8 +76,8 @@ class BoxModel(private val mapModel: MapModel,   val mBoxSize: Int) {
             it.x = checkX
             it.y = checkY
         }
-        (offsetX != 0) then move(offsetX, 0)
-        (offsetY != 0) then move(0, offsetY)
+        if (offsetX != 0) move(offsetX, 0)
+        if (offsetY != 0) move(0, offsetY)
     }
 
 
@@ -133,7 +132,7 @@ class BoxModel(private val mapModel: MapModel,   val mBoxSize: Int) {
     /**
      * 画方块盒子
      */
-  private  fun drawBox(canvas: Canvas, startX: Float, startY: Float, paint: Paint) {
+    private fun drawBox(canvas: Canvas, startX: Float, startY: Float, paint: Paint) {
         paint.style = Paint.Style.STROKE
 
         canvas.drawRect(startX + TetrisGameView.STROKE_WIDTH / 2, startY + TetrisGameView.STROKE_WIDTH / 2,

@@ -1,6 +1,5 @@
 package dinson.customview.http.manager
 
-import dinson.customview.kotlin.then
 import dinson.customview.kotlin.verbose
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -21,7 +20,7 @@ class NetworkInterceptor : Interceptor {
         val content = response.body()!!.string()
 
         //输出请求头
-        (request.headers().size() != 0) then {
+        if (request.headers().size() != 0) {
             verbose("│ ${chain.request().headers().toString().split("\n")
                 .dropLastWhile { it.isEmpty() }}", showLine = false)
         }
@@ -30,7 +29,7 @@ class NetworkInterceptor : Interceptor {
         else cacheControl}", showLine = false)
 
         //输出响应头
-        (response.headers().size() != 0) then {
+        if (response.headers().size() != 0) {
             verbose("│ ${response.headers().toString().split("\n")
                 .dropLastWhile { it.isEmpty() }}", showLine = false)
         }

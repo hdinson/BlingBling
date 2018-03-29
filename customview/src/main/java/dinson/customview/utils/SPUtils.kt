@@ -2,7 +2,6 @@ package dinson.customview.utils
 
 import android.content.Context
 import com.google.gson.Gson
-import dinson.customview.kotlin.then
 import dinson.customview.model._005QiNiuConfig
 import io.reactivex.Observable
 import io.reactivex.functions.BiConsumer

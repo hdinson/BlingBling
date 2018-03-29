@@ -4,12 +4,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Point
-import dinson.customview.kotlin.then
 
 /**
  *  地图模型
  */
-class MapModel  {
+class MapModel {
     val maps = Array(10) { BooleanArray(20) }
     private var mBoxPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.BLACK
@@ -96,14 +95,14 @@ class MapModel  {
     /**
      * 画方块盒子
      */
-    fun drawMap(canvas: Canvas,boxSize:Int) {
+    fun drawMap(canvas: Canvas, boxSize: Int) {
 
         //画地图和堆积
         maps.forEachIndexed { outerIndex, _ ->
             maps[outerIndex].forEachIndexed({ interIndex, b ->
                 val x = outerIndex * boxSize.toFloat()
                 val y = interIndex * boxSize.toFloat()
-                drawBox(canvas, x, y, b then mBoxPaint ?: mMapPaint,boxSize)
+                drawBox(canvas, x, y, if (b) mBoxPaint else mMapPaint, boxSize)
             })
         }
     }
@@ -111,7 +110,7 @@ class MapModel  {
     /**
      * 画方块盒子
      */
-    private fun drawBox(canvas: Canvas, startX: Float, startY: Float, paint: Paint,boxSize:Int) {
+    private fun drawBox(canvas: Canvas, startX: Float, startY: Float, paint: Paint, boxSize: Int) {
         paint.style = Paint.Style.STROKE
 
         canvas.drawRect(startX + TetrisGameView.STROKE_WIDTH / 2, startY + TetrisGameView.STROKE_WIDTH / 2,
