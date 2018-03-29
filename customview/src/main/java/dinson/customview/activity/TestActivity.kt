@@ -20,15 +20,15 @@ class TestActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_test)
-
-        val binding = DataBindingUtil.setContentView<ActivityTestBinding>(this, R.layout.activity_test)
-
-        //val inflate = ActivityTestBinding.inflate(layoutInflater)
+        val contentView = DataBindingUtil.setContentView<ActivityTestBinding>(this, R.layout.activity_test)
         val fileInfo = FileInfo()
         fileInfo.fsize=2
-        binding.dinsonFile= _005FileInfo(fileInfo,"")
+        val info = _005FileInfo(fileInfo, "")
+        contentView.dinsonFile= info
         initUI()
+
+        //contentView.dinsonFile?.fsize=6666
+        info.fsize=666
     }
 
     private fun initUI() {
