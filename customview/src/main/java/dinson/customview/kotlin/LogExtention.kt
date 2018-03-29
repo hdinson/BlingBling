@@ -9,96 +9,98 @@ import dinson.customview.BuildConfig
 
 private val Any.tag get() = javaClass.simpleName
 private const val filterTag = "│ --> "
-val isDebug = BuildConfig.DEBUG
+private val isDebug = BuildConfig.DEBUG
 
 fun Any.debug(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.d(tag, "$filterTag${showLine then getLineNumber("debug")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.d(tag, "$filterTag${if (showLine) getLineNumber("debug")
+    else ""}${message.toString()}")
 }
 
 fun Any.error(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.e(tag, "$filterTag${showLine then getLineNumber("error")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.e(tag, "$filterTag${if (showLine) getLineNumber("error")
+    else ""}${message.toString()}")
 }
 
 fun Any.wtf(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.wtf(tag, "$filterTag${showLine then getLineNumber("wtf")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.wtf(tag, "$filterTag${if (showLine) getLineNumber("wtf")
+    else ""}${message.toString()}")
 }
 
 fun Any.warning(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.w(tag, "$filterTag${showLine then getLineNumber("warning")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.w(tag, "$filterTag${if (showLine) getLineNumber("warning")
+    else ""}${message.toString()}")
 }
 
 fun Any.info(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.i(tag, "$filterTag${showLine then getLineNumber("info")
-        ?: ""}${message.toString()}")
+    if (isDebug) {
+        Log.i(tag, "$filterTag${if (showLine) getLineNumber("info")
+        else ""}${message.toString()}")
+    }
 }
 
 fun Any.verbose(message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.v(tag, "$filterTag${showLine then getLineNumber("verbose")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.v(tag, "$filterTag${if (showLine) getLineNumber("verbose")
+    else ""}${message.toString()}")
 }
 
 fun Any.debug(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.d(tag, "$filterTag${showLine then getLineNumber("debug")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.d(tag, "$filterTag${if (showLine) getLineNumber("debug")
+    else ""}${message.toString()}")
 }
 
 fun Any.error(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.e(tag, "$filterTag${showLine then getLineNumber("error")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.e(tag, "$filterTag${if (showLine) getLineNumber("error")
+    else ""}${message.toString()}")
 }
 
 fun Any.wtf(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.wtf(tag, "$filterTag${showLine then getLineNumber("wtf")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.wtf(tag, "$filterTag${if (showLine) getLineNumber("wtf")
+    else ""}${message.toString()}")
 }
 
 fun Any.warning(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.w(tag, "$filterTag${showLine then getLineNumber("warning")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.w(tag, "$filterTag${if (showLine) getLineNumber("warning")
+    else ""}${message.toString()}")
 }
 
 fun Any.info(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.i(tag, "$filterTag${showLine then getLineNumber("info")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.i(tag, "$filterTag${if (showLine) getLineNumber("info")
+    else ""}${message.toString()}")
 }
 
 fun Any.verbose(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.v(tag, "$filterTag${showLine then getLineNumber("verbose")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.v(tag, "$filterTag${if (showLine) getLineNumber("verbose")
+    else ""}${message.toString()}")
 }
 
 fun Any.debug(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.d(context.tag, "$filterTag${showLine then getLineNumber("debug")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.d(context.tag, "$filterTag${if (showLine) getLineNumber("debug")
+    else ""}${message.toString()}")
 }
 
 fun Any.error(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.e(context.tag, "$filterTag${showLine then getLineNumber("error")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.e(context.tag, "$filterTag${if (showLine) getLineNumber("error")
+    else ""}${message.toString()}")
 }
 
 fun Any.wtf(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.wtf(context.tag, "$filterTag${showLine then getLineNumber("wtf")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.wtf(context.tag, "$filterTag${if (showLine) getLineNumber("wtf")
+    else ""}${message.toString()}")
 }
 
 fun Any.warning(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.w(context.tag, "$filterTag${showLine then getLineNumber("warning")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.w(context.tag, "$filterTag${if (showLine) getLineNumber("warning")
+    else ""}${message.toString()}")
 }
 
 fun Any.info(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.i(context.tag, "$filterTag${showLine then getLineNumber("info")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.i(context.tag, "$filterTag${if (showLine) getLineNumber("info")
+    else ""}${message.toString()}")
 }
 
 fun Any.verbose(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    isDebug then Log.v(context.tag, "$filterTag${showLine then getLineNumber("verbose")
-        ?: ""}${message.toString()}")
+    if (isDebug) Log.v(context.tag, "$filterTag${if (showLine) getLineNumber("verbose")
+    else ""}${message.toString()}")
 }
 
 inline fun Any.debug(message: () -> Any?) = debug(message())

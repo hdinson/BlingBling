@@ -1,5 +1,6 @@
 package dinson.customview.activity
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.View
 import com.qiniu.storage.model.FileInfo
@@ -7,7 +8,7 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview._global.ConstantsUtils
 import dinson.customview.databinding.ActivityTestBinding
-import dinson.customview.kotlin.error
+import dinson.customview.kotlin.info
 import dinson.customview.model._005FileInfo
 import dinson.customview.utils.AESUtils
 import dinson.customview.utils.SystemBarModeUtils
@@ -19,12 +20,14 @@ class TestActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
+        //setContentView(R.layout.activity_test)
 
-        val inflate = ActivityTestBinding.inflate(layoutInflater)
+        val binding = DataBindingUtil.setContentView<ActivityTestBinding>(this, R.layout.activity_test)
+
+        //val inflate = ActivityTestBinding.inflate(layoutInflater)
         val fileInfo = FileInfo()
         fileInfo.fsize=2
-        inflate.dinsonFile= _005FileInfo(fileInfo,"")
+        binding.dinsonFile= _005FileInfo(fileInfo,"")
         initUI()
     }
 
@@ -38,11 +41,11 @@ class TestActivity : BaseActivity() {
 
     fun onEncryption(view: View) {
         val str = "jtef:/dfas[23ajfkav8293.12!@#$%^&*()_+}{:ha"
-        error(str)
+        info( str)
         val code = AESUtils.encrypt(ConstantsUtils.PACKAGE_NAME, str)
-        error(code)
+        info( code)
         val code2 = AESUtils.decrypt(ConstantsUtils.PACKAGE_NAME, code)
-        error(code2)
+        info( code2)
     }
 
     fun onQiNiuQuery(view: View) {

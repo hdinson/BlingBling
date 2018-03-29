@@ -16,7 +16,6 @@ import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.error
-import dinson.customview.kotlin.then
 import dinson.customview.kotlin.toast
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
@@ -113,8 +112,8 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
             showLoginDialog()
             return
         }
-        val observable = likeView.isChecked then mWanAndroidApi.addCollect(dataBean.id)
-            ?: mWanAndroidApi.delCollectFromMainList(dataBean.id)
+        val observable = if (likeView.isChecked) mWanAndroidApi.addCollect(dataBean.id)
+        else mWanAndroidApi.delCollectFromMainList(dataBean.id)
         observable.compose(RxSchedulers.io_main())
             .subscribe({
                 //接口请求成功

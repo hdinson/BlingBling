@@ -50,7 +50,7 @@ class _001WanAndroidLikeListAdapter(context: Context,
         likeView.isChecked = true
         RxView.clicks(likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
-                verbose(likeView.isChecked then "添加收藏" ?: "取消收藏")
+                verbose(if (likeView.isChecked) "添加收藏" else "取消收藏")
                 post2Server(likeView, dataBean, position)
             }
 

@@ -15,7 +15,6 @@ import dinson.customview.entity.zhihu.ZhihuTucaoDetails
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.error
-import dinson.customview.kotlin.then
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_content.*
@@ -74,7 +73,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
             return
         }
         val content = mData.content
-        (content == null || content.isEmpty()).then({
+        if (content == null || content.isEmpty()) {
             //加载网络
             HttpHelper.create(ZhihuTucaoApi::class.java).getStoriesDetails(extraData.id)
                 .compose(RxSchedulers.io_main())
@@ -89,10 +88,10 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
                     error("知乎请求详情数据失败")
                     onBackPressed()
                 })
-        }, {
+        } else {
             //加载本地数据
             parseJsonAndSetData(content)
-        })
+        }
     }
 
     /**

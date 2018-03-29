@@ -343,7 +343,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             put("品牌型号", "$BRAND $MODEL")
             put("AndroidID", Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID))//不可靠
             put("设备指纹", FINGERPRINT)
-            put("Root状态", isDeviceRooted() then "已root" ?: "未root")
+            put("Root状态", if (isDeviceRooted()) "已root" else "未root")
             put("分辨率", "${outMetrics.heightPixels}x${outMetrics.widthPixels}")
             put("屏幕密度", "density: ${outMetrics.density}/${outMetrics.scaledDensity} dpi:${outMetrics.densityDpi}")
             put("状态栏高度", "${getStatusBarHeight()}px")
@@ -354,14 +354,14 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             put("SDCard", "${StringUtils.byte2FileSize(value[1])}可用 / ${StringUtils.byte2FileSize(value[0])}总容量")
 
             //添加sim卡信息
-            (phone.simState == TelephonyManager.SIM_STATE_READY) then {
+            if (phone.simState == TelephonyManager.SIM_STATE_READY) {
                 put("SIM状态", getSimState(phone))
                 put("手机号码", getLine1Number(phone))
                 put("SIM卡序列号", getSubscriberId(phone))
                 put("IMSI", getSimSerialNumber(phone))
                 put("服务商", getSimOperatorName(phone))
                 put("SIM卡国家码", getSimCountryIso(phone))
-                put("漫游", isNetworkRoaming(phone) then "漫游中" ?: "未使用漫游服务")
+                put("漫游", if (isNetworkRoaming(phone)) "漫游中" else "未使用漫游服务")
                 put("数据活动状态", getDataActivity(phone))
                 put("数据连接状态", getDataState(phone))
             }
@@ -422,7 +422,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     override fun onBackPressed() {
-        (scrollView?.visibility == View.VISIBLE).then({ concealAndHiddenAndroidInfo() }, { super.onBackPressed() })
+        if (scrollView?.visibility == View.VISIBLE) concealAndHiddenAndroidInfo()
+        else super.onBackPressed()
     }
 
     override fun finishWithAnim(): Boolean = false

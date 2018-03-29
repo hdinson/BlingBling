@@ -1,23 +1,26 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.support_version = '27.1.0'
-    ext.kotlin_version = '1.1.51'
+    ext.kotlin_version = '1.2.30'
     ext.anko_version='0.10.4'
+    ext.gradle_version='3.1.0'
     repositories {
-        jcenter()
-        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+        mavenCentral()
         google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath 'me.tatarka:gradle-retrolambda:3.6.0'
-        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.8-RC1'
+        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.12'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
+        google()
+        jcenter()/*AndResGuard*/
     }
 }

@@ -23,7 +23,7 @@ infix fun View.setElevationResource(@DimenRes id: Int) {
 
 
 fun View.hide(isGone: Boolean = false) {
-    visibility = isGone then View.GONE ?: View.INVISIBLE
+    visibility = if (isGone) View.GONE else View.INVISIBLE
 }
 
 fun View.show() {
@@ -34,8 +34,8 @@ fun View.createArcPath(offsetX: Float, offsetY: Float): Path {
     val startX = translationX
     val startY = translationY
     val dY = offsetY - translationY
-    val pointX = (dY < 0) then offsetX ?: startX
-    val pointY = (dY < 0) then startY ?: offsetY
+    val pointX = if (dY < 0) offsetX else startX
+    val pointY = if (dY < 0) startY else offsetY
     return Path().apply {
         moveTo(startX, startY)
         quadTo(pointX, pointY, offsetX, offsetY)

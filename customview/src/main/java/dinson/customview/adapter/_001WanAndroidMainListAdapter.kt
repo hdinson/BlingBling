@@ -7,7 +7,10 @@ import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
 import dinson.customview.activity._001WanAndroidWebActivity
 import dinson.customview.entity.wanandroid.WanAndArticle
-import dinson.customview.kotlin.*
+import dinson.customview.kotlin.click
+import dinson.customview.kotlin.hide
+import dinson.customview.kotlin.show
+import dinson.customview.kotlin.verbose
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.DateUtils
 import dinson.customview.weight.recycleview.CommonAdapter
@@ -40,9 +43,9 @@ class _001WanAndroidMainListAdapter(context: Context,
 
         RxView.clicks(likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
-                verbose(likeView.isChecked then "添加收藏" ?: "取消收藏")
+                verbose(if (likeView.isChecked) "添加收藏" else "取消收藏")
                 //post2Server(likeView.isChecked, dataBean)
-                likeClickListener.onClickLikeView(likeView, dataBean,position)
+                likeClickListener.onClickLikeView(likeView, dataBean, position)
             }
 
         holder.rootView.click {
