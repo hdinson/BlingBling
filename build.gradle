@@ -22,5 +22,6 @@ allprojects {
         mavenCentral()
         google()
         jcenter()/*AndResGuard*/
+        maven { url 'https://jitpack.io' }
     }
 }

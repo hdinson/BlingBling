@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import dinson.customview.bindingview.DriverView;
+import dinson.customview.viewmodel.DriverView;
 import dinson.customview.model._005FileInfo;
 
 /**

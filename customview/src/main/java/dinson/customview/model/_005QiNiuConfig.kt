@@ -1,6 +1,8 @@
 package dinson.customview.model
 
+import android.annotation.SuppressLint
 import android.support.annotation.IntDef
+import com.qiniu.common.Zone
 
 /**
  * 七牛云配置文件
@@ -27,4 +29,12 @@ class _005QiNiuConfig(val AccessKey: String,
         return AccessKey == other.AccessKey && SecretKey == other.SecretKey
             && Domain == other.Domain && Bucket == other.Bucket && Area == other.Area
     }
+
+    @SuppressLint("SwitchIntDef")
+    fun getZone() = when (this.Area) {
+        _005QiNiuConfig.HUA_DONG -> Zone.zone0()
+        _005QiNiuConfig.HUA_BEI -> Zone.zone1()
+        _005QiNiuConfig.HUA_NAN -> Zone.zone2()
+        else -> Zone.autoZone()
+    }!!
 }
