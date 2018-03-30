@@ -58,6 +58,10 @@ android {
     dataBinding {
         enabled = true
     }
+    /*做七牛云上传图片时。图片选择添加，不用可删除*/
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 buildscript {
     repositories {
@@ -103,6 +107,7 @@ dependencies {
     /*轻量的WebView框架https://github.com/Justson/AgentWeb*/
     implementation 'com.just.agentweb:agentweb:4.0.2'
     implementation 'com.qiniu:qiniu-java-sdk:7.2.1'/*七牛云*/
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'/*图片选择框架，后期有更好的会替换*/
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'

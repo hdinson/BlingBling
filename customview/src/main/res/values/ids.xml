@@ -32,6 +32,10 @@
     <item name="guideline" type="id"/>
     <item name="iconGroup" type="id"/>
 
+    <item name="action_edit_repository" type="id"/>
+    <item name="action_upload_pic" type="id"/>
+
+
     <!--第三方或自定义控件-->
     <item name="glideTagId" type="id"/>
     <item name="floatingDecor" type="id"/>

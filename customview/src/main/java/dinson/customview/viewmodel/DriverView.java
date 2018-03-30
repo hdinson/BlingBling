@@ -1,4 +1,4 @@
-package dinson.customview.bindingview;
+package dinson.customview.viewmodel;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.qiniu.storage.model.FileInfo;
 
 import java.io.File;
 
@@ -62,7 +61,7 @@ public class DriverView extends RelativeLayout {
 
         this.post(() -> Glide.with(getContext()).asBitmap().load(host + data.getKey())
                 .apply(new RequestOptions().centerCrop()
-                        .override(mBinding.viewImgFeed.getWidth(), BitmapImageViewTarget.SIZE_ORIGINAL))
+                        .override(BitmapImageViewTarget.SIZE_ORIGINAL, BitmapImageViewTarget.SIZE_ORIGINAL))
                 .into(mViewTarget));
     }
 
@@ -99,7 +98,7 @@ public class DriverView extends RelativeLayout {
             if (mResult.isNull()) {
                 int viewWidth = mBinding.viewImgFeed.getWidth();
                 float scale = resource.getWidth() / (viewWidth * 1.0f);
-                int viewHeight = (int) (resource.getHeight() * scale);
+                int viewHeight = (int) (resource.getHeight() / scale);
                 setCardViewLayoutParams(viewWidth, viewHeight);
                 mResult.setSize(viewWidth, viewHeight);
             }
