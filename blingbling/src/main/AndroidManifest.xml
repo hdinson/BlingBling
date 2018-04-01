@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="dinson.customview">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- IMEI android:allowBackup="false" -->
+    <application
+        android:name="._global.GlobalApplication"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:resizeableActivity="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="n">
+        <!-- 高德地图设置key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="f16432f8253935bdaa564c4ad9288fbe" />
+        <!--TinkerId-->
+        <mata-data
+            android:name="TINKER_ID"
+            android:value="tinker_id_65535" />
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/AppTheme.SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity-alias
+            android:name=".activity.SplashAliasActivity"
+            android:enabled="false"
+            android:icon="@mipmap/app_icon"
+            android:targetActivity=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.DailyPicActivity" />
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity._001WanAndroidActivity" />
+        <activity android:name=".activity._001WanAndroidWebActivity" />
+        <activity android:name=".activity._001WanAndroidLikeActivity" />
+        <activity android:name=".activity._002ZhihuTucaoListActivity" />
+        <activity android:name=".activity._002ZhihuTucaoContentActivity" />
+        <activity android:name=".activity._003ExchangeActivity" />
+        <activity android:name=".activity._004BiliBiliListActivity" />
+        <activity android:name=".activity._005QiNiuYunActivity" />
+        <activity
+            android:name=".activity._004BiliBiliVideoActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity android:name=".activity._006FloatingViewActivity" />
+        <activity android:name=".activity._007SpotlightActivity" />
+        <activity android:name=".activity._008RichEditorActivity" />
+        <activity android:name=".activity._009GoogleVRActivity" />
+        <activity
+            android:name=".activity._010ParallaxActivity"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity android:name=".activity._011DiagonalLayoutActivity" />
+        <activity android:name=".activity._012QQNaviViewActivity" />
+        <activity android:name=".activity._013StepViewActivity" />
+        <activity android:name=".activity._014HonorClockActivity" />
+        <activity android:name=".activity._015ExplosionFieldActivity" />
+        <activity android:name=".activity._016ParallaxImgViewActivity" />
+        <activity android:name=".activity._017TetrisActivity" />
+        <activity
+            android:name=".activity._018NFCActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity._019GangedRecycleViewActivity" />
+        <activity android:name=".activity._020ShimmerActivity" />
+        <activity android:name=".activity._021LikeSmileViewActivity" />
+    </application>
+</manifest>

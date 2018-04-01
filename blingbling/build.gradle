@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
-apply plugin: 'AndResGuard'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'//kapt3插件
+apply plugin: 'com.tencent.tinker.patch'
+apply from: 'andres-guard.gradle'
 
 Properties prop = new Properties()
 prop.load(new FileInputStream(file("../signing.properties")))
@@ -101,6 +102,11 @@ dependencies {
     implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
     implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.4'
 
+    //compileOnly参与编译，不参与打包
+    compileOnly "com.tencent.tinker:tinker-android-anno:$tinker_version"
+    //tinker's main Android lib
+    implementation "com.tencent.tinker:tinker-android-lib:$tinker_version"
+
     implementation 'com.facebook.rebound:rebound:0.3.8'/*Facebook闪光控件*/
     implementation 'org.greenrobot:greendao:3.2.2'/*数据库*/
     implementation 'org.jsoup:jsoup:1.10.3'/*网页解析*/
@@ -108,47 +114,16 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:4.0.2'
     implementation 'com.qiniu:qiniu-java-sdk:7.2.1'/*七牛云*/
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'/*图片选择框架，后期有更好的会替换*/
+
+    /*在Kotlin中DataBinding的注解,kapt是 Kotlin内置的注解处理器*/
+    kapt "com.android.databinding:compiler:$gradle_version"
+
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-    /*在Kotlin中DataBinding的注解,kapt是 Kotlin内置的注解处理器*/
-    kapt "com.android.databinding:compiler:$gradle_version"
+
 }
 
-andResGuard {
-    // mappingFile = file("./resource_mapping.txt")
-    mappingFile = null
-    // 当你使用v2签名的时候，7zip压缩是无法生效的。
-    use7zip = true
-    useSign = true
-    // 打开这个开关，会keep住所有资源的原始路径，只混淆资源的名字
-    keepRoot = false
-    whiteList = [
-            // for your icon
-            "R.drawable.icon",
-            // for fabric
-            "R.string.com.crashlytics.*",
-            // for google-services
-            "R.string.google_app_id",
-            "R.string.gcm_defaultSenderId",
-            "R.string.default_web_client_id",
-            "R.string.ga_trackingId",
-            "R.string.firebase_database_url",
-            "R.string.google_api_key",
-            "R.string.google_crash_reporting_api_key"
-    ]
-    compressFilePattern = [
-            "*.png",
-            "*.jpg",
-            "*.jpeg",
-            "*.gif",
-            "resources.arsc"
-    ]
-    sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.2.3'
-        //path = "/usr/local/bin/7za"
-    }
-}
 repositories {
     mavenCentral()
     google()

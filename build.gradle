@@ -2,8 +2,9 @@
 buildscript {
     ext.support_version = '27.1.0'
     ext.kotlin_version = '1.2.30'
-    ext.anko_version='0.10.4'
-    ext.gradle_version='3.1.0'
+    ext.anko_version = '0.10.4'
+    ext.gradle_version = '3.1.0'
+    ext.tinker_version = '1.9.1'
     repositories {
         mavenCentral()
         google()
@@ -13,6 +14,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath 'me.tatarka:gradle-retrolambda:3.6.0'
         classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.12'
+        classpath "com.tencent.tinker:tinker-patch-gradle-plugin:$tinker_version"
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
