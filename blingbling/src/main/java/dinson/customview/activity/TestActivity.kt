@@ -17,18 +17,17 @@ import kotlinx.android.synthetic.main.activity_test.*
 
 class TestActivity : BaseActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val contentView = DataBindingUtil.setContentView<ActivityTestBinding>(this, R.layout.activity_test)
         val fileInfo = FileInfo()
-        fileInfo.fsize=2
+        fileInfo.fsize = 2
         val info = _005FileInfo(fileInfo, "")
-        contentView.dinsonFile= info
+        contentView.dinsonFile = info
         initUI()
 
         //contentView.dinsonFile?.fsize=6666
-        info.fsize=666
+        info.fsize = 666
     }
 
     private fun initUI() {
@@ -41,11 +40,11 @@ class TestActivity : BaseActivity() {
 
     fun onEncryption(view: View) {
         val str = "jtef:/dfas[23ajfkav8293.12!@#$%^&*()_+}{:ha"
-        info( str)
+        info(str)
         val code = AESUtils.encrypt(ConstantsUtils.PACKAGE_NAME, str)
-        info( code)
+        info(code)
         val code2 = AESUtils.decrypt(ConstantsUtils.PACKAGE_NAME, code)
-        info( code2)
+        info(code2)
     }
 
     fun onQiNiuQuery(view: View) {

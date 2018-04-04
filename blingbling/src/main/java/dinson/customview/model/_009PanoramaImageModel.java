@@ -27,7 +27,7 @@ public class _009PanoramaImageModel implements ITransformDownloadInfo {
         this.desc = desc;
         this.originalImg = originalImg;
         this.smallImg = smallImg;
-        this.localPath = ConstantsUtils.SDCARD_PRIVATE_IMAGE + StringUtils.getUrlName(originalImg);
+        this.localPath = ConstantsUtils.INSTANCE.getSDCARD_PRIVATE_IMAGE() + StringUtils.getUrlName(originalImg);
     }
 
     public float getProgress() {

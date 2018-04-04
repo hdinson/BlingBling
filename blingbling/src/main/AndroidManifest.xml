@@ -28,10 +28,6 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="f16432f8253935bdaa564c4ad9288fbe" />
-        <!--TinkerId-->
-        <mata-data
-            android:name="TINKER_ID"
-            android:value="tinker_id_65535" />
 
         <activity
             android:name=".activity.SplashActivity"

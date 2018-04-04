@@ -1,7 +1,6 @@
 package dinson.customview._global;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
@@ -10,7 +9,7 @@ import com.squareup.leakcanary.LeakCanary;
 import dinson.customview.BuildConfig;
 
 
-public class GlobalApplication extends Application {
+public class GlobalApplication extends BLingTinkerApplication {
 
     public static final Boolean IS_DEBUG = BuildConfig.DEBUG;
 
@@ -28,8 +27,7 @@ public class GlobalApplication extends Application {
         handler = new Handler();
         mainThreadId = android.os.Process.myTid();
 
-
-        CrashHandler.getInstance().init(getApplicationContext(), ConstantsUtils.SDCARD_PRIVATE );
+        CrashHandler.INSTANCE.init(ConstantsUtils.INSTANCE.getSDCARD_PRIVATE());
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.

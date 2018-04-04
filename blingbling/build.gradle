@@ -3,11 +3,12 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'//kapt3插件
-apply plugin: 'com.tencent.tinker.patch'
 apply from: 'andres-guard.gradle'
+apply from: 'tinker.gradle'
 
 Properties prop = new Properties()
 prop.load(new FileInputStream(file("../signing.properties")))
+
 
 android {
     compileSdkVersion 27
@@ -106,7 +107,7 @@ dependencies {
     compileOnly "com.tencent.tinker:tinker-android-anno:$tinker_version"
     //tinker's main Android lib
     implementation "com.tencent.tinker:tinker-android-lib:$tinker_version"
-
+    implementation "com.android.support:multidex:1.0.3"
     implementation 'com.facebook.rebound:rebound:0.3.8'/*Facebook闪光控件*/
     implementation 'org.greenrobot:greendao:3.2.2'/*数据库*/
     implementation 'org.jsoup:jsoup:1.10.3'/*网页解析*/
