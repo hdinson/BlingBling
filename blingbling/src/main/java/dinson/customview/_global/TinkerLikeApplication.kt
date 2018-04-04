@@ -10,9 +10,8 @@ import com.tencent.tinker.loader.shareutil.ShareConstants
 /**
  * Tinker带有生命周期的application
  */
-/*
 @DefaultLifeCycle(
-    application = ".HeHeDaApplication",
+    application = ".BLingTinkerApplication",
     flags = ShareConstants.TINKER_ENABLE_ALL,
     loadVerifyFlag = false
 )
@@ -27,4 +26,4 @@ class TinkerLikeApplication(application: Application?, tinkerFlags: Int,
         super.onBaseContextAttached(base)
         TinkerManager.installTinker(this)
     }
-}*/
+}

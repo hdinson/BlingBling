@@ -30,7 +30,7 @@ public class HttpHelper {
 
     private HttpHelper() {
         mOkHttpClient = new OkHttpClient.Builder()
-            .cache(new Cache(new File(ConstantsUtils.SDCARD_PRIVATE_CACHE, "http_cache"),
+            .cache(new Cache(new File(ConstantsUtils.INSTANCE.getSDCARD_PRIVATE_CACHE(), "http_cache"),
                 1024 * 1024 * 100))//100M的缓存
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

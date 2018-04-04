@@ -16,7 +16,7 @@ public class LogUtils {
     /**
      * 方便过滤
      */
-    private static String FLAG = ConstantsUtils.LOGCAT_TAG;
+    private static String FLAG = ConstantsUtils.INSTANCE.getLOGCAT_TAG();
 
 
     private static String getLineNumber(String methodName) {
