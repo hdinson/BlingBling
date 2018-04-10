@@ -45,7 +45,6 @@ open class BaseActivity : AppCompatActivity() {
      */
     open fun setWindowBackgroundColor(): Int? = R.color.window_bg
 
-
     override fun onBackPressed() {
         super.onBackPressed()
         if (finishWithAnim())
