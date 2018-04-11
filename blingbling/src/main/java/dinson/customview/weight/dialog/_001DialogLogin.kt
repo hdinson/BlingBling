@@ -51,6 +51,8 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
         setCanceledOnTouchOutside(true)
         setContentView(R.layout.dialog_001_login)
         initClick()
+
+
     }
 
     /**

@@ -2,19 +2,21 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
     android:background="@drawable/ripple_main_white"
-    android:focusable="true">
+    android:clickable="true"
+    android:focusable="true"
+    tools:ignore="ContentDescription">
 
     <ImageView
         android:id="@id/ivImg"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:contentDescription="@string/des_pic"
-        android:padding="16dp"
+        android:padding="@dimen/spacing_medium"
         android:scaleType="centerCrop"
+        tools:src="@drawable/def_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -49,20 +51,18 @@
         android:id="@+id/iv_third"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:contentDescription="@string/des_num"
-        android:src="@drawable/n_3"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginBottom="@dimen/spacing_medium"
+        android:layout_marginEnd="18dp"
+        tools:src="@drawable/n_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginEnd="18dp"/>
 
     <ImageView
         android:id="@+id/iv_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/des_num"
         android:src="@drawable/n_2"
         app:layout_constraintBottom_toBottomOf="@id/iv_third"
         app:layout_constraintRight_toLeftOf="@id/iv_third"/>
@@ -71,7 +71,6 @@
         android:id="@+id/iv_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/des_num"
         android:src="@drawable/n_1"
         app:layout_constraintBottom_toBottomOf="@id/iv_third"
         app:layout_constraintRight_toLeftOf="@id/iv_second"/>

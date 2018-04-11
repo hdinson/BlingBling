@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/spacing_medium"
-    android:orientation="vertical">
+    tools:background="@drawable/_007_activity_bg">
 
     <ImageView
         android:id="@id/ivImg"
-        android:src="@drawable/_015_img1"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingLeft="@dimen/spacing_small"
         android:paddingRight="@dimen/spacing_small"
-        android:layout_height="wrap_content"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/_015_img1"/>
 
     <TextView
         android:id="@id/tvName"
         android:layout_width="match_parent"
-        android:gravity="center_horizontal"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="Telephone"/>
 </LinearLayout>

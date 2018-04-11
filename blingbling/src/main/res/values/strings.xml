@@ -9,8 +9,8 @@
     <string name="wan_android_desc">WanAndroid is a BBS created by many passionate youth who love Android.</string>
     <string name="wan_android_img">http://ondlsj2sn.bkt.clouddn.com/FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp</string>
     <!--002-->
-    <string name="zhihu_title">QQNaviView</string>
-    <string name="zhihu_desc">Mimic QQ navigation bar</string>
+    <string name="zhihu_title">ZhihuDaily</string>
+    <string name="zhihu_desc">Zhihu is a question-and-answer website where questions are created, answered, edited and organized by the community of its users</string>
     <string name="zhihu_img">http://ondlsj2sn.bkt.clouddn.com/Fi8e4rUvYUC3tp5UzU6mUQh4SkTK.webp</string>
     <!--003-->
     <string name="exchange_rate_title">Exchange Rate</string>
@@ -21,24 +21,19 @@
     <string name="bilibili_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
     <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
     <!--005-->
-    <string name="qi_niu_title">七牛云</string>
-    <string name="qi_niu_desc">七牛云上传下载</string>
-    <!--<string name="qi_niu_img">http://p2c0m2mi6.bkt.clouddn.com/Fg873GxilLa4Gxx78lloLg96Igvs.webp</string>-->
+    <string name="qi_niu_title">QiNiuYun</string>
+    <string name="qi_niu_desc">QiNiuYun is online storage service provided by the QiNiuYun Co.,Ltd, through the interface to the customers with unlimited online storage space</string>
     <string name="qi_niu_img">http://ondlsj2sn.bkt.clouddn.com/Fg873GxilLa4Gxx78lloLg96Igvs.webp</string>
     <!--006-->
     <string name="floatingView_title">FloatingView</string>
-    <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool
-        animation
-    </string>
+    <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool animation</string>
     <string name="floatingView_img">http://ondlsj2sn.bkt.clouddn.com/FoswnjfkCoEaVY0Ijnnlur9BxYBl.webp</string>
     <!--007-->
     <string name="spotlight_title">Spotlight</string>
     <string name="spotlight_desc">Android Library that lights items for tutorials or walk-through etc…</string>
     <string name="spotlight_img">http://ondlsj2sn.bkt.clouddn.com/FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp</string>
     <string name="_007_tiny_attr">Seen: 1 Caught: 1 \nWeight: 9.0kg Height: 0.5m</string>
-    <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the
-        grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.
-    </string>
+    <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.</string>
     <string name="_007_tiny">Tiny Turtle Pokémon</string>
     <string name="_007_tiny_type">Type: Water</string>
     <string name="_007_tiny_name">SQUIRTLE</string>
@@ -214,12 +209,6 @@
     <string name="if_cold_37">&#xe617;</string>
     <string name="if_hot_38">&#xe60b;</string>
     <string name="if_unknown_99">&#xe623;</string>
-    <!--image contentDescription-->
-    <string name="des_pic">图片</string>
-    <string name="des_goods_pic">商品图片</string>
-    <string name="des_num">数字</string>
-    <string name="des_tab">标签</string>
-    <string name="des_bg">背景图片</string>
     <string name="_010_username">邮箱 / 手机号</string>
     <string name="password">密码</string>
     <string name="_010_register">注册</string>
@@ -238,4 +227,5 @@
     <string name="username_en">Username</string>
     <string name="login_en">LOGIN</string>
     <string name="unknown">未知</string>
+    <string name="please_select_currency_en">Please Select Currency</string>
 </resources>

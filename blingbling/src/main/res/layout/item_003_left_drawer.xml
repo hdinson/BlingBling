@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/deleteLayout"
     android:layout_width="match_parent"
     android:layout_height="70dp"
@@ -12,7 +13,9 @@
         android:id="@id/ivImg"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/def_img"/>
 
     <TextView
         android:id="@id/tvTitle"
@@ -22,7 +25,8 @@
         android:layout_marginStart="16dp"
         android:layout_toRightOf="@id/ivImg"
         android:alpha="0.4"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        tools:text="人民币"/>
 
     <TextView
         android:id="@id/tvDesc"
@@ -31,5 +35,6 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:alpha="0.4"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        tools:text="CNY"/>
 </RelativeLayout>

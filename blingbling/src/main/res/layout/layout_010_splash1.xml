@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:divider="@drawable/_010_divider"
     android:orientation="vertical"
     android:showDividers="middle"
-    android:weightSum="9">
+    android:weightSum="9"
+    tools:ignore="ContentDescription">
 
     <LinearLayout style="@style/_010_LinearLayout">
 
@@ -64,7 +66,7 @@
 
         <ImageView
             style="@style/_010_Item.XA.Lv2"
-            android:layout_marginRight="0dp"
+            android:layout_marginEnd="0dp"
             android:src="@drawable/_010_img10"/>
     </LinearLayout>
 

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dinson.customview.weight.swipelayout.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<dinson.customview.weight.swipelayout.SwipeItemLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/deleteLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="ContentDescription">
 
     <ImageView
         android:layout_width="80dp"
@@ -11,8 +14,7 @@
         android:layout_gravity="start"
         android:background="@drawable/_003_list_undercover"
         android:scaleType="center"
-        android:contentDescription="@string/des_pic"
-        android:src="@drawable/_003_delete_ic" />
+        android:src="@drawable/_003_delete_ic"/>
 
     <RelativeLayout
         android:id="@+id/contentLayout"
@@ -21,8 +23,8 @@
         android:layout_gravity="center"
         android:background="@drawable/selector_003_window_bg"
         android:clickable="true"
-        android:focusable="true"
         android:elevation="10dp"
+        android:focusable="true"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
 
@@ -30,7 +32,9 @@
             android:id="@id/ivImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/def_img"/>
 
         <TextView
             android:id="@+id/tvCurrencyCode"
@@ -42,7 +46,8 @@
             android:fontFamily="sans-serif-thin"
             android:minWidth="50dp"
             android:textColor="@color/_003_text_color_hint"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:text="CNY"/>
 
         <TextView
             android:id="@+id/tvResult"
@@ -58,7 +63,8 @@
             android:singleLine="true"
             android:textColor="@android:color/white"
             android:textColorHint="@color/_003_text_color_hint"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:text="100.00"/>
 
         <dinson.customview.weight.LanTingFontTextView
             android:id="@+id/tvEquation"
@@ -73,7 +79,9 @@
             android:gravity="end"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            tools:text="100.00"
+            tools:ignore="SmallSp"/>
 
         <TextView
             android:id="@+id/tvCurrencyCn"
@@ -83,7 +91,8 @@
             android:layout_below="@id/tvResult"
             android:fontFamily="sans-serif-thin"
             android:textColor="@color/_003_text_color_hint"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="人民币 ￥"/>
 
         <View
             android:id="@+id/lFocusView"
@@ -92,7 +101,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="@android:color/white"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
 
         <View
             android:id="@+id/sFocusView"
@@ -102,6 +111,6 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/tvEquation"
             android:background="@color/_003_text_color_hint"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
     </RelativeLayout>
 </dinson.customview.weight.swipelayout.SwipeItemLayout>

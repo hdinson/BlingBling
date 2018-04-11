@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
@@ -20,20 +21,28 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        tools:src="@drawable/def_img"
+        tools:ignore="ContentDescription"/>
 
     <TextView
         android:id="@id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/ivImg"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_toStartOf="@id/ivImg"
         android:textColor="@color/textPrimary"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        tools:text="瞎扯·如何正确地吐槽"/>
 
     <TextView
         android:id="@id/tvTime"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/ivImg"
-        android:textColor="@color/textPrimary"/>
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_toStartOf="@id/ivImg"
+        android:textColor="@color/textPrimary"
+        tools:text="13月31号"/>
 </RelativeLayout>

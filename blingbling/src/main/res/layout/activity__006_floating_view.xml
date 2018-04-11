@@ -6,7 +6,8 @@
     android:id="@id/layoutRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dinson.customview.activity._006FloatingViewActivity">
+    tools:context="dinson.customview.activity._006FloatingViewActivity"
+    tools:ignore="ContentDescription">
 
     <View
         android:id="@+id/rootBg"
