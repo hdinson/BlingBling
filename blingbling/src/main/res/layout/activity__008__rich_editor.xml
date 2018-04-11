@@ -2,10 +2,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -62,7 +64,6 @@
             app:layout_constraintTop_toTopOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 
-
     <dinson.customview.weight._008richeditor.widget.RichEditor
         android:id="@+id/richEditor"
         android:layout_width="match_parent"
@@ -75,7 +76,6 @@
         android:padding="12dp"
         android:textColor="@color/textPrimary"
         android:textColorHint="@color/textHint"/>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -99,45 +99,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="end"
             android:background="@drawable/shape_008_tab"
             android:drawablePadding="3dp"
             android:drawableStart="@drawable/_008_earth"
             android:gravity="center_vertical"
             android:text="@string/_008_open"
             android:textColor="#4c7aab"/>
-
     </RelativeLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:elevation="1dp"
         android:layout_marginTop="10dp"
         android:background="#f9f9f9"
+        android:elevation="1dp"
         android:orientation="horizontal">
 
         <ImageButton
             style="@style/_008Tab"
-            android:contentDescription="@string/des_tab"
             android:src="@drawable/selector_008_tab1"/>
+
         <ImageButton
             style="@style/_008Tab"
-            android:contentDescription="@string/des_tab"
             android:src="@drawable/selector_008_tab2"/>
+
         <ImageButton
             style="@style/_008Tab"
-            android:contentDescription="@string/des_tab"
             android:src="@drawable/selector_008_tab3"/>
+
         <ImageButton
-            style="@style/_008Tab"
             android:id="@+id/ib_emoji"
-            android:contentDescription="@string/des_tab"
+            style="@style/_008Tab"
             android:src="@drawable/selector_008_tab4"/>
+
         <ImageButton
             style="@style/_008Tab"
-            android:contentDescription="@string/des_tab"
             android:src="@drawable/selector_008_tab5"/>
     </LinearLayout>
 
@@ -145,6 +141,6 @@
         android:id="@+id/emojiLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
 </LinearLayout>

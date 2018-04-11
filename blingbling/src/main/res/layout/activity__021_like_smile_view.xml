@@ -11,13 +11,13 @@
         android:id="@id/ivImg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="@string/des_goods_pic"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"/>
 
     <dinson.customview.weight.IconFontTextView
         style="@style/_021TopIcon"

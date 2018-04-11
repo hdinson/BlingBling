@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="@color/white">
@@ -26,11 +27,11 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"
-        android:text="dfadsfa"
         app:layout_constraintBottom_toTopOf="@+id/tvChapter"
         app:layout_constraintLeft_toRightOf="@+id/likeView"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="文章标题"/>
 
     <TextView
         android:id="@+id/tvTag"
@@ -40,19 +41,20 @@
         android:background="@drawable/_001_tag_wireframe"
         android:textColor="#22AD79"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvChapter"
-        app:layout_constraintLeft_toLeftOf="@id/tvTitle"/>
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        tools:text="项目"/>
 
     <TextView
         android:id="@+id/tvChapter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
-        android:text="dfadsfa"
         android:textColor="@color/textSecond"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/tvTag"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_goneMarginStart="0dp"/>
+        app:layout_goneMarginStart="0dp"
+        tools:text="安卓 04/09 17:00"/>
 
     <TextView
         android:id="@id/tvTime"

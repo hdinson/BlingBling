@@ -11,7 +11,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="#2f2f2f"
         android:elevation="10dp"
         app:title="我的喜欢"

@@ -2,18 +2,20 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/_010_login_bg">
+    android:background="@drawable/_010_login_bg"
+    tools:ignore="ContentDescription">
 
     <ImageView
         android:id="@+id/qq"
         style="@style/_010_Item_ThirdLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/_010_login_qq"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -97,6 +99,7 @@
         android:background="@drawable/_010_login_edit"
         android:gravity="center"
         android:hint="@string/_010_username"
+        android:inputType="none"
         android:textColor="#C4996B"
         android:textColorHint="#838282"
         android:textCursorDrawable="@drawable/shape_010_cursor_color"

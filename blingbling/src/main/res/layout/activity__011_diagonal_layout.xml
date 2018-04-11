@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -138,5 +139,6 @@
         android:elevation="10dp"
         app:layout_anchor="@id/rv_follow"
         app:layout_anchorGravity="center_vertical"
-        app:layout_behavior="@string/app_bar_behavior"/>
+        app:layout_behavior="@string/app_bar_behavior"
+        tools:ignore="ContentDescription"/>
 </android.support.design.widget.CoordinatorLayout>
