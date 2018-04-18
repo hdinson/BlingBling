@@ -73,7 +73,7 @@ class _005QiNiuYunActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         flCustomRefreshView.setAdapter(mAdapter)
-        flCustomRefreshView.loadMoreEnable=false
+        flCustomRefreshView.loadMoreEnable = false
         val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         flCustomRefreshView.recyclerView.apply {
             layoutManager = manager
@@ -117,11 +117,13 @@ class _005QiNiuYunActivity : BaseActivity() {
                     .forEach {
                         val host = if (config.Domain.startsWith("http")) config.Domain + File.separator
                         else "http://" + config.Domain + File.separator
-                        val encodedFileName = Uri.encode(it.key, "utf-8")
-                        val publicUrl = String.format("%s/%s", host, encodedFileName)
-                        val token = Auth.create(config.AccessKey, config.SecretKey)
-//                        val finalUrl = token.privateDownloadUrl(publicUrl, 3600)//1小时,链接过期时间
-                        val finalUrl ="http://${config.Domain}/${it.key}"
+                        val finalUrl = if (config.isPrivate) {
+                            //私有空间需要加上上传凭证
+                            val encodedFileName = Uri.encode(it.key, "utf-8")
+                            val publicUrl = String.format("%s/%s", host, encodedFileName)
+                            val token = Auth.create(config.AccessKey, config.SecretKey)
+                            token.privateDownloadUrl(publicUrl, 3600)//1小时,链接过期时间
+                        } else "http://${config.Domain}/${it.key}"//公共空间
                         mListData.add(_005FileInfo(it, finalUrl))
                     }
             }

@@ -45,12 +45,15 @@
         android:hint="域名"/>
 
     <CheckBox
+        android:id="@+id/cbIsPrivate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_small"
-        android:text="是否私有"
+        android:button="@drawable/selector_common_checkbox"
+        android:buttonTint="@color/_005_config_bg"
+        android:text="\t私有空间"
         android:theme="@style/AppTheme.Accent005"/>
 
     <RadioGroup
@@ -68,33 +71,37 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@drawable/selector_common_checkbox"
             android:buttonTint="@color/_005_config_bg"
             android:checked="true"
-            android:text="华东"/>
+            android:text="\t华东"/>
 
         <RadioButton
             android:id="@+id/rb2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@drawable/selector_common_checkbox"
             android:buttonTint="@color/_005_config_bg"
-            android:text="华北"/>
+            android:text="\t华北"/>
 
         <RadioButton
             android:id="@+id/rb3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@drawable/selector_common_checkbox"
             android:buttonTint="@color/_005_config_bg"
-            android:text="华南"/>
+            android:text="\t华南"/>
 
         <RadioButton
             android:id="@+id/rb4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@drawable/selector_common_checkbox"
             android:buttonTint="@color/_005_config_bg"
-            android:text="北美"/>
+            android:text="\t北美"/>
     </RadioGroup>
 
     <LinearLayout
