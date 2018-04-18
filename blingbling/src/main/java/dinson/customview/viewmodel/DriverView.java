@@ -14,8 +14,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 
-import java.io.File;
-
 import dinson.customview.databinding.Item005ViewDriverFeedBinding;
 import dinson.customview.model._005FileInfo;
 
@@ -48,7 +46,7 @@ public class DriverView extends RelativeLayout {
         mBinding = Item005ViewDriverFeedBinding.inflate(inflater, this, true);
     }
 
-    public void setData(final _005FileInfo data) {
+    public void setData(_005FileInfo data) {
         mResult = data;
         mBinding.setFileInfo(data);
         mViewTarget = new DriverViewTarget(mBinding.viewImgFeed);
@@ -56,13 +54,10 @@ public class DriverView extends RelativeLayout {
             setCardViewLayoutParams(mResult.getWidth(), mResult.getHeight());
         }
 
-        String host = mResult.getDomain().startsWith("http") ? mResult.getDomain() + File.separator
-                : "http://" + mResult.getDomain() + File.separator;
-
-        this.post(() -> Glide.with(getContext()).asBitmap().load(host + data.getKey())
-                .apply(new RequestOptions().centerCrop()
-                        .override(BitmapImageViewTarget.SIZE_ORIGINAL, BitmapImageViewTarget.SIZE_ORIGINAL))
-                .into(mViewTarget));
+        this.post(() -> Glide.with(getContext()).asBitmap().load(mResult.getFinalUrl())
+            .apply(new RequestOptions().centerCrop()
+                .override(BitmapImageViewTarget.SIZE_ORIGINAL, BitmapImageViewTarget.SIZE_ORIGINAL))
+            .into(mViewTarget));
     }
 
     private void setCardViewLayoutParams(int width, int height) {

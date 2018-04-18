@@ -67,8 +67,8 @@ class DailyPicActivity : BaseActivity() {
 
     companion object {
 
-        private val EXTRA_DATA = "data"
-        private val EXTRA_PATH = "path"
+        private const val EXTRA_DATA = "data"
+        private const val EXTRA_PATH = "path"
 
         fun start(context: Context, bean: DailyDetail.DataBean, imgPath: String, options: ActivityOptionsCompat) {
             val starter = Intent(context, DailyPicActivity::class.java)

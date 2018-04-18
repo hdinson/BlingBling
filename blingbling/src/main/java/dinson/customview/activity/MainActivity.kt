@@ -11,9 +11,9 @@ import android.os.Build.VERSION.RELEASE
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.telephony.TelephonyManager
 import android.util.DisplayMetrics
@@ -26,8 +26,6 @@ import android.widget.TextView
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target
 import com.jakewharton.rxbinding2.view.RxView
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
@@ -40,6 +38,7 @@ import dinson.customview.entity.HomeWeather
 import dinson.customview.entity.one.DailyDetail
 import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
+import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.*
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
@@ -54,7 +53,6 @@ import dinson.customview.weight.recycleview.LinearItemDecoration
 import dinson.customview.weight.recycleview.OnItemClickListener
 import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -80,6 +78,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         initHead()
         getLocation()
     }
+
 
     /**
      * 内容的数据集
@@ -139,7 +138,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
         rvContent.apply {
             adapter = mainAdapter
             val layoutManager = LinearLayoutManager(this@MainActivity)
-            //layoutManager.isSmoothScrollbarEnabled = true
+            layoutManager.isSmoothScrollbarEnabled = true
             //layoutManager.isAutoMeasureEnabled = true
             //setHasFixedSize(true)
             //isNestedScrollingEnabled = false
@@ -150,10 +149,13 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
     }
 
     private fun initHead() {
+        llDaily.setPadding(0, (screenWidth() / 1.5).toInt(), 0, 0)
+
         mainBanner.setPages(mHeadData, MainBannerHolder())
         mainBanner.setDuration(500)
-        mainBanner.setBannerPageClickListener(BannerPageClickListener { view, position ->
-            Single.just(mHeadData[position].data.hp_img_url)
+        mainBanner.setBannerPageClickListener(BannerPageClickListener { _, position ->
+            /*Glide储存本地文件*/
+            /*Single.just(mHeadData[position].data.hp_img_url)
                 .map { s ->
                     Glide.with(this@MainActivity).downloadOnly().load(s).downloadOnly(Target.SIZE_ORIGINAL,
                         Target.SIZE_ORIGINAL).get().path
@@ -164,7 +166,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
                     debug("CurrentItem:" + position + " imgUrl:" + mHeadData[position].data.hp_img_url + "  imgPath:" + path)
                     val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, view, "dailyPic")
                     DailyPicActivity.start(this@MainActivity, mHeadData[position].data, path, options)
-                }
+                }*/
+            showDailyDetail(mHeadData[position].data)
         })
         mainBanner.start()
 
@@ -193,6 +196,39 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             }
     }
 
+    /**
+     * 显示每日一图的详情
+     */
+    private fun showDailyDetail(daily: DailyDetail.DataBean) {
+        llDaily.show()
+
+
+        val content = daily.hp_content
+        val indexOfStop = content.lastIndexOf("by")
+        val indexOfQm = content.lastIndexOf("from")
+        val index = if (indexOfStop > indexOfQm) indexOfStop else indexOfQm
+
+        val subContent = content.substring(0, index)
+        val subName = content.substring(index).trim { it <= ' ' }
+
+        tvDailyTitle.text = ""
+        tvDailyContent.text = ""
+        val subscribe = Observable.interval(10, TimeUnit.MILLISECONDS)
+            .take(Math.max(subContent.length, subName.length).toLong())
+            .compose(RxSchedulers.io_main())
+            .subscribe({
+                if (it < subName.length) tvDailyTitle.append(subName[it.toInt()].toString())
+                if (it < subContent.length) tvDailyContent.append(subContent[it.toInt()].toString())
+            })
+        llDaily.click {
+            subscribe.dispose()
+            llDaily.hide()
+        }
+    }
+
+    /**
+     * 定位
+     */
     private fun getLocation() {
         RxPermissions(this).request(Manifest.permission.ACCESS_COARSE_LOCATION)
             .subscribe {

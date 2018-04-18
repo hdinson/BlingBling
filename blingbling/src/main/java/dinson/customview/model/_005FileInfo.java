@@ -2,8 +2,6 @@ package dinson.customview.model;
 
 import com.qiniu.storage.model.FileInfo;
 
-import java.io.File;
-
 /**
  * 七牛云服务器文件实体
  */
@@ -19,9 +17,9 @@ public class _005FileInfo {
     private int height;
     private int width;
 
-    private String domain;
+    private String finalUrl;//文件的最终名字，因为私有空间需要加上下载凭证，否则无法访问
 
-    public _005FileInfo(FileInfo info, String domain) {
+    public _005FileInfo(FileInfo info, String finalUrl) {
         this.key = info.key;
         this.endUser = info.endUser;
         this.fsize = info.fsize;
@@ -29,7 +27,7 @@ public class _005FileInfo {
         this.mimeType = info.mimeType;
         this.hash = info.hash;
 
-        this.domain = domain;//域名
+        this.finalUrl = finalUrl;//域名
     }
 
     public String getKey() {
@@ -98,7 +96,7 @@ public class _005FileInfo {
         this.height = height;
     }
 
-    public String getDomain() {
-        return domain;
+    public String getFinalUrl() {
+        return finalUrl;
     }
 }

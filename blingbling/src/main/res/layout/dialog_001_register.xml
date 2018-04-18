@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_centerInParent="true">
-
-    <Space
-        android:id="@id/guideline"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true"/>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/dialog_001_login"
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:id="@+id/llRegister"
         android:layout_width="320dp"
         android:layout_height="320dp"
-        android:layout_below="@id/guideline"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-144dp"
         android:visibility="invisible"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/shape_rec_r5"
         android:backgroundTint="#2ea67f"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -108,4 +103,4 @@
             android:text="NEXT"
             android:textColor="@color/_001_accent_green"/>
     </LinearLayout>
-</RelativeLayout>
+</merge>
