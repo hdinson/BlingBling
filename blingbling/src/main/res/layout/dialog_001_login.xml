@@ -2,13 +2,14 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:clipChildren="false"
-    android:layout_height="match_parent">
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:clipChildren="false">
 
     <LinearLayout
         android:id="@+id/llLogin"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
         android:background="@drawable/shape_rec_r5"
@@ -18,13 +19,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="15dp">
 
             <View
                 android:layout_width="8dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
-                android:background="@color/_001_accent_green" />
+                android:background="@color/_001_accent_green"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,13 +35,13 @@
                 android:text="@string/login_en"
                 android:textColor="#FFCC00"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </RelativeLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:paddingEnd="30dp"
             android:paddingStart="30dp"
             android:textColorHint="#c5c5c5"
@@ -55,7 +56,7 @@
                 android:inputType="textPersonName"
                 android:textColor="@color/_001_accent_green"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -76,7 +77,7 @@
                 android:inputType="textPassword"
                 android:textColor="@color/_001_accent_green"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -88,7 +89,7 @@
             android:background="@drawable/_001_btn_wireframe"
             android:stateListAnimator="@drawable/animator_001_btn_z"
             android:text="@string/go_en"
-            android:textColor="#d3d3d3" />
+            android:textColor="#d3d3d3"/>
 
         <TextView
             android:id="@+id/tvForgotPsw"
@@ -96,7 +97,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/forgot_your_password_en"
-            android:textColor="@color/textHint" />
+            android:textColor="@color/textHint"/>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -106,14 +107,18 @@
         android:layout_alignEnd="@+id/llLogin"
         android:layout_alignTop="@+id/llLogin"
         android:layout_marginEnd="-20dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="55dp"
         android:src="@drawable/action_icon_plus"
         app:backgroundTint="@color/_001_accent_green"
-        app:fabSize="normal" />
-
-    <ViewStub
+        app:fabSize="normal"/>
+    <!--<ViewStub
         android:id="@id/vsContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/dialog_001_register" />
+        android:layout="@layout/dialog_001_register" />-->
+    <include
+        layout="@layout/dialog_001_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"/>
 </RelativeLayout>

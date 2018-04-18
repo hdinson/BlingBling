@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
@@ -72,6 +73,7 @@ class _005QiNiuYunActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         flCustomRefreshView.setAdapter(mAdapter)
+        flCustomRefreshView.loadMoreEnable=false
         val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         flCustomRefreshView.recyclerView.apply {
             layoutManager = manager
@@ -80,9 +82,7 @@ class _005QiNiuYunActivity : BaseActivity() {
                 OnItemClickListener.OnClickListener { _, position ->
                     val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                     val bean = mListData[position]
-                    var domain = bean.domain
-                    if (!domain.startsWith("http")) domain = "http://" + domain + File.separator
-                    val data = ClipData.newPlainText("Label", "$domain${bean.key}")
+                    val data = ClipData.newPlainText("Label", bean.finalUrl)
                     cm.primaryClip = data
                     "已复制".toast()
                 }))
@@ -114,7 +114,16 @@ class _005QiNiuYunActivity : BaseActivity() {
             mListData.clear()
             while (iterator.hasNext()) {
                 iterator.next().filter { it.mimeType.contains("image") }
-                    .forEach { mListData.add(_005FileInfo(it, config.Domain)) }
+                    .forEach {
+                        val host = if (config.Domain.startsWith("http")) config.Domain + File.separator
+                        else "http://" + config.Domain + File.separator
+                        val encodedFileName = Uri.encode(it.key, "utf-8")
+                        val publicUrl = String.format("%s/%s", host, encodedFileName)
+                        val token = Auth.create(config.AccessKey, config.SecretKey)
+//                        val finalUrl = token.privateDownloadUrl(publicUrl, 3600)//1小时,链接过期时间
+                        val finalUrl ="http://${config.Domain}/${it.key}"
+                        mListData.add(_005FileInfo(it, finalUrl))
+                    }
             }
             mListData.sortBy { it.putTime }
             mListData.reverse()

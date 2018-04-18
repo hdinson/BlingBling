@@ -51,8 +51,6 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
         setCanceledOnTouchOutside(true)
         setContentView(R.layout.dialog_001_login)
         initClick()
-
-
     }
 
     /**
@@ -64,10 +62,6 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             if (llRegister?.visibility == View.VISIBLE) {
                 animateRevealClose()
                 return@subscribe
-            }
-            vsContent?.let {
-                vsContent.inflate()
-                btnDoRegister.setOnClickListener(this)
             }
             val offsetX = llLogin.x + llLogin.halfWidth() - fabButton.x - fabButton.halfWidth()
             val offsetY = llLogin.y + 20 - fabButton.y - fabButton.halfHeight()
@@ -82,6 +76,7 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             }.start()
         }
 
+        btnDoRegister.setOnClickListener(this)
         btnDoLogin.setOnClickListener(this)
         tvForgotPsw.setOnClickListener(this)
     }
