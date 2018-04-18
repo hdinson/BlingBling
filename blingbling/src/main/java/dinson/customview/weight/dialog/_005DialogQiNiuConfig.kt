@@ -1,6 +1,5 @@
 package dinson.customview.weight.dialog
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import dinson.customview.R
@@ -55,7 +54,7 @@ class _005DialogQiNiuConfig(context: Context, private val mConfig: _005QiNiuConf
                 return@click
             }
             val config = _005QiNiuConfig(etAK.text.toString(), etSK.text.toString(), etDomain.text.toString(),
-                etBucket.text.toString(), getArea(rgArea.checkedRadioButtonId))
+                etBucket.text.toString(), cbIsPrivate.isChecked, getArea(rgArea.checkedRadioButtonId))
 
             if (mConfig == null) {
                 SPUtils.addQiNiuConfig(context, config)

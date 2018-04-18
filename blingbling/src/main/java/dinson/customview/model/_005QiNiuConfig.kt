@@ -11,6 +11,7 @@ class _005QiNiuConfig(val AccessKey: String,
                       val SecretKey: String,
                       val Domain: String,
                       val Bucket: String,
+                      val isPrivate: Boolean,
                       @AREA val Area: Int) {
 
     companion object {
@@ -27,7 +28,8 @@ class _005QiNiuConfig(val AccessKey: String,
     fun equals(other: _005QiNiuConfig?): Boolean {
         if (other == null) return false
         return AccessKey == other.AccessKey && SecretKey == other.SecretKey
-            && Domain == other.Domain && Bucket == other.Bucket && Area == other.Area
+            && Domain == other.Domain && Bucket == other.Bucket && Area == other.Area &&
+            isPrivate == other.isPrivate
     }
 
     @SuppressLint("SwitchIntDef")
