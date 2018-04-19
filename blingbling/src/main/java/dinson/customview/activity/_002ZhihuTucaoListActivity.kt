@@ -14,7 +14,8 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.debug
 import dinson.customview.utils.DateUtils
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.weight.recycleview.OnItemClickListener
+import dinson.customview.weight.recycleview.OnRvItemClickListener
+import dinson.customview.weight.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 
@@ -58,11 +59,10 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         })
         flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
-        val listener = OnItemClickListener(this, flCustomRefreshView.recyclerView,
-            OnItemClickListener.OnClickListener({ _, position ->
+        RvItemClickSupport.addTo(flCustomRefreshView.recyclerView)
+            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
                 _002ZhihuTucaoContentActivity.start(this, mData[position])
-            }))
-        flCustomRefreshView.recyclerView.addOnItemTouchListener(listener)
+            })
     }
 
     /**

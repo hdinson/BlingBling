@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.dialog_005_qi_niu_config.*
 /**
  *  七牛云参数设置对话框
  */
-class _005DialogQiNiuConfig(context: Context, private val mConfig: _005QiNiuConfig? = null, theme: Int = R.style.BaseDialogTheme)
+class _005QiNiuConfigDialog(context: Context, private val mConfig: _005QiNiuConfig? = null, theme: Int = R.style.BaseDialogTheme)
     : Dialog(context, theme) {
 
 
@@ -39,6 +39,7 @@ class _005DialogQiNiuConfig(context: Context, private val mConfig: _005QiNiuConf
             etBucket.setText(it.Bucket)
             etDomain.setText(it.Domain)
             rgArea.check(getId(it.Area))
+            cbIsPrivate.isChecked=it.isPrivate
         }
         initClick()
     }

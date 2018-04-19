@@ -22,7 +22,8 @@ import dinson.customview.model._003ModelUtil
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.SPUtils
-import dinson.customview.weight.recycleview.OnItemClickListener
+import dinson.customview.weight.recycleview.OnRvItemClickListener
+import dinson.customview.weight.recycleview.RvItemClickSupport
 import dinson.customview.weight.swipelayout.SwipeItemLayout
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,8 +32,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__003_exchange.*
 import org.json.JSONObject
 
-class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen,
-    OnItemClickListener.OnClickListener, DrawerLayout.DrawerListener {
+class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.DrawerListener {
 
     private lateinit var mAdapter: _003CurrencyAdapter
     private lateinit var mDrawerAdapter: _003LeftDrawerAdapter
@@ -93,18 +93,19 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen,
         mUserCurrencyData.forEach { mCurrencyData.remove(it) }
 
         mAdapter = _003CurrencyAdapter(this, mUserCurrencyData, this)
-
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.adapter = mAdapter
-        rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent, this))
+        rvContent.setOnRvItemClickListener { _, _, position ->
+            mAdapter.onItemChange(position)//条目的选中改变，更换货币基数
+        }
+
         //recycleView notifyItemChanged刷新时闪烁问题
         (rvContent.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
         mDrawerAdapter = _003LeftDrawerAdapter(this, mCurrencyData)
         rvLeft.adapter = mDrawerAdapter
         rvLeft.layoutManager = LinearLayoutManager(this)
-        rvLeft.addOnItemTouchListener(OnItemClickListener(this, rvContent
-            , OnItemClickListener.OnClickListener { _, position ->
+        RvItemClickSupport.addTo(rvLeft).setOnItemClickListener(OnRvItemClickListener({ _, _, position ->
             val bean = mCurrencyData[position]
             mCurrencyData[position] = mAdapter.mDataList[mNeedChangeItem]
             mDrawerAdapter.notifyItemChanged(position)
@@ -147,12 +148,6 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen,
         mAdapter.notifyDataSetChanged()
     }
 
-    /**
-     * 条目的选中改变，更换货币基数
-     */
-    override fun onItemClick(view: View, position: Int) {
-        mAdapter.onItemChange(position)
-    }
 
     override fun onOpen(view: SwipeItemLayout, position: Int) {
         view.close()

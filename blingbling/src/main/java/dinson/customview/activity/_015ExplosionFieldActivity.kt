@@ -1,7 +1,6 @@
 package dinson.customview.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,8 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._015AppIconAdapter
 import dinson.customview.model._015AppIcon
 import dinson.customview.weight._015explosionview.ExplosionField
-import dinson.customview.weight.recycleview.OnItemClickListener
+import dinson.customview.weight.recycleview.OnRvItemClickListener
+import dinson.customview.weight.recycleview.RvItemClickSupport
 import kotlinx.android.synthetic.main.activity__015_explosion_field.*
 
 
@@ -27,8 +27,8 @@ class _015ExplosionFieldActivity : BaseActivity() {
         val mDataList = getAppIconData()
         val mAdapter = _015AppIconAdapter(this, mDataList)
         rvContent.adapter = mAdapter
-        rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent,
-            OnItemClickListener.OnClickListener { view, position ->
+        RvItemClickSupport.addTo(rvContent)
+            .setOnItemClickListener(OnRvItemClickListener({ _, view, position ->
                 mExplosionField.explode(view)
                 mDataList.removeAt(position)
                 mAdapter.notifyItemRemoved(position)

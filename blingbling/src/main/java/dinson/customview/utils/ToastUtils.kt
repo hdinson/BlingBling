@@ -1,6 +1,8 @@
 package dinson.customview.utils
 
+import android.annotation.SuppressLint
 import android.view.Gravity
+import android.widget.TextView
 import android.widget.Toast
 import dinson.customview.R
 import dinson.customview._global.GlobalApplication
@@ -9,11 +11,13 @@ import dinson.customview._global.GlobalApplication
 /**
  * Toast工具
  */
+@SuppressLint("ShowToast")
 object ToastUtils {
     private val mToast by lazy {
         val toast = Toast.makeText(GlobalApplication.getContext(), "", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.view.setBackgroundResource(R.drawable.toast_bg)
+        toast.view.findViewById<TextView>(android.R.id.message).textSize = 16f
         toast
     }
 

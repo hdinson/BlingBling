@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.kotlin.toast
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.UIUtils
@@ -32,7 +33,7 @@ class _004BiliBiliVideoActivity : BaseActivity() {
 
          val mVideoPath = intent.getStringExtra(EXTRA_URL)
          if (StringUtils.isEmpty(mVideoPath)) {
-             UIUtils.showToast("视频地址错误")
+              "视频地址错误".toast()
              finish()
              return
          }

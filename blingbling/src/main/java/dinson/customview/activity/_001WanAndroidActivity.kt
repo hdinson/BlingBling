@@ -20,7 +20,7 @@ import dinson.customview.kotlin.toast
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog.OnLoginSuccessListener
-import dinson.customview.weight.dialog._001DialogLogin
+import dinson.customview.weight.dialog._001LoginDialog
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__001_wan_android.*
 
@@ -174,7 +174,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
      * 显示登录对话框
      */
     private fun showLoginDialog() {
-        _001DialogLogin(this).apply {
+        _001LoginDialog(this).apply {
             setOnLoginSuccessListener(mLoginSuccessListener)
             show()
         }

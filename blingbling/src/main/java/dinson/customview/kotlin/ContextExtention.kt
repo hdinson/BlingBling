@@ -53,7 +53,7 @@ fun Context.screenWidth(): Int {
  * 关闭软键盘
  *
  */
-fun Context.closeKeybord(view: View) {
+fun Context.closeKeyboard(view: View) {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
     if (imm?.isActive == true) imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }

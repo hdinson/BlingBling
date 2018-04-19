@@ -156,11 +156,12 @@
             android:background="@drawable/_003_list_undercover"
             android:gravity="bottom"
             android:paddingBottom="20dp"
-            android:layout_marginStart="16dp"
+            android:paddingStart="16dp"
             android:paddingTop="40dp"
             android:text="@string/please_select_currency_en"
             android:textColor="@color/white"
-            android:textStyle="italic"/>
+            android:textStyle="italic"
+            tools:ignore="RtlSymmetry"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvLeft"
