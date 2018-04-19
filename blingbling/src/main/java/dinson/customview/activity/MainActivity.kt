@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.telephony.TelephonyManager
 import android.util.DisplayMetrics
@@ -50,7 +49,8 @@ import dinson.customview.utils.TypefaceUtils
 import dinson.customview.weight.banner.BannerPageClickListener
 import dinson.customview.weight.banner.holder.MainBannerHolder
 import dinson.customview.weight.recycleview.LinearItemDecoration
-import dinson.customview.weight.recycleview.OnItemClickListener
+import dinson.customview.weight.recycleview.OnRvItemClickListener
+import dinson.customview.weight.recycleview.RvItemClickSupport
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -60,7 +60,7 @@ import kotlinx.android.synthetic.main.aspect_ratio_iv_layout.*
 import kotlinx.android.synthetic.main.layout_main_android_info.*
 import java.util.concurrent.TimeUnit
 
-class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListener.OnClickListener {
+class MainActivity : BaseActivity(), OnItemTouchMoveListener {
 
     //private val mContentData = ArrayList<ClassBean>()
     private val mHeadData = ArrayList<DailyDetail>()
@@ -144,8 +144,10 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
             //isNestedScrollingEnabled = false
             setLayoutManager(layoutManager)
             addItemDecoration(LinearItemDecoration(this@MainActivity))
-            addOnItemTouchListener(OnItemClickListener(this@MainActivity, rvContent, this@MainActivity))
         }
+        RvItemClickSupport.addTo(rvContent).setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+            startActivity(Intent(this, mContentData[position].name))
+        })
     }
 
     private fun initHead() {
@@ -451,10 +453,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, OnItemClickListene
 
     override fun onItemTouchMove(viewHolder: RecyclerView.ViewHolder?) {
         mTouchHelper.startDrag(viewHolder)
-    }
-
-    override fun onItemClick(view: View, position: Int) {
-        startActivity(Intent(this, mContentData[position].name))
     }
 
     override fun onBackPressed() {

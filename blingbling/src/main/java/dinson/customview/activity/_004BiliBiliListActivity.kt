@@ -7,7 +7,8 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._004VideoListAdapter
 import dinson.customview.model._004VideoBean
 import dinson.customview.weight.recycleview.LinearItemDecoration
-import dinson.customview.weight.recycleview.OnItemClickListener
+import dinson.customview.weight.recycleview.OnRvItemClickListener
+import dinson.customview.weight.recycleview.RvItemClickSupport
 import kotlinx.android.synthetic.main.activity__004_bili_bili_list.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -23,8 +24,8 @@ class _004BiliBiliListActivity : BaseActivity() {
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.addItemDecoration(LinearItemDecoration(this))
         rvContent.adapter = _004VideoListAdapter(this, mData)
-        rvContent.addOnItemTouchListener(OnItemClickListener(this, rvContent,
-            OnItemClickListener.OnClickListener { _, position ->
+        RvItemClickSupport.addTo(rvContent)
+            .setOnItemClickListener(OnRvItemClickListener({ _, _, position ->
                 _004BiliBiliVideoActivity.start(this, mData[position].title, mData[position].url)
             }))
     }

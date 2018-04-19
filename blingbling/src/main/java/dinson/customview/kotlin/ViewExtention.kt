@@ -11,7 +11,9 @@ import android.view.View
  *  View相关的扩展方法
  */
 
-fun View.click(function: () -> Unit) = setOnClickListener { function() }
+fun View.click(function: (view:View) -> Unit) = setOnClickListener { function(it) }
+
+fun View.longClick(function: (view:View) -> Boolean) = setOnLongClickListener { function(it) }
 
 fun View.halfWidth() = width / 2f
 

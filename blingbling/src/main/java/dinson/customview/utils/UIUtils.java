@@ -21,13 +21,6 @@ public class UIUtils {
     }
 
 
-    public static Handler getHandler() {
-        return GlobalApplication.getHandler();
-    }
-
-    public static int getMainThreadId() {
-        return GlobalApplication.getMainThreadId();
-    }
 
     // /////////////////加载资源文件 ///////////////////////////
 
@@ -67,41 +60,6 @@ public class UIUtils {
         return View.inflate(getContext(), id, null);
     }
 
-    // /////////////////判断是否运行在主线程//////////////////////////
-    public static boolean isRunOnUIThread() {
-        // 获取当前线程id, 如果当前线程id和主线程id相同, 那么当前就是主线程
-        int myTid = android.os.Process.myTid();
-        if (myTid == getMainThreadId()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    // 运行在主线程
-    public static void runOnUIThread(Runnable r) {
-        if (isRunOnUIThread()) {
-            // 已经是主线程, 直接运行
-            r.run();
-        } else {
-            // 如果是子线程, 借助handler让其运行在主线程
-            getHandler().post(r);
-        }
-    }
-
-    private static Toast mToast;
-
-    public static void showToast(String message) {
-        if (null == mToast) {
-            mToast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
-            mToast.setGravity(Gravity.CENTER, 0, 0);
-            mToast.getView().setBackgroundResource(R.drawable.toast_bg);
-        } else {
-            mToast.setText(message);
-        }
-        mToast.show();
-    }
-
 
     public static int getScreenHeight(Context context) {
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -110,9 +68,4 @@ public class UIUtils {
         return outMetrics.heightPixels;
     }
 
-
-    public static int dip2px(  float dip) {
-        float density = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5f);
-    }
 }

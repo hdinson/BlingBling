@@ -4,15 +4,12 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
-
-import java.io.File
-
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._009ContentAdapter
@@ -25,16 +22,15 @@ import dinson.customview.model._009PanoramaImageModel
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.UIUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
-import dinson.customview.weight.recycleview.OnItemClickListener
+import dinson.customview.weight.recycleview.OnRvItemClickListener
+import dinson.customview.weight.recycleview.RvItemClickSupport
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import kotlinx.android.synthetic.main.activity__009_google_vr.*
-import kotlinx.android.synthetic.main.activity__009_google_vr.view.*
+import java.io.File
 
-class _009GoogleVRActivity : BaseActivity(), OnItemClickListener.OnClickListener {
+class _009GoogleVRActivity : BaseActivity() {
 
     private var mListDatas = _009ModelUtil.getPanoramaImageList()
     private var mAdapter = _009ContentAdapter(this, mListDatas)
@@ -65,9 +61,11 @@ class _009GoogleVRActivity : BaseActivity(), OnItemClickListener.OnClickListener
             addItemDecoration(LinearItemDecoration(this@_009GoogleVRActivity))
             layoutManager = LinearLayoutManager(this@_009GoogleVRActivity)
             itemAnimator = null
-            addOnItemTouchListener(OnItemClickListener(this@_009GoogleVRActivity, rvContent,
-                this@_009GoogleVRActivity))
             adapter = mAdapter
+            RvItemClickSupport.addTo(this)
+                .setOnItemClickListener(OnRvItemClickListener({ _, v, position ->
+                    onItemClick(v, position)
+                }))
         }
     }
 
@@ -86,7 +84,7 @@ class _009GoogleVRActivity : BaseActivity(), OnItemClickListener.OnClickListener
     }
 
 
-    override fun onItemClick(view: View, position: Int) {
+    private fun onItemClick(view: View, position: Int) {
         val selector = mListDatas[position]
         val transform = selector.transform()
         val downloadInfo = DbDownUtil.getInstance().queryDownBy(transform.url)
@@ -110,10 +108,10 @@ class _009GoogleVRActivity : BaseActivity(), OnItemClickListener.OnClickListener
         }
     }
 
-    private fun loadPanoramaImage(bitmap: Bitmap ) {
+    private fun loadPanoramaImage(bitmap: Bitmap) {
         val options = VrPanoramaView.Options()
         options.inputType = VrPanoramaView.Options.TYPE_MONO
-        val childCount = vrPanoramaView .childCount
+        val childCount = vrPanoramaView.childCount
         if (childCount > 1) for (i in 1 until childCount) vrPanoramaView!!.removeViewAt(i)
         vrPanoramaView.loadImageFromBitmap(bitmap, options)
     }

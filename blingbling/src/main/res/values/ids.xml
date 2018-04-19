@@ -27,6 +27,8 @@
     <item name="wvContent" type="id"/>
     <item name="nestedScrollView" type="id"/>
 
+    <item name="itemClickSupport" type="id"/>
+
     <item name="cancel" type="id"/>
     <item name="rootView" type="id"/>
     <item name="guideline" type="id"/>

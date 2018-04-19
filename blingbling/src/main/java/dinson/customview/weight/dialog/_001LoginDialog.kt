@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 /**
  *  玩安卓登录框
  */
-class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : Dialog(context, theme), View.OnClickListener {
+class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : Dialog(context, theme), View.OnClickListener {
 
 
     /******************************************************************************************************/
@@ -58,7 +58,7 @@ class _001DialogLogin(context: Context, theme: Int = R.style.BaseDialogTheme) : 
      */
     private fun initClick() {
         RxView.clicks(fabButton).throttleFirst(1, TimeUnit.SECONDS).subscribe {
-            context.closeKeybord(this@_001DialogLogin.currentFocus)
+            context.closeKeyboard(this@_001LoginDialog.currentFocus)
             if (llRegister?.visibility == View.VISIBLE) {
                 animateRevealClose()
                 return@subscribe

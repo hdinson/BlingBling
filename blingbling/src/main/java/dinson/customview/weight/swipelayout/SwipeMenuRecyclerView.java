@@ -5,9 +5,12 @@ import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import dinson.customview.weight.recycleview.OnRvItemClickListener;
 
 /**
  * Created by AItsuki on 2017/2/23.
@@ -104,4 +107,29 @@ public class SwipeMenuRecyclerView extends RecyclerView {
         return null;
     }
 
+
+    private OnRvItemClickListener mListener;
+    private GestureDetector mGestureDetector;
+
+    public void setOnRvItemClickListener(OnRvItemClickListener listener) {
+        mListener = listener;
+        mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent e) {
+        View childView = findChildViewUnder(e.getX(), e.getY());
+
+        if (childView != null && mListener != null && mGestureDetector != null && mGestureDetector.onTouchEvent(e)) {
+            mListener.onItemClicked(this, childView, getChildAdapterPosition(childView));
+        }
+
+        return super.onInterceptTouchEvent(e);
+
+    }
 }
