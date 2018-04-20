@@ -20,8 +20,7 @@ class _005ContentMenuDialog(context: Context, theme: Int = R.style.BaseDialogThe
         orientation = LinearLayout.VERTICAL
         setBackgroundResource(R.drawable.shape_rec_r5)
         backgroundTintList = ContextCompat.getColorStateList(getContext(), R.color.white)
-        //		setDividerDrawable(getResources().getDrawable(R.drawable.shape_h_line));
-        dividerPadding = 10
+        dividerDrawable = ContextCompat.getDrawable(context, R.drawable.line_horizontal)
         showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE
     }
 

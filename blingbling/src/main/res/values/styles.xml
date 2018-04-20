@@ -20,15 +20,6 @@
         <item name="android:windowFullscreen">true</item>
     </style>
     <!--005-->
-    <!--android:="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/circle_white"
-        android:backgroundTint="#1a1a1a"
-        android:gravity="center"
-        android:text="@string/if_share"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"-->
     <!--12sp 小字提示
     14sp（桌面端13sp） 正文/按钮文字
     16sp（桌面端15sp） 小标题
@@ -67,7 +58,7 @@
         <item name="android:layout_marginStart">@dimen/spacing_medium</item>
         <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
         <item name="android:layout_marginTop">@dimen/spacing_medium</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:background">@drawable/shape_rec_r5</item>
     </style>
     <!--003-->

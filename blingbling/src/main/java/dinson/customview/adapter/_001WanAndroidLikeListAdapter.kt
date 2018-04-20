@@ -44,7 +44,7 @@ class _001WanAndroidLikeListAdapter(context: Context,
             tag.hide(true)
         }
 
-        holder.setTvText(R.id.tvTime, DateUtils.long2Str(dataBean.publishTime, "MM/dd HH:mm"))
+        holder.setTvText(R.id.tvTime, DateUtils.long2Str(dataBean.publishTime, "MM/dd"))
 
         val likeView = holder.getView<CheckBox>(R.id.likeView)
         likeView.isChecked = true
