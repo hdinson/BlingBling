@@ -22,9 +22,11 @@ class TestActivity : BaseActivity() {
         val contentView = DataBindingUtil.setContentView<ActivityTestBinding>(this, R.layout.activity_test)
         val fileInfo = FileInfo()
         fileInfo.fsize = 2
-        val info = _005FileInfo(fileInfo, "")
+        val info = _005FileInfo(fileInfo, "xiemen")
         contentView.dinsonFile = info
         initUI()
+
+
 
         //contentView.dinsonFile?.fsize=6666
         info.fsize = 666
