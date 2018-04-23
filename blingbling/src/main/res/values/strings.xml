@@ -30,7 +30,7 @@
     <string name="floatingView_img">http://ondlsj2sn.bkt.clouddn.com/FoswnjfkCoEaVY0Ijnnlur9BxYBl.webp</string>
     <!--007-->
     <string name="spotlight_title">Spotlight</string>
-    <string name="spotlight_desc">Android Library that lights items for tutorials or walk-through etc…</string>
+    <string name="spotlight_desc">Android Library that lights items for tutorials or walk-through etc</string>
     <string name="spotlight_img">http://ondlsj2sn.bkt.clouddn.com/FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp</string>
     <string name="_007_tiny_attr">Seen: 1 Caught: 1 \nWeight: 9.0kg Height: 0.5m</string>
     <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.</string>
@@ -103,6 +103,10 @@
     <string name="like_smile_img">http://ondlsj2sn.bkt.clouddn.com/FpoNvqVck6N_pe45kqlb4bB00JRE.jpg</string>
     <string name="_021_title">Popup | 银制鹿头灯</string>
     <string name="_021_desc">• 材质：铝 / 钢 \n• 电压：110–230V \n• 重量：1.3 kg</string>
+    <!--022-->
+    <string name="google_map_title">GoogleMaps</string>
+    <string name="google_map_desc">This\'s a mapping demo app developed by me for the Android mobile operating systems, it uses Google Maps for its information.</string>
+    <string name="google_map_img">http://ondlsj2sn.bkt.clouddn.com/FrvJ7OlyyBDRleOYvBE07TRslRON.webp</string>
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>

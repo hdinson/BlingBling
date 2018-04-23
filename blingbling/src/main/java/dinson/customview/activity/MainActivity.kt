@@ -126,6 +126,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
                 _020ShimmerActivity::class.java, getString(R.string.facebook_img)),
             ClassBean(getString(R.string.like_smile_title), getString(R.string.like_smile_desc),
                 _021LikeSmileViewActivity::class.java, getString(R.string.like_smile_img)),
+            ClassBean(getString(R.string.google_map_title), getString(R.string.google_map_desc),
+                _022GoogleMapActivity::class.java, getString(R.string.google_map_img)),
             ClassBean(getString(R.string.test_layout_title), getString(R.string.test_layout_desc),
                 TestActivity::class.java, getString(R.string.test_layout_img))
         )
@@ -203,7 +205,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
      */
     private fun showDailyDetail(daily: DailyDetail.DataBean) {
         llDaily.show()
-
 
         val content = daily.hp_content
         val indexOfStop = content.lastIndexOf("by")
