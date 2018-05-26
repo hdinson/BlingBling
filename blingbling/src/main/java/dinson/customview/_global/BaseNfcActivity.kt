@@ -10,7 +10,7 @@ import io.reactivex.Observable
 
 open class BaseNfcActivity : BaseActivity() {
 
-    private lateinit var mNfcAdapter: NfcAdapter
+    private var mNfcAdapter: NfcAdapter? = null
     private lateinit var mPendingIntent: PendingIntent
 
     /**
@@ -30,7 +30,7 @@ open class BaseNfcActivity : BaseActivity() {
         super.onResume()
         //设置处理优于所有其他NFC的处理
         Observable.timer(500, TimeUnit.MILLISECONDS).subscribe { _ ->
-            mNfcAdapter.enableForegroundDispatch(this@BaseNfcActivity,
+            mNfcAdapter?.enableForegroundDispatch(this@BaseNfcActivity,
                 mPendingIntent, null, null)
         }
     }
@@ -42,6 +42,6 @@ open class BaseNfcActivity : BaseActivity() {
     public override fun onPause() {
         super.onPause()
         //恢复默认状态
-        mNfcAdapter.disableForegroundDispatch(this)
+        mNfcAdapter?.disableForegroundDispatch(this)
     }
 }

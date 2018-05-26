@@ -17,10 +17,9 @@ import java.io.FileReader
  * 判断nfc是否开启
  * @return true已开启  false未开启
  */
-fun NfcIsEnable(context: Context): Boolean {
-    val manager = context.getSystemService(Context.NFC_SERVICE) as NfcManager
-    val adapter = manager.defaultAdapter
-    return adapter != null && adapter.isEnabled
+fun Context.isNfcEnable(): Boolean {
+    val manager = getSystemService(Context.NFC_SERVICE) as? NfcManager
+    return manager?.defaultAdapter?.isEnabled ?: false
 }
 
 /**
@@ -179,7 +178,8 @@ fun getSubscriberId(manager: TelephonyManager): String = manager.subscriberId
  * 也是该手机在厂家的”档案”和”身份证号”。
  */
 @SuppressLint("MissingPermission", "HardwareIds")
-fun getIMEI(manager: TelephonyManager) = (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) manager.meid else manager.deviceId) ?: "unknown"
+fun getIMEI(manager: TelephonyManager) = (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) manager.meid else manager.deviceId)
+        ?: "unknown"
 
 /**
  * 手机号<br></br>

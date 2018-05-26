@@ -1,9 +1,9 @@
 package dinson.customview.db
 
 import android.database.sqlite.SQLiteDatabase
-import dinson.customview.db.model.DaoMaster
 import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.db.model.ZhihuTucaoDao
+import dinson.customview.download.model.DaoMaster
 import dinson.customview.utils.UIUtils
 
 /**

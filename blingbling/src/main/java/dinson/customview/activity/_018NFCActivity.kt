@@ -9,9 +9,7 @@ import android.os.Bundle
 import android.provider.Settings
 import dinson.customview.R
 import dinson.customview._global.BaseNfcActivity
-import dinson.customview.kotlin.NfcIsEnable
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.debug
+import dinson.customview.kotlin.*
 import dinson.customview.utils.NfcUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__018_nfc.*
@@ -55,7 +53,7 @@ class _018NFCActivity : BaseNfcActivity() {
 
     private fun checkNfcEnable() {
         //检查模块是否开启
-        if (NfcIsEnable(this)) {
+        if (isNfcEnable()) {
             tvTitle.text = getString(R.string.nfc_enable_toast_msg)
         } else {
             tvTitle.text = getString(R.string.nfc_unable_toast_msg)
