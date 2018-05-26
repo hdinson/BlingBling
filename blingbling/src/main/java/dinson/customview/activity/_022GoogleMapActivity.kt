@@ -1,6 +1,7 @@
 package dinson.customview.activity
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
@@ -24,11 +25,9 @@ import com.google.android.gms.location.LocationAvailability
 import android.content.Context.LOCATION_SERVICE
 import android.location.LocationManager
 
-
-
-
-
-
+/**
+ * google地图
+ */
 class _022GoogleMapActivity : BaseActivity(),
     OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks,
@@ -47,7 +46,6 @@ class _022GoogleMapActivity : BaseActivity(),
     }
     private var mLastLocation: Location? = null
 
-    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__022_google_map)
@@ -113,7 +111,7 @@ class _022GoogleMapActivity : BaseActivity(),
         info("onConnected...")
 
 
-        RxPermissions(this).request(ACCESS_COARSE_LOCATION)
+        RxPermissions(this).request(ACCESS_FINE_LOCATION)
             .subscribe {
                 if (!it) return@subscribe
                 /*  val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
