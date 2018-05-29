@@ -20,10 +20,6 @@ public class _003ModelUtil {
         return getFileFromAssets("currency.txt");
     }
 
-    public static ArrayList<_003CurrencyModel> getUserCurrencyList() {
-        return getFileFromAssets("currency.txt");
-    }
-
     private static ArrayList<_003CurrencyModel> getFileFromAssets(String fileName) {
         Context context = UIUtils.getContext();
         if (context == null || StringUtils.isEmpty(fileName)) return null;
