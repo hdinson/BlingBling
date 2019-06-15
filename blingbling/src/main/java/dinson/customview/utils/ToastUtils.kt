@@ -1,6 +1,7 @@
 package dinson.customview.utils
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
@@ -17,7 +18,10 @@ object ToastUtils {
         val toast = Toast.makeText(GlobalApplication.getContext(), "", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.view.setBackgroundResource(R.drawable.toast_bg)
-        toast.view.findViewById<TextView>(android.R.id.message).textSize = 16f
+        toast.view.findViewById<TextView>(android.R.id.message).apply {
+            setTextColor(Color.WHITE)
+            textSize = 16f
+        }
         toast
     }
 

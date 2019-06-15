@@ -13,6 +13,10 @@ import android.view.View
 
 fun View.click(function: (view:View) -> Unit) = setOnClickListener { function(it) }
 
+fun Thread.run(function:()->Unit){
+
+}
+
 fun View.longClick(function: (view:View) -> Boolean) = setOnLongClickListener { function(it) }
 
 fun View.halfWidth() = width / 2f

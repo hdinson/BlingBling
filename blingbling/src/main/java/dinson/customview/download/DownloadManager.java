@@ -48,8 +48,6 @@ public class DownloadManager {
 
     /**
      * 获取单例
-     *
-     * @return
      */
     public static DownloadManager getInstance() {
         if (INSTANCE == null) {
@@ -105,12 +103,9 @@ public class DownloadManager {
                    /*失败后的retry配置*/
             //.retryWhen(new RetryWhenNetworkException())
                 /*读取下载写入文件*/
-            .map(new Function<ResponseBody, DownloadInfo>() {
-                @Override
-                public DownloadInfo apply(ResponseBody responseBody) throws Exception {
-                    writeCaches(responseBody, new File(info.getSavePath()), info);
-                    return info;
-                }
+            .map(responseBody -> {
+                writeCaches(responseBody, new File(info.getSavePath()), info);
+                return info;
             })
                 /*回调线程*/
             .observeOn(AndroidSchedulers.mainThread())

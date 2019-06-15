@@ -3,7 +3,7 @@ package dinson.customview.entity;
 import java.util.List;
 
 /**
- * @author Dinson - 2017/9/14
+ * 知心天气接口返回bean
  */
 public class HomeWeather {
     @Override

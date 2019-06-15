@@ -35,6 +35,7 @@ open class BaseNfcActivity : BaseActivity() {
         }
     }
 
+
     /**
      * 暂停Activity，界面获取焦点，按钮可以点击
      */

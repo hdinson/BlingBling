@@ -1,77 +1,53 @@
 package dinson.customview.adapter
 
-import android.content.Context
-import android.widget.CheckBox
-import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
-import dinson.customview.activity._001WanAndroidWebActivity
-import dinson.customview.api.WanAndroidApi
+import dinson.customview.activity.CommonWebActivity
 import dinson.customview.entity.wanandroid.WanAndArticle
-import dinson.customview.http.HttpHelper
-import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.*
+import dinson.customview.kotlin.click
+import dinson.customview.kotlin.hide
+import dinson.customview.kotlin.logv
+import dinson.customview.kotlin.show
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.DateUtils
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
+import kotlinx.android.synthetic.main.item_001_wan_android_main.view.*
 import java.util.concurrent.TimeUnit
 
 /**
  *玩安卓 "我的喜欢" 列表适配器
  */
-class _001WanAndroidLikeListAdapter(context: Context,
-                                    dataList: List<WanAndArticle>,
+class _001WanAndroidLikeListAdapter(dataList: List<WanAndArticle>,
                                     private val likeClickListener: _001OnLikeViewClickListener)
-    : CommonAdapter<WanAndArticle>(context, dataList) {
-
-    private val mWanAndroidApi = HttpHelper.create(WanAndroidApi::class.java)
+    : CommonAdapter<WanAndArticle>(dataList) {
 
     override fun getLayoutId(viewType: Int) = R.layout.item_001_wan_android_main
 
     override fun convert(holder: CommonViewHolder, dataBean: WanAndArticle, position: Int) {
-        holder.setTvText(R.id.tvTitle, dataBean.title)
+        holder.itemView.tvTitle.text = dataBean.title
 
         val chapterStr = if (dataBean.superChapterName == null) dataBean.chapterName
         else "${dataBean.superChapterName}/${dataBean.chapterName}"
-        holder.setTvText(R.id.tvChapter, chapterStr)
+        holder.itemView.tvChapter.text = chapterStr
 
-        val tag = holder.getView<TextView>(R.id.tvTag)
         if (dataBean.tags != null && dataBean.tags.isNotEmpty()) {
-            tag.show()
-            tag.text = dataBean.tags[0].name
+            holder.itemView.tvTag.show()
+            holder.itemView.tvTag.text = dataBean.tags[0].name
         } else {
-            tag.hide(true)
+            holder.itemView.tvTag.hide(true)
         }
 
-        holder.setTvText(R.id.tvTime, DateUtils.long2Str(dataBean.publishTime, "MM/dd"))
+        holder.itemView.tvTime.text = DateUtils.long2Str(dataBean.publishTime, "MM/dd")
 
-        val likeView = holder.getView<CheckBox>(R.id.likeView)
-        likeView.isChecked = true
-        RxView.clicks(likeView).throttleFirst(2, TimeUnit.SECONDS)
+        holder.itemView.likeView.isChecked = true
+        RxView.clicks(holder.itemView.likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
-                verbose(if (likeView.isChecked) "添加收藏" else "取消收藏")
-                post2Server(likeView, dataBean, position)
+                logv(if (holder.itemView.likeView.isChecked) "添加收藏" else "取消收藏")
+                //post2Server(likeView, dataBean, position)
+                likeClickListener.onClickLikeView(holder.itemView.likeView, dataBean, position)
             }
 
-        holder.rootView.click {
-            _001WanAndroidWebActivity.start(mContext, dataBean.link)
-        }
-    }
-
-    private fun post2Server(likeView: CheckBox, dataBean: WanAndArticle, position: Int) {
-        mWanAndroidApi.delCollectFromCollectList(dataBean.id).compose(RxSchedulers.io_main())
-            .subscribe({
-                mDataList.remove(dataBean)
-                notifyItemRemoved(position)
-                when (mDataList.size) {
-                    0 -> notifyDataSetChanged()
-                    position -> Unit
-                    else -> notifyItemRangeChanged(position, mDataList.size - position)
-                }
-                likeClickListener.onClickLikeView(likeView, dataBean, position)
-            }, {
-                error(it.toString())
-            })
+        holder.itemView.click { CommonWebActivity.start(it.context, dataBean.link) }
     }
 }

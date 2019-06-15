@@ -38,19 +38,46 @@ public static java.lang.String TABLENAME;
 # If you do not use RxJava:
 -dontwarn rx.**
 
-#Google VR
+### Google VR
 -keep class com.google.vr.*
 
-#轻量级的WebView代理
+### 轻量级的WebView代理
 -keep class com.just.agentweb.** {
     *;
 }
 -dontwarn com.just.agentweb.**
 
-#七牛云
+### 七牛云
 -keep class com.qiniu.**{*;}
 -keep class com.qiniu.**{public <init>();}
 
+### 背景虚化
+-keep class android.support.v8.renderscript.** { *; }
+
+### GSYVideoPlayer
+-keep class com.shuyu.gsyvideoplayer.video.** { *; }
+-dontwarn com.shuyu.gsyvideoplayer.video.**
+-keep class com.shuyu.gsyvideoplayer.video.base.** { *; }
+-dontwarn com.shuyu.gsyvideoplayer.video.base.**
+-keep class com.shuyu.gsyvideoplayer.utils.** { *; }
+-dontwarn com.shuyu.gsyvideoplayer.utils.**
+-keep class tv.danmaku.ijk.** { *; }
+-dontwarn tv.danmaku.ijk.**
+
+-keep public class * extends android.view.View{
+    *** get*();
+    void set*(***);
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+### eventbus
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
 #-------------------------------------------------------------------------
 
 #---------------------------------3.与js互相调用的类------------------------

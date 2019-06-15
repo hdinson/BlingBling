@@ -1,6 +1,6 @@
 package dinson.customview._global
 
-import dinson.customview.kotlin.error
+import dinson.customview.kotlin.loge
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
@@ -14,8 +14,8 @@ import java.util.*
 object CrashHandler : Thread.UncaughtExceptionHandler {
 
     private lateinit var mErrorLogDir: String
-    private val mExpirationDate = 3   //文件的存活周期：单位：天
-    private val mPrefix = "error_"
+    private const val mExpirationDate = 3   //文件的存活周期：单位：天
+    private const val mPrefix = "error_"
 
     fun init(errorLogDir: String) {
         mErrorLogDir = errorLogDir
@@ -50,7 +50,7 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
             e.printStackTrace()
         }
 
-        error(ex.toString())
+        loge(ex.toString())
         //退出程序
         android.os.Process.killProcess(android.os.Process.myPid())
         System.exit(1)

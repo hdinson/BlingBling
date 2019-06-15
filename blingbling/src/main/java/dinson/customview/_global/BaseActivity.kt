@@ -1,20 +1,31 @@
 package dinson.customview._global
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.Window
 import android.view.WindowManager
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import dinson.customview.BuildConfig
 import dinson.customview.R
+import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.utils.SystemBarTintUtils
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 /**
  * 所有activity的基类
  */
-open class BaseActivity : AppCompatActivity() {
+@SuppressLint("Registered")
+open class BaseActivity : RxAppCompatActivity() {
+
+
+    private val mCompositeDisposable = CompositeDisposable()
+    fun Disposable.addToManaged(){
+        mCompositeDisposable.add(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +34,10 @@ open class BaseActivity : AppCompatActivity() {
         /*共享元素*/
         window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         /*透明状态栏*/
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        //getSupportActionBar().hide();
+        SystemBarModeUtils.immersive(this)
         /*activity的出现动画*/
         overridePendingTransition(R.anim.activity_in_from_right, R.anim.activity_out_to_left)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         /*logcat点击跳转对用activity*/
         logShowActivity()
     }
@@ -159,6 +169,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        mCompositeDisposable.clear()
         logShowActivity()
     }
 
@@ -183,7 +194,7 @@ open class BaseActivity : AppCompatActivity() {
 
         currentIndex += 1
         val fullClassName = stackTraceElement[currentIndex].className
-        if (!fullClassName.startsWith(ConstantsUtils.PACKAGE_NAME)) return
+        if (!fullClassName.startsWith(BuildConfig.APPLICATION_ID)) return
         val className = fullClassName.substring(fullClassName.lastIndexOf(".") + 1)
         val methodName = stackTraceElement[currentIndex].methodName
         val lineNumber = stackTraceElement[currentIndex].lineNumber.toString()

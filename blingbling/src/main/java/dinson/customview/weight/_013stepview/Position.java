@@ -1,7 +1,7 @@
 package dinson.customview.weight._013stepview;
 
 /**
- * @author Dinson - 2018/2/23
+ * 步骤位置，（Start：起点   Middle:中间   End：终点）
  */
 public enum Position {
     Start, Middle, End

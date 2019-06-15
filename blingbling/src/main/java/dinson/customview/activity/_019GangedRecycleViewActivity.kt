@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
 import android.support.v7.widget.LinearLayoutManager
 import com.google.gson.Gson
+import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._019LeftAdapter
@@ -25,7 +26,7 @@ class _019GangedRecycleViewActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__019_ganged_recycle_view)
 
-        val url = "http://ondlsj2sn.bkt.clouddn.com/FpUVRI5ACAX7YkTOXLuD7mP_3BPg.webp"
+        val url = "${BuildConfig.QINIU_URL}FpUVRI5ACAX7YkTOXLuD7mP_3BPg.webp"
         GlideUtils.setImage(this, url, ivImg)
 
         initUI()
@@ -35,7 +36,7 @@ class _019GangedRecycleViewActivity : BaseActivity() {
         val textFromAssets = FileUtils.getTextFromAssets(this, "mh.json")
         val datas = Gson().fromJson(textFromAssets, MonsterHunter::class.java)
 
-        val leftAdapter = _019LeftAdapter(this, datas.data)
+        val leftAdapter = _019LeftAdapter(datas.data)
 
         //添加标题数据
         val rightDatas = ArrayList<MonsterBean>()
@@ -47,7 +48,7 @@ class _019GangedRecycleViewActivity : BaseActivity() {
             }
             rightDatas.addAll(datas.data[i].monster)
         }
-        val rightAdapter = _019RightAdapter(this, rightDatas)
+        val rightAdapter = _019RightAdapter(rightDatas)
 
 
         rvLeft.layoutManager = LinearLayoutManager(this)

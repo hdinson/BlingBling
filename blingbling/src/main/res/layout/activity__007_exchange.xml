@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:clipToPadding="true"
+    android:focusable="true"
+    tools:context="dinson.customview.activity._007ExchangeActivity"
+    tools:ignore="ContentDescription">
+
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <dinson.customview.weight.swipelayout.SwipeMenuRecyclerView
+            android:id="@id/rvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"/>
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:divider="@color/common_divider"
+            android:showDividers="middle"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/n7"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_7"/>
+
+                <ImageView
+                    android:id="@+id/n8"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_8"/>
+
+                <ImageView
+                    android:id="@+id/n9"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_9"/>
+
+                <ImageView
+                    android:id="@+id/add"
+                    style="@style/_003IvKeyboard"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/number_11"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/n4"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_4"/>
+
+                <ImageView
+                    android:id="@+id/n5"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_5"/>
+
+                <ImageView
+                    android:id="@+id/n6"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_6"/>
+
+                <ImageView
+                    android:id="@+id/sub"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_12"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/n1"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_1"/>
+
+                <ImageView
+                    android:id="@+id/n2"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_2"/>
+
+                <ImageView
+                    android:id="@+id/n3"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_3"/>
+
+                <ImageView
+                    android:id="@+id/mul"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_13"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/dot"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_15"/>
+
+                <ImageView
+                    android:id="@+id/n0"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_0"/>
+
+                <ImageView
+                    android:id="@+id/delete"
+                    style="@style/_003IvKeyboard"
+                    android:longClickable="true"
+                    android:src="@drawable/number_16"/>
+
+                <ImageView
+                    android:id="@+id/div"
+                    style="@style/_003IvKeyboard"
+                    android:src="@drawable/number_14"/>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/_003_window_bg"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <dinson.customview.weight.LanTingFontTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/_007_list_undercover"
+            android:gravity="bottom"
+            android:paddingBottom="20dp"
+            android:paddingStart="16dp"
+            android:paddingTop="40dp"
+            android:text="@string/please_select_currency_en"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            tools:ignore="RtlSymmetry"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvLeft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

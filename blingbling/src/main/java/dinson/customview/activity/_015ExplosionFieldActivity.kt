@@ -2,8 +2,6 @@ package dinson.customview.activity
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.view.View
-import android.view.ViewGroup
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._015AppIconAdapter
@@ -25,10 +23,11 @@ class _015ExplosionFieldActivity : BaseActivity() {
 
         rvContent.layoutManager = GridLayoutManager(this, 4)
         val mDataList = getAppIconData()
-        val mAdapter = _015AppIconAdapter(this, mDataList)
+        val mAdapter = _015AppIconAdapter(mDataList)
         rvContent.adapter = mAdapter
         RvItemClickSupport.addTo(rvContent)
-            .setOnItemClickListener(OnRvItemClickListener({ _, view, position ->
+            .setOnItemClickListener(OnRvItemClickListener { _, view, position ->
+                if (position<0)return@OnRvItemClickListener
                 mExplosionField.explode(view)
                 mDataList.removeAt(position)
                 mAdapter.notifyItemRemoved(position)
@@ -37,7 +36,7 @@ class _015ExplosionFieldActivity : BaseActivity() {
                     mDataList.addAll(getAppIconData())
                     mAdapter.notifyItemRangeInserted(0, mDataList.size)
                 }
-            }))
+            })
         tvDesc.setOnClickListener {
             mExplosionField.explode(it)
             it.setOnClickListener(null)
@@ -66,8 +65,7 @@ class _015ExplosionFieldActivity : BaseActivity() {
         _015AppIcon(R.drawable._015_img19, "AppStore")
     )
 
-
-    private fun addListener(root: View) {
+    /*private fun addListener(root: View) {
         if (root is ViewGroup) {
             for (i in 0 until root.childCount) {
                 addListener(root.getChildAt(i))
@@ -78,35 +76,6 @@ class _015ExplosionFieldActivity : BaseActivity() {
                 mExplosionField.explode(it)
                 it.setOnClickListener(null)
             }
-        }
-    }
-
-    /*fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() === R.id.action_reset) {
-            val root = findViewById<View>(R.id.root)
-            reset(root)
-            addListener(root)
-            mExplosionField!!.clear()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun reset(root: View) {
-        if (root is ViewGroup) {
-            val parent = root
-            for (i in 0 until parent.childCount) {
-                reset(parent.getChildAt(i))
-            }
-        } else {
-            root.scaleX = 1f
-            root.scaleY = 1f
-            root.alpha = 1f
         }
     }*/
 }

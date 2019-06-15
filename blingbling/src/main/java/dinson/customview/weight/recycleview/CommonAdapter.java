@@ -1,9 +1,10 @@
 package dinson.customview.weight.recycleview;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.ViewGroup;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -12,12 +13,10 @@ import java.util.List;
  */
 public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
     public List<T> mDataList;
-    public Context mContext;
     private SparseArray<CommonViewHolder> mViewHolder = new SparseArray<>();
 
-    public CommonAdapter(Context context, List<T> dataList) {
+    public CommonAdapter(  List<T> dataList) {
         this.mDataList = dataList;
-        this.mContext = context;
     }
 
     /**
@@ -34,14 +33,15 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
         return mDataList.get(position);
     }
 
+    @NotNull
     @Override
-    public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CommonViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         int layoutId = getLayoutId(viewType);
         return CommonViewHolder.getViewHolder(parent, layoutId);
     }
 
     @Override
-    public void onBindViewHolder(CommonViewHolder holder, final int position) {
+    public void onBindViewHolder(@NotNull CommonViewHolder holder, final int position) {
         T itemModel = getItem(position);
         mViewHolder.put(position, holder);
         convert(holder, itemModel, position);//更新itemView视图
@@ -54,11 +54,6 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
         return mDataList.size();
     }
 
-    public void destroyAdapter() {
-        if (mDataList != null)
-            mDataList.clear();
-        mDataList = null;
-    }
 
     public CommonViewHolder getCommonViewHolder(int position) {
         return mViewHolder.get(position);

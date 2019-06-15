@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/def_img"/>
+        tools:src="@drawable/def_img" />
 
     <TextView
         android:id="@id/tvTitle"
@@ -32,7 +31,7 @@
         app:layout_constraintLeft_toRightOf="@id/ivImg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread"
-        tools:text="这是标题"/>
+        tools:text="这是标题" />
 
     <TextView
         android:id="@id/tvDesc"
@@ -48,10 +47,10 @@
         app:layout_constraintLeft_toRightOf="@id/ivImg"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        tools:text="这是内容"/>
+        tools:text="这是内容" />
 
     <ImageView
-        android:id="@+id/iv_third"
+        android:id="@+id/ivThird"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
@@ -60,21 +59,21 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginEnd="18dp"
-        tools:src="@drawable/n_3"/>
+        tools:src="@drawable/n_3" />
 
     <ImageView
-        android:id="@+id/iv_second"
+        android:id="@+id/ivSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/n_2"
-        app:layout_constraintBottom_toBottomOf="@id/iv_third"
-        app:layout_constraintRight_toLeftOf="@id/iv_third"/>
+        app:layout_constraintBottom_toBottomOf="@id/ivThird"
+        app:layout_constraintRight_toLeftOf="@id/ivThird" />
 
     <ImageView
-        android:id="@+id/iv_one"
+        android:id="@+id/ivOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/n_1"
-        app:layout_constraintBottom_toBottomOf="@id/iv_third"
-        app:layout_constraintRight_toLeftOf="@id/iv_second"/>
+        app:layout_constraintBottom_toBottomOf="@id/ivThird"
+        app:layout_constraintRight_toLeftOf="@id/ivSecond" />
 </android.support.constraint.ConstraintLayout>

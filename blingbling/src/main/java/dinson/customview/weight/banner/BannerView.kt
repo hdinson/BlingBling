@@ -20,6 +20,7 @@ import dinson.customview.weight.banner.holder.BannerViewHolder
 import dinson.customview.weight.banner.transformer.CoverModeTransformer
 import dinson.customview.weight.banner.transformer.ScaleYTransformer
 
+
 /**
  *  广告轮播图控件
  */
@@ -67,6 +68,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         addView(mViewPager, pagerParams)
 
         mIndicatorContainer = LinearLayout(context)
+        mIndicatorContainer.setPadding(dip(16), 0, dip(16), mSettings.indicatorMarginBottom)
         val containerParams = RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         containerParams.addRule(when (mSettings.indicatorAlign) {
             0 -> RelativeLayout.ALIGN_PARENT_LEFT
@@ -84,7 +86,6 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         //隐藏指示器
         if (mSettings.isHiddenIndicator) mIndicatorContainer.visibility = View.GONE
     }
-
 
     /**
      * 初始化数据
@@ -177,17 +178,12 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         (0 until count).forEach {
             val imageView = ImageView(context)
-            val left = when (mSettings.isOpenMZEffect) {
-                true -> if (it == 0) dip(16) else mSettings.indicatorMargin
-                false -> if (it == 0) dip(16) else mSettings.indicatorMargin
-            }
-            val right = when (mSettings.isOpenMZEffect) {
-                true -> if (it == count - 1) dip(16) else mSettings.indicatorMargin
-                false -> if (it == count - 1) dip(16) else mSettings.indicatorMargin
-            }
-            val bottom = mSettings.indicatorMarginBottom
-            imageView.setPadding(left, 0, right, bottom)
             imageView.setImageResource(if (it == mCurrentItem % count) mIndicatorRes[1] else mIndicatorRes[0])
+            imageView.scaleType = ImageView.ScaleType.FIT_XY
+            val params = LinearLayout.LayoutParams(mSettings.indicatorSize,
+                mSettings.indicatorSize)
+            params.setMargins(mSettings.indicatorMargin, 0, mSettings.indicatorMargin, 0)
+            imageView.layoutParams = params
 
             mIndicators.add(imageView)
             mIndicatorContainer.addView(imageView)
@@ -198,7 +194,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         if (!mSettings.isAutoLoop) return super.dispatchTouchEvent(ev)
 
         when (ev?.action) {
-        //按住Banner的时候，停止自动轮播
+            //按住Banner的时候，停止自动轮播
             MotionEvent.ACTION_MOVE,
             MotionEvent.ACTION_CANCEL,
             MotionEvent.ACTION_OUTSIDE,
@@ -216,11 +212,28 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val width = View.MeasureSpec.getSize(widthMeasureSpec)
-        val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
-        val height = (width / mSettings.aspectRatio()).toInt()
-        val heightMeasure = View.MeasureSpec.makeMeasureSpec(height, heightMode)
-        super.onMeasure(widthMeasureSpec, heightMeasure)
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val hMode = View.MeasureSpec.getMode(heightMeasureSpec)
+
+        val wSize = View.MeasureSpec.getSize(widthMeasureSpec)
+        val hSize =
+            if (hMode == View.MeasureSpec.AT_MOST || hMode == View.MeasureSpec.UNSPECIFIED) {//相当于我们设置为wrap_content
+                (wSize / mSettings.aspectRatio()).toInt()
+            } else {//相当于我们设置为match_parent或者为一个具体的值
+                View.MeasureSpec.getSize(heightMeasureSpec)
+            }
+        mViewPager.layoutParams.apply {
+            this.height = hSize
+            this.width = wSize
+        }
+        setMeasuredDimension(wSize, hSize)
+
+        /* val width = View.MeasureSpec.getSize(widthMeasureSpec)
+         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
+         val height = (width / mSettings.aspectRatio()).toInt()
+         val heightMeasure = View.MeasureSpec.makeMeasureSpec(height, heightMode)
+         super.onMeasure(widthMeasureSpec, heightMeasure)*/
     }
 
 
@@ -337,4 +350,10 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         mIndicatorContainer.visibility = visibility
     }
 
+    /**
+     * 添加page改变监听
+     */
+    fun addOnPageChangeListener(listener: ViewPager.OnPageChangeListener) {
+        mViewPager.addOnPageChangeListener(listener)
+    }
 }

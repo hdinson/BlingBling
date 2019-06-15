@@ -7,9 +7,9 @@ import android.util.AttributeSet;
 import dinson.customview.R;
 
 /**
- * @author Dinson - 2017/8/9
+ * 点赞笑脸Settings
  */
-public class LikeSmileViewSettings {
+class LikeSmileViewSettings {
 
     private final float mPercentSize;
     private final float mDescSize;

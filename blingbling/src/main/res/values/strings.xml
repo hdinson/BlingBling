@@ -1,46 +1,13 @@
 <resources>
     <string name="app_name">BLingBLing</string>
-    <!--首页字段-->
-    <string name="test_layout_title">TestLayout</string>
-    <string name="test_layout_desc">An activity for testing.</string>
-    <string name="test_layout_img">http://ondlsj2sn.bkt.clouddn.com/Fos8aWM3lzyxB621rEmzMhgTUn-p.webp</string>
-    <!--001-->
-    <string name="wan_android_title">WanAndroid</string>
-    <string name="wan_android_desc">WanAndroid is a BBS created by many passionate youth who love Android.</string>
-    <string name="wan_android_img">http://ondlsj2sn.bkt.clouddn.com/FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp</string>
-    <!--002-->
-    <string name="zhihu_title">ZhihuDaily</string>
-    <string name="zhihu_desc">Zhihu is a question-and-answer website where questions are created, answered, edited and organized by the community of its users</string>
-    <string name="zhihu_img">http://ondlsj2sn.bkt.clouddn.com/Fi8e4rUvYUC3tp5UzU6mUQh4SkTK.webp</string>
-    <!--003-->
-    <string name="exchange_rate_title">Exchange Rate</string>
-    <string name="exchange_rate_desc">Support to exchange currency around the world</string>
-    <string name="exchange_rate_img">http://ondlsj2sn.bkt.clouddn.com/FgoM0tniC1eDMUOLrI3-P89zk3yt.webp</string>
-    <!--004-->
-    <string name="bilibili_title">IJKPlayer</string>
-    <string name="bilibili_desc">Android video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.</string>
-    <string name="bilibili_img">http://ondlsj2sn.bkt.clouddn.com/FnFicLrus5vXqAw5oElFFXL1-zb3.webp</string>
-    <!--005-->
-    <string name="qi_niu_title">QiNiuYun</string>
-    <string name="qi_niu_desc">QiNiuYun is online storage service provided by the QiNiuYun Co.,Ltd, through the interface to the customers with unlimited online storage space</string>
-    <string name="qi_niu_img">http://ondlsj2sn.bkt.clouddn.com/Fg873GxilLa4Gxx78lloLg96Igvs.webp</string>
-    <!--006-->
-    <string name="floatingView_title">FloatingView</string>
-    <string name="floatingView_desc">FloatingView can make the target view floating above the anchor view with cool animation</string>
-    <string name="floatingView_img">http://ondlsj2sn.bkt.clouddn.com/FoswnjfkCoEaVY0Ijnnlur9BxYBl.webp</string>
-    <!--007-->
-    <string name="spotlight_title">Spotlight</string>
-    <string name="spotlight_desc">Android Library that lights items for tutorials or walk-through etc</string>
-    <string name="spotlight_img">http://ondlsj2sn.bkt.clouddn.com/FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp</string>
+
     <string name="_007_tiny_attr">Seen: 1 Caught: 1 \nWeight: 9.0kg Height: 0.5m</string>
-    <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape and the grooves on its surface help minimize resistance in water. enabling this Pokémon to swim at high speeds.</string>
+    <string name="_007_desc">Squirtle\'s shell is not merely used for protection. The shell\'s
+        rounded shape and the grooves on its surface help minimize resistance in water. enabling
+        this Pokémon to swim at high speeds.</string>
     <string name="_007_tiny">Tiny Turtle Pokémon</string>
     <string name="_007_tiny_type">Type: Water</string>
     <string name="_007_tiny_name">SQUIRTLE</string>
-    <!--008-->
-    <string name="rich_editor_title">RichEditor</string>
-    <string name="rich_editor_desc">Rich text editor which enables users to insert/delete emoji and text into edit-view.</string>
-    <string name="rich_editor_img">http://ondlsj2sn.bkt.clouddn.com/FkLRL9du9H1_jy2C1yFTmCGswQSZ.webp</string>
     <string name="_008_send">发送</string>
     <string name="_008_cancel">取消</string>
     <string name="_008_post_blog">发微博</string>
@@ -48,65 +15,11 @@
     <string name="_008_open">公开</string>
     <string name="_008_where_are_u">你在哪里?</string>
     <string name="_008_hint">分享新鲜事…</string>
-    <!--009-->
-    <string name="google_vr_title">Google VR</string>
-    <string name="google_vr_desc">Virtual reality for everyone.</string>
-    <string name="google_vr_img">http://ondlsj2sn.bkt.clouddn.com/FuAVy3cV-_oNaNbqhidirKgpR_Yd.webp</string>
-    <!--010-->
-    <string name="parallax_animation_title">Parallax Animation Frame</string>
-    <string name="parallax_animation_desc">Virtual reality for everyone.</string>
-    <string name="parallax_animation_img">http://ondlsj2sn.bkt.clouddn.com/FtnPm05owdbcJC_7mf53nbOcq2Gy.webp</string>
     <string name="_010_third_login">| 合作账号登录 |</string>
-    <!--011-->
-    <string name="diagonal_layout_title">DiagonalLayout</string>
-    <string name="diagonal_layout_desc">With Diagonal Layout explore new styles and approaches on material design</string>
-    <string name="diagonal_layout_img">http://ondlsj2sn.bkt.clouddn.com/FoPzP9JbDTqxMlhWCRvxPUo24IRn.webp</string>
-    <!--012-->
-    <string name="qqnavi_title">QQNaviView</string>
-    <string name="qqnavi_desc">Mimic QQ navigation bar</string>
-    <string name="qqnavi_img">http://ondlsj2sn.bkt.clouddn.com/FghQpL5VATXt6Wtlm575wiDseyvI.webp</string>
-    <!--013-->
-    <string name="step_view_title">StepView</string>
-    <string name="step_view_desc">Step by step. Step indicator. Flow indicator</string>
-    <string name="step_view_img">http://ondlsj2sn.bkt.clouddn.com/Fm0fTIwMIZyoJZDpAOnARBLN0vCZ.webp</string>
-    <!--014-->
-    <string name="honor_clock_title">HonorClock</string>
-    <string name="honor_clock_desc">Step by step. Step indicator. Flow indicator</string>
-    <string name="honor_clock_img">http://ondlsj2sn.bkt.clouddn.com/Fknk1q5piAA00DmqxUUGEaK4OGyh.webp</string>
-    <!--015-->
-    <string name="explosion_field_title">ExplosionField</string>
-    <string name="explosion_field_desc">explosive dust effect for views</string>
-    <string name="explosion_field_img">http://ondlsj2sn.bkt.clouddn.com/FlSTZDl1fCGGNNqrauOAm8hEqn7y.webp</string>
-    <!--016-->
-    <string name="parallax_iv_title">ParallaxImageView</string>
-    <string name="parallax_iv_desc">An imageView can auto scroll with device rotating.</string>
-    <string name="parallax_iv_img">http://ondlsj2sn.bkt.clouddn.com/FgwMJZ8Y0KswSkjINvGnOgRR96u3.webp</string>
-    <!--017-->
-    <string name="tetris_title">Tetris</string>
-    <string name="tetris_desc">Soviet tile-matching puzzle video game released in June 1984.</string>
-    <string name="tetris_img">http://ondlsj2sn.bkt.clouddn.com/FoiBsBwQR4vTQJ6A0FiHLaxcqjIK.webp</string>
-    <!--018-->
-    <string name="nfc_title">NFC Tools</string>
-    <string name="nfc_desc">Near-field communication (NFC) is a set of communication protocols that enable two electronic devices</string>
-    <string name="nfc_img">http://ondlsj2sn.bkt.clouddn.com/FuEdGMh6ReHpM2hTK0_MZ39xTjX1.webp</string>
-    <!--019-->
-    <string name="ganged_recycle_title">GangedRecycleView</string>
-    <string name="ganged_recycle_desc">Two RecycleViews Joint sliding …</string>
-    <string name="ganged_recycle_img">http://ondlsj2sn.bkt.clouddn.com/FnLyI2fmB2ykukTQfKY6uBTKVdjB.webp</string>
-    <!--020-->
-    <string name="facebook_title">FaceBook-Shimmer</string>
-    <string name="facebook_desc">Add a shimmering effect to any view in your app.</string>
-    <string name="facebook_img">http://ondlsj2sn.bkt.clouddn.com/FsghEYkztX6HGcQufyUmB9N-DvRI.webp</string>
-    <!--021-->
-    <string name="like_smile_title">LikeSmileView</string>
-    <string name="like_smile_desc">Imitating ZuiWorld\'s application of thumb up function</string>
-    <string name="like_smile_img">http://ondlsj2sn.bkt.clouddn.com/FpoNvqVck6N_pe45kqlb4bB00JRE.jpg</string>
     <string name="_021_title">Popup | 银制鹿头灯</string>
     <string name="_021_desc">• 材质：铝 / 钢 \n• 电压：110–230V \n• 重量：1.3 kg</string>
-    <!--022-->
-    <string name="google_map_title">GoogleMaps</string>
-    <string name="google_map_desc">This\'s a mapping demo app developed by me for the Android mobile operating systems, it uses Google Maps for its information.</string>
-    <string name="google_map_img">http://ondlsj2sn.bkt.clouddn.com/FrvJ7OlyyBDRleOYvBE07TRslRON.webp</string>
+    <string name="_025_input_num_to_calculate">请输入数字开始计算</string>
+
     <!--媒体面板-->
     <string name="N_A">N/A</string>
     <string name="close">Close</string>
@@ -166,7 +79,8 @@
     <string name="VideoView_player_IjkMediaPlayer">Player: IjkMediaPlayer</string>
     <string name="VideoView_player_IjkExoMediaPlayer">Player: IjkExoMediaPlayer</string>
     <!--behavior-->
-    <string name="app_bar_behavior">dinson.customview.behavior._003Behavior</string>
+    <string name="behavior_003">dinson.customview.behavior._003Behavior</string>
+    <string name="behavior_abl_no_touch">dinson.customview.behavior.ABLNoTouchBehavior</string>
     <!--iconfont-->
     <string name="if_share">&#xe654;</string>
     <string name="if_arrow_left">&#xe697;</string>
@@ -232,4 +146,10 @@
     <string name="login_en">LOGIN</string>
     <string name="unknown">未知</string>
     <string name="please_select_currency_en">Please Select Currency</string>
+    <string name="Locating">正在定位</string>
+
+
+    <string name="long_shortcut">long test</string>
+    <string name="disabled">disabled</string>
+    <string name="short_shortcut">test</string>
 </resources>

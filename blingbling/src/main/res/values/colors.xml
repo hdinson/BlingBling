@@ -17,11 +17,12 @@
     <color name="_003_window_bg_light">#ff405158</color>
     <color name="_003_text_color_hint">#66ffffff</color>
     <color name="_005_config_bg">#19caad</color>
-    <color name="_008_system_bar">#fafafa</color>
     <color name="_010_window_bg">#fefefe</color>
-    <color name="_013_title_bg">#ff00beaf</color>
     <color name="_013_uncompleted_color">#FFFF00</color>
     <color name="_013_uncompleted_text_color">#008000</color>
+    <color name="_025_colorPrimary">#3299ff</color>
+    <color name="_025_colorAccent">#3299ff</color>
+
 
     <color name="transparent">#00000000</color>
     <color name="transparent05">#0B000000</color>
@@ -72,5 +73,4 @@
     <color name="light_gray3">#7f8195</color>
     <color name="green_comfy">#0cb399</color>
     <color name="orange_comfy">#e99e3c</color>
-
 </resources>

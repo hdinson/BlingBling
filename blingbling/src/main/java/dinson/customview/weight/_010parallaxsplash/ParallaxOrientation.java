@@ -1,7 +1,7 @@
 package dinson.customview.weight._010parallaxsplash;
 
 /**
- * @author Dinson - 2017/10/10
+ * 视差方向
  */
 enum ParallaxOrientation {
     LEFT , RIGHT

@@ -48,4 +48,19 @@ public class GlideUtils {
                 .as(PictureDrawable.class)
                 .error(R.drawable.def_img).load(url).into(view);
     }
+
+
+    /*Glide储存本地文件*/
+            /*Single.just(mHeadData[position].data.hp_img_url)
+                .map { s ->
+                    Glide.with(this@MainActivity).downloadOnly().load(s).downloadOnly(Target.SIZE_ORIGINAL,
+                        Target.SIZE_ORIGINAL).get().path
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { path ->
+                    debug("CurrentItem:" + position + " img:" + mHeadData[position].data.hp_img_url + "  imgPath:" + path)
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, view, "dailyPic")
+                    DailyPicActivity.start(this@MainActivity, mHeadData[position].data, path, options)
+                }*/
 }

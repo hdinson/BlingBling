@@ -7,6 +7,7 @@
         <attr name="autoLoop" format="boolean"/>
         <attr name="hiddenIndicator" format="boolean"/>
         <attr name="indicatorMargin" format="dimension"/>
+        <attr name="indicatorSize" format="dimension"/>
         <attr name="indicatorMarginBottom" format="dimension"/>
         <attr name="indicatorAlign">
             <enum name="left" value="0"/>
@@ -15,4 +16,5 @@
         </attr>
         <attr name="middle_page_cover" format="boolean"/>
     </declare-styleable>
+
 </resources>

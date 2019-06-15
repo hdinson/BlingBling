@@ -13,13 +13,13 @@ class _013StepViewActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setStatusBarTintColor(ContextCompat.getColor(this, R.color._013_title_bg))
         setContentView(R.layout.activity__013_step_view)
         SystemBarModeUtils.setPaddingTop(this, toolbar, nestedScrollView)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { onBackPressed() }
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        SystemBarModeUtils.setPaddingTop(this,nestedScrollView,blurView,stepView)
 
         val list0 = arrayListOf(
             "「太古时期」\n①阿拉巴斯坦王国建立于伟大航道圣汀岛\n②长翅膀的月球人因资源不足，离开月面都市比尔卡，前往蓝色星球\n③七水之都的船木匠们制造出古代兵器冥王",

@@ -1,7 +1,7 @@
 package dinson.customview.listener
 
 /**
- * @author Dinson - 2017/10/17
+ * 货币选中监听
  */
 interface _003OnRvItemChangeListener {
     fun onItemChange(position: Int)

@@ -1,16 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/deleteLayout"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp">
+    android:layout_height="60dp"
+    android:background="@drawable/ripple_main_white">
+
+    <CheckBox
+        android:id="@+id/cbVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:button="@null"
+        android:drawableStart="@drawable/selector_004_cb"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="16dp"/>
-</RelativeLayout>
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/tvSubTitle"
+        app:layout_constraintLeft_toRightOf="@id/cbVideo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginStart="16dp"
+        tools:text="台湾台" />
+
+    <TextView
+        android:id="@id/tvSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="@color/textHint"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="更新时间: 2012-12-12" />
+
+    <ImageView
+        android:id="@+id/ivVideoIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+</android.support.constraint.ConstraintLayout>

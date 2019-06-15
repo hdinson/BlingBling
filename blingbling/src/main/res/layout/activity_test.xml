@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
-            name="dinsonFile"
-            type="dinson.customview.model._005FileInfo"/>
+            name="cacheSize"
+            type="String" />
     </data>
 
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,21 +26,44 @@
             android:elevation="10dp"
             android:theme="@style/BaseToolBarTheme.Black"
             app:title="测试"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/white" />
 
         <Button
             style="@style/TestBtn"
-            android:onClick="onEncryption"
-            android:text="加解密"/>
+            android:onClick="onClearAllCache"
+            android:text="删除数据" />
 
         <Button
             style="@style/TestBtn"
-            android:onClick="onQiNiuQuery"
-            android:text="七牛云查询"/>
+            android:onClick="onClearCache"
+            android:text="清空缓存" />
 
         <Button
             style="@style/TestBtn"
-            android:onClick="onQiNiuQuery"
-            android:text="@{String.valueOf(dinsonFile.fsize)}"/>
+            android:onClick="onDataBindingClick"
+            android:text="@{cacheSize}" />
+
+        <EditText
+            android:id="@+id/etExec"
+            style="@style/TestBtn"
+            android:hint="请输入命令"
+            android:padding="@dimen/spacing_medium" />
+
+        <Button
+            style="@style/TestBtn"
+            android:onClick="onExec"
+            android:text="执行" />
+
+        <Button
+            style="@style/TestBtn"
+            android:onClick="onPing"
+            android:text="Ping一下" />
+
+        <Button
+            android:id="@+id/btnTest"
+            style="@style/TestBtn"
+            android:onClick="onOpenDelv"
+            android:text="ndk" />
+
     </LinearLayout>
 </layout>

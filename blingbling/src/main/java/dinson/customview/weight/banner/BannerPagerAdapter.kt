@@ -68,7 +68,6 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
         LogUtils.e("container: ${container .childCount}")
-
     }
 
 

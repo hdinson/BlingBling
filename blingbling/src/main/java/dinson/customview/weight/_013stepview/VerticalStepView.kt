@@ -41,7 +41,7 @@ class VerticalStepView @JvmOverloads constructor(context: Context, attrs: Attrib
         removeAllViews()
         if (mCompletingPosition < 0) mCompletingPosition = listData.size - 1
 
-        listData.forEachIndexed({ index, any ->
+        listData.forEachIndexed { index, any ->
             if (any == null) return@forEachIndexed
 
             val container = RelativeLayout(context)
@@ -85,42 +85,42 @@ class VerticalStepView @JvmOverloads constructor(context: Context, attrs: Attrib
 
             //-----------------------------------以下用ConstraintLayout有BUG----------------------------------//
             /*val constraintLayout = ConstraintLayout(context)
-           constraintLayout.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+               constraintLayout.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
 
-           val pos = when (index) {
-               0 -> VerticalStepViewIndicator.Position.Start
-               listData.size -> VerticalStepViewIndicator.Position.End
-               else -> VerticalStepViewIndicator.Position.Middle
-           }
+               val pos = when (index) {
+                   0 -> VerticalStepViewIndicator.Position.Start
+                   listData.size -> VerticalStepViewIndicator.Position.End
+                   else -> VerticalStepViewIndicator.Position.Middle
+               }
 
-           val state = when {
-               index < mCompletingPosition -> VerticalStepViewIndicator.State.Completed
-               index == mCompletingPosition -> VerticalStepViewIndicator.State.Completing
-               else -> VerticalStepViewIndicator.State.UnCompleted
-           }
-           //添加指示器
-           val indicator = VerticalStepViewIndicator(context, pos, state, mSetting)
-           indicator.id= View.generateViewId()
-           val params1 = ConstraintLayout.LayoutParams(300, 300)
-           params1.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID
-           params1.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-           params1.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
-           constraintLayout.addView(indicator, params1)
-           //添加绑定后的布局
-           if (any != null) {
-               val view = holder.onBind(context, any)
-               LogUtils.e("------------$index $any-----------------")
-               val params2 = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
-               params2.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-               params2.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
-               params2.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID
-               params2.leftToRight = indicator.id
-               constraintLayout.addView(view, params2)
-               view.requestLayout()
-               view.invalidate()
-           }
-           addView(constraintLayout)*/
-        })
+               val state = when {
+                   index < mCompletingPosition -> VerticalStepViewIndicator.State.Completed
+                   index == mCompletingPosition -> VerticalStepViewIndicator.State.Completing
+                   else -> VerticalStepViewIndicator.State.UnCompleted
+               }
+               //添加指示器
+               val indicator = VerticalStepViewIndicator(context, pos, state, mSetting)
+               indicator.id= View.generateViewId()
+               val params1 = ConstraintLayout.LayoutParams(300, 300)
+               params1.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID
+               params1.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+               params1.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
+               constraintLayout.addView(indicator, params1)
+               //添加绑定后的布局
+               if (any != null) {
+                   val view = holder.onBind(context, any)
+                   LogUtils.e("------------$index $any-----------------")
+                   val params2 = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+                   params2.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                   params2.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
+                   params2.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID
+                   params2.leftToRight = indicator.id
+                   constraintLayout.addView(view, params2)
+                   view.requestLayout()
+                   view.invalidate()
+               }
+               addView(constraintLayout)*/
+        }
     }
 
 

@@ -15,14 +15,14 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import dinson.customview.databinding.Item005ViewDriverFeedBinding;
-import dinson.customview.model._005FileInfo;
+import dinson.customview.model.QiNiuFileInfo;
 
 
 /**
  * Created by wrh on 16/2/15.
  */
 public class DriverView extends RelativeLayout {
-    private _005FileInfo mResult;
+    private QiNiuFileInfo mResult;
     private Item005ViewDriverFeedBinding mBinding;
     private DriverViewTarget mViewTarget;
 
@@ -46,7 +46,7 @@ public class DriverView extends RelativeLayout {
         mBinding = Item005ViewDriverFeedBinding.inflate(inflater, this, true);
     }
 
-    public void setData(_005FileInfo data) {
+    public void setData(QiNiuFileInfo data) {
         mResult = data;
         mBinding.setFileInfo(data);
         mViewTarget = new DriverViewTarget(mBinding.viewImgFeed);

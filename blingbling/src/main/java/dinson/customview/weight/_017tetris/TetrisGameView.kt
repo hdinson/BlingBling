@@ -10,9 +10,9 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import dinson.customview.R
-import dinson.customview.kotlin.debug
 import dinson.customview.kotlin.dip
-import dinson.customview.kotlin.info
+import dinson.customview.kotlin.logd
+import dinson.customview.kotlin.logi
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
@@ -153,20 +153,20 @@ class TetrisGameView @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
-        info("surfaceChanged")
+        logi("surfaceChanged")
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
         mIsDrawing = false
         mMoveDownInterval.dispose()
-        info("surfaceDestroyed")
+        logi("surfaceDestroyed")
     }
 
     /**
      * 绘制游戏画面
      */
     private fun onGameViewDraw(canvas: Canvas) {
-        debug("onGameViewDraw")
+        logd("onGameViewDraw")
         mMapModel.drawMap(canvas, mBoxModel.mBoxSize)
         mBoxModel.drawBox(canvas)
     }

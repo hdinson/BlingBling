@@ -1,6 +1,7 @@
 package dinson.customview.utils;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -27,8 +28,8 @@ public final class IntentUtils {
      *                  <br>参看https://developer.android.com/reference/android/support/v4/content/FileProvider.html
      * @return intent
      */
-    public static Intent getInstallAppIntent(final String filePath, final String authority) {
-        return getInstallAppIntent(FileUtils.getFileByPath(filePath), authority);
+    public static Intent getInstallAppIntent(Context context,final String filePath, final String authority) {
+        return getInstallAppIntent(context,FileUtils.getFileByPath(filePath), authority);
     }
 
     /**
@@ -39,7 +40,7 @@ public final class IntentUtils {
      *                  <br>参看https://developer.android.com/reference/android/support/v4/content/FileProvider.html
      * @return intent
      */
-    public static Intent getInstallAppIntent(final File file, final String authority) {
+    public static Intent getInstallAppIntent(Context context,final File file, final String authority) {
         if (file == null) return null;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         Uri data;
@@ -48,7 +49,7 @@ public final class IntentUtils {
             data = Uri.fromFile(file);
         } else {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            data = FileProvider.getUriForFile(UIUtils.getContext(), authority, file);
+            data = FileProvider.getUriForFile(context, authority, file);
         }
         intent.setDataAndType(data, type);
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -72,8 +73,8 @@ public final class IntentUtils {
      * @param packageName 包名
      * @return intent
      */
-    public static Intent getLaunchAppIntent(final String packageName) {
-        return UIUtils.getContext().getPackageManager().getLaunchIntentForPackage(packageName);
+    public static Intent getLaunchAppIntent(Context context,final String packageName) {
+        return context.getPackageManager().getLaunchIntentForPackage(packageName);
     }
 
     /**

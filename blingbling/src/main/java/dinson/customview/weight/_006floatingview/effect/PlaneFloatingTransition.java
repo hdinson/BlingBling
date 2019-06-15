@@ -6,7 +6,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.Path;
 
-import dinson.customview.utils.UIUtils;
 import dinson.customview.weight._006floatingview.spring.SimpleReboundListener;
 import dinson.customview.weight._006floatingview.spring.SpringHelper;
 import dinson.customview.weight._006floatingview.transition.BaseFloatingPathTransition;
@@ -15,17 +14,17 @@ import dinson.customview.weight._006floatingview.transition.PathPosition;
 import dinson.customview.weight._006floatingview.transition.YumFloating;
 
 /**
- * @author Dinson - 2017/8/11
+ * 飞机动画
  */
 public class PlaneFloatingTransition extends BaseFloatingPathTransition {
 
-    private int mScreenHeight= UIUtils.getScreenHeight(UIUtils.getContext());
+
     @Override
     public FloatingPath getFloatingPath() {
         Path path = new Path();
         path.moveTo(0, 0);
         path.quadTo(100, -300, 0, -600);
-        path.rLineTo(0, -mScreenHeight - 300);
+        path.rLineTo(0, -1920 - 300);
         return FloatingPath.create(path, false);
     }
 

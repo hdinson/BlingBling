@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    tools:context=".activity._026FiveChessActivity">
+
+    <dinson.customview.weight._026fivechess.GomokuView
+        android:layout_width="wrap_content"
+        android:background="#E7DDD4"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

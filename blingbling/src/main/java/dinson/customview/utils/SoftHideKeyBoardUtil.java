@@ -7,7 +7,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 /**
- * @author Dinson - 2017/8/20
+ * 软键盘工具类
  */
 public class SoftHideKeyBoardUtil {
     public static void assistActivity(Activity activity) {

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity._027MovieActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@id/toolbar"
+            style="@style/Toolbar._027ToolsBar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="#000000"
+            android:elevation="10dp"
+            android:theme="@style/BaseToolBarTheme.Black.027"
+            app:title="   图书馆"
+            app:titleTextColor="@android:color/white" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never" />
+
+
+        <dinson.customview.weight._027alphaindicator.AlphaIndicator
+            android:id="@+id/alphaIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:elevation="20dp"
+            android:orientation="horizontal">
+
+            <dinson.customview.weight._027alphaindicator.AlphaView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                app:av_tabIconNormal="@drawable/_027_home_normal"
+                app:av_tabIconSelected="@drawable/_027_home_selected"
+                app:av_tabTextSize="14sp"
+                app:av_textColorNormal="#999999"
+                app:av_textColorSelected="#000" />
+
+            <dinson.customview.weight._027alphaindicator.AlphaView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                app:av_tabIconNormal="@drawable/_027_face_normal"
+                app:av_tabIconSelected="@drawable/_027_face_selected"
+                app:av_tabTextSize="14sp"
+                app:av_textColorNormal="#999999"
+                app:av_textColorSelected="#000" />
+
+            <dinson.customview.weight._027alphaindicator.AlphaView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                app:av_tabIconNormal="@drawable/_027_loyalty_normal"
+                app:av_tabIconSelected="@drawable/_027_loyalty_selected"
+                app:av_tabTextSize="14sp"
+                app:av_textColorNormal="#999999"
+                app:av_textColorSelected="#000" />
+
+        </dinson.customview.weight._027alphaindicator.AlphaIndicator>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvHistory"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/black"
+        android:dividerHeight="1dp"/>
+</FrameLayout>

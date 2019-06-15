@@ -2,29 +2,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#303030"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#303030">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:elevation="10dp"
-        app:title="海贼大事件"
-        app:titleTextColor="@color/white" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:scaleType="center"
         android:alpha="0.7"
+        android:scaleType="center"
         android:src="@drawable/_013_activity_bg" />
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@id/nestedScrollView"
-        android:layout_marginTop="?actionBarSize"
         android:overScrollMode="never">
 
         <dinson.customview.weight._013stepview.VerticalStepView
@@ -35,4 +28,22 @@
             app:IndicatorLineWidth="2dp"
             app:IndicatorWidth="60dp" />
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@android:color/transparent"
+        android:elevation="10dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="海贼大事件"
+        app:titleTextColor="@color/white" />
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:realtimeBlurRadius="20dp"
+        android:id="@+id/blurView"
+        app:realtimeOverlayColor="#2f2f2f" />
+
 </FrameLayout>

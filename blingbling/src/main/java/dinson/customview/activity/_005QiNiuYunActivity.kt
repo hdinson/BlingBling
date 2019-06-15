@@ -22,12 +22,12 @@ import com.qiniu.storage.model.DefaultPutRet
 import com.qiniu.util.Auth
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.adapter.DriverFeedAdapter
+import dinson.customview.adapter._005QiNiuPicAdapter
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.info
+import dinson.customview.kotlin.logi
+import dinson.customview.kotlin.logv
 import dinson.customview.kotlin.toast
-import dinson.customview.kotlin.verbose
-import dinson.customview.model._005FileInfo
+import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.utils.MD5
 import dinson.customview.utils.SPUtils
@@ -46,17 +46,17 @@ import java.io.File
 
 class _005QiNiuYunActivity : BaseActivity() {
 
-    private val mListData = ArrayList<_005FileInfo>()
+    private val mListData = ArrayList<QiNiuFileInfo>()
     private val mConfigList = ArrayList<_005QiNiuConfig>()
     private var mCurrentConfig: _005QiNiuConfig? = null
 
-    private lateinit var mAdapter: DriverFeedAdapter
+    private lateinit var mAdapter: _005QiNiuPicAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__005_qi_niu_yun)
 
-        mAdapter = DriverFeedAdapter(this, mListData)
+        mAdapter = _005QiNiuPicAdapter(this, mListData)
         initView()
         initConfig()
     }
@@ -84,23 +84,23 @@ class _005QiNiuYunActivity : BaseActivity() {
             overScrollMode = View.OVER_SCROLL_NEVER
 
             RvItemClickSupport.addTo(this)
-                .setOnItemClickListener(OnRvItemClickListener({ _, _, position ->
+                .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
                     val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                     val bean = mListData[position]
                     val data = ClipData.newPlainText("Label", bean.finalUrl)
                     cm.primaryClip = data
-                    verbose(bean.finalUrl)
+                    logv(bean.finalUrl)
                     "已复制".toast()
-                })).setOnItemLongClickListener(OnRvItemLongClickListener({ _, _, position ->
+                }).setOnItemLongClickListener(OnRvItemLongClickListener { _, _, position ->
                     val dialog = _005ContentMenuDialog(this@_005QiNiuYunActivity)
                     val items = arrayOf("复制", "黏贴")
                     dialog.setDatas(items, OnItemClickListener {
                         items[it].toast()
-                        info(mListData[position])
+                        logi(mListData[position])
                     })
                     dialog.show()
                     return@OnRvItemLongClickListener true
-                }))
+                })
         }
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
@@ -124,11 +124,13 @@ class _005QiNiuYunActivity : BaseActivity() {
     private fun getDataFromServer(config: _005QiNiuConfig) {
         val auth = Auth.create(config.AccessKey, config.SecretKey)
         val zone = config.getZone()
-        Observable.just(BucketManager(auth, Configuration(zone))).map {
-            val iterator = it.createFileListIterator(config.Bucket, "", 1000, "")
+        Observable.just(BucketManager(auth, Configuration(zone))).doOnNext { manager ->
+            val iterator = manager.createFileListIterator(config.Bucket, "", 1000, "")
             mListData.clear()
             while (iterator.hasNext()) {
-                iterator.next().filter { it.mimeType.contains("image") }
+                iterator.next().filter {
+                    it.mimeType.contains("image")
+                }
                     .forEach {
                         val host = if (config.Domain.startsWith("http")) config.Domain
                         else "http://" + config.Domain
@@ -139,12 +141,13 @@ class _005QiNiuYunActivity : BaseActivity() {
                             val token = Auth.create(config.AccessKey, config.SecretKey)
                             token.privateDownloadUrl(publicUrl, 3600)//1小时,链接过期时间
                         } else "$host/${it.key}"//公共空间
-                        mListData.add(_005FileInfo(it, finalUrl))
+                        mListData.add(QiNiuFileInfo(it, finalUrl))
                     }
             }
+
             mListData.sortBy { it.putTime }
             mListData.reverse()
-            verbose("Load ${mListData.size} pic")
+            logv("Load ${mListData.size} pic")
         }.compose(RxSchedulers.io_main()).subscribe({
             mAdapter.notifyDataSetChanged()
             flCustomRefreshView.complete()
@@ -152,7 +155,7 @@ class _005QiNiuYunActivity : BaseActivity() {
             it.printStackTrace()
             mAdapter.notifyDataSetChanged()
             flCustomRefreshView.complete()
-        })
+        }).addToManaged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -188,7 +191,7 @@ class _005QiNiuYunActivity : BaseActivity() {
      * 跳转图片选择界面
      */
     private fun showPicSelectorActivity() {
-        PictureSelector.create(_005QiNiuYunActivity@ this)
+        PictureSelector.create(this@_005QiNiuYunActivity)
             .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
             //.theme()//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
             .maxSelectNum(1)// 最大图片选择数量 int
@@ -261,7 +264,7 @@ class _005QiNiuYunActivity : BaseActivity() {
             flCustomRefreshView.isRefreshing = true
         } else {
             when (item.itemId) {
-            //点击添加七牛云配置
+                //点击添加七牛云配置
                 R.id.action_add_repository -> showAddQiNiuConfigDialog()
             }
         }
@@ -319,9 +322,9 @@ class _005QiNiuYunActivity : BaseActivity() {
      */
     private fun uploadImg2QiNiu(path: String) {
         "正在上传".toast()
-        mCurrentConfig?.let {
-            val upToken = Auth.create(it.AccessKey, it.SecretKey).uploadToken(it.Bucket)
-            val zone = it.getZone()
+        mCurrentConfig?.let { config->
+            val upToken = Auth.create(config.AccessKey, config.SecretKey).uploadToken(config.Bucket)
+            val zone = config.getZone()
             val file = File(path)
             if (!file.exists() || !file.isFile) return@let
             val key = file.name.let { MD5.encode(it) + it.substring(it.lastIndexOf(".")) }
@@ -329,7 +332,7 @@ class _005QiNiuYunActivity : BaseActivity() {
             Observable.just(UploadManager(Configuration(zone))).map {
                 val response = it.put(path, key, upToken)
                 val putRet = Gson().fromJson(response.bodyString(), DefaultPutRet::class.java)
-                verbose("Upload success {hash: ${putRet.hash} key:${putRet.key}}")
+                logv("Upload success {hash: ${putRet.hash} key:${putRet.key}}")
             }.compose(RxSchedulers.io_main()).subscribe({
                 mAdapter.notifyDataSetChanged()
                 flCustomRefreshView.isRefreshing = true

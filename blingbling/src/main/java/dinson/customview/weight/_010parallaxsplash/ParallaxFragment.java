@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Dinson - 2017/10/9
+ * 带有视差动画的fragment
  */
 public class ParallaxFragment extends Fragment {
     //此Fragment上所有的需要实现视差动画的视图

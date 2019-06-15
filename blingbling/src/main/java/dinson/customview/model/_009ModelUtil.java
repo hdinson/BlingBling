@@ -3,6 +3,8 @@ package dinson.customview.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import dinson.customview.BuildConfig;
+import dinson.customview._global.ConstantsUtils;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.utils.DbDownUtil;
 
@@ -56,41 +58,41 @@ public class _009ModelUtil {
 
 
     private static final String[] originalImgArr = {
-        "http://ondlsj2sn.bkt.clouddn.com/FpCHLyRU6LxkV8qD0LciJKN5oU3h.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FqCreoHlRPVcwdNuyFSrLwYuF9wI.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Fg8vhnZAkC9ITYCXTppsgzvNWtBW.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FnxcAXag_6QchrQENPSClfN6BUaV.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FgbAq1Qz8rnMzXJOn-cXQt6XLyeZ.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FqK9Tjpd6Q88HrtHuS7HFA66CStO.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FhKebFIN8NU4Im3JoX9bR5K47eWC.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FgCjnCZJ0UQPRvYw-MfX3nKBiQMe.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FvZG8R_rYVsZJj88meyFELWS5D7_.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Fo4p7zd-lO5pDZh1SkHLOcyjb0iK.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FovJM3t22TeURDiCdM41aG3-i_LW.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Fnr-FHQoaoXmIu4XJ-8Rogr5u_76.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FnRKaCfPjrnDwWQWkqF8MFJDCTca.jpg"
+        "FpCHLyRU6LxkV8qD0LciJKN5oU3h.jpg",
+        "FqCreoHlRPVcwdNuyFSrLwYuF9wI.jpg",
+        "Fg8vhnZAkC9ITYCXTppsgzvNWtBW.jpg",
+        "FnxcAXag_6QchrQENPSClfN6BUaV.jpg",
+        "FgbAq1Qz8rnMzXJOn-cXQt6XLyeZ.jpg",
+        "FqK9Tjpd6Q88HrtHuS7HFA66CStO.jpg",
+        "FhKebFIN8NU4Im3JoX9bR5K47eWC.jpg",
+        "FgCjnCZJ0UQPRvYw-MfX3nKBiQMe.jpg",
+        "FvZG8R_rYVsZJj88meyFELWS5D7_.jpg",
+        "Fo4p7zd-lO5pDZh1SkHLOcyjb0iK.jpg",
+        "FovJM3t22TeURDiCdM41aG3-i_LW.jpg",
+        "Fnr-FHQoaoXmIu4XJ-8Rogr5u_76.jpg",
+        "FnRKaCfPjrnDwWQWkqF8MFJDCTca.jpg"
     };
     private static final String[] smallImgArr = {
-        "http://ondlsj2sn.bkt.clouddn.com/FhnaHFETXxivQ9BgX4QLxAbfSWAh.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Fu0mbCwCfrlIrHyj2Sp9V6cPNE_Y.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FliVr6z07_qCanZzqAlLokebM4vr.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FidGSDzzJWGp-NHJpdT8mRV6FSOq.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FkKoM2mQG8B2fFPmlVA-VRylo4rP.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Ftqa-uSKuhco3VZiWl3xiZc1sVai.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FjqiTYr2yV5RGi_rI8ULH-xmwjQR.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Fj9WmBmNeu1ZrnjEqTmJ0ieEFnxP.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FtmosnvSNBGXm0NOfC8Y8xFYdxph.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FgruG8ECsBWG3-9mSkrb_XIolT7l.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Ftambtg7shoLRTWznZMXt1Hxm0_s.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/Fp9h7bhpBKf1qu5FqV8BZceX61iT.jpg",
-        "http://ondlsj2sn.bkt.clouddn.com/FmYEUOMcNju10GNopgFywZCQOyOl.jpg"
+        "FhnaHFETXxivQ9BgX4QLxAbfSWAh.jpg",
+        "Fu0mbCwCfrlIrHyj2Sp9V6cPNE_Y.jpg",
+        "FliVr6z07_qCanZzqAlLokebM4vr.jpg",
+        "FidGSDzzJWGp-NHJpdT8mRV6FSOq.jpg",
+        "FkKoM2mQG8B2fFPmlVA-VRylo4rP.jpg",
+        "Ftqa-uSKuhco3VZiWl3xiZc1sVai.jpg",
+        "FjqiTYr2yV5RGi_rI8ULH-xmwjQR.jpg",
+        "Fj9WmBmNeu1ZrnjEqTmJ0ieEFnxP.jpg",
+        "FtmosnvSNBGXm0NOfC8Y8xFYdxph.jpg",
+        "FgruG8ECsBWG3-9mSkrb_XIolT7l.jpg",
+        "Ftambtg7shoLRTWznZMXt1Hxm0_s.jpg",
+        "Fp9h7bhpBKf1qu5FqV8BZceX61iT.jpg",
+        "FmYEUOMcNju10GNopgFywZCQOyOl.jpg"
     };
 
     public static List<_009PanoramaImageModel> getPanoramaImageList() {
         List<_009PanoramaImageModel> list = new ArrayList<>();
         for (int i = 0; i < titleArr.length; i++) {
             _009PanoramaImageModel entity = new _009PanoramaImageModel(titleArr[i], descArr[i], originalImgArr[i],
-                smallImgArr[i]);
+                BuildConfig.QINIU_URL + smallImgArr[i]);
             DownloadInfo downloadInfo = DbDownUtil.getInstance().queryDownBy(originalImgArr[i]);
             if (downloadInfo != null) {
                 entity.setSize(downloadInfo.getCountLength());

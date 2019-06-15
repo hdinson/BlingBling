@@ -1,6 +1,6 @@
 <resources>
     <!--————————————————————————————————————————主题——————————————————————————————————————————————-->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -140,7 +140,7 @@
         <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <style name="_010_Item.XA"/>
+    <style name="_010_Item.XA" />
 
     <style name="_010_Item.XA.Lv5">
         <item name="x_in">-2.2</item>
@@ -177,7 +177,7 @@
         <item name="a_out">1</item>
     </style>
 
-    <style name="_010_Item.YA"/>
+    <style name="_010_Item.YA" />
 
     <style name="_010_Item.YA.Lv5">
         <item name="y_in">-2.2</item>
@@ -250,11 +250,24 @@
         <item name="android:colorBackground">#2f2f2f</item>
         <item name="colorControlNormal">@color/white</item><!-- 溢出菜单图标颜色-->
     </style>
+    <!--027Toolbar主题-->
+    <style name="BaseToolBarTheme.Black.027">
+        <item name="colorAccent">#aaaaaa</item>
+        <!--修改搜索框提示文字-->
+        <item name="defaultQueryHint">搜索番号或者名字</item>
+        <!--修改搜索框左边的搜索按钮图标-->
+        <item name="searchIcon">@drawable/action_icon_add</item>
+        <item name="searchHintIcon">@drawable/action_icon_add</item>
+    </style>
     <!--水平线-->
     <style name="HorizontalLine">
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/common_divider</item>
+    </style>
+    <!--水平细线-->
+    <style name="HorizontalLine.thin">
+        <item name="android:layout_height">0.5dp</item>
     </style>
     <!--垂直线-->
     <style name="VerticalLine">
@@ -263,7 +276,7 @@
         <item name="android:background">@color/common_divider</item>
     </style>
     <!-- 自定义对话框样式 -->
-    <style name="BaseDialogTheme">
+    <style name="BaseDialogTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
@@ -284,4 +297,31 @@
     <style name="AppTheme.Accent005">
         <item name="colorControlActivated">@color/_005_config_bg</item>
     </style>
+    <!--027界面的主题颜色-->
+    <style name="AppTheme.Activity025">
+        <item name="colorPrimary">@color/_025_colorPrimary</item>
+        <item name="colorAccent">@color/_025_colorAccent</item>
+        <item name="colorControlNormal">@color/textHint</item>
+        <item name="colorControlActivated">@color/_025_colorPrimary</item>
+    </style>
+
+    <!--027界面的主题颜色-->
+    <style name="AppTheme.Activity025AddSchedule">
+        <item name="colorPrimary">@color/_025_colorPrimary</item>
+        <item name="colorAccent">@color/_025_colorAccent</item>
+        <item name="colorControlActivated">@color/_025_colorPrimary</item>
+    </style>
+
+
+    <!--标题与NavigationIcon的距离-->
+    <style name="Toolbar._027ToolsBar" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <!--Toolbar标题文字大小-->
+    <style name="Toolbar._027ToolsBarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

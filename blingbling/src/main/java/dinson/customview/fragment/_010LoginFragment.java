@@ -8,13 +8,12 @@ import android.view.ViewGroup;
 import dinson.customview.weight._010parallaxsplash.ParallaxFragment;
 
 /**
- * @author Dinson - 2017/10/10
+ * 登陆界面
  */
 public class _010LoginFragment extends ParallaxFragment {
 
     @Override
     public View onCreateView(LayoutInflater original, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(original, container, savedInstanceState);
-        return view;
+        return super.onCreateView(original, container, savedInstanceState);
     }
 }

@@ -12,8 +12,6 @@ import dinson.customview.R;
 
 /**
  * 圆形进度条
- *
- * @author Dinson - 2017/9/13
  */
 public class TasksCompletedView extends View {
 

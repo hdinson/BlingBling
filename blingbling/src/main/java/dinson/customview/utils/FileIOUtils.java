@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Dinson - 2017/7/7
+ * 文件相关工具类
  */
 public class FileIOUtils {
 

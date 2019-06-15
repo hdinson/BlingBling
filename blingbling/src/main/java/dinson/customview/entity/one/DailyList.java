@@ -11,7 +11,7 @@ public class DailyList {
      * res : 0
      * data : ["1756","1755","1754","1753","1752","1751","1750","1749","1748","1747"]
      */
-
+    private boolean isLocalCache = false;
     private int res;
     private List<Integer> data;
 
@@ -37,5 +37,13 @@ public class DailyList {
 
     public void setData(List<Integer> data) {
         this.data = data;
+    }
+
+    public boolean isLocalCache() {
+        return isLocalCache;
+    }
+
+    public void setLocalCache(boolean localCache) {
+        isLocalCache = localCache;
     }
 }

@@ -1,9 +1,5 @@
 package dinson.customview.utils;
 
-/**
- * @author Dinson - 2017/7/24
- */
-
 import android.os.Build;
 import android.text.Html;
 import android.util.Base64;

@@ -9,6 +9,7 @@ import android.os.StatFs
 import android.telephony.CellInfo
 import android.telephony.TelephonyManager
 import android.telephony.TelephonyManager.*
+import com.loc.s
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -21,7 +22,6 @@ fun Context.isNfcEnable(): Boolean {
     val manager = getSystemService(Context.NFC_SERVICE) as? NfcManager
     return manager?.defaultAdapter?.isEnabled ?: false
 }
-
 /**
  *  设备信息相关
  */
@@ -139,7 +139,9 @@ fun getCellLocation(manager: TelephonyManager): MutableList<CellInfo>? = manager
  * 需要权限：READ_PHONE_STATE
  */
 @SuppressLint("MissingPermission", "HardwareIds")
-fun getSimSerialNumber(manager: TelephonyManager): String = manager.simSerialNumber
+fun getSimSerialNumber( manager: TelephonyManager): String {
+  return  manager.simSerialNumber
+}
 
 
 /**
@@ -179,7 +181,7 @@ fun getSubscriberId(manager: TelephonyManager): String = manager.subscriberId
  */
 @SuppressLint("MissingPermission", "HardwareIds")
 fun getIMEI(manager: TelephonyManager) = (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) manager.meid else manager.deviceId)
-        ?: "unknown"
+    ?: "unknown"
 
 /**
  * 手机号<br></br>

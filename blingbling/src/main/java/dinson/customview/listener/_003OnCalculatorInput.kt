@@ -1,7 +1,7 @@
 package dinson.customview.listener
 
 /**
- * @author Dinson - 2017/10/17
+ * 计算器输入监听接口
  */
 interface _003OnCalculatorInput {
     fun onInput(key: CalculatorKey)

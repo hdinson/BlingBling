@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 /**
- * @author Dinson - 2017/9/11
+ * Shell命令
  */
 public final class ShellUtils {
 

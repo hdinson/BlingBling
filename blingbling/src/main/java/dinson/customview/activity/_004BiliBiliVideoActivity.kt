@@ -4,14 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import com.shuyu.gsyvideoplayer.GSYVideoManager
+import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.kotlin.toast
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.StringUtils
-import dinson.customview.utils.UIUtils
 import kotlinx.android.synthetic.main.activity__004_bili_bili_video.*
-import tv.danmaku.ijk.media.player.IjkMediaPlayer
+import com.shuyu.gsyvideoplayer.player.PlayerFactory
+import tv.danmaku.ijk.media.exo2.Exo2PlayerManager
+
 
 class _004BiliBiliVideoActivity : BaseActivity() {
 
@@ -26,47 +31,72 @@ class _004BiliBiliVideoActivity : BaseActivity() {
         }
     }
 
-      override fun onCreate(savedInstanceState: Bundle?) {
-         super.onCreate(savedInstanceState)
-         setContentView(R.layout.activity__004_bili_bili_video)
-          requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity__004_bili_bili_video)
+        /* requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE*/
 
          val mVideoPath = intent.getStringExtra(EXTRA_URL)
          if (StringUtils.isEmpty(mVideoPath)) {
-              "视频地址错误".toast()
+             "视频地址错误".toast()
              finish()
              return
          }
          initUI(mVideoPath)
-     }
+    }
 
-     private fun initUI(mVideoPath: String) {
-         LogUtils.e(mVideoPath)
+    private var mOrientationUtils: OrientationUtils? = null
 
-         // init player
-         IjkMediaPlayer.loadLibrariesOnce(null)
-         IjkMediaPlayer.native_profileBegin("libijkplayer.so")
 
-         ijkVideoView.setVideoPath(mVideoPath)
-         ijkVideoView.setAsFillParent()
-         ijkVideoView.start()
-     }
+    private fun initUI(mVideoPath: String) {
+        LogUtils.e(mVideoPath)
 
-     private var mBackPressed = false
-     override fun onBackPressed() {
-         mBackPressed = true
-         super.onBackPressed()
-     }
+        videoPlayer.setUp(mVideoPath, true, "")
+        PlayerFactory.setPlayManager(Exo2PlayerManager::class.java)//EXO模式
+        //增加封面
+        val imageView = ImageView(this)
+        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+        imageView.setImageResource(R.mipmap.ic_launcher)
+        videoPlayer.thumbImageView = imageView
+        //增加title
+        videoPlayer.titleTextView.visibility = View.VISIBLE
+        //设置返回键
+        videoPlayer.backButton.visibility = View.VISIBLE
+        //设置旋转
+        mOrientationUtils = OrientationUtils(this, videoPlayer)
+        //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
+        videoPlayer.fullscreenButton.setOnClickListener { mOrientationUtils?.resolveByClick() }
+        //是否可以滑动调整
+        videoPlayer.setIsTouchWiget(true)
+        //设置返回按键功能
+        videoPlayer.backButton.setOnClickListener { onBackPressed() }
+        videoPlayer.startPlayLogic()
+    }
 
-     override fun onStop() {
-         super.onStop()
-         if (mBackPressed || !ijkVideoView.isBackgroundPlayEnabled) {
-             ijkVideoView.stopPlayback()
-             ijkVideoView.release(true)
-             ijkVideoView.stopBackgroundPlay()
-         } else {
-             ijkVideoView.enterBackground()
-         }
-         IjkMediaPlayer.native_profileEnd()
-     }
+    override fun onPause() {
+        super.onPause()
+        videoPlayer.onVideoPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        videoPlayer.onVideoResume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        GSYVideoManager.releaseAllVideos()
+        mOrientationUtils?.releaseListener()
+    }
+
+    override fun onBackPressed() {
+        //先返回正常状态
+        if (mOrientationUtils?.screenType == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            videoPlayer.fullscreenButton.performClick()
+            return
+        }
+        //释放所有
+        videoPlayer.setVideoAllCallBack(null)
+        super.onBackPressed()
+    }
 }

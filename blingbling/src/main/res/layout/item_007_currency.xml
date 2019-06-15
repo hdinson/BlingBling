@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dinson.customview.weight.swipelayout.SwipeItemLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/deleteLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="start"
+        android:background="@drawable/_007_list_undercover"
+        android:scaleType="center"
+        android:src="@drawable/_007_delete_ic"/>
+
+    <RelativeLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@drawable/selector_007_window_bg"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ImageView
+            android:id="@id/ivImg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/def_img"/>
+
+        <TextView
+            android:id="@+id/tvCurrencyCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/ivImg"
+            android:fontFamily="sans-serif-thin"
+            android:minWidth="50dp"
+            android:textColor="@color/_003_text_color_hint"
+            android:textSize="20sp"
+            tools:text="CNY"/>
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="3dp"
+            android:layout_toEndOf="@id/tvCurrencyCode"
+            android:ellipsize="none"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="end"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/_003_text_color_hint"
+            android:textSize="20sp"
+            tools:text="100.00"/>
+
+        <dinson.customview.weight.LanTingFontTextView
+            android:id="@+id/tvEquation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tvResult"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"
+            android:layout_toEndOf="@id/tvCurrencyCode"
+            android:alpha="0.34"
+            android:ellipsize="none"
+            android:gravity="end"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            tools:text="100.00"
+            tools:ignore="SmallSp"/>
+
+        <TextView
+            android:id="@+id/tvCurrencyCn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tvResult"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@color/_003_text_color_hint"
+            android:textSize="12sp"
+            tools:text="人民币 ￥"/>
+
+        <View
+            android:id="@+id/lFocusView"
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/white"
+            android:visibility="invisible"/>
+
+        <View
+            android:id="@+id/sFocusView"
+            android:layout_width="1dp"
+            android:layout_height="11dp"
+            android:layout_above="@id/tvResult"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/tvEquation"
+            android:background="@color/_003_text_color_hint"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+</dinson.customview.weight.swipelayout.SwipeItemLayout>

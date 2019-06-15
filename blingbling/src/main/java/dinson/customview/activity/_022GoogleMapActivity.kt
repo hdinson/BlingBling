@@ -1,10 +1,10 @@
 package dinson.customview.activity
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -20,14 +20,10 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.info
-import com.google.android.gms.location.LocationAvailability
-import android.content.Context.LOCATION_SERVICE
-import android.location.LocationManager
+import dinson.customview.kotlin.logi
+import io.reactivex.rxkotlin.addTo
 
-/**
- * google地图
- */
+
 class _022GoogleMapActivity : BaseActivity(),
     OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks,
@@ -46,6 +42,7 @@ class _022GoogleMapActivity : BaseActivity(),
     }
     private var mLastLocation: Location? = null
 
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__022_google_map)
@@ -75,7 +72,7 @@ class _022GoogleMapActivity : BaseActivity(),
 
     override fun onMapReady(googleMap: GoogleMap) {
 
-        info("onMapReady...")
+        logi("onMapReady...")
 
         mMap = googleMap
         mMap.uiSettings.isZoomControlsEnabled = true
@@ -93,14 +90,14 @@ class _022GoogleMapActivity : BaseActivity(),
      * GoogleMap连接暂停
      */
     override fun onConnectionSuspended(p0: Int) {
-        info("onConnectionSuspended...")
+        logi("onConnectionSuspended...")
     }
 
     /**
      * GoogleMap连接失败
      */
     override fun onConnectionFailed(p0: ConnectionResult) {
-        info("onConnectionFailed...")
+        logi("onConnectionFailed...")
     }
 
     /**
@@ -108,7 +105,7 @@ class _022GoogleMapActivity : BaseActivity(),
      */
     @SuppressLint("MissingPermission")
     override fun onConnected(p0: Bundle?) {
-        info("onConnected...")
+        logi("onConnected...")
 
 
         RxPermissions(this).request(ACCESS_FINE_LOCATION)
@@ -139,7 +136,7 @@ class _022GoogleMapActivity : BaseActivity(),
                 // 2
 
 
-                info("------1")
+                logi("------1")
 
 
                 val locationManager = getSystemService (Context.LOCATION_SERVICE) as LocationManager
@@ -148,15 +145,12 @@ class _022GoogleMapActivity : BaseActivity(),
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     1000, 0f,object :android.location.LocationListener{
                     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun onProviderEnabled(provider: String?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun onProviderDisabled(provider: String?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun onLocationChanged(location: Location?) {
@@ -171,24 +165,24 @@ class _022GoogleMapActivity : BaseActivity(),
                 val locationAvailability = LocationServices.FusedLocationApi.getLocationAvailability(mGoogleApiClient)
                 if (null != locationAvailability && locationAvailability.isLocationAvailable) {
                     // 3
-                    info("------2")
+                    logi("------2")
                     val  mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
                     // 4
                     if (mLastLocation != null) {
-                        info("------3")
+                        logi("------3")
                         val currentLocation = LatLng(mLastLocation.latitude, mLastLocation
                             .longitude)
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12f))
                     }
                 }
-            }
+            }.addToManaged()
     }
 
     /**
      * GoogleMarkerClick点击
      */
     override fun onMarkerClick(p0: Marker?): Boolean {
-        info("onMarkerClick...")
+        logi("onMarkerClick...")
         return true
     }
 
@@ -196,7 +190,7 @@ class _022GoogleMapActivity : BaseActivity(),
      * 定位回调
      */
     override fun onLocationChanged(p0: Location?) {
-        info("onLocationChanged...")
+        logi("onLocationChanged...")
 
     }
 }

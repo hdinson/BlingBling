@@ -15,7 +15,7 @@ import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.error
+import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.toast
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
@@ -33,8 +33,9 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
         /**
          * 判断当前是否登录
          */
-        fun isLogin() = HttpHelper.getCookie(ConstantsUtils.WANANDROID_DOMAIN)
-            .filter { it.name() == "loginUserPassword" || it.name() == "loginUserName" }.count() == 2
+        fun isLogin() = HttpHelper.getCookie(ConstantsUtils.WAN_ANDROID_DOMAIN)
+            .asSequence()
+            .filter { it.name() == "token_pass" || it.name() == "loginUserName" }.count() == 2
     }
 
     private lateinit var mWanAndroidApi: WanAndroidApi
@@ -58,7 +59,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initToolbarTitle()//设置title
 
-        mAdapter = _001WanAndroidMainListAdapter(this, mData, this)
+        mAdapter = _001WanAndroidMainListAdapter(mData, this)
 
         flCustomRefreshView.setAdapter(mAdapter)
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
@@ -78,7 +79,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
      * 设置toolbarTitle
      */
     private fun initToolbarTitle() {
-        toolbar.title = "玩安卓 - ${HttpHelper.getCookie(ConstantsUtils.WANANDROID_DOMAIN)
+        toolbar.title = "玩安卓 - ${HttpHelper.getCookie(ConstantsUtils.WAN_ANDROID_DOMAIN)
             .firstOrNull { it.name() == "loginUserName" }?.value() ?: "未登录"}"
     }
 
@@ -88,7 +89,8 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
      */
     private fun getServiceData(isRefresh: Boolean) {
         if (isRefresh) mPageIndex = 0
-        mWanAndroidApi.getMainArticleList(mPageIndex).compose(RxSchedulers.io_main())
+        mWanAndroidApi.getMainArticleList(mPageIndex)
+            .compose(RxSchedulers.io_main())
             .subscribe({
                 flCustomRefreshView.complete()
                 if (isRefresh) mData.clear()
@@ -99,8 +101,9 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 mAdapter.notifyDataSetChanged()
                 mPageIndex++
             }, {
+                loge(it.toString())
                 flCustomRefreshView.complete()
-            })
+            }).addToManaged()
     }
 
     /**
@@ -122,8 +125,10 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                     mData[position] = dataBean
                 }
             }, {
-                error(it.toString())
-            })
+                likeView.toggle()
+                it.message?.toast()
+                loge(it.toString())
+            }).addToManaged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -132,20 +137,20 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        viewClick@ when (item?.itemId) {
+        when (item?.itemId) {
             R.id.action_like -> {
                 val login = isLogin()
                 if (!login) {
                     showLoginDialog()
-                    return@viewClick
+                    return true
                 }
                 _001WanAndroidLikeActivity.start(this, REQUEST_CODE_LIKE)
             }
             R.id.action_search -> {
-                error("search")
+                loge("search")
             }
             R.id.action_logout -> {
-                HttpHelper.clearCookie(ConstantsUtils.WANANDROID_DOMAIN)
+                HttpHelper.clearCookie(ConstantsUtils.WAN_ANDROID_DOMAIN)
                 flCustomRefreshView.isRefreshing = true
                 initToolbarTitle()
             }
@@ -160,14 +165,14 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
      * 显示登录对话框
      */
     private val mLoginSuccessListener by lazy {
-        OnLoginSuccessListener({ isSuccess, errorMsg ->
+        OnLoginSuccessListener { isSuccess, errorMsg ->
             if (isSuccess) {
                 initToolbarTitle()
                 flCustomRefreshView.isRefreshing = true
             } else {
                 errorMsg.toast()
             }
-        })
+        }
     }
 
     /**

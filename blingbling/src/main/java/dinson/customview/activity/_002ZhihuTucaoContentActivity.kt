@@ -6,15 +6,16 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
 import com.google.gson.Gson
+import com.trello.rxlifecycle2.android.ActivityEvent
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.api.ZhihuTucaoApi
-import dinson.customview.db.AppDbUtils
+import dinson.customview.db.ZhiHuDbUtils
 import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.entity.zhihu.ZhihuTucaoDetails
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.error
+import dinson.customview.kotlin.loge
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_content.*
@@ -66,26 +67,28 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
 
     private fun initData() {
         val extraData = intent.getParcelableExtra<ZhihuTucao>(EXTRA_NEWS_BEAN)
-        val mData = AppDbUtils.queryById(extraData.id)
+        val mData = ZhiHuDbUtils.queryById(extraData.id)
         if (mData == null) {
             onBackPressed()
-            error("数据库查不到当前日期的数据")
+            loge("数据库查不到当前日期的数据")
             return
         }
         val content = mData.content
         if (content == null || content.isEmpty()) {
             //加载网络
-            HttpHelper.create(ZhihuTucaoApi::class.java).getStoriesDetails(extraData.id)
+            HttpHelper.create(ZhihuTucaoApi::class.java)
+                .getStoriesDetails(extraData.id)
                 .compose(RxSchedulers.io_main())
+                .compose(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe({
                     //本地数据库存储
                     mData.content = it.string()
-                    AppDbUtils.updateZhihuTucao(mData)
+                    ZhiHuDbUtils.updateZhihuTucao(mData)
 
                     //解析数据，设置数据
                     parseJsonAndSetData(mData.content)
                 }, {
-                    error("知乎请求详情数据失败")
+                    loge("知乎请求详情数据失败")
                     onBackPressed()
                 })
         } else {
