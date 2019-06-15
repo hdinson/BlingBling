@@ -33,7 +33,7 @@ class DailyPicActivity : BaseActivity() {
         para.height = height
         para.width = screenWidth
         ivImg.setImageBitmap(bitmap)
-        ivImg.setOnClickListener({ onBackPressed() })
+        ivImg.setOnClickListener { onBackPressed() }
 
         val content = data.hp_content
         val indexOfStop = content.lastIndexOf("by")

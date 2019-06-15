@@ -101,6 +101,19 @@ public class DateUtils {
     }
 
     /**
+     * 得到日期
+     *
+     * @param offset 偏移天数，0表示今天，-1表示昨天，1表示明天
+     * @return yyyy-MM-dd
+     */
+    public static String getDateOfDay(int offset, String format) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, offset);
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        String yestoday = sdf.format(calendar.getTime());
+        return yestoday;
+    }
+    /**
      * 得到今年
      *
      * @return yyyy

@@ -17,7 +17,7 @@ import dinson.customview.R;
 import dinson.customview.utils.LogUtils;
 
 /**
- * @author Dinson - 2017/10/9
+ * 视差fragment容器
  */
 public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageChangeListener {
 

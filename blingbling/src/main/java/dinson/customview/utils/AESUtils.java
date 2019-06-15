@@ -19,7 +19,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * @author Dinson - 2018/3/21
+ * 加密工具类
  */
 public class AESUtils {
     private final static String HEX = "0123456789ABCDEF";

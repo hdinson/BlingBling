@@ -11,6 +11,8 @@ import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
+import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.toast
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.refreshview.CustomRefreshView
@@ -47,7 +49,7 @@ class _001WanAndroidLikeActivity : BaseActivity(), _001OnLikeViewClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        mAdapter = _001WanAndroidLikeListAdapter(this, mData, this)
+        mAdapter = _001WanAndroidLikeListAdapter(mData, this)
 
         flCustomRefreshView.setAdapter(mAdapter)
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
@@ -65,7 +67,8 @@ class _001WanAndroidLikeActivity : BaseActivity(), _001OnLikeViewClickListener {
      * 获取文章数据
      */
     private fun getServiceData() {
-        mWanAndroidApi.collectList().compose(RxSchedulers.io_main())
+        mWanAndroidApi.collectList()
+            .compose(RxSchedulers.io_main())
             .subscribe({
                 flCustomRefreshView.complete()
                 mData.clear()
@@ -76,7 +79,7 @@ class _001WanAndroidLikeActivity : BaseActivity(), _001OnLikeViewClickListener {
                 mAdapter.notifyDataSetChanged()
             }, {
                 flCustomRefreshView.complete()
-            })
+            }).addToManaged()
     }
 
     /**
@@ -84,6 +87,22 @@ class _001WanAndroidLikeActivity : BaseActivity(), _001OnLikeViewClickListener {
      * 通知上一个界面刷新界面
      */
     override fun onClickLikeView(likeView: CheckBox, dataBean: WanAndArticle, position: Int) {
-        setResult(Activity.RESULT_OK)
+        mWanAndroidApi.delCollectFromCollectList(dataBean.id)
+            .compose(RxSchedulers.io_main())
+            .subscribe({
+                mData.remove(dataBean)
+                mAdapter.notifyItemRemoved(position)
+                when (mData.size) {
+                    0 -> mAdapter.notifyDataSetChanged()
+                    position -> Unit
+                    else -> mAdapter.notifyItemRangeChanged(position,
+                        mData.size - position)
+                }
+                setResult(Activity.RESULT_OK)
+            }, {
+                likeView.toggle()
+                it.message?.toast()
+                loge(it.toString())
+            }).addToManaged()
     }
 }

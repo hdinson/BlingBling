@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="tvTitle" type="id"/>
+    <item name="tvSubTitle" type="id"/>
     <item name="tvHead" type="id"/>
     <item name="tvName" type="id"/>
     <item name="tvDesc" type="id"/>
@@ -33,6 +34,7 @@
     <item name="rootView" type="id"/>
     <item name="guideline" type="id"/>
     <item name="iconGroup" type="id"/>
+    <item name="mPullZoomView" type="id"/>
 
     <item name="action_edit_repository" type="id"/>
     <item name="action_upload_pic" type="id"/>

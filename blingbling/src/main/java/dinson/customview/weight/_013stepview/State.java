@@ -1,7 +1,7 @@
 package dinson.customview.weight._013stepview;
 
 /**
- * @author Dinson - 2018/2/23
+ * 步骤状态（Completed：已完成  UnCompleted：未完成  Completing：进行到当前步骤）
  */
 public enum State {
     Completed, UnCompleted, Completing

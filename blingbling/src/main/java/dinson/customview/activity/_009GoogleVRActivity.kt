@@ -3,37 +3,37 @@ package dinson.customview.activity
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
+import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview._global.ConstantsUtils
 import dinson.customview.adapter._009ContentAdapter
 import dinson.customview.download.DownloadManager
 import dinson.customview.download.listener.HttpDownOnNextListener
 import dinson.customview.download.model.DownloadState
 import dinson.customview.download.utils.DbDownUtil
+import dinson.customview.http.RxSchedulers
 import dinson.customview.model._009ModelUtil
 import dinson.customview.model._009PanoramaImageModel
 import dinson.customview.utils.LogUtils
-import dinson.customview.utils.UIUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
 import dinson.customview.weight.recycleview.OnRvItemClickListener
 import dinson.customview.weight.recycleview.RvItemClickSupport
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity__009_google_vr.*
 import java.io.File
 
 class _009GoogleVRActivity : BaseActivity() {
 
     private var mListDatas = _009ModelUtil.getPanoramaImageList()
-    private var mAdapter = _009ContentAdapter(this, mListDatas)
+    private var mAdapter = _009ContentAdapter(mListDatas)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,7 @@ class _009GoogleVRActivity : BaseActivity() {
 
     private fun initView() {
         //顶部图片
-        val imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Fqp3F7wLs2rjSrMlA-9bSIIi27Of.webp"
+        val imgUrl = "${BuildConfig.QINIU_URL}Fqp3F7wLs2rjSrMlA-9bSIIi27Of.webp"
         val rOptions = RequestOptions().error(R.drawable.def_img)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
         val tOptions = DrawableTransitionOptions().crossFade(500)
@@ -63,9 +63,9 @@ class _009GoogleVRActivity : BaseActivity() {
             itemAnimator = null
             adapter = mAdapter
             RvItemClickSupport.addTo(this)
-                .setOnItemClickListener(OnRvItemClickListener({ _, v, position ->
-                    onItemClick(v, position)
-                }))
+                .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+                    onItemClick(position)
+                })
         }
     }
 
@@ -76,15 +76,16 @@ class _009GoogleVRActivity : BaseActivity() {
 
         Observable.just(model.localPath)
             .map {
-                Glide.with(UIUtils.getContext()).asBitmap().load(it)
+                Glide.with(this).asBitmap().load(it)
                     .submit(SIZE_ORIGINAL, SIZE_ORIGINAL).get()
-            }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ this.loadPanoramaImage(it) })
+            }
+            .compose(RxSchedulers.io_main())
+            .subscribe { this.loadPanoramaImage(it) }
+            .addToManaged()
     }
 
 
-    private fun onItemClick(view: View, position: Int) {
+    private fun onItemClick(position: Int) {
         val selector = mListDatas[position]
         val transform = selector.transform()
         val downloadInfo = DbDownUtil.getInstance().queryDownBy(transform.url)
@@ -131,5 +132,7 @@ class _009GoogleVRActivity : BaseActivity() {
         super.onDestroy()
     }
 
-    override fun setWindowBackgroundColor() = null
+    override fun setWindowBackgroundColor(): Int? {
+        return null
+    }
 }

@@ -12,7 +12,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * @author Dinson - 2018/3/23
+ * 七牛云工具类
  */
 public class QiNiuUtils {
 

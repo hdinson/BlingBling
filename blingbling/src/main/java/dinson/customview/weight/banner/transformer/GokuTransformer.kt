@@ -4,7 +4,7 @@ import android.support.v4.view.ViewPager
 import android.view.View
 
 /**
- * @author Dinson - 2018/1/30
+ * 全民直播banner效果
  */
 class GokuTransformer : ViewPager.PageTransformer {
     companion object {

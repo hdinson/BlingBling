@@ -1,53 +1,51 @@
 package dinson.customview.adapter
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.BitmapImageViewTarget
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.bumptech.glide.request.transition.Transition
-import com.qiniu.storage.model.FileInfo
 import dinson.customview.R
-import dinson.customview.kotlin.screenWidth
-import dinson.customview.model._005FileInfo
+import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.utils.GlideUtils
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
+import kotlinx.android.synthetic.main.item_005_main_pic.view.*
 
 
 /**
  *玩安卓列表适配器
  */
-class _005MainPicAdapter(context: Context, dataList: List<_005FileInfo>, private val mBaseUrl: String)
-    : CommonAdapter<_005FileInfo>(context, dataList) {
+class _005MainPicAdapter(dataList: List<QiNiuFileInfo>, private val mBaseUrl: String)
+    : CommonAdapter<QiNiuFileInfo>(dataList) {
 
     //private val imageHeightMap = LinkedHashMap<Int, Int>()
 
     override fun getLayoutId(viewType: Int) = R.layout.item_005_main_pic
 
-    override fun convert(holder: CommonViewHolder, dataBean: _005FileInfo, position: Int) {
-        val imageView = holder.getView<ImageView>(R.id.ivImg)
+    override fun convert(holder: CommonViewHolder, dataBean: QiNiuFileInfo, position: Int) {
+
+
         if (dataBean.mimeType.contains("image")) {
 
             if (!dataBean.isNull) {
-                setCardViewLayoutParams(imageView, dataBean.width, dataBean.height)
+                setCardViewLayoutParams(holder.itemView.ivImg, dataBean.width, dataBean.height)
             }
 
-            Glide.with(mContext).asBitmap()
+            Glide.with(holder.itemView.context).asBitmap()
                 .load(mBaseUrl + dataBean.key)
                 .apply(GlideUtils.getDefaultOptions()
-                    .override(imageView.width, 100))
-                .into(DriverViewTarget(dataBean, imageView))
+                    .override(holder.itemView.ivImg.width, 100))
+                .into(DriverViewTarget(dataBean, holder.itemView.ivImg))
         } else {
-            Glide.with(mContext).load(R.mipmap.ic_launcher)
+            Glide.with(holder.itemView).load(R.mipmap.ic_launcher)
                 .apply(GlideUtils.getDefaultOptions())
-                .into(holder.getView(R.id.ivImg))
+                .into(holder.itemView.ivImg)
         }
     }
 
-    private inner class DriverViewTarget(val data: _005FileInfo, val ivImg: ImageView) : BitmapImageViewTarget(ivImg) {
+    private inner class DriverViewTarget(val data: QiNiuFileInfo, val ivImg: ImageView) : BitmapImageViewTarget(ivImg) {
 
         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
 

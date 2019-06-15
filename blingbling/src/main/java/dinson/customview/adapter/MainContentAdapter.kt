@@ -1,25 +1,24 @@
 package dinson.customview.adapter
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageView
+import dinson.customview.BuildConfig
 import dinson.customview.R
-import dinson.customview.R.id.iv_one
 import dinson.customview.entity.ClassBean
 import dinson.customview.listener.OnItemMoveListener
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.utils.GlideUtils
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
+import kotlinx.android.synthetic.main.item_main_content.view.*
 import java.util.*
 
 /**
  * 主页适配器
  */
-class MainContentAdapter(context: Context, dataList: List<ClassBean>, private val mMoveListener
-: OnItemTouchMoveListener) : CommonAdapter<ClassBean>(context, dataList), OnItemMoveListener {
+class MainContentAdapter(dataList: List<ClassBean>, private val mMoveListener
+: OnItemTouchMoveListener) : CommonAdapter<ClassBean>(dataList), OnItemMoveListener {
 
     private val mNumberImg = intArrayOf(R.drawable.n_0, R.drawable.n_1, R.drawable.n_2,
         R.drawable.n_3, R.drawable.n_4, R.drawable.n_5, R.drawable.n_6,
@@ -28,16 +27,22 @@ class MainContentAdapter(context: Context, dataList: List<ClassBean>, private va
     override fun getLayoutId(viewType: Int) = R.layout.item_main_content
 
     override fun convert(holder: CommonViewHolder, classBean: ClassBean, position: Int) {
-        holder.setTvText(R.id.tvTitle, classBean.title)
-        holder.setTvText(R.id.tvDesc, classBean.desc)
+        holder.itemView.tvTitle.text = classBean.title
+        holder.itemView.tvDesc.text = classBean.desc
+
         val ints = formatPosition(position + 1)
-        val ivImg = holder.getView<ImageView>(R.id.ivImg)
-        GlideUtils.setCircleImage(mContext, classBean.imgUrl, ivImg)
-        ivImg.setOnTouchListener(ViewHolderTouchListener(holder))
-        holder.getView<View>(iv_one).visibility = if (ints[0] == 0) View.INVISIBLE else View.VISIBLE
-        if (ints[0] != 0) holder.setIvSrc(iv_one, mNumberImg[ints[0]])
-        holder.setIvSrc(R.id.iv_second, mNumberImg[ints[1]])
-        holder.setIvSrc(R.id.iv_third, mNumberImg[ints[2]])
+        GlideUtils.setCircleImage(holder.itemView.context, "${BuildConfig.QINIU_URL}${classBean.img}",
+            holder.itemView.ivImg)
+        holder.itemView.ivImg.setOnTouchListener(ViewHolderTouchListener(holder))
+
+        if (ints[0] == 0) {
+            holder.itemView.ivOne.visibility = View.INVISIBLE
+        } else {
+            holder.itemView.ivOne.visibility = View.VISIBLE
+            holder.itemView.ivOne.setImageResource(mNumberImg[ints[0]])
+        }
+        holder.itemView.ivSecond.setImageResource(mNumberImg[ints[1]])
+        holder.itemView.ivThird.setImageResource(mNumberImg[ints[2]])
     }
 
 

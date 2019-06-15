@@ -11,134 +11,127 @@ private val Any.tag get() = javaClass.simpleName
 private const val filterTag = "│ --> "
 private val isDebug = BuildConfig.DEBUG
 
-fun Any.debug(message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.d(tag, "$filterTag${if (showLine) getLineNumber("debug")
+fun Any.logd(message: Any?, showLine: Boolean = true) {
+    if (isDebug) Log.d(tag, "$filterTag${if (showLine) getLineNumber("logd")
     else ""}${message.toString()}")
 }
 
-fun Any.error(message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.e(tag, "$filterTag${if (showLine) getLineNumber("error")
+fun Any.loge(message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.e(tag, "$filterTag${if (showLine) getLineNumber("loge")
     else ""}${message.toString()}")
 }
 
-fun Any.wtf(message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.wtf(tag, "$filterTag${if (showLine) getLineNumber("wtf")
+fun Any.logwtf(message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.wtf(tag, "$filterTag${if (showLine) getLineNumber("logwtf")
     else ""}${message.toString()}")
 }
 
-fun Any.warning(message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.w(tag, "$filterTag${if (showLine) getLineNumber("warning")
+fun Any.logw(message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.w(tag, "$filterTag${if (showLine) getLineNumber("logw")
     else ""}${message.toString()}")
 }
 
-fun Any.info(message: Any?, showLine: Boolean = true) = apply {
+fun Any.logi(message: Any?, showLine: Boolean = true) = apply {
     if (isDebug) {
-        Log.i(tag, "$filterTag${if (showLine) getLineNumber("info")
+        Log.i(tag, "$filterTag${if (showLine) getLineNumber("logi")
         else ""}${message.toString()}")
     }
 }
 
-fun Any.verbose(message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.v(tag, "$filterTag${if (showLine) getLineNumber("verbose")
+fun Any.logv(message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.v(tag, "$filterTag${if (showLine) getLineNumber("logv")
     else ""}${message.toString()}")
 }
 
-fun Any.debug(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.d(tag, "$filterTag${if (showLine) getLineNumber("debug")
+fun Any.logd(tag: String, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.d(tag, "$filterTag${if (showLine) getLineNumber("logd")
     else ""}${message.toString()}")
 }
 
-fun Any.error(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.e(tag, "$filterTag${if (showLine) getLineNumber("error")
+fun Any.loge(tag: String, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.e(tag, "$filterTag${if (showLine) getLineNumber("loge")
     else ""}${message.toString()}")
 }
 
-fun Any.wtf(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.wtf(tag, "$filterTag${if (showLine) getLineNumber("wtf")
+fun Any.logwtf(tag: String, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.wtf(tag, "$filterTag${if (showLine) getLineNumber("logwtf")
     else ""}${message.toString()}")
 }
 
-fun Any.warning(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.w(tag, "$filterTag${if (showLine) getLineNumber("warning")
+fun Any.logw(tag: String, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.w(tag, "$filterTag${if (showLine) getLineNumber("logw")
     else ""}${message.toString()}")
 }
 
-fun Any.info(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.i(tag, "$filterTag${if (showLine) getLineNumber("info")
+fun Any.logi(tag: String, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.i(tag, "$filterTag${if (showLine) getLineNumber("logi")
     else ""}${message.toString()}")
 }
 
-fun Any.verbose(tag: String, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.v(tag, "$filterTag${if (showLine) getLineNumber("verbose")
+fun Any.logv(tag: String, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.v(tag, "$filterTag${if (showLine) getLineNumber("logv")
     else ""}${message.toString()}")
 }
 
-fun Any.debug(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.d(context.tag, "$filterTag${if (showLine) getLineNumber("debug")
+fun Any.logd(context: Any, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.d(context.tag, "$filterTag${if (showLine) getLineNumber("logd")
     else ""}${message.toString()}")
 }
 
-fun Any.error(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.e(context.tag, "$filterTag${if (showLine) getLineNumber("error")
+fun Any.loge(context: Any, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.e(context.tag, "$filterTag${if (showLine) getLineNumber("loge")
     else ""}${message.toString()}")
 }
 
-fun Any.wtf(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.wtf(context.tag, "$filterTag${if (showLine) getLineNumber("wtf")
+fun Any.logwtf(context: Any, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.wtf(context.tag, "$filterTag${if (showLine) getLineNumber("logwtf")
     else ""}${message.toString()}")
 }
 
-fun Any.warning(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.w(context.tag, "$filterTag${if (showLine) getLineNumber("warning")
+fun Any.logw(context: Any, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.w(context.tag, "$filterTag${if (showLine) getLineNumber("logw")
     else ""}${message.toString()}")
 }
 
-fun Any.info(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.i(context.tag, "$filterTag${if (showLine) getLineNumber("info")
+fun Any.logi(context: Any, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.i(context.tag, "$filterTag${if (showLine) getLineNumber("logi")
     else ""}${message.toString()}")
 }
 
-fun Any.verbose(context: Any, message: Any?, showLine: Boolean = true) = apply {
-    if (isDebug) Log.v(context.tag, "$filterTag${if (showLine) getLineNumber("verbose")
+fun Any.logv(context: Any, message: Any?, showLine: Boolean = true) = apply {
+    if (isDebug) Log.v(context.tag, "$filterTag${if (showLine) getLineNumber("logv")
     else ""}${message.toString()}")
 }
 
-inline fun Any.debug(message: () -> Any?) = debug(message())
+fun String.logd(showLine: Boolean = true) {
+    if (isDebug) Log.d(this, "$filterTag${if (showLine) getLineNumber("logd")
+    else ""}${this}")
+}
 
-inline fun Any.error(message: () -> Any?) = error(message())
+fun String.loge(showLine: Boolean = true) {
+    if (isDebug) Log.e(this, "$filterTag${if (showLine) getLineNumber("loge")
+    else ""}${this}")
+}
 
-inline fun Any.wtf(message: () -> Any?) = wtf(message())
+fun String.logwtf(showLine: Boolean = true) {
+    if (isDebug) Log.wtf(this, "$filterTag${if (showLine) getLineNumber("logwtf")
+    else ""}${this}")
+}
 
-inline fun Any.warning(message: () -> Any?) = warning(message())
+fun String.logw(showLine: Boolean = true) {
+    if (isDebug) Log.w(this, "$filterTag${if (showLine) getLineNumber("logw")
+    else ""}${this}")
+}
 
-inline fun Any.info(message: () -> Any?) = info(message())
+fun String.logi(showLine: Boolean = true) {
+    if (isDebug) Log.i(this, "$filterTag${if (showLine) getLineNumber("logi")
+    else ""}${this}")
+}
 
-inline fun Any.verbose(message: () -> Any?) = verbose(message())
-
-inline fun Any.debug(tag: String, message: () -> Any?) = debug(tag, message())
-
-inline fun Any.error(tag: String, message: () -> Any?) = error(tag, message())
-
-inline fun Any.wtf(tag: String, message: () -> Any?) = wtf(tag, message())
-
-inline fun Any.warning(tag: String, message: () -> Any?) = warning(tag, message())
-
-inline fun Any.info(tag: String, message: () -> Any?) = info(tag, message())
-
-inline fun Any.verbose(tag: String, message: () -> Any?) = verbose(tag, message())
-
-fun Any.debug(context: Any, message: () -> Any?) = debug(context.tag, message())
-
-fun Any.error(context: Any, message: () -> Any?) = error(context.tag, message())
-
-fun Any.wtf(context: Any, message: () -> Any?) = wtf(context.tag, message())
-
-fun Any.warning(context: Any, message: () -> Any?) = warning(context.tag, message())
-
-fun Any.info(context: Any, message: () -> Any?) = info(context.tag, message())
-
-fun Any.verbose(context: Any, message: () -> Any?) = verbose(context.tag, message())
-
+fun String.logv(showLine: Boolean = true) {
+    if (isDebug) Log.v(this, "$filterTag${if (showLine) getLineNumber("logv")
+    else ""}${this}")
+}
 
 private fun getLineNumber(methodName: String): String {
     val stackTraceElement = Thread.currentThread().stackTrace

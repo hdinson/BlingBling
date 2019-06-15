@@ -15,8 +15,8 @@ public class NetworkUtils {
      *
      * @return NetworkInfo
      */
-    private static NetworkInfo getActiveNetworkInfo() {
-        return ((ConnectivityManager) UIUtils.getContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+    private static NetworkInfo getActiveNetworkInfo(Context context) {
+        return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
     }
 
     /**
@@ -25,8 +25,8 @@ public class NetworkUtils {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean isNetworkAvailable() {
-        NetworkInfo info = getActiveNetworkInfo();
+    public static boolean isNetworkAvailable(Context context) {
+        NetworkInfo info = getActiveNetworkInfo(context);
         return info != null && info.isConnected();
     }
    /* *//**

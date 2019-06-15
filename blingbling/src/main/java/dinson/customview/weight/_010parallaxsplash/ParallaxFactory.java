@@ -10,7 +10,7 @@ import android.view.View;
 import dinson.customview.R;
 
 /**
- * @author Dinson - 2017/10/9
+ * 自定义视差LayoutInflater
  */
 class ParallaxFactory implements LayoutInflaterFactory {
     private ParallaxFragment fragment;

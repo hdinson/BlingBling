@@ -13,6 +13,7 @@ import dinson.customview.R;
 public class BannerViewSettings {
 
     private final int mIndicatorMargin;
+    private final int mIndicatorSize;
     private final int mIndicatorMarginBottom;
     private boolean mIsOpenMZEffect;
     private final boolean mIsMiddlePageCover;
@@ -32,7 +33,8 @@ public class BannerViewSettings {
         mIsAutoLoop = mIsCanLoop && attr.getBoolean(R.styleable.BannerView_autoLoop, true);
         mHiddenIndicator = attr.getBoolean(R.styleable.BannerView_hiddenIndicator, false);
         mIndicatorAlign = attr.getInt(R.styleable.BannerView_indicatorAlign, 1);
-        mIndicatorMargin = attr.getDimensionPixelSize(R.styleable.BannerView_indicatorMargin, 0);
+        mIndicatorMargin = attr.getDimensionPixelSize(R.styleable.BannerView_indicatorMargin, 20);
+        mIndicatorSize = attr.getDimensionPixelSize(R.styleable.BannerView_indicatorSize, 20);
         mIndicatorMarginBottom = attr.getDimensionPixelSize(R.styleable.BannerView_indicatorMarginBottom, 0);
         attr.recycle();
     }
@@ -83,5 +85,9 @@ public class BannerViewSettings {
 
     public float aspectRatio() {
         return mAspectRatio;
+    }
+
+    public int getIndicatorSize() {
+        return mIndicatorSize;
     }
 }

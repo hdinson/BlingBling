@@ -2,7 +2,11 @@ package dinson.customview.utils
 
 import android.content.Context
 import com.google.gson.Gson
+import dinson.customview._global.GlobalApplication
+import dinson.customview.entity.countdown.OnTheDay
+import dinson.customview.model._003GankLadyMode
 import dinson.customview.model._005QiNiuConfig
+import dinson.customview.model._025Schedule
 import io.reactivex.Observable
 import io.reactivex.functions.BiConsumer
 import java.util.*
@@ -17,12 +21,12 @@ object SPUtils {
     /** 设置当前用户设置的币种 */
     fun setUserCurrency(currency: ArrayList<String>) {
         if (currency.size != 5) return
-        putString(UIUtils.getContext(), "config", "currency", currency.joinToString(","))
+        putString(GlobalApplication.getContext(), "config", "currency", currency.joinToString(","))
     }
 
     /** 获取当前用户设置的币种 */
     fun getUserCurrency(): List<String>? {
-        val value = getString(UIUtils.getContext(), "config", "currency", "")
+        val value = getString(GlobalApplication.getContext(), "config", "currency", "")
         if (value.isEmpty()) return null
 
         val result = Arrays.asList(*value.split(",").dropLastWhile { it.isEmpty() }.toTypedArray())
@@ -32,6 +36,17 @@ object SPUtils {
                 BiConsumer<ArrayList<String>, String> { obj, e -> obj.add(e) })
             .subscribe()
         return result
+    }
+
+    /** 设置干货集中营福利图片的显示模式 */
+    fun setGankLadyMode(mode: _003GankLadyMode) {
+        putBoolean(GlobalApplication.getContext(), "config", "isRandom", mode == _003GankLadyMode.RANDOM)
+    }
+
+    /** 获取干货集中营福利图片的显示模式 */
+    fun getGankLadyMode(): _003GankLadyMode {
+        val isRandom = getBoolean(GlobalApplication.getContext(), "config", "isRandom", false)
+        return if (isRandom) _003GankLadyMode.RANDOM else _003GankLadyMode.NORMAL
     }
 
     /**
@@ -148,6 +163,67 @@ object SPUtils {
         sp.edit().putString(config.Domain, Gson().toJson(config)).apply()
     }
 
+    /**
+     * 获取倒数日日程
+     */
+    fun getScheduleList(context: Context): ArrayList<_025Schedule> {
+        val sp = context.getSharedPreferences("schedule", Context.MODE_PRIVATE)
+        val result = ArrayList<_025Schedule>()
+        val gson = Gson()
+        sp.all.forEach {
+            result.add(gson.fromJson(it.value.toString(), _025Schedule::class.java))
+        }
+        return result
+    }
+
+    /**
+     * 根据id获取倒数日日程
+     */
+    fun getScheduleById(context: Context, id: String): _025Schedule? {
+        if (StringUtils.isEmpty(id)) return null
+        val sp = context.getSharedPreferences("schedule", Context.MODE_PRIVATE)
+        val json = sp.getString(id, "")
+        if (StringUtils.isEmpty(json)) return null
+        return Gson().fromJson(json, _025Schedule::class.java)
+    }
+
+    /**
+     * 添加倒数日日程
+     */
+    fun addSchedule(context: Context, schedule: _025Schedule) {
+        val sp = context.getSharedPreferences("schedule", Context.MODE_PRIVATE)
+        sp.edit().putString(schedule.id.toString(), Gson().toJson(schedule)).apply()
+    }
+
+    /**
+     * 删除倒数日日程
+     */
+    fun deleteSchedule(context: Context, id: String) {
+        context.getSharedPreferences("schedule", Context.MODE_PRIVATE)
+            .edit().remove(id).apply()
+    }
+
+    /** 置顶的日程 */
+    fun setScheduleTop(context: Context, id: String) {
+        putString(context, "common", "top", id)
+    }
+
+    /** 置顶的日程 */
+    fun getScheduleTop(context: Context) = getString(context,
+        "common", "top", "")
+
+    fun getOnTheDay(context: Context, key: String) =
+        getString(context, "daily", key, "")
+
+
+    fun setOnTheDay(context: Context, onTheDay: HashMap<String, ArrayList<OnTheDay>>) {
+        val edit = context.getSharedPreferences("daily", Context.MODE_PRIVATE).edit()
+        val gson = Gson()
+        onTheDay.forEach {
+            edit.putString(it.key, gson.toJson(it.value))
+        }
+        edit.apply()
+    }
 
     /******************************************************************************************************/
     /**                             内部实现                                                              **/

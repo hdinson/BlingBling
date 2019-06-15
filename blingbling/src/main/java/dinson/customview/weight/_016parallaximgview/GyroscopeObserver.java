@@ -80,10 +80,7 @@ public class GyroscopeObserver implements SensorEventListener {
 
         if (rotateY > rotateX + rotateZ) {
             final float dT = (event.timestamp - mLastTimestamp) * NS2S;
-
-            LogUtils.e(dT+"-------"+(event.timestamp - mLastTimestamp));
             mRotateRadianY += event.values[1] * dT;
-
 
             if (mRotateRadianY > mMaxRotateRadian) {
                 mRotateRadianY = mMaxRotateRadian;
@@ -92,9 +89,6 @@ public class GyroscopeObserver implements SensorEventListener {
             } else {
                 for (ParallaxImageView view : mViews) {
                     if (view != null && view.getOrientation() == ParallaxScrollOrientation.HORIZONTAL) {
-
-                        LogUtils.e("1：mRotateRadianY:"+mRotateRadianY+" mMaxRotateRadian:"+mMaxRotateRadian);
-
                         view.updateProgress((float) (mRotateRadianY / mMaxRotateRadian));
                     }
                 }
@@ -111,7 +105,6 @@ public class GyroscopeObserver implements SensorEventListener {
             } else {
                 for (ParallaxImageView view : mViews) {
                     if (view != null && view.getOrientation() == ParallaxScrollOrientation.VERTICAL) {
-                        LogUtils.e("2：mRotateRadianY:"+mRotateRadianY+" mMaxRotateRadian:"+mMaxRotateRadian);
                         view.updateProgress((float) (mRotateRadianX / mMaxRotateRadian));
                     }
                 }

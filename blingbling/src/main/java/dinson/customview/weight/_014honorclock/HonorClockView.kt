@@ -150,7 +150,7 @@ class HonorClockView @JvmOverloads constructor(context: Context, attrs: Attribut
             it.removeAllListeners()
             it.cancel()
         }
-        mInitStartAngle=-1
+        mInitStartAngle = -1
         mClockAnimator = null
     }
 }

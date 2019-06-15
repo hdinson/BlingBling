@@ -6,8 +6,6 @@ import java.util.StringTokenizer;
 
 /**
  * 四则运算（逆波兰算法）
- *
- * @author Dinson - 2017/10/18
  */
 public class ArithmeticUtils {
     /**

@@ -5,13 +5,11 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._002ZhihuListAdapter
 import dinson.customview.api.ZhihuTucaoApi
-import dinson.customview.db.AppDbUtils
+import dinson.customview.db.ZhiHuDbUtils
 import dinson.customview.db.model.ZhihuTucao
-import dinson.customview.entity.zhihu.ZhihuTucaoListResponse
-import dinson.customview.http.BaseObserver
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.debug
+import dinson.customview.kotlin.logd
 import dinson.customview.utils.DateUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.recycleview.OnRvItemClickListener
@@ -43,8 +41,8 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        mData = AppDbUtils.getLocalDatas() as ArrayList<ZhihuTucao>
-        mAdapter = _002ZhihuListAdapter(this, mData)
+        mData = ZhiHuDbUtils.getLocalDatas() as ArrayList<ZhihuTucao>
+        mAdapter = _002ZhihuListAdapter(mData)
 
         flCustomRefreshView.setAdapter(mAdapter)
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
@@ -69,23 +67,23 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
      * 获取服务器数据
      */
     private fun getServiceData() {
-        mZhihuTucaoApi.getStoriesList().compose(RxSchedulers.io_main())
-            .subscribe(object : BaseObserver<ZhihuTucaoListResponse?>() {
-                override fun onHandlerSuccess(response: ZhihuTucaoListResponse) {
-                    //数据集不为空时，如果第一条的日期比较大时，说明没有更新的
-                    if (mData.isNotEmpty() && mData[0].date >= response.stories[0].date) return
+        mZhihuTucaoApi.getStoriesList()
+            .compose(RxSchedulers.io_main())
+            .subscribe({ response ->
+                //数据集不为空时，如果第一条的日期比较大时，说明没有更新的
+                if (mData.isNotEmpty() && mData[0].date >= response.stories[0].date)
+                    return@subscribe
 
-                    val map = response.stories.map { it.convertToZhihuTucao() }
-                    AppDbUtils.insertMultiZhihuTucao(map)
-                    mData.clear()
-                    mData.addAll(map)
-                    mAdapter.notifyDataSetChanged()
-                }
-
-                override fun onFinal() {
-                    flCustomRefreshView.complete()
-                }
-            })
+                val map = response.stories.map { it.convertToZhihuTucao() }
+                ZhiHuDbUtils.insertMultiZhihuTucao(map)
+                mData.clear()
+                mData.addAll(map)
+                mAdapter.notifyDataSetChanged()
+            }, {
+                flCustomRefreshView.complete()
+            }, {
+                flCustomRefreshView.complete()
+            }).addToManaged()
     }
 
     /**
@@ -93,40 +91,40 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
      */
     private fun loadMoreData() {
         //本地查询
-        val datas = AppDbUtils.getLocalDatasBefore(mData.last().date)
+        val data = ZhiHuDbUtils.getLocalDataBefore(mData.last().date)
         //显示本地数据
-        if (datas.isNotEmpty()) {
-            debug("本地有更多数据")
+        if (data.isNotEmpty()) {
+            logd("本地有更多数据")
             val index = mData.size - 2
-            mData.addAll(datas)
+            mData.addAll(data)
             mAdapter.notifyItemChanged(index)
             flCustomRefreshView.complete()
             return
         }
         //请求网络加载更多数据
-        debug("请求网络加载更多数据")
+        logd("请求网络加载更多数据")
         //拼接URL
         if (mData.isEmpty()) return
-        val timestamp = DateUtils.str2int(mData.last().date.toString(), "yyyyMMdd")
-        mZhihuTucaoApi.getStoriesListBeforeData(timestamp).compose(RxSchedulers.io_main())
-            .subscribe(object : BaseObserver<ZhihuTucaoListResponse?>() {
-                override fun onHandlerSuccess(response: ZhihuTucaoListResponse) {
-                    if (response.stories.isEmpty()) {
-                        //没有更多的数据了
-                        flCustomRefreshView.onNoMore()
-                        return
-                    }
-                    val map = response.stories.map { it.convertToZhihuTucao() }
-                    AppDbUtils.insertMultiZhihuTucao(map)
-                    val index = mData.size - 2
-                    mData.addAll(map)
-                    mAdapter.notifyItemChanged(index)
+        var timestamp = DateUtils.str2int(mData.last().date.toString(), "yyyyMMdd")
+        timestamp -= 3600
+        mZhihuTucaoApi.getStoriesListBeforeData(timestamp)
+            .compose(RxSchedulers.io_main())
+            .subscribe({ response ->
+                if (response.stories.isEmpty()) {
+                    //没有更多的数据了
+                    flCustomRefreshView.onNoMore()
+                    return@subscribe
                 }
-
-                override fun onFinal() {
-                    flCustomRefreshView.complete()
-                }
-            })
+                val map = response.stories.map { it.convertToZhihuTucao() }
+                ZhiHuDbUtils.insertMultiZhihuTucao(map)
+                val index = mData.size - 2
+                mData.addAll(map)
+                mAdapter.notifyItemChanged(index)
+            }, {
+                flCustomRefreshView.complete()
+            }, {
+                flCustomRefreshView.complete()
+            }).addToManaged()
     }
 
     override fun setWindowBackgroundColor() = R.color._002_window_bg

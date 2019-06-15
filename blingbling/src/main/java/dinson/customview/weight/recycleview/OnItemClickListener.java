@@ -10,8 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * RecyclerView的点击监听
- *
- * @author Dinson-2017/7/4
  */
 public class OnItemClickListener implements RecyclerView.OnItemTouchListener {
 

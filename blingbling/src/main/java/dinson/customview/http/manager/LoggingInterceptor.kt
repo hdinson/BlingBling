@@ -1,8 +1,10 @@
 package dinson.customview.http.manager
 
+import android.content.Context
+import android.net.ConnectivityManager
+import dinson.customview._global.GlobalApplication
+import dinson.customview.kotlin.logv
 import dinson.customview.kotlin.times
-import dinson.customview.kotlin.verbose
-import dinson.customview.utils.NetworkUtils
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -16,13 +18,13 @@ class LoggingInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response? {
 
-        verbose("┌${"─".times(120)}", showLine = false)
-        verbose("│ Request{method= ${chain.request().method()}, url=${chain.request().url()}}", showLine = false)
+        logv("\t┌${"─".times(120)}", showLine = false)
+        logv("\t│ Request{method= ${chain.request().method()}, url=${chain.request().url()}}", showLine = false)
 
         val request = when {
-            NetworkUtils.isNetworkAvailable() -> chain.request()
+            isNetworkAvailable() -> chain.request()
             else -> {
-                verbose("│ Loaded From LocalCache - Network error", showLine = false)
+                logv("\t│ Loaded From LocalCache - Network error", showLine = false)
                 //强制使用缓存
                 chain.request().newBuilder().cacheControl(CacheControl.FORCE_CACHE).build()
             }
@@ -31,13 +33,38 @@ class LoggingInterceptor : Interceptor {
         val response = chain.proceed(request)
         val t2 = System.nanoTime()
 
-        verbose("│ Received response for in ${(t2 - t1) / 1e6}ms", showLine = false)
+        logv("\t│ Received response for in ${(t2 - t1) / 1e6}ms", showLine = false)
 
         val mediaType = response.body()!!.contentType()
         val content = response.body()!!.string()
-        if (content.isNotEmpty()) verbose("│ ${content.replace("\n","")}", showLine = false)
-        verbose("└${"─".times(120)}", showLine = false)
+        if (content.isNotEmpty()) logv("\t│ ${content.replace("\n", "")}", showLine = false)
+        logv("\t└${"─".times(120)}", showLine = false)
         return response.newBuilder().removeHeader("Pragma")
             .body(okhttp3.ResponseBody.create(mediaType, content)).build()
     }
+
+
+    /**
+     * 判断网络是否连接
+     *
+     * 需添加权限 `<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>`
+     *
+     * @return `true`: 是<br></br>`false`: 否
+     */
+    private fun isNetworkAvailable(): Boolean {
+        val info = (GlobalApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE)
+            as ConnectivityManager).activeNetworkInfo
+        return info != null && info.isConnected
+    }
+
+    /**
+     *   字符串相关的扩展方法
+     */
+    fun String.times(count: Int): String {
+        return (1..count).fold(StringBuilder()) { acc, _ ->
+            acc.append(this)
+        }.toString()
+    }
 }
+
+

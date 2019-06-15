@@ -30,7 +30,7 @@ import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.TypefaceUtils;
 
 /**
- * @author Dinson - 2017/8/9
+ * 点赞笑脸view
  */
 public class LikeSmileView extends LinearLayout implements View.OnClickListener {
     String defLike = "喜欢", defDis = "无感";
@@ -112,7 +112,7 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         animDis = (AnimationDrawable) mIvDis.getBackground();
 
         //初始化文字
-        Typeface typeface = TypefaceUtils.getAppleFont(getContext());
+        Typeface typeface = TypefaceUtils.INSTANCE.getAppleFont(getContext());
         mTvLikeNum = new TextView(getContext());
         mTvLikeNum.setTypeface(typeface);
         mTvLikeNum.setTextColor(defTextColor);

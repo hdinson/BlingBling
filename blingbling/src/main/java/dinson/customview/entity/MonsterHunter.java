@@ -2,8 +2,10 @@ package dinson.customview.entity;
 
 import java.util.List;
 
+import dinson.customview.weight.recycleview.multitype.MultiType;
+
 /**
- * @author Dinson - 2017/7/21
+ * 怪物猎人数据bean
  */
 public class MonsterHunter {
 
@@ -22,7 +24,7 @@ public class MonsterHunter {
 
         /**
          * family : 两生種
-         * monster : [{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_020.png","name":"化鲛"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_012.png","name":"虎鲛","species":"化鲛亜種"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_003.png","name":"旋齿鲨"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_019.png","name":"鬼蛙"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_021.png","name":"荒鬼蛙","species":"鬼蛙亜種"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_006.png","name":"岩穿","species":"鬼蛙（二名特殊個体）"}]
+         * monster : [{"icon":"mh_ic_020.png","name":"化鲛"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_012.png","name":"虎鲛","species":"化鲛亜種"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_003.png","name":"旋齿鲨"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_019.png","name":"鬼蛙"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_021.png","name":"荒鬼蛙","species":"鬼蛙亜種"},{"icon":"http://ondlsj2sn.bkt.clouddn.com/mh_ic_006.png","name":"岩穿","species":"鬼蛙（二名特殊個体）"}]
          */
 
         private String family;
@@ -46,7 +48,7 @@ public class MonsterHunter {
 
         public static class MonsterBean {
             /**
-             * icon : http://ondlsj2sn.bkt.clouddn.com/mh_ic_020.png
+             * icon : /mh_ic_020.png
              * name : 化鲛
              * species : 化鲛亜種
              */

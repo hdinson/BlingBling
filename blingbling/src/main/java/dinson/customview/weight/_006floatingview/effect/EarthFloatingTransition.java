@@ -12,7 +12,7 @@ import dinson.customview.weight._006floatingview.transition.PathPosition;
 import dinson.customview.weight._006floatingview.transition.YumFloating;
 
 /**
- * @author Dinson - 2017/8/11
+ * 地球动画
  */
 public class EarthFloatingTransition extends BaseFloatingPathTransition {
 

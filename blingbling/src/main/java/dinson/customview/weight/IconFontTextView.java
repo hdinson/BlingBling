@@ -28,7 +28,7 @@ public class IconFontTextView extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface typeface = TypefaceUtils.getIconFont(getContext());
+        Typeface typeface = TypefaceUtils.INSTANCE.getIconFont(getContext());
         setTypeface(typeface);
     }
 }

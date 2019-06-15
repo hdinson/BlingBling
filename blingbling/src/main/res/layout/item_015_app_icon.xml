@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="@dimen/spacing_medium"
-    tools:background="@drawable/_007_activity_bg">
+    tools:background="@drawable/_024_activity_bg">
 
     <ImageView
         android:id="@id/ivImg"

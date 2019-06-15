@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import dinson.customview.R
-import dinson.customview.utils.SPUtils
 
 
 class SplashActivity : AppCompatActivity() {

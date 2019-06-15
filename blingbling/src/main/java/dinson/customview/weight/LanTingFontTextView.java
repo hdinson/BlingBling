@@ -38,7 +38,7 @@ public class LanTingFontTextView extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface typeface = TypefaceUtils.getAppleFont(getContext());
+        Typeface typeface = TypefaceUtils.INSTANCE.getAppleFont(getContext());
         setTypeface(typeface);
     }
 }

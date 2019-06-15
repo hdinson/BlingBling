@@ -27,7 +27,7 @@ import java.util.*
 class _006FloatingViewActivity : BaseActivity() {
 
     private lateinit var mFloating: Floating
-    private lateinit var mTypeface: Typeface
+    private var mTypeface: Typeface? = null
 
     private var mCount = 0//点赞计数
     private var toggle = true//背景转变

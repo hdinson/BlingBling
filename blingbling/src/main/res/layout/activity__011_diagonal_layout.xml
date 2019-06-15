@@ -139,6 +139,6 @@
         android:elevation="10dp"
         app:layout_anchor="@id/rv_follow"
         app:layout_anchorGravity="center_vertical"
-        app:layout_behavior="@string/app_bar_behavior"
+        app:layout_behavior="@string/behavior_003"
         tools:ignore="ContentDescription"/>
 </android.support.design.widget.CoordinatorLayout>

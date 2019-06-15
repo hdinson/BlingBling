@@ -23,9 +23,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Dinson - 2017/7/5
+ * 文件相关工具类
  */
-public class FileUtils {
+public class  FileUtils {
 
     public static void saveBitmapFile(Context context, Bitmap bitmap, String filePath) {
         File file = new File(filePath);//将要保存图片的路径

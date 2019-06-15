@@ -7,9 +7,12 @@ import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.os.Bundle
 import android.provider.Settings
+import com.just.agentweb.AgentWebConfig.debug
 import dinson.customview.R
 import dinson.customview._global.BaseNfcActivity
-import dinson.customview.kotlin.*
+import dinson.customview.kotlin.click
+import dinson.customview.kotlin.isNfcEnable
+import dinson.customview.kotlin.logd
 import dinson.customview.utils.NfcUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__018_nfc.*
@@ -42,7 +45,7 @@ class _018NFCActivity : BaseNfcActivity() {
         //1.获取Tag对象
         val detectedTag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
         val techList = detectedTag.techList
-        techList.forEach { debug(it) }
+        techList.forEach { logd(it) }
         //2.获取Ndef的实例
         val ndef = Ndef.get(detectedTag)
         tvDesc.append("${ndef.type} Maxsize:${ndef.maxSize}bytes")
@@ -99,6 +102,5 @@ class _018NFCActivity : BaseNfcActivity() {
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, Intent(Intent.ACTION_MAIN).setComponent(comp))
 
         sendBroadcast(shortcut)
-
     }
 }

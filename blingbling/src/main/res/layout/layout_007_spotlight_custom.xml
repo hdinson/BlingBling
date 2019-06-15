@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@drawable/_007_activity_bg">
+    tools:background="@drawable/_024_activity_bg">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/_007_spot_arrow"
+        android:src="@drawable/_024_spot_arrow"
         tools:ignore="ContentDescription"/>
 </FrameLayout>

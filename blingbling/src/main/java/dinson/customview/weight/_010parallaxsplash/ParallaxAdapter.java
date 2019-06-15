@@ -7,12 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * @author Dinson - 2017/10/9
+ * 视差fragment适配器
  */
 class ParallaxAdapter extends FragmentPagerAdapter {
     private List<ParallaxFragment> mFragments;
-
-
 
     ParallaxAdapter(FragmentManager supportFragmentManager, List<ParallaxFragment> fragments) {
         super(supportFragmentManager);

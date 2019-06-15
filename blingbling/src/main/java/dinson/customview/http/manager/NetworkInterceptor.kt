@@ -1,6 +1,6 @@
 package dinson.customview.http.manager
 
-import dinson.customview.kotlin.verbose
+import dinson.customview.kotlin.logv
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
@@ -21,16 +21,16 @@ class NetworkInterceptor : Interceptor {
 
         //输出请求头
         if (request.headers().size() != 0) {
-            verbose("│ ${chain.request().headers().toString().split("\n")
+            logv("\t│ ${chain.request().headers().toString().split("\n")
                 .dropLastWhile { it.isEmpty() }}", showLine = false)
         }
 
-        verbose("│ Loaded From Network - Cache-Control: ${if (cacheControl.isEmpty()) "None"
+        logv("\t│ Loaded From Network - Cache-Control: ${if (cacheControl.isEmpty()) "None"
         else cacheControl}", showLine = false)
 
         //输出响应头
         if (response.headers().size() != 0) {
-            verbose("│ ${response.headers().toString().split("\n")
+            logv("\t│ ${response.headers().toString().split("\n")
                 .dropLastWhile { it.isEmpty() }}", showLine = false)
         }
 

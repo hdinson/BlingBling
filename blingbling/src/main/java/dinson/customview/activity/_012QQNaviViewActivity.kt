@@ -1,11 +1,8 @@
 package dinson.customview.activity
 
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-
 import com.bumptech.glide.Glide
-
+import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.utils.LogUtils
@@ -23,7 +20,7 @@ class _012QQNaviViewActivity : BaseActivity() {
     }
 
     private fun initUI() {
-        val imgUrl = "http://ondlsj2sn.bkt.clouddn.com/Fm71mrw6NECZAitx83iMnoBXUvgW.jpg"
+        val imgUrl = "${BuildConfig.QINIU_URL}Fm71mrw6NECZAitx83iMnoBXUvgW.jpg"
         Glide.with(this).load(imgUrl).into(ivBg)
 
 

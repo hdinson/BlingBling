@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/_024_activity_bg"
+    tools:context="dinson.customview.activity._024SpotlightActivity">
+
+    <ImageView
+        android:id="@id/ivImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/_024_squirtle"
+        app:layout_constraintBottom_toTopOf="@id/tvHead"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <dinson.customview.weight.IconFontTextView
+        android:id="@id/tvHead"
+        style="@style/_007Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="@string/if_pokemon"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@id/tvDis"
+        app:layout_constraintRight_toLeftOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/ivImg"/>
+
+    <TextView
+        android:id="@id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_007_tiny_name"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvHead"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@id/tvDis"
+        style="@style/_007Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:lineSpacingExtra="5dp"
+        android:text="@string/_007_tiny_attr"
+        app:layout_constraintBottom_toTopOf="@id/tvType"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHead"/>
+    <TextView
+        android:id="@id/tvType"
+        style="@style/_007Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/_007_tiny_type"
+        app:layout_constraintBottom_toTopOf="@id/tvName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDis"/>
+
+    <TextView
+        android:id="@id/tvName"
+        style="@style/_007Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/_007_tiny"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/tvContent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvType"/>
+
+    <TextView
+        android:id="@id/tvContent"
+        style="@style/_007Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16sp"
+        android:layout_marginTop="5dp"
+        android:text="@string/_007_desc"
+        app:layout_constraintBottom_toTopOf="@id/cancel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName"/>
+
+    <ImageView
+        android:id="@id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/_024_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvContent"
+        tools:ignore="ContentDescription"/>
+</android.support.constraint.ConstraintLayout>

@@ -2,7 +2,7 @@ package dinson.customview.http.manager
 
 import android.content.Context
 import com.google.gson.Gson
-import dinson.customview._global.ConstantsUtils
+import dinson.customview.BuildConfig
 import dinson.customview._global.GlobalApplication
 import dinson.customview.utils.AESUtils
 import dinson.customview.utils.StringUtils
@@ -51,7 +51,7 @@ class InDiskCookieStore {
             }
             cookies[url.host()]!![cookie.name()] = cookie
             //将cookies持久化到本地
-            cookiePrefs.edit().putString(name, AESUtils.encrypt(ConstantsUtils.PACKAGE_NAME, encodeCookie(cookie))).apply()
+            cookiePrefs.edit().putString(name, AESUtils.encrypt(BuildConfig.APPLICATION_ID, encodeCookie(cookie))).apply()
         } else {
             if (cookies.containsKey(url.host())) {
                 cookies[url.host()]!!.remove(cookie.name())
@@ -125,7 +125,7 @@ class InDiskCookieStore {
      * 将字符串反序列化成cookies
      */
     private fun decodeCookie(cookieString: String): Cookie =
-        Gson().fromJson(AESUtils.decrypt(ConstantsUtils.PACKAGE_NAME, cookieString), Cookie::class.java)
+        Gson().fromJson(AESUtils.decrypt(BuildConfig.APPLICATION_ID, cookieString), Cookie::class.java)
 
 
 }

@@ -1,8 +1,5 @@
 package dinson.customview.kotlin
 
-/**
- *   @author Dinson - 2017/10/13
- */
 enum class Lang(val s: String) {
     ENGLISH("英语"),
     CHINESE("中文"),

@@ -4,10 +4,11 @@ import android.content.Context
 import android.graphics.Color
 import android.util.TypedValue
 import android.view.View
-import android.widget.LinearLayout.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
+import dinson.customview.BuildConfig
 import dinson.customview.kotlin.dip
 import dinson.customview.utils.GlideUtils
 import dinson.customview.weight._013stepview.Position
@@ -15,7 +16,7 @@ import dinson.customview.weight._013stepview.State
 import dinson.customview.weight._013stepview.StepViewHolder
 
 /**
- * @author Dinson - 2018/2/22
+ * 步骤holder
  */
 class _013StepViewHolder : StepViewHolder<String> {
     override fun onBind(context: Context, data: String, pos: Position, state: State): View {
@@ -32,7 +33,7 @@ class _013StepViewHolder : StepViewHolder<String> {
             params.bottomMargin =  dip(16)
             val ivImg = ImageView(context)
             ivImg.adjustViewBounds = true
-            GlideUtils.setImage(context, "http://ondlsj2sn.bkt.clouddn.com/FoxNtdwL6G0wdXUos7WNhswu1M_f.webp", ivImg)
+            GlideUtils.setImage(context, "${BuildConfig.QINIU_URL}FoxNtdwL6G0wdXUos7WNhswu1M_f.webp", ivImg)
             llContainer.addView(ivImg, params)
             llContainer.addView(textView)
             return llContainer

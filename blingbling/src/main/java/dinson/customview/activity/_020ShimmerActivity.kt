@@ -1,6 +1,7 @@
 package dinson.customview.activity
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import com.bumptech.glide.Glide
@@ -50,6 +51,7 @@ class _020ShimmerActivity : BaseActivity() {
      *
      * @param preset index of the shimmer animation preset
      */
+    @SuppressLint("SetTextI18n")
     private fun selectPreset(preset: Int) {
         if (mCurrentPreset == preset) {
             return
