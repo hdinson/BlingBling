@@ -48,7 +48,7 @@ class _001WanAndroidWebActivity : BaseActivity() {
         mAgentWeb.webCreator.webView.apply {
             overScrollMode = View.OVER_SCROLL_NEVER
             //根据cache-control决定是否从网络上取数据。没网，则从本地获取，即离线加载
-            settings.cacheMode = if (NetworkUtils.isNetworkAvailable()) WebSettings.LOAD_DEFAULT
+            settings.cacheMode = if (NetworkUtils.isNetworkAvailable(this@_001WanAndroidWebActivity)) WebSettings.LOAD_DEFAULT
             else WebSettings.LOAD_CACHE_ELSE_NETWORK
         }
     }

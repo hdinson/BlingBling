@@ -4,7 +4,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import dinson.customview.R
 import dinson.customview.entity.gank.Welfare
-import dinson.customview.utils.svg.GlideApp
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_003_gank_lady_pic.view.*
@@ -28,7 +27,7 @@ class _003GankLadyPicAdapter(dataList: List<Welfare>)
             /*val params = layoutParams
             params.height = dataBean.height
             layoutParams = params*/
-            GlideApp.with(context).load(dataBean.url).apply(options).into(this)
+           // GlideApp.with(context).load(dataBean.url).apply(options).into(this)
 
         }
     }

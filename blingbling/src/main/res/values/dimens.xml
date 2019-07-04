@@ -13,5 +13,6 @@
     <dimen name="text_size_biggish">18sp</dimen>
     <dimen name="text_size_large">20sp</dimen>
     <dimen name="text_size_huge">24sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

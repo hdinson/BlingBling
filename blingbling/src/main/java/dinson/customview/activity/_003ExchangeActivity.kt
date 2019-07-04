@@ -50,7 +50,7 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
     }
 
     private fun getExchangeData() {
-        val exchangeStr = CacheUtils.getExchangeRateCache()
+        val exchangeStr = CacheUtils.getExchangeRateCache(this)
 
         //显示本地数据
         if (exchangeStr != null) {
@@ -67,7 +67,7 @@ class _003ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
             .subscribe(object : BaseObserver<ExchangeBean?>() {
                 override fun onHandlerSuccess(value: ExchangeBean) {
                     val json = Gson().toJson(value)
-                    CacheUtils.setExangeRateCache(json)
+                    CacheUtils.setExangeRateCache(this@_003ExchangeActivity,json)
                     setAdapterRate(json)
                 }
             })

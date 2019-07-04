@@ -115,7 +115,7 @@ class _027MovieDetailsActivity : BaseActivity() , View.OnClickListener, MessageP
     }
 
     private fun getMovieInfo(movie: Movie) {
-        val cache = CacheUtils.getCache(this, "_027MovieInfo${movie.code}")
+        val cache = CacheUtils.getCache( this,"_027MovieInfo${movie.code}")
         if (StringUtils.isEmpty(cache).not()) {
             val movieInfo = Gson().fromJson<MovieInfo>(cache, MovieInfo::class.java)
             initMovieInfoUI(movieInfo)
@@ -128,7 +128,7 @@ class _027MovieDetailsActivity : BaseActivity() , View.OnClickListener, MessageP
             .subscribe({
                 initMovieInfoUI(it)
                 "MovieInfo >> put to cache".logi()
-                CacheUtils.setCache(this@_027MovieDetailsActivity,
+                CacheUtils.setCache(this,
                     "_027MovieInfo${movie.code}", Gson().toJson(it))
             }, {
                 it.toString().loge()

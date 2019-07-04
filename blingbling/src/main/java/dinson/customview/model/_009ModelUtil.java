@@ -91,9 +91,11 @@ public class _009ModelUtil {
     public static List<_009PanoramaImageModel> getPanoramaImageList() {
         List<_009PanoramaImageModel> list = new ArrayList<>();
         for (int i = 0; i < titleArr.length; i++) {
-            _009PanoramaImageModel entity = new _009PanoramaImageModel(titleArr[i], descArr[i], originalImgArr[i],
+            _009PanoramaImageModel entity = new _009PanoramaImageModel(titleArr[i], descArr[i],
+                BuildConfig.QINIU_URL + originalImgArr[i],
                 BuildConfig.QINIU_URL + smallImgArr[i]);
-            DownloadInfo downloadInfo = DbDownUtil.getInstance().queryDownBy(originalImgArr[i]);
+            DownloadInfo downloadInfo = DbDownUtil.getInstance().queryDownBy(
+                BuildConfig.QINIU_URL + originalImgArr[i]);
             if (downloadInfo != null) {
                 entity.setSize(downloadInfo.getCountLength());
                 entity.setCurrentPos(downloadInfo.getReadLength());
