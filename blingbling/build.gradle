@@ -5,8 +5,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'//kapt3插件
 apply from: 'andres-guard.gradle'
 
-Properties prop = new Properties()
-prop.load(new FileInputStream(file("../signing.properties")))
+//Properties prop = new Properties()
+//prop.load(new FileInputStream(file("../signing.properties")))
 
 
 android {
@@ -25,23 +25,23 @@ android {
         }
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         ndk {
-            abiFilters 'armeabi-v7a'//, 'arm64-v8a', 'x86', 'x86_64'//, 'armeabi','armeabi-v7a', 'arm64-v8a'
+            abiFilters 'armeabi-v7a' //, 'arm64-v8a', 'x86', 'x86_64'//, 'armeabi','armeabi-v7a', 'arm64-v8a'
         }
         renderscriptSupportModeEnabled true    // Enable RS support
 
     }
     /*打包 gradlew resguardRelease*/
-    signingConfigs {
-        app {
-            storeFile file(prop['KEYSTORE_FILEPATH'])
-            storePassword prop['STORE_PASSWORD']
-            keyAlias prop['KEY_ALIAS']
-            keyPassword prop['KEY_PASSWORD']
-        }
-    }
+//    signingConfigs {
+//        app {
+//            storeFile file(prop['KEYSTORE_FILEPATH'])
+//            storePassword prop['STORE_PASSWORD']
+//            keyAlias prop['KEY_ALIAS']
+//            keyPassword prop['KEY_PASSWORD']
+//        }
+//    }
     applicationVariants.all { variant ->
         variant.outputs.all {
-            if (variant.buildType.name=="release") {
+            if (variant.buildType.name == "release") {
                 outputFileName = "BlingBling_${new Date().format("MMddHHmm")}_${variant.buildType.name}.apk"
             } else {
                 outputFileName = "BlingBling_${variant.buildType.name}.apk"
@@ -53,16 +53,16 @@ android {
             minifyEnabled true      //开启代码混淆
             shrinkResources true    //开启shrinkResources去除无用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.app
+            //signingConfig signingConfigs.app
             debuggable false
         }
         debug {
-            signingConfig signingConfigs.app
+            // signingConfig signingConfigs.app
         }
     }
     flavorDimensions "default"
-    productFlavors{
-        BlingBling{
+    productFlavors {
+        BlingBling {
             Properties tempPro = new Properties()
             tempPro.load(new FileInputStream(file("../constant.properties")))
             buildConfigField 'String', 'QINIU_URL', tempPro['QINIU_URL']
@@ -76,6 +76,7 @@ android {
         targetCompatibility 1.8
     }
     dataBinding.enabled = true
+
     /*做七牛云上传图片时。图片选择添加，不用可删除*/
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
@@ -114,8 +115,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit2_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
 
-    implementation 'com.github.bumptech.glide:glide:4.8.0'/*Glide*/
-    implementation 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'/*Glide*/
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.caverock:androidsvg:1.2.2-beta-1'/*svg图片支持*/
 
 
@@ -137,10 +138,10 @@ dependencies {
     implementation 'com.facebook.rebound:rebound:0.3.8'/*Facebook闪光控件*/
     implementation 'com.google.vr:sdk-panowidget:1.80.0'/*googleVR*/
     implementation 'com.github.mmin18:realtimeblurview:1.1.2'/*高斯模糊控件*/
-    implementation ('com.nex3z:flow-layout:1.2.4') {
+    implementation('com.nex3z:flow-layout:1.2.4') {
         exclude group: 'com.android.support', module: 'support-media-compat'
     }/*布局自动换行*/
-    implementation ('com.byc:ImageWatcher:1.1.0') {
+    implementation('com.byc:ImageWatcher:1.1.0') {
         exclude group: 'com.android.support', module: 'support-media-compat'
     }/*仿微信图片查看*/
     implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB

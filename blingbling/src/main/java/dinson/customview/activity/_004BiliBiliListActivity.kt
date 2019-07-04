@@ -93,7 +93,7 @@ class _004BiliBiliListActivity : BaseActivity() {
     private val mApi by lazy { HttpHelper.create(BmobApi::class.java) }
 
     private fun initData() {
-        val cache = CacheUtils.getCache(this, "_004VideoList")
+        val cache = CacheUtils.getCache( this,"_004VideoList")
         if (StringUtils.isNotEmpty(cache)) {
             //加载缓存数据
             val type = object : TypeToken<ArrayList<TvShowResp.TvShow>>() {}.type
@@ -115,7 +115,7 @@ class _004BiliBiliListActivity : BaseActivity() {
                 if (it.code == 0) {
                     mDataList.clear()
                     mDataList.addAll(it.results)
-                    CacheUtils.setCache(this@_004BiliBiliListActivity, "_004VideoList",
+                    CacheUtils.setCache(  this,"_004VideoList",
                         Gson().toJson(mDataList))
                     mAdapter.notifyDataSetChanged()
                 }

@@ -29,8 +29,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
-
-        <!-- 高德地图设置key -->
+         <!-- 高德地图设置key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="f16432f8253935bdaa564c4ad9288fbe" />
@@ -53,17 +52,17 @@
                 android:resource="@xml/shortcuts" />
         </activity>
 
-        <activity-alias
-            android:name=".activity.SplashAliasActivity"
-            android:enabled="false"
-            android:icon="@mipmap/app_icon"
-            android:targetActivity=".activity.SplashActivity">
+        <!--<activity-alias
+            android:name=".activity.WechatActivity"
+            android:enabled="true"
+            android:icon="@mipmap/wechat"
+            android:getActivity=".activity.WechatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity-alias>
+        </activity-alias>-->
 
         <activity
             android:name=".activity.MainActivity"
@@ -201,10 +200,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity._027MovieListByLinkActivity"
-            android:screenOrientation="portrait" />
-
-
-        <!--receiver-->
+            android:screenOrientation="portrait" /> <!-- receiver -->
         <receiver
             android:name=".weight._025provider.WidgetProviderSmall"
             android:label="倒数日控件(小)">

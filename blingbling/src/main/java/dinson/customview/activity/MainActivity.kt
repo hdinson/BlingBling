@@ -51,7 +51,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
         initContent()
         initHead()
         //getLocation()
-        weatherLayout.click { _ ->
+        weatherLayout.click {
             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE)
                 .subscribe { AndroidInfoActivity.start(this) }
         }

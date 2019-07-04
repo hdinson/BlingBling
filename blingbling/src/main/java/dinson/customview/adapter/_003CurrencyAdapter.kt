@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import dinson.customview.R
 import dinson.customview.listener.CalculatorKey
 import dinson.customview.listener.OnItemSwipeOpen
@@ -14,7 +13,7 @@ import dinson.customview.model._003CurrencyModel
 import dinson.customview.utils.*
 import dinson.customview.weight.recycleview.CommonAdapter
 import dinson.customview.weight.recycleview.CommonViewHolder
-import dinson.customview.weight.swipelayout.SwipeItemLayout
+import kotlinx.android.synthetic.main.item_003_currency.view.*
 import java.util.*
 import java.util.regex.Pattern
 
@@ -24,7 +23,7 @@ import java.util.regex.Pattern
 class _003CurrencyAdapter(context: Context,
                           dataList: List<_003CurrencyModel>,
                           private val mListener: OnItemSwipeOpen)
-    : CommonAdapter<_003CurrencyModel>(context, dataList), _003OnCalculatorInput, _003OnRvItemChangeListener {
+    : CommonAdapter<_003CurrencyModel>(dataList), _003OnCalculatorInput, _003OnRvItemChangeListener {
 
     private var mTargetMoney = Integer.MAX_VALUE.toDouble()
     private var mEquationStr = ""
@@ -44,17 +43,17 @@ class _003CurrencyAdapter(context: Context,
     override fun getLayoutId(viewType: Int) = R.layout.item_003_currency
 
     override fun convert(holder: CommonViewHolder, dataBean: _003CurrencyModel, position: Int) {
-        GlideUtils.setImage(mContext, dataBean.imgUrl, holder.getView(R.id.ivImg))
-        holder.setTvText(R.id.tvCurrencyCode, dataBean.currencyCode)
-        holder.setTvText(R.id.tvEquation, dataBean.equation
-            .replace("\\+".toRegex(), "＋").replace("-".toRegex(), "－")
-            .replace("\\*".toRegex(), "×").replace("/".toRegex(), "÷"))
-        holder.setTvText(R.id.tvCurrencyCn, String.format(Locale.CHINA, "%s %s", dataBean.currencyCn, dataBean.sign))
-        holder.getView<View>(R.id.contentLayout).isEnabled = position == mCurrentSelect
+        GlideUtils.setImage(holder.itemView.context, dataBean.imgUrl, holder.itemView.ivImg)
+        holder.itemView.tvCurrencyCode.text = dataBean.currencyCode
+        holder.itemView.tvEquation.text = dataBean.equation
+                .replace("\\+".toRegex(), "＋").replace("-".toRegex(), "－")
+                .replace("\\*".toRegex(), "×").replace("/".toRegex(), "÷")
+        holder.itemView.tvCurrencyCn.text = String.format(Locale.CHINA, "%s %s", dataBean.currencyCn, dataBean.sign)
+        holder.itemView.contentLayout.isEnabled = position == mCurrentSelect
 
 
         //计算汇率结果
-        holder.getView<TextView>(R.id.tvResult).apply {
+        holder.itemView.tvResult.apply {
             if (mTargetMoney == Integer.MAX_VALUE.toDouble()) {
                 text = ""
                 hint = dataBean.getTargetMoney(sDefaultMoney.toDouble())
@@ -68,12 +67,12 @@ class _003CurrencyAdapter(context: Context,
         }
 
         //侧滑布局的监听
-        holder.getView<SwipeItemLayout>(R.id.deleteLayout)
-            .addSwipeListener { view, isOpen -> if (isOpen) mListener.onOpen(view, position) }
+        holder.itemView.deleteLayout
+                .addSwipeListener { view, isOpen -> if (isOpen) mListener.onOpen(view, position) }
 
         //处理光标
-        val lCursor = holder.getView<View>(R.id.lFocusView)
-        val sCursor = holder.getView<View>(R.id.sFocusView)
+        val lCursor = holder.itemView.lFocusView
+        val sCursor = holder.itemView.sFocusView
         if (position != mCurrentSelect) {
             lCursor.clearAnimation()
             sCursor.clearAnimation()
@@ -99,9 +98,9 @@ class _003CurrencyAdapter(context: Context,
         if (!validateInput(key)) {
             //验证不过,晃动提示
             if (StringUtils.isEmpty(mDataList[mCurrentSelect].equation)) {
-                getCommonViewHolder(mCurrentSelect).getView<View>(R.id.tvResult).startAnimation(mShakeAnimation)
+                getCommonViewHolder(mCurrentSelect).itemView.tvResult.startAnimation(mShakeAnimation)
             } else {
-                getCommonViewHolder(mCurrentSelect).getView<View>(R.id.tvEquation).startAnimation(mShakeAnimation)
+                getCommonViewHolder(mCurrentSelect).itemView.tvEquation.startAnimation(mShakeAnimation)
             }
             return
         }
@@ -167,15 +166,13 @@ class _003CurrencyAdapter(context: Context,
     /**
      * 是否包含运算符
      */
-    private fun containsOperator(str: String)
-        = str.contains("+") || str.contains("-") || str.contains("*") || str.contains("/")
+    private fun containsOperator(str: String) = str.contains("+") || str.contains("-") || str.contains("*") || str.contains("/")
 
 
     /**
      * 是否以数字结尾
      */
-    private fun isEndWithNum(str: String)
-        = Pattern.matches("(.*\\d+$)", str)
+    private fun isEndWithNum(str: String) = Pattern.matches("(.*\\d+$)", str)
 
 
     override fun onItemChange(position: Int) {

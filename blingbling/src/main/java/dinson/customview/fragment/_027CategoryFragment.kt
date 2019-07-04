@@ -42,7 +42,7 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
     }
 
     override fun onFirstUserVisible() {
-        val cache = CacheUtils.getCache(context!!, "_027category")
+        val cache = CacheUtils.getCache(  context!!,"_027category")
         if (StringUtils.isEmpty(cache).not()) {
             "getTag << cache".logi()
             val type = object : TypeToken<HashMap<String, ArrayList<MovieInfo.Genre>>>() {}.type

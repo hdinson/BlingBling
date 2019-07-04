@@ -3,14 +3,12 @@ package dinson.customview.activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.databinding.ActivityTestBinding
 import dinson.customview.kotlin.click
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
@@ -28,13 +26,13 @@ import java.io.InputStreamReader
 class TestActivity : BaseActivity() {
 
 
-    private lateinit var   contentView: ActivityTestBinding
+//    private lateinit var   contentView: ActivityTestBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-          contentView = DataBindingUtil.setContentView(
-            this, R.layout.activity_test)
-        contentView.cacheSize = "click times : $clickTimes"
+//          contentView = DataBindingUtil.setContentView(
+//            this, R.layout.activity_test)
+//        contentView.cacheSize = "click times : $clickTimes"
         initUI()
     }
 
@@ -60,17 +58,17 @@ class TestActivity : BaseActivity() {
     fun onClearAllCache(view: View) {
         CacheUtils.cleanApplicationData(this)
         CacheUtils.getCacheSize(this).loge()
-        contentView.cacheSize = CacheUtils.getCacheSize(this)
+//        contentView.cacheSize = CacheUtils.getCacheSize(this)
     }
 
     fun onClearCache(view: View) {
         CacheUtils.cleanApplicationCacheData(this)
-        contentView.cacheSize = CacheUtils.getCacheSize(this)
+//        contentView.cacheSize = CacheUtils.getCacheSize(this)
     }
 
     var clickTimes=0
     fun onDataBindingClick(view: View) {
-        contentView.cacheSize = "click times : ${++clickTimes}"
+//        contentView.cacheSize = "click times : ${++clickTimes}"
     }
 
     fun onExec(view: View) {

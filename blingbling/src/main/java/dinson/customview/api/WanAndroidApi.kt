@@ -14,7 +14,7 @@ import retrofit2.http.*
 interface WanAndroidApi {
 
     companion object {
-        const val SERVER_URL = "http://www.wanandroid.com"
+        const val SERVER_URL = "https://www.wanandroid.com"
     }
 
     /**
