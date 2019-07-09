@@ -1,20 +1,21 @@
 package dinson.customview.utils
 
+import android.content.Context
 import com.google.gson.Gson
-import dinson.customview._global.GlobalApplication
+import dinson.customview.BuildConfig
 import dinson.customview.entity.HomeWeather
 import dinson.customview.entity.exchange.ExchangeBean
 import dinson.customview.entity.one.DailyDetail
 import dinson.customview.entity.one.DailyList
 
-object AppCacheUtil{
+object AppCacheUtil {
 
     /**
      * 设置首页头部one缓存
      *
      * @param bean entity
      */
-    fun setMainHeardCache(bean: DailyList) {
+    fun setMainHeardCache(context: Context, bean: DailyList) {
         val json = Gson().toJson(bean)
         LogUtils.d("<DailyList> Put Cache >> $json", false)
 
@@ -22,10 +23,10 @@ object AppCacheUtil{
         val now = System.currentTimeMillis()
         val today4 = DateUtils.getDataTimestamp(0) * 1000L + 14400000
         if (now < today4)
-            CacheUtils.setCache(GlobalApplication.getContext(),"home_head_list", json, today4 - now)
+            CacheUtils.setCache(context, "home_head_list", json, today4 - now)
         else {
             val deathLine = (DateUtils.getDataTimestamp(1) + 14400L) * 1000 - now
-            CacheUtils.setCache(GlobalApplication.getContext(),"home_head_list", json, deathLine)
+            CacheUtils.setCache(context, "home_head_list", json, deathLine)
         }
     }
 
@@ -34,8 +35,8 @@ object AppCacheUtil{
      *
      * @return null表示没有数据
      */
-    fun getMainHeardCache(): DailyList? {
-        val homeList = CacheUtils.getCache(GlobalApplication.getContext(),"home_head_list")
+    fun getMainHeardCache(context: Context): DailyList? {
+        val homeList = CacheUtils.getCache(context, "home_head_list")
         LogUtils.d("<DailyList> Get Cache << $homeList", false)
         return if (homeList == null) null else Gson().fromJson<DailyList>(homeList, DailyList::class.java)
     }
@@ -45,10 +46,10 @@ object AppCacheUtil{
      *
      * @param bean entity
      */
-    fun setDailyDetail(bean: DailyDetail) {
+    fun setDailyDetail(context: Context, bean: DailyDetail) {
         val json = Gson().toJson(bean)
         LogUtils.d("<DailyDetail> Put Cache >> $json", false)
-        CacheUtils.setCache(GlobalApplication.getContext(),"home_heard_detail" + bean.data.hpcontent_id, json)
+        CacheUtils.setCache(context, "home_heard_detail" + bean.data.hpcontent_id, json)
     }
 
     /**
@@ -57,8 +58,8 @@ object AppCacheUtil{
      * @param id 数据id
      * @return null表示没有数据
      */
-    fun getDailyDetail(id: Int): DailyDetail? {
-        val cache = CacheUtils.getCache(GlobalApplication.getContext(),"home_heard_detail$id")
+    fun getDailyDetail(context: Context, id: Int): DailyDetail? {
+        val cache = CacheUtils.getCache(context, "home_heard_detail$id")
         LogUtils.d("<DailyDetail> Get Cache << $cache", false)
         return if (cache == null) null else Gson().fromJson<DailyDetail>(cache, DailyDetail::class.java)
     }
@@ -69,10 +70,10 @@ object AppCacheUtil{
      *
      * @param bean entity
      */
-    fun setHomeWeatherCache(bean: HomeWeather) {
+    fun setHomeWeatherCache(context: Context, bean: HomeWeather) {
         val json = Gson().toJson(bean)
         LogUtils.d("<HomeWeather> Put Cache >> $json", false)
-        CacheUtils.setCache(GlobalApplication.getContext(),"lastKnowWeather", json, 3600000)//缓存时间1小时
+        CacheUtils.setCache(context, "lastKnowWeather", json, 3600000)//缓存时间1小时
     }
 
     /**
@@ -80,8 +81,8 @@ object AppCacheUtil{
      *
      * @return null表示没有数据
      */
-    fun getHomeWeatherCache(city: String): HomeWeather? {
-        val homeList = CacheUtils.getCache(GlobalApplication.getContext(),"lastKnowWeather")
+    fun getHomeWeatherCache(context: Context, city: String): HomeWeather? {
+        val homeList = CacheUtils.getCache(context, "lastKnowWeather")
         if (homeList == null) {
             LogUtils.d("<HomeWeather> is out of date or no exist !", false)
             return null
@@ -101,12 +102,12 @@ object AppCacheUtil{
      *
      * @param beanStr entity序列化后
      */
-    fun setExangeRateCache(beanStr: String) {
-        if (GlobalApplication.IS_DEBUG) {
+    fun setExchangeRateCache(context: Context, beanStr: String) {
+        if (BuildConfig.DEBUG) {
             val json = Gson().toJson(beanStr)
             LogUtils.d("<ExchangeBean> Put Cache >> $json", false)
         }
-        CacheUtils.setCache(GlobalApplication.getContext(),"lastKnowExchangeRate", beanStr)//缓存永久有效
+        CacheUtils.setCache(context, "lastKnowExchangeRate", beanStr)//缓存永久有效
     }
 
     /**
@@ -114,13 +115,13 @@ object AppCacheUtil{
      *
      * @return null表示没有数据
      */
-    fun getExchangeRateCache(): String? {
-        val exchangeRate = CacheUtils.getCache(GlobalApplication.getContext(),"lastKnowExchangeRate")
+    fun getExchangeRateCache(context: Context): String? {
+        val exchangeRate = CacheUtils.getCache(context, "lastKnowExchangeRate")
         if (exchangeRate == null) {
             LogUtils.d("<ExchangeBean> is out of date or no exist !", false)
             return null
         }
-        if (GlobalApplication.IS_DEBUG) {
+        if (BuildConfig.DEBUG) {
             val exchangeBean = Gson().fromJson<ExchangeBean>(exchangeRate, ExchangeBean::class.java)
             LogUtils.d("<ExchangeBean> Get Cache << $exchangeBean", false)
         }
