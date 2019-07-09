@@ -1,10 +1,10 @@
 package dinson.customview.db
 
 import android.database.sqlite.SQLiteDatabase
+import dinson.customview._global.GlobalApplication
+import dinson.customview.db.model.DaoMaster
 import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.db.model.ZhihuTucaoDao
-import dinson.customview.download.model.DaoMaster
-import dinson.customview.utils.UIUtils
 
 /**
  * app数据库相关工具类
@@ -12,7 +12,7 @@ import dinson.customview.utils.UIUtils
 object AppDbUtils {
 
     private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(UIUtils.getContext(), "AppDb", null)
+        DaoMaster.DevOpenHelper(GlobalApplication.getContext(), "AppDb", null)
     }
 
     /**

@@ -12,23 +12,20 @@ import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview._global.ConstantsUtils
 import dinson.customview.adapter._009ContentAdapter
 import dinson.customview.download.DownloadManager
 import dinson.customview.download.listener.HttpDownOnNextListener
 import dinson.customview.download.model.DownloadState
 import dinson.customview.download.utils.DbDownUtil
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.logi
+import dinson.customview.kotlin.toast
 import dinson.customview.model._009ModelUtil
 import dinson.customview.model._009PanoramaImageModel
 import dinson.customview.utils.LogUtils
-import dinson.customview.utils.ToastUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
 import dinson.customview.weight.recycleview.OnRvItemClickListener
 import dinson.customview.weight.recycleview.RvItemClickSupport
 import io.reactivex.Observable
-import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity__009_google_vr.*
 import java.io.File
 
@@ -48,7 +45,7 @@ class _009GoogleVRActivity : BaseActivity() {
         //顶部图片
         val imgUrl = "${BuildConfig.QINIU_URL}Fqp3F7wLs2rjSrMlA-9bSIIi27Of.webp"
         val rOptions = RequestOptions().error(R.drawable.def_img)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
         val tOptions = DrawableTransitionOptions().crossFade(500)
         Glide.with(this).load(imgUrl).transition(tOptions).apply(rOptions).into(ivImg)
 
@@ -65,25 +62,25 @@ class _009GoogleVRActivity : BaseActivity() {
             itemAnimator = null
             adapter = mAdapter
             RvItemClickSupport.addTo(this)
-                    .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
-                        onItemClick(position)
-                    })
+                .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+                    onItemClick(position)
+                })
         }
     }
 
     private fun loadPanoramaImage(model: _009PanoramaImageModel) {
         val file = File(model.localPath)
         LogUtils
-                .e(String.format("File exists? %s and the path is %s", file.exists(), file.absoluteFile))
+            .e(String.format("File exists? %s and the path is %s", file.exists(), file.absoluteFile))
 
         Observable.just(model.localPath)
-                .map {
-                    Glide.with(this).asBitmap().load(it)
-                            .submit(SIZE_ORIGINAL, SIZE_ORIGINAL).get()
-                }
-                .compose(RxSchedulers.io_main())
-                .subscribe { this.loadPanoramaImage(it) }
-                .addToManaged()
+            .map {
+                Glide.with(this).asBitmap().load(it)
+                    .submit(SIZE_ORIGINAL, SIZE_ORIGINAL).get()
+            }
+            .compose(RxSchedulers.io_main())
+            .subscribe { this.loadPanoramaImage(it) }
+            .addToManaged()
     }
 
 
@@ -110,7 +107,7 @@ class _009GoogleVRActivity : BaseActivity() {
             if (downloadInfo.state == DownloadState.FINISH) {
                 loadPanoramaImage(selector)
             } else {
-                ToastUtils.showToast("下载失败")
+                "下载失败".toast()
             }
         }
     }

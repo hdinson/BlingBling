@@ -48,7 +48,7 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
     }
 
     private fun getExchangeData() {
-        val exchangeStr = AppCacheUtil.getExchangeRateCache()
+        val exchangeStr = AppCacheUtil.getExchangeRateCache(this)
 
         //显示本地数据
         if (exchangeStr != null) {
@@ -62,7 +62,7 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
             .compose(RxSchedulers.io_main())
             .subscribe({ value ->
                 val json = Gson().toJson(value)
-                AppCacheUtil.setExangeRateCache(json)
+                AppCacheUtil.setExchangeRateCache(this@_007ExchangeActivity, json)
                 setAdapterRate(json)
                 mLoading.success()
             }, {

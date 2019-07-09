@@ -13,8 +13,6 @@ public class GlobalApplication extends Application {
 
     @SuppressLint("StaticFieldLeak")
     private static Context context;
-    private static Handler handler;
-    private static int mainThreadId;
 
 
     @Override
@@ -22,9 +20,6 @@ public class GlobalApplication extends Application {
         super.onCreate();
 
         context = getApplicationContext();
-        handler = new Handler();
-        mainThreadId = android.os.Process.myTid();
-
         CrashHandler.INSTANCE.init(ConstantsUtils.INSTANCE.getSDCARD_PRIVATE());
 
     }
@@ -34,11 +29,4 @@ public class GlobalApplication extends Application {
         return context;
     }
 
-    public static Handler getHandler() {
-        return handler;
-    }
-
-    public static int getMainThreadId() {
-        return mainThreadId;
-    }
 }

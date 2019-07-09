@@ -130,19 +130,19 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
 
         Observable
             .concat(Observable.create<DailyList> {
-                val cache = AppCacheUtil.getMainHeardCache()
+                val cache = AppCacheUtil.getMainHeardCache(this@MainActivity)
                 if (cache == null) it.onComplete()
                 else it.onNext(cache)
             }, mOneApi.loadDaily())
             .doOnNext {
                 if (it.isLocalCache.not()) {
                     it.isLocalCache = true
-                    AppCacheUtil.setMainHeardCache(it)
+                    AppCacheUtil.setMainHeardCache(this@MainActivity,it)
                 }
             }
             .map { it.data[0] }
             .flatMap {
-                val detail = AppCacheUtil.getDailyDetail(it)
+                val detail = AppCacheUtil.getDailyDetail(this@MainActivity,it)
                 if (detail == null) mOneApi.getDetail(it) else Observable.just(detail)
             }
             .subscribeOn(Schedulers.io())
@@ -151,7 +151,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
             .subscribe({
                 if (it.isLocalCache.not()) {
                     it.isLocalCache = true
-                    AppCacheUtil.setDailyDetail(it)
+                    AppCacheUtil.setDailyDetail(this@MainActivity,it)
                 }
                 GlideUtils.setImage(this, it.data.hp_img_url, ivDaily)
             }, { LogUtils.d(it.toString()) }).addToManaged()
@@ -204,12 +204,12 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
         val add = if (StringUtils.isEmpty(location.city)) location.province else location.city
         Observable.just<String>(add)
             .flatMap { city ->
-                val cache = AppCacheUtil.getHomeWeatherCache(city)
+                val cache = AppCacheUtil.getHomeWeatherCache(this@MainActivity,city)
                 if (cache == null) HttpHelper.create(XinZhiWeatherApi::class.java).getWeather(city)
                 else Observable.just(cache)
             }
             .map { homeWeather ->
-                AppCacheUtil.setHomeWeatherCache(homeWeather)
+                AppCacheUtil.setHomeWeatherCache(this@MainActivity,homeWeather)
                 homeWeather
             }
             .compose(RxSchedulers.io_main())
