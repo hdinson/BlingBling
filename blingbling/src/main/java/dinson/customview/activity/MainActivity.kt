@@ -50,7 +50,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
         initPullZoomView()
         initContent()
         initHead()
-        //getLocation()
+        getLocation()
         weatherLayout.click {
             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE)
                 .subscribe { AndroidInfoActivity.start(this) }
@@ -176,7 +176,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
      * 定位
      */
     private fun getLocation() {
-        weatherLayout.click { _ ->
+        weatherLayout.click {
             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE)
                 .subscribe { AndroidInfoActivity.start(this) }
         }
