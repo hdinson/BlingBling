@@ -2,8 +2,8 @@ package dinson.customview.weight.recycleview;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 public class GridSpaceItemDecoration extends RecyclerView.ItemDecoration {
@@ -27,7 +27,7 @@ public class GridSpaceItemDecoration extends RecyclerView.ItemDecoration {
         int totalCount = layoutManager.getItemCount();
         int surplusCount = totalCount % layoutManager.getSpanCount();
         int childPosition = parent.getChildAdapterPosition(view);
-        if (layoutManager.getOrientation() == GridLayoutManager.VERTICAL) {//竖直方向的
+        if (layoutManager.getOrientation() == RecyclerView.VERTICAL) {//竖直方向的
             if (surplusCount == 0 && childPosition > totalCount - layoutManager.getSpanCount() - 1) {
                 //后面几项需要bottom
                 outRect.bottom = topBottom;

@@ -1,8 +1,8 @@
 package dinson.customview.weight.expandingviewpager;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.ViewGroup;
 
 /**

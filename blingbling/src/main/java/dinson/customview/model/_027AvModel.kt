@@ -10,8 +10,8 @@ import org.jsoup.Jsoup
 
 object _027AvModel {
 
-    const val BASE_URL = "https://avmoo.xyz"
-//    private const val BASE_URL = "https://avsox.net"
+//    const val BASE_URL = "https://avmoo.xyz"
+    private const val BASE_URL = "https://avsox.asia"
 
 
     const val HOME = "$BASE_URL/cn//page/"

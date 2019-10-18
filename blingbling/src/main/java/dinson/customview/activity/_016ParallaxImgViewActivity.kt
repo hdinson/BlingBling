@@ -2,8 +2,8 @@ package dinson.customview.activity
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.design.widget.Snackbar.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.kotlin.loge

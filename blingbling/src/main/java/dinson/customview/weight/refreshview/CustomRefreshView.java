@@ -2,10 +2,14 @@ package dinson.customview.weight.refreshview;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import dinson.customview.R;
+import dinson.customview.utils.LogUtils;
 
 /**
  * 一个支持网络错误重试，无数据页（可自定义），无网络界面（可自定义）的上拉加载更多，下拉刷新控件
@@ -22,7 +27,7 @@ import dinson.customview.R;
  * SwipeRefreshLayout + recyclerView
  */
 public class CustomRefreshView extends FrameLayout
-        implements SwipeRefreshLayout.OnRefreshListener {
+    implements SwipeRefreshLayout.OnRefreshListener {
 
     private View mEmptyView;
     //private TextView mEmptyText;
@@ -93,10 +98,6 @@ public class CustomRefreshView extends FrameLayout
 
         mRefreshLayout.setOnRefreshListener(this);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -110,8 +111,18 @@ public class CustomRefreshView extends FrameLayout
                 if (mLayoutManager instanceof LinearLayoutManager) {
                     lastVisiblePosition = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
                 }
+                if (mLayoutManager instanceof StaggeredGridLayoutManager) {
+                    StaggeredGridLayoutManager layoutManager = ((StaggeredGridLayoutManager) mLayoutManager);
+                    layoutManager.invalidateSpanAssignments();
+                    int[] temp = layoutManager.findLastVisibleItemPositions(null);
+                    lastVisiblePosition = temp[0];
+                    for (int i : temp) {
+                        if (i > lastVisiblePosition)
+                            lastVisiblePosition = i;
+                    }
+                }
                 int childCount = mWrapperAdapter == null ? 0 : mWrapperAdapter.getItemCount();
-                if (childCount > 9 && lastVisiblePosition == childCount - 1 && !isLoadingMore) {
+                if (lastVisiblePosition >= childCount - 1 && !isLoadingMore) {
                     if (mListener != null) {
                         isLoadingMore = true;
                         mListener.onLoadMore();

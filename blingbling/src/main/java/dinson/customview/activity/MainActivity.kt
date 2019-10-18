@@ -3,9 +3,9 @@ package dinson.customview.activity
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View.OVER_SCROLL_NEVER
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -153,6 +153,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
                     it.isLocalCache = true
                     AppCacheUtil.setDailyDetail(this@MainActivity,it)
                 }
+                ivDaily.tag = null
                 GlideUtils.setImage(this, it.data.hp_img_url, ivDaily)
             }, { LogUtils.d(it.toString()) }).addToManaged()
     }

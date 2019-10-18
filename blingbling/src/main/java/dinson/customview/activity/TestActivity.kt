@@ -6,15 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import dinson.customview.BuildConfig
+import androidx.databinding.DataBindingUtil
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.databinding.ActivityTestBinding
 import dinson.customview.kotlin.click
 import dinson.customview.kotlin.loge
-import dinson.customview.kotlin.logi
 import dinson.customview.kotlin.toast
 import dinson.customview.manager.BlingNdkHelper
-import dinson.customview.utils.AESUtils
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity_test.*
@@ -26,13 +25,13 @@ import java.io.InputStreamReader
 class TestActivity : BaseActivity() {
 
 
-//    private lateinit var   contentView: ActivityTestBinding
+    private lateinit var contentView: ActivityTestBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//          contentView = DataBindingUtil.setContentView(
-//            this, R.layout.activity_test)
-//        contentView.cacheSize = "click times : $clickTimes"
+        contentView = DataBindingUtil.setContentView(
+            this, R.layout.activity_test)
+        contentView.cacheSize = "click times : $clickTimes"
         initUI()
     }
 
@@ -46,14 +45,6 @@ class TestActivity : BaseActivity() {
         btnTest.click { BlingNdkHelper.getFromC().toast() }
     }
 
-    fun onEncryption(view: View) {
-        val str = "jtef:/dfas[23ajfkav8293.12!@#$%^&*()_+}{:ha中国"
-        logi(str)
-        val code = AESUtils.encrypt(BuildConfig.APPLICATION_ID, str)
-        logi(code)
-        val code2 = AESUtils.decrypt(BuildConfig.APPLICATION_ID, code)
-        logi(code2)
-    }
 
     fun onClearAllCache(view: View) {
         CacheUtils.cleanApplicationData(this)
@@ -66,7 +57,8 @@ class TestActivity : BaseActivity() {
 //        contentView.cacheSize = CacheUtils.getCacheSize(this)
     }
 
-    var clickTimes=0
+
+    var clickTimes = 0
     fun onDataBindingClick(view: View) {
 //        contentView.cacheSize = "click times : ${++clickTimes}"
     }
@@ -136,9 +128,11 @@ class TestActivity : BaseActivity() {
 
     }
 
+
+
     companion object {
-        fun start(context:Context){
-            context.startActivity(Intent(context,TestActivity::class.java))
+        fun start(context: Context) {
+            context.startActivity(Intent(context, TestActivity::class.java))
         }
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,35 +8,35 @@
     android:background="@drawable/_017_activity_bg"
     tools:context="dinson.customview.activity._017TetrisActivity">
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.58"/>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="67dp"/>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.79"/>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.09"/>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="@dimen/spacing_medium"
-        android:background="@drawable/shape_rec_r999"
+        android:background="@drawable/shape_rec_r999_blue"
         android:backgroundTint="#232f2f"
         android:gravity="center"
         android:text="A"
@@ -117,7 +117,7 @@
         android:layout_height="45dp"
         android:layout_marginEnd="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_medium"
-        android:background="@drawable/shape_rec_r999"
+        android:background="@drawable/shape_rec_r999_blue"
         android:backgroundTint="#232f2f"
         android:gravity="center"
         android:text="B"
@@ -131,7 +131,7 @@
         android:layout_width="25dp"
         android:layout_height="8dp"
         android:layout_marginEnd="@dimen/spacing_medium"
-        android:background="@drawable/shape_rec_r999"
+        android:background="@drawable/shape_rec_r999_blue"
         android:backgroundTint="#232f2f"
         android:gravity="center"
         android:text="B"
@@ -147,7 +147,7 @@
         android:id="@+id/btnReset"
         android:layout_width="25dp"
         android:layout_height="8dp"
-        android:background="@drawable/shape_rec_r999"
+        android:background="@drawable/shape_rec_r999_blue"
         android:backgroundTint="#232f2f"
         android:gravity="center"
         android:text="B"
@@ -156,4 +156,4 @@
         app:layout_constraintLeft_toRightOf="@+id/btnNothing"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnNothing"/>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

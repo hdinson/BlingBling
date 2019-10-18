@@ -2,7 +2,7 @@ package dinson.customview.utils
 
 import android.content.Context
 import android.graphics.Typeface
-import android.support.v4.util.SimpleArrayMap
+import androidx.collection.SimpleArrayMap
 
 /**
  * 字体工具（优化向）

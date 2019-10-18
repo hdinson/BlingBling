@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:overScrollMode="never">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topCard"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -73,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View style="@style/HorizontalLine" />
 
@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/crvScheduleList"
             android:overScrollMode="never"
             android:paddingTop="8dp"

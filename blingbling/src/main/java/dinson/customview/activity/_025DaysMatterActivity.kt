@@ -2,12 +2,12 @@ package dinson.customview.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.content.FileProvider
-import android.support.v4.view.ViewPager
 import android.view.View
+import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -15,7 +15,6 @@ import dinson.customview._global.ConstantsUtils
 import dinson.customview.fragment._025CaculateDateFragment
 import dinson.customview.fragment._025DaysMatterFragment
 import dinson.customview.fragment._025OnTheDaysFragment
-import dinson.customview.fragment._027LadyFragment
 import dinson.customview.kotlin.click
 import dinson.customview.kotlin.logi
 import dinson.customview.utils.SystemBarModeUtils
@@ -59,7 +58,7 @@ class _025DaysMatterActivity : BaseActivity() {
     }
 
     private inner class MainAdapter(fm: FragmentManager, val fragments: List<Fragment>)
-        : FragmentPagerAdapter(fm) {
+        : FragmentPagerAdapter(fm,BEHAVIOR_SET_USER_VISIBLE_HINT) {
 
         override fun getItem(position: Int): Fragment {
             return fragments[position]

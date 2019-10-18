@@ -26,7 +26,7 @@ class _007SpotlightActivity : BaseActivity() {
         tvType.typeface = typeface
         tvName.typeface = typeface
         tvContent.typeface = typeface
-        cancel.setOnClickListener({ onBackPressed() })
+        cancel.setOnClickListener { onBackPressed() }
     }
 
 

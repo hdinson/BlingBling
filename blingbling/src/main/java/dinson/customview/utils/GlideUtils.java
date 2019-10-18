@@ -9,7 +9,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import dinson.customview.R;
-import dinson.customview.utils.svg.GlideApp;
 
 
 /**
@@ -39,12 +38,11 @@ public class GlideUtils {
             setSvgImage(context, url, view);
             return;
         }
-
-        Glide.with(context).load(url).apply(getDefaultOptions()).into(view);
+        Glide.with(context).load(url).apply(getDefaultOptions()) .into(view);
     }
 
     private static void setSvgImage(Context context, String url, ImageView view) {
-        GlideApp.with(context)
+        Glide.with(context)
                 .as(PictureDrawable.class)
                 .error(R.drawable.def_img).load(url).into(view);
     }

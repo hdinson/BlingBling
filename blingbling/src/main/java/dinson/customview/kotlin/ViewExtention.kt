@@ -3,8 +3,8 @@ package dinson.customview.kotlin
 import android.animation.ValueAnimator
 import android.graphics.Path
 import android.graphics.PathMeasure
-import android.support.annotation.DimenRes
-import android.support.v4.view.ViewCompat
+import androidx.annotation.DimenRes
+import androidx.core.view.ViewCompat
 import android.view.View
 
 /**

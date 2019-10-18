@@ -8,7 +8,7 @@
     tools:context="dinson.customview.activity._004BiliBiliListActivity">
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topTitleLayout"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -61,7 +61,7 @@
             android:visibility="gone"
             app:layout_constraintRight_toLeftOf="@+id/actionMode"
             tools:ignore="HardcodedText" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <dinson.customview.weight.refreshview.CustomRefreshView
         android:id="@+id/crvVideoContent"

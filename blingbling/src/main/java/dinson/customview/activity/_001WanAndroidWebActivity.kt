@@ -2,10 +2,12 @@ package dinson.customview.activity
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebSettings
+import android.webkit.WebView
 import com.just.agentweb.AgentWeb
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -32,7 +34,7 @@ class _001WanAndroidWebActivity : BaseActivity() {
         SystemBarModeUtils.setPaddingTop(this, flContainer)
         SystemBarModeUtils.darkMode(this, true)
 
-
+        WebView.setWebContentsDebuggingEnabled(false)
         initData()
     }
 

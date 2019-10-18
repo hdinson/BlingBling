@@ -1,7 +1,7 @@
 package dinson.customview.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.*
 import dinson.customview.R
 import dinson.customview.activity._027MovieDetailsActivity

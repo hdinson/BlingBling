@@ -14,7 +14,7 @@
         android:scaleType="center"
         android:src="@drawable/_013_activity_bg" />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,9 +27,9 @@
             app:IndicatorHeight="44dp"
             app:IndicatorLineWidth="2dp"
             app:IndicatorWidth="60dp" />
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"

@@ -25,7 +25,7 @@ class _014HonorClockActivity : BaseActivity() {
         val calendar = Calendar.getInstance()
         val sdf = SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA)
         return "${sdf.format(calendar.time)} ${getDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK))} " +
-            "\n第${calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)}周 第${calendar.get(Calendar.DAY_OF_YEAR)}天"
+            "\n第${calendar.get(Calendar.WEEK_OF_YEAR)}周 第${calendar.get(Calendar.DAY_OF_YEAR)}天"
     }
 
     /**

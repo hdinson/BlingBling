@@ -1,6 +1,5 @@
 package dinson.customview.model
 
-import dinson.customview._global.ConstantsUtils
 import dinson.customview.activity.*
 import dinson.customview.entity.ClassBean
 
@@ -14,13 +13,13 @@ object MainActivityModelUtil {
      */
     val dataList: List<ClassBean> by lazy {
         listOf(
-            ClassBean(_001WanAndroidActivity::class.java, "WanAndroid",
+             ClassBean(_001WanAndroidActivity::class.java, "WanAndroid",
                 "WanAndroid is a BBS created by many passionate youth who love Android.",
                 "FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp"),
             ClassBean(_002ZhihuTucaoListActivity::class.java, "ZhiHuDaily",
                 "Zhihu is a question-and-answer website where questions are created, answered, edited and organized by the community of its users",
                 "Fi8e4rUvYUC3tp5UzU6mUQh4SkTK.webp"),
-            ClassBean(_003GankIOActivity::class.java, "Gank.io",
+            ClassBean(_003GankActivity::class.java, "Gank.io",
                 "Share daily photos and technical dry goods, as well as casual videos for everyone to rest at noon",
                 "2d4bf309b03e8340cf0178b558b15daf.webp"),
             ClassBean(_004BiliBiliListActivity::class.java, "IJKPlayer",
@@ -88,16 +87,13 @@ object MainActivityModelUtil {
                 "FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp"),
             ClassBean(_025DaysMatterActivity::class.java, "CountDownTimer",
                 "Android Library that lights items for tutorials or walk-through etc",
-                "FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp"),
-            ClassBean(test::class.java, "五子棋",
+                "FkLRL9du9H1_jy2C1yFTmCdswQSZ.webp"),
+            ClassBean(_026FiveChessActivity::class.java, "Five Chess",
                 "Android Library that lights items for tutorials or walk-through etc",
-                "FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp"),
-            ClassBean(_026FiveChessActivity::class.java, "五子棋2",
+                "FrTu8V2-W461c2C4UIa_9-yp69ls.webp"),
+            ClassBean(_027MovieActivity::class.java, "AV",
                 "Android Library that lights items for tutorials or walk-through etc",
-                "FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp"),
-            ClassBean(_027MovieActivity::class.java, "五子棋2",
-                "Android Library that lights items for tutorials or walk-through etc",
-                "FrTu8V2-Wu7nc2C4UIa_9-yp69ls.webp"),
+                "FrvJ7OlyyBDRleOBvBE07TRslRON.webp"),
             ClassBean(TestActivity::class.java, "TestLayout",
                 "An activity for testing.",
                 "Fos8aWM3lzyxB621rEmzMhgTUn-p.webp")

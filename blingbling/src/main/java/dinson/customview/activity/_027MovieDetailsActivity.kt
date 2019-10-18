@@ -6,7 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
@@ -15,7 +15,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import byc.imagewatcher.ImageWatcherHelper
 import com.google.gson.Gson
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -34,6 +33,7 @@ import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.MessagePicturesLayout
+import dinson.customview.weight.imagewatcher.ImageWatcherHelper
 import dinson.customview.weight.recycleview.OnRvItemClickListener
 import dinson.customview.weight.recycleview.RvItemClickSupport
 import io.reactivex.Observable
@@ -42,7 +42,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__027_movie_details.*
 
 
-class _027MovieDetailsActivity : BaseActivity() , View.OnClickListener, MessagePicturesLayout.Callback {
+class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePicturesLayout.Callback {
 
 
     companion object {
@@ -58,13 +58,10 @@ class _027MovieDetailsActivity : BaseActivity() , View.OnClickListener, MessageP
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__027_movie_details)
 
-        screenEmpty.click {
-            TestActivity.start(this@_027MovieDetailsActivity)
-        }
-       initUI()
+        initUI()
     }
 
-     @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n")
     private fun initUI() {
         SystemBarModeUtils.setPaddingTop(this, toolbar, clMovieInfo)
         setSupportActionBar(toolbar)
@@ -82,7 +79,7 @@ class _027MovieDetailsActivity : BaseActivity() , View.OnClickListener, MessageP
 
     private fun initMovieInfoUI(movieInfo: MovieInfo) {
         //显示大图
-        GlideUtils.setImage(this,movieInfo.coverUrl,ivMovieBg)
+        GlideUtils.setImage(this, movieInfo.coverUrl, ivMovieBg)
         //添加制作商，系列等信息
         createHeard(movieInfo)
         //添加演员
@@ -115,7 +112,7 @@ class _027MovieDetailsActivity : BaseActivity() , View.OnClickListener, MessageP
     }
 
     private fun getMovieInfo(movie: Movie) {
-        val cache = CacheUtils.getCache( this,"_027MovieInfo${movie.code}")
+        val cache = CacheUtils.getCache(this, "_027MovieInfo${movie.code}")
         if (StringUtils.isEmpty(cache).not()) {
             val movieInfo = Gson().fromJson<MovieInfo>(cache, MovieInfo::class.java)
             initMovieInfoUI(movieInfo)

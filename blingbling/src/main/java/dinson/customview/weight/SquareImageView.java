@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 /**
  * 正方形的imageview
  */
-public class SquareImageView extends android.support.v7.widget.AppCompatImageView {
+public class SquareImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     public SquareImageView(Context context) {
         this(context, null);

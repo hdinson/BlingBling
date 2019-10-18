@@ -1,6 +1,6 @@
 package dinson.customview.weight._006floatingview;
 
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.view.View;
 
 import dinson.customview.weight._006floatingview.effect.ScaleFloatingTransition;

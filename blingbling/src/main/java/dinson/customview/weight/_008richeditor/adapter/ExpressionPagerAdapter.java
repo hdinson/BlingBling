@@ -13,7 +13,7 @@
  */
 package dinson.customview.weight._008richeditor.adapter;
 
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 

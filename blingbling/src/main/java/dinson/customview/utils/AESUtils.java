@@ -1,5 +1,7 @@
 package dinson.customview.utils;
 
+import android.util.Base64;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,9 +9,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
+import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -29,12 +36,9 @@ public class AESUtils {
     /**
      * 加密
      *
-     * @param key
-     *            密钥
-     * @param src
-     *            加密文本
+     * @param key 密钥
+     * @param src 加密文本
      * @return
-     * @throws Exception
      */
     public static String encrypt(String key, String src) throws Exception {
         // /src = Base64.encodeToString(src.getBytes(), Base64.DEFAULT);
@@ -47,12 +51,9 @@ public class AESUtils {
     /**
      * 加密
      *
-     * @param key
-     *            密钥
-     * @param src
-     *            加密文本
+     * @param key 密钥
+     * @param src 加密文本
      * @return
-     * @throws Exception
      */
     public static String encrypt2Java(String key, String src) throws Exception {
         // /src = Base64.encodeToString(src.getBytes(), Base64.DEFAULT);
@@ -65,12 +66,9 @@ public class AESUtils {
     /**
      * 解密
      *
-     * @param key
-     *            密钥
-     * @param encrypted
-     *            待揭秘文本
+     * @param key       密钥
+     * @param encrypted 待揭秘文本
      * @return
-     * @throws Exception
      */
     public static String decrypt(String key, String encrypted) throws Exception {
         byte[] rawKey = toMakekey(key, keyLenght, defaultV).getBytes();// key.getBytes();
@@ -83,6 +81,7 @@ public class AESUtils {
 
     /**
      * 密钥key ,默认补的数字，补全16位数，以保证安全补全至少16位长度,android和ios对接通过
+     *
      * @param str
      * @param strLength
      * @param val
@@ -106,10 +105,10 @@ public class AESUtils {
      * 真正的加密过程
      * 1.通过密钥得到一个密钥专用的对象SecretKeySpec
      * 2.Cipher 加密算法，加密模式和填充方式三部分或指定加密算 (可以只用写算法然后用默认的其他方式)Cipher.getInstance("AES");
+     *
      * @param key
      * @param src
      * @return
-     * @throws Exception
      */
     private static byte[] encrypt(byte[] key, byte[] src) throws Exception {
         SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
@@ -125,7 +124,6 @@ public class AESUtils {
      * @param key
      * @param src
      * @return
-     * @throws Exception
      */
     private static byte[] encrypt2Java(byte[] key, byte[] src) throws Exception {
         SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
@@ -141,7 +139,6 @@ public class AESUtils {
      * @param key
      * @param encrypted
      * @return
-     * @throws Exception
      */
     private static byte[] decrypt(byte[] key, byte[] encrypted) throws Exception {
         SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
@@ -162,6 +159,7 @@ public class AESUtils {
 
     /**
      * 把16进制转化为字节数组
+     *
      * @param hexString
      * @return
      */
@@ -177,6 +175,7 @@ public class AESUtils {
     /**
      * 二进制转字符,转成了16进制
      * 0123456789abcdefg
+     *
      * @param buf
      * @return
      */
@@ -196,6 +195,7 @@ public class AESUtils {
 
     /**
      * 初始化 AES Cipher
+     *
      * @param sKey
      * @param cipherMode
      * @return
@@ -234,6 +234,7 @@ public class AESUtils {
 
     /**
      * 对文件进行AES加密
+     *
      * @param sourceFile
      * @param sKey
      * @return
@@ -282,6 +283,7 @@ public class AESUtils {
 
     /**
      * AES方式解密文件
+     *
      * @param sourceFile
      * @return
      */
@@ -319,6 +321,66 @@ public class AESUtils {
             }
         }
         return decryptFile;
+    }
+
+    /**
+     * 解密 带偏移量
+     *
+     * @param data   2进制流
+     * @param key    秘钥
+     * @param offset 偏移量
+     * @return 明文
+     */
+    public static String decodeCBCSync(String data, String key, String offset) throws Exception {
+        byte[] key2 = toMakekey(key);
+        byte[] iv = offset.getBytes();
+        // 初始化
+        //Security.addProvider(new BouncyCastleProvider());
+        // 转化成JAVA的密钥格式
+        Key secretKey = new SecretKeySpec(key2, "AES");
+        // 初始化cipher
+        Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(iv));
+        byte[]  encryptedText = cipher.doFinal(toByte(data));
+        return new String(encryptedText, StandardCharsets.UTF_8);//此处使用BASE64做转码。
+    }
+
+    /**
+     * 补足key 16的倍数位
+     *
+     * @param key 补足key
+     * @return 补全后的key byte[]
+     */
+    private static byte[] toMakekey(String key) {
+        // 如果密钥不足16位，那么就补足.  这个if 中的内容很重要
+        int base = 16;
+        byte[] keyBytes = key.getBytes();
+        if (keyBytes.length % base != 0) {
+            int groups = keyBytes.length / base + (keyBytes.length % base != 0 ? 1 : 0);
+            byte[] temp = new byte[groups * base];
+            Arrays.fill(temp, (byte) 0);
+            System.arraycopy(keyBytes, 0, temp, 0, keyBytes.length);
+            return temp;
+        } else return keyBytes;
+    }
+
+
+    /**
+     * 16进制转2进制
+     *
+     * @param hex 16进制流
+     * @return 2进制流
+     */
+    private byte[] hexStr2Byte(String hex) {
+        ByteBuffer bf = ByteBuffer.allocate(hex.length() / 2);
+        for (int i = 0; i < hex.length(); i++) {
+            String hexStr = hex.charAt(i) + "";
+            i++;
+            hexStr += hex.charAt(i);
+            byte b = (byte) Integer.parseInt(hexStr, 16);
+            bf.put(b);
+        }
+        return bf.array();
     }
 
 }
