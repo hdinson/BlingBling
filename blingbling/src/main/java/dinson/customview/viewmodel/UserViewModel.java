@@ -1,6 +1,6 @@
 package dinson.customview.viewmodel;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 /**
  * @author Dinson - 2018/3/30

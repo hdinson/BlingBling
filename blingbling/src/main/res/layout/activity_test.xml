@@ -11,59 +11,73 @@
             type="String" />
     </data>
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_main"
+    <ScrollView xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         tools:context=".activity.TestActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@id/toolbar"
+        <LinearLayout
+            android:id="@+id/activity_main"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="#2f2f2f"
-            android:elevation="10dp"
-            android:theme="@style/BaseToolBarTheme.Black"
-            app:title="测试"
-            app:titleTextColor="@color/white" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <Button
-            style="@style/TestBtn"
-            android:onClick="onClearAllCache"
-            android:text="删除数据" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="#2f2f2f"
+                android:elevation="10dp"
+                android:theme="@style/BaseToolBarTheme.Black"
+                app:title="测试"
+                app:titleTextColor="@color/white" />
 
-        <Button
-            style="@style/TestBtn"
-            android:onClick="onClearCache"
-            android:text="清空缓存" />
+            <Button
+                style="@style/TestBtn"
+                android:onClick="onClearAllCache"
+                android:text="删除数据" />
 
-        <Button
-            style="@style/TestBtn"
-            android:onClick="onDataBindingClick"
-            android:text="@{cacheSize}" />
+            <Button
+                style="@style/TestBtn"
+                android:onClick="onClearCache"
+                android:text="清空缓存" />
 
-        <EditText
-            android:id="@+id/etExec"
-            style="@style/TestBtn"
-            android:hint="请输入命令"
-            android:padding="@dimen/spacing_medium" />
+            <Button
+                style="@style/TestBtn"
+                android:onClick="onDataBindingClick"
+                android:text="@{cacheSize}" />
 
-        <Button
-            style="@style/TestBtn"
-            android:onClick="onExec"
-            android:text="执行" />
+            <EditText
+                android:id="@+id/etExec"
+                style="@style/TestBtn"
+                android:hint="请输入命令"
+                android:padding="@dimen/spacing_medium" />
 
-        <Button
-            style="@style/TestBtn"
-            android:onClick="onPing"
-            android:text="Ping一下" />
+            <Button
+                style="@style/TestBtn"
+                android:onClick="onExec"
+                android:text="执行" />
 
-        <Button
-            android:id="@+id/btnTest"
-            style="@style/TestBtn"
-            android:onClick="onOpenDelv"
-            android:text="ndk" />
+            <Button
+                style="@style/TestBtn"
+                android:onClick="onPing"
+                android:text="Ping一下" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnTest"
+                style="@style/TestBtn"
+                android:onClick="onOpenDelv"
+                android:text="ndk" />
+
+            <Button
+                style="@style/TestBtn"
+                android:onClick="onDanteng"
+                android:text="解密" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 </layout>

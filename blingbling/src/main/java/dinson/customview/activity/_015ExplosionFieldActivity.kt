@@ -1,7 +1,7 @@
 package dinson.customview.activity
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._015AppIconAdapter

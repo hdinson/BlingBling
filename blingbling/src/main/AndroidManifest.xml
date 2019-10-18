@@ -29,7 +29,8 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
-         <!-- 高德地图设置key -->
+        <activity android:name=".activity.Main2Activity"></activity>
+        <!-- 高德地图设置key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="f16432f8253935bdaa564c4ad9288fbe" />
@@ -51,8 +52,8 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-
-        <!--<activity-alias
+        <!--
+<activity-alias
             android:name=".activity.WechatActivity"
             android:enabled="true"
             android:icon="@mipmap/wechat"
@@ -62,8 +63,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity-alias>-->
-
+        </activity-alias>
+        -->
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask"
@@ -91,6 +92,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity._002ZhihuTucaoContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity._003GankActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity._003PicSetListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity._003GankIOActivity"
@@ -190,9 +197,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity._027MovieActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.test"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity._027MovieDetailsActivity"

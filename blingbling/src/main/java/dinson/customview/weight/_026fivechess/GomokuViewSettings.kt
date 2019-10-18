@@ -6,11 +6,11 @@ import dinson.customview.R
 
 class GomokuViewSettings(context: Context, attrs: AttributeSet? = null) {
 
-    val mGomokuSize: Int
+    val mGomokuLineColor: Int
 
     init {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.GomokuView)
-        mGomokuSize = attributes.getInt(R.styleable.GomokuView_gomoku_size, 15)
+        mGomokuLineColor = attributes.getInt(R.styleable.GomokuView_gomoku_line_color, R.color.black)
 
 
         attributes.recycle()

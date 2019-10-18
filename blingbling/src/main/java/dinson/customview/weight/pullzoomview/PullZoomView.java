@@ -2,14 +2,13 @@ package dinson.customview.weight.pullzoomview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.widget.NestedScrollView;
+import androidx.core.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.ScrollView;
 import android.widget.Scroller;
 
 import dinson.customview.R;
@@ -120,9 +119,6 @@ public class PullZoomView extends NestedScrollView {
         child.setFocusable(true);
         child.setFocusableInTouchMode(true);
         findTagViews(this);
-        if (headerView == null || zoomView == null || contentView == null) {
-            throw new IllegalStateException("content, header, zoom 都不允许为空,请在Xml布局中设置Tag，或者使用属性设置");
-        }
         headerParams = (MarginLayoutParams) headerView.getLayoutParams();
         headerHeight = headerView.getMeasuredHeight();
         smoothScrollTo(0, 0);//如果是滚动到最顶部，默认最顶部是ListView的顶部

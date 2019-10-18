@@ -1,16 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/_026_bg_repeat"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
     tools:context=".activity._026FiveChessActivity">
 
+
     <dinson.customview.weight._026fivechess.GomokuView
-        android:layout_width="wrap_content"
-        android:background="#E7DDD4"
-        android:layout_height="wrap_content" />
+        android:id="@+id/gomokuView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:gomoku_line_color="@color/white"
+        android:layout_marginEnd="20dp"   />
+
+
+    <dinson.customview.weight.elasticview.ElasticView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:flexibility="7"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/actionRefresh"
+                style="@style/_026_Action_btn"
+                android:drawableTop="@drawable/_026_restart"
+                android:text="重来" />
+
+            <TextView
+                android:id="@+id/actionBack"
+                style="@style/_026_Action_btn"
+                android:drawableTop="@drawable/_026_left"
+                android:text="后退" />
+
+            <TextView
+                android:id="@+id/actionForward"
+                style="@style/_026_Action_btn"
+                android:drawableTop="@drawable/_026_right"
+                android:text="前进" />
+
+            <TextView
+                android:id="@+id/actionTips"
+                style="@style/_026_Action_btn"
+                android:drawableTop="@drawable/_026_tips"
+                android:text="提示" />
+
+            <TextView
+                android:id="@+id/actionStop"
+                style="@style/_026_Action_btn"
+                android:drawableTop="@drawable/_026_cancel"
+                android:text="停止" />
+
+            <TextView
+                android:id="@+id/actionSetting"
+                style="@style/_026_Action_btn"
+                android:drawableTop="@drawable/_026_setting"
+                android:text="设置" />
+
+
+        </LinearLayout>
+
+
+    </dinson.customview.weight.elasticview.ElasticView>
+
 
 </LinearLayout>

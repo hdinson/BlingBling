@@ -45,7 +45,7 @@ object SPUtils {
 
     /** 获取干货集中营福利图片的显示模式 */
     fun getGankLadyMode(): _003GankLadyMode {
-        val isRandom = getBoolean(GlobalApplication.getContext(), "config", "isRandom", false)
+        val isRandom = getBoolean(GlobalApplication.getContext(), "config", "isRandom", true)
         return if (isRandom) _003GankLadyMode.RANDOM else _003GankLadyMode.NORMAL
     }
 

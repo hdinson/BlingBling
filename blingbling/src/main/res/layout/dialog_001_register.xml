@@ -28,7 +28,7 @@
             android:textSize="16sp"
             android:textStyle="bold"/>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -47,9 +47,9 @@
                 android:textColor="#f0f7f4"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_gold"
                 android:textSize="15sp"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -68,9 +68,9 @@
                 android:textColor="#f0f7f4"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_gold"
                 android:textSize="15sp"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -89,7 +89,7 @@
                 android:textColor="#f0f7f4"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_gold"
                 android:textSize="15sp"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnDoRegister"

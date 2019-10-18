@@ -2,7 +2,7 @@ package dinson.customview.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.view.menu.MenuBuilder
+import androidx.appcompat.view.menu.MenuBuilder
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -195,8 +195,8 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
     /**
      * 显示item中的图片；
      */
-    override fun onPrepareOptionsPanel(view: View?, menu: Menu?): Boolean {
-        if (menu?.javaClass == MenuBuilder::class.java) {
+    override fun onPrepareOptionsPanel(view: View?, menu: Menu): Boolean {
+        if (menu.javaClass == MenuBuilder::class.java) {
             try {
                 val m = menu.javaClass.getDeclaredMethod("setOptionalIconsVisible", java.lang.Boolean.TYPE)
                 m.isAccessible = true

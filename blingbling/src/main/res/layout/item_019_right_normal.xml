@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +13,7 @@
         android:id="@id/ivImg"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         app:aspectRatio="1"
         tools:src="@drawable/def_img"/>
 
@@ -30,4 +30,4 @@
         tools:text="雷狼龙"
         android:textColor="@android:color/white"
         android:textSize="14sp"/>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

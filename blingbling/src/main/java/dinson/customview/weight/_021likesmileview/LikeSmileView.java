@@ -180,7 +180,6 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        LogUtils.e("onMeasure load");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

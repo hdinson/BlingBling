@@ -1,6 +1,6 @@
 package dinson.customview.weight.recycleview
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import dinson.customview.R
 import dinson.customview.kotlin.click

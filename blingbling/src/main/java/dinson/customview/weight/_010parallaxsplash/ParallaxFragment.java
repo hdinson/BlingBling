@@ -1,8 +1,8 @@
 package dinson.customview.weight._010parallaxsplash;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.LayoutInflaterCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.view.LayoutInflaterCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

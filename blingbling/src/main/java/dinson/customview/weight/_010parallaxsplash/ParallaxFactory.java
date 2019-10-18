@@ -2,7 +2,7 @@ package dinson.customview.weight._010parallaxsplash;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.LayoutInflaterFactory;
+import androidx.core.view.LayoutInflaterFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;

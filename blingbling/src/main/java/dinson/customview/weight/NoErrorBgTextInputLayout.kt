@@ -2,8 +2,8 @@ package dinson.customview.weight
 
 import android.content.Context
 import android.graphics.PorterDuff
-import android.support.design.widget.TextInputLayout
-import android.support.v4.content.ContextCompat
+import com.google.android.material.textfield.TextInputLayout
+import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import dinson.customview.R
 

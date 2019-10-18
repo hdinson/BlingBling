@@ -70,6 +70,9 @@
         <item name="android:longClickable">false</item>
         <item name="android:background">@drawable/ripple_main_white</item>
     </style>
+    <style name="TabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
     <!--005-->
     <style name="_005TextView">
         <item name="android:layout_width">match_parent</item>
@@ -222,6 +225,19 @@
     <style name="_010_Item_Login">
         <item name="x_in">-2</item>
         <item name="x_out">2</item>
+    </style>
+
+    <!--026-->
+    <style name="_026_Action_btn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/textSecond</item>
+        <item name="android:background">@drawable/ripple_main_white</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+
     </style>
 
     <style name="BaseToolBarTheme" parent="AppTheme">

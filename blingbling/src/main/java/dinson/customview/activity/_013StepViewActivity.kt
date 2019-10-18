@@ -1,7 +1,7 @@
 package dinson.customview.activity
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.holder._013StepViewHolder

@@ -39,7 +39,7 @@
                 android:textStyle="bold"/>
         </RelativeLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -58,9 +58,9 @@
                 android:textColor="@color/_001_accent_green"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
                 android:textSize="15sp"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
                 android:textColor="@color/_001_accent_green"
                 android:textCursorDrawable="@drawable/_001_bg_input_cursor_green"
                 android:textSize="15sp"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnDoLogin"
@@ -101,7 +101,7 @@
             android:textColor="@color/textHint"/>
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

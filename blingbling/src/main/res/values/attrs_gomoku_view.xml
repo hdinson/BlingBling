@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="GomokuView">
         <attr name="gomoku_size" format="integer"/>
+        <attr name="gomoku_line_color" format="color"/>
 
     </declare-styleable>
 </resources>

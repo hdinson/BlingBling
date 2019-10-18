@@ -7,7 +7,7 @@
     android:background="@drawable/_003_lady_act_bg"
     tools:context=".activity._003GankLadyActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"

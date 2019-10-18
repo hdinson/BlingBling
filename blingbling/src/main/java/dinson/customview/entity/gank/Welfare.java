@@ -13,10 +13,19 @@ public class Welfare {
      * who : lijinshan
      */
 
-    private String desc;
     private String url;
+    private String desc;
 
     private int height;//图片的高
+    private int width;
+
+    private String link;//仅妹子图网站需要
+    private String refer;//仅妹子图网站需要
+
+    public Welfare(String url, String desc) {
+        this.url = url;
+        this.desc = desc;
+    }
 
     public int getHeight() {
         return height;
@@ -40,5 +49,29 @@ public class Welfare {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getRefer() {
+        return refer;
+    }
+
+    public void setRefer(String refer) {
+        this.refer = refer;
     }
 }

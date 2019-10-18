@@ -1,6 +1,6 @@
 package dinson.customview.utils
 
-import android.support.annotation.FloatRange
+import androidx.annotation.FloatRange
 
 /**
  *  颜色相关的工具类

@@ -2,7 +2,9 @@ package dinson.customview.weight;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
@@ -90,17 +92,17 @@ public class MessagePicturesLayout extends FrameLayout implements View.OnClickLi
         } else if (urlListSize == 4) {
             column = 2;
         }
-        int row = 0;
+        int row;
         if (urlListSize > 6) {
             row = 3;
         } else if (urlListSize > 3) {
             row = 2;
-        } else if (urlListSize > 0) {
+        } else {
             row = 1;
         }
 
         final int imageSize = urlListSize == 1 ? mSingleMaxSize :
-                (int) ((getWidth() * 1f - mSpace * (column - 1)) / column);
+            (int) ((getWidth() * 1f - mSpace * (column - 1)) / column);
 
         lpChildImage.width = imageSize;
         lpChildImage.height = lpChildImage.width;

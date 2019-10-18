@@ -2,7 +2,7 @@ package dinson.customview.weight.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.widget.LinearLayout
 import android.widget.TextView
 import dinson.customview.R

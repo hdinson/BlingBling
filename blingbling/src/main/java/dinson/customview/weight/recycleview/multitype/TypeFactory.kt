@@ -1,7 +1,7 @@
 package dinson.customview.weight.recycleview.multitype
 
 
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 import android.view.View
 
 interface TypeFactory {

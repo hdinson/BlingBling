@@ -2,59 +2,56 @@ package com.bf92.ai;
 
 import android.content.res.*;
 
+import dinson.customview.utils.LogUtils;
 import dinson.customview.weight._026fivechess.AICallBack;
-import dinson.customview.weight._026fivechess.FiveChessView2;
 
 public class AI implements Runnable {
-    public static int DO_CGO = 6;
-    public static int DO_DOSTONE = 3;
-    public static int DO_INITION = 1;
-    public static int DO_NEWGAME = 2;
-    public static int DO_STEPTIME = 7;
-    public static int DO_STOP = 5;
-    public static int DO_UNDO = 4;
-    private int aiTurn;
+
+    private static int DO_INITION = 1;  //初始化
+    public static int DO_NEWGAME = 2;   //重新开始游戏
+    public static int DO_DOSTONE = 3;   //落子
+    public static int DO_UNDO = 4;      //悔棋
+    public static int DO_STOP = 5;      //停止查找深度
+    private static int DO_CGO = 6;      //ai算步
+    public static int DO_STEPTIME = 7;  //设置单步思考时间
+
     private AICallBack callBack;
-    public String ccc;
-    private int[][] chessArray;
-    private int panelLength;
+    private int[] chessList;
 
     static {
         System.loadLibrary("mmai");
     }
 
-    public AI(final int[][] chessArray, final int[] chessList, final AICallBack callBack) {
-        this.aiTurn = 1;
-        this.chessArray = chessArray;
+    public AI(final int[] chessList , final AICallBack callBack) {
         this.callBack = callBack;
-        this.panelLength = chessArray.length;
-        this.ccc = "5";
-        this.TEFACES(AI.DO_INITION, 0, 0, 0, chessList );
-        this.TEFACES(AI.DO_NEWGAME, 0, 0, 0, chessList );
+        this.chessList = chessList;
+        this.TEFACES(AI.DO_INITION, 0, 0, 0, chessList);
+        this.TEFACES(AI.DO_NEWGAME, 0, 0, 0, chessList);
     }
 
-    public native int TEFACES(final int p0, final int p1, final int p2, final int p3, final int[] p4);
+    private native int TEFACES(final int code, final int who, final int point, final int step, final int[] chessList);
 
-    public void aiBout() {
+    /**
+     * ai线程开始执行
+     *
+     */
+    public void aiBout( ) {
         new Thread(this).start();
     }
 
-    public void aiTEFACES(final int n, final int n2, final int n3, final int n4, final int n5) {
-        this.TEFACES(n, n2, n3 * 15 + n4, n5, FiveChessView2.chessList);
+    public void aiTEFACES(final int code, final int who, final int x, final int y, final int step) {
+        this.TEFACES(code, who, x * 15 + y, step, chessList);
     }
-
-    public native void book(final AssetManager p0, final String p1);
 
     @Override
     public void run() {
-        final int tefaces = this.TEFACES(AI.DO_CGO, this.aiTurn, 0, FiveChessView2.stepNum, FiveChessView2.chessList);
-        this.callBack.aiCompleted(0, tefaces / FiveChessView2.GRID_NUMBER, tefaces % FiveChessView2.GRID_NUMBER, this.aiTurn);
+        final int tefaces = this.TEFACES(AI.DO_CGO, 1, 0, 0, chessList);
+        this.callBack.aiCompleted(tefaces / 15, tefaces % 15 );
     }
 
-    public void setAiChess(final int aiTurn) {
-        this.aiTurn = aiTurn;
-    }
+
     public int cpp_put_bestpos(final int n) {
+        this.callBack.aiThinkPoint(n);
         return 1;
     }
 

@@ -1,9 +1,10 @@
 package dinson.customview.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import dinson.customview._global.BaseFragment;
+import dinson.customview.utils.LogUtils;
 
 
 /**
@@ -24,10 +25,13 @@ public abstract class ViewPagerLazyFragment extends BaseFragment {
      */
     private boolean isFirstResume = true;
 
-
     @Override
     public void onResume() {
         super.onResume();
+
+
+
+
         if (isFirstResume) {
             isFirstResume = false;
             return;
@@ -48,6 +52,7 @@ public abstract class ViewPagerLazyFragment extends BaseFragment {
 
     private boolean isFirstVisible = true;
     private boolean isFirstInvisible = true;
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

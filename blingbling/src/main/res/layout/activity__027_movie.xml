@@ -11,7 +11,7 @@
         android:orientation="vertical"
         tools:context=".activity._027MovieActivity">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@id/toolbar"
             style="@style/Toolbar._027ToolsBar"
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             app:title="   图书馆"
             app:titleTextColor="@android:color/white" />
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/vpContent"
             android:layout_width="match_parent"
             android:layout_height="0dp"

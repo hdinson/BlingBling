@@ -2,8 +2,8 @@ package dinson.customview.activity
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.widget.SimpleCursorAdapter
-import android.support.v7.widget.SearchView
+import androidx.cursoradapter.widget.SimpleCursorAdapter
+import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AutoCompleteTextView

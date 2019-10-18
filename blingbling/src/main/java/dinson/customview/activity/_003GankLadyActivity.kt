@@ -3,11 +3,11 @@ package dinson.customview.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.trello.rxlifecycle2.android.ActivityEvent
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.adapter._003GankLadyPicAdapter
+import dinson.customview.adapter._003GankGirlsPicAdapter
 import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.GankRoot
 import dinson.customview.entity.gank.Welfare
@@ -22,7 +22,6 @@ import dinson.customview.weight.recycleview.OnRvItemClickListener
 import dinson.customview.weight.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
-import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity__003_gank_lady.*
 
 class _003GankLadyActivity : BaseActivity() {
@@ -39,7 +38,7 @@ class _003GankLadyActivity : BaseActivity() {
     private val mApi = HttpHelper.create(GankApi::class.java)
     private val mRandomObservable by lazy { mApi.randomLadyPic(mPageSize) }
 
-    private lateinit var mAdapter: _003GankLadyPicAdapter
+    private lateinit var mAdapter: _003GankGirlsPicAdapter
     private val mData = ArrayList<Welfare>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +56,7 @@ class _003GankLadyActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mCurrencyMode = SPUtils.getGankLadyMode()
-        mAdapter = _003GankLadyPicAdapter(mData)
+        mAdapter = _003GankGirlsPicAdapter(mData)
 
         flCustomRefreshView.recyclerView.layoutManager = GridLayoutManager(this, 2)
         flCustomRefreshView.setAdapter(mAdapter)
@@ -114,7 +113,7 @@ class _003GankLadyActivity : BaseActivity() {
 
     private fun getObservable(page: Int): Observable<GankRoot<ArrayList<Welfare>>> {
         return when (mCurrencyMode) {
-            _003GankLadyMode.NORMAL -> mApi.ladyPic(mPageSize, page)
+            _003GankLadyMode.NORMAL -> mApi.gankIOGirlsPic(mPageSize, page)
             _003GankLadyMode.RANDOM -> mRandomObservable
         }
     }

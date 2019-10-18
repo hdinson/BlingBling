@@ -2,7 +2,7 @@ package dinson.customview.weight._007spotlight;
 
 import android.app.Activity;
 import android.graphics.PointF;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.view.View;
 
 /**

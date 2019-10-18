@@ -1,7 +1,7 @@
 package dinson.customview.model
 
 import android.annotation.SuppressLint
-import android.support.annotation.IntDef
+import androidx.annotation.IntDef
 import com.qiniu.common.Zone
 
 /**

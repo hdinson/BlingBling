@@ -2,8 +2,8 @@ package dinson.customview.weight.banner
 
 import android.content.Context
 import android.os.Handler
-import android.support.annotation.DrawableRes
-import android.support.v4.view.ViewPager
+import androidx.annotation.DrawableRes
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent

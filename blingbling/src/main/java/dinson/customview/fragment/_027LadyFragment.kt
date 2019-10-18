@@ -10,7 +10,7 @@ import dinson.customview.kotlin.loge
 import dinson.customview.weight._010parallaxsplash.ParallaxFragment
 
 /**
- * 首页界面
+ * 优优界面
  */
 class _027LadyFragment : ViewPagerLazyFragment() {
 

@@ -193,4 +193,9 @@ class _022GoogleMapActivity : BaseActivity(),
         logi("onLocationChanged...")
 
     }
+
+    override fun onDestroy() {
+        logi("onDestroy...")
+        super.onDestroy()
+    }
 }

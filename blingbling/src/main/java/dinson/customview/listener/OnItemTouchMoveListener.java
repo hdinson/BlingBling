@@ -1,6 +1,6 @@
 package dinson.customview.listener;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 当条目移动时的监听
