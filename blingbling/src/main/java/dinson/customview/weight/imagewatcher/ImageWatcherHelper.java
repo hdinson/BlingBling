@@ -1,6 +1,6 @@
 package dinson.customview.weight.imagewatcher;
 
-import android.net.Uri; 
+import android.net.Uri;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -32,6 +32,7 @@ public class ImageWatcherHelper {
     private ImageWatcher.LoadingUIProvider loadingUIProvider;
     private final List<ViewPager.OnPageChangeListener> onPageChangeListeners = new ArrayList<>();
     private final List<ImageWatcher.OnStateChangedListener> onStateChangedListeners = new ArrayList<>();
+    private final List<ImageWatcher.OnShowListener> onShowListener = new ArrayList<>();
     private View otherView;
 
 
@@ -85,14 +86,16 @@ public class ImageWatcherHelper {
         return this;
     }
 
-    @Deprecated
-    public ImageWatcherHelper setOnStateChangedListener(ImageWatcher.OnStateChangedListener listener) {
-        return addOnStateChangedListener(listener);
-    }
-
     public ImageWatcherHelper addOnStateChangedListener(ImageWatcher.OnStateChangedListener listener) {
         if (!onStateChangedListeners.contains(listener)) {
             onStateChangedListeners.add(listener);
+        }
+        return this;
+    }
+
+    public ImageWatcherHelper addOnShowListener(ImageWatcher.OnShowListener listener) {
+        if (!onShowListener.contains(listener)) {
+            onShowListener.add(listener);
         }
         return this;
     }
@@ -208,6 +211,11 @@ public class ImageWatcherHelper {
                 }
             });
         }
+        if (!onShowListener.isEmpty()) {
+            for (ImageWatcher.OnShowListener listener : onShowListener) {
+                listener.onShowed();
+            }
+        }
     }
 
     private void addToBackStack(final FragmentActivity activity, final ImageWatcherHelper helper) {
@@ -228,9 +236,9 @@ public class ImageWatcherHelper {
         };
 
         activity.getSupportFragmentManager().beginTransaction()
-                .add(android.R.id.content, backPressedFragment)
-                .addToBackStack("back")
-                .commitAllowingStateLoss();
+            .add(android.R.id.content, backPressedFragment)
+            .addToBackStack("back")
+            .commitAllowingStateLoss();
     }
 
     private void removeFromBackStack(FragmentActivity activity) {

@@ -8,9 +8,13 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dinson.customview.R
+import dinson.customview._global.BaseActivity
+import io.reactivex.Observable
+import io.reactivex.rxkotlin.addTo
+import java.util.concurrent.TimeUnit
 
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     companion object {
         private const val defaultIconPath = "dinson.customview.activity.SplashActivity"
@@ -20,7 +24,10 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        startActivity(Intent(this, MainActivity::class.java))
+        Observable.timer(1, TimeUnit.SECONDS).subscribe {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }.addToManaged()
     }
 
     override fun onRestart() {

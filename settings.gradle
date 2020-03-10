@@ -1,1 +1,1 @@
-include ':blingbling'
+include ':blingbling', ':blingxposed'

@@ -11,7 +11,9 @@ public class MeiZiTuUrl {
      * block : 1
      */
 
-    /*{
+    /*
+    update_url : https://apk.meizitu.net/app/version.json
+    {
     "version": "1.5.6",
     "title": "发现新版本",
     "tips": "修复已知问题。\n",
@@ -22,6 +24,7 @@ public class MeiZiTuUrl {
 
     private String basic_url;
     private String post_url;
+    private String z_url;
 
     public String getBasic_url() {
         return basic_url;
@@ -39,4 +42,11 @@ public class MeiZiTuUrl {
         this.post_url = post_url;
     }
 
+    public String getZ_url() {
+        return z_url;
+    }
+
+    public void setZ_url(String z_url) {
+        this.z_url = z_url;
+    }
 }

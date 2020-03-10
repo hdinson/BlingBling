@@ -24,11 +24,11 @@ import dinson.customview.download.model.DownloadInfoDao;
 public class DbDownUtil {
     private static DbDownUtil db;
     private final static String dbName = "AppDb";
-    private DaoMaster.DevOpenHelper openHelper;
+    public DaoMaster.DevOpenHelper openHelper;
     private Context context = GlobalApplication.getContext();
 
 
-    public DbDownUtil() {
+    private DbDownUtil() {
         openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
     }
 

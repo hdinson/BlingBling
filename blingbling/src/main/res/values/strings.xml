@@ -86,6 +86,7 @@
     <string name="if_arrow_left">&#xe697;</string>
     <string name="if_pokemon">&#xe633;</string>
     <string name="if_complete">&#xe619;</string>
+    <string name="if_good">&#xe720;</string>
     <!--天气图标-->
     <string name="if_sunny_0">&#xe60b;</string>
     <string name="if_clear_1">&#xe60b;</string>
@@ -127,6 +128,7 @@
     <string name="if_cold_37">&#xe617;</string>
     <string name="if_hot_38">&#xe60b;</string>
     <string name="if_unknown_99">&#xe623;</string>
+
     <string name="_010_username">邮箱 / 手机号</string>
     <string name="password">密码</string>
     <string name="_010_register">注册</string>

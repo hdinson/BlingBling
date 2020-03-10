@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-     <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpGankContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,8 +26,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="15dp"
-            app:av_tabIconNormal="@drawable/_027_bottom1_normal"
-            app:av_tabIconSelected="@drawable/_027_bottom1_selector" />
+            app:av_tabIconNormal="@drawable/_003_bottom1_normal"
+            app:av_tabIconSelected="@drawable/_003_bottom1_selector" />
 
 
         <dinson.customview.weight._027alphaindicator.AlphaView
@@ -35,8 +35,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="15dp"
-            app:av_tabIconNormal="@drawable/_027_bottom2_normal"
-            app:av_tabIconSelected="@drawable/_027_bottom2_selector" />
+            app:av_tabIconNormal="@drawable/_003_bottom2_normal"
+            app:av_tabIconSelected="@drawable/_003_bottom2_selector" />
 
     </dinson.customview.weight._027alphaindicator.AlphaIndicator>
 </LinearLayout>

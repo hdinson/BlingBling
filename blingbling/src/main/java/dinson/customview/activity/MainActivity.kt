@@ -23,6 +23,7 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.click
 import dinson.customview.kotlin.logd
+import dinson.customview.kotlin.toast
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
@@ -52,8 +53,11 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
         initHead()
         getLocation()
         weatherLayout.click {
-            RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE)
-                .subscribe { AndroidInfoActivity.start(this) }
+            RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE,Manifest.permission.RECEIVE_MMS,Manifest.permission.READ_CALL_LOG)
+                .subscribe {
+                    if (it) AndroidInfoActivity.start(this)
+                    else "需要电话权限".toast()
+                }
         }
     }
 
@@ -137,12 +141,12 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
             .doOnNext {
                 if (it.isLocalCache.not()) {
                     it.isLocalCache = true
-                    AppCacheUtil.setMainHeardCache(this@MainActivity,it)
+                    AppCacheUtil.setMainHeardCache(this@MainActivity, it)
                 }
             }
             .map { it.data[0] }
             .flatMap {
-                val detail = AppCacheUtil.getDailyDetail(this@MainActivity,it)
+                val detail = AppCacheUtil.getDailyDetail(this@MainActivity, it)
                 if (detail == null) mOneApi.getDetail(it) else Observable.just(detail)
             }
             .subscribeOn(Schedulers.io())
@@ -151,7 +155,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
             .subscribe({
                 if (it.isLocalCache.not()) {
                     it.isLocalCache = true
-                    AppCacheUtil.setDailyDetail(this@MainActivity,it)
+                    AppCacheUtil.setDailyDetail(this@MainActivity, it)
                 }
                 ivDaily.tag = null
                 GlideUtils.setImage(this, it.data.hp_img_url, ivDaily)
@@ -206,12 +210,12 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
         val add = if (StringUtils.isEmpty(location.city)) location.province else location.city
         Observable.just<String>(add)
             .flatMap { city ->
-                val cache = AppCacheUtil.getHomeWeatherCache(this@MainActivity,city)
+                val cache = AppCacheUtil.getHomeWeatherCache(this@MainActivity, city)
                 if (cache == null) HttpHelper.create(XinZhiWeatherApi::class.java).getWeather(city)
                 else Observable.just(cache)
             }
             .map { homeWeather ->
-                AppCacheUtil.setHomeWeatherCache(this@MainActivity,homeWeather)
+                AppCacheUtil.setHomeWeatherCache(this@MainActivity, homeWeather)
                 homeWeather
             }
             .compose(RxSchedulers.io_main())
