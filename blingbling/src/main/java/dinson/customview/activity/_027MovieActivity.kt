@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AutoCompleteTextView
+import android.widget.CursorAdapter
 import android.widget.TextView
 import com.github.promeg.pinyinhelper.Pinyin
 import dinson.customview.R
@@ -106,7 +107,7 @@ class _027MovieActivity : BaseActivity() {
             val adapter = SimpleCursorAdapter(this@_027MovieActivity,
                 R.layout.item_027_search_history, cursor,
                 arrayOf(SearchHistory027Dao.Properties.Name.columnName),
-                intArrayOf(R.id.tvHistoryName))
+                intArrayOf(R.id.tvHistoryName), CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER)
             view.suggestionsAdapter = adapter
         } else {
             view.suggestionsAdapter.changeCursor(cursor)

@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import dinson.customview.R
 import dinson.customview._global.BaseFragment
 import dinson.customview.kotlin.logi
+import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.fragment_003_girl.*
 import java.util.ArrayList
 
@@ -28,7 +29,7 @@ class _003GirlFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
-
+        SystemBarModeUtils.setPaddingTop(view.context,tlGirl)
         tlGirl.setupWithViewPager(vpGirlPage)
         tlGirl.tabMode = TabLayout.MODE_SCROLLABLE
     }

@@ -9,6 +9,7 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.fragment._003GirlFragment
 import dinson.customview.fragment._003InfomationFragment
+import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__003_gank.*
 
 class _003GankActivity : BaseActivity() {
@@ -21,7 +22,7 @@ class _003GankActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__003_gank)
 
-
+        SystemBarModeUtils.darkMode(this, true)
         vpGankContent.adapter = MainAdapter(supportFragmentManager, mFragments)
         vpGankContent.offscreenPageLimit = 5
         alphaIndicator.setViewPager(vpGankContent)
@@ -35,7 +36,7 @@ class _003GankActivity : BaseActivity() {
     }
 
     private inner class MainAdapter(fm: FragmentManager, val fragments: List<Fragment>)
-        : FragmentPagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {
             return fragments[position]

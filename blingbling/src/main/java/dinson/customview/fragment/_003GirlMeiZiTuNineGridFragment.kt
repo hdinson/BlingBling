@@ -1,6 +1,5 @@
 package dinson.customview.fragment
 
-import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
 import android.util.SparseArray
@@ -9,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import dinson.customview.R
 import dinson.customview._global.BaseFragment
@@ -19,7 +17,6 @@ import dinson.customview.entity.gank.MeiZiTuNineGrid
 import dinson.customview.entity.gank.MeiZiTuNinePic
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.logd
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.toast
 import dinson.customview.manager.GlideSimpleLoader
@@ -74,7 +71,10 @@ abstract class _003GirlMeiZiTuNineGridFragment : BaseFragment(), MessagePictures
     }
 
     private fun getDataFromServer(isRefresh: Boolean) {
-        if (isRefresh) mCurrentPage = 1
+        if (isRefresh){
+            mYearTag = ""
+            mCurrentPage = 1
+        }
         getObservable()
             .map {
                 val gird = ArrayList<MeiZiTuNineGrid>()
@@ -130,13 +130,12 @@ abstract class _003GirlMeiZiTuNineGridFragment : BaseFragment(), MessagePictures
     }
 
     override fun onThumbPictureClick(i: ImageView?, imageGroupList: SparseArray<ImageView>?, urlList: MutableList<Uri>?) {
-        mPicHelper.show(i, imageGroupList, urlList)
         layDecoration.attachImageWatcher(mPicHelper)
+        mPicHelper.show(i, imageGroupList, urlList)
     }
 
     override fun onResume() {
         super.onResume()
-        "MeiZiTuFragment onResume".logd()
 
         view?.apply {
             isFocusableInTouchMode = true
@@ -150,34 +149,6 @@ abstract class _003GirlMeiZiTuNineGridFragment : BaseFragment(), MessagePictures
         }
     }
 
-
-
     abstract fun getObservable(): Observable<ArrayList<MeiZiTuNinePic>>
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        "MeiZiTuFragment onCreate".logd()
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        "MeiZiTuFragment onDestroy".logd()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        "MeiZiTuFragment onPause".logd()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        "MeiZiTuFragment onDestroyView".logd()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        "MeiZiTuFragment onStart".logd()
-    }
 }

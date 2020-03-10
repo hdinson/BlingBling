@@ -31,9 +31,10 @@ class InDiskCookieStore {
             if (!cookies.containsKey(split[1])) cookies[split[1]] = ConcurrentHashMap()
 
             val sp = cookiePrefs.getString(it.key, "")
-            if (StringUtils.isNotEmpty(sp)) {
+            if (sp != null && StringUtils.isNotEmpty(sp)) {
                 val cookie = decodeCookie(sp)
-                cookies[split[1]]!![cookie.name()] = cookie
+                if (cookie.name() != null)
+                    cookies[split[1]]!![cookie.name()] = cookie
             }
         }
     }

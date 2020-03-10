@@ -16,6 +16,9 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+
     <application
         android:name="._global.GlobalApplication"
         android:allowBackup="false"
@@ -99,13 +102,7 @@
         <activity
             android:name=".activity._003PicSetListActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._003GankIOActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._003GankLadyActivity"
-            android:screenOrientation="portrait" />
-        <activity
+         <activity
             android:name=".activity._004BiliBiliListActivity"
             android:screenOrientation="portrait" />
         <activity

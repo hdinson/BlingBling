@@ -12,7 +12,7 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Message; 
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -258,6 +258,10 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
         void onStateChanged(ImageWatcher imageWatcher, int position, Uri uri, int actionTag);
     }
 
+    public interface OnShowListener {
+        void onShowed();
+    }
+
     public interface OnPictureLongPressListener {
         /**
          * @param v   当前被按的ImageView
@@ -340,6 +344,7 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
             initI = i;
             initImageGroupList = imageGroupList;
             initUrlList = urlList;
+            mUrlList = urlList;
             return;
         }
 
@@ -354,7 +359,13 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
 
         ImageWatcher.this.setVisibility(View.VISIBLE);
         vPager.setAdapter(adapter = new ImagePagerAdapter());
-        vPager.setCurrentItem(initPosition);
+        if (initPosition == 0) {
+            for (ViewPager.OnPageChangeListener listener : onPageChangeListeners) {
+                listener.onPageSelected(0);
+            }
+        } else {
+            vPager.setCurrentItem(initPosition);
+        }
         if (indexProvider != null) indexProvider.onPageChanged(this, initPosition, mUrlList);
     }
 
@@ -482,14 +493,14 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
                     // 没有vsDefault标志的View说明图标正在下载中。转化为Slide手势，可以进行viewpager的翻页滑动
                     mTouchMode = TOUCH_MODE_SLIDE;
                 } else if (Math.abs(moveX) < mTouchSlop && moveY > Math.abs(moveX) * 3 &&
-                        vsDefault.height * vsCurrent.scaleY / 2 - vsDefault.height / 2 <= iSource.getTranslationY()) {
+                    vsDefault.height * vsCurrent.scaleY / 2 - vsDefault.height / 2 <= iSource.getTranslationY()) {
                     // 手指垂直下拉。 横图未放大or图片放大且显示出了顶端   转化为退出查看图片操作
                     if (mTouchMode != TOUCH_MODE_EXIT) {
                         ViewState.write(iSource, ViewState.STATE_EXIT);
                     }
                     mTouchMode = TOUCH_MODE_EXIT;
                 } else if (vsCurrent.scaleY > vsDefault.scaleY || vsCurrent.scaleX > vsDefault.scaleX ||
-                        vsCurrent.scaleY * iSource.getHeight() > mHeight) {
+                    vsCurrent.scaleY * iSource.getHeight() > mHeight) {
                     // 图片当前为放大状态(宽或高超出了屏幕尺寸)or竖图
                     if (mTouchMode != TOUCH_MODE_DRAG) {
                         ViewState.write(iSource, ViewState.STATE_DRAG);
@@ -770,7 +781,7 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
             }
 
             animSourceViewStateTransform(iSource,
-                    ViewState.write(iSource, ViewState.STATE_TEMP).scaleX(expectedScale).scaleY(expectedScale));
+                ViewState.write(iSource, ViewState.STATE_TEMP).scaleX(expectedScale).scaleY(expectedScale));
         } else {
             animSourceViewStateTransform(iSource, vsDefault);
         }
@@ -878,7 +889,7 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
             return;// 如果没有变化跳过动画实行时间的触摸锁定
         }
         animSourceViewStateTransform(iSource,
-                ViewState.write(iSource, ViewState.STATE_TEMP).translationX(endTranslateX).translationY(endTranslateY));
+            ViewState.write(iSource, ViewState.STATE_TEMP).translationX(endTranslateX).translationY(endTranslateY));
 
         animBackgroundTransform(0xFF000000, 0);
     }
@@ -1032,7 +1043,7 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
                         notifyItemChangedState(position, false, false);
 
                         ViewState vsDefault = ViewState.write(imageView, ViewState.STATE_DEFAULT).width(sourceDefaultWidth).height(sourceDefaultHeight)
-                                .translationX(sourceDefaultTranslateX).translationY(sourceDefaultTranslateY);
+                            .translationX(sourceDefaultTranslateX).translationY(sourceDefaultTranslateY);
 
                         ViewState.restore(imageView, vsDefault.mTag);
                         imageView.setAlpha(1f);
@@ -1126,7 +1137,7 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
                     int bmpMirrorWidth = bmpMirror.getBounds().width();
                     int bmpMirrorHeight = bmpMirror.getBounds().height();
                     ViewState vsThumb = ViewState.write(imageView, ViewState.STATE_THUMB).width(bmpMirrorWidth).height(bmpMirrorHeight)
-                            .translationX((mWidth - bmpMirrorWidth) / 2).translationY((mHeight - bmpMirrorHeight) / 2);
+                        .translationX((mWidth - bmpMirrorWidth) / 2).translationY((mHeight - bmpMirrorHeight) / 2);
 
                     if (bmpMirror instanceof Animatable) {
                         Drawable.ConstantState constantState = bmpMirror.getConstantState();
@@ -1178,7 +1189,7 @@ public class ImageWatcher extends FrameLayout implements GestureDetector.OnGestu
                     notifyItemChangedState(pos, false, false);
 
                     ViewState vsDefault = ViewState.write(imageView, ViewState.STATE_DEFAULT).width(sourceDefaultWidth).height(sourceDefaultHeight)
-                            .translationX(sourceDefaultTranslateX).translationY(sourceDefaultTranslateY);
+                        .translationX(sourceDefaultTranslateX).translationY(sourceDefaultTranslateY);
                     if (isPlayEnterAnimation) {
                         animSourceViewStateTransform(imageView, vsDefault);
                     } else {

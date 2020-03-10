@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple_main_white"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="8dp">
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/textSecond"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ivScreenshot"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Flutter实现Android、iOS跨平台经验总结" />
+
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textColor="@color/textHint"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintRight_toLeftOf="@+id/ivScreenshot"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:text="Flutter跨平台框架，有着较低的入门门槛，较好的开发效率和运行效率，在github上已有77.6k的star，故项目中有引用，以实现跨平台的需求。 默认的i18n库，使用语言环境类来管理所有语言的字符，动态生成S，采用json配置文件的形式，动态生成所有语言对应的变量…" />
+
+    <ImageView
+        android:id="@+id/ivScreenshot"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/tvContent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        tools:src="@mipmap/ic_launcher" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tvContent,ivScreenshot" />
+
+    <TextView
+        android:id="@+id/tvTags"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/textSecond"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ifTemp"
+        app:layout_constraintTop_toBottomOf="@+id/barrier"
+        tools:text="tvCollectionCount" />
+
+    <TextView
+        android:id="@+id/tvCollectionCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textSecond"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTags"
+        tools:text="12" />
+
+    <dinson.customview.weight.IconFontTextView
+        android:id="@+id/ifTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:text="@string/if_good"
+        android:textColor="@color/textSecond"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCollectionCount"
+        app:layout_constraintRight_toLeftOf="@+id/tvCollectionCount"
+        app:layout_constraintTop_toTopOf="@+id/tvCollectionCount" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

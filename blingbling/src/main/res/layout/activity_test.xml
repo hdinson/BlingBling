@@ -20,7 +20,8 @@
             android:id="@+id/activity_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_medium">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@id/toolbar"
@@ -32,26 +33,40 @@
                 app:title="测试"
                 app:titleTextColor="@color/white" />
 
-            <Button
-                style="@style/TestBtn"
-                android:onClick="onClearAllCache"
-                android:text="删除数据" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <Button
-                style="@style/TestBtn"
-                android:onClick="onClearCache"
-                android:text="清空缓存" />
+                <Button
+                    style="@style/TestBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="onDataBindingClick"
+                    android:text="@{cacheSize}" />
 
-            <Button
-                style="@style/TestBtn"
-                android:onClick="onDataBindingClick"
-                android:text="@{cacheSize}" />
+                <Button
+                    style="@style/TestBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="onClearAllCache"
+                    android:text="删除数据" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="onClearCache"
+                    android:text="清空缓存" />
+
+            </LinearLayout>
+
 
             <EditText
                 android:id="@+id/etExec"
                 style="@style/TestBtn"
                 android:hint="请输入命令"
-                android:padding="@dimen/spacing_medium" />
+                android:paddingStart="16dp" />
 
             <Button
                 style="@style/TestBtn"
@@ -71,8 +86,38 @@
 
             <Button
                 style="@style/TestBtn"
-                android:onClick="onDanteng"
-                android:text="解密" />
+                android:onClick="onDoWork"
+                android:text="WorkManager" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etUser"
+                    style="@style/TestBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:hint="号码"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+
+                <EditText
+                    android:id="@+id/etUserMsg"
+                    style="@style/TestBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:hint="内容"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:layout_width="wrap_content"
+                    android:onClick="onSendMsg"
+                    android:text="发送短信" />
+            </LinearLayout>
 
 
         </LinearLayout>

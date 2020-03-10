@@ -1,8 +1,7 @@
 package com.bf92.ai;
 
-import android.content.res.*;
+import androidx.annotation.Keep;
 
-import dinson.customview.utils.LogUtils;
 import dinson.customview.weight._026fivechess.AICallBack;
 
 public class AI implements Runnable {
@@ -22,7 +21,7 @@ public class AI implements Runnable {
         System.loadLibrary("mmai");
     }
 
-    public AI(final int[] chessList , final AICallBack callBack) {
+    public AI(final int[] chessList, final AICallBack callBack) {
         this.callBack = callBack;
         this.chessList = chessList;
         this.TEFACES(AI.DO_INITION, 0, 0, 0, chessList);
@@ -33,9 +32,8 @@ public class AI implements Runnable {
 
     /**
      * ai线程开始执行
-     *
      */
-    public void aiBout( ) {
+    public void aiBout() {
         new Thread(this).start();
     }
 
@@ -46,15 +44,16 @@ public class AI implements Runnable {
     @Override
     public void run() {
         final int tefaces = this.TEFACES(AI.DO_CGO, 1, 0, 0, chessList);
-        this.callBack.aiCompleted(tefaces / 15, tefaces % 15 );
+        this.callBack.aiCompleted(tefaces / 15, tefaces % 15);
     }
 
-
+    @Keep
     public int cpp_put_bestpos(final int n) {
         this.callBack.aiThinkPoint(n);
         return 1;
     }
 
+    @Keep
     public void cpp_put_str(final byte[] array, final int n) {
     }
 }

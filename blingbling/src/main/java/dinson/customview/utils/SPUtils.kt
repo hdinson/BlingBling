@@ -4,7 +4,6 @@ import android.content.Context
 import com.google.gson.Gson
 import dinson.customview._global.GlobalApplication
 import dinson.customview.entity.countdown.OnTheDay
-import dinson.customview.model._003GankLadyMode
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.model._025Schedule
 import io.reactivex.Observable
@@ -36,17 +35,6 @@ object SPUtils {
                 BiConsumer<ArrayList<String>, String> { obj, e -> obj.add(e) })
             .subscribe()
         return result
-    }
-
-    /** 设置干货集中营福利图片的显示模式 */
-    fun setGankLadyMode(mode: _003GankLadyMode) {
-        putBoolean(GlobalApplication.getContext(), "config", "isRandom", mode == _003GankLadyMode.RANDOM)
-    }
-
-    /** 获取干货集中营福利图片的显示模式 */
-    fun getGankLadyMode(): _003GankLadyMode {
-        val isRandom = getBoolean(GlobalApplication.getContext(), "config", "isRandom", true)
-        return if (isRandom) _003GankLadyMode.RANDOM else _003GankLadyMode.NORMAL
     }
 
     /**

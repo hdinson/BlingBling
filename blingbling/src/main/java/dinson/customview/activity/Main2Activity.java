@@ -44,7 +44,7 @@ public class Main2Activity extends AppCompatActivity {
         mTess.init(Environment.getExternalStorageDirectory().getAbsolutePath(), lang); // 初始化，第一个参数为 mDataPath 的父目录
 
         Long starttime = System.currentTimeMillis(); // 检测开始时间
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.codeimg1); // 获取测试图片
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable._001_bg_input_cursor_gold); // 获取测试图片
 
         Thread thread = new Thread() {
             @Override

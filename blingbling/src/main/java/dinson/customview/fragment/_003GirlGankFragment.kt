@@ -1,9 +1,12 @@
 package dinson.customview.fragment
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import dinson.customview.R
@@ -15,7 +18,9 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.logd
 import dinson.customview.kotlin.loge
-import dinson.customview.kotlin.toast
+import dinson.customview.manager.GlideSimpleLoader
+import dinson.customview.weight._003weight.DecorationLayout
+import dinson.customview.weight.imagewatcher.ImageWatcherHelper
 import dinson.customview.weight.recycleview.OnRvItemClickListener
 import dinson.customview.weight.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
@@ -27,7 +32,6 @@ import kotlinx.android.synthetic.main.fragment_003_girl_pic_set.*
 class _003GirlGankFragment : BaseFragment() {
 
     override fun onCreateView(original: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        "GankFragment onCreateView".logd()
         return original.inflate(R.layout.fragment_003_girl_pic_set, container, false)
     }
 
@@ -41,7 +45,6 @@ class _003GirlGankFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        "GankFragment onViewCreated".logd()
         mAdapter = _003GankGirlsPicAdapter(mData)
         crfGirlsContent.setAdapter(mAdapter)
         crfGirlsContent.setEmptyView("")
@@ -66,8 +69,15 @@ class _003GirlGankFragment : BaseFragment() {
         crfGirlsContent.isRefreshing = true
 
         RvItemClickSupport.addTo(crfGirlsContent.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
-                mData[position].url.toast()
+            .setOnItemClickListener(OnRvItemClickListener { _, view, position ->
+                layDecoration.attachImageWatcher(mPicHelper)
+                if (view is ImageView) {
+                    val list = SparseArray<ImageView>()
+                    list.put(0, view)
+                    mPicHelper.show(view, list, listOf(Uri.parse(mData[position].url)))
+                } else {
+                    mPicHelper.show(listOf(Uri.parse(mData[position].url)), 0)
+                }
             })
         return true
     }
@@ -106,34 +116,13 @@ class _003GirlGankFragment : BaseFragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        "GankFragment onResume".logd()
+
+    private val mPicHelper by lazy {
+        ImageWatcherHelper.with(this.activity, GlideSimpleLoader())
+            .setOtherView(layDecoration)
+            .addOnShowListener(layDecoration)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        "GankFragment onCreate".logd()
-    }
+    private val layDecoration by lazy { DecorationLayout(context) }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        "GankFragment onDestroy".logd()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        "GankFragment onPause".logd()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        "GankFragment onDestroyView".logd()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        "GankFragment onStart".logd()
-    }
 }

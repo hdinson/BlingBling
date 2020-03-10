@@ -51,12 +51,10 @@ abstract class _003GirlMeiZiTuPicSetFragment : BaseFragment() {
         crfGirlsContent.recyclerView.layoutManager = GridLayoutManager(context, 2)
         crfGirlsContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
-                "crfGirlsContent  onRefresh".loge()
                 getDataFromServer(true)
             }
 
             override fun onLoadMore() {
-                "crfGirlsContent  onLoadMore".loge()
                 getDataFromServer(false)
             }
         })
@@ -101,34 +99,4 @@ abstract class _003GirlMeiZiTuPicSetFragment : BaseFragment() {
     open fun needIncrement() = true
     open fun needLoadMore() = true
 
-    override fun onResume() {
-        super.onResume()
-        "精品 onResume".logd()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        "精品 onCreate".logd()
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        "精品 onDestroy".logd()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        "精品 onPause".logd()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        "精品 onDestroyView".logd()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        "精品 onStart".logd()
-    }
 }

@@ -88,8 +88,8 @@ class _003PicSetListActivity : BaseActivity() {
         flCustomRefreshView.loadMoreEnable = false
         RvItemClickSupport.addTo(flCustomRefreshView.recyclerView)
             .setOnItemClickListener(OnRvItemClickListener { _, view, pos ->
-                mPicHelper.show(mData, pos)
                 decorationLayout.attachImageWatcher(mPicHelper)
+                mPicHelper.show(mData, pos)
             })
     }
 
@@ -121,7 +121,7 @@ class _003PicSetListActivity : BaseActivity() {
             }).addToManaged()
     }
 
-    private val decorationLayout = DecorationLayout(this)
+    private val decorationLayout by lazy {   DecorationLayout(this)}
 
     private val mPicHelper by lazy {
         ImageWatcherHelper.with(this, GlideSimpleLoader())
