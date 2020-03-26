@@ -10,8 +10,8 @@ import org.jsoup.Jsoup
 
 object _027AvModel {
 
-//    const val BASE_URL = "https://avmoo.xyz"
-    private const val BASE_URL = "https://avsox.asia"
+//    const val BASE_URL = "https://avmoo.host"
+    private const val BASE_URL = "https://avsox.host"
 
 
     const val HOME = "$BASE_URL/cn//page/"
@@ -19,7 +19,7 @@ object _027AvModel {
     const val HOT = "$BASE_URL/cn/popular/page/"
 
     const val CATEGORY = "$BASE_URL/cn/genre/"
-    const val SEARCH_KEY = "$BASE_URL/cn/search/"
+        const val SEARCH_KEY = "$BASE_URL/cn/search/"
 
 
     fun getSearchUrl(query: String) = "$BASE_URL/cn/search/$query"

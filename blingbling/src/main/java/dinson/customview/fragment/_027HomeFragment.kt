@@ -16,7 +16,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_027_home.*
-import org.jsoup.Jsoup
 import java.util.*
 
 
