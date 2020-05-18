@@ -77,14 +77,18 @@ public class DecorationLayout extends FrameLayout implements ViewPager.OnPageCha
                     //第二个参数为你想要保存的目录名称
                     File appDir = new File(pictureFolder, "BLingDownload");
                     if (!appDir.exists()) {
-                        appDir.mkdirs();
+                       boolean b =  appDir.mkdirs();
+                       LogUtils.e("文件夹创建:"+b);
                     }
                     File destFile = new File(appDir, fileName);
                     //把gilde下载得到图片复制到定义好的目录中去
-                    FileUtils.copyFile(file, destFile);
+                    LogUtils.i("-----: " + file.getPath()+ "  /  " +destFile.getPath());
+                   boolean isSuccess=  FileUtils.copyFile(file, destFile);
+                   LogUtils.e("isSuccess: " +isSuccess);
 
                     Looper.prepare();
                     ToastUtils.INSTANCE.showToast("图片已保存至BLingDownload/" + fileName);
+                    LogUtils.e(destFile.exists()+"   :<-");
                     Looper.loop();
 
                     // 最后通知图库更新

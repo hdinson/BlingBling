@@ -34,8 +34,7 @@ class _025CaculateDateFragment : ViewPagerLazyFragment() {
     private lateinit var mEndDay: String
     private lateinit var mDefaultHint: String
 
-
-    override fun onFirstUserVisible() {
+    override fun lazyInit() {
         selectStartDate.click { showStartDateDialog() }
         selectEndDate.click { showEndDateDialog() }
         mDefaultHint = resources.getString(R.string._025_input_num_to_calculate)

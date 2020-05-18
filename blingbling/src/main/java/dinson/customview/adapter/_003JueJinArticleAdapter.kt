@@ -2,7 +2,6 @@ package dinson.customview.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
-import androidx.work.Worker
 import dinson.customview.R
 import dinson.customview.entity.gank.JueJinResponse
 import dinson.customview.utils.DateUtils

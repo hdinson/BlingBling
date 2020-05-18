@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_003_girl_pic_set.*
 /**
  * 妹子图图集样式界面
  */
-abstract class _003GirlMeiZiTuPicSetFragment : BaseFragment() {
+abstract class _003GirlMeiZiTuPicSetFragment : ViewPagerLazyFragment() {
 
     var mCurrentPage = 1
     val mApi: GankApi by lazy { HttpHelper.create(GankApi::class.java) }
@@ -47,7 +47,7 @@ abstract class _003GirlMeiZiTuPicSetFragment : BaseFragment() {
         crfGirlsContent.setEmptyView("")
     }
 
-    override fun onResumeLazyLoad(): Boolean {
+    override fun lazyInit() {
         crfGirlsContent.recyclerView.layoutManager = GridLayoutManager(context, 2)
         crfGirlsContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
@@ -69,8 +69,9 @@ abstract class _003GirlMeiZiTuPicSetFragment : BaseFragment() {
                     _003PicSetListActivity.start(context!!, mData[position].id, mData[position].title)
                 }
             })
-        return true
     }
+
+
 
     private fun getDataFromServer(isRefresh: Boolean) {
         if (isRefresh && needIncrement()) mCurrentPage = 1

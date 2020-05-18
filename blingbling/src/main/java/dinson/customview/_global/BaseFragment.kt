@@ -13,7 +13,6 @@ abstract class BaseFragment : Fragment() {
 
 
     private val mCompositeDisposable = CompositeDisposable()
-    private var mLazyLoaded = false
     fun Disposable.addToManaged() {
         mCompositeDisposable.add(this)
     }
@@ -23,24 +22,6 @@ abstract class BaseFragment : Fragment() {
         mCompositeDisposable.clear()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (!mLazyLoaded && onResumeLazyLoad()) {
-            mLazyLoaded = true
-        }
-    }
 
-    /**
-     * 第一次fragment可见（进行初始化工作）
-     */
-    open fun onResumeLazyLoad(): Boolean {
-        return false
-    }
 
-    /**
-     * 设置懒加载完成
-     */
-    public fun setLazyLoaded(isLazyLoaded: Boolean) {
-        mLazyLoaded = isLazyLoaded
-    }
 }

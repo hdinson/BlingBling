@@ -95,96 +95,66 @@ android {
 
 dependencies {
     implementation files('libs/AMap_Location_V3.6.0_20170918.jar')
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
+
+    /*androidx*/
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "android.arch.work:work-runtime:1.0.1"
-    /*kotlin*/
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    annotationProcessor 'androidx.annotation:annotation:1.1.0'/*androidx 注解兼容*/
 
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //implementation "org.jetbrains.anko:anko-commons:$anko_version"/*kotlin扩展类*/
 
+
     /*RX全家桶*/
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.0.2'/*RxKotlin*/
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0' /*RXBinding*/
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle"/*RXLifecycle*/
 
-    /*RxKotlin*/
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-
-    /*RXBinding*/
-    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
-
-    /*实时权限*/
-    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle"
-
-    /*RXLifecycle*/
 
     /*Retrofit*/
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit2_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    annotationProcessor 'androidx.annotation:annotation:1.1.0'
 
-    //androidx 注解兼容
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
 
-    /*Glide*/
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar' /*实时权限*/
+    implementation 'com.github.bumptech.glide:glide:4.9.0'/*Glide*/
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.caverock:androidsvg:1.2.2-beta-1'
+    implementation 'com.caverock:androidsvg:1.2.2-beta-1'/*svg图片支持*/
+    implementation 'org.greenrobot:greendao:3.2.2'/*数据库*/
+    implementation 'org.greenrobot:eventbus:3.1.1'/*EventBus*/
 
-    /*svg图片支持*/
 
-    /*视频框架*/
-    implementation('com.shuyu:gsyVideoPlayer-java:6.0.3') {
-        exclude group: 'com.android.support', module: 'support-media-compat'
-    }
-    implementation 'com.shuyu:GSYVideoPlayer-exo2:6.0.3'
-    implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.3'
-    implementation 'org.greenrobot:greendao:3.2.2'
-
-    /*数据库*/
-    implementation 'org.greenrobot:eventbus:3.1.1'
-
-    /*EventBus*/
-    implementation 'org.jsoup:jsoup:1.11.2'
-
-    /*网页解析*/
-    implementation 'com.qiniu:qiniu-java-sdk:7.2.1'
-
-    /*七牛云*/
-    implementation 'com.just.agentweb:agentweb:4.0.2'
-
-    /*WebView框架*/
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.facebook.rebound:rebound:0.3.8'
-
-    /*Facebook闪光控件*/
-    implementation 'com.google.vr:sdk-panowidget:1.80.0'
-
-    /*googleVR*/
-    implementation 'com.github.mmin18:realtimeblurview:1.1.2'
-
-    /*高斯模糊控件*/
-    implementation('com.nex3z:flow-layout:1.2.4') {
-        exclude group: 'com.android.support', module: 'support-media-compat'
-    }
-
-    /*布局自动换行*/
-    implementation 'com.github.promeg:tinypinyin:2.0.3'
-
-    // TinyPinyin核心包，约80KB
-
-    /*图片选择框架，后期有更好的会替换*/
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
-
-    implementation 'com.rmtheis:tess-two:9.0.0'
-
+    implementation 'org.jsoup:jsoup:1.11.2'/*网页解析*/
+    implementation 'com.qiniu:qiniu-java-sdk:7.2.1'/*七牛云*/
+    implementation 'com.just.agentweb:agentweb:4.0.2'/*WebView框架*/
+    implementation 'com.facebook.rebound:rebound:0.3.8'/*Facebook闪光控件*/
+    implementation 'com.google.vr:sdk-panowidget:1.80.0'/*googleVR*/
+    implementation 'com.github.mmin18:realtimeblurview:1.2.1'/*高斯模糊控件*/
+    implementation 'com.github.promeg:tinypinyin:2.0.3'// TinyPinyin核心包，约80KB
+    implementation 'com.rmtheis:tess-two:9.0.0'/*ORC图片识别库*/
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'/*google地图*/
+    implementation 'com.google.android.gms:play-services-location:17.0.0'/*google定位*/
     /*在Kotlin中DataBinding的注解,kapt是 Kotlin内置的注解处理器*/
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
+
+    implementation('com.shuyu:gsyVideoPlayer-java:6.0.3') {
+        exclude group: 'com.android.support', module: 'support-media-compat'
+    }/*视频框架*/
+    implementation('com.nex3z:flow-layout:1.2.4') {
+        exclude group: 'com.android.support', module: 'support-media-compat'
+    }/*布局自动换行*/
+    implementation 'com.shuyu:GSYVideoPlayer-exo2:6.0.3'
+    implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.3'
+    /*图片选择框架，后期有更好的会替换*/
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
 }

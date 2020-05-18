@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_003_juejin_flutter.*
 /**
  * 掘金flutter专题
  */
-class _003JueJinFlutterFragment : BaseFragment() {
+class _003JueJinFlutterFragment : ViewPagerLazyFragment() {
 
     companion object {
         const val EXTRA_TAGS = "tags"
@@ -57,7 +57,7 @@ class _003JueJinFlutterFragment : BaseFragment() {
     }
 
 
-    override fun onResumeLazyLoad(): Boolean {
+    override fun lazyInit() {
         crfFlutterContent.recyclerView.addItemDecoration(LinearItemDecoration(context))
         crfFlutterContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
@@ -74,7 +74,6 @@ class _003JueJinFlutterFragment : BaseFragment() {
             .setOnItemClickListener(OnRvItemClickListener { _, view, position ->
                 CommonWebActivity.start(view.context, mData[position].originalUrl)
             })
-        return true
     }
 
     private fun getDataFromServer(isRefresh: Boolean) {

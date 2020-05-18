@@ -19,13 +19,6 @@
     <style name="AppTheme.FullScreen">
         <item name="android:windowFullscreen">true</item>
     </style>
-    <!--005-->
-    <!--12sp 小字提示
-    14sp（桌面端13sp） 正文/按钮文字
-    16sp（桌面端15sp） 小标题
-    20sp Appbar文字
-    24sp 大标题
-    34sp/45sp/56sp/112sp 超大号文字-->
     <!--————————————————————————————————————————字体——————————————————————————————————————————————-->
     <style name="font">
         <item name="android:textColor">@color/textPrimary</item>

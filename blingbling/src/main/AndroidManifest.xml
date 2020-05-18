@@ -3,22 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dinson.customview">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
-
     <application
         android:name="._global.GlobalApplication"
         android:allowBackup="false"
@@ -27,23 +11,16 @@
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:resizeableActivity="true"
-        android:screenOrientation="portrait"
+
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
         <activity android:name=".activity.Main2Activity"></activity>
         <!-- 高德地图设置key -->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="f16432f8253935bdaa564c4ad9288fbe" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDBnMuJo4oIS2H3BTwUM_rECvx4IzKNJpI" />
-
         <activity
             android:name=".activity.SplashActivity"
-            android:screenOrientation="portrait"
+
             android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,6 +32,11 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
+
+        <activity android:name=".activity.DailyPicActivity" />
         <!--
 <activity-alias
             android:name=".activity.WechatActivity"
@@ -68,89 +50,37 @@
             </intent-filter>
         </activity-alias>
         -->
-        <activity
-            android:name=".activity.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.DailyPicActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.AndroidInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.TestActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._001WanAndroidActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.CommonWebActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._001WanAndroidLikeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._002ZhihuTucaoListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._002ZhihuTucaoContentActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._003GankActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._003PicSetListActivity"
-            android:screenOrientation="portrait" />
-         <activity
-            android:name=".activity._004BiliBiliListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._004BiliBiliVideoActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity._005QiNiuYunActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._006FloatingViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._007ExchangeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._008RichEditorActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._009GoogleVRActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity.AndroidInfoActivity" />
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity._001WanAndroidActivity" />
+        <activity android:name=".activity.CommonWebActivity" />
+        <activity android:name=".activity._001WanAndroidLikeActivity" />
+        <activity android:name=".activity._002ZhihuTucaoListActivity" />
+        <activity android:name=".activity._002ZhihuTucaoContentActivity" />
+        <activity android:name=".activity._003GankActivity" />
+        <activity android:name=".activity._003PicSetListActivity" />
+        <activity android:name=".activity._004BiliBiliListActivity" />
+        <activity android:name=".activity._004BiliBiliVideoActivity" />
+        <activity android:name=".activity._005QiNiuYunActivity" />
+        <activity android:name=".activity._006FloatingViewActivity" />
+        <activity android:name=".activity._007ExchangeActivity" />
+        <activity android:name=".activity._008RichEditorActivity" />
+        <activity android:name=".activity._009GoogleVRActivity" />
         <activity
             android:name=".activity._010ParallaxActivity"
             android:theme="@style/AppTheme.FullScreen" />
-        <activity
-            android:name=".activity._011DiagonalLayoutActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._012QQNaviViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._013StepViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._014HonorClockActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._015ExplosionFieldActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity._011DiagonalLayoutActivity" />
+        <activity android:name=".activity._012QQNaviViewActivity" />
+        <activity android:name=".activity._013StepViewActivity" />
+        <activity android:name=".activity._014HonorClockActivity" />
+        <activity android:name=".activity._015ExplosionFieldActivity" />
         <activity
             android:name=".activity._016ParallaxImgViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._017TetrisActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
+        <activity android:name=".activity._017TetrisActivity" />
         <activity
             android:name=".activity._018NFCActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -159,49 +89,37 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity._019GangedRecycleViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._020ShimmerActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._021LikeSmileViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._022GoogleMapActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._023TheDaVinciCodeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._024SpotlightActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity._019GangedRecycleViewActivity" />
+        <activity android:name=".activity._020ShimmerActivity" />
+        <activity android:name=".activity._021LikeSmileViewActivity" />
+        <activity android:name=".activity._022GoogleMapActivity" />
+        <activity android:name=".activity._023TheDaVinciCodeActivity" />
+        <activity android:name=".activity._024SpotlightActivity" />
         <activity
             android:name=".activity._025DaysMatterActivity"
-            android:screenOrientation="portrait"
+
             android:theme="@style/AppTheme.Activity025" />
         <activity
             android:name=".activity._025AddScheduleActivity"
-            android:screenOrientation="portrait"
+
             android:theme="@style/AppTheme.Activity025AddSchedule" />
         <activity
             android:name=".activity._025ChooseScheduleActivity"
-            android:screenOrientation="portrait"
+
             android:theme="@style/BaseDialogTheme" />
-        <activity
-            android:name=".activity._026FiveChessActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._027MovieActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity._026FiveChessActivity" />
+        <activity android:name=".activity._027MovieActivity" />
         <activity
             android:name=".activity._027MovieDetailsActivity"
-            android:configChanges="screenSize|orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity._027MovieListByLinkActivity"
-            android:screenOrientation="portrait" /> <!-- receiver -->
+            android:configChanges="screenSize|orientation" />
+        <activity android:name=".activity._027MovieListByLinkActivity" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="f16432f8253935bdaa564c4ad9288fbe" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDBnMuJo4oIS2H3BTwUM_rECvx4IzKNJpI" /> <!-- receiver -->
         <receiver
             android:name=".weight._025provider.WidgetProviderSmall"
             android:label="倒数日控件(小)">
@@ -236,5 +154,22 @@
                 android:resource="@xml/app_widget_025_big" />
         </receiver>
     </application>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <uses-permission android:name="android.permission.WRITE_SMS" />
 
 </manifest>

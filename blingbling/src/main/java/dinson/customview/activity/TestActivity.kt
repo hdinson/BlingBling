@@ -4,32 +4,27 @@ import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteException
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.databinding.ActivityTestBinding
 import dinson.customview.kotlin.click
 import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 import dinson.customview.kotlin.toast
 import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.workmanager.DeletePng
 import kotlinx.android.synthetic.main.activity_test.*
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-import android.database.sqlite.SQLiteException
-import dinson.customview.kotlin.logi
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -115,10 +110,10 @@ class TestActivity : BaseActivity() {
     }
 
     fun onDoWork(v: View) {
-        val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+       /* val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
         val request = OneTimeWorkRequest.Builder(DeletePng::class.java)
             .setConstraints(constraints).build()
-        WorkManager.getInstance().enqueue(request)
+        WorkManager.getInstance().enqueue(request)*/
     }
 
     fun onSendMsg(v: View) {

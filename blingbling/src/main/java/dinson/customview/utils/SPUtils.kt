@@ -233,7 +233,7 @@ object SPUtils {
 
     fun getString(ctx: Context, fileName: String, key: String, defValue: String): String {
         val sp = ctx.getSharedPreferences(fileName, Context.MODE_PRIVATE)
-        return sp.getString(key, defValue)
+        return sp.getString(key, defValue) ?: ""
     }
 
     fun putInt(ctx: Context, fileName: String, key: String, value: Int) {

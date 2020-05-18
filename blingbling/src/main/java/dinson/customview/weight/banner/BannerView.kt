@@ -214,14 +214,14 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        val hMode = View.MeasureSpec.getMode(heightMeasureSpec)
+        val hMode = MeasureSpec.getMode(heightMeasureSpec)
 
-        val wSize = View.MeasureSpec.getSize(widthMeasureSpec)
+        val wSize = MeasureSpec.getSize(widthMeasureSpec)
         val hSize =
             if (hMode == View.MeasureSpec.AT_MOST || hMode == View.MeasureSpec.UNSPECIFIED) {//相当于我们设置为wrap_content
                 (wSize / mSettings.aspectRatio()).toInt()
             } else {//相当于我们设置为match_parent或者为一个具体的值
-                View.MeasureSpec.getSize(heightMeasureSpec)
+                MeasureSpec.getSize(heightMeasureSpec)
             }
         mViewPager.layoutParams.apply {
             this.height = hSize
