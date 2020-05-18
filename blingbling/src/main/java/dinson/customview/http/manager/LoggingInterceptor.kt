@@ -8,6 +8,8 @@ import dinson.customview.kotlin.times
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response
+import okio.Buffer
+import java.net.URLDecoder
 
 /**
  *  日志拦截器+缓存策略
@@ -19,6 +21,7 @@ class LoggingInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response? {
 
         logv("\t┌${"─".times(120)}", showLine = false)
+        chain.request().
         logv("\t│ Request{method= ${chain.request().method()}, url=${chain.request().url()}}", showLine = false)
 
         val request = when {
@@ -28,6 +31,12 @@ class LoggingInterceptor : Interceptor {
                 //强制使用缓存
                 chain.request().newBuilder().cacheControl(CacheControl.FORCE_CACHE).build()
             }
+        }
+        request.body()?.apply {
+            logv("\t│ Body: ${Buffer().let {
+                this.writeTo(it)
+                URLDecoder.decode(it.readUtf8(),"UTF-8")
+            }}", showLine = false)
         }
         val t1 = System.nanoTime()
         val response = chain.proceed(request)

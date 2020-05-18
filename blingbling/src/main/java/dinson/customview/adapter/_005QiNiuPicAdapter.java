@@ -45,7 +45,7 @@ public class _005QiNiuPicAdapter extends RecyclerView.Adapter<_005QiNiuPicAdapte
     static class ItemHolder extends RecyclerView.ViewHolder {
         DriverView driverView;
 
-        public ItemHolder(View itemView) {
+        ItemHolder(View itemView) {
             super(itemView);
             driverView = (DriverView) itemView;
         }

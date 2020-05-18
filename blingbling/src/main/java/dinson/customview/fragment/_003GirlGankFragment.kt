@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_003_girl_pic_set.*
 /**
  * Gank妹子界面
  */
-class _003GirlGankFragment : BaseFragment() {
+class _003GirlGankFragment : ViewPagerLazyFragment() {
 
     override fun onCreateView(original: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return original.inflate(R.layout.fragment_003_girl_pic_set, container, false)
@@ -50,9 +50,7 @@ class _003GirlGankFragment : BaseFragment() {
         crfGirlsContent.setEmptyView("")
     }
 
-
-    override fun onResumeLazyLoad(): Boolean {
-
+    override fun lazyInit() {
         val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         crfGirlsContent.recyclerView.layoutManager = manager
@@ -79,8 +77,9 @@ class _003GirlGankFragment : BaseFragment() {
                     mPicHelper.show(listOf(Uri.parse(mData[position].url)), 0)
                 }
             })
-        return true
     }
+
+
 
     private fun getDataFromServer(isRefresh: Boolean) {
         if (isRefresh) mCurrentPage = 1

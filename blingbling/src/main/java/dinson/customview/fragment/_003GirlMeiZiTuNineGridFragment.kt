@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.fragment_003_girl_nine_grid.*
 /**
  * 妹子图9图样式界面
  */
-abstract class _003GirlMeiZiTuNineGridFragment : BaseFragment(), MessagePicturesLayout.Callback {
+abstract class _003GirlMeiZiTuNineGridFragment : ViewPagerLazyFragment(), MessagePicturesLayout.Callback {
 
 
     var mCurrentPage = 1
@@ -54,7 +54,7 @@ abstract class _003GirlMeiZiTuNineGridFragment : BaseFragment(), MessagePictures
         mAdapter!!.setPictureClickCallback(this)
     }
 
-    override fun onResumeLazyLoad(): Boolean {
+    override fun lazyInit() {
         crfGirlsContent.recyclerView.layoutManager = LinearLayoutManager(context)
 
         crfGirlsContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
@@ -67,11 +67,10 @@ abstract class _003GirlMeiZiTuNineGridFragment : BaseFragment(), MessagePictures
             }
         })
         crfGirlsContent.isRefreshing = true
-        return true
     }
 
     private fun getDataFromServer(isRefresh: Boolean) {
-        if (isRefresh){
+        if (isRefresh) {
             mYearTag = ""
             mCurrentPage = 1
         }

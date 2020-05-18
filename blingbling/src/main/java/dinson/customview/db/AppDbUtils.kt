@@ -9,16 +9,16 @@ import dinson.customview.download.model.DaoMaster
 /**
  * app数据库相关工具类
  */
-object ZhiHuDbUtils {
+object AppDbUtils {
 
     private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(GlobalApplication.getContext(), "ZhuHuDb", null)
+        DaoMaster.DevOpenHelper(GlobalApplication.getContext(), "AppDb", null)
     }
 
     /**
      * 获取可读数据库
      */
-    public fun getReadableDatabase(): SQLiteDatabase = openHelper.readableDatabase
+    private fun getReadableDatabase(): SQLiteDatabase = openHelper.readableDatabase
 
     /**
      * 获取可写数据库
@@ -68,7 +68,7 @@ object ZhiHuDbUtils {
     /**
      * 获取某个时间以前的本地知乎吐槽数据
      */
-    fun getLocalDataBefore(time: Int, limit: Int = 20): List<ZhihuTucao> {
+    fun getLocalDatasBefore(time: Int, limit: Int = 20): List<ZhihuTucao> {
         val builder = DaoMaster(getWritableDatabase()).newSession().zhihuTucaoDao.queryBuilder()
         return builder.where(ZhihuTucaoDao.Properties.Date.lt(time)).orderDesc(ZhihuTucaoDao.Properties.Date).limit(limit).list()
     }
