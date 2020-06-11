@@ -2,14 +2,19 @@ package dinson.customview.activity
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.widget.ImageView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.ItemTouchHelper
-import android.view.View.OVER_SCROLL_NEVER
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
 import dinson.customview.R
@@ -23,12 +28,16 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.click
 import dinson.customview.kotlin.logd
+import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.toast
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
 import dinson.customview.model.MainActivityModelUtil
-import dinson.customview.utils.*
+import dinson.customview.utils.AppCacheUtil
+import dinson.customview.utils.LogUtils
+import dinson.customview.utils.StringUtils
+import dinson.customview.utils.TypefaceUtils
 import dinson.customview.weight.recycleview.LinearItemDecoration
 import dinson.customview.weight.recycleview.OnRvItemClickListener
 import dinson.customview.weight.recycleview.RvItemClickSupport
@@ -36,24 +45,33 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import me.stefan.library.mu5viewpager.Mu5Interface
 
-class MainActivity : BaseActivity(), OnItemTouchMoveListener {
+class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
 
     //private val mHeadData = ArrayList<DailyDetail>()
     private var mAMapLocationClient: AMapLocationClient? = null
     private lateinit var mTouchHelper: ItemTouchHelper
     private val mOneApi = HttpHelper.create(OneApi::class.java)
+    private val datas = arrayListOf(
+        "http://t8.baidu.com/it/u=1484500186,1503043093&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1592301754&t=67e1baa9056ed69356e4375d50076def",
+        "http://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1592301754&t=3e276810ba79da3fc024adb9cf7d3df8",
+        "http://imgsrc.baidu.com/imgad/pic/item/241f95cad1c8a7860ea6962d6d09c93d70cf5001.jpg",
+        "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab6440d4dfe5fd36afc379311e74.jpg",
+        "http://img.tuku.cn/file_big/201503/d8905515d1c046aeba51025f0ea842f0.jpg",
+        "http://img2.imgtn.bdimg.com/it/u=1395710768,4003046922&fm=214&gp=0.jpg",
+        "http://www.pp3.cn/uploads/201412/2014123114.jpg"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initPullZoomView()
         initContent()
         initHead()
         getLocation()
         weatherLayout.click {
-            RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE,Manifest.permission.RECEIVE_MMS,Manifest.permission.READ_CALL_LOG)
+            RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_MMS, Manifest.permission.READ_CALL_LOG)
                 .subscribe {
                     if (it) AndroidInfoActivity.start(this)
                     else "需要电话权限".toast()
@@ -61,19 +79,6 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
         }
     }
 
-    /**
-     * 初始化头部伸缩
-     */
-    private fun initPullZoomView() {
-        mPullZoomView.apply {
-            overScrollMode = OVER_SCROLL_NEVER
-            isVerticalScrollBarEnabled = false
-            setIsParallax(true)
-            setIsZoomEnable(true)
-            setSensitive(1.5f)
-            setZoomTime(500)
-        }
-    }
 
     /**
      * 内容的数据集
@@ -92,6 +97,9 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
         RvItemClickSupport.addTo(rvContent).setOnItemClickListener(OnRvItemClickListener { _, _, position ->
             startActivity(Intent(this, mContentData[position].name))
         })
+
+        mu5Viewpager.setData(datas, this)   //datas支持绑定类型String[] 或者 List<String>
+
     }
 
     private fun initHead() {
@@ -157,8 +165,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
                     it.isLocalCache = true
                     AppCacheUtil.setDailyDetail(this@MainActivity, it)
                 }
-                ivDaily.tag = null
-                GlideUtils.setImage(this, it.data.hp_img_url, ivDaily)
+//                ivDaily.tag = null
+//                GlideUtils.setImage(this, it.data.hp_img_url, ivDaily)
             }, { LogUtils.d(it.toString()) }).addToManaged()
     }
 
@@ -275,4 +283,16 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener {
     }
 
     override fun finishWithAnim(): Boolean = false
+
+    override fun onIndexChange(p0: Int) {
+        "$p0/${datas.size}".loge()
+    }
+
+    override fun onLoadImage(p0: ImageView, url: String, p2: Int) {
+        Glide.with(this).asBitmap().load(url).into(object :SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL){
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                mu5Viewpager.bindSource(resource,p2,p0)
+            }
+        })
+    }
 }

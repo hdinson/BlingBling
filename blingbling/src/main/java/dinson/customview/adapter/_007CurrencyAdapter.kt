@@ -217,7 +217,7 @@ class _007CurrencyAdapter(context: Context,
     }
 
     companion object {
-        private val sDefaultMoney = 100f
+        private const val sDefaultMoney = 100f
     }
 
 }

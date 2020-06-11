@@ -1,16 +1,15 @@
-package dinson.blingxposed.kotlin
+package com.dinson.blingbase.kotlin
 
 import android.content.Context
 import android.content.res.Configuration
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import dinson.blingxposed.kotlin.dip
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 
 
 /**
@@ -24,16 +23,21 @@ fun Context.getStatusBarHeight(): Int {
     else dip(24)
 }
 
+@Suppress("unused")
 fun Context.isLandscape() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
+@Suppress("unused")
 fun Context.isPortrait() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
+@Suppress("unused")
 fun Context.getCompatDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(this, id)
 
+@Suppress("unused")
 fun Context.getCompatColor(@ColorRes id: Int) = ContextCompat.getColor(this, id)
 
 infix fun Context.getDimensFloat(@DimenRes id: Int) = resources.getDimension(id)
 
+@Suppress("unused")
 fun Context.screenHeight(): Int {
     val manager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
     val outMetrics = DisplayMetrics()
@@ -41,6 +45,7 @@ fun Context.screenHeight(): Int {
     return outMetrics.heightPixels
 }
 
+@Suppress("unused")
 fun Context.screenWidth(): Int {
     val manager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
     val outMetrics = DisplayMetrics()
@@ -53,6 +58,7 @@ fun Context.screenWidth(): Int {
  * 关闭软键盘
  *
  */
+@Suppress("unused")
 fun Context.closeKeyboard(view: View) {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
     if (imm?.isActive == true) imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)

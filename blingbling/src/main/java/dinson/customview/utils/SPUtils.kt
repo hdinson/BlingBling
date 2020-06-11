@@ -28,7 +28,7 @@ object SPUtils {
         val value = getString(GlobalApplication.getContext(), "config", "currency", "")
         if (value.isEmpty()) return null
 
-        val result = Arrays.asList(*value.split(",").dropLastWhile { it.isEmpty() }.toTypedArray())
+        val result = listOf(*value.split(",").dropLastWhile { it.isEmpty() }.toTypedArray())
         Observable.fromIterable(result)
             .filter { s -> !StringUtils.isEmpty(s) }
             .collect(Callable<ArrayList<String>> { ArrayList() },
@@ -36,6 +36,7 @@ object SPUtils {
             .subscribe()
         return result
     }
+
 
     /**
      * 判断是否应该加载默认的应用图标
@@ -62,8 +63,8 @@ object SPUtils {
         val ret = ArrayList<_005QiNiuConfig>()
         val gson = Gson()
         var isContainCurrent = false
-        sp.all.keys.forEach {
-            sp.getString(it, "").let {
+        sp.all.keys.forEach { setting ->
+            sp.getString(setting, "").let {
                 if (it.isNotEmpty()) {
                     val element = gson.fromJson(it, _005QiNiuConfig::class.java)
                     if (element.Domain == domain) isContainCurrent = true

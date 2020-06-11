@@ -90,7 +90,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
                 }, {
                     loge("知乎请求详情数据失败")
                     onBackPressed()
-                })
+                }).addToManaged()
         } else {
             //加载本地数据
             parseJsonAndSetData(content)

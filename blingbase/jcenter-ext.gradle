@@ -1,0 +1,24 @@
+ext {
+    bintrayRepo = 'base-module'
+    bintrayName = 'blingbase'
+
+    publishedGroupId = 'com.dinson.bling'
+    libraryName = 'blingbase'
+    artifact = 'blingbase'
+
+    libraryDescription = 'Library of tools used in development'
+
+    siteUrl = 'https://github.com/Dinson-Huang/BlingBling.git'
+    gitUrl = 'https://github.com/Dinson-Huang/BlingBling.git'
+
+    // ./gradlew install  ./gradlew bintrayUpload
+    libraryVersion = '0.0.4'
+
+    developerId = 'dinson'
+    developerName = 'dinson'
+    developerEmail = 'dinsom.me@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}

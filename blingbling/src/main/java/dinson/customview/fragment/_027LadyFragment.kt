@@ -14,6 +14,10 @@ import dinson.customview.weight._010parallaxsplash.ParallaxFragment
  */
 class _027LadyFragment : ViewPagerLazyFragment() {
 
+    override fun lazyInit() {
+
+
+    }
     override fun onCreateView(original: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return original.inflate(R.layout.fragment_027_lady, container, false)
     }

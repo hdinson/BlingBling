@@ -1,1 +1,2 @@
 include ':blingbling', ':blingxposed'
+include ':blingbase'

@@ -1,91 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="dinson.customview.activity.MainActivity">
 
-    <dinson.customview.weight.pullzoomview.PullZoomView
-        android:id="@id/mPullZoomView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_height="wrap_content">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@id/rvContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            android:tag="content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mu5Viewpager" />
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <me.stefan.library.mu5viewpager.Mu5ViewPager
+            android:id="@+id/mu5Viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <FrameLayout
-                android:id="@+id/flDaily"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:tag="header"
-                app:layout_constraintDimensionRatio="3:2"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_top_wave"
+            app:layout_constraintBottom_toBottomOf="@+id/mu5Viewpager"
+            tools:background="@color/red"
+            tools:ignore="ContentDescription" />
 
-                <ImageView
-                    android:id="@+id/ivDaily"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:tag="zoom"
-                    tools:ignore="ContentDescription" />
-            </FrameLayout>
+        <RelativeLayout
+            android:id="@+id/weatherLayout"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/spacing_medium"
+            android:background="@drawable/shape_rec_r999_blue"
+            android:elevation="15dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="-20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/main_top_wave"
-                app:layout_constraintBottom_toBottomOf="@+id/flDaily"
-                tools:ignore="ContentDescription" />
+            <TextView
+                android:id="@+id/tvWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iconFontWeather"
+                android:layout_centerHorizontal="true"
+                android:text="@string/Locating"
+                android:textColor="@android:color/white"
+                android:textSize="13sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@id/rvContent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:overScrollMode="never"
-                android:tag="content"
-                app:layout_constraintTop_toBottomOf="@+id/flDaily" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </dinson.customview.weight.pullzoomview.PullZoomView>
+            <dinson.customview.weight.IconFontTextView
+                android:id="@+id/iconFontWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/if_unknown_99"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/weatherLayout"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/spacing_medium"
-        android:background="@drawable/shape_rec_r999_blue"
-        android:elevation="15dp"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
 
-        <dinson.customview.weight.IconFontTextView
-            android:id="@+id/iconFontWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/if_unknown_99"
-            android:textColor="@android:color/white"
-            android:textSize="30sp" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <TextView
-            android:id="@+id/tvWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iconFontWeather"
-            android:layout_centerHorizontal="true"
-            android:text="@string/Locating"
-            android:textColor="@android:color/white"
-            android:textSize="13sp" />
-    </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

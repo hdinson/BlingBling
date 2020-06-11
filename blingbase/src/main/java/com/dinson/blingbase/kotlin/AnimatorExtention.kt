@@ -1,4 +1,4 @@
-package dinson.blingxposed.kotlin
+package com.dinson.blingbase.kotlin
 
 import android.animation.Animator
 import android.animation.AnimatorSet
@@ -6,10 +6,12 @@ import android.animation.AnimatorSet
 /**
  *  Animator扩展方法
  */
+@Suppress("unused")
 fun AnimatorSet.playWith(vararg items: Animator) = apply {
     playTogether(items.toMutableList())
 }
 
+@Suppress("unused")
 fun Animator.playWith(animator: Animator): Animator {
     if (animator is AnimatorSet)
         return animator.playWith(this)
@@ -18,14 +20,19 @@ fun Animator.playWith(animator: Animator): Animator {
     return AnimatorSet().playWith(this, animator)
 }
 
+@Suppress("unused")
 fun Animator.onEnd(callback: (Animator?) -> Unit) = Keeper(this).onEnd(callback)
 
+@Suppress("unused")
 fun Animator.onStart(callback: (Animator?) -> Unit) = Keeper(this).onStart(callback)
 
+@Suppress("unused")
 fun Animator.onCancel(callback: (Animator?) -> Unit) = Keeper(this).onCancel(callback)
 
+@Suppress("unused")
 fun Animator.onRepeat(callback: (Animator?) -> Unit) = Keeper(this).onRepeat(callback)
 
+@Suppress("unused")
 class Keeper(private val animator: Animator) {
     private val executor = ListenerExecutor()
 
