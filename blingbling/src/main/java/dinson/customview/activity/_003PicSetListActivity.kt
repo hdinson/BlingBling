@@ -87,7 +87,7 @@ class _003PicSetListActivity : BaseActivity() {
         flCustomRefreshView.setEmptyView("")
         flCustomRefreshView.loadMoreEnable = false
         RvItemClickSupport.addTo(flCustomRefreshView.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, view, pos ->
+            .setOnItemClickListener(OnRvItemClickListener { _, _, pos ->
                 decorationLayout.attachImageWatcher(mPicHelper)
                 mPicHelper.show(mData, pos)
             })

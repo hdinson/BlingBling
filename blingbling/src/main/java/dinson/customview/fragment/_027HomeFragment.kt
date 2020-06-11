@@ -33,8 +33,8 @@ class _027HomeFragment : ViewPagerLazyFragment() {
         return original.inflate(R.layout.fragment_027_home, container, false)
     }
 
-    override fun onFirstUserVisible() {
-        mAdapter = _027HomeAdapter(mDataList)
+    override fun lazyInit() {
+          mAdapter = _027HomeAdapter(mDataList)
         crfHomeContent.setAdapter(mAdapter)
         crfHomeContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {

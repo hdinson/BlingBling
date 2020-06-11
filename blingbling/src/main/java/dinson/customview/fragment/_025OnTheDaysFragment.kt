@@ -28,7 +28,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
     private val mApi by lazy { HttpHelper.create(DaysMatterApi::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_025_on_the_days, container,false)
+        return inflater.inflate(R.layout.fragment_025_on_the_days, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,9 +45,9 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
         "日期设置完毕".logi()
     }
 
-    override fun onFirstUserVisible() {
+    override fun lazyInit() {
         val date = DateUtils.getDateOfDay(0, "yyyy-MM-dd")
-        val cache = CacheUtils.getCache(  context!!,"daily_banner")
+        val cache = CacheUtils.getCache(context!!, "daily_banner")
         if (StringUtils.isEmpty(cache)) {
             mApi.loadDailyNews().compose(RxSchedulers.io_main())
                 .subscribe({
@@ -90,7 +90,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
         if (data.isEmpty()) return
         mData.clear()
         mData.addAll(data.take(10))
-        CacheUtils.setCache(  context!!,"daily_banner", Gson().toJson(mData), 10800000)
+        CacheUtils.setCache(context!!, "daily_banner", Gson().toJson(mData), 10800000)
         //val view = dailyBanner as BannerView<IDailyNews>
         dailyBanner.setPages(mData, _025DailyTodayViewHolder())
     }

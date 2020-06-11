@@ -14,6 +14,7 @@ import dinson.customview.kotlin.loge
 import dinson.customview.model._025Schedule
 import dinson.customview.utils.SPUtils
 import dinson.customview.utils.StringUtils
+import kotlin.math.abs
 
 open class WidgetProviderBig : AppWidgetProvider() {
 
@@ -76,7 +77,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
             views.setTextViewText(R.id.tvScheduleName, schedule.name)
             views.setTextViewText(R.id.tvScheduleDateTime, schedule.dateTime + " " + schedule.week)
             views.setViewVisibility(R.id.emptyView, View.GONE)
-            views.setTextViewText(R.id.tvDayCount, schedule.displayDay.toString())
+            views.setTextViewText(R.id.tvDayCount, abs(schedule.displayDay).toString())
         }
         AppWidgetManager.getInstance(context).updateAppWidget(id, views)
     }

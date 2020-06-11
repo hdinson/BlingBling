@@ -28,13 +28,13 @@ import org.greenrobot.eventbus.ThreadMode
 class _025DaysMatterFragment : ViewPagerLazyFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_025_days_matter, container,false)
+        return inflater.inflate(R.layout.fragment_025_days_matter, container, false)
     }
 
     private val mData = ArrayList<_025Schedule>()
     private lateinit var mAdapter: _025ScheduleMainListAdapter
 
-    override fun onFirstUserVisible() {
+    override fun lazyInit() {
         //TextViewCompat.setAutoSizeTextTypeWithDefaults(tv_scale, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         crvScheduleList.layoutManager = LinearLayoutManager(context)
         mAdapter = _025ScheduleMainListAdapter(mData)
@@ -67,7 +67,8 @@ class _025DaysMatterFragment : ViewPagerLazyFragment() {
         topCard.show()
         tvTopTitle.text = schedule.name
         tvTopDate.text = "目标日: ${schedule.dateTime}"
-        tvDayCount.text = schedule.displayDay.toString()
+        val displayDay = schedule.displayDay
+        tvDayCount.text = if (displayDay < 0) "已过 ${-displayDay}" else displayDay.toString()
     }
 
 

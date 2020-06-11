@@ -76,6 +76,7 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
             .setTranslationY(100)
 
         mCurrencyData = getCurrencyList()
+
         val userCurrency = SPUtils.getUserCurrency()
 
         if (userCurrency == null) {

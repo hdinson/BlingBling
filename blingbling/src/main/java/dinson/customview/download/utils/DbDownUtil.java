@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import dinson.customview._global.GlobalApplication;
-import dinson.customview.download.model.DaoMaster;
-import dinson.customview.download.model.DaoSession;
+import dinson.customview.db.model.DaoMaster;
+import dinson.customview.db.model.DaoSession;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.DownloadInfoDao;
 

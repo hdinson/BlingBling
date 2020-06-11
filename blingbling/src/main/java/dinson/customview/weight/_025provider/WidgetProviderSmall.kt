@@ -11,6 +11,7 @@ import dinson.customview.R
 import dinson.customview.activity._025ChooseScheduleActivity
 import dinson.customview.kotlin.loge
 import dinson.customview.model._025Schedule
+import kotlin.math.abs
 
 class WidgetProviderSmall : WidgetProviderBig() {
     companion object {
@@ -62,7 +63,7 @@ class WidgetProviderSmall : WidgetProviderBig() {
         } else {
             views.setTextViewText(R.id.tvScheduleName, schedule.name)
             views.setViewVisibility(R.id.emptyView, View.GONE)
-            views.setTextViewText(R.id.tvDayCount, schedule.displayDay.toString())
+            views.setTextViewText(R.id.tvDayCount, abs(schedule.displayDay).toString())
         }
         AppWidgetManager.getInstance(context).updateAppWidget(id, views)
     }

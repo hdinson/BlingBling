@@ -2,12 +2,15 @@ package dinson.customview.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.service.quicksettings.Tile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import dinson.customview.utils.LogUtils;
 
 public class _025Schedule implements Parcelable {
     private String id;
@@ -73,6 +76,12 @@ public class _025Schedule implements Parcelable {
         this.repeatType = repeatType;
     }
 
+    /**
+     * 计算时间间隔，带正负数
+     *
+     * @return
+     * @throws Exception
+     */
     public int getDisplayDay() throws Exception {
         if (displayDay == null || displayDay.length() == 0) {
             switch (repeatType) {
@@ -99,7 +108,8 @@ public class _025Schedule implements Parcelable {
         Date end = dfs.parse(future);
         String now = dfs.format(new Date());
         Date start = dfs.parse(now);
-        return (end.getTime() - start.getTime()) / 100000 / 36 / 24;
+        long time = (end.getTime() - start.getTime()) / 100000 / 36 / 24;
+        return time < 0 ? time - 1 : time;
     }
 
     private int getRepeatDay(int field) throws ParseException {

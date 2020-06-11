@@ -1,4 +1,4 @@
-package dinson.blingxposed.kotlin
+package com.dinson.blingbase.kotlin
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,6 +17,7 @@ import java.io.FileReader
  * 判断nfc是否开启
  * @return true已开启  false未开启
  */
+@Suppress("unused")
 fun Context.isNfcEnable(): Boolean {
     val manager = getSystemService(Context.NFC_SERVICE) as? NfcManager
     return manager?.defaultAdapter?.isEnabled ?: false
@@ -29,12 +30,14 @@ fun Context.isNfcEnable(): Boolean {
  *
  * @return `true`: yes<br></br>`false`: no
  */
+@Suppress("unused")
 fun isDeviceRooted(): Boolean {
     val locations = arrayOf("/system/bin/", "/system/xbin/")
     return locations.any { File("${it}su").exists() }
 }
 
 // 获取手机CPU信息
+@Suppress("unused")
 fun getCpuInfo(): String {
     var reader: BufferedReader? = null
     return try {
@@ -57,6 +60,7 @@ fun getCpuInfo(): String {
  * CALL_STATE_OFFHOOK 接起电话时
  * CALL_STATE_RINGING 电话进来时
  */
+@Suppress("unused")
 fun getCallState(manager: TelephonyManager): String = when (manager.callState) {
     CALL_STATE_IDLE -> "空闲"
     CALL_STATE_OFFHOOK -> "通话中"
@@ -73,6 +77,7 @@ fun getCallState(manager: TelephonyManager): String = when (manager.callState) {
  * SIM_STATE_NETWORK_LOCKED 锁定状态，需要网络的PIN码解锁 4<br></br>
  * SIM_STATE_READY 就绪状态 5
  */
+@Suppress("unused")
 fun getSimState(manager: TelephonyManager) = when (manager.simState) {
     SIM_STATE_ABSENT -> "未插卡"
     SIM_STATE_PIN_REQUIRED -> "锁定，需要PIN解锁"
