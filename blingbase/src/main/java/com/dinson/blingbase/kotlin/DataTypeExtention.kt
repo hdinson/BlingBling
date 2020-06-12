@@ -1,5 +1,8 @@
 package com.dinson.blingbase.kotlin
 
+import android.view.View
+import com.dinson.blingbase.utils.BlingBaseApplication
+import com.dinson.blingbase.widget.toasty.Toasty
 import java.text.DecimalFormat
 
 /******************************************************************************************************/
@@ -34,6 +37,27 @@ fun String.lowerFirstLetter(): String {
     return if (Character.isUpperCase(this[0])) this
     else "${(this[0].toInt() + 32).toChar()} ${this.substring(1)}"
 }
+
+
+fun String.toasty() {
+    Toasty.normal(BlingBaseApplication.getContext()).text(this).show()
+}
+
+fun String.toastySuc() {
+    Toasty.success(BlingBaseApplication.getContext()).text(this).show()
+}
+
+
+fun String.toastyTarget(view: View) {
+    Toasty.info(BlingBaseApplication.getContext())
+        .text(this)
+        .showIcon(false)
+        .target(view)
+        .animate(true)
+        .offsetY(20)
+        .show()
+}
+
 
 /******************************************************************************************************/
 /**                             Double                                                               **/

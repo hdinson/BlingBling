@@ -5,14 +5,14 @@ ext {
     publishedGroupId = 'com.dinson.bling'
     libraryName = 'blingbase'
     artifact = 'blingbase'
-
     libraryDescription = 'Library of tools used in development'
 
-    siteUrl = 'https://github.com/Dinson-Huang/BlingBling.git'
-    gitUrl = 'https://github.com/Dinson-Huang/BlingBling.git'
+    siteUrl = 'https://github.com/Dinson-Huang'
+    gitUrl = 'https://github.com/Dinson-Huang'
 
     // ./gradlew install  ./gradlew bintrayUpload
-    libraryVersion = '0.0.4'
+    libraryVersion = '0.0.5'
+    libraryVersionDesc = 'Daily update'
 
     developerId = 'dinson'
     developerName = 'dinson'
