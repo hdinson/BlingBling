@@ -119,7 +119,7 @@ bintray {
         publicDownloadNumbers = true
         version {
             name = libraryVersion
-            desc = libraryDescription
+            desc = libraryVersionDesc
 //            gpg {
 //                sign = true //Determines whether to GPG sign the files. The default is false
 //                passphrase = properties.getProperty("bintray.gpg.password")

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义标题栏-->
+    <declare-styleable name="CommonTitleBar">
+        <attr name="backgroundResource" format="reference" />
+        <!--最外层是否实现了fitsSystemWindows这个属性-->
+        <attr name="ancestorFitsSystemWindow" format="boolean" />
+
+        <attr name="leftBtnVisible" format="boolean" />
+        <attr name="leftBtnDrawable" format="reference|color" />
+
+        <attr name="rightBtnVisible" format="boolean" />
+        <attr name="rightBtnDrawable" format="reference|color" />
+
+        <attr name="titleText" format="string" />
+        <attr name="titleTextColor" format="color" />
+
+        <attr name="rightText" format="string" />
+        <attr name="rightTextColor" format="color" />
+        <attr name="rightTextVisible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DrawableTextView">
+        <attr name="leftDrawable" format="reference|color" />
+        <attr name="rightDrawable" format="reference|color" />
+        <attr name="topDrawable" format="reference|color" />
+        <attr name="bottomDrawable" format="reference|color" />
+
+        <attr name="leftDrawableWidth" format="reference|dimension" />
+        <attr name="rightDrawableWidth" format="reference|dimension" />
+        <attr name="topDrawableWidth" format="reference|dimension" />
+        <attr name="bottomDrawableWidth" format="reference|dimension" />
+
+        <attr name="leftDrawableHeight" format="reference|dimension" />
+        <attr name="rightDrawableHeight" format="reference|dimension" />
+        <attr name="topDrawableHeight" format="reference|dimension" />
+        <attr name="bottomDrawableHeight" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="imgRatio" format="float" />
+    </declare-styleable>
+</resources>
