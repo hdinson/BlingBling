@@ -2,15 +2,17 @@ package dinson.customview.weight.swipelayout;
 
 import android.content.Context;
 import android.graphics.Rect;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import dinson.customview.weight.recycleview.OnRvItemClickListener;
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener;
 
 /**
  * Created by AItsuki on 2017/2/23.

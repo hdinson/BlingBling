@@ -6,8 +6,8 @@ import androidx.core.content.ContextCompat
 import android.widget.LinearLayout
 import android.widget.TextView
 import dinson.customview.R
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.screenWidth
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.screenWidth
 
 /**
  * 微信长按后出来的菜单

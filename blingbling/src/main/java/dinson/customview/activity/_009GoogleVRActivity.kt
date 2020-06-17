@@ -18,13 +18,13 @@ import dinson.customview.download.listener.HttpDownOnNextListener
 import dinson.customview.download.model.DownloadState
 import dinson.customview.download.utils.DbDownUtil
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.toast
+import com.dinson.blingbase.kotlin.toast
 import dinson.customview.model._009ModelUtil
 import dinson.customview.model._009PanoramaImageModel
 import dinson.customview.utils.LogUtils
-import dinson.customview.weight.recycleview.LinearItemDecoration
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity__009_google_vr.*
 import java.io.File

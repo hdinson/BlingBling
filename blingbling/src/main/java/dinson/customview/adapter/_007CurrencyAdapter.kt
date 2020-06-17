@@ -15,8 +15,8 @@ import dinson.customview.utils.ArithmeticUtils
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.SPUtils
 import dinson.customview.utils.StringUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_007_currency.view.*
 import java.util.*
 import java.util.regex.Pattern

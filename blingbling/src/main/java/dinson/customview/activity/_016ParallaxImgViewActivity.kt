@@ -6,7 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.loge
+import com.dinson.blingbase.kotlin.loge
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight._016parallaximgview.GyroscopeObserver
 import kotlinx.android.synthetic.main.activity__016_parallax_img_view.*

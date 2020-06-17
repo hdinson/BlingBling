@@ -10,9 +10,9 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import dinson.customview.R
-import dinson.customview.kotlin.dip
-import dinson.customview.kotlin.logd
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.dip
+import com.dinson.blingbase.kotlin.logd
+import com.dinson.blingbase.kotlin.logi
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit

@@ -1,7 +1,7 @@
 package com.dinson.blingbase.kotlin
 
 import android.util.Log
-import com.dinson.blingbase.utils.BlingBaseApplication
+import com.dinson.blingbase.utils.RxBling
 
 /**
  *  日志工具类
@@ -9,7 +9,7 @@ import com.dinson.blingbase.utils.BlingBaseApplication
 
 private val Any.tag get() = javaClass.simpleName
 private const val filterTag = "│ --> "
-private val isDebug = BlingBaseApplication.isDebug()
+private val isDebug = RxBling.isDebug()
 
 fun Any.logd(message: Any?, showLine: Boolean = true) {
     if (isDebug) Log.d(tag, "$filterTag${if (showLine) getLineNumber("logd")

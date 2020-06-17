@@ -10,7 +10,7 @@ import android.view.ViewAnimationUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.entity.one.DailyDetail
-import dinson.customview.kotlin.screenWidth
+import com.dinson.blingbase.kotlin.screenWidth
 import kotlinx.android.synthetic.main.activity_daily_pic.*
 
 class DailyPicActivity : BaseActivity() {

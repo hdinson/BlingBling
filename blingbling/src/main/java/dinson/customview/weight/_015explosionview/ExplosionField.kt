@@ -12,7 +12,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import dinson.customview.kotlin.dip
+import com.dinson.blingbase.kotlin.dip
 
 import java.util.ArrayList
 import java.util.Arrays

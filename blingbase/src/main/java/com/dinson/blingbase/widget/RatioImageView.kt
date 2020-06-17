@@ -19,6 +19,7 @@ class RatioImageView @JvmOverloads constructor(
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.RatioImageView)
         mRatio = attributes.getFloat(R.styleable.RatioImageView_imgRatio, 1f)
         attributes.recycle()
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

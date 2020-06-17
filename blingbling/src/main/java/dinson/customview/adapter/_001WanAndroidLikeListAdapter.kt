@@ -4,14 +4,14 @@ import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
 import dinson.customview.activity.CommonWebActivity
 import dinson.customview.entity.wanandroid.WanAndArticle
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.hide
-import dinson.customview.kotlin.logv
-import dinson.customview.kotlin.show
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.hide
+import com.dinson.blingbase.kotlin.logv
+import com.dinson.blingbase.kotlin.show
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.DateUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_001_wan_android_main.view.*
 import java.util.concurrent.TimeUnit
 

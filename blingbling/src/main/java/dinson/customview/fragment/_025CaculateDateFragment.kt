@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import com.jakewharton.rxbinding2.widget.RxTextView
 import dinson.customview.R
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.loge
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.loge
 import dinson.customview.utils.DateUtils
 import kotlinx.android.synthetic.main.fragment_025_caculate_date.*
 import java.text.SimpleDateFormat

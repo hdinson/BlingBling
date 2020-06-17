@@ -137,7 +137,7 @@
             android:src="@drawable/_025_daily_title"
             tools:ignore="ContentDescription" />
 
-        <dinson.customview.weight.banner.BannerView
+        <com.dinson.blingbase.widget.banner.BannerView
             android:id="@+id/dailyBanner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

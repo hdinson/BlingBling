@@ -13,7 +13,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.*
+import com.dinson.blingbase.kotlin.*
 import dinson.customview.utils.StringUtils
 import kotlinx.android.synthetic.main.activity_android_info.*
 

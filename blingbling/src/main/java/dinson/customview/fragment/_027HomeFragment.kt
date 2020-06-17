@@ -7,10 +7,10 @@ import dinson.customview.R
 import dinson.customview.activity._027MovieDetailsActivity
 import dinson.customview.adapter._027HomeAdapter
 import dinson.customview.entity.av.Movie
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.logi
 import dinson.customview.model._027AvModel
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

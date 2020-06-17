@@ -1,6 +1,7 @@
 package dinson.customview.db
 
 import android.database.sqlite.SQLiteDatabase
+import com.dinson.blingbase.utils.RxBling
 import dinson.customview._global.GlobalApplication
 import dinson.customview.db.model.DaoMaster
 import dinson.customview.db.model.ZhihuTucao
@@ -12,7 +13,7 @@ import dinson.customview.db.model.ZhihuTucaoDao
 object AppDbUtils {
 
     private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(GlobalApplication.getContext(), "AppDb", null)
+        DaoMaster.DevOpenHelper(RxBling.context, "AppDb", null)
     }
 
     /**

@@ -7,8 +7,8 @@ import dinson.customview.R
 import dinson.customview.entity.MonsterHunter
 import dinson.customview.entity.MonsterHunter.DataBean.MonsterBean
 import dinson.customview.utils.GlideUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 
 /**
  * 联动右边的适配器

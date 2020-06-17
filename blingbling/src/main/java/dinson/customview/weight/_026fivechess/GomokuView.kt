@@ -12,8 +12,8 @@ import android.view.MotionEvent
 import android.view.View
 import com.bf92.ai.AI
 import dinson.customview.R
-import dinson.customview.kotlin.loge
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.loge
+import com.dinson.blingbase.kotlin.logi
 
 
 class GomokuView @JvmOverloads constructor(context: Context,

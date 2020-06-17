@@ -9,8 +9,8 @@ import dinson.customview.entity.gank.MeiZiTuNineGrid
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.TypefaceUtils
 import dinson.customview.weight.MessagePicturesLayout
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_003_meizitu_nine_grid.view.*
 
 

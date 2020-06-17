@@ -5,6 +5,7 @@ buildscript {
     ext.gradle_version = '3.1.4'
     ext.rxlifecycle = '2.2.1'
     ext.retrofit2_version = '2.3.0'
+    ext.blingbase_version = '0.0.6'
 
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }

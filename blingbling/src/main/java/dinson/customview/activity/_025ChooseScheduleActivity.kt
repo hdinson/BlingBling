@@ -9,8 +9,8 @@ import dinson.customview.utils.SPUtils
 import dinson.customview.weight._025provider.WidgetProviderBig
 import dinson.customview.weight._025provider.WidgetProviderMiddle
 import dinson.customview.weight._025provider.WidgetProviderSmall
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import kotlinx.android.synthetic.main.activity__025_choose_schedule.*
 
 class _025ChooseScheduleActivity : BaseActivity() {

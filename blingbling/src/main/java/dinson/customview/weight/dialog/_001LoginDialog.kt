@@ -12,7 +12,7 @@ import dinson.customview.R
 import dinson.customview.api.WanAndroidApi
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.*
+import com.dinson.blingbase.kotlin.*
 import kotlinx.android.synthetic.main.dialog_001_login.*
 import kotlinx.android.synthetic.main.dialog_001_register.*
 import java.util.concurrent.TimeUnit

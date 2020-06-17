@@ -15,8 +15,9 @@ import dinson.customview.entity.countdown.OnTheDay
 import dinson.customview.holder._025DailyTodayViewHolder
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.logi
-import dinson.customview.kotlin.toast
+import com.dinson.blingbase.kotlin.logi
+import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.utils.RxBling
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.DateUtils
 import dinson.customview.utils.SPUtils
@@ -63,7 +64,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
             }
         }
 
-        val todayListStr = SPUtils.getOnTheDay(GlobalApplication.getContext(), date)
+        val todayListStr = SPUtils.getOnTheDay(RxBling.context, date)
         if (StringUtils.isEmpty(todayListStr)) {
             mApi.loadOnThisDays().compose(RxSchedulers.io_main())
                 .subscribe({
@@ -73,7 +74,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
                         } else {
                             initTodayList(it.iterator().next().value)
                         }
-                        SPUtils.setOnTheDay(GlobalApplication.getContext(), it)
+                        SPUtils.setOnTheDay(RxBling.context, it)
                     }
                 }, { it.toString().toast() }).addToManaged()
         } else {

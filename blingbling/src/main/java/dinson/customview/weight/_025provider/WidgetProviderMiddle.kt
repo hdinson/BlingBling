@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.RemoteViews
 import dinson.customview.R
 import dinson.customview.activity._025ChooseScheduleActivity
-import dinson.customview.kotlin.loge
+import com.dinson.blingbase.kotlin.loge
 import dinson.customview.model._025Schedule
 import kotlin.math.abs
 

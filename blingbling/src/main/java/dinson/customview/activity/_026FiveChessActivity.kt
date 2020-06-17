@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.click
+import com.dinson.blingbase.kotlin.click
 import dinson.customview.weight._026fivechess.GameCallBack
 import dinson.customview.weight._026fivechess.GomokuGameState
 import kotlinx.android.synthetic.main.activity__026_five_chess.*

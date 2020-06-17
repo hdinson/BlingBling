@@ -4,8 +4,8 @@ import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview.model._007CurrencyModel
 import dinson.customview.utils.GlideUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_007_left_drawer.view.*
 
 /**

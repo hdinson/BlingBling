@@ -1,6 +1,6 @@
 package dinson.customview.http.manager
 
-import dinson.customview.kotlin.logv
+import com.dinson.blingbase.kotlin.logv
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody

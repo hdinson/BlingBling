@@ -25,7 +25,7 @@ import dinson.customview.entity.av.Movie
 import dinson.customview.entity.av.MovieInfo
 import dinson.customview.entity.av.MovieVideo
 import dinson.customview.http.HttpHelper
-import dinson.customview.kotlin.*
+import com.dinson.blingbase.kotlin.*
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.CacheUtils
@@ -34,8 +34,8 @@ import dinson.customview.utils.StringUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.MessagePicturesLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

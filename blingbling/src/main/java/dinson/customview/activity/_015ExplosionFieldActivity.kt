@@ -7,8 +7,8 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._015AppIconAdapter
 import dinson.customview.model._015AppIcon
 import dinson.customview.weight._015explosionview.ExplosionField
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import kotlinx.android.synthetic.main.activity__015_explosion_field.*
 
 

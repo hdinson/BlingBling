@@ -5,7 +5,7 @@ import android.graphics.*
 import androidx.appcompat.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.widget.ImageView
-import dinson.customview.kotlin.dip
+import com.dinson.blingbase.kotlin.dip
 import dinson.customview.utils.LogUtils
 
 /**

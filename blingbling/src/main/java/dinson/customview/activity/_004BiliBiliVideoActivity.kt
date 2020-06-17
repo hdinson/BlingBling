@@ -10,7 +10,7 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.toast
+import com.dinson.blingbase.kotlin.toast
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.StringUtils
 import kotlinx.android.synthetic.main.activity__004_bili_bili_video.*

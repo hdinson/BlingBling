@@ -21,8 +21,8 @@ import dinson.customview.model._007CurrencyModel
 import dinson.customview.utils.AppCacheUtil
 import dinson.customview.utils.SPUtils
 import dinson.customview.weight._003toast.LoadToast
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.swipelayout.SwipeItemLayout
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer

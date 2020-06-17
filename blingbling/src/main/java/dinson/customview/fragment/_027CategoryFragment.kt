@@ -12,8 +12,8 @@ import com.google.gson.reflect.TypeToken
 import dinson.customview.R
 import dinson.customview.activity._027MovieListByLinkActivity
 import dinson.customview.entity.av.MovieInfo
-import dinson.customview.kotlin.loge
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.loge
+import com.dinson.blingbase.kotlin.logi
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.StringUtils

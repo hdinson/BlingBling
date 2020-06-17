@@ -3,9 +3,9 @@ package dinson.customview.weight.dialog
 import android.app.Dialog
 import android.content.Context
 import dinson.customview.R
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.show
-import dinson.customview.kotlin.toast
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.show
+import com.dinson.blingbase.kotlin.toast
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.utils.SPUtils
 import kotlinx.android.synthetic.main.dialog_005_qi_niu_config.*

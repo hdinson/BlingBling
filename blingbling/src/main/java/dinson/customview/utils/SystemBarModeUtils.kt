@@ -15,7 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
-import dinson.customview.kotlin.getStatusBarHeight
+import com.dinson.blingbase.kotlin.getStatusBarHeight
 import java.util.regex.Pattern
 
 /**
