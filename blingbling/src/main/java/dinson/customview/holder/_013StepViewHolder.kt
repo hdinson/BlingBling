@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import dinson.customview.BuildConfig
-import dinson.customview.kotlin.dip
+import com.dinson.blingbase.kotlin.dip
 import dinson.customview.utils.GlideUtils
 import dinson.customview.weight._013stepview.Position
 import dinson.customview.weight._013stepview.State

@@ -3,8 +3,8 @@ package dinson.customview.utils.steganography.core
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.text.TextUtils
-import dinson.customview.kotlin.logd
-import dinson.customview.kotlin.logv
+import com.dinson.blingbase.kotlin.logd
+import com.dinson.blingbase.kotlin.logv
 import dinson.customview.utils.steganography.model.MessageDecodingStatus
 import dinson.customview.utils.steganography.model.MessageEncodingStatus
 import dinson.customview.utils.steganography.util.SteganographyUtils

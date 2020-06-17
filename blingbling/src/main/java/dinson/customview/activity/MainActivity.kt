@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +17,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.logd
+import com.dinson.blingbase.kotlin.loge
+import com.dinson.blingbase.network.NetworkListener
+import com.dinson.blingbase.network.core.AppNetwork
+import com.dinson.blingbase.network.core.NetType
+import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
 import dinson.customview.R
@@ -26,10 +37,6 @@ import dinson.customview.entity.HomeWeather
 import dinson.customview.entity.one.DailyList
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.logd
-import dinson.customview.kotlin.loge
-import dinson.customview.kotlin.toast
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
@@ -38,9 +45,6 @@ import dinson.customview.utils.AppCacheUtil
 import dinson.customview.utils.LogUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.TypefaceUtils
-import dinson.customview.weight.recycleview.LinearItemDecoration
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -71,11 +75,14 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         initHead()
         getLocation()
         weatherLayout.click {
-            RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_MMS, Manifest.permission.READ_CALL_LOG)
-                .subscribe {
-                    if (it) AndroidInfoActivity.start(this)
-                    else "需要电话权限".toast()
-                }
+            /* RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_MMS, Manifest.permission.READ_CALL_LOG)
+                 .subscribe {
+                     if (it) AndroidInfoActivity.start(this)
+                     else "需要电话权限".toast()
+                 }*/
+
+            intArrayOf(2)[10]
+
         }
     }
 
@@ -289,10 +296,15 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     }
 
     override fun onLoadImage(p0: ImageView, url: String, p2: Int) {
-        Glide.with(this).asBitmap().load(url).into(object :SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL){
+        Glide.with(this).asBitmap().load(url).into(object : SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                mu5Viewpager.bindSource(resource,p2,p0)
+                mu5Viewpager.bindSource(resource, p2, p0)
             }
         })
+    }
+
+    @AppNetwork(netType = NetType.WIFI)
+    fun onNetChanged(netType: NetType) {
+        "onNetChanged: 网络发生改变 ${netType.name}".logd()
     }
 }

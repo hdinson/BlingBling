@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.Window
 import android.view.WindowManager
+import com.dinson.blingbase.network.NetworkListener
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import dinson.customview.BuildConfig
 import dinson.customview.R
@@ -23,7 +24,7 @@ open class BaseActivity : RxAppCompatActivity() {
 
 
     private val mCompositeDisposable = CompositeDisposable()
-    fun Disposable.addToManaged(){
+    fun Disposable.addToManaged() {
         mCompositeDisposable.add(this)
     }
 
@@ -40,6 +41,9 @@ open class BaseActivity : RxAppCompatActivity() {
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         /*logcat点击跳转对用activity*/
         logShowActivity()
+
+        //监听网络
+        NetworkListener.getInstance().registerObserver(this)
     }
 
     override fun onStart() {
@@ -170,6 +174,7 @@ open class BaseActivity : RxAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mCompositeDisposable.clear()
+        NetworkListener.getInstance().unRegisterObserver(this);
         logShowActivity()
     }
 

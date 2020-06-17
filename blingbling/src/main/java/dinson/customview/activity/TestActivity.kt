@@ -14,10 +14,10 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.databinding.ActivityTestBinding
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.loge
-import dinson.customview.kotlin.logi
-import dinson.customview.kotlin.toast
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.loge
+import com.dinson.blingbase.kotlin.logi
+import com.dinson.blingbase.kotlin.toast
 import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.SystemBarModeUtils

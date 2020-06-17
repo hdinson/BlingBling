@@ -9,11 +9,11 @@ import dinson.customview.db.ZhiHuDbUtils
 import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.logd
+import com.dinson.blingbase.kotlin.logd
 import dinson.customview.utils.DateUtils
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 

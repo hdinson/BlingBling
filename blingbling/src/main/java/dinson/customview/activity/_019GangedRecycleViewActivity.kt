@@ -16,7 +16,7 @@ import dinson.customview.entity.MonsterHunter.DataBean.MonsterBean
 import dinson.customview.utils.FileUtils
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.StringUtils
-import dinson.customview.weight.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
 import kotlinx.android.synthetic.main.activity__019_ganged_recycle_view.*
 import java.util.*
 

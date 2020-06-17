@@ -1,7 +1,7 @@
 package com.dinson.blingbase.utils
 
 import android.util.Log
-import com.dinson.blingbase.utils.BlingBaseApplication.isDebug
+import com.dinson.blingbase.utils.RxBling.isDebug
 import java.util.*
 
 object LogUtils {

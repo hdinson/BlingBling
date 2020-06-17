@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dinson.customview.R
-import dinson.customview.kotlin.loge
+import com.dinson.blingbase.kotlin.loge
 
 import dinson.customview.weight._010parallaxsplash.ParallaxFragment
 

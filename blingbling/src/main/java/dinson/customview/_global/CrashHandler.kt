@@ -1,6 +1,6 @@
 package dinson.customview._global
 
-import dinson.customview.kotlin.loge
+import com.dinson.blingbase.kotlin.loge
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter

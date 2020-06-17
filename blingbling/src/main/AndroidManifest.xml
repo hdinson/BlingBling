@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".activity.Main2Activity"></activity>
+        <activity android:name=".activity.Main2Activity"/>
         <!-- 高德地图设置key -->
         <activity
             android:name=".activity.SplashActivity"

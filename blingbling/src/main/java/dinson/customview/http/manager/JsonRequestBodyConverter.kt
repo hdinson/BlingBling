@@ -2,7 +2,7 @@ package dinson.customview.http.manager
 
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.logi
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import retrofit2.Converter

@@ -9,8 +9,8 @@ import com.bumptech.glide.request.transition.Transition
 import dinson.customview.R
 import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.utils.GlideUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_005_main_pic.view.*
 
 

@@ -2,7 +2,7 @@ package dinson.customview.entity;
 
 import java.util.List;
 
-import dinson.customview.weight.recycleview.multitype.MultiType;
+import com.dinson.blingbase.widget.recycleview.multitype.MultiType;
 
 /**
  * 怪物猎人数据bean

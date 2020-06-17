@@ -3,8 +3,9 @@ package dinson.customview.http.manager
 import android.content.Context
 import android.net.ConnectivityManager
 import dinson.customview._global.GlobalApplication
-import dinson.customview.kotlin.logv
-import dinson.customview.kotlin.times
+import com.dinson.blingbase.kotlin.logv
+import com.dinson.blingbase.kotlin.times
+import com.dinson.blingbase.utils.RxBling
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -61,7 +62,7 @@ class LoggingInterceptor : Interceptor {
      * @return `true`: 是<br></br>`false`: 否
      */
     private fun isNetworkAvailable(): Boolean {
-        val info = (GlobalApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE)
+        val info = (RxBling.context.getSystemService(Context.CONNECTIVITY_SERVICE)
             as ConnectivityManager).activeNetworkInfo
         return info != null && info.isConnected
     }

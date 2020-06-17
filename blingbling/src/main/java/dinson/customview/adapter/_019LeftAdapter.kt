@@ -2,8 +2,8 @@ package dinson.customview.adapter
 
 import dinson.customview.R
 import dinson.customview.entity.MonsterHunter.DataBean
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_019_left.view.*
 
 /**

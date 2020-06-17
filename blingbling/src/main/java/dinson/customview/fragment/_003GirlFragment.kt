@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import dinson.customview.R
 import dinson.customview._global.BaseFragment
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.logi
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.fragment_003_girl.*
 import java.util.ArrayList

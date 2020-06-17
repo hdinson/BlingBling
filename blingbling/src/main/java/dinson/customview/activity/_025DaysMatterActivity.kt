@@ -15,8 +15,8 @@ import dinson.customview._global.ConstantsUtils
 import dinson.customview.fragment._025CaculateDateFragment
 import dinson.customview.fragment._025DaysMatterFragment
 import dinson.customview.fragment._025OnTheDaysFragment
-import dinson.customview.kotlin.click
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.logi
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__025_days_matter.*
 import java.io.File

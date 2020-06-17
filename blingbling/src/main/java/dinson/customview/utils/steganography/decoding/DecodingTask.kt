@@ -2,7 +2,7 @@ package dinson.customview.utils.steganography.decoding
 
 import android.os.AsyncTask
 import android.text.TextUtils
-import dinson.customview.kotlin.logv
+import com.dinson.blingbase.kotlin.logv
 import dinson.customview.utils.steganography.model.ImageSteganography
 import dinson.customview.utils.steganography.util.SteganographyUtils
 import dinson.customview.utils.steganography.core.EncodeDecode

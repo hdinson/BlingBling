@@ -1,6 +1,7 @@
 package dinson.customview.utils
 
 import android.content.Context
+import com.dinson.blingbase.utils.RxBling
 import com.google.gson.Gson
 import dinson.customview._global.GlobalApplication
 import dinson.customview.entity.countdown.OnTheDay
@@ -20,12 +21,12 @@ object SPUtils {
     /** 设置当前用户设置的币种 */
     fun setUserCurrency(currency: ArrayList<String>) {
         if (currency.size != 5) return
-        putString(GlobalApplication.getContext(), "config", "currency", currency.joinToString(","))
+        putString(RxBling.context, "config", "currency", currency.joinToString(","))
     }
 
     /** 获取当前用户设置的币种 */
     fun getUserCurrency(): List<String>? {
-        val value = getString(GlobalApplication.getContext(), "config", "currency", "")
+        val value = getString(RxBling.context, "config", "currency", "")
         if (value.isEmpty()) return null
 
         val result = listOf(*value.split(",").dropLastWhile { it.isEmpty() }.toTypedArray())

@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.logi
 import io.reactivex.rxkotlin.addTo
 
 

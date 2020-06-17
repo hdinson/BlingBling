@@ -7,10 +7,10 @@ import com.bumptech.glide.Glide
 import dinson.customview.R
 import dinson.customview.entity.bmob.TvShowResp
 import dinson.customview.event._004CheckSelectorAllEvent
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.kotlin.logi
 import dinson.customview.utils.StringUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_004_video.view.*
 import org.greenrobot.eventbus.EventBus
 

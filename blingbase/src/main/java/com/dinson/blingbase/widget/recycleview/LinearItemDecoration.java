@@ -34,7 +34,7 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
      */
     public LinearItemDecoration(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(Color.parseColor("EEEEEE"));
+        mPaint.setColor(Color.parseColor("#EEEEEE"));
         mPaint.setStyle(Paint.Style.FILL);
     }
 

@@ -3,6 +3,8 @@ package dinson.customview.download.utils;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.dinson.blingbase.utils.RxBling;
+
 import org.greenrobot.greendao.query.QueryBuilder;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,7 +27,7 @@ public class DbDownUtil {
     private static DbDownUtil db;
     private final static String dbName = "AppDb";
     public DaoMaster.DevOpenHelper openHelper;
-    private Context context = GlobalApplication.getContext();
+    private Context context = RxBling.INSTANCE.getContext();
 
 
     private DbDownUtil() {

@@ -37,6 +37,17 @@ fun Context.getCompatColor(@ColorRes id: Int) = ContextCompat.getColor(this, id)
 
 infix fun Context.getDimensFloat(@DimenRes id: Int) = resources.getDimension(id)
 
+/**
+ * 获取App名称
+ *
+ * @return App名称
+ */
+fun Context.getAppName(): String {
+    val pi = packageManager.getPackageInfo(this.packageName, 0)
+    return pi.applicationInfo.loadLabel(packageManager).toString()
+}
+
+
 @Suppress("unused")
 fun Context.screenHeight(): Int {
     val manager = getSystemService(Context.WINDOW_SERVICE) as WindowManager

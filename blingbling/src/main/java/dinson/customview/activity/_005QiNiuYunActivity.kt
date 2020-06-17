@@ -25,9 +25,9 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._005QiNiuPicAdapter
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.logi
-import dinson.customview.kotlin.logv
-import dinson.customview.kotlin.toast
+import com.dinson.blingbase.kotlin.logi
+import com.dinson.blingbase.kotlin.logv
+import com.dinson.blingbase.kotlin.toast
 import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.utils.MD5
@@ -36,9 +36,9 @@ import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog.OnItemClickListener
 import dinson.customview.weight.dialog._005ContentMenuDialog
 import dinson.customview.weight.dialog._005QiNiuConfigDialog
-import dinson.customview.weight.recycleview.OnRvItemClickListener
-import dinson.customview.weight.recycleview.OnRvItemLongClickListener
-import dinson.customview.weight.recycleview.RvItemClickSupport
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.OnRvItemLongClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity__005_qi_niu_yun.*

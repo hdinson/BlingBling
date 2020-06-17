@@ -1,6 +1,7 @@
 package dinson.customview.db
 
 import android.database.sqlite.SQLiteDatabase
+import com.dinson.blingbase.utils.RxBling
 import dinson.customview._global.GlobalApplication
 import dinson.customview.db.model.DaoMaster
 import dinson.customview.db.model.SearchHistory027
@@ -12,7 +13,7 @@ import dinson.customview.db.model.SearchHistory027Dao
 object SearchHistory027DbUtils {
 
     private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(GlobalApplication.getContext(), "History027", null)
+        DaoMaster.DevOpenHelper(RxBling.context, "History027", null)
     }
 
     /**

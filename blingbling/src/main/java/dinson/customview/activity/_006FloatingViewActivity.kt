@@ -11,9 +11,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.dip
-import dinson.customview.kotlin.screenHeight
-import dinson.customview.kotlin.screenWidth
+import com.dinson.blingbase.kotlin.dip
+import com.dinson.blingbase.kotlin.screenHeight
+import com.dinson.blingbase.kotlin.screenWidth
 import dinson.customview.utils.TypefaceUtils
 import dinson.customview.weight._006floatingview.Floating
 import dinson.customview.weight._006floatingview.FloatingBuilder

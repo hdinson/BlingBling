@@ -97,6 +97,8 @@ android {
 dependencies {
     implementation files('libs/AMap_Location_V3.6.0_20170918.jar')
     implementation 'com.google.android.material:material:1.1.0'
+    //implementation "com.dinson.bling:blingbase:$blingbase_version"
+    implementation project(path: ':blingbase')
 
     /*androidx*/
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

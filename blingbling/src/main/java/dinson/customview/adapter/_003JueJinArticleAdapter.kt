@@ -7,8 +7,8 @@ import dinson.customview.entity.gank.JueJinResponse
 import dinson.customview.utils.DateUtils
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.StringUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_003_juejin_article.view.*
 
 

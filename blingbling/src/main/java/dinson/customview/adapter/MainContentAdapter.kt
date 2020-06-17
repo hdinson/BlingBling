@@ -9,8 +9,8 @@ import dinson.customview.entity.ClassBean
 import dinson.customview.listener.OnItemMoveListener
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.utils.GlideUtils
-import dinson.customview.weight.recycleview.CommonAdapter
-import dinson.customview.weight.recycleview.CommonViewHolder
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_main_content.view.*
 import java.util.*
 

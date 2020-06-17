@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.dinson.blingbase.widget.banner.holder.BannerViewHolder
 import dinson.customview.R
 import dinson.customview.entity.countdown.IDailyNews
 import dinson.customview.utils.GlideUtils
 
-
-import dinson.customview.weight.banner.holder.BannerViewHolder
 
 class _025DailyTodayViewHolder : BannerViewHolder<IDailyNews> {
     private var mImageView: ImageView? = null

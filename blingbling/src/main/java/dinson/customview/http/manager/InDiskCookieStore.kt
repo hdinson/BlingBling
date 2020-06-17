@@ -1,6 +1,7 @@
 package dinson.customview.http.manager
 
 import android.content.Context
+import com.dinson.blingbase.utils.RxBling
 import com.google.gson.Gson
 import dinson.customview.BuildConfig
 import dinson.customview._global.GlobalApplication
@@ -20,7 +21,7 @@ class InDiskCookieStore {
         private const val COOKIE_PREFS_FILE_NAME = "Cookies_Prefs"
     }
 
-    private val cookiePrefs = GlobalApplication.getContext()
+    private val cookiePrefs = RxBling.context
         .getSharedPreferences(COOKIE_PREFS_FILE_NAME, Context.MODE_PRIVATE)
     private val cookies = HashMap<String, ConcurrentHashMap<String, Cookie>>()
 

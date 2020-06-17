@@ -3,7 +3,7 @@ package dinson.customview.activity
 import android.os.Bundle
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.kotlin.click
+import com.dinson.blingbase.kotlin.click
 import kotlinx.android.synthetic.main.activity__017_tetris.*
 
 class _017TetrisActivity : BaseActivity() {
