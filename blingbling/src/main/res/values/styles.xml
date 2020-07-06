@@ -1,6 +1,6 @@
 <resources>
     <!--————————————————————————————————————————主题——————————————————————————————————————————————-->
-    <style name="AppTheme" parent="Theme.AppCompat">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -9,15 +9,23 @@
         <item name="android:textColor">@color/textPrimary</item>
         <!-- 溢出菜单图标颜色-->
         <item name="colorControlNormal">@android:color/white</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTitleBackgroundStyle">@null</item>
     </style>
 
     <style name="AppTheme.SplashTheme">
         <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:windowFullscreen">true</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="AppTheme.FullScreen">
         <item name="android:windowFullscreen">true</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
     <!--————————————————————————————————————————字体——————————————————————————————————————————————-->
     <style name="font">

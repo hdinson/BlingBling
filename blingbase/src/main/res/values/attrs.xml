@@ -40,4 +40,14 @@
     <declare-styleable name="RatioImageView">
         <attr name="imgRatio" format="float" />
     </declare-styleable>
+
+
+    <declare-styleable name="AlignTextView">
+        <attr name="align" format="enum">
+            <!-- 末行对齐方式 -->
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

@@ -1,20 +1,24 @@
-package dinson.customview.weight;
+package com.dinson.blingbase.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
+import com.dinson.blingbase.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import dinson.customview.R;
-
+/**
+ * 文本对齐控件，TextView 头尾不留空
+ */
 public class AlignTextView extends AppCompatTextView {
 
     private float textHeight; // 单行文字高度

@@ -31,6 +31,9 @@ android {
 }
 
 buildscript {
+
+    ext.bling_retrofit2_version = '2.3.0'
+
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -56,6 +59,13 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'/*协程*/
     implementation 'org.greenrobot:eventbus:3.1.1'/*EventBus*/
+
+    /*Retrofit*/
+    implementation "com.squareup.retrofit2:converter-gson:$bling_retrofit2_version"
+    implementation "com.squareup.retrofit2:retrofit:$bling_retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$bling_retrofit2_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$bling_retrofit2_version"
+
 }
 
 def prop = new Properties()

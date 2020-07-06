@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.Window
 import android.view.WindowManager
-import com.dinson.blingbase.network.NetworkListener
+import com.dinson.blingbase.annotate.Annotations
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import dinson.customview.BuildConfig
 import dinson.customview.R
@@ -15,13 +15,14 @@ import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.utils.SystemBarTintUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import org.greenrobot.eventbus.EventBus
+
 
 /**
  * 所有activity的基类
  */
 @SuppressLint("Registered")
 open class BaseActivity : RxAppCompatActivity() {
-
 
     private val mCompositeDisposable = CompositeDisposable()
     fun Disposable.addToManaged() {
@@ -39,11 +40,17 @@ open class BaseActivity : RxAppCompatActivity() {
         /*activity的出现动画*/
         overridePendingTransition(R.anim.activity_in_from_right, R.anim.activity_out_to_left)
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        /*logcat点击跳转对用activity*/
-        logShowActivity()
 
-        //监听网络
-        NetworkListener.getInstance().registerObserver(this)
+        if (BuildConfig.DEBUG) {
+            /*logcat点击跳转对用activity*/
+            logShowActivity()
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+
+        if (this.javaClass.isAnnotationPresent(Annotations::class.java) &&
+            !EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
     }
 
     override fun onStart() {
@@ -174,7 +181,11 @@ open class BaseActivity : RxAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mCompositeDisposable.clear()
-        NetworkListener.getInstance().unRegisterObserver(this);
+
+        if (this.javaClass.isAnnotationPresent(Annotations::class.java) &&
+            EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
         logShowActivity()
     }
 

@@ -36,6 +36,8 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import static com.dinson.blingbase.kotlin.ContextExtentionKt.getAppName;
+
 /**
  * @author tamsiree
  * @date 2016/12/21
@@ -312,37 +314,33 @@ public class CrashTool {
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH点mm分ss秒", Locale.CHINA);
 
-        //Get build date
-        String buildDateAsString = getBuildDateAsString(context, dateFormat);
-
         //Get app version
         String versionName = getVersionName(context);
         String appName = getAppName(context);
-        String packageName = getPackageName(context);
-        String errorDetails = "";
+        String packageName = context.getPackageName();
+        StringBuilder errorDetails = new StringBuilder();
 
-        errorDetails += "Build App Name : " + appName + " \n";
-        errorDetails += "Build version : " + versionName + " \n";
-        errorDetails += "Build Package Name : " + packageName + " \n";
-        if (buildDateAsString != null) {
-            errorDetails += "Build date : " + buildDateAsString + " \n";
-        }
-        errorDetails += "Current date : " + dateFormat.format(currentDate) + " \n";
+        errorDetails.append("Build App Name : ").append(appName).append(" \n");
+        errorDetails.append("Build version : ").append(versionName).append(" \n");
+        errorDetails.append("Build Package Name : ").append(packageName).append(" \n");
+
+        errorDetails.append("Current date : ").append(dateFormat.format(currentDate)).append(" \n");
         //Added a space between line feeds to fix #18.
         //Ideally, we should not use this method at all... It is only formatted this way because of coupling with the default error activity.
         //We should move it to a method that returns a bean, and let anyone format it as they wish.
-        errorDetails += "Device : " + getDeviceModelName() + " \n";
-        errorDetails += "OS version : Android " + Build.VERSION.RELEASE + " (SDK " + Build.VERSION.SDK_INT + ") \n \n";
-        errorDetails += "Stack trace :  \n";
-        errorDetails += getStackTraceFromIntent(intent);
+        errorDetails.append("Device : ").append(getDeviceModelName()).append(" \n");
+        errorDetails.append("OS version : Android ").append(Build.VERSION.RELEASE)
+            .append(" (SDK ").append(Build.VERSION.SDK_INT).append(") \n \n");
+        errorDetails.append("Stack trace :  \n");
+        errorDetails.append(getStackTraceFromIntent(intent));
 
         String activityLog = getActivityLogFromIntent(intent);
 
         if (activityLog != null) {
-            errorDetails += "\nUser actions : \n";
-            errorDetails += activityLog;
+            errorDetails.append("\nUser actions : \n");
+            errorDetails.append(activityLog);
         }
-        return errorDetails;
+        return errorDetails.toString();
     }
 
     /**
@@ -504,44 +502,6 @@ public class CrashTool {
         }
     }
 
-
-    /**
-     * 获取App名称
-     *
-     * @param context     上下文
-     * @param packageName 包名
-     * @return App名称
-     */
-    private static String getAppName(Context context, String packageName) {
-        PackageManager pm = context.getPackageManager();
-        if (pm == null) return "";
-        try {
-            PackageInfo pi = pm.getPackageInfo(packageName, 0);
-            return pi.applicationInfo.loadLabel(pm).toString();
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-
-    public static String getAppName(Context context) {
-        String appName = getAppName(context);
-        if (StringUtils.isEmpty(appName)) {
-            return "Unknown";
-        } else {
-            return appName;
-        }
-    }
-
-    private static String getPackageName(Context context) {
-        String appName = context.getPackageName();
-        if (StringUtils.isEmpty(appName)) {
-            return "Unknown";
-        } else {
-            return appName;
-        }
-    }
 
     /**
      * INTERNAL method that returns the device model name with correct capitalization.

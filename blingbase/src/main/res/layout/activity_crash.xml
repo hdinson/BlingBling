@@ -1,64 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/crashErrorRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/grid_pattern"
+    android:background="@drawable/crash_activity_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".crash.ActivityCrash">
+    tools:context=".crash.ActivityCrash"
+    tools:ignore="HardcodedText">
 
     <Button
-        android:id="@+id/crash_error_activity_restart_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnRestartCrashErrorActivity"
+        android:layout_width="120dp"
         android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:background="#52ba97"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:text="@string/crash_error_restart_app"
+        android:text="重新启动应用"
         android:textColor="#ffffff" />
 
 
     <Button
-        android:id="@+id/crash_error_activity_close_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnCloseCrashErrorActivity"
+        android:layout_width="120dp"
         android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="50dp"
         android:background="#eeeeee"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:text="@string/crash_error_close_app"
+        android:text="关闭应用"
         android:textColor="#4B4B4B" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/crash_error_activity_more_info_button"
-            style="?borderlessButtonStyle"
+            android:id="@+id/btnCrashErrorActivityMoreInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/crash_error_details"
-            android:textColor="?colorPrimary" />
+            android:background="@null"
+            android:text="错误详细资料"
+            android:textColor="#3F51B5" />
+
 
         <ImageView
-            android:id="@+id/crash_error_activity_image"
+            android:id="@+id/ivCrashErrorActivity"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_centerInParent="true"
             android:contentDescription="@null"
             android:src="@drawable/crash_logo" />
 
@@ -68,14 +61,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:text="@string/crash_error_occurred_explanation"
+            android:text="发生意外错误.\n造成不便深感抱歉"
             android:textColor="#707070"
             android:textSize="18sp"
             android:textStyle="bold" />
 
 
         <TextView
-            android:id="@+id/crash_error_locate_more_info_button"
+            android:id="@+id/tvCrashErrorLocateMoreInfo"
             style="?borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,17 +76,17 @@
             android:layout_marginRight="20dp"
             android:background="#55000000"
             android:padding="10dp"
-            android:text="@string/crash_error_file"
-            android:textColor="?colorPrimary" />
+            android:text="错误日志保存路径"
+            android:textColor="#3F51B5" />
 
     </LinearLayout>
 
 
     <TextView
-        android:id="@+id/rx_crash_tool"
+        android:id="@+id/tvCrashErrorBottomBar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="?colorPrimary"
+        android:background="#3F51B5"
         android:gravity="center"
         android:text="RxCrashTool"
         android:textColor="#ffffff"

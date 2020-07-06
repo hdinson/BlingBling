@@ -4,9 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +18,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.logd
 import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.network.NetworkListener
-import com.dinson.blingbase.network.core.AppNetwork
-import com.dinson.blingbase.network.core.NetType
+import com.dinson.blingbase.kotlin.logi
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -34,7 +30,6 @@ import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.api.OneApi
 import dinson.customview.api.XinZhiWeatherApi
 import dinson.customview.entity.HomeWeather
-import dinson.customview.entity.one.DailyList
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.listener.MainItemTouchHelper
@@ -53,19 +48,10 @@ import me.stefan.library.mu5viewpager.Mu5Interface
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
 
-    //private val mHeadData = ArrayList<DailyDetail>()
+    private val mHeadData = ArrayList<String>()
     private var mAMapLocationClient: AMapLocationClient? = null
     private lateinit var mTouchHelper: ItemTouchHelper
     private val mOneApi = HttpHelper.create(OneApi::class.java)
-    private val datas = arrayListOf(
-        "http://t8.baidu.com/it/u=1484500186,1503043093&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1592301754&t=67e1baa9056ed69356e4375d50076def",
-        "http://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1592301754&t=3e276810ba79da3fc024adb9cf7d3df8",
-        "http://imgsrc.baidu.com/imgad/pic/item/241f95cad1c8a7860ea6962d6d09c93d70cf5001.jpg",
-        "http://imgsrc.baidu.com/imgad/pic/item/a50f4bfbfbedab6440d4dfe5fd36afc379311e74.jpg",
-        "http://img.tuku.cn/file_big/201503/d8905515d1c046aeba51025f0ea842f0.jpg",
-        "http://img2.imgtn.bdimg.com/it/u=1395710768,4003046922&fm=214&gp=0.jpg",
-        "http://www.pp3.cn/uploads/201412/2014123114.jpg"
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,51 +90,12 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         RvItemClickSupport.addTo(rvContent).setOnItemClickListener(OnRvItemClickListener { _, _, position ->
             startActivity(Intent(this, mContentData[position].name))
         })
-
-        mu5Viewpager.setData(datas, this)   //datas支持绑定类型String[] 或者 List<String>
-
+        //mu5Viewpager.setData(mHeadData, this)
     }
 
     private fun initHead() {
-        /*mainBanner.setPages(mHeadData, MainBannerHolder())
-        mainBanner.setDuration(500)
-        mainBanner.start()
-        mainBanner.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
-            override fun onPageSelected(position: Int) {
-                setDailyContent(mHeadData[position].data.hp_content)
-            }
-        })*/
-
-        /*val mainHeardCache = CacheUtils.getMainHeardCache()
-        Flowable.fromPublisher(if (mainHeardCache == null) mOneApi.daily else Flowable.just(mainHeardCache))
-            .flatMap { list ->
-                CacheUtils.setMainHeardCache(list)
-                Flowable.fromIterable(list.data)
-            }
-            .flatMap { id ->
-                val detail = CacheUtils.getDailyDetail(id)
-                if (detail == null) mOneApi.getDetail(id) else Flowable.just(detail)
-            }
-            .filter { detail -> detail.data != null }
-            .collect({ mHeadData }) { list, bean ->
-                logv(bean.toString())
-                CacheUtils.setDailyDetail(bean)
-                list.add(bean)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ _ ->
-                //mainBanner.setPages(mHeadData, MainBannerHolder())
-                if (mHeadData.isNotEmpty()) setDailyContent(mHeadData[0].data.hp_content)
-            }) { throwable ->
-                LogUtils.d(throwable.toString())
-            }*/
-
         Observable
-            .concat(Observable.create<DailyList> {
+            .concat(Observable.create {
                 val cache = AppCacheUtil.getMainHeardCache(this@MainActivity)
                 if (cache == null) it.onComplete()
                 else it.onNext(cache)
@@ -159,21 +106,31 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
                     AppCacheUtil.setMainHeardCache(this@MainActivity, it)
                 }
             }
-            .map { it.data[0] }
+            .flatMap { Observable.fromIterable(it.data) }
             .flatMap {
                 val detail = AppCacheUtil.getDailyDetail(this@MainActivity, it)
                 if (detail == null) mOneApi.getDetail(it) else Observable.just(detail)
+            }
+            .map {
+                if (it.isLocalCache.not()) {
+                    it.isLocalCache = true
+                    AppCacheUtil.setDailyDetail(this@MainActivity, it)
+                }
+                it.data.hp_img_url
+            }
+            .toList()
+            .flatMapObservable {
+                "log -- ${it.size}".loge()
+                Observable.just(it)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .compose(bindUntilEvent(ActivityEvent.DESTROY))
             .subscribe({
-                if (it.isLocalCache.not()) {
-                    it.isLocalCache = true
-                    AppCacheUtil.setDailyDetail(this@MainActivity, it)
-                }
-//                ivDaily.tag = null
-//                GlideUtils.setImage(this, it.data.hp_img_url, ivDaily)
+                mHeadData.clear()
+                mHeadData.addAll(it)
+                "log -- setdata".loge()
+                mu5Viewpager.setData(mHeadData, this)
             }, { LogUtils.d(it.toString()) }).addToManaged()
     }
 
@@ -292,7 +249,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     override fun finishWithAnim(): Boolean = false
 
     override fun onIndexChange(p0: Int) {
-        "$p0/${datas.size}".loge()
+        //"$p0/${datas.size}".loge()
     }
 
     override fun onLoadImage(p0: ImageView, url: String, p2: Int) {
@@ -301,10 +258,5 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
                 mu5Viewpager.bindSource(resource, p2, p0)
             }
         })
-    }
-
-    @AppNetwork(netType = NetType.WIFI)
-    fun onNetChanged(netType: NetType) {
-        "onNetChanged: 网络发生改变 ${netType.name}".logd()
     }
 }
