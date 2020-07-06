@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    　
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:background="#ffdcd0"
+        android:drawableStart="@drawable/ic_round_close_48"
+        android:drawablePadding="12.5dip"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="世界上最遥远的距离就是没网。检查设置"
+        android:textColor="#665b55" />
+
+</RelativeLayout>

@@ -28,7 +28,6 @@ import java.io.InputStreamReader
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class TestActivity : BaseActivity() {
 
 
@@ -110,20 +109,20 @@ class TestActivity : BaseActivity() {
     }
 
     fun onDoWork(v: View) {
-       /* val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-        val request = OneTimeWorkRequest.Builder(DeletePng::class.java)
-            .setConstraints(constraints).build()
-        WorkManager.getInstance().enqueue(request)*/
+        /* val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+         val request = OneTimeWorkRequest.Builder(DeletePng::class.java)
+             .setConstraints(constraints).build()
+         WorkManager.getInstance().enqueue(request)*/
     }
 
     fun onSendMsg(v: View) {
         "1111111111111".loge()
         /*android.permission.READ_SMS or android.permission.WRITE_SMS*/
 
-     
+
         getSmsInPhone().logi()
-        
-        RxPermissions(this).request(Manifest.permission.READ_SMS,Manifest.permission.SEND_SMS)
+
+        RxPermissions(this).request(Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS)
             .subscribe {
                 "2222222222222:$it".loge()
                 val uri = Uri.parse("content://sms/")

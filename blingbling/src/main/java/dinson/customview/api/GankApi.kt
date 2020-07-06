@@ -12,7 +12,7 @@ import retrofit2.http.*
 interface GankApi {
 
     companion object {
-        const val SERVER_URL = "http://gank.io/api"
+        const val SERVER_URL = "https://gank.io/api"
 
     }
 

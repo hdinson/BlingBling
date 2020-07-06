@@ -20,7 +20,6 @@
         <!-- 高德地图设置key -->
         <activity
             android:name=".activity.SplashActivity"
-
             android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

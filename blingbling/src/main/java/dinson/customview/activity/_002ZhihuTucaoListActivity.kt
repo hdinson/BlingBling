@@ -30,7 +30,6 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
 
         mZhihuTucaoApi = HttpHelper.create(ZhihuTucaoApi::class.java)
         initUI()
-
     }
 
     private fun initUI() {
@@ -62,6 +61,8 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
                 _002ZhihuTucaoContentActivity.start(this, mData[position])
             })
     }
+
+    //
 
     /**
      * 获取服务器数据

@@ -9,11 +9,14 @@ import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.RxBling
 import dinson.customview.BuildConfig
 import dinson.customview.activity.MainActivity
+import dinson.customview.activity.SplashActivity
 
 class GlobalApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         RxBling.init(this)
+            .initNetWorkListener()
+            .initCrashModule()
             .backgroundMode(CrashProfile.BACKGROUND_MODE_SILENT) //default: TCrashProfile.BACKGROUND_MODE_SHOW_CUSTOM
             .enabled(true) //default: true
             .showErrorDetails(true) //default: true
@@ -21,7 +24,7 @@ class GlobalApplication : Application() {
             .logErrorOnRestart(true) //default: true
             .trackActivities(true) //default: false
             .minTimeBetweenCrashesMs(2000) //default: 3000
-            .restartActivity(MainActivity::class.java) //default: null (your app's launch activity)
+            .restartActivity(SplashActivity::class.java) //default: null (your app's launch activity)
             .errorActivity(ActivityCrash::class.java) //default: null (default error activity)
             .eventListener(object : CrashTool.EventListener {
                 override fun onRestartAppFromErrorActivity() {

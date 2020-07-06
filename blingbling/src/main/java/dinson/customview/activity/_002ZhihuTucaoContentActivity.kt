@@ -88,6 +88,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
                     //解析数据，设置数据
                     parseJsonAndSetData(mData.content)
                 }, {
+                    it.printStackTrace()
                     loge("知乎请求详情数据失败")
                     onBackPressed()
                 }).addToManaged()

@@ -38,7 +38,7 @@ object AppCacheUtil {
     fun getMainHeardCache(context: Context): DailyList? {
         val homeList = CacheUtils.getCache(context, "home_head_list")
         LogUtils.d("<DailyList> Get Cache << $homeList", false)
-        return if (homeList == null) null else Gson().fromJson<DailyList>(homeList, DailyList::class.java)
+        return if (homeList == null) null else Gson().fromJson(homeList, DailyList::class.java)
     }
 
     /**

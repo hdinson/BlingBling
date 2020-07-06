@@ -2,8 +2,11 @@ package com.dinson.blingbase.utils
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.net.ConnectivityManager
+import android.net.NetworkRequest
 import com.dinson.blingbase.crash.CrashProfile
-import com.dinson.blingbase.network.NetworkListener
+import com.dinson.blingbase.network.NetworkType
+import com.dinson.blingbase.network.NetworkCallbackImpl
 
 
 @Suppress("unused")
@@ -12,13 +15,13 @@ object RxBling {
     private var mContext: Context? = null
     private var mIsDebug: Boolean? = null
 
+    private var mNetType = NetworkType.NETWORK_UNKNOWN
+
     @JvmStatic
-    fun init(context: Context): CrashProfile.Builder {
+    fun init(context: Context): RxBling {
         mContext = context
         mIsDebug = context.applicationInfo != null && (context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
-
-        NetworkListener.getInstance().init(context)
-        return CrashProfile.Builder.create()
+        return this
     }
 
     @JvmStatic
@@ -31,4 +34,21 @@ object RxBling {
         }
 
     fun isDebug() = mIsDebug ?: false
+
+    /**
+     * 设置网络监听
+     */
+    fun initNetWorkListener(): RxBling {
+        //添加网络监听
+        val connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connMgr.registerNetworkCallback(NetworkRequest.Builder().build(), NetworkCallbackImpl(mNetType))
+        return this
+    }
+
+    /**
+     * 设置崩溃日志
+     */
+    fun initCrashModule(): CrashProfile.Builder {
+        return CrashProfile.Builder.create()
+    }
 }

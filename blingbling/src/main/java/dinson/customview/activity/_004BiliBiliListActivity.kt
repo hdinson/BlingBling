@@ -40,7 +40,6 @@ class _004BiliBiliListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__004_bili_bili_list)
-        EventBus.getDefault().register(this)
 
         initUI()
         initData()
