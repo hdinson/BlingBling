@@ -1,7 +1,7 @@
 package com.dinson.blingbase.kotlin
 
 import android.util.Log
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 
 /**
  *  日志工具类

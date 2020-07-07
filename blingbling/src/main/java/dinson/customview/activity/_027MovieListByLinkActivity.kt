@@ -11,7 +11,6 @@ import dinson.customview.entity.av.Movie
 import com.dinson.blingbase.kotlin.logi
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.utils.SystemBarTintUtils
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView

@@ -1,8 +1,7 @@
 package dinson.customview.db
 
 import android.database.sqlite.SQLiteDatabase
-import com.dinson.blingbase.utils.RxBling
-import dinson.customview._global.GlobalApplication
+import com.dinson.blingbase.RxBling
 import dinson.customview.db.model.DaoMaster
 import dinson.customview.db.model.SearchHistory027
 import dinson.customview.db.model.SearchHistory027Dao

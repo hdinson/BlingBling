@@ -223,20 +223,9 @@ public final class StringUtils {
     public static String getUrlName(String url) {
         int index = url.lastIndexOf("/");
         if (index != -1) {
-            url = url.substring(index + 1, url.length());
+            url = url.substring(index + 1);
         }
         return url;
-    }
-
-    /**
-     * 格式化成货币（保留两位小数）
-     *
-     * @param money 金额
-     * @return str
-     */
-    public static String formatMoney(double money) {
-        DecimalFormat df = new DecimalFormat("###,##0.00");
-        return df.format(money);
     }
 
     public static String byte2FileSize(long size) {
@@ -268,29 +257,4 @@ public final class StringUtils {
         }
     }
 
-    public static byte[] utf8Bytes(String data) {
-        try {
-            return data.getBytes("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static String utf8String(byte[] data) {
-        try {
-            return new String(data, Constants.UTF_8);
-        } catch ( Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-    public static boolean inStringArray(String s, String[] array) {
-        for (String x : array) {
-            if (x.equals(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
