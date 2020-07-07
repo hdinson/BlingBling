@@ -1,20 +1,18 @@
 package dinson.customview.adapter
 
-import android.content.Context
-import android.widget.CheckBox
-import android.widget.TextView
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.hide
+import com.dinson.blingbase.kotlin.logv
+import com.dinson.blingbase.kotlin.show
+import com.dinson.blingbase.utils.DateUtils
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
 import dinson.customview.activity.CommonWebActivity
 import dinson.customview.entity.wanandroid.WanAndArticle
-import com.dinson.blingbase.kotlin.click
-import com.dinson.blingbase.kotlin.hide
-import com.dinson.blingbase.kotlin.show
-import com.dinson.blingbase.kotlin.logv
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.utils.DateUtils
-import com.dinson.blingbase.widget.recycleview.CommonAdapter
-import com.dinson.blingbase.widget.recycleview.CommonViewHolder
+import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.item_001_wan_android_main.view.*
 import java.util.concurrent.TimeUnit
 

@@ -1,7 +1,7 @@
 package com.dinson.blingbase.kotlin
 
 import android.view.View
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 import com.dinson.blingbase.widget.toasty.Toasty
 import java.text.DecimalFormat
 

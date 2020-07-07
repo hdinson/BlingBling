@@ -1,6 +1,7 @@
 package dinson.customview.utils
 
 import android.content.Context
+import com.dinson.blingbase.utils.DateUtils
 import com.google.gson.Gson
 import dinson.customview.BuildConfig
 import dinson.customview.entity.HomeWeather
@@ -21,11 +22,11 @@ object AppCacheUtil {
 
         //缓存的时间是到凌晨4点
         val now = System.currentTimeMillis()
-        val today4 = DateUtils.getDataTimestamp(0) * 1000L + 14400000
+        val today4 = DateUtils.getDateOfTimestamp(0) * 1000L + 14400000
         if (now < today4)
             CacheUtils.setCache(context, "home_head_list", json, today4 - now)
         else {
-            val deathLine = (DateUtils.getDataTimestamp(1) + 14400L) * 1000 - now
+            val deathLine = (DateUtils.getDateOfTimestamp(1) + 14400L) * 1000 - now
             CacheUtils.setCache(context, "home_head_list", json, deathLine)
         }
     }

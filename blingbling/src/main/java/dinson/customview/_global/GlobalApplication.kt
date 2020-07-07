@@ -6,9 +6,8 @@ import com.dinson.blingbase.crash.CrashProfile
 import com.dinson.blingbase.crash.CrashTool
 import com.dinson.blingbase.kotlin.logi
 import com.dinson.blingbase.kotlin.toasty
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 import dinson.customview.BuildConfig
-import dinson.customview.activity.MainActivity
 import dinson.customview.activity.SplashActivity
 
 class GlobalApplication : Application() {

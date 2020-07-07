@@ -1,5 +1,6 @@
 package dinson.customview.model
 
+import com.dinson.blingbase.kotlin.formatMoney
 import dinson.customview.utils.StringUtils
 
 /**
@@ -32,5 +33,5 @@ data class _007CurrencyModel(val currencyCn: String, val currencyCode: String, v
      * @return 目标货币金额（保留两位小数）
      */
     fun getTargetMoney(targetMoney: Double): String =
-        StringUtils.formatMoney(targetMoney / targetRate * baseRate)
+        (targetMoney / targetRate * baseRate).formatMoney()
 }

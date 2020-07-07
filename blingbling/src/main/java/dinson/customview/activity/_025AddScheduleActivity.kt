@@ -7,14 +7,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.DatePicker
-import dinson.customview.R
-import dinson.customview._global.BaseActivity
-import dinson.customview.event._025EditScheduleEvent
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.show
 import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.utils.DateUtils
+import dinson.customview.R
+import dinson.customview._global.BaseActivity
+import dinson.customview.event._025EditScheduleEvent
 import dinson.customview.model._025Schedule
-import dinson.customview.utils.DateUtils
 import dinson.customview.utils.SPUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.SystemBarModeUtils
@@ -93,7 +93,7 @@ class _025AddScheduleActivity : BaseActivity() {
             }
             val time = tvChooseDateTime.text.split(" ")[0]
             if (StringUtils.isEmpty(mScheduleId)) {
-                mScheduleId = DateUtils.getCurrentTimeMillis10().toString()
+                mScheduleId = DateUtils.currentTimeMillis10().toString()
             }
             val bean = _025Schedule(mScheduleId, name, time, mRepeatType)
             SPUtils.addSchedule(this@_025AddScheduleActivity, bean)
