@@ -11,7 +11,6 @@ import com.google.android.material.tabs.TabLayout
 import dinson.customview.R
 import dinson.customview._global.BaseFragment
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.utils.SystemBarTintUtils
 
 import kotlinx.android.synthetic.main.fragment_003_information.*
 import java.util.ArrayList

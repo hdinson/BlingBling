@@ -16,7 +16,7 @@ import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.getAppName
 import com.dinson.blingbase.kotlin.hide
 import com.dinson.blingbase.kotlin.sp
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity_crash.*
 import java.io.BufferedWriter

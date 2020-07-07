@@ -2,12 +2,7 @@ package dinson.customview.utils
 
 import android.content.Context
 import android.os.Environment
-import com.google.gson.Gson
-import dinson.customview._global.GlobalApplication
-import dinson.customview.entity.HomeWeather
-import dinson.customview.entity.exchange.ExchangeBean
-import dinson.customview.entity.one.DailyDetail
-import dinson.customview.entity.one.DailyList
+import com.dinson.blingbase.utils.MD5
 import java.io.File
 import java.math.BigDecimal
 

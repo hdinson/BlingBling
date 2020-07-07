@@ -9,6 +9,7 @@ object IOUtils {
      *
      * @param closeables closeables
      */
+    @JvmStatic
     fun close(vararg closeables: Closeable) {
         closeables.forEach {
             try {

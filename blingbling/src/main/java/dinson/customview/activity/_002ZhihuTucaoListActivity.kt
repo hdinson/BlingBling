@@ -10,7 +10,7 @@ import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import com.dinson.blingbase.kotlin.logd
-import dinson.customview.utils.DateUtils
+import com.dinson.blingbase.utils.DateUtils
 import dinson.customview.utils.SystemBarModeUtils
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport

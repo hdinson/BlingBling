@@ -5,9 +5,8 @@ import android.graphics.Color
 import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 import dinson.customview.R
-import dinson.customview._global.GlobalApplication
 
 
 /**
