@@ -1,9 +1,8 @@
 package dinson.customview.utils
 
 import android.content.Context
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 import com.google.gson.Gson
-import dinson.customview._global.GlobalApplication
 import dinson.customview.entity.countdown.OnTheDay
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.model._025Schedule

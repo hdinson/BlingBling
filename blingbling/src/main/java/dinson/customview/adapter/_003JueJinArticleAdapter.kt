@@ -2,13 +2,13 @@ package dinson.customview.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
-import dinson.customview.R
-import dinson.customview.entity.gank.JueJinResponse
-import dinson.customview.utils.DateUtils
-import dinson.customview.utils.GlideUtils
-import dinson.customview.utils.StringUtils
+import com.dinson.blingbase.utils.DateUtils
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
+import dinson.customview.R
+import dinson.customview.entity.gank.JueJinResponse
+import dinson.customview.utils.GlideUtils
+import dinson.customview.utils.StringUtils
 import kotlinx.android.synthetic.main.item_003_juejin_article.view.*
 
 
@@ -36,7 +36,7 @@ class _003JueJinArticleAdapter(dataList: List<JueJinResponse.DBean.EntrylistBean
             tags = dataBean.tags.joinToString("/", "  # ") { it.title }
         }
         val intTime = DateUtils.str2int(dataBean.createdAt, "yyyy-MM-dd'T'HH:mm:ss.SSS")
-        val timeStr = DateUtils.convertTimeToFormat(intTime)
+        val timeStr = DateUtils.convertTimeToFormat(intTime.toLong())
         holder.itemView.tvTags.text = "$timeStr # ${dataBean.user.username}$tags"
         holder.itemView.tvCollectionCount.text = dataBean.collectionCount
     }

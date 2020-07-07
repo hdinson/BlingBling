@@ -1,4 +1,4 @@
-package com.dinson.blingbase.utils
+package com.dinson.blingbase
 
 import android.content.Context
 import android.content.pm.ApplicationInfo

@@ -1,10 +1,9 @@
 package dinson.customview.model
 
+import com.dinson.blingbase.kotlin.loge
+import com.dinson.blingbase.utils.MD5
 import dinson.customview.entity.av.Movie
 import dinson.customview.entity.av.MovieInfo
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.toast
-import dinson.customview.utils.MD5
 import org.jsoup.Jsoup
 
 

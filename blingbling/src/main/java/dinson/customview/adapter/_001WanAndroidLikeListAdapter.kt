@@ -8,8 +8,8 @@ import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.hide
 import com.dinson.blingbase.kotlin.logv
 import com.dinson.blingbase.kotlin.show
+import com.dinson.blingbase.utils.DateUtils
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.utils.DateUtils
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_001_wan_android_main.view.*

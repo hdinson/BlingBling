@@ -12,7 +12,6 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview.utils.SystemBarModeUtils
-import dinson.customview.utils.SystemBarTintUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import org.greenrobot.eventbus.EventBus
@@ -74,42 +73,8 @@ open class BaseActivity : RxAppCompatActivity() {
 
     open fun finishWithAnim() = true
 
-    /**
-     * 状态栏透明之后，状态栏不会顶上去，标题栏多大就是多大
-     * SystemBarTintManager，这时可以通过框架设置标题栏的颜色
-     *
-     *  @param color The color of the background tint.
-     */
-    fun setStatusBarTintColor(color: Int) {
-        //透明状态栏
-        val win = window
-        val winParams = win.attributes
-        val bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-        winParams.flags = winParams.flags or bits
-        win.attributes = winParams
-        val tintManager = SystemBarTintUtils(this)
-        tintManager.isStatusBarTintEnabled = true
-        tintManager.setStatusBarTintColor(color)// 通知栏所需颜色
-    }
 
 
-    /**
-     *状态栏透明之后，状态栏不会顶上去，标题栏多大就是多大
-     * SystemBarTintManager，这时可以通过框架设置标题栏的颜色
-     *
-     * @param res The identifier of the resource.
-     */
-    fun setStatusBarTintResource(res: Int) {
-        //透明状态栏
-        val win = window
-        val winParams = win.attributes
-        val bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-        winParams.flags = winParams.flags or bits
-        win.attributes = winParams
-        val tintManager = SystemBarTintUtils(this)
-        tintManager.isStatusBarTintEnabled = true
-        tintManager.setNavigationBarTintResource(res)// 通知栏所需颜色
-    }
 
 
     override fun onResumeFragments() {

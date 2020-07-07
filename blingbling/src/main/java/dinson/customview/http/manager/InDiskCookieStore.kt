@@ -1,10 +1,9 @@
 package dinson.customview.http.manager
 
 import android.content.Context
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 import com.google.gson.Gson
 import dinson.customview.BuildConfig
-import dinson.customview._global.GlobalApplication
 import dinson.customview.utils.AESUtils
 import dinson.customview.utils.StringUtils
 import okhttp3.Cookie

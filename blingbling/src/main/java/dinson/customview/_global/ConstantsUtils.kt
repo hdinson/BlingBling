@@ -1,7 +1,7 @@
 package dinson.customview._global
 
 import android.os.Environment
-import com.dinson.blingbase.utils.RxBling
+import com.dinson.blingbase.RxBling
 
 import java.io.File
 

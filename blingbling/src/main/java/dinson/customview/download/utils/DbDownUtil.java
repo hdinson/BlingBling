@@ -3,14 +3,13 @@ package dinson.customview.download.utils;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dinson.blingbase.utils.RxBling;
+import com.dinson.blingbase.RxBling;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import dinson.customview._global.GlobalApplication;
 import dinson.customview.db.model.DaoMaster;
 import dinson.customview.db.model.DaoSession;
 import dinson.customview.download.model.DownloadInfo;
