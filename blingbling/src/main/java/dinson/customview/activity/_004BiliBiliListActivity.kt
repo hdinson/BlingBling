@@ -18,7 +18,7 @@ import dinson.customview.http.RxSchedulers
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.loge
 import com.dinson.blingbase.kotlin.logi
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.SystemBarModeUtils
@@ -120,7 +120,7 @@ class _004BiliBiliListActivity : BaseActivity() {
                 }
             }, {
                 crvVideoContent.complete()
-                it.message?.toast()
+                it.message?.toasty()
                 it.toString().loge()
             }, {
                 crvVideoContent.complete()

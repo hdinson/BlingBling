@@ -64,7 +64,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
             /* RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_MMS, Manifest.permission.READ_CALL_LOG)
                  .subscribe {
                      if (it) AndroidInfoActivity.start(this)
-                     else "需要电话权限".toast()
+                     else "需要电话权限".toasty()
                  }*/
 
             intArrayOf(2)[10]

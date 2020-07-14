@@ -18,7 +18,7 @@ import dinson.customview.download.listener.HttpDownOnNextListener
 import dinson.customview.download.model.DownloadState
 import dinson.customview.download.utils.DbDownUtil
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.model._009ModelUtil
 import dinson.customview.model._009PanoramaImageModel
 import dinson.customview.utils.LogUtils
@@ -107,7 +107,7 @@ class _009GoogleVRActivity : BaseActivity() {
             if (downloadInfo.state == DownloadState.FINISH) {
                 loadPanoramaImage(selector)
             } else {
-                "下载失败".toast()
+                "下载失败".toasty()
             }
         }
     }

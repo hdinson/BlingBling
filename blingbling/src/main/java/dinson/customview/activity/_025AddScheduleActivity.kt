@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.widget.DatePicker
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.show
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.DateUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -88,7 +88,7 @@ class _025AddScheduleActivity : BaseActivity() {
         actionSave.click {
             val name = etScheduleName.text.toString()
             if (StringUtils.isEmpty(name)) {
-                "请输入日程标题".toast()
+                "请输入日程标题".toasty()
                 return@click
             }
             val time = tvChooseDateTime.text.split(" ")[0]

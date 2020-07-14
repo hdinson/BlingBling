@@ -31,8 +31,6 @@ class ActivityCrash : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //This is needed to avoid a crash if the developer has not specified
-        //an app-level theme that extends Theme.AppCompat
         val a = obtainStyledAttributes(R.styleable.AppCompatTheme)
         if (!a.hasValue(R.styleable.AppCompatTheme_windowActionBar)) {
             setTheme(R.style.Theme_AppCompat_Light_DarkActionBar)
@@ -43,13 +41,8 @@ class ActivityCrash : FragmentActivity() {
         SystemBarModeUtils.darkMode(this, true)
         SystemBarModeUtils.setPaddingTop(this, crashErrorRoot)
 
-        //Close/restart button logic:
-        //If a class if set, use restart.
-        //Else, use close and just finish the app.
-        //It is recommended that you follow this logic if implementing a custom error activity.
         val config = CrashTool.getConfigFromIntent(intent)
         if (config == null) {
-            //This should never happen - Just finish the activity to avoid a recursive crash.
             finish()
             return
         }
@@ -88,7 +81,6 @@ class ActivityCrash : FragmentActivity() {
         val errorInformation = CrashTool.getAllErrorDetailsFromIntent(this@ActivityCrash, intent)
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-        //Are there any devices without clipboard...?
         val clip = ClipData.newPlainText("错误信息", errorInformation)
         clipboard.setPrimaryClip(clip)
         Toast.makeText(this@ActivityCrash, "已复制到剪贴板", Toast.LENGTH_SHORT).show()

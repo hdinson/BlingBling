@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.dinson.blingbase.kotlin.logi
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.DateUtils
 import com.dinson.blingbase.RxBling
 import com.google.gson.Gson
@@ -53,7 +53,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
                 .subscribe({
                     initBanner(it)
                 }, {
-                    it.toString().toast()
+                    it.toString().toasty()
                 }).addToManaged()
         } else {
             val type = object : TypeToken<ArrayList<IDailyNews>>() {}.type
@@ -75,7 +75,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
                         }
                         SPUtils.setOnTheDay(RxBling.context, it)
                     }
-                }, { it.toString().toast() }).addToManaged()
+                }, { it.toString().toasty() }).addToManaged()
         } else {
             val type = object : TypeToken<ArrayList<OnTheDay>>() {}.type
             val list = Gson().fromJson<ArrayList<OnTheDay>>(todayListStr, type)

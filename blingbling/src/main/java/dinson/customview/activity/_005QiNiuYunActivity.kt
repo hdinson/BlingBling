@@ -13,7 +13,7 @@ import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dinson.blingbase.kotlin.logi
 import com.dinson.blingbase.kotlin.logv
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.MD5
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.OnRvItemLongClickListener
@@ -90,12 +90,12 @@ class _005QiNiuYunActivity : BaseActivity() {
                     val data = ClipData.newPlainText("Label", bean.finalUrl)
                     cm.primaryClip = data
                     logv(bean.finalUrl)
-                    "已复制".toast()
+                    "已复制".toasty()
                 }).setOnItemLongClickListener(OnRvItemLongClickListener { _, _, position ->
                     val dialog = _005ContentMenuDialog(this@_005QiNiuYunActivity)
                     val items = arrayOf("复制", "黏贴")
                     dialog.setDatas(items, OnItemClickListener {
-                        items[it].toast()
+                        items[it].toasty()
                         logi(mListData[position])
                     })
                     dialog.show()
@@ -321,7 +321,7 @@ class _005QiNiuYunActivity : BaseActivity() {
      * 上传图片到服务器。path为本地路径
      */
     private fun uploadImg2QiNiu(path: String) {
-        "正在上传".toast()
+        "正在上传".toasty()
         mCurrentConfig?.let { config->
             val upToken = Auth.create(config.AccessKey, config.SecretKey).uploadToken(config.Bucket)
             val zone = config.getZone()

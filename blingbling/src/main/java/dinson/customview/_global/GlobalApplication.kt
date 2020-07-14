@@ -14,7 +14,7 @@ class GlobalApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         RxBling.init(this)
-            .initNetWorkListener()
+            //.initNetWorkListener()
             .initCrashModule()
             .backgroundMode(CrashProfile.BACKGROUND_MODE_SILENT) //default: TCrashProfile.BACKGROUND_MODE_SHOW_CUSTOM
             .enabled(true) //default: true

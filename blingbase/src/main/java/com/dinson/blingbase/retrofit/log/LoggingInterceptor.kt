@@ -6,10 +6,6 @@ import okhttp3.internal.platform.Platform.INFO
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-
-/**
- * @author ihsan on 09/02/2017.
- */
 class LoggingInterceptor private constructor(private val builder: Builder) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -78,6 +74,14 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
             builder.httpUrl.keys.forEach { key ->
                 httpUrlBuilder.addQueryParameter(key, builder.httpUrl[key])
             }
+            builder.httpUrl2.keys.forEach { key ->
+                val function = builder.httpUrl2[key]
+                if (function != null) {
+                    val value = function()
+                    if (value.isNotEmpty())
+                        httpUrlBuilder.addQueryParameter(key, value)
+                }
+            }
         }
         return requestBuilder.url(httpUrlBuilder?.build()!!).build()
     }
@@ -86,6 +90,7 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
     class Builder {
         val headers: HashMap<String, String> = HashMap()
         val httpUrl: HashMap<String, String> = HashMap()
+        val httpUrl2: HashMap<String, () -> String> = HashMap()
 
         var level: Int = INFO
             private set
@@ -108,76 +113,41 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
             }
         }
 
-        /**
-         * @param name  Filed
-         * @param value Value
-         * @return Builder
-         * Add a field with the specified value
-         */
         fun addHeader(name: String, value: String): Builder {
             headers[name] = value
             return this
         }
 
-        /**
-         * @param name  Filed
-         * @param value Value
-         * @return Builder
-         * Add a field with the specified value
-         */
         fun addQueryParam(name: String, value: String): Builder {
             httpUrl[name] = value
             return this
         }
 
-        /**
-         * Set request and response each log tag
-         *
-         * @param tag general log tag
-         * @return Builder
-         */
+        fun addDynamicQueryParam(name: String, func: () -> String): Builder {
+            httpUrl2[name] = func
+            return this
+        }
+
         fun tag(tag: String): Builder {
             TAG = tag
             return this
         }
 
-        /**
-         * Set request log tag
-         *
-         * @param tag request log tag
-         * @return Builder
-         */
         fun requestTag(tag: String): Builder {
             requestTag = tag
             return this
         }
 
-        /**
-         * Set response log tag
-         *
-         * @param tag response log tag
-         * @return Builder
-         */
         fun responseTag(tag: String): Builder {
             responseTag = tag
             return this
         }
 
-
-        /**
-         * @param level set sending log output type
-         * @return Builder
-         */
         fun log(level: Int): Builder {
             this.level = level
             return this
         }
 
-        /**
-         * @param logger manuel logging interface
-         * @return Builder
-         * @see Logger
-         */
         fun logger(logger: Logger): Builder {
             this.logger = logger
             return this
@@ -188,13 +158,6 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
             return this
         }
 
-
-        /**
-         * @param useMock let you use json file from asset
-         * @param sleep   let you see progress dialog when you request
-         * @return Builder
-         * @see LoggingInterceptor
-         */
         fun enableMock(useMock: Boolean, sleep: Long, listener: BufferListener?): Builder {
             isMockEnabled = useMock
             sleepMs = sleep

@@ -14,9 +14,6 @@ import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
-/**
- * @author ihsan on 09/02/2017.
- */
 class Printer private constructor() {
     companion object {
         private const val JSON_INDENT = 3
@@ -228,9 +225,6 @@ class Printer private constructor() {
     }
 }
 
-/**
- * @see 'https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/src/main/java/okhttp3/logging/utf8.kt'
- * */
 internal fun Buffer.isProbablyUtf8(): Boolean {
     try {
         val prefix = Buffer()

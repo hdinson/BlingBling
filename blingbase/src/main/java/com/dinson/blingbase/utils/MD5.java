@@ -6,11 +6,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5 {
 
-    private final static String SALT = "hi,md5";//加盐
+    //private final static String SALT = "hi,md5";//加盐
 
     public static String encode(String string) {
 
-        string += SALT;
+        //string += SALT;
 
         byte[] hash;
         StringBuilder hex = null;

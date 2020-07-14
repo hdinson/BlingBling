@@ -16,7 +16,7 @@ import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog.OnLoginSuccessListener
@@ -126,7 +126,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 }
             }, {
                 likeView.toggle()
-                it.message?.toast()
+                it.message?.toasty()
                 loge(it.toString())
             }).addToManaged()
     }
@@ -170,7 +170,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 initToolbarTitle()
                 flCustomRefreshView.isRefreshing = true
             } else {
-                errorMsg.toast()
+                errorMsg.toasty()
             }
         }
     }

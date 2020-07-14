@@ -5,7 +5,7 @@ import android.content.Context
 import dinson.customview.R
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.show
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.utils.SPUtils
 import kotlinx.android.synthetic.main.dialog_005_qi_niu_config.*
@@ -51,7 +51,7 @@ class _005QiNiuConfigDialog(context: Context, private val mConfig: _005QiNiuConf
         btnSave.click {
             if (etAK.text.isEmpty() || etSK.text.isEmpty() ||
                 etBucket.text.isEmpty() || etDomain.text.isEmpty()) {
-                "请完善参数后提交".toast()
+                "请完善参数后提交".toasty()
                 return@click
             }
             val config = _005QiNiuConfig(etAK.text.toString(), etSK.text.toString(), etDomain.text.toString(),
