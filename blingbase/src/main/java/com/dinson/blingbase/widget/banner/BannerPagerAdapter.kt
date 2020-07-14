@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.dinson.blingbase.utils.LogUtils
+import com.dinson.blingbase.kotlin.loge
 import com.dinson.blingbase.widget.banner.holder.BannerViewHolder
 
 
@@ -67,7 +67,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
     override fun isViewFromObject(view: View, obj: Any) = view == obj
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
-        LogUtils.e("container: ${container .childCount}")
+        "container: ${container.childCount}".loge()
     }
 
 

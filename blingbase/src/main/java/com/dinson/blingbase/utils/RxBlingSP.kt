@@ -5,7 +5,7 @@ import android.content.Context
 /**
  * SharedPreferences工具类
  */
-object SPUtils {
+object RxBlingSP {
 
 
     /******************************************************************************************************/

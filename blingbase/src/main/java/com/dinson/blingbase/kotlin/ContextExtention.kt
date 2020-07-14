@@ -67,7 +67,6 @@ fun Context.screenWidth(): Int {
 
 /**
  * 关闭软键盘
- *
  */
 @Suppress("unused")
 fun Context.closeKeyboard(view: View) {

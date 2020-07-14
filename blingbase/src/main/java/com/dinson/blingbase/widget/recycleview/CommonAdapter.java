@@ -1,6 +1,7 @@
 package com.dinson.blingbase.widget.recycleview;
 
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
@@ -15,7 +16,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
     public List<T> mDataList;
     private SparseArray<CommonViewHolder> mViewHolder = new SparseArray<>();
 
-    public CommonAdapter(  List<T> dataList) {
+    public CommonAdapter(List<T> dataList) {
         this.mDataList = dataList;
     }
 
@@ -25,7 +26,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
     public abstract int getLayoutId(int viewType);
 
     //更新itemView视图(由子类负责完成)
-    public abstract void convert(CommonViewHolder holder, T t, int position);
+    public abstract void convert(@NotNull CommonViewHolder holder, @NotNull T bean, int position);
 
     public T getItem(int position) {
         if (mDataList == null || position < 0 || mDataList.size() <= position)

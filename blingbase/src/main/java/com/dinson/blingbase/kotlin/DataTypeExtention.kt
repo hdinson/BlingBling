@@ -38,13 +38,8 @@ fun String.lowerFirstLetter(): String {
     else "${(this[0].toInt() + 32).toChar()} ${this.substring(1)}"
 }
 
-fun String.toast(): String {
-    Toasty.normal(RxBling.context).text(this).show()
-    return this
-}
-
 fun String.toasty(): String {
-    Toasty.normal(RxBling.context).text(this).show()
+    //Toasty.normal(RxBling.context).text(this).show()
     return this
 }
 

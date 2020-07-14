@@ -117,10 +117,10 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
         when (v.id) {
             R.id.btnDoLogin -> {
                 if (etLoginUsername.text.isEmpty()) {
-                    "Username must not null".toast();return
+                    "Username must not null".toasty();return
                 }
                 if (etLoginPassword.text.isEmpty()) {
-                    "Password must not null".toast();return
+                    "Password must not null".toasty();return
                 }
                 btnDoLogin.isEnabled = false
                 mWanAndroidApi.login(etLoginUsername.text.toString(), etLoginPassword.text.toString())
@@ -138,24 +138,24 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             }
             R.id.btnDoRegister -> {
                 if (etRegisterUsername.text.isEmpty()) {
-                    "Username must not null".toast();return
+                    "Username must not null".toasty();return
                 }
                 if (etRegisterPassword.text.isEmpty()) {
-                    "Password must not null".toast();return
+                    "Password must not null".toasty();return
                 }
                 if (etRegisterRepeatPassword.text.isEmpty()
                     || etRegisterPassword.text.toString() != etRegisterRepeatPassword.text.toString()) {
-                    "Two different input".toast();return
+                    "Two different input".toasty();return
                 }
                 btnDoRegister.isEnabled = false
                 mWanAndroidApi.register(etRegisterUsername.text.toString(), etRegisterPassword.text.toString(),
                     etRegisterRepeatPassword.text.toString()).compose(RxSchedulers.io_main())
                     .subscribe({
                         if (it.errorCode == 0) animateRevealClose()
-                        else it.errorMsg.toast()
+                        else it.errorMsg.toasty()
                     }, {
                         it.printStackTrace()
-                        it.toString().toast()
+                        it.toString().toasty()
                     }, {}, { btnDoRegister.isEnabled = true })
             }
             R.id.tvForgotPsw -> {

@@ -15,7 +15,7 @@ import dinson.customview.http.HttpHelper
 import com.dinson.blingbase.kotlin.dip
 import com.dinson.blingbase.kotlin.logd
 import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
@@ -90,7 +90,7 @@ abstract class _003GirlMeiZiTuPicSetFragment : ViewPagerLazyFragment() {
                 mCurrentPage++
             }, {
                 crfGirlsContent.complete()
-                it.toString().toast()
+                it.toString().toasty()
                 it.toString().loge()
             }).addToManaged()
     }

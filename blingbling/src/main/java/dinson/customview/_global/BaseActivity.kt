@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.Window
 import android.view.WindowManager
-import com.dinson.blingbase.annotate.Annotations
+import com.dinson.blingbase.annotate.BindEventBus
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import dinson.customview.BuildConfig
 import dinson.customview.R
@@ -21,6 +21,7 @@ import org.greenrobot.eventbus.EventBus
  * 所有activity的基类
  */
 @SuppressLint("Registered")
+@BindEventBus
 open class BaseActivity : RxAppCompatActivity() {
 
     private val mCompositeDisposable = CompositeDisposable()
@@ -46,7 +47,7 @@ open class BaseActivity : RxAppCompatActivity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         }
 
-        if (this.javaClass.isAnnotationPresent(Annotations::class.java) &&
+        if (this.javaClass.isAnnotationPresent(BindEventBus::class.java) &&
             !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }
@@ -72,10 +73,6 @@ open class BaseActivity : RxAppCompatActivity() {
     }
 
     open fun finishWithAnim() = true
-
-
-
-
 
     override fun onResumeFragments() {
         super.onResumeFragments()
@@ -147,7 +144,7 @@ open class BaseActivity : RxAppCompatActivity() {
         super.onDestroy()
         mCompositeDisposable.clear()
 
-        if (this.javaClass.isAnnotationPresent(Annotations::class.java) &&
+        if (this.javaClass.isAnnotationPresent(BindEventBus::class.java) &&
             EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this)
         }

@@ -1,6 +1,6 @@
 package com.dinson.blingbase.annotate
 
 
-@Target(AnnotationTarget.TYPE)
+@Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Annotations
+annotation class BindEventBus

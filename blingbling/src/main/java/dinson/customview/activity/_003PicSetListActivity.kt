@@ -4,29 +4,22 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.SparseArray
-import android.view.KeyEvent
-import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.adapter._002ZhihuListAdapter
 import dinson.customview.adapter._003PicSetListAdapter
 import dinson.customview.api.GankApi
-import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.logd
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.toast
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.utils.AESUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight._003weight.DecorationLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
-import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__003_pic_set_list.*
 import java.util.regex.Pattern
@@ -98,7 +91,7 @@ class _003PicSetListActivity : BaseActivity() {
      */
     private fun getServiceData() {
         if (StringUtils.isEmpty(mId)) {
-            "ID is none. Please go back.".toast()
+            "ID is none. Please go back.".toasty()
         }
         mApi.loadPicSetById(mId)
             .compose(RxSchedulers.io_main())

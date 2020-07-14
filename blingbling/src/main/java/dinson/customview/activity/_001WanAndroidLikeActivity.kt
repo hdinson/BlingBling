@@ -12,7 +12,7 @@ import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.refreshview.CustomRefreshView
@@ -101,7 +101,7 @@ class _001WanAndroidLikeActivity : BaseActivity(), _001OnLikeViewClickListener {
                 setResult(Activity.RESULT_OK)
             }, {
                 likeView.toggle()
-                it.message?.toast()
+                it.message?.toasty()
                 loge(it.toString())
             }).addToManaged()
     }

@@ -17,7 +17,9 @@ import dinson.customview.databinding.ActivityTestBinding
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.loge
 import com.dinson.blingbase.kotlin.logi
-import com.dinson.blingbase.kotlin.toast
+import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.utils.validations.EditTextValidator
+import com.dinson.blingbase.utils.validations.ValidationModel
 import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.SystemBarModeUtils
@@ -54,7 +56,7 @@ class TestActivity : BaseActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        btnTest.click { BlingNdkHelper.getFromC().toast() }
+        btnTest.click { BlingNdkHelper.getFromC().toasty() }
     }
 
 
@@ -98,7 +100,7 @@ class TestActivity : BaseActivity() {
                         val i = it.indexOf("/", 20)
                         val j = it.indexOf(".", i)
                         val all = it.substring(i + 1, j)
-                        all.toast()
+                        all.toasty()
                         all.loge()
                     }
                 }

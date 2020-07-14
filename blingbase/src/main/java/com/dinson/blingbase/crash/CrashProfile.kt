@@ -1,18 +1,3 @@
-/*
- * Copyright 2014-2017 Eduard Ereza Martínez
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- *
- * You may obtain a copy of the License at
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.dinson.blingbase.crash
 
 import android.app.Activity
@@ -132,126 +117,67 @@ class CrashProfile : Serializable {
     class Builder {
         private var mProfile: CrashProfile? = null
 
-        /**
-         * Defines if the error activity must be launched when the app is on background.
-         * BackgroundMode.BACKGROUND_MODE_SHOW_CUSTOM: launch the error activity when the app is in background,
-         * BackgroundMode.BACKGROUND_MODE_CRASH: launch the default system error when the app is in background,
-         * BackgroundMode.BACKGROUND_MODE_SILENT: crash silently when the app is in background,
-         * The default is BackgroundMode.BACKGROUND_MODE_SHOW_CUSTOM (the app will be brought to front when a crash occurs).
-         */
+
         fun backgroundMode(@BackgroundMode backgroundMode: Int): Builder {
             mProfile!!.backgroundMode = backgroundMode
             return this
         }
 
-        /**
-         * Defines if CustomActivityOnCrash crash interception mechanism is enabled.
-         * Set it to true if you want CustomActivityOnCrash to intercept crashes,
-         * false if you want them to be treated as if the library was not installed.
-         * The default is true.
-         */
+
         fun enabled(enabled: Boolean): Builder {
             mProfile!!.enabled = enabled
             return this
         }
 
-        /**
-         * Defines if the error activity must shown the error details button.
-         * Set it to true if you want to show the full stack trace and device info,
-         * false if you want it to be hidden.
-         * The default is true.
-         */
+
         fun showErrorDetails(showErrorDetails: Boolean): Builder {
             mProfile!!.showErrorDetails = showErrorDetails
             return this
         }
 
-        /**
-         * Defines if the error activity should show a restart button.
-         * Set it to true if you want to show a restart button,
-         * false if you want to show a close button.
-         * Note that even if restart is enabled but you app does not have any launcher activities,
-         * a close button will still be used by the default error activity.
-         * The default is true.
-         */
+
         fun showRestartButton(showRestartButton: Boolean): Builder {
             mProfile!!.showRestartButton = showRestartButton
             return this
         }
 
-        /**
-         * Defines if the stack trace must be logged again once the custom activity is shown.
-         * Set it to true if you want to log the stack trace again,
-         * false if you don't want the extra logging.
-         * This option exists because the default Android Studio logcat view only shows the output
-         * of the current process, and since the error activity runs on a new process,
-         * you can't see the previous output easily.
-         * Internally, it's logged when getConfigFromIntent() is called.
-         * The default is true.
-         */
+
         fun logErrorOnRestart(logErrorOnRestart: Boolean): Builder {
             mProfile!!.logErrorOnRestart = logErrorOnRestart
             return this
         }
 
-        /**
-         * Defines if the activities visited by the user should be tracked
-         * so they are reported when an error occurs.
-         * The default is false.
-         */
+
         fun trackActivities(trackActivities: Boolean): Builder {
             mProfile!!.trackActivities = trackActivities
             return this
         }
 
-        /**
-         * Defines the time that must pass between app crashes to determine that we are not
-         * in a crash loop. If a crash has occurred less that this time ago,
-         * the error activity will not be launched and the system crash screen will be invoked.
-         * The default is 3000.
-         */
+
         fun minTimeBetweenCrashesMs(minTimeBetweenCrashesMs: Int): Builder {
             mProfile!!.minTimeBetweenCrashesMs = minTimeBetweenCrashesMs
             return this
         }
 
-        /**
-         * Defines which drawable to use in the default error activity image.
-         * Set this if you want to use an image other than the default one.
-         * The default is R.drawable.customactivityoncrash_error_image (a cute upside-down bug).
-         */
+
         fun errorDrawable(@DrawableRes errorDrawable: Int?): Builder {
             mProfile!!.errorDrawable = errorDrawable
             return this
         }
 
-        /**
-         * Sets the error activity class to launch when a crash occurs.
-         * If null, the default error activity will be used.
-         */
+
         fun errorActivity(errorActivityClass: Class<out Activity>?): Builder {
             mProfile!!.errorActivityClass = errorActivityClass
             return this
         }
 
-        /**
-         * Sets the main activity class that the error activity must launch when a crash occurs.
-         * If not set or set to null, the default launch activity will be used.
-         * If your app has no launch activities and this is not set, the default error activity will close instead.
-         */
+
         fun restartActivity(restartActivityClass: Class<out Activity>?): Builder {
             mProfile!!.restartActivityClass = restartActivityClass
             return this
         }
 
-        /**
-         * Sets an event listener to be called when events occur, so they can be reported
-         * by the app as, for example, Google Analytics events.
-         * If not set or set to null, no events will be reported.
-         *
-         * @param eventListener The event listener.
-         * @throws IllegalArgumentException if the mEventListener is an inner or anonymous class
-         */
+
         fun eventListener(eventListener: CrashTool.EventListener?): Builder {
             require(!(eventListener != null && eventListener.javaClass.enclosingClass != null && !Modifier.isStatic(eventListener.javaClass.modifiers))) { "The event listener cannot be an inner or anonymous class, because it will need to be serialized. Change it to a class of its own, or make it a static inner class." }
             mProfile!!.mEventListener = eventListener
