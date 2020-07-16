@@ -8,7 +8,7 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._027HomeAdapter
 import dinson.customview.entity.av.Movie
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.SystemBarModeUtils
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
@@ -18,7 +18,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity__027_movie_list_by_link.*
-import org.jsoup.Jsoup
 import java.util.ArrayList
 
 class _027MovieListByLinkActivity : BaseActivity() {
@@ -86,7 +85,7 @@ class _027MovieListByLinkActivity : BaseActivity() {
     private fun getServiceData(isRefresh: Boolean) {
         mPage = if (isRefresh) 1 else mPage + 1
         val url = "$mLink/page/$mPage"
-        url.logi()
+        logi { url }
         Observable.just(url)
             .map { _027AvModel.decodeMovie(it) }
             .subscribeOn(Schedulers.io())

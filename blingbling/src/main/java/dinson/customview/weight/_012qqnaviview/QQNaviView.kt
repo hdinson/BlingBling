@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
-import dinson.customview.utils.LogUtils
 
 /**
  *   仿QQ底部菜单拖动效果
@@ -87,12 +86,10 @@ class QQNaviView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val y = event.y
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                LogUtils.e("ACTION_DOWN")
                 lastX = x
                 lastY = y
             }
             MotionEvent.ACTION_MOVE -> {
-                LogUtils.e("ACTION_MOVE")
                 val deltaX = x - lastX
                 val deltaY = y - lastY
                 moveEvent(mIvBig, deltaX, deltaY, mSmallRadius)

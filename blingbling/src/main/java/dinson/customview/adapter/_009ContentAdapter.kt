@@ -2,7 +2,7 @@ package dinson.customview.adapter
 
 import android.view.View
 import dinson.customview.R
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import dinson.customview.model._009PanoramaImageModel
 import dinson.customview.utils.GlideUtils
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
@@ -25,7 +25,7 @@ class _009ContentAdapter(dataList: List<_009PanoramaImageModel>)
 
         val current = (bean.progress * 100).toInt()
 
-        logi("current: $current")
+        logi { "current: $current" }
 
         holder.itemView.progress.visibility = if (current == 0 || current == 100) View.INVISIBLE else View.VISIBLE
         holder.itemView.complete.visibility = if (current == 100) View.VISIBLE else View.INVISIBLE

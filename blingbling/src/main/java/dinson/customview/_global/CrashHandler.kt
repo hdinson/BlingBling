@@ -1,12 +1,13 @@
 package dinson.customview._global
 
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.system.exitProcess
 
 /**
  * 异常拦截类
@@ -50,10 +51,10 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
             e.printStackTrace()
         }
 
-        loge(ex.toString())
+        loge { ex.toString() }
         //退出程序
         android.os.Process.killProcess(android.os.Process.myPid())
-        System.exit(1)
+        exitProcess(1)
     }
 
 

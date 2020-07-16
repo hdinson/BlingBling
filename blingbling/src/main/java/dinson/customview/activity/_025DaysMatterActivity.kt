@@ -16,7 +16,7 @@ import dinson.customview.fragment._025CaculateDateFragment
 import dinson.customview.fragment._025DaysMatterFragment
 import dinson.customview.fragment._025OnTheDaysFragment
 import com.dinson.blingbase.kotlin.click
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__025_days_matter.*
 import java.io.File
@@ -58,7 +58,7 @@ class _025DaysMatterActivity : BaseActivity() {
     }
 
     private inner class MainAdapter(fm: FragmentManager, val fragments: List<Fragment>)
-        : FragmentPagerAdapter(fm,BEHAVIOR_SET_USER_VISIBLE_HINT) {
+        : FragmentPagerAdapter(fm, BEHAVIOR_SET_USER_VISIBLE_HINT) {
 
         override fun getItem(position: Int): Fragment {
             return fragments[position]
@@ -76,7 +76,7 @@ class _025DaysMatterActivity : BaseActivity() {
 
         val targetFile = File("${ConstantsUtils.SDCARD_PRIVATE}$packageName.apk")
         apkFile.copyRecursively(targetFile, true) { _, _ ->
-            "CopyRecursively Error  !!".logi()
+            logi { "CopyRecursively Error  !!" }
             return@copyRecursively OnErrorAction.SKIP
         }
 

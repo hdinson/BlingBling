@@ -18,7 +18,6 @@ import java.io.File;
 
 import dinson.customview.R;
 import dinson.customview.utils.FileUtils;
-import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.ToastUtils;
 import dinson.customview.weight.imagewatcher.ImageWatcher;
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper;
@@ -27,9 +26,13 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static dinson.customview.kotlin.LogExtentionKt.loge;
+import static dinson.customview.kotlin.LogExtentionKt.logi;
+import static dinson.customview.kotlin.LogExtentionKt.logv;
+
 
 public class DecorationLayout extends FrameLayout implements ViewPager.OnPageChangeListener,
-     ImageWatcher.OnShowListener, View.OnClickListener {
+    ImageWatcher.OnShowListener, View.OnClickListener {
 
     private ImageWatcherHelper mHolder;
     private int currentPosition;
@@ -58,7 +61,7 @@ public class DecorationLayout extends FrameLayout implements ViewPager.OnPageCha
         if (v.getId() == R.id.ivDownload) {
             v.setVisibility(View.GONE);
             String url = mHolder.getImageWatcher().getUri(currentPosition).toString();
-            LogUtils.i("-----: " + url);
+            logi(() -> "-----: " + url);
             String fileName = url.substring(url.lastIndexOf("/") + 1);
             Disposable a = Observable
                 .create((ObservableOnSubscribe<File>) e -> {
@@ -77,24 +80,23 @@ public class DecorationLayout extends FrameLayout implements ViewPager.OnPageCha
                     //第二个参数为你想要保存的目录名称
                     File appDir = new File(pictureFolder, "BLingDownload");
                     if (!appDir.exists()) {
-                       boolean b =  appDir.mkdirs();
-                       LogUtils.e("文件夹创建:"+b);
+                        boolean b = appDir.mkdirs();
+                        logv(() -> "文件夹创建:" + b);
                     }
                     File destFile = new File(appDir, fileName);
                     //把gilde下载得到图片复制到定义好的目录中去
-                    LogUtils.i("-----: " + file.getPath()+ "  /  " +destFile.getPath());
-                   boolean isSuccess=  FileUtils.copyFile(file, destFile);
-                   LogUtils.e("isSuccess: " +isSuccess);
-
+                    logi(() -> "-----: " + file.getPath() + "  /  " + destFile.getPath());
+                    boolean isSuccess = FileUtils.copyFile(file, destFile);
+                    logi(() -> "isSuccess: " + isSuccess);
                     Looper.prepare();
                     ToastUtils.INSTANCE.showToast("图片已保存至BLingDownload/" + fileName);
-                    LogUtils.e(destFile.exists()+"   :<-");
+                    logi(() -> destFile.exists() + "   :<-");
                     Looper.loop();
 
                     // 最后通知图库更新
                     getContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                         Uri.fromFile(new File(destFile.getPath()))));
-                }, throwable -> LogUtils.e(throwable.toString()));
+                }, throwable -> loge(throwable::toString));
         }
     }
 
@@ -115,7 +117,7 @@ public class DecorationLayout extends FrameLayout implements ViewPager.OnPageCha
         String fileName = url.substring(url.lastIndexOf("/") + 1);
         String path = Environment.getExternalStorageDirectory() + File.separator + "BLingDownload" + File.separator + fileName;
         boolean exists = new File(path).exists();
-        LogUtils.i(path + " already exists: " + exists);
+        logi(() -> path + " already exists: " + exists);
         vDownload.setVisibility(exists ? View.GONE : View.VISIBLE);
     }
 

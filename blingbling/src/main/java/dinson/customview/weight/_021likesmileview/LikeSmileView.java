@@ -26,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import dinson.customview.R;
-import dinson.customview.utils.LogUtils;
 import dinson.customview.utils.TypefaceUtils;
 
 /**
@@ -39,13 +38,13 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
     private ObjectAnimator mObjectAnimator;
     private ValueAnimator mValueAnimator;
 
+    @SuppressWarnings("unused")
     public void setDefDis(String defDis, String defLike) {
         mTvDisText.setText(defDis);
         mTvLikeText.setText(defLike);
     }
 
     public void onDestroy() {
-        LogUtils.v("LikeSmileView: onDestroy() called");
         if (mValueAnimator != null) mValueAnimator.cancel();
         if (mObjectAnimator != null) mObjectAnimator.cancel();
         if (animatorBack != null) animatorBack.cancel();
@@ -185,7 +184,6 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        LogUtils.e("onLayout load");
         super.onLayout(changed, l, t, r, b);
     }
 

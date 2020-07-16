@@ -17,7 +17,7 @@ import dinson.customview.entity.gank.MeiZiTuNineGrid
 import dinson.customview.entity.gank.MeiZiTuNinePic
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.utils.StringUtils
@@ -116,7 +116,7 @@ abstract class _003GirlMeiZiTuNineGridFragment : ViewPagerLazyFragment(), Messag
             }, {
                 crfGirlsContent.complete()
                 it.toString().toasty()
-                it.toString().loge()
+                loge { it.toString() }
             }).addToManaged()
     }
 

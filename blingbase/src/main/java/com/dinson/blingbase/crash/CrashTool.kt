@@ -12,9 +12,6 @@ import android.os.Process
 import android.util.Log
 import androidx.annotation.RestrictTo
 import com.dinson.blingbase.kotlin.getAppName
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.logv
-import com.dinson.blingbase.kotlin.logw
 import java.io.*
 import java.lang.ref.WeakReference
 import java.text.DateFormat
@@ -50,20 +47,20 @@ object CrashTool {
     fun install(context: Context?) {
         try {
             if (context == null) {
-                "Install failed: context is null!".loge()
+                Log.e(TAG, "Install failed: context is null!")
             } else {
                 //INSTALL!
                 val oldHandler = Thread.getDefaultUncaughtExceptionHandler()
                 if (oldHandler != null && oldHandler.javaClass.name.startsWith(TAM_HANDLER_PACKAGE_NAME)) {
-                    "CrashTool was already installed, doing nothing!".logv()
+                    Log.v(TAG, "CrashTool was already installed, doing nothing!")
                 } else {
                     if (oldHandler != null && !oldHandler.javaClass.name.startsWith(DEFAULT_HANDLER_PACKAGE_NAME)) {
-                        "IMPORTANT WARNING! You already have an UncaughtExceptionHandler".logw()
+                        Log.w(TAG, "IMPORTANT WARNING! You already have an UncaughtExceptionHandler")
                     }
                     application = context.applicationContext as Application
                     Thread.setDefaultUncaughtExceptionHandler(Thread.UncaughtExceptionHandler { thread, throwable ->
                         if (config.isEnabled()) {
-                            "App has crashed, executing TCrashTool's UncaughtExceptionHandler".loge()
+                            Log.e(TAG, "App has crashed, executing TCrashTool's UncaughtExceptionHandler")
                             if (hasCrashedInTheLastSeconds(application!!)) {
                                 Log.e(TAG, "App already crashed recently, not starting custom error activity because we could enter a restart loop. Are you sure that your app does not crash directly on init?", throwable)
                                 if (oldHandler != null) {
@@ -175,11 +172,11 @@ object CrashTool {
                         }
                     })
                 }
-                "CrashTool has been installed.".logv()
+                Log.v(TAG, "CrashTool has been installed.")
             }
         } catch (t: Throwable) {
-            "An unknown error occurred while installing CrashTool".loge()
-            t.toString().loge()
+            Log.e(TAG, "An unknown error occurred while installing CrashTool")
+            Log.e(TAG, t.toString())
         }
     }
 

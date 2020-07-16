@@ -10,14 +10,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import dinson.customview.R
-import dinson.customview._global.BaseFragment
 import dinson.customview.adapter._003GankGirlsPicAdapter
 import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.Welfare
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.logd
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.weight._003weight.DecorationLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
@@ -80,7 +78,6 @@ class _003GirlGankFragment : ViewPagerLazyFragment() {
     }
 
 
-
     private fun getDataFromServer(isRefresh: Boolean) {
         if (isRefresh) mCurrentPage = 1
         mApi.gankIOGirlsPic(mPageSize, mCurrentPage)
@@ -109,7 +106,7 @@ class _003GirlGankFragment : ViewPagerLazyFragment() {
                 mAdapter?.notifyDataSetChanged()
                 mCurrentPage++
             }, {
-                it.message?.loge()
+                it.message?.let { loge { it } }
                 crfGirlsContent.complete()
             }).addToManaged()
 

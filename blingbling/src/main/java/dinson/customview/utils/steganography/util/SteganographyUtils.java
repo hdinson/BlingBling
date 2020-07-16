@@ -7,7 +7,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import dinson.customview.utils.LogUtils;
+import static dinson.customview.kotlin.LogExtentionKt.logd;
 
 /*
 This is the SteganographyUtils Class containing some useful methods
@@ -110,7 +110,7 @@ public class SteganographyUtils {
             cols++;
 
         //create a bitmap of a size which can hold the complete image after merging
-        LogUtils.d("Size width " + original_width + " size height " + original_height);
+        logd(() -> "Size width " + original_width + " size height " + original_height);
         Bitmap bitmap = Bitmap.createBitmap(original_width, original_height, Bitmap.Config.ARGB_4444);
 
         //Creating canvas

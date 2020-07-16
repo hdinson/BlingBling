@@ -7,7 +7,7 @@ import dinson.customview.R
 import dinson.customview.activity._027MovieDetailsActivity
 import dinson.customview.adapter._027HomeAdapter
 import dinson.customview.entity.av.Movie
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import dinson.customview.model._027AvModel
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -34,7 +34,7 @@ class _027HomeFragment : ViewPagerLazyFragment() {
     }
 
     override fun lazyInit() {
-          mAdapter = _027HomeAdapter(mDataList)
+        mAdapter = _027HomeAdapter(mDataList)
         crfHomeContent.setAdapter(mAdapter)
         crfHomeContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
@@ -61,7 +61,7 @@ class _027HomeFragment : ViewPagerLazyFragment() {
     private fun getServiceData(isRefresh: Boolean) {
         mPage = if (isRefresh) 1 else mPage + 1
         val url = "${_027AvModel.HOME}$mPage"
-        url.logi()
+        logi { url }
         Observable.just(url)
             .map { _027AvModel.decodeMovie(it) }
             .subscribeOn(Schedulers.io())

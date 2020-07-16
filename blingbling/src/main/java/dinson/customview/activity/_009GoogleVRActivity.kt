@@ -8,6 +8,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
+import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import dinson.customview.BuildConfig
 import dinson.customview.R
@@ -18,13 +22,9 @@ import dinson.customview.download.listener.HttpDownOnNextListener
 import dinson.customview.download.model.DownloadState
 import dinson.customview.download.utils.DbDownUtil
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.kotlin.logi
 import dinson.customview.model._009ModelUtil
 import dinson.customview.model._009PanoramaImageModel
-import dinson.customview.utils.LogUtils
-import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
-import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity__009_google_vr.*
 import java.io.File
@@ -70,8 +70,7 @@ class _009GoogleVRActivity : BaseActivity() {
 
     private fun loadPanoramaImage(model: _009PanoramaImageModel) {
         val file = File(model.localPath)
-        LogUtils
-            .e(String.format("File exists? %s and the path is %s", file.exists(), file.absoluteFile))
+        logi { String.format("File exists? %s and the path is %s", file.exists(), file.absoluteFile) }
 
         Observable.just(model.localPath)
             .map {

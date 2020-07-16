@@ -12,8 +12,8 @@ import com.google.gson.reflect.TypeToken
 import dinson.customview.R
 import dinson.customview.activity._027MovieListByLinkActivity
 import dinson.customview.entity.av.MovieInfo
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.StringUtils
@@ -44,13 +44,13 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
     override fun lazyInit() {
         val cache = CacheUtils.getCache(context!!, "_027category")
         if (StringUtils.isEmpty(cache).not()) {
-            "getTag << cache".logi()
+            logi { "getTag << cache" }
             val type = object : TypeToken<HashMap<String, ArrayList<MovieInfo.Genre>>>() {}.type
             val turns = Gson().fromJson<HashMap<String, ArrayList<MovieInfo.Genre>>>(cache, type)
             initUI(turns)
             return
         }
-        "getTag << net".logi()
+        logi { "getTag << net" }
         Observable.just(_027AvModel.CATEGORY)
             .map { url ->
                 val document = Jsoup.connect(url).get()
@@ -77,7 +77,7 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
                 CacheUtils.setCache(context!!, "_027category",
                     Gson().toJson(it), 36000000)
                 initUI(it)
-            }, { it.toString().loge() }).addToManaged()
+            }, { loge(it::toString) }).addToManaged()
     }
 
     private fun initUI(data: HashMap<String, ArrayList<MovieInfo.Genre>>) {

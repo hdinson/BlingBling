@@ -10,6 +10,8 @@ import android.view.View
 import android.widget.EditText
 import androidx.annotation.DimenRes
 import androidx.core.view.ViewCompat
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 
 
 /**
@@ -63,6 +65,11 @@ fun View.getArcListener(path: Path): ValueAnimator.AnimatorUpdateListener {
         translationY = point[1]
     }
 }
+
+
+/******************************************************************************************************/
+/**                             EditText                                                             **/
+/******************************************************************************************************/
 
 
 fun EditText.forbiddenSpace(): EditText {
@@ -122,4 +129,25 @@ fun EditText.addEmptySelectTrue(): EditText {
 
     })
     return this
+}
+
+/******************************************************************************************************/
+/**                             CollapsingToolbarLayout                                              **/
+/******************************************************************************************************/
+
+
+fun CollapsingToolbarLayout.rmScrollFlag() {
+    if (this.layoutParams !is AppBarLayout.LayoutParams) return
+    val layoutParams = this.layoutParams as AppBarLayout.LayoutParams
+    val scrollFlags = layoutParams.scrollFlags xor AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+    layoutParams.scrollFlags = scrollFlags
+    this.layoutParams = layoutParams
+}
+
+fun CollapsingToolbarLayout.addScrollFlag() {
+    if (this.layoutParams !is AppBarLayout.LayoutParams) return
+    val layoutParams = this.layoutParams as AppBarLayout.LayoutParams
+    val scrollFlags = layoutParams.scrollFlags or AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+    layoutParams.scrollFlags = scrollFlags
+    this.layoutParams = layoutParams
 }

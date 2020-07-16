@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import dinson.customview.R
 import dinson.customview.entity.bmob.TvShowResp
 import dinson.customview.event._004CheckSelectorAllEvent
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import dinson.customview.utils.StringUtils
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
@@ -120,7 +120,7 @@ class _004VideoListAdapter(dataList: List<TvShowResp.TvShow>, isEditMode: Boolea
         if (before == mDeleteList.size) return 0
         EventBus.getDefault().post(_004CheckSelectorAllEvent(false, 0))
         notifyDataSetChanged()
-        logi(mDeleteList.joinToString(",") { it.tvName })
+        logi { mDeleteList.joinToString(",") { it.tvName } }
         return mDeleteList.size - before
     }
 }

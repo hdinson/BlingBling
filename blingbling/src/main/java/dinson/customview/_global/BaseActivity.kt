@@ -30,7 +30,7 @@ open class BaseActivity : RxAppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState?:Bundle())
         /*禁止截屏*/
         //window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         /*共享元素*/

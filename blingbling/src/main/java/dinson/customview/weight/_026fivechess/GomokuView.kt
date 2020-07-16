@@ -12,8 +12,8 @@ import android.view.MotionEvent
 import android.view.View
 import com.bf92.ai.AI
 import dinson.customview.R
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 
 
 class GomokuView @JvmOverloads constructor(context: Context,
@@ -28,10 +28,13 @@ class GomokuView @JvmOverloads constructor(context: Context,
 
     //二位数组，虚拟棋盘，0表示无棋，1表示黑棋，2表示白旗
     private val mChessArray: Array<IntArray> = Array(mGomokuSize) { IntArray(mGomokuSize) }
+
     //存储棋步，一位数组，值用15进制表示
     private val mChessList: IntArray = IntArray(mGomokuSize * mGomokuSize)
+
     //存储棋步，用于恢复，一位数组，值用15进制表示
     private val mChessListFar: IntArray = IntArray(mGomokuSize * mGomokuSize)
+
     //有顺序的棋谱
     private val mChessArrayList = ArrayList<Int>()
 
@@ -63,7 +66,7 @@ class GomokuView @JvmOverloads constructor(context: Context,
         mPaint.color = mGomokuViewSettings.mGomokuLineColor
         viewTreeObserver.addOnGlobalLayoutListener {
             if (mAI == null) {
-                "init AI".logi()
+                logi { "init AI" }
                 mAI = AI(mChessList, this)
                 aiRun()
             }
@@ -197,7 +200,7 @@ class GomokuView @JvmOverloads constructor(context: Context,
                     mChessArray[mDx][mDy] == 2 ||
                     mChessArray[mDx][mDy] == 1) {
 
-                    "ACTION_DOWN:$mDx  $mDy".logi()
+                    logi { "ACTION_DOWN:$mDx  $mDy" }
                     mDx = -1
                     mDy = -1
                     return false
@@ -207,11 +210,11 @@ class GomokuView @JvmOverloads constructor(context: Context,
             MotionEvent.ACTION_UP -> {
                 if (mIsGameOver) {
                     mGameCallBack?.onGameOver(mGameState)
-                    "------  GameOver  ------".logi()
+                    logi { "------  GameOver  ------" }
                     return false
                 }
                 if (mIsThinking) {
-                    "------  IsThinking  ------".logi()
+                    logi { "------  IsThinking  ------" }
                     return false
                 }
 
@@ -286,7 +289,7 @@ class GomokuView @JvmOverloads constructor(context: Context,
                 mGameCallBack?.onChessChange()
             }
         } else {
-            "Game Error. Check the game.".loge()
+            loge { "Game Error. Check the game." }
         }
         postInvalidate()
     }
@@ -302,7 +305,7 @@ class GomokuView @JvmOverloads constructor(context: Context,
     private fun checkGameOver4() {
         for (index in mChessList.withIndex()) {
             val value = index.value
-            "foreach chessList index: $value".logi()
+            logi { "foreach chessList index: $value" }
             if (mChessList[value] == 0) return
             if (value == mChessList.size) {
                 mIsGameOver = true
@@ -472,15 +475,15 @@ class GomokuView @JvmOverloads constructor(context: Context,
 
     private fun doStone(whoTurn: Int, x: Int, y: Int, format: String) {
         if (x < 0 || y < 0 || x > 14 || y > 14) {
-            "DoStone $x $y out of range".logi()
+            logi { "DoStone $x $y out of range" }
             return
         }
         if (mChessArray[x][y] != 0) {
-            "DoStone $x $y already set".logi()
+            logi { "DoStone $x $y already set" }
             return
         }
         val s = if (whoTurn == 1) "黑" else "白"
-        "$s${mStepNum + 1} @ ${convertX(x)}${convertY(y)} : $format".logi()
+        logi { "$s${mStepNum + 1} @ ${convertX(x)}${convertY(y)} : $format" }
 
         val chessNum = mGomokuSize * x + y
         mChessList[mStepNum] = chessNum
@@ -515,7 +518,7 @@ class GomokuView @JvmOverloads constructor(context: Context,
         }
         val str = mChessArrayList.joinToString(", ")
         { "${convertX(it / mGomokuSize)}${convertY(it % mGomokuSize)}" }
-        "$whoWin Print: $str".logi()
+        logi { "$whoWin Print: $str" }
     }
 
     /**
@@ -543,7 +546,7 @@ class GomokuView @JvmOverloads constructor(context: Context,
     else (87 + mGomokuSize - y).toChar().toString()
 
     fun aiRun() {
-        "aiRun".logi()
+        logi { "aiRun" }
         mIsThinking = true
         mGameCallBack?.onAiRunState(true)
         mAI?.aiBout()
@@ -576,8 +579,8 @@ class GomokuView @JvmOverloads constructor(context: Context,
             postInvalidate()
             return
         }
-        if (mIsThinking) "Can`t go back. Thinking.".logi()
-        if (mStepNum <= 0) "Can`t go back. None.".logi()
+        if (mIsThinking) logi { "Can`t go back. Thinking." }
+        if (mStepNum <= 0) logi { "Can`t go back. None." }
     }
 
     /**
@@ -603,16 +606,16 @@ class GomokuView @JvmOverloads constructor(context: Context,
             postInvalidate()
             return
         }
-        if (mIsGameOver) "Can`t forward. GameOver.".logi()
-        if (mIsThinking) "Can`t forward. Thinking.".logi()
-        if (mStepFarNum <= mStepNum) "Can`t forward. None".logi()
+        if (mIsGameOver) logi { "Can`t forward. GameOver." }
+        if (mIsThinking) logi { "Can`t forward. Thinking." }
+        if (mStepFarNum <= mStepNum) logi { "Can`t forward. None" }
     }
 
     /**
      * 重新开始游戏
      */
     fun newGame() {
-        "GameNew".logi()
+        logi { "GameNew" }
         resetGameStateValue()
         postInvalidate()
         mAI?.aiTEFACES(AI.DO_NEWGAME, 1, 0, 0, mStepNum)

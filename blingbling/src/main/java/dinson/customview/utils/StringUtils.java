@@ -1,11 +1,6 @@
 package dinson.customview.utils;
 
 
-import com.qiniu.common.Constants;
-
-import java.io.UnsupportedEncodingException;
-import java.text.DecimalFormat;
-
 /**
  * 字符串相关工具类
  */
@@ -213,7 +208,6 @@ public final class StringUtils {
         if (index != -1) {
             url = url.substring(0, index + 1);
         }
-        LogUtils.e("Retrofit's baseUrl is : " + head + url);
         return head + url;
     }
 

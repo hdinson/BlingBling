@@ -20,8 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import com.dinson.blingbase.kotlin.logi
-import io.reactivex.rxkotlin.addTo
+import dinson.customview.kotlin.logi
 
 
 class _022GoogleMapActivity : BaseActivity(),
@@ -71,8 +70,7 @@ class _022GoogleMapActivity : BaseActivity(),
      */
 
     override fun onMapReady(googleMap: GoogleMap) {
-
-        logi("onMapReady...")
+        logi{"onMapReady..."}
 
         mMap = googleMap
         mMap.uiSettings.isZoomControlsEnabled = true
@@ -90,14 +88,14 @@ class _022GoogleMapActivity : BaseActivity(),
      * GoogleMap连接暂停
      */
     override fun onConnectionSuspended(p0: Int) {
-        logi("onConnectionSuspended...")
+        logi{"onConnectionSuspended..."}
     }
 
     /**
      * GoogleMap连接失败
      */
     override fun onConnectionFailed(p0: ConnectionResult) {
-        logi("onConnectionFailed...")
+        logi{"onConnectionFailed..."}
     }
 
     /**
@@ -105,7 +103,6 @@ class _022GoogleMapActivity : BaseActivity(),
      */
     @SuppressLint("MissingPermission")
     override fun onConnected(p0: Bundle?) {
-        logi("onConnected...")
 
 
         RxPermissions(this).request(ACCESS_FINE_LOCATION)
@@ -136,7 +133,6 @@ class _022GoogleMapActivity : BaseActivity(),
                 // 2
 
 
-                logi("------1")
 
 
                 val locationManager = getSystemService (Context.LOCATION_SERVICE) as LocationManager
@@ -165,11 +161,9 @@ class _022GoogleMapActivity : BaseActivity(),
                 val locationAvailability = LocationServices.FusedLocationApi.getLocationAvailability(mGoogleApiClient)
                 if (null != locationAvailability && locationAvailability.isLocationAvailable) {
                     // 3
-                    logi("------2")
                     val  mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
                     // 4
                     if (mLastLocation != null) {
-                        logi("------3")
                         val currentLocation = LatLng(mLastLocation.latitude, mLastLocation
                             .longitude)
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12f))
@@ -182,7 +176,7 @@ class _022GoogleMapActivity : BaseActivity(),
      * GoogleMarkerClick点击
      */
     override fun onMarkerClick(p0: Marker?): Boolean {
-        logi("onMarkerClick...")
+        logi{"onMarkerClick..."}
         return true
     }
 
@@ -190,12 +184,11 @@ class _022GoogleMapActivity : BaseActivity(),
      * 定位回调
      */
     override fun onLocationChanged(p0: Location?) {
-        logi("onLocationChanged...")
-
+        logi{"onLocationChanged..."}
     }
 
     override fun onDestroy() {
-        logi("onDestroy...")
+        logi{"onDestroy..."}
         super.onDestroy()
     }
 }

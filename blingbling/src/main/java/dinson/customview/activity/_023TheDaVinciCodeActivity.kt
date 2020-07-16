@@ -8,8 +8,8 @@ import androidx.core.content.ContextCompat
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import com.dinson.blingbase.kotlin.click
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.utils.steganography.decoding.DecodingCallback
 import dinson.customview.utils.steganography.decoding.DecodingTask
@@ -39,14 +39,14 @@ class _023TheDaVinciCodeActivity : BaseActivity() {
             val bitmapDrawable = ContextCompat.getDrawable(this, R.drawable._023_act_bg) as BitmapDrawable
             val imageSteganography = ImageSteganography(etSecret.text.toString(), secret_key, bitmapDrawable.bitmap)
             val textEncoding = EncodingTask(EncodingCallback {
-                logi("onCompleteEncoding")
+                logi { "onCompleteEncoding" }
                 if (it.isSuccess) {
-                    logi("有图片")
+                    logi { "有图片" }
                     tvResult.text = "加密成功\n"
                     tvResult.append("耗时：${System.currentTimeMillis() - mStartTime} ms")
                     mCurrentBitmap = it.encodedImage
                 } else {
-                    loge("失败")
+                    loge { "失败" }
                 }
             })
             mStartTime = System.currentTimeMillis()
@@ -59,9 +59,9 @@ class _023TheDaVinciCodeActivity : BaseActivity() {
                 if (it.isSuccess) {
                     tvResult.text = "解码成功\n"
                     tvResult.append("耗时：${System.currentTimeMillis() - mStartTime} ms length: ${it.msg.length}")
-                    logi(it.msg)
+                    logi { it.msg }
                 } else {
-                    loge(it.msg)
+                    loge { it.msg }
                 }
             })
             mStartTime = System.currentTimeMillis()

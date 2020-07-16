@@ -10,14 +10,13 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import androidx.annotation.AttrRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import dinson.customview.utils.LogUtils;
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Spotlight View
@@ -87,12 +86,7 @@ class SpotlightView extends FrameLayout {
                 }
             }
         });
-
-//        paint.setColor(Color.parseColor());
-        LogUtils.e("设置背景");
-        //setBackgroundColor(Color.parseColor("#E6000000"));
         setBackgroundColor(Color.parseColor("#CC000000"));
-
 //        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
     }
 

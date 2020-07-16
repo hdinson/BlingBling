@@ -1,14 +1,11 @@
 #-------------------------------------------定制化区域----------------------------------------------
 #---------------------------------1.实体类---------------------------------
--keep class com.zjta.wybfast.entity.** { *; }
--keep class com.zjta.wybfast.event.** { *; }
 
 
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------
 ### 腾讯云
--keep class com.tencent.** { *; }
 
 ### retrofit2
 # Platform calls Class.forName on types which do not exist on Android to determine platform.
@@ -30,41 +27,17 @@
   public *;
 }
 
-### greenDAO 3
--keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
-public static java.lang.String TABLENAME;
-}
 -keep class **$Properties
 # If you do not use SQLCipher:
 -dontwarn org.greenrobot.greendao.database.**
 # If you do not use RxJava:
 -dontwarn rx.**
 
-### Google VR
--keep class com.google.vr.*
-
 ### 轻量级的WebView代理
--keep class com.just.agentweb.** {
-    *;
-}
--dontwarn com.just.agentweb.**
-
-### 七牛云
--keep class com.qiniu.**{*;}
--keep class com.qiniu.**{public <init>();}
-
-### 背景虚化
--keep class android.support.v8.renderscript.** { *; }
-
-### GSYVideoPlayer
--keep class com.shuyu.gsyvideoplayer.video.** { *; }
--dontwarn com.shuyu.gsyvideoplayer.video.**
--keep class com.shuyu.gsyvideoplayer.video.base.** { *; }
--dontwarn com.shuyu.gsyvideoplayer.video.base.**
--keep class com.shuyu.gsyvideoplayer.utils.** { *; }
--dontwarn com.shuyu.gsyvideoplayer.utils.**
--keep class tv.danmaku.ijk.** { *; }
--dontwarn tv.danmaku.ijk.**
+#-keep class com.just.agentweb.** {
+#    *;
+#}
+#-dontwarn com.just.agentweb.**
 
 -keep public class * extends android.view.View{
     *** get*();
@@ -81,9 +54,6 @@ public static java.lang.String TABLENAME;
 }
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
-#PictureSelector 2.0
--keep class com.luck.picture.lib.** { *; }
-
 #Ucrop
 -dontwarn com.yalantis.ucrop**
 -keep class com.yalantis.ucrop** { *; }
@@ -91,20 +61,6 @@ public static java.lang.String TABLENAME;
 
 #Okio
 -dontwarn org.codehaus.mojo.animal_sniffer.*
-
-#毛玻璃
--keep class android.support.v8.renderscript.** { *; }
--keep class androidx.renderscript.** { *; }
-
-#腾讯云直播
--keep class com.tencent.** { *; }
-
-
-# AgentWeb
--keep class com.just.agentweb.** {
-    *;
-}
--dontwarn com.just.agentweb.**
 
 #-------------------------------------------------------------------------
 
@@ -146,8 +102,6 @@ public static java.lang.String TABLENAME;
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.view.View
--keep public class com.android.vending.licensing.ILicensingService
--keep class android.support.** {*;}
 
 -keepclasseswithmembernames class * {
     native <methods>;

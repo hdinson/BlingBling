@@ -1,10 +1,9 @@
 package dinson.customview.listener;
 
 import android.graphics.Canvas;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
 
-import dinson.customview.utils.LogUtils;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 实现了，拖拽移动列表数据，侧滑删除数据，侧滑条目透明
@@ -33,7 +32,6 @@ public class MainItemTouchHelper extends ItemTouchHelper.Callback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        LogUtils.e("DIAOLE------------");
         mOnItemMoveListener.onItemSwipe2Remove(viewHolder.getAdapterPosition());
     }
 

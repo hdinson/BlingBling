@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import com.dinson.blingbase.kotlin.click
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import com.dinson.blingbase.utils.DateUtils
 import com.jakewharton.rxbinding2.widget.RxTextView
 import dinson.customview.R
@@ -97,7 +97,7 @@ class _025CaculateDateFragment : ViewPagerLazyFragment() {
                 //计算还有几天
                 val dr = DateUtils.compareTime("$mEndYear-$mEndMonth-$mEndDay",
                     "$mNowYear-$mNowMonth-$mNowDay", "yyyy-MM-dd")
-                loge("$dr : ${dr / 3600 / 24}")
+                loge { "$dr : ${dr / 3600 / 24}" }
                 tvTimeDr.text = (dr / 3600 / 24).toString()
             }, mEndYear.toInt(), mEndMonth.toInt() - 1, mEndDay.toInt())
         //弹出选择日期对话框

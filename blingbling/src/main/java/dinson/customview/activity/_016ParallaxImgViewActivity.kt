@@ -6,14 +6,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight._016parallaximgview.GyroscopeObserver
 import kotlinx.android.synthetic.main.activity__016_parallax_img_view.*
 
 class _016ParallaxImgViewActivity : BaseActivity() {
 
-    private   var mGyroscopeObserver: GyroscopeObserver?=null
+    private var mGyroscopeObserver: GyroscopeObserver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class _016ParallaxImgViewActivity : BaseActivity() {
         SystemBarModeUtils.darkMode(this, true)
 
         if (!packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_GYROSCOPE)) {
-            loge("当前设备不支持陀螺仪")
+            loge { "当前设备不支持陀螺仪" }
             Snackbar.make(parallaxView, "当前设备不支持陀螺仪", LENGTH_SHORT).show()
         }
 

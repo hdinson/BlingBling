@@ -4,7 +4,7 @@ import android.app.Application
 import com.dinson.blingbase.crash.ActivityCrash
 import com.dinson.blingbase.crash.CrashProfile
 import com.dinson.blingbase.crash.CrashTool
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.RxBling
 import dinson.customview.BuildConfig
@@ -27,15 +27,15 @@ class GlobalApplication : Application() {
             .errorActivity(ActivityCrash::class.java) //default: null (default error activity)
             .eventListener(object : CrashTool.EventListener {
                 override fun onRestartAppFromErrorActivity() {
-                    "onRestartAppFromErrorActivity".toasty().logi()
+                    logi { "onRestartAppFromErrorActivity" }
                 }
 
                 override fun onCloseAppFromErrorActivity() {
-                    "onCloseAppFromErrorActivity".toasty().logi()
+                    logi { "onCloseAppFromErrorActivity" }
                 }
 
                 override fun onLaunchErrorActivity() {
-                    ("onLaunchErrorActivity").toasty().logi()
+                    logi { "onLaunchErrorActivity" }
                 }
 
             }) //default: null

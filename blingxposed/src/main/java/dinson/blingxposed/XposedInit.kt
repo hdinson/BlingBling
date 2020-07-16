@@ -1,7 +1,6 @@
 package dinson.blingxposed
 
 import android.util.Log
-import com.dinson.blingbase.kotlin.logi
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
@@ -13,7 +12,7 @@ class XposedInit : IXposedHookLoadPackage {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam?) {
         Log.i("test", "------------------- hook --------------------")
         XposedBridge.log("------------------- hook2 --------------------")
-        lpparam?.let { "xposed: ${it.packageName} - ${it.processName} - ${it.appInfo.className} ${it.appInfo}".logi() }
+        //lpparam?.let { "xposed: ${it.packageName} - ${it.processName} - ${it.appInfo.className} ${it.appInfo}".logi() }
 
         if (lpparam?.packageName.equals("com.aaa.xposedhook")) {
             XposedBridge.log("XposedInit has hooked!")

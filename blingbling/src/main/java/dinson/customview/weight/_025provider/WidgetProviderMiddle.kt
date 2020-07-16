@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.RemoteViews
 import dinson.customview.R
 import dinson.customview.activity._025ChooseScheduleActivity
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import dinson.customview.model._025Schedule
 import kotlin.math.abs
 
@@ -37,7 +37,7 @@ class WidgetProviderMiddle : WidgetProviderBig() {
             intent.setClass(context, WidgetProviderMiddle::class.java)
             intent.putExtra(EXTRA_WIDGET_ID, widgetId)
             intent.putExtra(EXTRA_SCHEDULE_ID, scheduleId)
-            loge("WidgetProviderMiddle sendToSetData widgetIds: $widgetId scheduleId: $scheduleId")
+            loge { "WidgetProviderMiddle sendToSetData widgetIds: $widgetId scheduleId: $scheduleId" }
             context.sendBroadcast(intent)
         }
     }
@@ -53,7 +53,7 @@ class WidgetProviderMiddle : WidgetProviderBig() {
 
     override fun toggleLayout(context: Context, id: Int, schedule: _025Schedule?) {
         val views = RemoteViews(context.packageName, R.layout.widget_025_layout_middle)
-        loge("schedule : $schedule")
+        loge { "schedule : $schedule" }
         if (schedule == null) {
             views.setTextViewText(R.id.tvScheduleName, "")
             views.setTextViewText(R.id.tvScheduleDateTime, "")

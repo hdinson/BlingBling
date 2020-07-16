@@ -2,9 +2,10 @@ package dinson.customview.http;
 
 import org.jetbrains.annotations.NotNull;
 
-import dinson.customview.utils.LogUtils;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+
+import static dinson.customview.kotlin.LogExtentionKt.loge;
 
 /**
  * @author Dinson - 2017/7/25
@@ -24,7 +25,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        LogUtils.i("onError() called with: [" + e.toString() + "]",false);
+        loge(false, () -> "onError() called with: [" + e.toString() + "]");
         onFinal();
     }
 
@@ -37,6 +38,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
     /**
      * 不管网络是否请求成功或者失败都会回调
      */
-    public void onFinal(){
+    public void onFinal() {
     }
 }

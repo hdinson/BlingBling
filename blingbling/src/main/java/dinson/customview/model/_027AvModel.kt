@@ -1,6 +1,6 @@
 package dinson.customview.model
 
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import com.dinson.blingbase.utils.MD5
 import dinson.customview.entity.av.Movie
 import dinson.customview.entity.av.MovieInfo
@@ -9,7 +9,7 @@ import org.jsoup.Jsoup
 
 object _027AvModel {
 
-//    const val BASE_URL = "https://avmoo.host"
+    //    const val BASE_URL = "https://avmoo.host"
     private const val BASE_URL = "https://avsox.host"
 
 
@@ -18,7 +18,7 @@ object _027AvModel {
     const val HOT = "$BASE_URL/cn/popular/page/"
 
     const val CATEGORY = "$BASE_URL/cn/genre/"
-        const val SEARCH_KEY = "$BASE_URL/cn/search/"
+    const val SEARCH_KEY = "$BASE_URL/cn/search/"
 
 
     fun getSearchUrl(query: String) = "$BASE_URL/cn/search/$query"
@@ -47,7 +47,7 @@ object _027AvModel {
                     date[1].text(), img.attr("src"), e.attr("href"), hot))
             }
         } catch (e: Exception) {
-            e.message.toString().loge()
+            loge(e.message::toString)
         }
         return list
     }
@@ -101,7 +101,7 @@ object _027AvModel {
                 }
             }
         } catch (e: Exception) {
-            e.message.toString().loge()
+            loge(e.message::toString)
         }
         return moveDetailInfo
     }

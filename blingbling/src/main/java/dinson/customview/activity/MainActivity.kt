@@ -16,9 +16,6 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.dinson.blingbase.kotlin.click
-import com.dinson.blingbase.kotlin.logd
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.logi
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -32,12 +29,13 @@ import dinson.customview.api.XinZhiWeatherApi
 import dinson.customview.entity.HomeWeather
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
+import dinson.customview.kotlin.logd
+import dinson.customview.kotlin.logi
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
 import dinson.customview.model.MainActivityModelUtil
 import dinson.customview.utils.AppCacheUtil
-import dinson.customview.utils.LogUtils
 import dinson.customview.utils.StringUtils
 import dinson.customview.utils.TypefaceUtils
 import io.reactivex.Observable
@@ -120,7 +118,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
             }
             .toList()
             .flatMapObservable {
-                "log -- ${it.size}".loge()
+                logi { "log -- ${it.size}" }
                 Observable.just(it)
             }
             .subscribeOn(Schedulers.io())
@@ -129,9 +127,9 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
             .subscribe({
                 mHeadData.clear()
                 mHeadData.addAll(it)
-                "log -- setdata".loge()
+                logi { "log -- setdata" }
                 mu5Viewpager.setData(mHeadData, this)
-            }, { LogUtils.d(it.toString()) }).addToManaged()
+            }, { logd { it.toString() } }).addToManaged()
     }
 
     /**
@@ -199,7 +197,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     }
 
     private fun initWeatherLayout(weather: HomeWeather) {
-        logd(".$weather")
+        logd { ".$weather" }
         val resultsBean = weather.results[0]
         iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
         tvWeather.apply {

@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.RemoteViews
 import dinson.customview.R
 import dinson.customview.activity._025ChooseScheduleActivity
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import dinson.customview.model._025Schedule
 import dinson.customview.utils.SPUtils
 import dinson.customview.utils.StringUtils
@@ -20,7 +20,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
-        loge("onReceive  ${intent.action}")
+        loge { "onReceive  ${intent.action}" }
         when (intent.action) {
             REFRESH_ACTION -> {
                 val scheduleId = intent.getStringExtra(EXTRA_SCHEDULE_ID)
@@ -30,14 +30,14 @@ open class WidgetProviderBig : AppWidgetProvider() {
                     if (mIdsSet.containsKey(it)) {
                         val value = mIdsSet[it]
                         if (StringUtils.isEmpty(scheduleId) || scheduleId == value) {
-                            loge("匹配了")
+                            loge { "匹配了" }
                             val bean = SPUtils.getScheduleById(context, scheduleId)
                             toggleLayout(context, it, bean)
                         } else {
-                            loge("没匹配")
+                            loge { "没匹配" }
                         }
                     } else {
-                        loge("找到一个未设置数据")
+                        loge { "找到一个未设置数据" }
                     }
                 }
             }
@@ -45,7 +45,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
                 val widgetId = intent.getIntExtra(EXTRA_WIDGET_ID, 0)
                 val scheduleId = intent.getStringExtra(EXTRA_SCHEDULE_ID)
                 mIdsSet[widgetId] = scheduleId
-                loge("mIdsSet : ${mIdsSet.toList()}")
+                loge { "mIdsSet : ${mIdsSet.toList()}" }
                 val schedule = SPUtils.getScheduleById(context, scheduleId)
                 toggleLayout(context, widgetId, schedule)
             }
@@ -55,7 +55,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
-        loge("onUpdate : ${appWidgetIds.asList()}")
+        loge { "onUpdate : ${appWidgetIds.asList()}" }
 
         appWidgetIds.forEach {
             val views = RemoteViews(context.packageName, R.layout.widget_025_layout_big)
@@ -66,7 +66,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
 
     open fun toggleLayout(context: Context, id: Int, schedule: _025Schedule? = null) {
         val views = RemoteViews(context.packageName, R.layout.widget_025_layout_big)
-        loge("schedule : $schedule")
+        loge { "schedule : $schedule" }
         if (schedule == null) {
             views.setTextViewText(R.id.tvScheduleName, "")
             views.setTextViewText(R.id.tvScheduleDateTime, "")
@@ -122,7 +122,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
             intent.setClass(context, WidgetProviderBig::class.java)
             intent.putExtra(EXTRA_WIDGET_ID, widgetId)
             intent.putExtra(EXTRA_SCHEDULE_ID, scheduleId)
-            loge("WidgetProviderBig sendToSetData widgetIds: $widgetId scheduleId: $scheduleId")
+            loge { "WidgetProviderBig sendToSetData widgetIds: $widgetId scheduleId: $scheduleId" }
             context.sendBroadcast(intent)
         }
     }

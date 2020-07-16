@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.net.ConnectivityManager
 import android.net.NetworkRequest
+import android.util.Log
+import android.widget.Toast
 import com.dinson.blingbase.crash.CrashProfile
+import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.network.NetworkType
 import com.dinson.blingbase.network.NetworkCallbackImpl
 
@@ -21,6 +24,8 @@ object RxBling {
     fun init(context: Context): RxBling {
         mContext = context
         mIsDebug = context.applicationInfo != null && (context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
+        Log.e("heheda", "调用: $mIsDebug")
+        Toast.makeText(context, "调用: $mIsDebug", Toast.LENGTH_LONG).show()
         return this
     }
 
@@ -33,7 +38,10 @@ object RxBling {
             return mContext!!
         }
 
-    fun isDebug() = mIsDebug ?: false
+    fun isDebug(): Boolean {
+        Log.e("heheda", "调用2: $mIsDebug")
+        return mIsDebug ?: true
+    }
 
     /**
      * 设置网络监听

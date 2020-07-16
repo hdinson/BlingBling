@@ -3,8 +3,8 @@ package dinson.customview.utils.steganography.core
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.text.TextUtils
-import com.dinson.blingbase.kotlin.logd
-import com.dinson.blingbase.kotlin.logv
+import dinson.customview.kotlin.logd
+import dinson.customview.kotlin.logv
 import dinson.customview.utils.steganography.model.MessageDecodingStatus
 import dinson.customview.utils.steganography.model.MessageEncodingStatus
 import dinson.customview.utils.steganography.util.SteganographyUtils
@@ -40,7 +40,7 @@ object EncodeDecode {
         message.currentMessageIndex = 0
         message.isMessageEncoded = false
 
-        logv("Message length :${byteMessage.size}")
+        logv { "Message length :${byteMessage.size}" }
         splittedImages.forEach {
             if (!message.isMessageEncoded) {
 
@@ -181,7 +181,7 @@ object EncodeDecode {
                 val str = String(byteArrayOf(tmp), Charset.forName("UTF-8"))
 
                 if (messageDecodingStatus.message.endsWith(END_MESSAGE_CONSTANT)) {
-                    logd("解码结束")
+                    logd { "解码结束" }
                     messageDecodingStatus.isEnded = true
                     return
                 } else {
