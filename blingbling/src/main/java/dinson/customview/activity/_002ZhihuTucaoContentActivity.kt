@@ -15,7 +15,7 @@ import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.entity.zhihu.ZhihuTucaoDetails
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_content.*
@@ -70,7 +70,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
         val mData = ZhiHuDbUtils.queryById(extraData.id)
         if (mData == null) {
             onBackPressed()
-            loge("数据库查不到当前日期的数据")
+            loge{"数据库查不到当前日期的数据"}
             return
         }
         val content = mData.content
@@ -89,7 +89,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
                     parseJsonAndSetData(mData.content)
                 }, {
                     it.printStackTrace()
-                    loge("知乎请求详情数据失败")
+                    loge{"知乎请求详情数据失败"}
                     onBackPressed()
                 }).addToManaged()
         } else {

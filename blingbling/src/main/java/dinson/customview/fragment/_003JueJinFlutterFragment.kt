@@ -12,7 +12,7 @@ import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.JueJinResponse
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.loge
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -93,7 +93,7 @@ class _003JueJinFlutterFragment : ViewPagerLazyFragment() {
                 mAdapter?.notifyDataSetChanged()
                 mCurrentPage++
             }, {
-                it.message?.loge()
+                it.message?.let { loge { it } }
                 crfFlutterContent.complete()
             }).addToManaged()
     }

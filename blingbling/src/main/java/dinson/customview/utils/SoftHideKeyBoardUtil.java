@@ -19,7 +19,6 @@ public class SoftHideKeyBoardUtil {
             if (resourceId > 0) {
                 //根据资源ID获取响应的尺寸值
                 statusBarHeight = activity.getResources().getDimensionPixelSize(resourceId);
-                LogUtils.i("statusBarHeight: " + statusBarHeight);
             }
         }
         new SoftHideKeyBoardUtil(activity);

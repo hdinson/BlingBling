@@ -6,15 +6,15 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import com.dinson.blingbase.kotlin.toasty
 import com.shuyu.gsyvideoplayer.GSYVideoManager
+import com.shuyu.gsyvideoplayer.player.PlayerFactory
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import com.dinson.blingbase.kotlin.toasty
-import dinson.customview.utils.LogUtils
+import dinson.customview.kotlin.logd
 import dinson.customview.utils.StringUtils
 import kotlinx.android.synthetic.main.activity__004_bili_bili_video.*
-import com.shuyu.gsyvideoplayer.player.PlayerFactory
 import tv.danmaku.ijk.media.exo2.Exo2PlayerManager
 
 
@@ -36,20 +36,20 @@ class _004BiliBiliVideoActivity : BaseActivity() {
         setContentView(R.layout.activity__004_bili_bili_video)
         /* requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE*/
 
-         val mVideoPath = intent.getStringExtra(EXTRA_URL)
-         if (StringUtils.isEmpty(mVideoPath)) {
-             "视频地址错误".toasty()
-             finish()
-             return
-         }
-         initUI(mVideoPath)
+        val mVideoPath = intent.getStringExtra(EXTRA_URL)
+        if (StringUtils.isEmpty(mVideoPath)) {
+            "视频地址错误".toasty()
+            finish()
+            return
+        }
+        initUI(mVideoPath)
     }
 
     private var mOrientationUtils: OrientationUtils? = null
 
 
     private fun initUI(mVideoPath: String) {
-        LogUtils.e(mVideoPath)
+        logd { mVideoPath }
 
         videoPlayer.setUp(mVideoPath, true, "")
         PlayerFactory.setPlayManager(Exo2PlayerManager::class.java)//EXO模式

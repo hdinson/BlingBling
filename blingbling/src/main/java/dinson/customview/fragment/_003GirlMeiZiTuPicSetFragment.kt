@@ -13,8 +13,8 @@ import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.MeiZiTuPicSet
 import dinson.customview.http.HttpHelper
 import com.dinson.blingbase.kotlin.dip
-import com.dinson.blingbase.kotlin.logd
-import com.dinson.blingbase.kotlin.loge
+import dinson.customview.kotlin.logd
+import dinson.customview.kotlin.loge
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -72,7 +72,6 @@ abstract class _003GirlMeiZiTuPicSetFragment : ViewPagerLazyFragment() {
     }
 
 
-
     private fun getDataFromServer(isRefresh: Boolean) {
         if (isRefresh && needIncrement()) mCurrentPage = 1
         getObservable()
@@ -91,7 +90,7 @@ abstract class _003GirlMeiZiTuPicSetFragment : ViewPagerLazyFragment() {
             }, {
                 crfGirlsContent.complete()
                 it.toString().toasty()
-                it.toString().loge()
+                loge(it::toString)
             }).addToManaged()
     }
 

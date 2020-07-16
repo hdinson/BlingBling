@@ -1,15 +1,12 @@
 package dinson.customview.weight._016parallaximgview;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import java.util.LinkedList;
-
-import dinson.customview.utils.LogUtils;
 
 /**
  * Created by gjz on 21/12/2016.

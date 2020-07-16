@@ -36,6 +36,8 @@ import dinson.customview.weight.MessagePicturesLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
+import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -124,11 +126,11 @@ class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePi
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 initMovieInfoUI(it)
-                "MovieInfo >> put to cache".logi()
+                logi { "MovieInfo >> put to cache" }
                 CacheUtils.setCache(this,
                     "_027MovieInfo${movie.code}", Gson().toJson(it))
             }, {
-                it.toString().loge()
+                loge(it::toString)
             }).addToManaged()
     }
 
@@ -142,7 +144,7 @@ class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePi
                     createVideoItem(it)
                 }
             }, {
-                it.toString().loge()
+                loge(it::toString)
             }).addToManaged()
     }
 

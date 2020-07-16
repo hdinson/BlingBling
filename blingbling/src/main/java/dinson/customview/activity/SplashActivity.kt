@@ -6,12 +6,9 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.dinson.blingbase.kotlin.loge
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import io.reactivex.Observable
-import io.reactivex.rxkotlin.addTo
 import java.util.concurrent.TimeUnit
 
 
@@ -25,7 +22,6 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        "splash start".loge()
         Observable.timer(1, TimeUnit.SECONDS).subscribe {
             startActivity(Intent(this, MainActivity::class.java))
             finish()

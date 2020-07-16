@@ -11,8 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.dinson.blingbase.kotlin.logi
-import com.dinson.blingbase.kotlin.logv
+import dinson.customview.kotlin.logi
+import dinson.customview.kotlin.logv
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.MD5
 import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
@@ -89,14 +89,14 @@ class _005QiNiuYunActivity : BaseActivity() {
                     val bean = mListData[position]
                     val data = ClipData.newPlainText("Label", bean.finalUrl)
                     cm.primaryClip = data
-                    logv(bean.finalUrl)
+                    logv { bean.finalUrl }
                     "已复制".toasty()
                 }).setOnItemLongClickListener(OnRvItemLongClickListener { _, _, position ->
                     val dialog = _005ContentMenuDialog(this@_005QiNiuYunActivity)
                     val items = arrayOf("复制", "黏贴")
                     dialog.setDatas(items, OnItemClickListener {
                         items[it].toasty()
-                        logi(mListData[position])
+                        logi { mListData[position].toString() }
                     })
                     dialog.show()
                     return@OnRvItemLongClickListener true
@@ -147,7 +147,7 @@ class _005QiNiuYunActivity : BaseActivity() {
 
             mListData.sortBy { it.putTime }
             mListData.reverse()
-            logv("Load ${mListData.size} pic")
+            logv { "Load ${mListData.size} pic" }
         }.compose(RxSchedulers.io_main()).subscribe({
             mAdapter.notifyDataSetChanged()
             flCustomRefreshView.complete()
@@ -332,7 +332,7 @@ class _005QiNiuYunActivity : BaseActivity() {
             Observable.just(UploadManager(Configuration(zone))).map {
                 val response = it.put(path, key, upToken)
                 val putRet = Gson().fromJson(response.bodyString(), DefaultPutRet::class.java)
-                logv("Upload success {hash: ${putRet.hash} key:${putRet.key}}")
+                logv { "Upload success {hash: ${putRet.hash} key:${putRet.key}}" }
             }.compose(RxSchedulers.io_main()).subscribe({
                 mAdapter.notifyDataSetChanged()
                 flCustomRefreshView.isRefreshing = true

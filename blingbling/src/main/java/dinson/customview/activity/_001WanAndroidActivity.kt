@@ -2,11 +2,12 @@ package dinson.customview.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.view.menu.MenuBuilder
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.CheckBox
+import androidx.appcompat.view.menu.MenuBuilder
+import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview._global.ConstantsUtils
@@ -15,8 +16,7 @@ import dinson.customview.api.WanAndroidApi
 import dinson.customview.entity.wanandroid.WanAndArticle
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.kotlin.loge
 import dinson.customview.listener._001OnLikeViewClickListener
 import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog.OnLoginSuccessListener
@@ -101,7 +101,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 mAdapter.notifyDataSetChanged()
                 mPageIndex++
             }, {
-                loge(it.toString())
+                loge{it.toString()}
                 flCustomRefreshView.complete()
             }).addToManaged()
     }
@@ -127,7 +127,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
             }, {
                 likeView.toggle()
                 it.message?.toasty()
-                loge(it.toString())
+                loge{it.toString()}
             }).addToManaged()
     }
 
@@ -147,7 +147,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 _001WanAndroidLikeActivity.start(this, REQUEST_CODE_LIKE)
             }
             R.id.action_search -> {
-                loge("search")
+
             }
             R.id.action_logout -> {
                 HttpHelper.clearCookie(ConstantsUtils.WAN_ANDROID_DOMAIN)

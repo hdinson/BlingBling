@@ -159,6 +159,16 @@ public static java.lang.String TABLENAME;
 -keepclassmembers class * {
     void *(**On*Event);
 }
+
+#---------------------------------去log------------------------------------
+-assumenosideeffects class android.util.Log {
+public static *** d(...);
+public static *** v(...);
+public static *** i(...);
+public static *** e(...);
+public static *** w(...);
+}
+
 #----------------------------------------------------------------------------
 
 #---------------------------------webview------------------------------------

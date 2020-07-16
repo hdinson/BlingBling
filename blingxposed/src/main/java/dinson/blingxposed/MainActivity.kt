@@ -8,7 +8,6 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dinson.blingbase.kotlin.loge
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(),SensorEventListener {
@@ -17,9 +16,9 @@ class MainActivity : AppCompatActivity(),SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        "--------- onSensorChanged ---------------".loge()
+        //"--------- onSensorChanged ---------------".loge()
          event?.values?.forEach {
-             "Sensor : $it".loge()
+          //   "Sensor : $it".loge()
          }
     }
 

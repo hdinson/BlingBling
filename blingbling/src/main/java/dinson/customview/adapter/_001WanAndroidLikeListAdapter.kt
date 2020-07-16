@@ -6,7 +6,7 @@ import dinson.customview.activity.CommonWebActivity
 import dinson.customview.entity.wanandroid.WanAndArticle
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.hide
-import com.dinson.blingbase.kotlin.logv
+import dinson.customview.kotlin.logv
 import com.dinson.blingbase.kotlin.show
 import com.dinson.blingbase.utils.DateUtils
 import dinson.customview.listener._001OnLikeViewClickListener
@@ -43,7 +43,7 @@ class _001WanAndroidLikeListAdapter(dataList: List<WanAndArticle>,
         holder.itemView.likeView.isChecked = true
         RxView.clicks(holder.itemView.likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
-                logv(if (holder.itemView.likeView.isChecked) "添加收藏" else "取消收藏")
+                logv { if (holder.itemView.likeView.isChecked) "添加收藏" else "取消收藏" }
                 //post2Server(likeView, dataBean, position)
                 likeClickListener.onClickLikeView(holder.itemView.likeView, dataBean, position)
             }

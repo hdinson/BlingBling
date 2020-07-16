@@ -1,20 +1,22 @@
 package dinson.customview.weight._010parallaxsplash;
 
 import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.FrameLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import dinson.customview.R;
-import dinson.customview.utils.LogUtils;
+
+import static dinson.customview.kotlin.LogExtentionKt.logv;
 
 /**
  * 视差fragment容器
@@ -65,12 +67,9 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
     /***********************************  监听  ******************************************/
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
-        LogUtils.i("onPageScrolled() called with: position = [" + position + "], positionOffset = [" + positionOffset + "], positionOffsetPixels = [" + positionOffsetPixels + "]");
+        logv(() -> "onPageScrolled() called with: position = [" + position + "], positionOffset = [" + positionOffset + "], positionOffsetPixels = [" + positionOffsetPixels + "]");
 
         checkScrollOrientation(position);
-
 
         if (mInFragment != null) {
             //获取Fragment上所有的视图，实现动画效果
@@ -178,7 +177,6 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
             mOutFragment = getFragmentQuietly(leftPagerVisible ? position + 1 : position);
             if (mOutFragment != null)
                 mOutFragment.setCurrentOrientation(leftPagerVisible ? ParallaxOrientation.RIGHT : ParallaxOrientation.LEFT);
-            LogUtils.e("mInFragment:" + mInFragment + "   mOutFragment:" + mOutFragment);
             return;
         }
 

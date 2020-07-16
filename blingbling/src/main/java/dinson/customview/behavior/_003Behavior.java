@@ -1,15 +1,14 @@
 package dinson.customview.behavior;
 
 import android.content.Context;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior;
-import androidx.core.view.ViewCompat;
-import androidx.core.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import dinson.customview.utils.LogUtils;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
 
 /**
  * 首页监听recycleview的滑动
@@ -57,7 +56,6 @@ public class _003Behavior extends Behavior<ImageView> {
                 ViewCompat.setScaleY(child, 0);
                 child.setElevation(0);
                 percent = 0;
-                LogUtils.e("头像隐藏");
             }
             return false;
         } else if (child.getY() >= mAvatorHeight) {
@@ -68,7 +66,6 @@ public class _003Behavior extends Behavior<ImageView> {
         this.percent = percent;
         ViewCompat.setScaleX(child, percent);
         ViewCompat.setScaleY(child, percent);
-        LogUtils.e("percent=" + percent + " OriginHeight=" + mOriginHeight + " currentHeight=" + child.getY());
         return false;
 
     }

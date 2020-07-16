@@ -16,8 +16,8 @@ import dinson.customview.event._004CheckSelectorAllEvent
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import com.dinson.blingbase.kotlin.click
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.StringUtils
@@ -85,14 +85,14 @@ class _004BiliBiliListActivity : BaseActivity() {
         btnSelectorAll.click { mAdapter.selectorAll() }
         btnDelete.click {
             val count = mAdapter.deleteSelector()
-            logi("删除了 $count 个")
+            logi { "删除了 $count 个" }
         }
     }
 
     private val mApi by lazy { HttpHelper.create(BmobApi::class.java) }
 
     private fun initData() {
-        val cache = CacheUtils.getCache( this,"_004VideoList")
+        val cache = CacheUtils.getCache(this, "_004VideoList")
         if (StringUtils.isNotEmpty(cache)) {
             //加载缓存数据
             val type = object : TypeToken<ArrayList<TvShowResp.TvShow>>() {}.type
@@ -114,14 +114,14 @@ class _004BiliBiliListActivity : BaseActivity() {
                 if (it.code == 0) {
                     mDataList.clear()
                     mDataList.addAll(it.results)
-                    CacheUtils.setCache(  this,"_004VideoList",
+                    CacheUtils.setCache(this, "_004VideoList",
                         Gson().toJson(mDataList))
                     mAdapter.notifyDataSetChanged()
                 }
             }, {
                 crvVideoContent.complete()
                 it.message?.toasty()
-                it.toString().loge()
+                loge(it::toString)
             }, {
                 crvVideoContent.complete()
             }).addToManaged()

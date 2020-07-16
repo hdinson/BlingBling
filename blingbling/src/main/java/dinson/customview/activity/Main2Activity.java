@@ -1,8 +1,5 @@
 package dinson.customview.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -10,8 +7,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
@@ -23,7 +22,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import dinson.customview.R;
-import dinson.customview.utils.LogUtils;
+
+import static dinson.customview.kotlin.LogExtentionKt.logv;
 
 public class Main2Activity extends AppCompatActivity {
     /* mDataPath 是字库在手机上的存储位置 */
@@ -52,8 +52,8 @@ public class Main2Activity extends AppCompatActivity {
                 mTess.setImage(bitmap);
                 String OCRresult = mTess.getUTF8Text(); // 拿到字符串结果
                 Long endtime = System.currentTimeMillis(); // 检测结束时间
-                LogUtils.e("识别结果：" + OCRresult);
-                LogUtils.e((endtime - starttime) + " ms");
+                logv(() -> "识别结果：" + OCRresult);
+                logv(() -> (endtime - starttime) + " ms");
             }
         };
         thread.start();

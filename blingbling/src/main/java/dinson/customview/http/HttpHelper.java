@@ -11,13 +11,14 @@ import java.util.concurrent.TimeUnit;
 import dinson.customview._global.ConstantsUtils;
 import dinson.customview.http.manager.CookieManager;
 import dinson.customview.http.manager.JsonConverterFactory;
-import dinson.customview.utils.LogUtils;
 import okhttp3.Cache;
 import okhttp3.Cookie;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import static dinson.customview.kotlin.LogExtentionKt.logi;
 
 /**
  * Retrofit统一封装设置,返回retrofit对象
@@ -40,8 +41,8 @@ public class HttpHelper {
 
         mOkHttpClient = new OkHttpClient.Builder()
             .authenticator((route, response) -> {
-                LogUtils.e("Authenticating for response: " + response);
-                LogUtils.e("Challenges: " + response.challenges());
+                logi(() -> "Authenticating for response: " + response);
+                logi(() -> "Challenges: " + response.challenges());
                 String credential = Credentials.basic("jesse", "password1");
                 return response.request().newBuilder()
                     .header("Authorization", credential)

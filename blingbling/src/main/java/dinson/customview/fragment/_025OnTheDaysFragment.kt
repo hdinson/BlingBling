@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.DateUtils
 import com.dinson.blingbase.RxBling
@@ -42,7 +42,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
         tvDate6.text = date[6].toString()
         tvDate7.text = date[8].toString()
         tvDate8.text = date[9].toString()
-        "日期设置完毕".logi()
+        logi { "日期设置完毕" }
     }
 
     override fun lazyInit() {

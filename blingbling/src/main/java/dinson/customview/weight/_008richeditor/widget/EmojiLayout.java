@@ -3,7 +3,6 @@ package dinson.customview.weight._008richeditor.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -15,13 +14,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.viewpager.widget.ViewPager;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import dinson.customview.R;
-import dinson.customview.utils.LogUtils;
 import dinson.customview.weight._008richeditor.adapter.ExpressionPagerAdapter;
 import dinson.customview.weight._008richeditor.adapter.SmileImageExpressionAdapter;
+
+import static dinson.customview.kotlin.LogExtentionKt.logi;
 
 
 /**
@@ -59,19 +61,11 @@ public class EmojiLayout extends LinearLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-
-        LogUtils.e("measure 调用了");
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
-        LogUtils.e("onLayout 调用了");
-
         super.onLayout(changed, l, t, r, b);
 
     }
@@ -80,20 +74,19 @@ public class EmojiLayout extends LinearLayout {
 
         setOrientation(VERTICAL);
         mVPager = new ViewPager(context);
-        LayoutParams vpParams = new LayoutParams(LayoutParams.MATCH_PARENT,0);
-        vpParams.weight=4;
-        addView(mVPager,vpParams);
+        LayoutParams vpParams = new LayoutParams(LayoutParams.MATCH_PARENT, 0);
+        vpParams.weight = 4;
+        addView(mVPager, vpParams);
 
         mContainer = new LinearLayout(context);
-        LayoutParams llParams = new LayoutParams(LayoutParams.MATCH_PARENT,0);
-        llParams.weight=1;
+        LayoutParams llParams = new LayoutParams(LayoutParams.MATCH_PARENT, 0);
+        llParams.weight = 1;
         mContainer.setGravity(Gravity.CENTER);
         mContainer.setOrientation(HORIZONTAL);
-        addView(mContainer,llParams);
+        addView(mContainer, llParams);
 
         if (isInEditMode())
             return;
-        LogUtils.e("init 调用了");
         initViews();
     }
 
@@ -103,15 +96,14 @@ public class EmojiLayout extends LinearLayout {
      */
     private void initViews() {
 
+        logi(() -> "emoji 的高度：" + getMeasuredHeight());
 
-        LogUtils.e("emoji 的高度："+getMeasuredHeight());
-
-       // ViewPager mVPager = (ViewPager) findViewById(R.id.edittext_bar_vPager);
+        // ViewPager mVPager = (ViewPager) findViewById(R.id.edittext_bar_vPager);
         //LinearLayout edittextBarViewGroupFace = (LinearLayout) findViewById(R.id.edittext_bar_viewGroup_face);
 
 
-        int size =  dip2px(getContext(), 5);
-        int marginSize =  dip2px(getContext(), 5);
+        int size = dip2px(getContext(), 5);
+        int marginSize = dip2px(getContext(), 5);
         // 表情list
         List<String> smile = new ArrayList<>();
         for (int i = 1; i <= IMG_LIST.length; i++) {
@@ -162,7 +154,7 @@ public class EmojiLayout extends LinearLayout {
         gv.setNumColumns(7);
         gv.setCacheColorHint(Color.parseColor("#eeeeee"));
         gv.setGravity(Gravity.CENTER);
-        gv.setVerticalSpacing( dip2px(getContext(),20));
+        gv.setVerticalSpacing(dip2px(getContext(), 20));
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         gv.setLayoutParams(params);
 
@@ -215,7 +207,7 @@ public class EmojiLayout extends LinearLayout {
         if (context.getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
             if (context.getCurrentFocus() != null) {
                 ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).
-                        hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
     }
@@ -226,7 +218,7 @@ public class EmojiLayout extends LinearLayout {
     public void showKeyboard() {
         editTextEmoji.requestFocus();
         InputMethodManager inputManager =
-                (InputMethodManager) editTextEmoji.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            (InputMethodManager) editTextEmoji.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(editTextEmoji, 0);
     }
 

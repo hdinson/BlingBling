@@ -10,16 +10,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.toasty
 import com.tbruyelle.rxpermissions2.RxPermissions
+import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.databinding.ActivityTestBinding
-import com.dinson.blingbase.kotlin.click
-import com.dinson.blingbase.kotlin.loge
-import com.dinson.blingbase.kotlin.logi
-import com.dinson.blingbase.kotlin.toasty
-import com.dinson.blingbase.utils.validations.EditTextValidator
-import com.dinson.blingbase.utils.validations.ValidationModel
+import dinson.customview.kotlin.loge
 import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.SystemBarModeUtils
@@ -84,9 +82,9 @@ class TestActivity : BaseActivity() {
 
             ie.forEachLine { data.append(it).append("\n") }
             inBufferedReader.forEachLine { data.append(it).append("\n") }
-            loge(data.toString())
+            loge { data.toString() }
         } catch (e: Exception) {
-            loge(e.toString())
+            loge { e.toString() }
         }
     }
 
@@ -96,12 +94,12 @@ class TestActivity : BaseActivity() {
             BufferedReader(InputStreamReader(p.inputStream)).useLines { s ->
                 s.iterator().forEach {
                     if (s.contains("avg")) {
-                        it.loge()
+                        loge { it }
                         val i = it.indexOf("/", 20)
                         val j = it.indexOf(".", i)
                         val all = it.substring(i + 1, j)
                         all.toasty()
-                        all.loge()
+                        loge { all }
                     }
                 }
             }
@@ -117,16 +115,16 @@ class TestActivity : BaseActivity() {
          WorkManager.getInstance().enqueue(request)*/
     }
 
+    fun loggg3(func: () -> String) {
+        if (BuildConfig.DEBUG) {
+            Log.e("test", func())
+        }
+    }
+
     fun onSendMsg(v: View) {
-        "1111111111111".loge()
         /*android.permission.READ_SMS or android.permission.WRITE_SMS*/
-
-
-        getSmsInPhone().logi()
-
         RxPermissions(this).request(Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS)
             .subscribe {
-                "2222222222222:$it".loge()
                 val uri = Uri.parse("content://sms/")
                 // 获取一个内容提供者的解析器
                 val values = ContentValues()

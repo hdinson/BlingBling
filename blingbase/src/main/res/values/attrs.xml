@@ -50,4 +50,18 @@
             <enum name="right" value="2" />
         </attr>
     </declare-styleable>
+
+    <!--圆角或者圆形图片组件-->
+    <declare-styleable name="CircleImageView">
+        <attr name="civBorderColor" format="color" />
+        <attr name="civBorderWidth" format="dimension" />
+        <attr name="civPressAlpha" format="integer" />
+        <attr name="civPressColor" format="color" />
+        <attr name="civRadius" format="dimension" />
+        <attr name="civShapeType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="round" value="1" />
+            <enum name="rectangle" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

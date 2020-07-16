@@ -2,7 +2,7 @@ package dinson.customview.http.manager
 
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
-import com.dinson.blingbase.kotlin.logi
+import dinson.customview.kotlin.logi
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import retrofit2.Converter
@@ -16,7 +16,7 @@ class JsonRequestBodyConverter<T>(gson: Gson, private val adapter: TypeAdapter<T
     }
 
     override fun convert(value: T): RequestBody {
-        logi("POST: " + value.toString(), showLine = false)
+        logi(false) { "POST: " + value.toString() }
         val postBody = adapter.toJson(value)//对象转化成json
         return RequestBody.create(MEDIA_TYPE, postBody)
     }

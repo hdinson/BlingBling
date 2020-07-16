@@ -2,14 +2,6 @@ package dinson.customview.weight.refreshview;
 
 import android.content.Context;
 import android.graphics.Color;
-
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,8 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import dinson.customview.R;
-import dinson.customview.utils.LogUtils;
 
 /**
  * 一个支持网络错误重试，无数据页（可自定义），无网络界面（可自定义）的上拉加载更多，下拉刷新控件

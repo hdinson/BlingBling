@@ -1,7 +1,6 @@
 package dinson.customview.weight._012qqnaviview
 
 import android.view.View
-import dinson.customview.utils.LogUtils
 import java.util.*
 
 
@@ -41,7 +40,6 @@ class QQNaviViewManager(vararg views: QQNaviView) {
             val pos = mList.indexOf(view)
             mList.forEachIndexed { index, it ->
                 if (index==pos)return@forEachIndexed
-                LogUtils.e("index:$index")
                 if (index < pos) {
                     if (mIsHorizontal) {
                         it.setOffsetOrientation(OffsetOrientation.RIGHT)

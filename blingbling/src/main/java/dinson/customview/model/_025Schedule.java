@@ -2,15 +2,12 @@ package dinson.customview.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.service.quicksettings.Tile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import dinson.customview.utils.LogUtils;
 
 public class _025Schedule implements Parcelable {
     private String id;

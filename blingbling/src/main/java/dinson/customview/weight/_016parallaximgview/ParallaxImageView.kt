@@ -2,11 +2,10 @@ package dinson.customview.weight._016parallaximgview
 
 import android.content.Context
 import android.graphics.*
-import androidx.appcompat.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import com.dinson.blingbase.kotlin.dip
-import dinson.customview.utils.LogUtils
 
 /**
  *  带有视差的图片层
@@ -178,9 +177,6 @@ class ParallaxImageView @JvmOverloads constructor(context: Context, attrs: Attri
 
 
     fun updateProgress(progress: Float) {
-
-        LogUtils.e("------:$progress")
-
         if (!mSetting.isEnableParallaxMode) return
         mProgress = if (mSetting.isInvertScrollDirection) progress else -progress
 

@@ -5,7 +5,7 @@ import com.bumptech.glide.Glide
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.utils.LogUtils
+import dinson.customview.kotlin.logv
 import dinson.customview.weight._012qqnaviview.QQNaviView
 import dinson.customview.weight._012qqnaviview.QQNaviViewManager
 import kotlinx.android.synthetic.main.activity__012_qqnavi_view.*
@@ -26,8 +26,9 @@ class _012QQNaviViewActivity : BaseActivity() {
 
         val manager = QQNaviViewManager(qqViewBubble, qqViewPerson, qqViewStar)
         qqViewBubble.setOnClickListener {
-            LogUtils.e("点击事件")
-            manager.setCheckedView(it as QQNaviView) }
+            logv { "点击事件" }
+            manager.setCheckedView(it as QQNaviView)
+        }
         qqViewPerson.setOnClickListener { manager.setCheckedView(it as QQNaviView) }
         qqViewStar.setOnClickListener { manager.setCheckedView(it as QQNaviView) }
     }

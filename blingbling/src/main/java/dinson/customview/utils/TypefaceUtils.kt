@@ -3,6 +3,7 @@ package dinson.customview.utils
 import android.content.Context
 import android.graphics.Typeface
 import androidx.collection.SimpleArrayMap
+import dinson.customview.kotlin.loge
 
 /**
  * 字体工具（优化向）
@@ -32,7 +33,7 @@ object TypefaceUtils {
                     val t = Typeface.createFromAsset(context.assets, name)
                     TYPEFACE_CACHE.put(name, t)
                 } catch (e: Exception) {
-                    LogUtils.e("Could not get typeface '" + name + "' because " + e.message)
+                    loge { "Could not get typeface '" + name + "' because " + e.message }
                     return null
                 }
 

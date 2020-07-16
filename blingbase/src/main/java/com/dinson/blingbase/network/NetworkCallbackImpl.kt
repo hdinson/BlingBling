@@ -4,8 +4,7 @@ import android.net.ConnectivityManager
 import android.net.LinkProperties
 import android.net.Network
 import android.net.NetworkCapabilities
-import com.dinson.blingbase.kotlin.logi
-import com.dinson.blingbase.kotlin.logv
+import android.util.Log
 import com.dinson.blingbase.utils.NetworkUtils
 import org.greenrobot.eventbus.EventBus
 
@@ -19,7 +18,7 @@ class NetworkCallbackImpl(var mNetType: NetworkType) : ConnectivityManager.Netwo
     override fun onAvailable(network: Network) {
         super.onAvailable(network)
         val networkType = NetworkUtils.getNetworkType()
-        "网络已连接: ${networkType.name}".logi()
+        Log.v("BlingBase", "网络已连接: ${networkType.name}")
         EventBus.getDefault().post(networkType)
     }
 
@@ -28,7 +27,7 @@ class NetworkCallbackImpl(var mNetType: NetworkType) : ConnectivityManager.Netwo
      */
     override fun onLost(network: Network) {
         super.onLost(network)
-        "onLost: 网络已断开".logi()
+        Log.v("BlingBase", "onLost: 网络已断开")
         EventBus.getDefault().post(NetworkType.NETWORK_OFF)
     }
 
@@ -46,7 +45,7 @@ class NetworkCallbackImpl(var mNetType: NetworkType) : ConnectivityManager.Netwo
                     EventBus.getDefault().post(mNetType)
                 }
                 else -> {
-                    "onCapabilitiesChanged: 其他网络".logv()
+                    Log.v("BlingBase", "onCapabilitiesChanged: 其他网络")
                 }
             }
         }
@@ -57,7 +56,7 @@ class NetworkCallbackImpl(var mNetType: NetworkType) : ConnectivityManager.Netwo
      */
     override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
         super.onLinkPropertiesChanged(network, linkProperties)
-        "onLinkPropertiesChanged".logv()
+        Log.v("BlingBase", "onLinkPropertiesChanged")
     }
 
     /**
@@ -65,6 +64,6 @@ class NetworkCallbackImpl(var mNetType: NetworkType) : ConnectivityManager.Netwo
      */
     override fun onUnavailable() {
         super.onUnavailable()
-        "onUnavailable".logv()
+        Log.v("BlingBase", "onUnavailable")
     }
 }

@@ -2,7 +2,7 @@ package dinson.customview.adapter
 
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.hide
-import com.dinson.blingbase.kotlin.logv
+import dinson.customview.kotlin.logv
 import com.dinson.blingbase.kotlin.show
 import com.dinson.blingbase.utils.DateUtils
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
@@ -42,7 +42,7 @@ class _001WanAndroidMainListAdapter(
 
         RxView.clicks(holder.itemView.likeView).throttleFirst(2, TimeUnit.SECONDS)
             .subscribe {
-                logv(if (holder.itemView.likeView.isChecked) "添加收藏" else "取消收藏")
+                logv { if (holder.itemView.likeView.isChecked) "添加收藏" else "取消收藏" }
                 //post2Server(likeView.isChecked, dataBean)
                 likeClickListener.onClickLikeView(holder.itemView.likeView, dataBean, position)
             }

@@ -12,7 +12,7 @@ import dinson.customview.R
 import dinson.customview._global.BaseNfcActivity
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.isNfcEnable
-import com.dinson.blingbase.kotlin.logd
+import dinson.customview.kotlin.logd
 import dinson.customview.utils.NfcUtils
 import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__018_nfc.*
@@ -45,7 +45,7 @@ class _018NFCActivity : BaseNfcActivity() {
         //1.获取Tag对象
         val detectedTag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
         val techList = detectedTag.techList
-        techList.forEach { logd(it) }
+        techList.forEach { logd { it } }
         //2.获取Ndef的实例
         val ndef = Ndef.get(detectedTag)
         tvDesc.append("${ndef.type} Maxsize:${ndef.maxSize}bytes")
