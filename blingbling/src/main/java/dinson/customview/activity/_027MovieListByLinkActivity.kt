@@ -4,14 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._027HomeAdapter
 import dinson.customview.entity.av.Movie
 import dinson.customview.kotlin.logi
 import dinson.customview.model._027AvModel
-import dinson.customview.utils.SystemBarModeUtils
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
@@ -50,7 +50,7 @@ class _027MovieListByLinkActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { onBackPressed() }
 
-        mLink = intent.getStringExtra(EXTRA_LINK)
+        mLink = intent.getStringExtra(EXTRA_LINK) ?: ""
 
         initUI()
     }
@@ -73,11 +73,11 @@ class _027MovieListByLinkActivity : BaseActivity() {
         crvMovieContent.setEmptyView("")
         crvMovieContent.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
-            RvItemClickSupport.addTo(this).setOnItemClickListener(OnRvItemClickListener { _, _, pos ->
+            RvItemClickSupport.addTo(this).setOnItemClickListener { _, _, pos ->
                 if (pos >= 0 && pos < mDataList.size) {
                     _027MovieDetailsActivity.start(context, mDataList[pos])
                 }
-            })
+            }
         }
     }
 

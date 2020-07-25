@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_003_meizitu_pic_set.view.*
 /**
  * 妹子图精选，最新，最热，图集样式的适配器
  */
-class _003MeiZiTuPicSetAdapter(dataList: List<MeiZiTuPicSet>)
+class _003MeiZiTuPicSetAdapter(dataList: MutableList<MeiZiTuPicSet>)
     : CommonAdapter<MeiZiTuPicSet>(dataList) {
 
     val options = RequestOptions()

@@ -25,7 +25,7 @@ import java.util.regex.Pattern
  * 货币主界面适配器
  */
 class _007CurrencyAdapter(context: Context,
-                          dataList: List<_007CurrencyModel>,
+                          dataList: MutableList<_007CurrencyModel>,
                           private val mListener: OnItemSwipeOpen)
     : CommonAdapter<_007CurrencyModel>(dataList), _003OnCalculatorInput, _003OnRvItemChangeListener {
 

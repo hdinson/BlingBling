@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.AutoCompleteTextView
 import android.widget.CursorAdapter
 import android.widget.TextView
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.github.promeg.pinyinhelper.Pinyin
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -17,7 +18,6 @@ import dinson.customview.db.SearchHistory027DbUtils
 import dinson.customview.db.model.SearchHistory027
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.StringUtils
-import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__027_movie.*
 import dinson.customview.db.model.SearchHistory027Dao
 

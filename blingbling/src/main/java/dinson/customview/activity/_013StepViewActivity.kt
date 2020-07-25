@@ -2,10 +2,10 @@ package dinson.customview.activity
 
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.holder._013StepViewHolder
-import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__013_step_view.*
 
 

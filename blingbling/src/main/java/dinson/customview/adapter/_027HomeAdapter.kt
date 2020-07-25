@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_027_home.view.*
 /**
  * 联动右边的适配器
  */
-class _027HomeAdapter(dataList: List<Movie>)
+class _027HomeAdapter(dataList: MutableList<Movie>)
     : CommonAdapter<Movie>(dataList) {
 
     override fun getLayoutId(viewType: Int) = R.layout.item_027_home

@@ -54,6 +54,8 @@ public class RippleLayout extends FrameLayout {
         } else {
             super.dispatchDraw(canvas);
         }
+
+        this.setVisibility(View.GONE);
     }
 
     @Override

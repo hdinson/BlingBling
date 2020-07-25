@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_015_app_icon.view.*
 /**
  * App图标适配器
  */
-class _015AppIconAdapter(dataList: List<_015AppIcon>) :
+class _015AppIconAdapter(dataList: MutableList<_015AppIcon>) :
     CommonAdapter<_015AppIcon>(dataList) {
 
     override fun getLayoutId(viewType: Int): Int {

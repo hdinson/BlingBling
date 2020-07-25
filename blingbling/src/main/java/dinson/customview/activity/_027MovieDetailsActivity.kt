@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
@@ -15,6 +14,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import com.dinson.blingbase.kotlin.dip
+import com.dinson.blingbase.kotlin.hide
+import com.dinson.blingbase.utils.SystemBarModeUtils
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.gson.Gson
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -25,19 +29,15 @@ import dinson.customview.entity.av.Movie
 import dinson.customview.entity.av.MovieInfo
 import dinson.customview.entity.av.MovieVideo
 import dinson.customview.http.HttpHelper
-import com.dinson.blingbase.kotlin.*
+import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.StringUtils
-import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.MessagePicturesLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
-import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
-import dinson.customview.kotlin.loge
-import dinson.customview.kotlin.logi
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -70,7 +70,7 @@ class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePi
         toolbar.setNavigationOnClickListener { onBackPressed() }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)//左侧添加一个默认的返回图标
         supportActionBar?.setHomeButtonEnabled(true)//设置返回键可用
-        val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
+        val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE) ?: return
         GlideUtils.setImage(this, movie.coverUrl, ivMovieBg)
         GlideUtils.setImage(this, movie.coverUrl, ivMoviePic)
         tvMovieName.text = movie.title
@@ -92,11 +92,11 @@ class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePi
             val manager = GridLayoutManager(this@_027MovieDetailsActivity, 3)
             rvActresses.layoutManager = manager
             RvItemClickSupport.addTo(rvActresses)
-                .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+                .setOnItemClickListener { _, _, position ->
                     val bean = movieInfo.actresses[position]
                     _027MovieListByLinkActivity.start(this@_027MovieDetailsActivity,
                         bean.name, bean.link)
-                })
+                }
         }
         //添加截图
         if (movieInfo.screenshots.isNotEmpty()) {
@@ -167,11 +167,11 @@ class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePi
         val manager = GridLayoutManager(this@_027MovieDetailsActivity, 2)
         rvVideo.layoutManager = manager
         RvItemClickSupport.addTo(rvVideo)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+            .setOnItemClickListener { _, _, position ->
                 val bean = movieVideo.response.videos[position]
                 _004BiliBiliVideoActivity.start(this@_027MovieDetailsActivity,
                     bean.title, _027AvModel.getPlayAddress(bean.vid))
-            })
+            }
     }
 
     @SuppressLint("SetTextI18n")

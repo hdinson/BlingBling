@@ -19,11 +19,11 @@ import com.dinson.blingbase.kotlin.click
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
 import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.StringUtils
-import dinson.customview.utils.SystemBarModeUtils
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__004_bili_bili_list.*
@@ -74,10 +74,10 @@ class _004BiliBiliListActivity : BaseActivity() {
             override fun onLoadMore() {}
         })
         RvItemClickSupport.addTo(crvVideoContent.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+            .setOnItemClickListener { _, _, position ->
                 _004BiliBiliVideoActivity.start(this, mDataList[position].tvName,
                     mDataList[position].tvUrl)
-            })
+            }
         crvVideoContent.loadMoreEnable = false
         crvVideoContent.setEmptyView("")
         crvVideoContent.recyclerView.overScrollMode = OVER_SCROLL_NEVER

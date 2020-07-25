@@ -11,7 +11,7 @@ ext {
     gitUrl = 'https://github.com/Dinson-Huang'
 
     // ./gradlew install  ./gradlew bintrayUpload
-    libraryVersion = '0.0.26'
+    libraryVersion = '1.2.34'
     libraryVersionDesc = 'Daily update'
 
     developerId = 'dinson'

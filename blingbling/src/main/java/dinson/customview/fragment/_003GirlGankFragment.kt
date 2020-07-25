@@ -19,7 +19,7 @@ import dinson.customview.kotlin.loge
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.weight._003weight.DecorationLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.fragment_003_girl_pic_set.*
@@ -65,7 +65,7 @@ class _003GirlGankFragment : ViewPagerLazyFragment() {
         crfGirlsContent.isRefreshing = true
 
         RvItemClickSupport.addTo(crfGirlsContent.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, view, position ->
+            .setOnItemClickListener { _, view, position ->
                 layDecoration.attachImageWatcher(mPicHelper)
                 if (view is ImageView) {
                     val list = SparseArray<ImageView>()
@@ -74,7 +74,7 @@ class _003GirlGankFragment : ViewPagerLazyFragment() {
                 } else {
                     mPicHelper.show(listOf(Uri.parse(mData[position].url)), 0)
                 }
-            })
+            }
     }
 
 

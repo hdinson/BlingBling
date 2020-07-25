@@ -12,7 +12,7 @@ import com.dinson.blingbase.widget.banner.holder.BannerViewHolder
 /**
  *   广播轮播图数据适配器
  */
-class BannerPagerAdapter<T>(private val mDatas: List<T>,
+class BannerPagerAdapter<T>(private val mDataList: List<T>,
                             private val mViewHolder: BannerViewHolder<T>,
                             private val canLoop: Boolean) : PagerAdapter() {
 
@@ -35,7 +35,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
         if (view == null) {
             view = mViewHolder.createView(container.context)
             mViewList.put(realPosition, view)
-            mViewHolder.onBind(container.context, realPosition, mDatas[realPosition])
+            mViewHolder.onBind(container.context, realPosition, mDataList[realPosition])
         }
         // 添加点击事件
         view.setOnClickListener { mPageClickListener?.onPageClick(it, realPosition) }
@@ -48,7 +48,7 @@ class BannerPagerAdapter<T>(private val mDatas: List<T>,
     /**
      * 获取真实的Count
      */
-    private fun getRealCount() = mDatas.size
+    private fun getRealCount() = mDataList.size
 
     /**
      * 获取真实的Count

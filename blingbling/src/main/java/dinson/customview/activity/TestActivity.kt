@@ -9,9 +9,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.utils.SystemBarModeUtils
+import com.dinson.blingbase.widget.smartpopwindow.HorizontalPosition
+import com.dinson.blingbase.widget.smartpopwindow.SmartPopupWindow
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.BuildConfig
 import dinson.customview.R
@@ -20,7 +25,6 @@ import dinson.customview.databinding.ActivityTestBinding
 import dinson.customview.kotlin.loge
 import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
-import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity_test.*
 import java.io.BufferedReader
 import java.io.IOException
@@ -45,6 +49,12 @@ class TestActivity : BaseActivity() {
             this, R.layout.activity_test)
         contentView.cacheSize = CacheUtils.getCacheSize(this)
         initUI()
+
+
+        val popupWindow = SmartPopupWindow.Builder.build(this, TextView(this))
+            .setAlpha(0.4f)                   //背景灰度     默认全透明
+            .createPopupWindow()
+        popupWindow.showAtAnchorView(TextView(this),0,9,false)
     }
 
     private fun initUI() {

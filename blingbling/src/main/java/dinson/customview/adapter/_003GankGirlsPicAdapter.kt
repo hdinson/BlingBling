@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_003_gank_lady_pic.view.*
 /**
  *
  */
-class _003GankGirlsPicAdapter(dataList: List<Welfare>)
+class _003GankGirlsPicAdapter(dataList: MutableList<Welfare>)
     : CommonAdapter<Welfare>(dataList) {
 
     val options = RequestOptions()

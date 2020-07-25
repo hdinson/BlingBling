@@ -11,6 +11,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.EOFException
 import java.io.IOException
+import java.lang.Exception
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
@@ -18,7 +19,6 @@ class Printer private constructor() {
     companion object {
         private const val JSON_INDENT = 3
         private val LINE_SEPARATOR = System.getProperty("line.separator") ?: "\n"
-        private val DOUBLE_SEPARATOR = LINE_SEPARATOR + LINE_SEPARATOR
         private val UP_LINE = "┌${"─".times(100)}"
         private val END_LINE = "└${"─".times(100)}"
 
@@ -29,14 +29,14 @@ class Printer private constructor() {
         }
 
         fun printJsonRequest(builder: LoggingInterceptor.Builder, body: RequestBody?, url: String, headers: Headers, method: String) {
-            val tag = builder.getTag(true)
+            val tag = builder.requestTag
             if (!isEmpty(headers.toString()) || body != null) {
-                builder.logger.log(builder.level, tag, UP_LINE)////上线
-                builder.logger.log(builder.level, tag, "$DEFAULT_LINE--> $method $url")  //url行
+                builder.logger.log(builder.logLevel, tag, UP_LINE)////上线
+                builder.logger.log(builder.logLevel, tag, "$DEFAULT_LINE--> $method $url")  //url行
                 if (!isEmpty(headers.toString())) {
                     //打印headers
                     val headersArr = dotHeaders(headers).split(LINE_SEPARATOR).toTypedArray()
-                    logLines(builder.logger, builder.level, tag, headersArr)
+                    logLines(builder.logger, builder.logLevel, tag, headersArr)
                 }
                 if (body != null) {
                     val requestBody = if (builder.isNeedFormatJson) bodyToString(body, headers) else {
@@ -46,14 +46,14 @@ class Printer private constructor() {
                         }
                     }
 
-                    builder.logger.log(builder.level, tag, LINE_SEPARATOR)//换行
-                    logLines(builder.logger, builder.level, tag, requestBody.split(LINE_SEPARATOR).toTypedArray())
+                    builder.logger.log(builder.logLevel, tag, LINE_SEPARATOR)//换行
+                    logLines(builder.logger, builder.logLevel, tag, requestBody.split(LINE_SEPARATOR).toTypedArray())
                     val bodySize = "(${body.contentLength()}-byte body)"
-                    builder.logger.log(builder.level, tag, "--> END $method $bodySize")
+                    builder.logger.log(builder.logLevel, tag, "$DEFAULT_LINE--> END $method $bodySize")
                 }
-                builder.logger.log(builder.level, tag, END_LINE)
+                builder.logger.log(builder.logLevel, tag, END_LINE)
             } else {
-                builder.logger.log(builder.level, tag, "--> $method $url")  //url行
+                builder.logger.log(builder.logLevel, tag, "$DEFAULT_LINE--> $method $url")  //url行
             }
         }
 
@@ -61,25 +61,25 @@ class Printer private constructor() {
                               code: Int, headers: Headers, response: Response,
                               message: String, responseUrl: String, isHttps: Boolean) {
 
-            val tag = builder.getTag(false)
+            val tag = builder.responseTag
 
-            builder.logger.log(builder.level, tag, UP_LINE)////上线
+            builder.logger.log(builder.logLevel, tag, UP_LINE)////上线
             //  <-- 200 OK http://op.juhe.cn/onebox/movie/video (760ms)
-            builder.logger.log(builder.level, tag, "$DEFAULT_LINE<-- $code $message $responseUrl (${chainMs}ms)")//url行
+            builder.logger.log(builder.logLevel, tag, "$DEFAULT_LINE<-- $code $message $responseUrl (${chainMs}ms)")//url行
 
             if (!isEmpty(headers.toString())) {
                 //打印headers
                 val headersArr = dotHeaders(headers).split(LINE_SEPARATOR).toTypedArray()
-                logLines(builder.logger, builder.level, tag, headersArr)
+                logLines(builder.logger, builder.logLevel, tag, headersArr)
             }
 
             if (response.body() != null) {
                 val responseBody = LINE_SEPARATOR + getResponseBody(builder, response)
-                logLines(builder.logger, builder.level, tag, responseBody.split(LINE_SEPARATOR).toTypedArray())
+                logLines(builder.logger, builder.logLevel, tag, responseBody.split(LINE_SEPARATOR).toTypedArray())
             }
 
-            builder.logger.log(builder.level, tag, "$DEFAULT_LINE<-- END ${if (isHttps) "HTTPS" else "HTTP"}")
-            builder.logger.log(builder.level, tag, END_LINE)
+            builder.logger.log(builder.logLevel, tag, "$DEFAULT_LINE<-- END ${if (isHttps) "HTTPS" else "HTTP"}")
+            builder.logger.log(builder.logLevel, tag, END_LINE)
 
         }
 
@@ -141,7 +141,7 @@ class Printer private constructor() {
         }
 
 
-        private fun logLines(logger: Logger, level: Int, tag: String, lines: Array<String>) {
+        private fun logLines(logger: Logger?, level: Int, tag: String, lines: Array<String>) {
             lines.forEach { line ->
                 val lineLength = line.length
                 val maxLogSize = 110
@@ -150,7 +150,7 @@ class Printer private constructor() {
                     var end = (i + 1) * maxLogSize
                     end = if (end > line.length) line.length else end
 
-                    logger.log(level, tag, DEFAULT_LINE + line.substring(start, end))
+                    logger?.log(level, tag, DEFAULT_LINE + line.substring(start, end))
                 }
             }
         }
@@ -213,10 +213,10 @@ class Printer private constructor() {
             return message
         }
 
-        fun printFailed(tag: String, builder: LoggingInterceptor.Builder) {
-            builder.logger.log(builder.level, tag, UP_LINE)
-            builder.logger.log(builder.level, tag, DEFAULT_LINE + "Response failed")
-            builder.logger.log(builder.level, tag, END_LINE)
+        fun printFailed(builder: LoggingInterceptor.Builder, e: Exception) {
+            builder.logger.log(builder.logLevel, builder.responseTag, UP_LINE)
+            builder.logger.log(builder.logLevel, builder.responseTag, DEFAULT_LINE + "Response failed : ${e.message}")
+            builder.logger.log(builder.logLevel, builder.responseTag, END_LINE)
         }
     }
 

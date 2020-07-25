@@ -2,11 +2,13 @@ package dinson.customview.activity
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
-import android.view.View
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.gson.Gson
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -21,8 +23,6 @@ import dinson.customview.model._007CurrencyModel
 import dinson.customview.utils.AppCacheUtil
 import dinson.customview.utils.SPUtils
 import dinson.customview.weight._003toast.LoadToast
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
-import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.swipelayout.SwipeItemLayout
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer
@@ -98,9 +98,11 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
         mAdapter = _007CurrencyAdapter(this, mUserCurrencyData, this)
         rvContent.layoutManager = LinearLayoutManager(this)
         rvContent.adapter = mAdapter
-        rvContent.setOnRvItemClickListener { _, _, position ->
-            mAdapter.onItemChange(position)//条目的选中改变，更换货币基数
-        }
+        rvContent.setOnRvItemClickListener(object : RvItemClickSupport.OnRvItemClickListener {
+            override fun onItemClicked(recyclerView: RecyclerView, view: View, position: Int) {
+                mAdapter.onItemChange(position)//条目的选中改变，更换货币基数
+            }
+        })
 
         //recycleView notifyItemChanged刷新时闪烁问题
         (rvContent.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
@@ -108,14 +110,14 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
         mDrawerAdapter = _007LeftDrawerAdapter(mCurrencyData)
         rvLeft.adapter = mDrawerAdapter
         rvLeft.layoutManager = LinearLayoutManager(this)
-        RvItemClickSupport.addTo(rvLeft).setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+        RvItemClickSupport.addTo(rvLeft).setOnItemClickListener { _, _, position ->
             val bean = mCurrencyData[position]
             mCurrencyData[position] = mAdapter.mDataList[mNeedChangeItem]
             mDrawerAdapter.notifyItemChanged(position)
             bean.baseRate = mAllDataRates?.get(bean.currencyCode).toString().toDouble()
             mAdapter.onItemReplaced(mNeedChangeItem, bean)
             drawerLayout.closeDrawers()
-        })
+        }
 
         //侧滑布局禁止手势滑动
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)

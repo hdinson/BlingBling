@@ -18,8 +18,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * @author deadline
- * <p>
  * 解决drawable不与文字居中的问题
  */
 @SuppressWarnings("unused")

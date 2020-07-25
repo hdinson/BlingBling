@@ -24,8 +24,6 @@ object RxBling {
     fun init(context: Context): RxBling {
         mContext = context
         mIsDebug = context.applicationInfo != null && (context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
-        Log.e("heheda", "调用: $mIsDebug")
-        Toast.makeText(context, "调用: $mIsDebug", Toast.LENGTH_LONG).show()
         return this
     }
 
@@ -39,7 +37,6 @@ object RxBling {
         }
 
     fun isDebug(): Boolean {
-        Log.e("heheda", "调用2: $mIsDebug")
         return mIsDebug ?: true
     }
 

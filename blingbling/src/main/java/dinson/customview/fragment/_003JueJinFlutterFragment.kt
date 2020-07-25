@@ -14,7 +14,7 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.fragment_003_juejin_flutter.*
@@ -58,7 +58,7 @@ class _003JueJinFlutterFragment : ViewPagerLazyFragment() {
 
 
     override fun lazyInit() {
-        crfFlutterContent.recyclerView.addItemDecoration(LinearItemDecoration(context))
+        crfFlutterContent.recyclerView.addItemDecoration(LinearItemDecoration(crfFlutterContent.context))
         crfFlutterContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
                 getDataFromServer(true)
@@ -71,9 +71,9 @@ class _003JueJinFlutterFragment : ViewPagerLazyFragment() {
         crfFlutterContent.isRefreshing = true
 
         RvItemClickSupport.addTo(crfFlutterContent.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, view, position ->
+            .setOnItemClickListener { _, view, position ->
                 CommonWebActivity.start(view.context, mData[position].originalUrl)
-            })
+            }
     }
 
     private fun getDataFromServer(isRefresh: Boolean) {

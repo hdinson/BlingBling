@@ -1,6 +1,9 @@
 package dinson.customview.activity
 
 import android.os.Bundle
+import com.dinson.blingbase.utils.DateUtils
+import com.dinson.blingbase.utils.SystemBarModeUtils
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._002ZhihuListAdapter
@@ -10,10 +13,6 @@ import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.logd
-import com.dinson.blingbase.utils.DateUtils
-import dinson.customview.utils.SystemBarModeUtils
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
-import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 
@@ -57,9 +56,9 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         flCustomRefreshView.isRefreshing = true
         flCustomRefreshView.setEmptyView("")
         RvItemClickSupport.addTo(flCustomRefreshView.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+            .setOnItemClickListener { _, _, position ->
                 _002ZhihuTucaoContentActivity.start(this, mData[position])
-            })
+            }
     }
 
     //
@@ -95,7 +94,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         val data = ZhiHuDbUtils.getLocalDataBefore(mData.last().date)
         //显示本地数据
         if (data.isNotEmpty()) {
-            logd{"本地有更多数据"}
+            logd { "本地有更多数据" }
             val index = mData.size - 2
             mData.addAll(data)
             mAdapter.notifyItemChanged(index)
@@ -103,7 +102,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
             return
         }
         //请求网络加载更多数据
-        logd{"请求网络加载更多数据"}
+        logd { "请求网络加载更多数据" }
         //拼接URL
         if (mData.isEmpty()) return
         var timestamp = DateUtils.str2int(mData.last().date.toString(), "yyyyMMdd")

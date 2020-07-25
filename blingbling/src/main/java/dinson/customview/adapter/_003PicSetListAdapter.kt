@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_003_pic_set_list.view.*
 /**
  * 妹子图 图集
  */
-class _003PicSetListAdapter(dataList: List<Uri>)
+class _003PicSetListAdapter(dataList: MutableList<Uri>)
     : CommonAdapter<Uri>(dataList) {
 
     private val options = RequestOptions()

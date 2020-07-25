@@ -6,7 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dinson.blingbase.kotlin.toasty
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+import com.dinson.blingbase.utils.SystemBarModeUtils
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -17,7 +18,6 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.utils.AESUtils
 import dinson.customview.utils.StringUtils
-import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight._003weight.DecorationLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
 import dinson.customview.weight.refreshview.CustomRefreshView
@@ -80,10 +80,10 @@ class _003PicSetListActivity : BaseActivity() {
         flCustomRefreshView.setEmptyView("")
         flCustomRefreshView.loadMoreEnable = false
         RvItemClickSupport.addTo(flCustomRefreshView.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, pos ->
+            .setOnItemClickListener { _, _, pos ->
                 decorationLayout.attachImageWatcher(mPicHelper)
                 mPicHelper.show(mData, pos)
-            })
+            }
     }
 
     /**
@@ -114,7 +114,7 @@ class _003PicSetListActivity : BaseActivity() {
             }).addToManaged()
     }
 
-    private val decorationLayout by lazy {   DecorationLayout(this)}
+    private val decorationLayout by lazy { DecorationLayout(this) }
 
     private val mPicHelper by lazy {
         ImageWatcherHelper.with(this, GlideSimpleLoader())

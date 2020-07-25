@@ -17,7 +17,7 @@ import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -85,9 +85,9 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(LinearItemDecoration(this@MainActivity))
         }
-        RvItemClickSupport.addTo(rvContent).setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+        RvItemClickSupport.addTo(rvContent).setOnItemClickListener { _, _, position ->
             startActivity(Intent(this, mContentData[position].name))
-        })
+        }
         //mu5Viewpager.setData(mHeadData, this)
     }
 

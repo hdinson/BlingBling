@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.google.android.material.tabs.TabLayout
 import dinson.customview.R
 import dinson.customview._global.BaseFragment
-import dinson.customview.utils.SystemBarModeUtils
 
 import kotlinx.android.synthetic.main.fragment_003_information.*
 import java.util.ArrayList

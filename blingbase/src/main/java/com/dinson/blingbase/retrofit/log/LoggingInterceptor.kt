@@ -2,28 +2,29 @@ package com.dinson.blingbase.retrofit.log
 
 import okhttp3.*
 import okhttp3.MediaType.parse
-import okhttp3.internal.platform.Platform.INFO
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class LoggingInterceptor private constructor(private val builder: Builder) : Interceptor {
+class LoggingInterceptor(val builder: Builder) : Interceptor {
+
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = addQueryAndHeaders(chain.request())
 
-        printlnRequestLog(request)
+        if (builder.isLoggerEnabled) printlnRequestLog(request)
 
         val startNs = System.nanoTime()
         val response: Response
         try {
             response = proceedResponse(chain, request)
         } catch (e: Exception) {
-            Printer.printFailed(builder.getTag(false), builder)
+            Printer.printFailed(builder, e)
             throw e
         }
-        val receivedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
-
-        printlnResponseLog(receivedMs, response, request)
+        if (builder.isLoggerEnabled) {
+            val receivedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
+            printlnResponseLog(receivedMs, response, request)
+        }
         return response
     }
 
@@ -64,18 +65,22 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
 
     private fun addQueryAndHeaders(request: Request): Request {
         val requestBuilder = request.newBuilder()
-        builder.headers.keys.forEach { key ->
-            builder.headers[key]?.let {
-                requestBuilder.addHeader(key, it)
-            }
+        builder.headers.forEach {
+            requestBuilder.addHeader(it.key, it.value)
+        }
+        builder.dyHeaders.forEach {
+            val function = it.value
+            val value = function()
+            if (value.isNotEmpty())
+                requestBuilder.addHeader(it.key, value)
         }
         val httpUrlBuilder: HttpUrl.Builder? = request.url().newBuilder(request.url().toString())
         httpUrlBuilder?.let {
-            builder.httpUrl.keys.forEach { key ->
-                httpUrlBuilder.addQueryParameter(key, builder.httpUrl[key])
+            builder.queryParam.keys.forEach { key ->
+                httpUrlBuilder.addQueryParameter(key, builder.queryParam[key])
             }
-            builder.httpUrl2.keys.forEach { key ->
-                val function = builder.httpUrl2[key]
+            builder.dyQueryParam.keys.forEach { key ->
+                val function = builder.dyQueryParam[key]
                 if (function != null) {
                     val value = function()
                     if (value.isNotEmpty())
@@ -88,90 +93,89 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
 
     @Suppress("unused")
     class Builder {
+
         val headers: HashMap<String, String> = HashMap()
-        val httpUrl: HashMap<String, String> = HashMap()
-        val httpUrl2: HashMap<String, () -> String> = HashMap()
+        val dyHeaders: HashMap<String, () -> String> = HashMap()
+        val queryParam: HashMap<String, String> = HashMap()
+        val dyQueryParam: HashMap<String, () -> String> = HashMap()
 
-        var level: Int = INFO
-            private set
-        private var requestTag: String = TAG
-        private var responseTag: String = TAG
-
+        //Log
         var logger: Logger = Logger.DEFAULT
-            private set
+
+        @LogLevel
+        var logLevel: Int = LogLevel.WARN
+        var isLoggerEnabled = false
+        var isNeedFormatJson = false
+        var requestTag: String = "LogHttpInfo"
+        var responseTag: String = "LogHttpInfo"
 
         //虚拟接口发送
         var isMockEnabled = false
-        var isNeedFormatJson = false
         var sleepMs: Long = 0
         var listener: BufferListener? = null
 
-        fun getTag(isRequest: Boolean): String {
-            return when (isRequest) {
-                true -> if (requestTag.isEmpty()) TAG else requestTag
-                false -> if (responseTag.isEmpty()) TAG else responseTag
-            }
-        }
 
         fun addHeader(name: String, value: String): Builder {
             headers[name] = value
             return this
         }
 
+        fun addDynamicHeader(name: String, func: () -> String): Builder {
+            dyHeaders[name] = func
+            return this
+        }
+
         fun addQueryParam(name: String, value: String): Builder {
-            httpUrl[name] = value
+            queryParam[name] = value
             return this
         }
 
         fun addDynamicQueryParam(name: String, func: () -> String): Builder {
-            httpUrl2[name] = func
+            dyQueryParam[name] = func
             return this
         }
 
-        fun tag(tag: String): Builder {
-            TAG = tag
-            return this
-        }
-
-        fun requestTag(tag: String): Builder {
+        fun setRequestTag(tag: String): Builder {
             requestTag = tag
             return this
         }
 
-        fun responseTag(tag: String): Builder {
+        fun setResponseTag(tag: String): Builder {
             responseTag = tag
             return this
         }
 
-        fun log(level: Int): Builder {
-            this.level = level
+        fun setEnableLogger(showLogger: Boolean): Builder {
+            isLoggerEnabled = showLogger
             return this
         }
 
-        fun logger(logger: Logger): Builder {
+        fun setLogLevel(@LogLevel level: Int): Builder {
+            isLoggerEnabled = true
+            logLevel = level
+            return this
+        }
+
+        fun setLogger(logger: Logger): Builder {
+            isLoggerEnabled = true
             this.logger = logger
             return this
         }
 
-        fun formatJson(needFormat: Boolean): Builder {
-            this.isNeedFormatJson = needFormat
+        fun setFormatJson(needFormat: Boolean): Builder {
+            isNeedFormatJson = needFormat
             return this
         }
 
-        fun enableMock(useMock: Boolean, sleep: Long, listener: BufferListener?): Builder {
+        fun setMock(useMock: Boolean, sleep: Long, listener: BufferListener): Builder {
             isMockEnabled = useMock
             sleepMs = sleep
             this.listener = listener
             return this
         }
 
-
         fun build(): LoggingInterceptor {
             return LoggingInterceptor(this)
-        }
-
-        companion object {
-            private var TAG = "LogHttpInfo"
         }
     }
 }

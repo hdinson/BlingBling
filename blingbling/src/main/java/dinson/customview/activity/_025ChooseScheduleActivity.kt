@@ -9,7 +9,7 @@ import dinson.customview.utils.SPUtils
 import dinson.customview.weight._025provider.WidgetProviderBig
 import dinson.customview.weight._025provider.WidgetProviderMiddle
 import dinson.customview.weight._025provider.WidgetProviderSmall
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import kotlinx.android.synthetic.main.activity__025_choose_schedule.*
 
@@ -34,7 +34,7 @@ class _025ChooseScheduleActivity : BaseActivity() {
         rcvScheduleList.adapter = _025ChooseScheduleListAdapter(scheduleList)
         rcvScheduleList.layoutManager = LinearLayoutManager(this)
         RvItemClickSupport.addTo(rcvScheduleList)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+            .setOnItemClickListener { _, _, position ->
                 val schedule = scheduleList[position]
                 val flag = intent.getStringExtra(EXTRA_FLAG)
                 val ids = intent.getIntExtra(EXTRA_ID, 0)
@@ -44,7 +44,7 @@ class _025ChooseScheduleActivity : BaseActivity() {
                     FLAG_SMALL -> WidgetProviderSmall.sendToSetData(this, ids, schedule.id)
                 }
                 onBackPressed()
-            })
+            }
     }
 
     override fun finishWithAnim() = false

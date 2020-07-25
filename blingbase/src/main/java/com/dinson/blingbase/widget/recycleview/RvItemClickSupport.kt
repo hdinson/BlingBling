@@ -1,7 +1,7 @@
 package com.dinson.blingbase.widget.recycleview
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.dinson.blingbase.R
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.longClick
@@ -26,15 +26,22 @@ class RvItemClickSupport private constructor(private val mRecyclerView: Recycler
             support?.detach(view)
             return support
         }
+
     }
 
-    fun setOnItemClickListener(listener: OnRvItemClickListener): RvItemClickSupport {
-        mOnItemClickListener = listener
+
+    private var mItemLongClick: ((recyclerView: RecyclerView, view: View, position: Int) -> Boolean)? = null
+
+
+    fun setOnItemLongClickListener(func: (recyclerView: RecyclerView, view: View, position: Int) -> Boolean): RvItemClickSupport {
+        mItemLongClick = func
         return this
     }
 
-    fun setOnItemLongClickListener(listener: OnRvItemLongClickListener): RvItemClickSupport {
-        mOnItemLongClickListener = listener
+    private var mItemClick: ((recyclerView: RecyclerView, view: View, position: Int) -> Unit)? = null
+
+    fun setOnItemClickListener(func: (recyclerView: RecyclerView, view: View, position: Int) -> Unit): RvItemClickSupport {
+        mItemClick = func
         return this
     }
 
@@ -43,27 +50,19 @@ class RvItemClickSupport private constructor(private val mRecyclerView: Recycler
     /**                             内部实现                                                               **/
     /******************************************************************************************************/
 
-    private var mOnItemClickListener: OnRvItemClickListener? = null
-    private var mOnItemLongClickListener: OnRvItemLongClickListener? = null
-
 
     private val mAttachListener = object : RecyclerView.OnChildAttachStateChangeListener {
         override fun onChildViewAttachedToWindow(view: View) {
-            if (mOnItemClickListener != null) {
+            mItemClick?.apply {
                 view.click {
-                    mOnItemClickListener?.apply {
-                        val pos = mRecyclerView.getChildViewHolder(it).adapterPosition
-                        this.onItemClicked(mRecyclerView, it, pos)
-                    }
+                    val pos = mRecyclerView.getChildViewHolder(it).adapterPosition
+                    this(mRecyclerView, it, pos)
                 }
             }
-            if (mOnItemLongClickListener != null) {
+            mItemLongClick?.apply {
                 view.longClick {
-                    mOnItemLongClickListener?.apply {
-                        val pos = mRecyclerView.getChildViewHolder(it).adapterPosition
-                        return@longClick this.onItemLongClicked(mRecyclerView, it, pos)
-                    }
-                    false
+                    val pos = mRecyclerView.getChildViewHolder(it).adapterPosition
+                    this(mRecyclerView, it, pos)
                 }
             }
         }
@@ -83,4 +82,41 @@ class RvItemClickSupport private constructor(private val mRecyclerView: Recycler
         view.removeOnChildAttachStateChangeListener(mAttachListener)
         view.setTag(R.id.itemClickSupport, null)
     }
+
+    /**
+     * recycleView点击事件
+     */
+    interface OnRvItemClickListener {
+        fun onItemClicked(recyclerView: RecyclerView, view: View, position: Int)
+    }
+
+    /**
+     * recycleView长点击事件
+     */
+    interface OnRvItemLongClickListener {
+        fun onItemLongClicked(recyclerView: RecyclerView, view: View, position: Int): Boolean
+    }
+/*
+    interface OnItemClick {
+        fun onClicked(recyclerView: RecyclerView, view: View, position: Int)
+        fun onLongClicked(recyclerView: RecyclerView, view: View, position: Int): Boolean
+    }
+
+    class OnItemClickImp(private val onClick: (recyclerView: RecyclerView, view: View, position: Int) -> Unit,
+                         private val onLongClick: (recyclerView: RecyclerView, view: View, position: Int) -> Boolean) : OnItemClick {
+        override fun onClicked(recyclerView: RecyclerView, view: View, position: Int) {
+            onClick(recyclerView, view, position)
+        }
+
+        override fun onLongClicked(recyclerView: RecyclerView, view: View, position: Int): Boolean {
+            return onLongClick(recyclerView, view, position)
+        }
+
+    }
+
+    private var mCallBack: OnItemClickImp? = null
+    fun setOnItemClickListener(callback: OnItemClickImp) {
+        mCallBack = callback
+    }
+ */
 }

@@ -7,14 +7,13 @@ import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.os.Bundle
 import android.provider.Settings
-import com.just.agentweb.AgentWebConfig.debug
 import dinson.customview.R
 import dinson.customview._global.BaseNfcActivity
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.isNfcEnable
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.kotlin.logd
 import dinson.customview.utils.NfcUtils
-import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__018_nfc.*
 
 

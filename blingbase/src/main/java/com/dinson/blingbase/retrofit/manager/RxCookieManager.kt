@@ -1,4 +1,4 @@
-package dinson.customview.http.manager
+package com.dinson.blingbase.retrofit.manager
 
 import okhttp3.Cookie
 import okhttp3.CookieJar
@@ -7,7 +7,7 @@ import okhttp3.HttpUrl
 /**
  * Cookie管理器
  */
-class CookieManager : CookieJar {
+class RxCookieManager : CookieJar {
     private var cookieStore = InDiskCookieStore()
 
     override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {

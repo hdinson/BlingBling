@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_003_juejin_article.view.*
 /**
  *掘金文章适配器
  */
-class _003JueJinArticleAdapter(dataList: List<JueJinResponse.DBean.EntrylistBean>)
+class _003JueJinArticleAdapter(dataList: MutableList<JueJinResponse.DBean.EntrylistBean>)
     : CommonAdapter<JueJinResponse.DBean.EntrylistBean>(dataList) {
 
 

@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 /**
  *玩安卓 "我的喜欢" 列表适配器
  */
-class _001WanAndroidLikeListAdapter(dataList: List<WanAndArticle>,
+class _001WanAndroidLikeListAdapter(dataList: MutableList<WanAndArticle>,
                                     private val likeClickListener: _001OnLikeViewClickListener)
     : CommonAdapter<WanAndArticle>(dataList) {
 
