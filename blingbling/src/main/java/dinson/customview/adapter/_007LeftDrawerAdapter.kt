@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_007_left_drawer.view.*
 /**
  * 选择货币列表适配器
  */
-class _007LeftDrawerAdapter(dataList: List<_007CurrencyModel>)
+class _007LeftDrawerAdapter(dataList: MutableList<_007CurrencyModel>)
     : CommonAdapter<_007CurrencyModel>(dataList) {
 
     override fun getLayoutId(viewType: Int) = R.layout.item_007_left_drawer

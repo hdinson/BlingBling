@@ -11,9 +11,9 @@ object MainActivityModelUtil {
     /**
      * 内容的数据集
      */
-    val dataList: List<ClassBean> by lazy {
-        listOf(
-             ClassBean(_001WanAndroidActivity::class.java, "WanAndroid",
+    val dataList: ArrayList<ClassBean> by lazy {
+        arrayListOf(
+            ClassBean(_001WanAndroidActivity::class.java, "WanAndroid",
                 "WanAndroid is a BBS created by many passionate youth who love Android.",
                 "FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp"),
             ClassBean(_002ZhihuTucaoListActivity::class.java, "ZhiHuDaily",

@@ -1,11 +1,5 @@
 package dinson.customview.utils
 
-import dinson.customview.http.manager.Pick
-import org.jsoup.Jsoup
-import org.jsoup.select.Elements
-import org.w3c.dom.Document
-import org.w3c.dom.Element
-
 
 object JsoupUtils{
 

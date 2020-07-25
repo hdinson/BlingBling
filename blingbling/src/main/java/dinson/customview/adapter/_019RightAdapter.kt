@@ -13,7 +13,7 @@ import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 /**
  * 联动右边的适配器
  */
-class _019RightAdapter(dataList: List<MonsterHunter.DataBean.MonsterBean>)
+class _019RightAdapter(dataList: MutableList<MonsterHunter.DataBean.MonsterBean>)
     : CommonAdapter<MonsterBean>(dataList) {
 
     override fun getLayoutId(viewType: Int) = if (viewType == 0) R.layout.item_019_right_title else R.layout.item_019_right_normal

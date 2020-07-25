@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
 import com.dinson.blingbase.kotlin.getStatusBarHeight
 import java.util.regex.Pattern
 
@@ -28,36 +29,35 @@ object SystemBarModeUtils {
     /******************************************************************************************************/
     /**                             对外API                                                               **/
     /******************************************************************************************************/
+    @Suppress("unused")
     fun immersiveResource(activity: Activity, @ColorRes color: Int = android.R.color.white,
                           @FloatRange(from = 0.0, to = 1.0) alpha: Float = 1f) {
         immersive(activity, ContextCompat.getColor(activity, color), alpha)
     }
 
+    fun immersive(activity: Activity, @ColorInt color: Int = 0xffffff,
+                  @FloatRange(from = 0.0, to = 1.0) alpha: Float = 0f) {
+        immersive(activity.window, color, alpha)
+    }
 
-      fun immersive(activity: Activity, @ColorInt color: Int = 0xffffff,
-                          @FloatRange(from = 0.0, to = 1.0) alpha: Float = 0f) {
-        val window = activity.window
-        when {
-            Build.VERSION.SDK_INT >= 21 -> {
-                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                window.statusBarColor = mixtureColor(color, alpha)
 
-                var systemUiVisibility = window.decorView.systemUiVisibility
-                systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                window.decorView.systemUiVisibility = systemUiVisibility
-            }
-            Build.VERSION.SDK_INT >= 19 -> {
-                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                setTranslucentView(window.decorView as ViewGroup, color, alpha)
-            }
-            Build.VERSION.SDK_INT > 16 -> {
-                var systemUiVisibility = window.decorView.systemUiVisibility
-                systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                window.decorView.systemUiVisibility = systemUiVisibility
-            }
+    fun immersive(window: Window, @ColorInt color: Int = 0xffffff,
+                  @FloatRange(from = 0.0, to = 1.0) alpha: Float = 0f) {
+
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = mixtureColor(color, alpha)
+
+        var systemUiVisibility = window.decorView.systemUiVisibility
+        systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        window.decorView.systemUiVisibility = systemUiVisibility
+
+        //适配刘海屏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val lp = window.attributes
+            lp.layoutInDisplayCutoutMode = LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            window.attributes = lp
         }
     }
 
@@ -88,9 +88,11 @@ object SystemBarModeUtils {
     }
 
     /** 判断是否为MIUI6以上  */
+    @Suppress("unused")
     fun isMIUI6Later() = isMIUI6LaterInner()
 
     /** 判断是否Flyme4以上  */
+    @Suppress("unused")
     fun isFlyme4Later() = isFlyme4LaterInner()
 
 
@@ -109,6 +111,7 @@ object SystemBarModeUtils {
     /**
      * 创建假的透明栏
      */
+    @Suppress("unused")
     private fun setTranslucentView(container: ViewGroup, color: Int, @FloatRange(from = 0.0, to = 1.0) alpha: Float) {
         if (Build.VERSION.SDK_INT >= 19) {
             val mixtureColor = mixtureColor(color, alpha)

@@ -7,7 +7,7 @@ import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_025_choose_schedule.view.*
 
-class _025ChooseScheduleListAdapter(dataList: List<_025Schedule>)
+class _025ChooseScheduleListAdapter(dataList: MutableList<_025Schedule>)
     : CommonAdapter<_025Schedule>(dataList) {
 
 

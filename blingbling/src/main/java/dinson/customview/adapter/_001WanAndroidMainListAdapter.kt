@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  *玩安卓列表适配器
  */
 class _001WanAndroidMainListAdapter(
-    dataList: List<WanAndArticle>,
+    dataList: MutableList<WanAndArticle>,
     private val likeClickListener: _001OnLikeViewClickListener)
     : CommonAdapter<WanAndArticle>(dataList) {
 

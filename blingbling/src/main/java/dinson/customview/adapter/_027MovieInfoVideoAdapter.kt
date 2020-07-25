@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_027_movie_info_video.view.*
 /**
  * 电影详情中播放的视频item
  */
-class _027MovieInfoVideoAdapter(dataList: List<MovieVideo.ResponseBean.VideosBean>)
+class _027MovieInfoVideoAdapter(dataList: MutableList<MovieVideo.ResponseBean.VideosBean>)
     : CommonAdapter<MovieVideo.ResponseBean.VideosBean>(dataList) {
 
     override fun getLayoutId(viewType: Int) = R.layout.item_027_movie_info_video

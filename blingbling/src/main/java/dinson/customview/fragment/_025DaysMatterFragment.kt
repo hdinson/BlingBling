@@ -17,7 +17,7 @@ import dinson.customview.utils.SPUtils
 import dinson.customview.weight._025provider.WidgetProviderBig
 import dinson.customview.weight._025provider.WidgetProviderMiddle
 import dinson.customview.weight._025provider.WidgetProviderSmall
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import kotlinx.android.synthetic.main.fragment_025_days_matter.*
 import org.greenrobot.eventbus.EventBus
@@ -40,9 +40,9 @@ class _025DaysMatterFragment : ViewPagerLazyFragment() {
         mAdapter = _025ScheduleMainListAdapter(mData)
         crvScheduleList.adapter = mAdapter
         RvItemClickSupport.addTo(crvScheduleList)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+            .setOnItemClickListener { _, _, position ->
                 _025AddScheduleActivity.start(context!!, mData[position])
-            })
+            }
         initData()
     }
 

@@ -142,15 +142,18 @@ class CircleImageView @JvmOverloads constructor(
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         when (event!!.action) {
             MotionEvent.ACTION_DOWN -> {
-                performClick()
+                //performClick()
                 pressPaint.alpha = (mSettings.pressAlpha * 255).toInt()
                 invalidate()
             }
             MotionEvent.ACTION_MOVE -> {
             }
-            else -> {
+            MotionEvent.ACTION_UP -> {
                 pressPaint.alpha = 0
                 invalidate()
+            }
+            else -> {
+                performClick()
             }
         }
         return super.onTouchEvent(event)

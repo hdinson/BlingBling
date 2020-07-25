@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_027_actresses.view.*
 /**
  * 女演员（名字和图片）
  */
-class _027ActressesAdapter(dataList: List<MovieInfo.Actress>)
+class _027ActressesAdapter(dataList: MutableList<MovieInfo.Actress>)
     : CommonAdapter<MovieInfo.Actress>(dataList) {
 
     override fun getLayoutId(viewType: Int) = R.layout.item_027_actresses

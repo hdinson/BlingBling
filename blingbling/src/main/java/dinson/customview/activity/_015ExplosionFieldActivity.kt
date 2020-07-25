@@ -7,7 +7,7 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._015AppIconAdapter
 import dinson.customview.model._015AppIcon
 import dinson.customview.weight._015explosionview.ExplosionField
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import kotlinx.android.synthetic.main.activity__015_explosion_field.*
 
@@ -26,8 +26,8 @@ class _015ExplosionFieldActivity : BaseActivity() {
         val mAdapter = _015AppIconAdapter(mDataList)
         rvContent.adapter = mAdapter
         RvItemClickSupport.addTo(rvContent)
-            .setOnItemClickListener(OnRvItemClickListener { _, view, position ->
-                if (position<0)return@OnRvItemClickListener
+            .setOnItemClickListener { _, view, position ->
+                if (position < 0) return@setOnItemClickListener
                 mExplosionField.explode(view)
                 mDataList.removeAt(position)
                 mAdapter.notifyItemRemoved(position)
@@ -36,7 +36,7 @@ class _015ExplosionFieldActivity : BaseActivity() {
                     mDataList.addAll(getAppIconData())
                     mAdapter.notifyItemRangeInserted(0, mDataList.size)
                 }
-            })
+            }
         tvDesc.setOnClickListener {
             mExplosionField.explode(it)
             it.setOnClickListener(null)

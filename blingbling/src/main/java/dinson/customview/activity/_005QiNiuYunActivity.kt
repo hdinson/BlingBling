@@ -4,19 +4,15 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import dinson.customview.kotlin.logi
-import dinson.customview.kotlin.logv
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.MD5
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
-import com.dinson.blingbase.widget.recycleview.OnRvItemLongClickListener
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.gson.Gson
 import com.luck.picture.lib.PictureSelector
@@ -31,10 +27,11 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._005QiNiuPicAdapter
 import dinson.customview.http.RxSchedulers
+import dinson.customview.kotlin.logi
+import dinson.customview.kotlin.logv
 import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.utils.SPUtils
-import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog.OnItemClickListener
 import dinson.customview.weight.dialog._005ContentMenuDialog
 import dinson.customview.weight.dialog._005QiNiuConfigDialog
@@ -84,14 +81,14 @@ class _005QiNiuYunActivity : BaseActivity() {
             overScrollMode = View.OVER_SCROLL_NEVER
 
             RvItemClickSupport.addTo(this)
-                .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+                .setOnItemClickListener { _, _, position ->
                     val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                     val bean = mListData[position]
                     val data = ClipData.newPlainText("Label", bean.finalUrl)
                     cm.primaryClip = data
                     logv { bean.finalUrl }
                     "已复制".toasty()
-                }).setOnItemLongClickListener(OnRvItemLongClickListener { _, _, position ->
+                }.setOnItemLongClickListener { _, _, position ->
                     val dialog = _005ContentMenuDialog(this@_005QiNiuYunActivity)
                     val items = arrayOf("复制", "黏贴")
                     dialog.setDatas(items, OnItemClickListener {
@@ -99,9 +96,10 @@ class _005QiNiuYunActivity : BaseActivity() {
                         logi { mListData[position].toString() }
                     })
                     dialog.show()
-                    return@OnRvItemLongClickListener true
-                })
+                    return@setOnItemLongClickListener true
+                }
         }
+
         flCustomRefreshView.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
                 if (mCurrentConfig != null) {
@@ -235,24 +233,7 @@ class _005QiNiuYunActivity : BaseActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                PictureConfig.CHOOSE_REQUEST -> {
-                    // 图片选择结果回调
-                    val selectList = PictureSelector.obtainMultipleResult(data)
-                    // 例如 LocalMedia 里面返回三种path
-                    // 1.media.getPath(); 为原图path
-                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
-                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
-                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
-                    val path = selectList[0].path
-                    uploadImg2QiNiu(path)
-                }
-            }
-        }
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.groupId == R.id.iconGroup) {
@@ -322,7 +303,7 @@ class _005QiNiuYunActivity : BaseActivity() {
      */
     private fun uploadImg2QiNiu(path: String) {
         "正在上传".toasty()
-        mCurrentConfig?.let { config->
+        mCurrentConfig?.let { config ->
             val upToken = Auth.create(config.AccessKey, config.SecretKey).uploadToken(config.Bucket)
             val zone = config.getZone()
             val file = File(path)

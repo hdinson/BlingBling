@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_009_panorana_content.view.*
 /**
  * googleVR列表数据适配器
  */
-class _009ContentAdapter(dataList: List<_009PanoramaImageModel>)
+class _009ContentAdapter(dataList: MutableList<_009PanoramaImageModel>)
     : CommonAdapter<_009PanoramaImageModel>(dataList) {
 
     override fun getLayoutId(viewType: Int): Int = R.layout.item_009_panorana_content

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_003_meizitu_nine_grid.view.*
 /**
  * 妹子图精选，最新，最热，图集样式的适配器
  */
-class _003MeiZiTuNineGridAdapter(dataList: List<MeiZiTuNineGrid>)
+class _003MeiZiTuNineGridAdapter(dataList: MutableList<MeiZiTuNineGrid>)
     : CommonAdapter<MeiZiTuNineGrid>(dataList) {
 
     private var mCallback: MessagePicturesLayout.Callback? = null

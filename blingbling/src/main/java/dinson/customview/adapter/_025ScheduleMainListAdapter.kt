@@ -8,7 +8,7 @@ import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_025_schedule_main.view.*
 import kotlin.math.abs
 
-class _025ScheduleMainListAdapter(dataList: List<_025Schedule>)
+class _025ScheduleMainListAdapter(dataList: MutableList<_025Schedule>)
     : CommonAdapter<_025Schedule>(dataList) {
 
 

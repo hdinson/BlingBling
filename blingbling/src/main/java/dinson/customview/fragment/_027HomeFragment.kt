@@ -9,7 +9,7 @@ import dinson.customview.adapter._027HomeAdapter
 import dinson.customview.entity.av.Movie
 import dinson.customview.kotlin.logi
 import dinson.customview.model._027AvModel
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
@@ -49,11 +49,11 @@ class _027HomeFragment : ViewPagerLazyFragment() {
         crfHomeContent.setEmptyView("")
         crfHomeContent.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
-            RvItemClickSupport.addTo(this).setOnItemClickListener(OnRvItemClickListener { _, _, pos ->
+            RvItemClickSupport.addTo(this).setOnItemClickListener { _, _, pos ->
                 if (pos >= 0 && pos < mDataList.size) {
                     _027MovieDetailsActivity.start(context, mDataList[pos])
                 }
-            })
+            }
         }
 
     }
@@ -86,3 +86,4 @@ class _027HomeFragment : ViewPagerLazyFragment() {
     }
 
 }
+ 

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_019_left.view.*
 /**
  * 联动左侧列表适配器
  */
-class _019LeftAdapter(dataList: List<DataBean>)
+class _019LeftAdapter(dataList: MutableList<DataBean>)
     : CommonAdapter<DataBean>(dataList) {
 
     override fun getLayoutId(viewType: Int) = R.layout.item_019_left

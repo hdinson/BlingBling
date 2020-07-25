@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
+
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import dinson.customview.BuildConfig
@@ -62,9 +62,9 @@ class _009GoogleVRActivity : BaseActivity() {
             itemAnimator = null
             adapter = mAdapter
             RvItemClickSupport.addTo(this)
-                .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+                .setOnItemClickListener { _, _, position ->
                     onItemClick(position)
-                })
+                }
         }
     }
 

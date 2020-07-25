@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.EventBus
 /**
  * 视频数据适配器
  */
-class _004VideoListAdapter(dataList: List<TvShowResp.TvShow>, isEditMode: Boolean)
+class _004VideoListAdapter(dataList: MutableList<TvShowResp.TvShow>, isEditMode: Boolean)
     : CommonAdapter<TvShowResp.TvShow>(dataList), View.OnClickListener {
 
     override fun onClick(v: View) {
@@ -39,7 +39,7 @@ class _004VideoListAdapter(dataList: List<TvShowResp.TvShow>, isEditMode: Boolea
     override fun getLayoutId(viewType: Int) = R.layout.item_004_video
 
     @SuppressLint("SetTextI18n")
-    override fun convert(holder: CommonViewHolder, video: TvShowResp.TvShow, position: Int) {
+    override fun convert(holder: CommonViewHolder, bean: TvShowResp.TvShow, position: Int) {
         holder.itemView.cbVideo.apply {
             tag = position
             if (mIsEditMode) {
@@ -51,10 +51,10 @@ class _004VideoListAdapter(dataList: List<TvShowResp.TvShow>, isEditMode: Boolea
             visibility = if (mIsEditMode) View.VISIBLE else View.GONE
             setOnClickListener(this@_004VideoListAdapter)
         }
-        holder.itemView.tvTitle.text = video.tvName
-        holder.itemView.tvSubTitle.text = "更新时间: ${video.updatedAt.split(" ")[0]}"
-        if (StringUtils.isNotEmpty(video.tvIcon)) {
-            Glide.with(holder.itemView.context).load(video.tvIcon)
+        holder.itemView.tvTitle.text = bean.tvName
+        holder.itemView.tvSubTitle.text = "更新时间: ${bean.updatedAt.split(" ")[0]}"
+        if (StringUtils.isNotEmpty(bean.tvIcon)) {
+            Glide.with(holder.itemView.context).load(bean.tvIcon)
                 .into(holder.itemView.ivVideoIcon)
         }
     }
@@ -69,7 +69,7 @@ class _004VideoListAdapter(dataList: List<TvShowResp.TvShow>, isEditMode: Boolea
 
     private fun initSelectorList() {
         mSelectorList.clear()
-        (0 until mDataList.size).forEach { _ ->
+        mDataList.indices.forEach { _ ->
             mSelectorList.add(false)
         }
     }

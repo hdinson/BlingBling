@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener;
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport;
 
 /**
  * Created by AItsuki on 2017/2/23.
@@ -110,10 +110,10 @@ public class SwipeMenuRecyclerView extends RecyclerView {
     }
 
 
-    private OnRvItemClickListener mListener;
+    private RvItemClickSupport.OnRvItemClickListener mListener;
     private GestureDetector mGestureDetector;
 
-    public void setOnRvItemClickListener(OnRvItemClickListener listener) {
+    public void setOnRvItemClickListener(RvItemClickSupport.OnRvItemClickListener listener) {
         mListener = listener;
         mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override

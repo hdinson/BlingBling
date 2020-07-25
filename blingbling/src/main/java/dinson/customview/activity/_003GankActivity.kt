@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.fragment._003GirlFragment
 import dinson.customview.fragment._003InfomationFragment
-import dinson.customview.utils.SystemBarModeUtils
 import kotlinx.android.synthetic.main.activity__003_gank.*
 
 class _003GankActivity : BaseActivity() {

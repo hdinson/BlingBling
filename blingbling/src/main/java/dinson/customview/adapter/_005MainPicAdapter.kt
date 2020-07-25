@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_005_main_pic.view.*
 /**
  *玩安卓列表适配器
  */
-class _005MainPicAdapter(dataList: List<QiNiuFileInfo>, private val mBaseUrl: String)
+class _005MainPicAdapter(dataList: MutableList<QiNiuFileInfo>, private val mBaseUrl: String)
     : CommonAdapter<QiNiuFileInfo>(dataList) {
 
     //private val imageHeightMap = LinkedHashMap<Int, Int>()

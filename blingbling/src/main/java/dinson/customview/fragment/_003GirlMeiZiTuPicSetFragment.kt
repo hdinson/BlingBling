@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dinson.blingbase.kotlin.dip
+import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.R
-import dinson.customview._global.BaseFragment
 import dinson.customview.activity._003PicSetListActivity
 import dinson.customview.adapter._003MeiZiTuPicSetAdapter
 import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.MeiZiTuPicSet
 import dinson.customview.http.HttpHelper
-import com.dinson.blingbase.kotlin.dip
-import dinson.customview.kotlin.logd
 import dinson.customview.kotlin.loge
-import com.dinson.blingbase.kotlin.toasty
-import com.dinson.blingbase.widget.recycleview.OnRvItemClickListener
-import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.weight.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -64,11 +61,11 @@ abstract class _003GirlMeiZiTuPicSetFragment : ViewPagerLazyFragment() {
         crfGirlsContent.recyclerView.isVerticalScrollBarEnabled = false
 
         RvItemClickSupport.addTo(crfGirlsContent.recyclerView)
-            .setOnItemClickListener(OnRvItemClickListener { _, _, position ->
+            .setOnItemClickListener { _, _, position ->
                 if (context != null) {
                     _003PicSetListActivity.start(context!!, mData[position].id, mData[position].title)
                 }
-            })
+            }
     }
 
 

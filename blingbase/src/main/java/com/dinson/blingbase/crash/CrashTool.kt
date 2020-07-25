@@ -125,7 +125,8 @@ object CrashTool {
                     application!!.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                         var currentlyStartedActivities = 0
-                        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
+
+                        override fun onActivityCreated(activity: Activity, p1: Bundle?) {
                             if (activity.javaClass != config.getErrorActivityClass()) {
                                 lastActivityCreated = WeakReference(activity)
                                 lastActivityCreatedTimestamp = Date().time
@@ -136,7 +137,7 @@ object CrashTool {
                             }
                         }
 
-                        override fun onActivityStarted(activity: Activity) {
+                        override fun onActivityStarted(act: Activity) {
                             currentlyStartedActivities++
                             isInBackground = currentlyStartedActivities == 0
                             //Do nothing
@@ -281,7 +282,7 @@ object CrashTool {
         var process: String?
         try {
             val br = BufferedReader(FileReader("/proc/self/cmdline"))
-            process = br.readLine().trim { it <= ' ' }
+            process = br.readLine()
             br.close()
         } catch (e: IOException) {
             process = null
@@ -296,7 +297,7 @@ object CrashTool {
                     return true
                 }
             }
-        } while (tempThrow.cause.also { tempThrow = it!! } != null)
+        } while (tempThrow.cause?.also { tempThrow = it } != null)
         return false
     }
 

@@ -13,8 +13,8 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__001_wan_android_like.*
 

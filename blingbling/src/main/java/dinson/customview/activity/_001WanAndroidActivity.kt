@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.CheckBox
 import androidx.appcompat.view.menu.MenuBuilder
 import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview._global.ConstantsUtils
@@ -18,7 +19,6 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.utils.SystemBarModeUtils
 import dinson.customview.weight.dialog.OnLoginSuccessListener
 import dinson.customview.weight.dialog._001LoginDialog
 import dinson.customview.weight.refreshview.CustomRefreshView

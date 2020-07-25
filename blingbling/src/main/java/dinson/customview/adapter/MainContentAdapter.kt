@@ -1,23 +1,23 @@
 package dinson.customview.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.MotionEvent
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview.entity.ClassBean
 import dinson.customview.listener.OnItemMoveListener
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.utils.GlideUtils
-import com.dinson.blingbase.widget.recycleview.CommonAdapter
-import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_main_content.view.*
 import java.util.*
 
 /**
  * 主页适配器
  */
-class MainContentAdapter(dataList: List<ClassBean>, private val mMoveListener
+class MainContentAdapter(dataList: MutableList<ClassBean>, private val mMoveListener
 : OnItemTouchMoveListener) : CommonAdapter<ClassBean>(dataList), OnItemMoveListener {
 
     private val mNumberImg = intArrayOf(R.drawable.n_0, R.drawable.n_1, R.drawable.n_2,
