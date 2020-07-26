@@ -5,17 +5,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.os.Build
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.FloatRange
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.FloatRange
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.dinson.blingbase.kotlin.getStatusBarHeight
 import java.util.regex.Pattern
 
@@ -29,18 +29,21 @@ object SystemBarModeUtils {
     /******************************************************************************************************/
     /**                             对外API                                                               **/
     /******************************************************************************************************/
+
     @Suppress("unused")
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun immersiveResource(activity: Activity, @ColorRes color: Int = android.R.color.white,
                           @FloatRange(from = 0.0, to = 1.0) alpha: Float = 1f) {
         immersive(activity, ContextCompat.getColor(activity, color), alpha)
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun immersive(activity: Activity, @ColorInt color: Int = 0xffffff,
                   @FloatRange(from = 0.0, to = 1.0) alpha: Float = 0f) {
         immersive(activity.window, color, alpha)
     }
 
-
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun immersive(window: Window, @ColorInt color: Int = 0xffffff,
                   @FloatRange(from = 0.0, to = 1.0) alpha: Float = 0f) {
 
