@@ -117,7 +117,7 @@ public class Toasty {
     }
 
     private static void runAgentThread() {
-        new Thread(new Runnable() {
+        new Thread( new Runnable() {
             @Override
             public void run() {
                 for (; ; ) {

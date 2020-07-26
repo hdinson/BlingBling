@@ -1,5 +1,6 @@
 package dinson.customview
 
+import com.dinson.blingbase.utils.MD5
 import org.junit.Test
 import java.nio.ByteBuffer
 
@@ -10,11 +11,9 @@ import java.nio.ByteBuffer
 class KotlinUnitTest {
 
 
-
     @Test
     fun testAdd() {
 
-        listDelete()
 
     }
 
@@ -27,7 +26,7 @@ class KotlinUnitTest {
         list.add("D")
         list.add("E")
         //需求是删除B和D
-        
+
 
         //方法一
         /*while (iterator.hasNext()) {
@@ -51,7 +50,7 @@ class KotlinUnitTest {
         //普通for循环遍历删除
         var i = 0
         while (i < list.size) {
-            if ("D" == list[i]||"B" == list[i]) {
+            if ("D" == list[i] || "B" == list[i]) {
                 list.removeAt(i)
                 i--
             }

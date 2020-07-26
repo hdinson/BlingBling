@@ -25,7 +25,8 @@ object _027AvModel {
 
     fun getPlayAddress(vid: String, time: String? = null): String {
         val ts = time ?: (System.currentTimeMillis() / 1000).toString()
-        return "http://api.rekonquer.com/psvs/mp4.php?vid=$vid&ts=$ts&sign=${MD5.b(vid, ts)}"
+        val sign = MD5.encode(String.format("%s%sBrynhildr", vid, ts))
+        return "http://api.rekonquer.com/psvs/mp4.php?vid=$vid&ts=$ts&sign=$sign"
     }
 
 
