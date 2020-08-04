@@ -8,17 +8,15 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Rect
-import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import com.dinson.blingbase.kotlin.dip
+import com.dinson.blingbase.utils.BitmapUtils
 
 import java.util.ArrayList
 import java.util.Arrays
 import java.util.Random
-
-import dinson.customview.utils.BitmapUtils
 
 
 class ExplosionField constructor(context: Context) : View(context) {

@@ -2,6 +2,7 @@ package com.dinson.blingbase.widget.banner.transformer
 
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+import kotlin.math.abs
 
 
 class CoverModeTransformer(viewPager: ViewPager) : ViewPager.PageTransformer {
@@ -27,7 +28,7 @@ class CoverModeTransformer(viewPager: ViewPager) : ViewPager.PageTransformer {
                 view.scaleY = mScaleMin
             }
             pos <= 1f -> {     //[-1,1]
-                val scale = (1 - Math.abs(pos)) * (1 - mScaleMin) + mScaleMin
+                val scale = (1 - abs(pos)) * (1 - mScaleMin) + mScaleMin
                 val translationX = reduceX * -pos
                 view.translationX = translationX
                 view.scaleX = scale

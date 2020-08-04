@@ -16,13 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="16dp" />
 
-        <com.nex3z.flowlayout.FlowLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flowContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:flChildSpacing="8dp"
-            app:flChildSpacingForLastRow="align"
-            app:flRowSpacing="8dp"/>
+            android:layout_height="wrap_content" />
 
         <Space
             android:layout_width="match_parent"

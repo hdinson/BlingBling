@@ -16,7 +16,7 @@ import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.CacheUtils
-import dinson.customview.utils.StringUtils
+
 
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,7 +31,7 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
 
     private val mTvColor = Color.parseColor("#3CB034")
     private val mTitleDrawableLeft by lazy {
-        val drawable = context!!.getDrawable(R.drawable._027_category_title_left)!!
+        val drawable = requireContext().getDrawable(R.drawable._027_category_title_left)!!
         drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
         drawable
     }
@@ -42,8 +42,8 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
     }
 
     override fun lazyInit() {
-        val cache = CacheUtils.getCache(context!!, "_027category")
-        if (StringUtils.isEmpty(cache).not()) {
+        val cache = CacheUtils.getCache(requireContext(), "_027category")
+        if (cache?.isNotEmpty() == true) {
             logi { "getTag << cache" }
             val type = object : TypeToken<HashMap<String, ArrayList<MovieInfo.Genre>>>() {}.type
             val turns = Gson().fromJson<HashMap<String, ArrayList<MovieInfo.Genre>>>(cache, type)
@@ -66,7 +66,7 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
                 }
                 val result = HashMap<String, ArrayList<MovieInfo.Genre>>()
                 keys.forEachIndexed { index, s ->
-                    val key = if (StringUtils.isEmpty(s.trim())) "场地" else s
+                    val key = if (s.trim().isEmpty()) "场地" else s
                     result[key] = genres[index]
                 }
                 result
@@ -74,7 +74,7 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                CacheUtils.setCache(context!!, "_027category",
+                CacheUtils.setCache(requireContext(), "_027category",
                     Gson().toJson(it), 36000000)
                 initUI(it)
             }, { loge(it::toString) }).addToManaged()
@@ -93,6 +93,7 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
                 text.setPadding(0, 0, 8, 8)
                 text.setCompoundDrawables(mTitleDrawableLeft, null, null, null)
                 currentCategory = it.key
+                //todo 替换了自动换行控件，检查是否正确
                 flowContent.addView(text)
             }
             it.value.forEach { movie ->
@@ -102,7 +103,7 @@ class _027CategoryFragment : ViewPagerLazyFragment(), View.OnClickListener {
     }
 
     private fun addItem(movie: MovieInfo.Genre) {
-        if (StringUtils.isEmpty(movie.name)) return
+        if (movie.name.isEmpty()) return
         val textView = TextView(context)
         textView.text = movie.name
         textView.tag = "${movie.name}$*key*$${movie.link}"

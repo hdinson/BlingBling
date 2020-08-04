@@ -39,7 +39,7 @@ fun String.lowerFirstLetter(): String {
 }
 
 fun String.toasty(): String {
-    //Toasty.normal(RxBling.context).text(this).show()
+    Toasty.normal(RxBling.context).text(this).show()
     return this
 }
 
@@ -63,7 +63,6 @@ fun String.toastyTarget(view: View) {
 /******************************************************************************************************/
 /**                             Double                                                               **/
 /******************************************************************************************************/
-
 
 /**
  * 格式化成货币（保留两位小数）
@@ -110,3 +109,13 @@ fun Long.formatFileSize(): String {
             + (size % 100).toString() + "GB")
     }
 }
+
+/******************************************************************************************************/
+/**                             Max Min                                                              **/
+/******************************************************************************************************/
+infix fun Int.max(other: Int) = if (this > other) this else other
+infix fun Float.max(other: Float) = if (this > other) this else other
+infix fun Double.max(other: Double) = if (this > other) this else other
+infix fun Int.min(other: Int) = if (this < other) this else other
+infix fun Float.min(other: Float) = if (this < other) this else other
+infix fun Double.min(other: Double) = if (this < other) this else other

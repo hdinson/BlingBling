@@ -12,7 +12,7 @@
 
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -39,7 +39,7 @@
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="@id/tvTitle"
         app:layout_constraintRight_toLeftOf="@+id/ivScreenshot"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         tools:text="Flutter跨平台框架，有着较低的入门门槛，较好的开发效率和运行效率，在github上已有77.6k的star，故项目中有引用，以实现跨平台的需求。 默认的i18n库，使用语言环境类来管理所有语言的字符，动态生成S，采用json配置文件的形式，动态生成所有语言对应的变量…" />
 
     <ImageView

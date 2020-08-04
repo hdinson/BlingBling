@@ -8,11 +8,10 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import com.dinson.blingbase.utils.FileUtils
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview._global.ConstantsUtils
-import dinson.customview.utils.FileUtils
 import dinson.customview.utils.GlideUtils
 import kotlinx.android.synthetic.main.activity__011_diagonal_layout.*
 

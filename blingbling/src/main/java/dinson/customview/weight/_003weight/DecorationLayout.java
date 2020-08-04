@@ -13,11 +13,11 @@ import android.widget.FrameLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.dinson.blingbase.utils.FileUtils;
 
 import java.io.File;
 
 import dinson.customview.R;
-import dinson.customview.utils.FileUtils;
 import dinson.customview.utils.ToastUtils;
 import dinson.customview.weight.imagewatcher.ImageWatcher;
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper;

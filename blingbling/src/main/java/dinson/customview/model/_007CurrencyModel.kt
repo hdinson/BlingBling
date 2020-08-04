@@ -1,7 +1,7 @@
 package dinson.customview.model
 
 import com.dinson.blingbase.kotlin.formatMoney
-import dinson.customview.utils.StringUtils
+
 
 /**
  * 货币模型

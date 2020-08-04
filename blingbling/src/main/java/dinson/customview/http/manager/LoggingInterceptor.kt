@@ -3,7 +3,6 @@ package dinson.customview.http.manager
 import android.content.Context
 import android.net.ConnectivityManager
 import com.dinson.blingbase.RxBling
-import dinson.customview._global.GlobalApplication
 import dinson.customview.kotlin.logv
 import okhttp3.CacheControl
 import okhttp3.Interceptor

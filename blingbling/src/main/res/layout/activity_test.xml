@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,117 +12,162 @@
             type="String" />
     </data>
 
-    <ScrollView xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.TestActivity">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/activity_main"
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/spacing_medium">
+            android:layout_height="?actionBarSize"
+            android:background="#2f2f2f"
+            android:elevation="10dp"
+            android:theme="@style/BaseToolBarTheme.Black"
+            app:title="测试"
+            app:titleTextColor="@color/white" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="#2f2f2f"
-                android:elevation="10dp"
-                android:theme="@style/BaseToolBarTheme.Black"
-                app:title="测试"
-                app:titleTextColor="@color/white" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    style="@style/TestBtn"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:onClick="onDataBindingClick"
-                    android:text="@{cacheSize}" />
-
-                <Button
-                    style="@style/TestBtn"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:onClick="onClearAllCache"
-                    android:text="删除数据" />
-
-                <Button
-                    style="@style/TestBtn"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:onClick="onClearCache"
-                    android:text="清空缓存" />
-
-            </LinearLayout>
-
-
-            <EditText
-                android:id="@+id/etExec"
-                style="@style/TestBtn"
-                android:hint="请输入命令"
-                android:paddingStart="16dp" />
-
-            <Button
-                style="@style/TestBtn"
-                android:onClick="onExec"
-                android:text="执行" />
-
-            <Button
-                style="@style/TestBtn"
-                android:onClick="onPing"
-                android:text="Ping一下" />
-
-            <Button
-                android:id="@+id/btnTest"
-                style="@style/TestBtn"
-                android:onClick="onOpenDelv"
-                android:text="ndk" />
-
-            <Button
-                style="@style/TestBtn"
-                android:onClick="onDoWork"
-                android:text="WorkManager" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".activity.TestActivity"
+            tools:ignore="HardcodedText">
 
             <LinearLayout
+                android:id="@+id/activity_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/spacing_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:orientation="horizontal">
+
+                    <Button
+                        style="@style/TestBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onDataBindingClick"
+                        android:text="@{cacheSize}" />
+
+                    <Button
+                        style="@style/TestBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onClearAllCache"
+                        android:text="删除数据" />
+
+                    <Button
+                        style="@style/TestBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onClearCache"
+                        android:text="清空缓存" />
+
+                </LinearLayout>
+
 
                 <EditText
-                    android:id="@+id/etUser"
+                    android:id="@+id/etExec"
                     style="@style/TestBtn"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:hint="号码"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
-
-                <EditText
-                    android:id="@+id/etUserMsg"
-                    style="@style/TestBtn"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:hint="内容"
+                    android:hint="请输入命令"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp" />
 
                 <Button
                     style="@style/TestBtn"
+                    android:onClick="onExec"
+                    android:text="执行" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onPing"
+                    android:text="Ping一下" />
+
+                <Button
+                    android:id="@+id/btnTest"
+                    style="@style/TestBtn"
+                    android:onClick="onOpenDelv"
+                    android:text="ndk" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onDoWork"
+                    android:text="WorkManager" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/etUser"
+                        style="@style/TestBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="号码"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <EditText
+                        android:id="@+id/etUserMsg"
+                        style="@style/TestBtn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="内容"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        style="@style/TestBtn"
+                        android:layout_width="wrap_content"
+                        android:onClick="onSendMsg"
+                        android:text="发送短信" />
+
+                </LinearLayout>
+
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onPostNormalMsg"
+                    android:text="发一个普通通知" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onSendRemindNotification"
+                    android:text="有提醒的通知（声音/振动/闪光灯）" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onSendProgressNotification"
+                    android:text="有进度条的通知" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onCustomNotification"
+                    android:text="自定义视图的通知" />
+
+
+                <ImageView
+                    android:id="@+id/ivImg"
                     android:layout_width="wrap_content"
-                    android:onClick="onSendMsg"
-                    android:text="发送短信" />
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onOCR"
+                    android:text="文本识别" />
+
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
-
+    </LinearLayout>
 
 </layout>

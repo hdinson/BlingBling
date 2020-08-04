@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.SystemBarModeUtils
-
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -17,7 +16,6 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.utils.AESUtils
-import dinson.customview.utils.StringUtils
 import dinson.customview.weight._003weight.DecorationLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
 import dinson.customview.weight.refreshview.CustomRefreshView
@@ -90,7 +88,7 @@ class _003PicSetListActivity : BaseActivity() {
      * 获取服务器数据
      */
     private fun getServiceData() {
-        if (StringUtils.isEmpty(mId)) {
+        if (mId.isEmpty()) {
             "ID is none. Please go back.".toasty()
         }
         mApi.loadPicSetById(mId)

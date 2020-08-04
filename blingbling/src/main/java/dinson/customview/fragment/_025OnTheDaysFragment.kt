@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import dinson.customview.kotlin.logi
+import com.dinson.blingbase.RxBling
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.DateUtils
-import com.dinson.blingbase.RxBling
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dinson.customview.R
@@ -18,9 +17,10 @@ import dinson.customview.entity.countdown.OnTheDay
 import dinson.customview.holder._025DailyTodayViewHolder
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
+import dinson.customview.kotlin.logi
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.SPUtils
-import dinson.customview.utils.StringUtils
+
 import kotlinx.android.synthetic.main.fragment_025_on_the_days.*
 
 class _025OnTheDaysFragment : ViewPagerLazyFragment() {
@@ -47,8 +47,8 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
 
     override fun lazyInit() {
         val date = DateUtils.getDateOfDay(0, "yyyy-MM-dd")
-        val cache = CacheUtils.getCache(context!!, "daily_banner")
-        if (StringUtils.isEmpty(cache)) {
+        val cache = CacheUtils.getCache(requireContext(), "daily_banner")
+        if (cache?.isEmpty() == true) {
             mApi.loadDailyNews().compose(RxSchedulers.io_main())
                 .subscribe({
                     initBanner(it)
@@ -64,7 +64,7 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
         }
 
         val todayListStr = SPUtils.getOnTheDay(RxBling.context, date)
-        if (StringUtils.isEmpty(todayListStr)) {
+        if (todayListStr.isEmpty()) {
             mApi.loadOnThisDays().compose(RxSchedulers.io_main())
                 .subscribe({
                     if (it.isNotEmpty()) {

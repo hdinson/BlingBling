@@ -8,7 +8,7 @@ import dinson.customview.R
 import dinson.customview.entity.bmob.TvShowResp
 import dinson.customview.event._004CheckSelectorAllEvent
 import dinson.customview.kotlin.logi
-import dinson.customview.utils.StringUtils
+
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_004_video.view.*
@@ -53,7 +53,7 @@ class _004VideoListAdapter(dataList: MutableList<TvShowResp.TvShow>, isEditMode:
         }
         holder.itemView.tvTitle.text = bean.tvName
         holder.itemView.tvSubTitle.text = "更新时间: ${bean.updatedAt.split(" ")[0]}"
-        if (StringUtils.isNotEmpty(bean.tvIcon)) {
+        if (bean.tvIcon.isNotEmpty()) {
             Glide.with(holder.itemView.context).load(bean.tvIcon)
                 .into(holder.itemView.ivVideoIcon)
         }

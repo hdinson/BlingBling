@@ -17,4 +17,7 @@ object ConstantsUtils {
 
     const val LOGCAT_TAG = "│ --> "
     const val WAN_ANDROID_DOMAIN = "www.wanandroid.com"
+
+    const val APP_FONT_PATH = "fonts/AppleFontWithoutChinese.ttf"
+    const val ICON_FONT_PATH = "iconfont/iconfont.ttf"
 }

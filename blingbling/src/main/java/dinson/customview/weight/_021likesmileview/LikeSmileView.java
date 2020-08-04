@@ -25,8 +25,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dinson.blingbase.utils.TypefaceUtil;
+
 import dinson.customview.R;
-import dinson.customview.utils.TypefaceUtils;
+;
+
+import static dinson.customview._global.ConstantsUtils.APP_FONT_PATH;
 
 /**
  * 点赞笑脸view
@@ -111,7 +115,7 @@ public class LikeSmileView extends LinearLayout implements View.OnClickListener 
         animDis = (AnimationDrawable) mIvDis.getBackground();
 
         //初始化文字
-        Typeface typeface = TypefaceUtils.INSTANCE.getAppleFont(getContext());
+        Typeface typeface = TypefaceUtil.getFontFromAssets(getContext(), APP_FONT_PATH);
         mTvLikeNum = new TextView(getContext());
         mTvLikeNum.setTypeface(typeface);
         mTvLikeNum.setTextColor(defTextColor);

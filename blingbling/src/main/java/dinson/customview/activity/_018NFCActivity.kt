@@ -7,13 +7,13 @@ import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.os.Bundle
 import android.provider.Settings
-import dinson.customview.R
-import dinson.customview._global.BaseNfcActivity
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.isNfcEnable
+import com.dinson.blingbase.utils.NfcUtils
 import com.dinson.blingbase.utils.SystemBarModeUtils
+import dinson.customview.R
+import dinson.customview._global.BaseNfcActivity
 import dinson.customview.kotlin.logd
-import dinson.customview.utils.NfcUtils
 import kotlinx.android.synthetic.main.activity__018_nfc.*
 
 
@@ -48,7 +48,7 @@ class _018NFCActivity : BaseNfcActivity() {
         //2.获取Ndef的实例
         val ndef = Ndef.get(detectedTag)
         tvDesc.append("${ndef.type} Maxsize:${ndef.maxSize}bytes")
-        val (b, s) = NfcUtils.writeUri(detectedTag, "http://www.dinson.win")
+        val (b, s) = NfcUtils.writeUri(detectedTag, "http://www.hdinson.cn")
         tvDesc.append("\n$s")
     }
 

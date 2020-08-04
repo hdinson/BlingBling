@@ -84,7 +84,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -98,11 +98,11 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="20dp"
-                    android:maxWidth="25dp"
-                    android:minWidth="25dp"
-                    android:maxHeight="25dp"
-                    android:minHeight="25dp"
                     android:indeterminateDrawable="@drawable/progress_027_loading"
+                    android:maxWidth="25dp"
+                    android:maxHeight="25dp"
+                    android:minWidth="25dp"
+                    android:minHeight="25dp"
                     android:visibility="visible" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -123,12 +123,13 @@
             android:orientation="vertical"
             android:showDividers="middle">
 
-         <dinson.customview.weight.NoScrollRecycleView
+            <dinson.customview.weight.NoScrollRecycleView
                 android:id="@+id/rvVideo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 android:scrollbars="none" />
+
             <LinearLayout
                 android:id="@+id/llHeardContainer"
                 android:layout_width="match_parent"
@@ -215,13 +216,10 @@
                     android:layout_height="wrap_content"
                     android:text="暂无分类" />
 
-                <com.nex3z.flowlayout.FlowLayout
+                <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/flowContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:flChildSpacing="8dp"
-                    app:flChildSpacingForLastRow="align"
-                    app:flRowSpacing="8dp" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
         </LinearLayout>

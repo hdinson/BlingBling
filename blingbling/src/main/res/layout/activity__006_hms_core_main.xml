@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2"
+    android:orientation="vertical"
+    tools:context=".activity._006HMSCoreMainActivity"
+    tools:ignore="HardcodedText">
+
+    <FrameLayout
+        android:id="@+id/actTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#003853">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:drawableEnd="@drawable/_006_top_bar_logo"
+            android:gravity="center_vertical"
+            android:paddingStart="80dp"
+            android:paddingEnd="80dp"
+            android:text="MACHINE\n  LEARNING"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+    </FrameLayout>
+
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-20dp"
+        android:background="@drawable/_006_activity_top_circle"
+        tools:ignore="ContentDescription" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rvContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-40dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_006_home_item" />
+</LinearLayout>

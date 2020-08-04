@@ -30,7 +30,7 @@ object SPUtils {
 
         val result = listOf(*value.split(",").dropLastWhile { it.isEmpty() }.toTypedArray())
         Observable.fromIterable(result)
-            .filter { s -> !StringUtils.isEmpty(s) }
+            .filter { s -> s.isNotEmpty() }
             .collect(Callable<ArrayList<String>> { ArrayList() },
                 BiConsumer<ArrayList<String>, String> { obj, e -> obj.add(e) })
             .subscribe()
@@ -169,10 +169,10 @@ object SPUtils {
      * 根据id获取倒数日日程
      */
     fun getScheduleById(context: Context, id: String): _025Schedule? {
-        if (StringUtils.isEmpty(id)) return null
+        if (id.isEmpty()) return null
         val sp = context.getSharedPreferences("schedule", Context.MODE_PRIVATE)
         val json = sp.getString(id, "")
-        if (StringUtils.isEmpty(json)) return null
+        if (json.isNullOrEmpty()) return null
         return Gson().fromJson(json, _025Schedule::class.java)
     }
 
