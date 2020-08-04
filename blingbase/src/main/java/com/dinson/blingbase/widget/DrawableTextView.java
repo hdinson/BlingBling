@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -80,6 +81,12 @@ public class DrawableTextView extends AppCompatTextView {
         drawables[gravity] = drawable;
         widths[gravity] = width;
         heights[gravity] = height;
+        postInvalidate();
+    }
+
+    public void setDrawable(@DrawGravity int gravity, @DrawableRes int resourceId) {
+        Drawable drawable = getContext().getResources().getDrawable(resourceId);
+        drawables[gravity] = drawable;
         postInvalidate();
     }
 

@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvContent"
+        android:id="@id/rvContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/spacing_small"

@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 文件相关工具类
  */
-public class  FileUtils {
+public class FileUtils {
 
     public static void saveBitmapFile(Context context, Bitmap bitmap, String filePath) {
         File file = new File(filePath);//将要保存图片的路径
@@ -105,7 +105,7 @@ public class  FileUtils {
         File newFile = new File(file.getParent() + File.separator + newName);
         // 如果重命名的文件已存在返回false
         return !newFile.exists()
-                && file.renameTo(newFile);
+            && file.renameTo(newFile);
     }
 
     /**
@@ -295,7 +295,7 @@ public class  FileUtils {
         if (!createOrExistsDir(destFile.getParentFile())) return false;
         try {
             return FileIOUtils.writeFileFromIS(destFile, new FileInputStream(srcFile), false)
-                    && !(isMove && !deleteFile(srcFile));
+                && !(isMove && !deleteFile(srcFile));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
@@ -1163,15 +1163,43 @@ public class  FileUtils {
             br = new BufferedReader(in);
             String line;
             while ((line = br.readLine()) != null) {
-                s.append(line + "\n");
+                s.append(line).append("\n");
             }
             return s.toString();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.INSTANCE.close(br);
-            IOUtils.INSTANCE.close(in);
+            IOUtils.close(br, in);
+        }
+    }
+
+    public static String formatFileSize(long size) {
+        //如果字节数少于1024，则直接以B为单位，否则先除于1024，后3位因太少无意义
+        if (size < 1024) {
+            return String.valueOf(size) + "B";
+        } else {
+            size = size / 1024;
+        }
+        //如果原字节数除于1024之后，少于1024，则可以直接以KB作为单位
+        //因为还没有到达要使用另一个单位的时候
+        //接下去以此类推
+        if (size < 1024) {
+            return String.valueOf(size) + "KB";
+        } else {
+            size = size / 1024;
+        }
+        if (size < 1024) {
+            //因为如果以MB为单位的话，要保留最后1位小数，
+            //因此，把此数乘以100之后再取余
+            size = size * 100;
+            return size / 100 + "."
+                + size % 100 + "MB";
+        } else {
+            //否则如果要以GB为单位的，先除于1024再作同样的处理
+            size = size * 100 / 1024;
+            return size / 100 + "."
+                + size % 100 + "GB";
         }
     }
 }

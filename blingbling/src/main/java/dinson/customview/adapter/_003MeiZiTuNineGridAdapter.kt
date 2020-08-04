@@ -1,16 +1,17 @@
 package dinson.customview.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Typeface
 import android.view.View
+import com.dinson.blingbase.utils.TypefaceUtil
 import dinson.customview.R
 import dinson.customview.entity.gank.MeiZiTuNineGrid
-import dinson.customview.utils.StringUtils
-import dinson.customview.utils.TypefaceUtils
+
+
 import dinson.customview.weight.MessagePicturesLayout
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
+import dinson.customview._global.ConstantsUtils.APP_FONT_PATH
 import kotlinx.android.synthetic.main.item_003_meizitu_nine_grid.view.*
 
 
@@ -28,7 +29,7 @@ class _003MeiZiTuNineGridAdapter(dataList: MutableList<MeiZiTuNineGrid>)
     @SuppressLint("SetTextI18n")
     override fun convert(holder: CommonViewHolder, dataBean: MeiZiTuNineGrid, position: Int) {
         if (mTypeFace == null) {
-            mTypeFace = TypefaceUtils.getAppleFont(holder.itemView.context)
+            mTypeFace = TypefaceUtil.getFontFromAssets(holder.itemView.context, APP_FONT_PATH)
         }
         holder.itemView.tvYear.visibility = if (dataBean.isShowYear) View.VISIBLE else View.GONE
         holder.itemView.tvYear.typeface = mTypeFace

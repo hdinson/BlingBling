@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/_028FirstFragment">
+
+
+    <fragment
+        android:id="@+id/_028FirstFragment"
+        android:name="dinson.customview.fragment._028FirstFragment"
+        tools:layout="@layout/fragment_028_first">
+        <action
+            android:id="@+id/action028ToSecondFragment"
+            app:destination="@id/_028SecondFragment"
+            app:enterAnim="@anim/activity_in_from_right"
+            app:exitAnim="@anim/activity_out_to_left"
+            app:popEnterAnim="@anim/activity_in_from_left"
+            app:popExitAnim="@anim/activity_out_to_right" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/_028SecondFragment"
+        android:name="dinson.customview.fragment._028SecondFragment"
+        tools:layout="@layout/fragment_028_second">
+
+        <argument
+            android:name="UserName"
+            android:defaultValue="unknown"
+            app:argType="string" />
+
+        <argument
+            android:name="UserAge"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+</navigation>

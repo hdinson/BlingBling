@@ -2,10 +2,17 @@ package dinson.customview.weight;
 
 import android.content.Context;
 import android.graphics.Typeface;
+
 import androidx.appcompat.widget.AppCompatTextView;
+
 import android.util.AttributeSet;
 
-import dinson.customview.utils.TypefaceUtils;
+import com.dinson.blingbase.utils.TypefaceUtil;
+
+import dinson.customview._global.ConstantsUtils;
+;
+
+import static dinson.customview._global.ConstantsUtils.ICON_FONT_PATH;
 
 /**
  * IconFont支持
@@ -28,7 +35,7 @@ public class IconFontTextView extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface typeface = TypefaceUtils.INSTANCE.getIconFont(getContext());
+        Typeface typeface = TypefaceUtil.getFontFromAssets(getContext(), ICON_FONT_PATH);
         setTypeface(typeface);
     }
 }

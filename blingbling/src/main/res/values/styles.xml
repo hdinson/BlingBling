@@ -58,7 +58,7 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_marginStart">@dimen/spacing_medium</item>
         <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
-        <item name="android:layout_marginTop">@dimen/spacing_medium</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_medium</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@drawable/shape_rec_r5</item>
     </style>

@@ -21,7 +21,7 @@ import dinson.customview.kotlin.logi
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.utils.CacheUtils
-import dinson.customview.utils.StringUtils
+
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -93,7 +93,7 @@ class _004BiliBiliListActivity : BaseActivity() {
 
     private fun initData() {
         val cache = CacheUtils.getCache(this, "_004VideoList")
-        if (StringUtils.isNotEmpty(cache)) {
+        if (cache?.isNotEmpty() == true) {
             //加载缓存数据
             val type = object : TypeToken<ArrayList<TvShowResp.TvShow>>() {}.type
             val tempDataList =

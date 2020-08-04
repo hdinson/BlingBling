@@ -1,11 +1,13 @@
 package dinson.customview.model;
 
+import com.dinson.blingbase.utils.StringUtils;
+
 import org.jetbrains.annotations.NotNull;
 
 import dinson.customview._global.ConstantsUtils;
 import dinson.customview.download.model.DownloadInfo;
 import dinson.customview.download.model.ITransformDownloadInfo;
-import dinson.customview.utils.StringUtils;
+;
 
 /**
  * @author sunfusheng on 2017/8/25.

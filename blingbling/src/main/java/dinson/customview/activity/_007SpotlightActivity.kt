@@ -2,9 +2,11 @@ package dinson.customview.activity
 
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
+import com.dinson.blingbase.utils.TypefaceUtil
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.utils.TypefaceUtils
+import dinson.customview._global.ConstantsUtils.APP_FONT_PATH
+
 import dinson.customview.weight._007spotlight.CustomTarget
 import dinson.customview.weight._007spotlight.SimpleTarget
 import dinson.customview.weight._007spotlight.Spotlight
@@ -20,7 +22,7 @@ class _007SpotlightActivity : BaseActivity() {
     }
 
     private fun initUI() {
-        val typeface = TypefaceUtils.getAppleFont(this)
+        val typeface = TypefaceUtil.getFontFromAssets(this,APP_FONT_PATH)
         tvTitle.typeface = typeface
         tvDis.typeface = typeface
         tvType.typeface = typeface

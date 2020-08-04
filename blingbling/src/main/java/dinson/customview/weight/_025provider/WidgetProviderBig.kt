@@ -13,7 +13,7 @@ import dinson.customview.activity._025ChooseScheduleActivity
 import dinson.customview.kotlin.loge
 import dinson.customview.model._025Schedule
 import dinson.customview.utils.SPUtils
-import dinson.customview.utils.StringUtils
+
 import kotlin.math.abs
 
 open class WidgetProviderBig : AppWidgetProvider() {
@@ -29,7 +29,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
                 widgetIds.forEach {
                     if (mIdsSet.containsKey(it)) {
                         val value = mIdsSet[it]
-                        if (StringUtils.isEmpty(scheduleId) || scheduleId == value) {
+                        if (scheduleId.isEmpty() || scheduleId == value) {
                             loge { "匹配了" }
                             val bean = SPUtils.getScheduleById(context, scheduleId)
                             toggleLayout(context, it, bean)

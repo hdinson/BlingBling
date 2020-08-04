@@ -8,7 +8,7 @@ import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import dinson.customview.R
 import dinson.customview.entity.gank.JueJinResponse
 import dinson.customview.utils.GlideUtils
-import dinson.customview.utils.StringUtils
+
 import kotlinx.android.synthetic.main.item_003_juejin_article.view.*
 
 
@@ -25,7 +25,7 @@ class _003JueJinArticleAdapter(dataList: MutableList<JueJinResponse.DBean.Entryl
     override fun convert(holder: CommonViewHolder, dataBean: JueJinResponse.DBean.EntrylistBean, position: Int) {
         holder.itemView.tvTitle.text = dataBean.title
         holder.itemView.tvContent.text = dataBean.content
-        if (StringUtils.isEmpty(dataBean.screenshot)) {
+        if (dataBean.screenshot.isEmpty()) {
             holder.itemView.ivScreenshot.visibility = View.GONE
         } else {
             holder.itemView.ivScreenshot.visibility = View.VISIBLE

@@ -2,6 +2,8 @@ package com.dinson.blingbase.widget.banner.transformer
 
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+import com.dinson.blingbase.kotlin.max
+import kotlin.math.abs
 
 class ScaleYTransformer : ViewPager.PageTransformer {
     companion object {
@@ -14,8 +16,7 @@ class ScaleYTransformer : ViewPager.PageTransformer {
                 page.scaleY = MIN_SCALE
             }
             position <= 1 -> {
-                //
-                val scale = Math.max(MIN_SCALE, 1 - Math.abs(position))
+                val scale = MIN_SCALE max 1 - abs(position)
                 page.scaleY = scale
                 /*page.setScaleX(scale);
 

@@ -2,13 +2,13 @@ package dinson.customview.activity
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.cursoradapter.widget.SimpleCursorAdapter
-import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AutoCompleteTextView
 import android.widget.CursorAdapter
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
+import androidx.cursoradapter.widget.SimpleCursorAdapter
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.github.promeg.pinyinhelper.Pinyin
 import dinson.customview.R
@@ -16,10 +16,9 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._027VpAdapter
 import dinson.customview.db.SearchHistory027DbUtils
 import dinson.customview.db.model.SearchHistory027
-import dinson.customview.model._027AvModel
-import dinson.customview.utils.StringUtils
-import kotlinx.android.synthetic.main.activity__027_movie.*
 import dinson.customview.db.model.SearchHistory027Dao
+import dinson.customview.model._027AvModel
+import kotlinx.android.synthetic.main.activity__027_movie.*
 
 
 class _027MovieActivity : BaseActivity() {
@@ -64,7 +63,7 @@ class _027MovieActivity : BaseActivity() {
             mAutoCompleteTextView!!.setOnItemClickListener { _, view, _, _ ->
                 val key = view.findViewById<TextView>(R.id.tvHistoryName).text.toString()
                 closeSearchView()//关闭SearchView
-                if (StringUtils.isNotEmpty(key)) {
+                if (key.isNotEmpty()) {
                     _027MovieListByLinkActivity.start(this@_027MovieActivity,
                         key, _027AvModel.getSearchUrl(key))
                 }
@@ -76,13 +75,13 @@ class _027MovieActivity : BaseActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 closeSearchView()//关闭SearchView
 
-                if (StringUtils.isNotEmpty(query)) {
-                  val history = SearchHistory027()
+                if (query?.isNotEmpty() == true) {
+                    val history = SearchHistory027()
                     history.name = query
                     history.pinyin = Pinyin.toPinyin(query, "")
                     SearchHistory027DbUtils.insertHistory(history)
                     _027MovieListByLinkActivity.start(this@_027MovieActivity,
-                        query!!, _027AvModel.getSearchUrl(query))
+                        query, _027AvModel.getSearchUrl(query))
                 }
                 return false
             }
@@ -96,7 +95,7 @@ class _027MovieActivity : BaseActivity() {
 
     private fun notifyHistoryDataSet(view: SearchView, key: String?) {
         // 不要频繁创建适配器，如果适配器已经存在，则只需要更新适配器中的cursor对象即可。
-        val sql = if (StringUtils.isEmpty(key)) {
+        val sql = if (key?.isEmpty() == true) {
             "select * from ${SearchHistory027Dao.TABLENAME} " +
                 "order by ${SearchHistory027Dao.Properties.Id.columnName} desc limit 0,20"
         } else "select * from ${SearchHistory027Dao.TABLENAME} " +

@@ -4,9 +4,13 @@ import android.content.Context;
 import android.graphics.Typeface;
 
 import androidx.appcompat.widget.AppCompatTextView;
+
 import android.util.AttributeSet;
 
-import dinson.customview.utils.TypefaceUtils;
+import com.dinson.blingbase.utils.TypefaceUtil;
+
+
+import static dinson.customview._global.ConstantsUtils.APP_FONT_PATH;
 
 /**
  * 兰亭字体的TextView
@@ -29,7 +33,7 @@ public class LanTingFontTextView extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface typeface = TypefaceUtils.INSTANCE.getAppleFont(getContext());
+        Typeface typeface = TypefaceUtil.getFontFromAssets(getContext(), APP_FONT_PATH);
         setTypeface(typeface);
     }
 }

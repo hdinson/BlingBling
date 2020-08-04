@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import com.dinson.blingbase.utils.ArithmeticUtils
+import com.dinson.blingbase.widget.recycleview.CommonAdapter
+import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview.listener.CalculatorKey
@@ -11,12 +14,8 @@ import dinson.customview.listener.OnItemSwipeOpen
 import dinson.customview.listener._003OnCalculatorInput
 import dinson.customview.listener._003OnRvItemChangeListener
 import dinson.customview.model._007CurrencyModel
-import dinson.customview.utils.ArithmeticUtils
 import dinson.customview.utils.GlideUtils
 import dinson.customview.utils.SPUtils
-import dinson.customview.utils.StringUtils
-import com.dinson.blingbase.widget.recycleview.CommonAdapter
-import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import kotlinx.android.synthetic.main.item_007_currency.view.*
 import java.util.*
 import java.util.regex.Pattern
@@ -62,7 +61,7 @@ class _007CurrencyAdapter(context: Context,
             if (mTargetMoney == Integer.MAX_VALUE.toDouble()) {
                 text = ""
                 hint = dataBean.getTargetMoney(sDefaultMoney.toDouble())
-            } else if (mCurrentSelect == position && StringUtils.isEmpty(dataBean.equation)) {
+            } else if (mCurrentSelect == position && dataBean.equation.isEmpty()) {
                 hint = ""
                 text = mEquationStr
             } else {
@@ -86,7 +85,7 @@ class _007CurrencyAdapter(context: Context,
             return
         }
 
-        if (StringUtils.isEmpty(dataBean.equation)) {
+        if (dataBean.equation.isEmpty()) {
             sCursor.clearAnimation()
             sCursor.visibility = View.GONE
             lCursor.visibility = View.VISIBLE
@@ -102,7 +101,7 @@ class _007CurrencyAdapter(context: Context,
     override fun onInput(key: CalculatorKey) {
         if (!validateInput(key)) {
             //验证不过,晃动提示
-            if (StringUtils.isEmpty(mDataList[mCurrentSelect].equation)) {
+            if (mDataList[mCurrentSelect].equation.isEmpty()) {
                 getCommonViewHolder(mCurrentSelect).itemView.tvResult.startAnimation(mShakeAnimation)
             } else {
                 getCommonViewHolder(mCurrentSelect).itemView.tvEquation.startAnimation(mShakeAnimation)
@@ -132,7 +131,7 @@ class _007CurrencyAdapter(context: Context,
                 if (mEquationStr.isEmpty()) return
                 var tempEquation = mEquationStr.substring(0, mEquationStr.length - 1)
                 mEquationStr = tempEquation
-                if (StringUtils.isEmpty(tempEquation)) tempEquation = "0"
+                if (tempEquation.isEmpty()) tempEquation = "0"
                 mTargetMoney = if (isEndWithNum(tempEquation)) {
                     ArithmeticUtils.simpleCalculate(tempEquation)
                 } else {
@@ -160,7 +159,7 @@ class _007CurrencyAdapter(context: Context,
         var flag = true
         when (key) {
             CalculatorKey.N0 -> if (mEquationStr == "0") flag = false
-            CalculatorKey.ADD, CalculatorKey.SUB, CalculatorKey.MUL, CalculatorKey.DIV -> if (StringUtils.isEmpty(mEquationStr)) flag = false
+            CalculatorKey.ADD, CalculatorKey.SUB, CalculatorKey.MUL, CalculatorKey.DIV -> if (mEquationStr.isEmpty()) flag = false
             CalculatorKey.DOT -> if (!isEndWithNum(mEquationStr)) flag = false
             else -> {
             }

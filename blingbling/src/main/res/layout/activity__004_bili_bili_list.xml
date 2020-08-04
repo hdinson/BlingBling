@@ -20,7 +20,7 @@
             android:layout_width="?actionBarSize"
             android:layout_height="match_parent"
             android:scaleType="center"
-            android:src="@drawable/picture_back"
+            android:src="@drawable/picture_icon_back"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="ContentDescription" />
 

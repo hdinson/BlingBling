@@ -35,7 +35,7 @@ import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.model._027AvModel
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.GlideUtils
-import dinson.customview.utils.StringUtils
+
 import dinson.customview.weight.MessagePicturesLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
 import io.reactivex.Observable
@@ -115,8 +115,8 @@ class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePi
 
     private fun getMovieInfo(movie: Movie) {
         val cache = CacheUtils.getCache(this, "_027MovieInfo${movie.code}")
-        if (StringUtils.isEmpty(cache).not()) {
-            val movieInfo = Gson().fromJson<MovieInfo>(cache, MovieInfo::class.java)
+        if (cache?.isNotEmpty() == true) {
+            val movieInfo = Gson().fromJson(cache, MovieInfo::class.java)
             initMovieInfoUI(movieInfo)
             return
         }
@@ -150,7 +150,7 @@ class _027MovieDetailsActivity : BaseActivity(), View.OnClickListener, MessagePi
 
     private val mTvColor = Color.parseColor("#3CB034")
     private fun addTagItem(key: MovieInfo.Genre) {
-        if (StringUtils.isEmpty(key.name)) return
+        if (key.name.isEmpty()) return
         val textView = TextView(this)
         textView.text = key.name
         textView.tag = "${key.name}$*key*$${key.link}"

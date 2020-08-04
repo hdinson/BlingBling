@@ -13,7 +13,6 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.kotlin.logd
-import dinson.customview.utils.StringUtils
 import kotlinx.android.synthetic.main.activity__004_bili_bili_video.*
 import tv.danmaku.ijk.media.exo2.Exo2PlayerManager
 
@@ -37,7 +36,7 @@ class _004BiliBiliVideoActivity : BaseActivity() {
         /* requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE*/
 
         val mVideoPath = intent.getStringExtra(EXTRA_URL)
-        if (StringUtils.isEmpty(mVideoPath)) {
+        if (mVideoPath.isNullOrEmpty()) {
             "视频地址错误".toasty()
             finish()
             return

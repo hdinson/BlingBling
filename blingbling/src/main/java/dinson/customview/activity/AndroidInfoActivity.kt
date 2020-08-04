@@ -11,10 +11,10 @@ import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.widget.TableRow
 import android.widget.TextView
+import com.dinson.blingbase.kotlin.*
+import com.dinson.blingbase.utils.FileUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import com.dinson.blingbase.kotlin.*
-import dinson.customview.utils.StringUtils
 import kotlinx.android.synthetic.main.activity_android_info.*
 
 
@@ -136,7 +136,7 @@ class AndroidInfoActivity : BaseActivity() {
             put("CPU型号", getCpuInfo())
             put("CPU架构", Build.SUPPORTED_ABIS.joinToString(","))
             val value = getSDCardMemory()
-            put("SDCard", "${StringUtils.byte2FileSize(value[1])}可用 / ${StringUtils.byte2FileSize(value[0])}总容量")
+            put("SDCard", "${FileUtils.formatFileSize(value[1])}可用 / ${FileUtils.formatFileSize(value[0])}总容量")
 
             //添加sim卡信息
             if (phone.simState == TelephonyManager.SIM_STATE_READY) {

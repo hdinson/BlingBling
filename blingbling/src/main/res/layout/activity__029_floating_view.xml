@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/layoutRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dinson.customview.activity._029FloatingViewActivity"
+    tools:ignore="ContentDescription">
+
+    <View
+        android:id="@+id/rootBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#6d5f88"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@id/ivTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/_029_floating_view_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/ivLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/_029_like"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ivStar"
+        app:layout_constraintTop_toBottomOf="@+id/ivTitle"/>
+
+    <ImageView
+        android:id="@+id/ivSchool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/_029_school"
+        app:layout_constraintBottom_toBottomOf="@+id/ivStar"
+        app:layout_constraintLeft_toRightOf="@+id/ivStar"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/ivStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/_029_star"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLike"
+        app:layout_constraintLeft_toRightOf="@+id/ivLike"
+        app:layout_constraintRight_toLeftOf="@+id/ivSchool"/>
+
+    <ImageView
+        android:id="@+id/ivPlane"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/_029_plane"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/ivEarth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/_029_earth"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

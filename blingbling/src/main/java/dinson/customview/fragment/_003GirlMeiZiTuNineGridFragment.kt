@@ -20,7 +20,7 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import com.dinson.blingbase.kotlin.toasty
 import dinson.customview.manager.GlideSimpleLoader
-import dinson.customview.utils.StringUtils
+
 import dinson.customview.weight.MessagePicturesLayout
 import dinson.customview.weight._003weight.DecorationLayout
 import dinson.customview.weight.imagewatcher.ImageWatcherHelper
@@ -82,7 +82,7 @@ abstract class _003GirlMeiZiTuNineGridFragment : ViewPagerLazyFragment(), Messag
 
                 it.forEach { bean ->
                     val tTime = bean.date.split("T").first()
-                    if (StringUtils.isNotEmpty(tTime) && tTime != tempTime) {
+                    if (tTime.isNotEmpty() && tTime != tempTime) {
                         tempTime = tTime
                         child = MeiZiTuNineGrid()
                         child.time = tempTime

@@ -7,7 +7,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
-import dinson.customview.utils.TypefaceUtils
+import com.dinson.blingbase.utils.TypefaceUtil
+import dinson.customview._global.ConstantsUtils.APP_FONT_PATH
 import java.util.*
 
 /**
@@ -20,6 +21,7 @@ class HonorClockView @JvmOverloads constructor(context: Context, attrs: Attribut
     private val mXfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
     private val mMaskWidth = 20f      //遮罩层的宽度
     private var mClockAnimator: ValueAnimator? = null   //时钟的动画
+
     //时钟文字的起始点坐标
     private var mDigitalTimeTextStartX = 0f
     private var mDigitalTimeTextStartY = 0f
@@ -35,7 +37,7 @@ class HonorClockView @JvmOverloads constructor(context: Context, attrs: Attribut
             isAntiAlias = true // 抗锯齿
             isDither = true // 防抖动
             textSize = mSettings.timeTextSize
-            typeface = TypefaceUtils.getAppleFont(getContext())
+            typeface = TypefaceUtil.getFontFromAssets(getContext(), APP_FONT_PATH)
             strokeCap = Paint.Cap.ROUND//线帽
         }
     }

@@ -17,7 +17,7 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.event._025EditScheduleEvent
 import dinson.customview.model._025Schedule
 import dinson.customview.utils.SPUtils
-import dinson.customview.utils.StringUtils
+
 import kotlinx.android.synthetic.main.activity__025_add_schedule.*
 import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
@@ -87,12 +87,12 @@ class _025AddScheduleActivity : BaseActivity() {
 
         actionSave.click {
             val name = etScheduleName.text.toString()
-            if (StringUtils.isEmpty(name)) {
+            if (name.isEmpty()) {
                 "请输入日程标题".toasty()
                 return@click
             }
             val time = tvChooseDateTime.text.split(" ")[0]
-            if (StringUtils.isEmpty(mScheduleId)) {
+            if (mScheduleId.isEmpty()) {
                 mScheduleId = DateUtils.currentTimeMillis10().toString()
             }
             val bean = _025Schedule(mScheduleId, name, time, mRepeatType)

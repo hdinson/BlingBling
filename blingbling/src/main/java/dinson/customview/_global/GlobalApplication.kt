@@ -7,10 +7,12 @@ import com.dinson.blingbase.crash.CrashTool
 import dinson.customview.kotlin.logi
 import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.RxBling
+import com.huawei.hms.mlsdk.common.MLApplication
 import dinson.customview.BuildConfig
 import dinson.customview.activity.SplashActivity
 
 class GlobalApplication : Application() {
+
     override fun onCreate() {
         super.onCreate()
         RxBling.init(this)
@@ -40,11 +42,8 @@ class GlobalApplication : Application() {
 
             }) //default: null
             .apply()
-    }
 
-    companion object {
-        @JvmField
-        val IS_DEBUG = BuildConfig.DEBUG
-
+        logi { "application init.." }
+        MLApplication.getInstance().apiKey = BuildConfig.HUAWEI_API_KEY
     }
 }

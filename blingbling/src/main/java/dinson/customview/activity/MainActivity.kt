@@ -16,6 +16,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.utils.TypefaceUtil
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -23,6 +24,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview._global.ConstantsUtils.APP_FONT_PATH
 import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.api.OneApi
 import dinson.customview.api.XinZhiWeatherApi
@@ -36,8 +38,8 @@ import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
 import dinson.customview.model.MainActivityModelUtil
 import dinson.customview.utils.AppCacheUtil
-import dinson.customview.utils.StringUtils
-import dinson.customview.utils.TypefaceUtils
+
+
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -177,7 +179,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         }
         if (location.errorCode != 0) return@AMapLocationListener  //errCode等于0代表定位成功
 
-        val add = if (StringUtils.isEmpty(location.city)) location.province else location.city
+        val add = if (location.city.isNullOrEmpty()) location.province else location.city
         Observable.just<String>(add)
             .flatMap { city ->
                 val cache = AppCacheUtil.getHomeWeatherCache(this@MainActivity, city)
@@ -201,7 +203,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         val resultsBean = weather.results[0]
         iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
         tvWeather.apply {
-            typeface = TypefaceUtils.getAppleFont(this@MainActivity)
+            typeface = TypefaceUtil.getFontFromAssets(this@MainActivity, APP_FONT_PATH)
             text = String.format("%s℃", resultsBean.now.temperature)
         }
     }
