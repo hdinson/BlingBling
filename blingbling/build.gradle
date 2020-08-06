@@ -10,7 +10,6 @@ apply from: 'andres-guard.gradle'
 Properties prop = new Properties()
 prop.load(new FileInputStream(file("../constant.properties")))
 
-
 android {
     compileSdkVersion 28
 
@@ -100,7 +99,7 @@ android {
 dependencies {
     implementation files('libs/AMap_Location_V3.6.0_20170918.jar')
     implementation project(path: ':blingbase')
-
+    //implementation 'com.dinson.bling:blingsocial-alipay:1.0.4'
     /**
      * 官方库
      */
@@ -108,7 +107,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta8'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-rc1'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

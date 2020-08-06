@@ -30,9 +30,8 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".activity._006RemoteDetectionActivity"></activity>
+        <activity android:name=".activity._006RemoteDetectionActivity"/>
         <activity android:name=".activity._006HMSCoreMainActivity" />
-        <activity android:name=".activity.HMSCoreMainActivity" />
         <activity android:name=".activity._029NotificationTestActivity" />
         <activity android:name=".activity._028NavigationActivity" />
         <activity android:name=".activity.Main2Activity" /> <!-- 高德地图设置key -->

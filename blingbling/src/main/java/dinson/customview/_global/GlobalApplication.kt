@@ -5,7 +5,6 @@ import com.dinson.blingbase.crash.ActivityCrash
 import com.dinson.blingbase.crash.CrashProfile
 import com.dinson.blingbase.crash.CrashTool
 import dinson.customview.kotlin.logi
-import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.RxBling
 import com.huawei.hms.mlsdk.common.MLApplication
 import dinson.customview.BuildConfig
