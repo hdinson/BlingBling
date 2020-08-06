@@ -1,5 +1,5 @@
 ext {
-    bintrayRepo = 'base-module'
+    bintrayRepo = 'Android'
     bintrayName = 'blingbase'
 
     publishedGroupId = 'com.dinson.bling'
@@ -11,7 +11,7 @@ ext {
     gitUrl = 'https://github.com/Dinson-Huang'
 
     // ./gradlew install  ./gradlew bintrayUpload
-    libraryVersion = '1.2.34'
+    libraryVersion = '1.2.35'
     libraryVersionDesc = 'Daily update'
 
     developerId = 'dinson'

@@ -1,7 +1,5 @@
 package dinson.customview.utils;
 
-import android.util.Base64;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,7 +13,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.Security;
 import java.util.Arrays;
 
 import javax.crypto.Cipher;
@@ -356,7 +353,7 @@ public class AESUtils {
         int base = 16;
         byte[] keyBytes = key.getBytes();
         if (keyBytes.length % base != 0) {
-            int groups = keyBytes.length / base + (keyBytes.length % base != 0 ? 1 : 0);
+            int groups = keyBytes.length / base + 1;
             byte[] temp = new byte[groups * base];
             Arrays.fill(temp, (byte) 0);
             System.arraycopy(keyBytes, 0, temp, 0, keyBytes.length);
@@ -382,5 +379,4 @@ public class AESUtils {
         }
         return bf.array();
     }
-
 }
