@@ -9,12 +9,12 @@
     app:cardCornerRadius="2dp"
     app:cardElevation="3dp">
 
-    <dinson.customview.weight.aspectratioview.AspectRatioImageView
+    <com.dinson.blingbase.widget.RatioImageView
         android:id="@id/ivImg"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:scaleType="centerCrop"
-        app:aspectRatio="1"
+        app:rivImgRatio="1"
         tools:src="@drawable/def_img"/>
 
     <TextView

@@ -5,7 +5,7 @@
     android:layout_margin="4dp"
     android:elevation="2dp">
 
-    <dinson.customview.weight.RatioImageView
+    <com.dinson.blingbase.widget.RatioImageView
         android:id="@+id/ivPicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

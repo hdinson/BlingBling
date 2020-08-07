@@ -38,7 +38,7 @@
     </declare-styleable>
 
     <declare-styleable name="RatioImageView">
-        <attr name="imgRatio" format="float" />
+        <attr name="rivImgRatio" format="float" />
     </declare-styleable>
 
 
