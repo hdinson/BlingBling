@@ -27,7 +27,11 @@ import org.greenrobot.eventbus.ThreadMode
 
 class _025DaysMatterFragment : ViewPagerLazyFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_025_days_matter, container, false)
     }
 
@@ -41,13 +45,13 @@ class _025DaysMatterFragment : ViewPagerLazyFragment() {
         crvScheduleList.adapter = mAdapter
         RvItemClickSupport.addTo(crvScheduleList)
             .setOnItemClickListener { _, _, position ->
-                _025AddScheduleActivity.start(context!!, mData[position])
+                _025AddScheduleActivity.start(requireContext(), mData[position])
             }
         initData()
     }
 
     private fun initData() {
-        val spData = SPUtils.getScheduleList(context!!)
+        val spData = SPUtils.getScheduleList(requireContext())
         mData.clear()
         mData.addAll(spData)
         if (mData.isNotEmpty()) {
@@ -86,8 +90,8 @@ class _025DaysMatterFragment : ViewPagerLazyFragment() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: _025EditScheduleEvent) {
         initData()
-        WidgetProviderBig.sendToRefresh(context!!, scheduleId = event.id)
-        WidgetProviderMiddle.sendToRefresh(context!!, scheduleId = event.id)
-        WidgetProviderSmall.sendToRefresh(context!!, scheduleId = event.id)
+        WidgetProviderBig.sendToRefresh(requireContext(), scheduleId = event.id)
+        WidgetProviderMiddle.sendToRefresh(requireContext(), scheduleId = event.id)
+        WidgetProviderSmall.sendToRefresh(requireContext(), scheduleId = event.id)
     }
 }

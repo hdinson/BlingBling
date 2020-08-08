@@ -16,9 +16,10 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.rxcache.rxCache
+import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.utils.TypefaceUtil
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -32,14 +33,11 @@ import dinson.customview.entity.HomeWeather
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.logd
-import dinson.customview.kotlin.logi
+import dinson.customview.kotlin.loge
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
 import dinson.customview.model.MainActivityModelUtil
-import dinson.customview.utils.AppCacheUtil
-
-
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -66,9 +64,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
                      if (it) AndroidInfoActivity.start(this)
                      else "需要电话权限".toasty()
                  }*/
-
             intArrayOf(2)[10]
-
         }
     }
 
@@ -93,45 +89,28 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         //mu5Viewpager.setData(mHeadData, this)
     }
 
+    /**
+     * 加载one 模块
+     */
     private fun initHead() {
-        Observable
-            .concat(Observable.create {
-                val cache = AppCacheUtil.getMainHeardCache(this@MainActivity)
-                if (cache == null) it.onComplete()
-                else it.onNext(cache)
-            }, mOneApi.loadDaily())
-            .doOnNext {
-                if (it.isLocalCache.not()) {
-                    it.isLocalCache = true
-                    AppCacheUtil.setMainHeardCache(this@MainActivity, it)
-                }
-            }
-            .flatMap { Observable.fromIterable(it.data) }
+        mOneApi.loadDaily()
+            .rxCache("api_one_daily", CacheStrategy.firstCacheTimeout(12 * 3600 * 1000))
+            .flatMap { Observable.fromIterable(it.data.data) }
             .flatMap {
-                val detail = AppCacheUtil.getDailyDetail(this@MainActivity, it)
-                if (detail == null) mOneApi.getDetail(it) else Observable.just(detail)
+                mOneApi.getDetail(it).rxCache("one_daily_detail_$it", CacheStrategy.firstCache())
             }
-            .map {
-                if (it.isLocalCache.not()) {
-                    it.isLocalCache = true
-                    AppCacheUtil.setDailyDetail(this@MainActivity, it)
-                }
-                it.data.hp_img_url
-            }
+            .map { it.data.data.hp_img_url }
             .toList()
-            .flatMapObservable {
-                logi { "log -- ${it.size}" }
-                Observable.just(it)
-            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .compose(bindUntilEvent(ActivityEvent.DESTROY))
             .subscribe({
                 mHeadData.clear()
                 mHeadData.addAll(it)
-                logi { "log -- setdata" }
                 mu5Viewpager.setData(mHeadData, this)
-            }, { logd { it.toString() } }).addToManaged()
+            }, {
+                loge(it::toString)
+            }).addToManaged()
     }
 
     /**
@@ -179,23 +158,16 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         }
         if (location.errorCode != 0) return@AMapLocationListener  //errCode等于0代表定位成功
 
-        val add = if (location.city.isNullOrEmpty()) location.province else location.city
-        Observable.just<String>(add)
-            .flatMap { city ->
-                val cache = AppCacheUtil.getHomeWeatherCache(this@MainActivity, city)
-                if (cache == null) HttpHelper.create(XinZhiWeatherApi::class.java).getWeather(city)
-                else Observable.just(cache)
-            }
-            .map { homeWeather ->
-                AppCacheUtil.setHomeWeatherCache(this@MainActivity, homeWeather)
-                homeWeather
-            }
+        val city = if (location.city.isNullOrEmpty()) location.province else location.city
+        HttpHelper.create(XinZhiWeatherApi::class.java).getWeather(city)
+            .rxCache("api_home_weather_cache", CacheStrategy.firstCacheTimeout(3600000))
             .compose(RxSchedulers.io_main())
             .subscribe({
-                initWeatherLayout(it) //设置数据
+                initWeatherLayout(it.data) //设置数据
             }, {
-                tvWeather.text = add
-            }).addToManaged()
+                tvWeather.text = city
+                loge(it::toString)
+            })
     }
 
     private fun initWeatherLayout(weather: HomeWeather) {
@@ -253,10 +225,11 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     }
 
     override fun onLoadImage(p0: ImageView, url: String, p2: Int) {
-        Glide.with(this).asBitmap().load(url).into(object : SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                mu5Viewpager.bindSource(resource, p2, p0)
-            }
-        })
+        Glide.with(this).asBitmap().load(url)
+            .into(object : SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    mu5Viewpager.bindSource(resource, p2, p0)
+                }
+            })
     }
 }

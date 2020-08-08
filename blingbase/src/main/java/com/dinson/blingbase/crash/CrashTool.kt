@@ -106,6 +106,7 @@ object CrashTool {
                                     if (config.getEventListener() != null) {
                                         config.getEventListener()!!.onLaunchErrorActivity()
                                     }
+                                    Log.e("test","开启错误布局")
                                     application!!.startActivity(intent)
                                 } else if (config.getBackgroundMode() == CrashProfile.BACKGROUND_MODE_CRASH) {
                                     if (oldHandler != null) {

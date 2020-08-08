@@ -34,7 +34,7 @@
         <activity android:name=".activity._006HMSCoreMainActivity" />
         <activity android:name=".activity._029NotificationTestActivity" />
         <activity android:name=".activity._028NavigationActivity" />
-        <activity android:name=".activity.Main2Activity" /> <!-- 高德地图设置key -->
+        <!-- 高德地图设置key -->
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">

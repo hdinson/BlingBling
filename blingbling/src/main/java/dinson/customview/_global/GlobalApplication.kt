@@ -1,14 +1,18 @@
 package dinson.customview._global
 
 import android.app.Application
+import com.dinson.blingbase.RxBling
 import com.dinson.blingbase.crash.ActivityCrash
 import com.dinson.blingbase.crash.CrashProfile
 import com.dinson.blingbase.crash.CrashTool
-import dinson.customview.kotlin.logi
-import com.dinson.blingbase.RxBling
+import com.dinson.blingbase.rxcache.RxCache
+import com.dinson.blingbase.rxcache.diskconverter.GsonDiskConverter
 import com.huawei.hms.mlsdk.common.MLApplication
 import dinson.customview.BuildConfig
 import dinson.customview.activity.SplashActivity
+import dinson.customview.kotlin.logi
+import java.io.File
+
 
 class GlobalApplication : Application() {
 
@@ -44,5 +48,15 @@ class GlobalApplication : Application() {
 
         logi { "application init.." }
         MLApplication.getInstance().apiKey = BuildConfig.HUAWEI_API_KEY
+
+        RxCache.initializeDefault(
+            RxCache.Builder()
+                .appVersion(1) //当版本号改变,缓存路径下存储的所有数据都会被清除掉
+                .diskDir(File(cacheDir.path + File.separator.toString() + "data-cache"))
+                .diskConverter(GsonDiskConverter()) //支持Serializable、Json(GsonDiskConverter)
+                .memoryMax(2 * 1024 * 1024)
+                .diskMax(20 * 1024 * 1024.toLong())
+                .build()
+        )
     }
 }

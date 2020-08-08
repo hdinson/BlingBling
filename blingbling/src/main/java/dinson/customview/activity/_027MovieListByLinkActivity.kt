@@ -101,5 +101,4 @@ class _027MovieListByLinkActivity : BaseActivity() {
                 crvMovieContent.complete()
             }.addToManaged()
     }
-
 }

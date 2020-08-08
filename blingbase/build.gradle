@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
@@ -18,7 +17,6 @@ android {
 
     buildTypes {
         debug {
-            // debug configuration
             minifyEnabled false
             buildConfigField "boolean", "LOG_DEBUG", "true"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -29,13 +27,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 buildscript {
-
-    ext.bling_retrofit2_version = '2.3.0'
-
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -53,57 +47,39 @@ buildscript {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation "com.google.android.material:material:1.1.0"
-    //implementation 'androidx.core:core-ktx:1.3.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'/*协程*/
-    implementation 'org.greenrobot:eventbus:3.1.1'/*EventBus*/
-    implementation 'com.github.bumptech.glide:glide:4.11.0'/*Glide*/
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'com.google.android.material:material:1.1.0'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'/*协程*/
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"/*kotlin标准库*/
 
-    /*Retrofit*/
-    implementation "com.squareup.retrofit2:converter-gson:$bling_retrofit2_version"
-    implementation "com.squareup.retrofit2:retrofit:$bling_retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-scalars:$bling_retrofit2_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$bling_retrofit2_version"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api "com.squareup.retrofit2:retrofit:$retrofit2_version"/*Retrofit*/
+    api "com.squareup.retrofit2:converter-gson:$retrofit2_version"/*Retrofit*/
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"/*Retrofit*/
+    api "com.squareup.retrofit2:converter-scalars:$retrofit2_version"/*Retrofit*/
 
+    api 'org.greenrobot:eventbus:3.1.1'/*EventBus*/
+    api 'androidx.multidex:multidex:2.0.1'/*MultiDex*/
+    api 'com.github.bumptech.glide:glide:4.11.0'/*Glide*/
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'/*Glide*/
+    api 'androidx.recyclerview:recyclerview:1.1.0'/*recyclerview*/
+    api 'io.reactivex.rxjava2:rxkotlin:2.0.2'/*RxKotlin*/
+    api "androidx.constraintlayout:constraintlayout:$constraintlayout_version"/*ConstraintLayout*/
 }
-
-//def prop = new Properties()
-//prop.load(file('../constant.properties').newDataInputStream())
-
-/*publish {
-    userOrg = 'dinson'
-    groupId = 'com.dinson.bling'
-    artifactId = 'blingbase'
-    publishVersion = '1.0'
-    desc = 'Library of tools used in development'
-    website = 'https://github.com/Dinson-Huang'
-
-    dryRun = false
-    bintrayUser = prop.getProperty("BINTRAY_USER")
-    bintrayKey = prop.getProperty("BINTRAY_KEY")
-}*/
-
 
 ext {
     bintrayRepo = 'android'
-    bintrayName = 'blingbase'
+    bintrayName = 'android-base'
 
     publishedGroupId = 'com.dinson.bling'
-    libraryName = 'blingbase'
     artifactId = 'android-base'
-    libraryDescription = 'Library of tools used in development'
+    libraryDescription = '● kotlin拓展方法\n● 常用的依赖\n● 崩溃界面 \n● 常用工具类\n● 常用控件'
 
-    siteUrl = 'https://hdinson.cn'
-    gitUrl = 'https://github.com/hdinson/BlingBling'
+    siteUrl = 'https://github.com/hdinson/BlingBling'
+    gitUrl = 'https://github.com/hdinson/BlingBling.git'
     issuesUrl = 'https://github.com/hdinson/BlingBling/issues'
 
     // ./gradlew install  ./gradlew bintrayUpload
-    libraryVersion = '1.2.38'
+    libraryVersion = '1.3.0'
     libraryVersionDesc = 'Daily update'
 
     developerId = 'dinson'
