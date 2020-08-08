@@ -8,6 +8,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.dinson.blingbase.rxcache.rxCache
+import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.gson.Gson
 import dinson.customview.R
@@ -20,7 +22,6 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.listener.CalculatorKey
 import dinson.customview.listener.OnItemSwipeOpen
 import dinson.customview.model._007CurrencyModel
-import dinson.customview.utils.AppCacheUtil
 import dinson.customview.utils.SPUtils
 import dinson.customview.weight._003toast.LoadToast
 import dinson.customview.weight.swipelayout.SwipeItemLayout
@@ -48,21 +49,13 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
     }
 
     private fun getExchangeData() {
-        val exchangeStr = AppCacheUtil.getExchangeRateCache(this)
-
-        //显示本地数据
-        if (exchangeStr != null) {
-            setAdapterRate(exchangeStr)
-        } else {
-            //mLoading.setText("获取汇率")
-        }
         mLoading.setText("获取汇率").show()
         //获取最新数据
         HttpHelper.create(ExchangeApi::class.java).getRate()
+            .rxCache("api_exchange_data", CacheStrategy.cacheAndRemote())
             .compose(RxSchedulers.io_main())
-            .subscribe({ value ->
-                val json = Gson().toJson(value)
-                AppCacheUtil.setExchangeRateCache(this@_007ExchangeActivity, json)
+            .subscribe({
+                val json = Gson().toJson(it.data)
                 setAdapterRate(json)
                 mLoading.success()
             }, {
@@ -88,7 +81,9 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
                     it.tag != -1
                 }
                 .collect({ mUserCurrencyData }, { t1, t2 -> t1.add(t2) })
-                .flatMap { Observable.fromIterable(it).toSortedList { t1, t2 -> t1.tag!! - t2.tag!! } }
+                .flatMap {
+                    Observable.fromIterable(it).toSortedList { t1, t2 -> t1.tag!! - t2.tag!! }
+                }
                 .subscribe(Consumer { mUserCurrencyData = it as ArrayList<_007CurrencyModel> })
                 .addToManaged()
         }

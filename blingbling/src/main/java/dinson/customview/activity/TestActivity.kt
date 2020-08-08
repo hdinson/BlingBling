@@ -18,6 +18,9 @@ import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.rxcache.data.ResultFrom
+import com.dinson.blingbase.rxcache.rxCache
+import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.utils.RxNotification
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.huawei.hmf.tasks.Task
@@ -35,7 +38,10 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.api.OneApi
 import dinson.customview.databinding.ActivityTestBinding
+import dinson.customview.http.HttpHelper
+import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
 import dinson.customview.manager.BlingNdkHelper
@@ -62,7 +68,8 @@ class TestActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         contentView = DataBindingUtil.setContentView(
-            this, R.layout.activity_test)
+            this, R.layout.activity_test
+        )
         contentView.cacheSize = CacheUtils.getCacheSize(this)
         initUI()
     }
@@ -235,7 +242,12 @@ class TestActivity : BaseActivity() {
 
     fun onPostNormalMsg(view: View) {
         val channelId = (1..Int.MAX_VALUE).random()
-        val resultPendingIntent = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+        val resultPendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            Intent(this, MainActivity::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
         RxNotification.Builder(this, "简单的通知", "通知内容", R.mipmap.ic_launcher)
             .setChannelId(channelId)
             .setChannelName("测试界面通知")
@@ -248,7 +260,12 @@ class TestActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun onSendRemindNotification(view: View) {
         val channelId = (1..Int.MAX_VALUE).random()
-        val resultPendingIntent = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+        val resultPendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            Intent(this, MainActivity::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
         RxNotification.Builder(this, "带声音的通知", "内容", R.mipmap.ic_launcher)
             .setSoundRes(R.raw.early_bird)
             .setChannelId(channelId)
@@ -316,7 +333,8 @@ class TestActivity : BaseActivity() {
                 PictureConfig.CHOOSE_REQUEST -> {
                     // 图片选择结果回调
                     val selectList = PictureSelector.obtainMultipleResult(data)
-                    val path = if (selectList[0].isCompressed) selectList[0].compressPath else selectList[0].path
+                    val path =
+                        if (selectList[0].isCompressed) selectList[0].compressPath else selectList[0].path
 //                    mSelectorGoodsImg?.setGoodsImgLocalPath(path)
                     val bitmap = BitmapFactory.decodeFile(path)
 
@@ -336,7 +354,9 @@ class TestActivity : BaseActivity() {
 */
 
 
-                    val options = MLRemoteTextSetting.Factory().setBorderType(MLRemoteTextSetting.ARC).create()
+                    val options =
+                        MLRemoteTextSetting.Factory().setBorderType(MLRemoteTextSetting.ARC)
+                            .create()
                     val analyzer = MLAnalyzerFactory.getInstance().getRemoteTextAnalyzer(options)
 
 
@@ -365,4 +385,5 @@ class TestActivity : BaseActivity() {
             }
         }
     }
+
 }

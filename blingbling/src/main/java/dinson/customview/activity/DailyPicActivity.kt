@@ -12,6 +12,7 @@ import dinson.customview._global.BaseActivity
 import dinson.customview.entity.one.DailyDetail
 import com.dinson.blingbase.kotlin.screenWidth
 import kotlinx.android.synthetic.main.activity_daily_pic.*
+import kotlin.math.hypot
 
 class DailyPicActivity : BaseActivity() {
 
@@ -56,7 +57,7 @@ class DailyPicActivity : BaseActivity() {
                 val width = right - left
 
                 val animator = ViewAnimationUtils.createCircularReveal(v, 0, height, 0f,
-                    Math.hypot(width.toDouble(), viewHeight.toDouble()).toFloat())
+                    hypot(width.toDouble(), viewHeight.toDouble()).toFloat())
                 animator.duration = 700
                 animator.start()
             }

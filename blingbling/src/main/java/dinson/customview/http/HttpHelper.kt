@@ -25,10 +25,9 @@ object HttpHelper {
         .setLogLevel(LogLevel.VERBOSE)
         .setRequestTag("Request")
         .setResponseTag("Response")
-        .addHeader("ddd", "dinson")
         .build()
     private var mOkHttpClient = OkHttpClient.Builder()
-        .authenticator { route: Route?, response: Response ->
+        .authenticator { _: Route?, response: Response ->
             logi { "Authenticating for response: $response" }
             logi { "Challenges: " + response.challenges() }
             val credential = Credentials.basic("jesse", "password1")
@@ -36,8 +35,12 @@ object HttpHelper {
                 .header("Authorization", credential)
                 .build()
         }
-        .cache(Cache(File(SDCARD_PRIVATE_CACHE, "http_cache"),
-            1024 * 1024 * 100)) //100M的缓存
+        .cache(
+            Cache(
+                File(SDCARD_PRIVATE_CACHE, "http_cache"),
+                1024 * 1024 * 100
+            )
+        ) //100M的缓存
         .readTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
         .writeTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
         .connectTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)

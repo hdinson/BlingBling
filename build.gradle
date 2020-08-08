@@ -4,17 +4,20 @@ buildscript {
     ext.anko_version = '0.10.4'
     ext.gradle_version = '3.1.4'
     ext.rxlifecycle = '2.2.1'
-    ext.retrofit2_version = '2.3.0'
-    ext.blingbase_version = '0.0.8'
+    ext.retrofit2_version = '2.5.0'
+    ext.blingbase_version = '1.2.38'
     ext.navigation_version = '2.3.0'
+    ext.constraintlayout_version = '2.0.0-rc1'
 
     repositories {
+        maven { url 'https://dl.bintray.com/dinson/android' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://jitpack.io' }
+
         jcenter()
         google()
         mavenCentral()
@@ -34,12 +37,14 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://dl.bintray.com/dinson/android' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://jitpack.io' }
+
         jcenter()
         google()
         mavenCentral()
