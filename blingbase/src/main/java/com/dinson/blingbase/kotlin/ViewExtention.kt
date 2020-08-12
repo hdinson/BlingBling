@@ -8,6 +8,7 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.DimenRes
 import androidx.core.view.ViewCompat
 import com.google.android.material.appbar.AppBarLayout
@@ -66,6 +67,59 @@ fun View.getArcListener(path: Path): ValueAnimator.AnimatorUpdateListener {
     }
 }
 
+
+/******************************************************************************************************/
+/**                             TextView                                                             **/
+/******************************************************************************************************/
+
+fun TextView.onTextChanged(callback: (s: CharSequence?, start: Int, before: Int, count: Int) -> Unit) =
+    TvKeeper(this).onTextChanged(callback)
+
+fun TextView.afterTextChanged(callback: (s: Editable?) -> Unit) =
+    TvKeeper(this).afterTextChanged(callback)
+
+fun TextView.beforeTextChanged(callback: (s: CharSequence?, start: Int, count: Int, after: Int) -> Unit) =
+    TvKeeper(this).beforeTextChanged(callback)
+
+class TvKeeper(private val tv: TextView) {
+    private val executor = TextWatcherExecutor()
+
+    init {
+        tv.addTextChangedListener(executor)
+    }
+
+    fun afterTextChanged(callback: ((Editable?) -> Unit)) = apply {
+        executor.after = callback
+    }
+
+    fun beforeTextChanged(callback: (CharSequence?, Int, Int, Int) -> Unit) = apply {
+        executor.before = callback
+    }
+
+    fun onTextChanged(callback: (CharSequence?, Int, Int, Int) -> Unit) = apply {
+        executor.textChange = callback
+    }
+
+    fun view() = tv
+}
+
+private class TextWatcherExecutor : TextWatcher {
+    var after: ((Editable?) -> Unit)? = null
+    var before: ((CharSequence?, Int, Int, Int) -> Unit)? = null
+    var textChange: ((CharSequence?, Int, Int, Int) -> Unit)? = null
+
+    override fun afterTextChanged(s: Editable?) {
+        after?.invoke(s)
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        before?.invoke(s, start, count, after)
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        textChange?.invoke(s, start, count, count)
+    }
+}
 
 /******************************************************************************************************/
 /**                             EditText                                                             **/
@@ -130,6 +184,7 @@ fun EditText.addEmptySelectTrue(): EditText {
     })
     return this
 }
+
 
 /******************************************************************************************************/
 /**                             CollapsingToolbarLayout                                              **/

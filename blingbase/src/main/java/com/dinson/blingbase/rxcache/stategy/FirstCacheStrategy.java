@@ -15,7 +15,6 @@ import io.reactivex.Observable;
 
 /**
  * 优先缓存
- * 作者: 赵成柱 on 2016/9/12 0012.
  */
 public final class FirstCacheStrategy implements IStrategy  {
     private boolean isSync;

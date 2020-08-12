@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.dinson.blingbase.rxcache.data.CacheResult;
 import com.dinson.blingbase.rxcache.data.ResultFrom;
-import com.dinson.blingbase.rxcache.utils.LogUtils;
+import com.dinson.blingbase.rxcache.utils.RxCacheLog;
 
 
 import org.reactivestreams.Publisher;
@@ -20,12 +20,6 @@ import io.reactivex.ObservableSource;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-
-/**
- * author : zchu
- * date   : 2017/10/9
- * desc   : RxCache的帮助类
- */
 
 public class RxCacheHelper {
 
@@ -51,23 +45,23 @@ public class RxCacheHelper {
                     @SuppressLint("CheckResult")
                     @Override
                     public CacheResult<T> apply(@NonNull T t) throws Exception {
-                        LogUtils.debug("loadRemote result=" + t);
+                        RxCacheLog.Companion.getInstance().logv("loadRemote result=" + t);
                         rxCache.save(key, t, target)
                                 .subscribeOn(Schedulers.io())
                                 .subscribe(
                                         new Consumer<Boolean>() {
                                             @Override
                                             public void accept(@NonNull Boolean status) throws Exception {
-                                                LogUtils.debug("save status => " + status);
+                                                RxCacheLog.Companion.getInstance().logv("save status => " + status);
                                             }
                                         },
                                         new Consumer<Throwable>() {
                                             @Override
                                             public void accept(@NonNull Throwable throwable) throws Exception {
                                                 if (throwable instanceof ConcurrentModificationException) {
-                                                    LogUtils.log("Save failed, please use a synchronized cache strategy :", throwable);
+                                                    RxCacheLog.Companion.getInstance().loge("Save failed, please use a synchronized cache strategy :", throwable);
                                                 } else {
-                                                    LogUtils.log(throwable);
+                                                    RxCacheLog.Companion.getInstance().loge(throwable);
                                                 }
                                             }
                                         });
@@ -143,23 +137,23 @@ public class RxCacheHelper {
                     @SuppressLint("CheckResult")
                     @Override
                     public CacheResult<T> apply(@NonNull T t) throws Exception {
-                        LogUtils.debug("loadRemote result=" + t);
+                        RxCacheLog.Companion.getInstance().logv("loadRemote result=" + t);
                         rxCache.save(key, t, target)
                                 .subscribeOn(Schedulers.io())
                                 .subscribe(
                                         new Consumer<Boolean>() {
                                             @Override
                                             public void accept(@NonNull Boolean status) throws Exception {
-                                                LogUtils.debug("save status => " + status);
+                                                RxCacheLog.Companion.getInstance().logv("save status => " + status);
                                             }
                                         },
                                         new Consumer<Throwable>() {
                                             @Override
                                             public void accept(@NonNull Throwable throwable) throws Exception {
                                                 if (throwable instanceof ConcurrentModificationException) {
-                                                    LogUtils.log("Save failed, please use a synchronized cache strategy :", throwable);
+                                                    RxCacheLog.Companion.getInstance().loge("Save failed, please use a synchronized cache strategy :", throwable);
                                                 } else {
-                                                    LogUtils.log(throwable);
+                                                    RxCacheLog.Companion.getInstance().loge(throwable);
                                                 }
                                             }
                                         });

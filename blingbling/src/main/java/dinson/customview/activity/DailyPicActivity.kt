@@ -24,7 +24,7 @@ class DailyPicActivity : BaseActivity() {
     }
 
     private fun initUI() {
-        val data = intent.getParcelableExtra<DailyDetail.DataBean>(EXTRA_DATA)
+        val data = intent.getParcelableExtra<DailyDetail>(EXTRA_DATA)
         val path = intent.getStringExtra(EXTRA_PATH)
 
         val bitmap = BitmapFactory.decodeFile(path)
@@ -71,7 +71,7 @@ class DailyPicActivity : BaseActivity() {
         private const val EXTRA_DATA = "data"
         private const val EXTRA_PATH = "path"
 
-        fun start(context: Context, bean: DailyDetail.DataBean, imgPath: String, options: ActivityOptionsCompat) {
+        fun start(context: Context, bean: DailyDetail, imgPath: String, options: ActivityOptionsCompat) {
             val starter = Intent(context, DailyPicActivity::class.java)
             starter.putExtra(EXTRA_DATA, bean)
             starter.putExtra(EXTRA_PATH, imgPath)

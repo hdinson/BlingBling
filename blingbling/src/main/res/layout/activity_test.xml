@@ -164,6 +164,7 @@
                     android:onClick="onOCR"
                     android:text="文本识别" />
 
+
             </LinearLayout>
 
         </ScrollView>

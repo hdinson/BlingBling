@@ -1,12 +1,6 @@
 package com.dinson.blingbase.rxcache.stategy;
 
-/**
- * Created by Chu on 2016/10/25.
- */
-
 public final class CacheStrategy {
-
-
 
 
     /**
@@ -21,37 +15,39 @@ public final class CacheStrategy {
      * 优先网络,缓存用同步的方式保存
      */
     public static IStrategy firstRemoteSync() {
-        return  new FirstRemoteStrategy(true);
+        return new FirstRemoteStrategy(true);
     }
 
     /**
      * 优先缓存,缓存用异步的方式保存
      */
     public static IStrategy firstCache() {
-        return  new FirstCacheStrategy();
+        return new FirstCacheStrategy();
     }
 
     /**
      * 优先缓存,缓存用同步的方式保存
      */
     public static IStrategy firstCacheSync() {
-        return  new FirstCacheStrategy(true);
+        return new FirstCacheStrategy(true);
     }
 
     /**
-     *  优先缓存,并设置超时时间
+     * 优先缓存,并设置超时时间
+     *
      * @param milliSecond 毫秒
      */
     public static IStrategy firstCacheTimeout(long milliSecond) {
-        return  new FirstCacheTimeoutStrategy(milliSecond);
+        return new FirstCacheTimeoutStrategy(milliSecond);
     }
 
     /**
-     *  优先缓存,并设置超时时间,缓存用同步的方式保存
+     * 优先缓存,并设置超时时间,缓存用同步的方式保存
+     *
      * @param milliSecond 毫秒
      */
     public static IStrategy firstCacheTimeoutSync(long milliSecond) {
-        return  new FirstCacheTimeoutStrategy(milliSecond,true);
+        return new FirstCacheTimeoutStrategy(milliSecond, true);
     }
 
 
@@ -66,7 +62,7 @@ public final class CacheStrategy {
      * 仅加载网络，但数据依然会被缓存
      */
     public static IStrategy onlyRemoteSync() {
-        return  new OnlyRemoteStrategy(true);
+        return new OnlyRemoteStrategy(true);
     }
 
     /**

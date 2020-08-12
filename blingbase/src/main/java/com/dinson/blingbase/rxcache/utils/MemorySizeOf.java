@@ -2,6 +2,8 @@ package com.dinson.blingbase.rxcache.utils;
 
 import android.graphics.Bitmap;
 
+import com.dinson.blingbase.utils.IOUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -37,8 +39,7 @@ public class MemorySizeOf {
             oos.flush();  //缓冲流
             size = baos.size();
         } finally {
-            Utils.close(oos);
-            Utils.close(baos);
+            IOUtils.close(oos, baos);
         }
         return size;
     }
@@ -56,7 +57,7 @@ public class MemorySizeOf {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             size = baos.size();
         } finally {
-            Utils.close(baos);
+            IOUtils.close(baos);
         }
         return size;
     }

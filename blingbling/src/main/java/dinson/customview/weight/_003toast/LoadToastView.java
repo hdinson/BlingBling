@@ -14,7 +14,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import androidx.appcompat.widget.AppCompatImageView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -478,7 +477,6 @@ public class LoadToastView extends AppCompatImageView {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        Log.d(getClass().getSimpleName(), "detached");
         cleanup();
     }
 

@@ -1,7 +1,6 @@
 package dinson.customview.weight.imagewatcher;
 
 import android.net.Uri;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+
+import com.dinson.blingbase.rxcache.utils.RxCacheLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +168,7 @@ public class ImageWatcherHelper {
 
     public ImageWatcher getImageWatcher() {
         if (mImageWatcher == null) {
-            Log.i("ImageWatcherHelper", "please invoke 'show' first");
+            RxCacheLog.Companion.getInstance().loge("please invoke 'show' first");
         }
         return mImageWatcher;
     }

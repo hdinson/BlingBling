@@ -13,12 +13,9 @@ import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-
 /**
- * Created by Chu on 2017/6/24.
  * 仅加载网络，不缓存
  */
-
 public final class NoneStrategy implements IStrategy  {
 
     private NoneStrategy() {

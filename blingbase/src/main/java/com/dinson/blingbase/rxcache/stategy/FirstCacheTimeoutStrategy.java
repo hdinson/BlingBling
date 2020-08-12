@@ -16,7 +16,6 @@ import io.reactivex.functions.Predicate;
 
 /**
  * 优先缓存并可设置超时时间
- * 作者: 赵成柱 on 2016/9/12 0012.
  */
 public final class FirstCacheTimeoutStrategy implements IStrategy {
     private boolean isSync;

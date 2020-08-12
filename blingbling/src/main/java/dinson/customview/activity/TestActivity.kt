@@ -18,18 +18,13 @@ import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.dinson.blingbase.kotlin.toasty
-import com.dinson.blingbase.rxcache.data.ResultFrom
-import com.dinson.blingbase.rxcache.rxCache
-import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.utils.RxNotification
 import com.dinson.blingbase.utils.SystemBarModeUtils
-import com.huawei.hmf.tasks.Task
+import com.dinson.blingbase.utils.validations.RxValidator
+import com.dinson.blingbase.utils.validations.executor.EtNotEmptyExecutor
 import com.huawei.hms.mlsdk.MLAnalyzerFactory
-import com.huawei.hms.mlsdk.common.MLApplication
 import com.huawei.hms.mlsdk.common.MLException
 import com.huawei.hms.mlsdk.common.MLFrame
-import com.huawei.hms.mlsdk.document.MLDocument
-import com.huawei.hms.mlsdk.document.MLDocumentSetting
 import com.huawei.hms.mlsdk.text.MLRemoteTextSetting
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
@@ -38,10 +33,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
-import dinson.customview.api.OneApi
 import dinson.customview.databinding.ActivityTestBinding
-import dinson.customview.http.HttpHelper
-import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
 import dinson.customview.manager.BlingNdkHelper
@@ -67,9 +59,7 @@ class TestActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        contentView = DataBindingUtil.setContentView(
-            this, R.layout.activity_test
-        )
+        contentView = DataBindingUtil.setContentView(this, R.layout.activity_test)
         contentView.cacheSize = CacheUtils.getCacheSize(this)
         initUI()
     }

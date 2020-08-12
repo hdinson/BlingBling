@@ -5,10 +5,6 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Chu on 2017/6/1.
- */
-
 public class Occupy {
     //这8个方法不写不行，否则occupyof(int x)会自动重载到occupyof(Object o),并且无法在方法中判断
     public static int occupyof(boolean variable) {
@@ -61,7 +57,7 @@ public class Occupy {
         return new Occupy((byte) 8, (byte) 16, (byte) 8);
     }
 
-    public static Occupy forDetectedVM(){
+    public static Occupy forDetectedVM() {
         return null;
     }
 
@@ -69,15 +65,18 @@ public class Occupy {
     private final byte EMPTY_OBJECT_SIZE;
     private final byte EMPTY_ARRAY_VAR_SIZE;
 
-    private static class ref{
-        public ref(Object obj){
+    private static class ref {
+        public ref(Object obj) {
             this.obj = obj;
         }
+
         final Object obj;
+
         @Override
         public boolean equals(Object obj) {
-            return (obj instanceof ref) && ((ref)obj).obj == this.obj;
+            return (obj instanceof ref) && ((ref) obj).obj == this.obj;
         }
+
         @Override
         public int hashCode() {
             return obj.hashCode();
@@ -86,15 +85,16 @@ public class Occupy {
 
     private List dedup = new ArrayList();
 
-    public int occupyof(Object object){
+    public int occupyof(Object object) {
         dedup.clear();
         return occupyof0(object);
     }
+
     private int occupyof0(Object object) {
         if (object == null)
             return 0;
         ref r = new ref(object);
-        if(dedup.contains(r))
+        if (dedup.contains(r))
             return 0;
         dedup.add(r);
         int varSize = 0;//对象中的值类型、引用类型变量大小
@@ -119,7 +119,7 @@ public class Occupy {
                 if (Modifier.isStatic(field.getModifiers()))
                     continue;//类成员不计
                 //System.out.println(field.getDeclaringClass());
-                if(clazz != field.getDeclaringClass())
+                if (clazz != field.getDeclaringClass())
                     continue;
                 Class<?> type = field.getType();
                 if (type.isPrimitive())

@@ -2,15 +2,6 @@ package com.dinson.blingbase.rxcache;
 
 import android.os.Environment;
 import android.os.StatFs;
-import android.util.Log;
-
-
-import org.reactivestreams.Publisher;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.security.MessageDigest;
 
 import androidx.annotation.NonNull;
 
@@ -19,7 +10,14 @@ import com.dinson.blingbase.rxcache.diskconverter.IDiskConverter;
 import com.dinson.blingbase.rxcache.diskconverter.SerializableDiskConverter;
 import com.dinson.blingbase.rxcache.stategy.IFlowableStrategy;
 import com.dinson.blingbase.rxcache.stategy.IObservableStrategy;
-import com.dinson.blingbase.rxcache.utils.LogUtils;
+import com.dinson.blingbase.rxcache.utils.RxCacheLog;
+
+import org.reactivestreams.Publisher;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.security.MessageDigest;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
@@ -35,8 +33,8 @@ import io.reactivex.ObservableTransformer;
 
 /**
  * RxJava remote data cache processing library, support Serializable, JSON
- * 作者: 赵成柱 on 2016/9/9 0012.
  */
+@SuppressWarnings("unused")
 public final class RxCache {
 
 
@@ -51,7 +49,7 @@ public final class RxCache {
                     .appVersion(1)
                     .diskDir(Environment.getDownloadCacheDirectory())
                     .diskConverter(new SerializableDiskConverter())
-                    .setDebug(true)
+                    .showLog(true)
                     .build();
 
         }
@@ -62,7 +60,7 @@ public final class RxCache {
         if (sDefaultRxCache == null) {
             RxCache.sDefaultRxCache = rxCache;
         } else {
-            Log.e("RxBling LruMemoryCache", "You need to initialize it before using the default rxCache and only initialize it once");
+            RxCacheLog.Companion.getInstance().loge("You need to initialize it before using the default rxCache and only initialize it once");
         }
     }
 
@@ -113,7 +111,7 @@ public final class RxCache {
     public <T> Observable<CacheResult<T>> load(final String key, final Type type) {
         return Observable.create(new ObservableOnSubscribe<CacheResult<T>>() {
             @Override
-            public void subscribe(ObservableEmitter<CacheResult<T>> observableEmitter) throws Exception {
+            public void subscribe(ObservableEmitter<CacheResult<T>> observableEmitter) {
                 CacheResult<T> load = cacheCore.load(getMD5MessageDigest(key), type);
                 if (!observableEmitter.isDisposed()) {
                     if (load != null) {
@@ -137,7 +135,7 @@ public final class RxCache {
     public <T> Flowable<CacheResult<T>> load2Flowable(final String key, final Type type, BackpressureStrategy backpressureStrategy) {
         return Flowable.create(new FlowableOnSubscribe<CacheResult<T>>() {
             @Override
-            public void subscribe(FlowableEmitter<CacheResult<T>> flowableEmitter) throws Exception {
+            public void subscribe(FlowableEmitter<CacheResult<T>> flowableEmitter) {
                 CacheResult<T> load = cacheCore.load(getMD5MessageDigest(key), type);
                 if (!flowableEmitter.isCancelled()) {
                     if (load != null) {
@@ -162,7 +160,7 @@ public final class RxCache {
     public <T> Observable<Boolean> save(final String key, final T value, final CacheTarget target) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
-            public void subscribe(ObservableEmitter<Boolean> observableEmitter) throws Exception {
+            public void subscribe(ObservableEmitter<Boolean> observableEmitter) {
                 boolean save = cacheCore.save(getMD5MessageDigest(key), value, target);
                 if (!observableEmitter.isDisposed()) {
                     observableEmitter.onNext(save);
@@ -185,7 +183,7 @@ public final class RxCache {
     public <T> Flowable<Boolean> save2Flowable(final String key, final T value, final CacheTarget target, BackpressureStrategy strategy) {
         return Flowable.create(new FlowableOnSubscribe<Boolean>() {
             @Override
-            public void subscribe(FlowableEmitter<Boolean> flowableEmitter) throws Exception {
+            public void subscribe(FlowableEmitter<Boolean> flowableEmitter) {
                 boolean save = cacheCore.save(getMD5MessageDigest(key), value, target);
                 if (!flowableEmitter.isCancelled()) {
                     flowableEmitter.onNext(save);
@@ -197,9 +195,6 @@ public final class RxCache {
 
     /**
      * 是否包含
-     *
-     * @param key
-     * @return
      */
     public boolean containsKey(final String key) {
         return cacheCore.containsKey(getMD5MessageDigest(key));
@@ -218,7 +213,7 @@ public final class RxCache {
     public Observable<Boolean> clear() {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
-            public void subscribe(ObservableEmitter<Boolean> observableEmitter) throws Exception {
+            public void subscribe(ObservableEmitter<Boolean> observableEmitter) {
                 try {
                     cacheCore.clear();
                     if (!observableEmitter.isDisposed()) {
@@ -294,8 +289,8 @@ public final class RxCache {
             return this;
         }
 
-        public Builder setDebug(boolean debug) {
-            LogUtils.DEBUG = debug;
+        public Builder showLog(boolean debug) {
+            RxCacheLog.Companion.getInstance().setSHOW_LOG(debug);
             return this;
         }
 
@@ -334,11 +329,11 @@ public final class RxCache {
 
             try {
                 StatFs statFs = new StatFs(dir.getAbsolutePath());
-                long available = ((long) statFs.getBlockCount()) * statFs.getBlockSize();
+                long available = ((long) statFs.getBlockCountLong()) * statFs.getBlockSizeLong();
                 // Target 2% of the total space.
                 size = available / 50;
-            } catch (IllegalArgumentException ignored) {
-                LogUtils.log(ignored);
+            } catch (IllegalArgumentException e) {
+                RxCacheLog.Companion.getInstance().loge(e);
             }
             // Bound inside min/max size for disk cache.
             return Math.max(Math.min(size, MAX_DISK_CACHE_SIZE), MIN_DISK_CACHE_SIZE);
