@@ -34,6 +34,7 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.logd
 import dinson.customview.kotlin.loge
+import dinson.customview.kotlin.logi
 import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
@@ -95,18 +96,28 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     private fun initHead() {
         mOneApi.loadDaily()
             .rxCache("api_one_daily", CacheStrategy.firstCacheTimeout(12 * 3600 * 1000))
-            .flatMap { Observable.fromIterable(it.data.data) }
+            .flatMap {
+                logi { "${it.data.data}" }
+                Observable.fromIterable(it.data.data)
+            }
             .flatMap {
                 mOneApi.getDetail(it).rxCache("one_daily_detail_$it", CacheStrategy.firstCache())
             }
-            .map { it.data.data.hp_img_url }
-            .toList()
+            .map {
+                logi { "${it.data.data}" }
+                it.data
+            }
+            .toSortedList { o1, o2 ->
+                val before = o1.data?.hpcontent_id ?: 0
+                val after = o2.data?.hpcontent_id ?: 0
+                return@toSortedList after.compareTo(before)
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .compose(bindUntilEvent(ActivityEvent.DESTROY))
-            .subscribe({
+            .subscribe({ list ->
                 mHeadData.clear()
-                mHeadData.addAll(it)
+                mHeadData.addAll(list.filter { it.data != null }.map { it.data!!.hp_img_url })
                 mu5Viewpager.setData(mHeadData, this)
             }, {
                 loge(it::toString)

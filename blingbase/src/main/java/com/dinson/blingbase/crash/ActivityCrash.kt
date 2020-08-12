@@ -80,7 +80,6 @@ class ActivityCrash : FragmentActivity() {
     private fun copyErrorToClipboard() {
         val errorInformation = CrashTool.getAllErrorDetailsFromIntent(this@ActivityCrash, intent)
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-
         val clip = ClipData.newPlainText("错误信息", errorInformation)
         clipboard.setPrimaryClip(clip)
         Toast.makeText(this@ActivityCrash, "已复制到剪贴板", Toast.LENGTH_SHORT).show()

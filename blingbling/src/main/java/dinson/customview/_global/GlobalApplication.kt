@@ -46,7 +46,6 @@ class GlobalApplication : Application() {
             }) //default: null
             .apply()
 
-        logi { "application init.." }
         MLApplication.getInstance().apiKey = BuildConfig.HUAWEI_API_KEY
 
         RxCache.initializeDefault(
@@ -56,6 +55,7 @@ class GlobalApplication : Application() {
                 .diskConverter(GsonDiskConverter()) //支持Serializable、Json(GsonDiskConverter)
                 .memoryMax(2 * 1024 * 1024)
                 .diskMax(20 * 1024 * 1024.toLong())
+                .showLog(BuildConfig.DEBUG)
                 .build()
         )
     }

@@ -74,6 +74,10 @@ android {
             buildConfigField 'String', 'HUAWEI_API_KEY', tempPro['HUAWEI_API_KEY']
         }
     }
+    //kotlin序列化
+    androidExtensions {
+        experimental = true
+    }
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8

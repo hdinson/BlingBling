@@ -2,7 +2,7 @@ package com.dinson.blingbase.rxcache;
 
 import com.dinson.blingbase.rxcache.diskconverter.IDiskConverter;
 import com.dinson.blingbase.rxcache.disklrucache.DiskLruCache;
-import com.dinson.blingbase.rxcache.utils.LogUtils;
+import com.dinson.blingbase.rxcache.utils.RxCacheLog;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,10 +10,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
 
-
-/**
- * Created by Z.Chu on 2016/9/10.
- */
 public class LruDiskCache {
     private IDiskConverter mDiskConverter;
     private DiskLruCache mDiskLruCache;
@@ -24,7 +20,7 @@ public class LruDiskCache {
         try {
             mDiskLruCache = DiskLruCache.open(diskDir, appVersion, 2, diskMaxSize);
         } catch (IOException e) {
-            LogUtils.log(e);
+            RxCacheLog.Companion.getInstance().loge(e);
         }
     }
 
@@ -37,16 +33,13 @@ public class LruDiskCache {
             if (snapshot != null) {
                 InputStream source = snapshot.getInputStream(0);
                 T value = mDiskConverter.load(source, type);
-                long timestamp = 0;
                 String string = snapshot.getString(1);
-                if (string != null) {
-                    timestamp = Long.parseLong(string);
-                }
+                long timestamp = Long.parseLong(string);
                 snapshot.close();
                 return new CacheHolder<>(value, timestamp);
             }
         } catch (IOException e) {
-            LogUtils.log(e);
+            RxCacheLog.Companion.getInstance().loge(e);
         }
         return null;
     }
@@ -68,18 +61,18 @@ public class LruDiskCache {
             long l = System.currentTimeMillis();
             edit.set(1, String.valueOf(l));
             edit.commit();
-            LogUtils.log("save:  value=" + value + " , status=" + true);
+            RxCacheLog.Companion.getInstance().logv("save:  value=" + value + " , status=" + true);
             return true;
         } catch (IOException e) {
-            LogUtils.log(e);
+            RxCacheLog.Companion.getInstance().loge(e);
             if (edit != null) {
                 try {
                     edit.abort();
                 } catch (IOException e1) {
-                    LogUtils.log(e1);
+                    RxCacheLog.Companion.getInstance().loge(e1);
                 }
             }
-            LogUtils.log("save:  value=" + value + " , status=" + false);
+            RxCacheLog.Companion.getInstance().logv("save:  value=" + value + " , status=" + false);
         }
         return false;
     }
@@ -90,7 +83,7 @@ public class LruDiskCache {
             try {
                 return mDiskLruCache.get(key) != null;
             } catch (IOException e) {
-                LogUtils.log(e);
+                RxCacheLog.Companion.getInstance().loge(e);
             }
         }
         return false;
@@ -104,7 +97,7 @@ public class LruDiskCache {
             try {
                 return mDiskLruCache.remove(key);
             } catch (IOException e) {
-                LogUtils.log(e);
+                RxCacheLog.Companion.getInstance().loge(e);
             }
         }
         return false;
@@ -130,6 +123,4 @@ public class LruDiskCache {
             }
         }
     }
-
-
 }

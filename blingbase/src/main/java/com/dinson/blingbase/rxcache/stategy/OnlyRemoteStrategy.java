@@ -12,10 +12,8 @@ import java.lang.reflect.Type;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
-
 /**
  * 仅加载网络，但数据依然会被缓存
- * 作者: 赵成柱 on 2016/9/12 0012.
  */
 class OnlyRemoteStrategy implements IStrategy {
     private boolean isSync;

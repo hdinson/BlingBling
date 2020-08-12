@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 
 public class GsonDiskConverter implements IDiskConverter {
 
-    private Gson mGson = new Gson();
+    private Gson mGson;
 
 
     public GsonDiskConverter() {

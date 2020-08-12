@@ -11,10 +11,8 @@ import java.lang.reflect.Type;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
-
 /**
  * 仅加载缓存
- * 作者: 赵成柱 on 2016/9/12 0012.
  */
 public final class OnlyCacheStrategy implements IStrategy  {
 

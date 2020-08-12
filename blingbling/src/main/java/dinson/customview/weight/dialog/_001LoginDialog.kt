@@ -21,7 +21,8 @@ import java.util.concurrent.TimeUnit
 /**
  *  玩安卓登录框
  */
-class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : Dialog(context, theme), View.OnClickListener {
+class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) :
+    Dialog(context, theme), View.OnClickListener {
 
 
     /******************************************************************************************************/
@@ -70,7 +71,7 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
             ValueAnimator.ofFloat(0f, 1f).apply {
                 addUpdateListener(fabButton.getArcListener(path))
                 onEnd {
-                    fabButton.rotation=45f
+                    fabButton.rotation = 45f
                     animateRevealShow()
                 }
             }.start()
@@ -86,9 +87,12 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
      */
     private fun animateRevealShow() {
         llRegister.show()
-        val endRadius = Math.hypot(llRegister.halfWidth().toDouble(), llRegister.height.toDouble()).toFloat()
-        ViewAnimationUtils.createCircularReveal(llRegister,
-            llRegister.halfWidth().toInt(), 0, 0f, endRadius).apply {
+        val endRadius =
+            Math.hypot(llRegister.halfWidth().toDouble(), llRegister.height.toDouble()).toFloat()
+        ViewAnimationUtils.createCircularReveal(
+            llRegister,
+            llRegister.halfWidth().toInt(), 0, 0f, endRadius
+        ).apply {
             duration = 500
             interpolator = AccelerateInterpolator()
         }.start()
@@ -98,9 +102,12 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
      * 注册界面关闭水波纹
      */
     private fun animateRevealClose() {
-        val startRadius = Math.hypot(llRegister.halfWidth().toDouble(), llRegister.height.toDouble()).toFloat()
-        ViewAnimationUtils.createCircularReveal(llRegister, llRegister.halfWidth().toInt(), 0,
-            startRadius, 0f).onEnd {
+        val startRadius =
+            Math.hypot(llRegister.halfWidth().toDouble(), llRegister.height.toDouble()).toFloat()
+        ViewAnimationUtils.createCircularReveal(
+            llRegister, llRegister.halfWidth().toInt(), 0,
+            startRadius, 0f
+        ).onEnd {
             llRegister.hide()
             resetFabBtn()
         }.animator().apply {
@@ -123,7 +130,10 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
                     "Password must not null".toasty();return
                 }
                 btnDoLogin.isEnabled = false
-                mWanAndroidApi.login(etLoginUsername.text.toString(), etLoginPassword.text.toString())
+                mWanAndroidApi.login(
+                    etLoginUsername.text.toString(),
+                    etLoginPassword.text.toString()
+                )
                     .compose(RxSchedulers.io_main())
                     .subscribe({
                         if (it.errorCode == 0) {
@@ -144,12 +154,15 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
                     "Password must not null".toasty();return
                 }
                 if (etRegisterRepeatPassword.text.isEmpty()
-                    || etRegisterPassword.text.toString() != etRegisterRepeatPassword.text.toString()) {
+                    || etRegisterPassword.text.toString() != etRegisterRepeatPassword.text.toString()
+                ) {
                     "Two different input".toasty();return
                 }
                 btnDoRegister.isEnabled = false
-                mWanAndroidApi.register(etRegisterUsername.text.toString(), etRegisterPassword.text.toString(),
-                    etRegisterRepeatPassword.text.toString()).compose(RxSchedulers.io_main())
+                mWanAndroidApi.register(
+                    etRegisterUsername.text.toString(), etRegisterPassword.text.toString(),
+                    etRegisterRepeatPassword.text.toString()
+                ).compose(RxSchedulers.io_main())
                     .subscribe({
                         if (it.errorCode == 0) animateRevealClose()
                         else it.errorMsg.toasty()
@@ -169,7 +182,7 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) : 
      * 重置fab按钮
      */
     private fun resetFabBtn() {
-        fabButton.rotation=0f
+        fabButton.rotation = 0f
         val path = fabButton.createArcPath(0f, 0f)
         ValueAnimator.ofFloat(0f, 1f).apply {
             startDelay = 100L

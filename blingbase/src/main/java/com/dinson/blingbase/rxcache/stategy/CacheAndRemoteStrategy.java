@@ -18,7 +18,6 @@ import io.reactivex.functions.Predicate;
 
 /**
  * 先缓存，后网络
- * 作者: 赵成柱 on 2016/9/12 0012.
  */
 public final class CacheAndRemoteStrategy implements IStrategy {
     private boolean isSync;
