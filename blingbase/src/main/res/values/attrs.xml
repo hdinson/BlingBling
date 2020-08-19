@@ -1,25 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--自定义标题栏-->
-    <declare-styleable name="CommonTitleBar">
-        <attr name="backgroundResource" format="reference" />
-        <!--最外层是否实现了fitsSystemWindows这个属性-->
-        <attr name="ancestorFitsSystemWindow" format="boolean" />
-
-        <attr name="leftBtnVisible" format="boolean" />
-        <attr name="leftBtnDrawable" format="reference|color" />
-
-        <attr name="rightBtnVisible" format="boolean" />
-        <attr name="rightBtnDrawable" format="reference|color" />
-
-        <attr name="titleText" format="string" />
-        <attr name="titleTextColor" format="color" />
-
-        <attr name="rightText" format="string" />
-        <attr name="rightTextColor" format="color" />
-        <attr name="rightTextVisible" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="DrawableTextView">
         <attr name="leftDrawable" format="reference|color" />
         <attr name="rightDrawable" format="reference|color" />
@@ -62,6 +42,47 @@
             <enum name="none" value="0" />
             <enum name="round" value="1" />
             <enum name="rectangle" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <!--圆角或者圆形图片组件-->
+    <declare-styleable name="BannerView">
+        <attr name="bvIndicatorNormal" format="reference" />
+        <attr name="bvIndicatorSelect" format="reference" />
+        <attr name="bvIndicatorMargin" format="reference|dimension" />
+        <attr name="bvIndicatorMarginBottom" format="reference|dimension" />
+        <attr name="bvIsOpenMZEffect" format="boolean" />
+        <attr name="bvIsMiddlePageCover" format="boolean" />
+        <attr name="bvIsCanLoop" format="boolean" />
+        <attr name="bvIsAutoLoop" format="boolean" />
+        <attr name="bvHiddenIndicator" format="boolean" />
+        <attr name="bvAspectRatio" format="float" />
+        <attr name="bvIndicatorAlign" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <!--上下滚动走马灯-->
+    <declare-styleable name="MarqueeViewStyle">
+        <attr name="mvInterval" format="integer|reference" />
+        <attr name="mvAnimDuration" format="integer|reference" />
+        <attr name="mvTextSize" format="dimension|reference" />
+        <attr name="mvTextColor" format="color|reference" />
+        <attr name="mvSingleLine" format="boolean" />
+        <attr name="mvFont" format="reference" />
+        <attr name="mvGravity">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="mvDirection">
+            <enum name="bottom_to_top" value="0" />
+            <enum name="top_to_bottom" value="1" />
+            <enum name="right_to_left" value="2" />
+            <enum name="left_to_right" value="3" />
         </attr>
     </declare-styleable>
 </resources>

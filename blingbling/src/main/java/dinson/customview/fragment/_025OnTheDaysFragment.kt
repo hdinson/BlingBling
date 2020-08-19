@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.dinson.blingbase.RxBling
 import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.rxcache.rxCache
+import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.utils.DateUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -27,7 +29,11 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
 
     private val mApi by lazy { HttpHelper.create(DaysMatterApi::class.java) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_025_on_the_days, container, false)
     }
 
@@ -47,21 +53,14 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
 
     override fun lazyInit() {
         val date = DateUtils.getDateOfDay(0, "yyyy-MM-dd")
-        val cache = CacheUtils.getCache(requireContext(), "daily_banner")
-        if (cache?.isEmpty() == true) {
-            mApi.loadDailyNews().compose(RxSchedulers.io_main())
-                .subscribe({
-                    initBanner(it)
-                }, {
-                    it.toString().toasty()
-                }).addToManaged()
-        } else {
-            val type = object : TypeToken<ArrayList<IDailyNews>>() {}.type
-            val list = Gson().fromJson<ArrayList<IDailyNews>>(cache, type)
-            if (list != null && list.isNotEmpty()) {
-                initBanner(list)
-            }
-        }
+        mApi.loadDailyNews()
+            .rxCache("daily_banner", CacheStrategy.firstCache())
+            .compose(RxSchedulers.io_main())
+            .subscribe({
+                initBanner(it.data)
+            }, {
+                it.toString().toasty()
+            }).addToManaged()
 
         val todayListStr = SPUtils.getOnTheDay(RxBling.context, date)
         if (todayListStr.isEmpty()) {
@@ -90,8 +89,6 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
         if (data.isEmpty()) return
         mData.clear()
         mData.addAll(data.take(10))
-        CacheUtils.setCache(context!!, "daily_banner", Gson().toJson(mData), 10800000)
-        //val view = dailyBanner as BannerView<IDailyNews>
         dailyBanner.setPages(mData, _025DailyTodayViewHolder())
     }
 
