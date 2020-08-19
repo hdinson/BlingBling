@@ -5,15 +5,18 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
 
-class LocationListener :LifecycleObserver{
+class LocationListener : LifecycleObserver {
+
+
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun start(){
+    fun start() {
 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun stop(){
+    fun stop() {
 
     }
 }

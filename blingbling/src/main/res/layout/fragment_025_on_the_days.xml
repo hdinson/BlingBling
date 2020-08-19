@@ -141,11 +141,12 @@
             android:id="@+id/dailyBanner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bannerAspectRatio="3"
-            app:canLoop="false"
-            app:indicatorAlign="right"
-            app:indicatorMargin="4dp"
-            app:open_mz_mode="false" />
+            app:bvAspectRatio="3"
+            app:bvIsCanLoop="false"
+            app:bvIndicatorAlign="right"
+            app:bvIndicatorMarginBottom="40dp"
+            app:bvIndicatorMargin="4dp"
+            app:bvIsOpenMZEffect="false" />
 
         <LinearLayout
             android:id="@+id/llDailyContainer"

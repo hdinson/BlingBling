@@ -1,6 +1,8 @@
 package com.dinson.blingbase.kotlin
 
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.util.DisplayMetrics
 import android.view.View
@@ -24,7 +26,8 @@ fun Context.getStatusBarHeight(): Int {
 }
 
 @Suppress("unused")
-fun Context.isLandscape() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+fun Context.isLandscape() =
+    resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
 @Suppress("unused")
 fun Context.isPortrait() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
@@ -71,5 +74,34 @@ fun Context.screenWidth(): Int {
 @Suppress("unused")
 fun Context.closeKeyboard(view: View) {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    if (imm?.isActive == true) imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    if (imm?.isActive == true) imm.hideSoftInputFromWindow(
+        view.windowToken,
+        InputMethodManager.HIDE_NOT_ALWAYS
+    )
+}
+
+/**
+ * 获取剪贴板上的所有文本
+ */
+fun Context.getClipboardStrList(): ArrayList<String>? {
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    // 获取剪贴板的剪贴数据集
+    val clipData = clipboard.primaryClip
+    if (clipData == null || clipData.itemCount == 0) return null
+    val arr = java.util.ArrayList<String>()
+    for (i in 0 until clipData.itemCount) {
+        arr.add(clipData.getItemAt(i).text.toString())
+    }
+    return arr
+}
+
+/**
+ * 获取剪切板上最后一条文本
+ */
+fun Context.getClipboardStrFirst(): String? {
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    // 获取剪贴板的剪贴数据集
+    val clipData = clipboard.primaryClip
+    if (clipData == null || clipData.itemCount == 0) return null
+    return clipData.getItemAt(0).text.toString()
 }

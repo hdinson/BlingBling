@@ -1,4 +1,4 @@
-package dinson.customview.weight
+package com.dinson.blingbase.widget
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +9,7 @@ class NoScrollRecycleView @JvmOverloads constructor(context: Context, attrs: Att
     : RecyclerView(context, attrs, defStyleAttr) {
 
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {
-        val expandSpec = View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE shr 2, View.MeasureSpec.AT_MOST)
+        val expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE shr 2, View.MeasureSpec.AT_MOST)
         super.onMeasure(widthSpec, expandSpec)
     }
 }

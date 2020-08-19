@@ -4,21 +4,26 @@ import android.view.View
 import android.widget.*
 import com.dinson.blingbase.kotlin.onTextChanged
 import com.dinson.blingbase.utils.validations.executor.ValidationExecutor
+import java.util.HashMap
 
 class RxValidator(private val builder: Builder) {
 
     private fun execute(): RxValidator {
-        builder.validationModels.forEach {
-            when (val validateView = it.getValidateView()) {
-                is TextView -> validateView.onTextChanged { _, _, _, _ ->
-                    doValidator()
-                }
-                is CheckBox -> validateView.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, _ ->
-                    doValidator()
-                })
-            }
-        }
+        builder.validationModels.forEach { autoValidate(it.getValidateView()) }
+        builder.validateView.forEach { autoValidate(it.key) }
+        doValidator()
         return this
+    }
+
+    private fun autoValidate(target: View) {
+        when (target) {
+            is TextView -> target.onTextChanged { _, _, _, _ ->
+                doValidator()
+            }
+            is CheckBox -> target.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, _ ->
+                doValidator()
+            })
+        }
     }
 
 
@@ -31,7 +36,7 @@ class RxValidator(private val builder: Builder) {
             }
         }
         builder.validateView.forEach {
-            val result = it()
+            val result = it.value()
             if (!result) {
                 return false
             }
@@ -44,15 +49,15 @@ class RxValidator(private val builder: Builder) {
     class Builder(private val applyBtn: View) {
 
         val validationModels = ArrayList<ValidationExecutor>()
-        val validateView = ArrayList<() -> Boolean>()
+        val validateView = HashMap<View, () -> Boolean>()
 
         fun add(valida: ValidationExecutor): Builder {
             validationModels.add(valida)
             return this
         }
 
-        fun add(func: () -> Boolean): Builder {
-            validateView.add(func)
+        fun add(view: View, func: () -> Boolean): Builder {
+            validateView[view] = func
             return this
         }
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
 import androidx.core.view.ViewCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -18,7 +19,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 /**
  *  View相关的扩展方法
  */
-
 fun View.click(function: (view: View) -> Unit) = setOnClickListener { function(it) }
 
 fun Thread.run(function: () -> Unit) {
@@ -65,6 +65,34 @@ fun View.getArcListener(path: Path): ValueAnimator.AnimatorUpdateListener {
         translationX = point[0]
         translationY = point[1]
     }
+}
+
+fun TextView.setCompoundDrawablesRes(
+    @DrawableRes left: Int? = null,
+    @DrawableRes top: Int? = null,
+    @DrawableRes right: Int? = null,
+    @DrawableRes bottom: Int? = null
+) {
+    val leftRes = left?.let {
+        this.context.getDrawable(it)?.apply {
+            setBounds(0, 0, this.minimumWidth, this.minimumHeight)
+        }
+    }
+    val topRes = top?.let {
+        this.context.getDrawable(it)?.apply {
+            setBounds(0, 0, this.minimumWidth, this.minimumHeight)
+        }
+    }
+    val rightRes = right?.let {
+        this.context.getDrawable(it)
+            ?.apply { setBounds(0, 0, this.minimumWidth, this.minimumHeight) }
+    }
+    val bottomRes = bottom?.let {
+        this.context.getDrawable(it)?.apply {
+            setBounds(0, 0, this.minimumWidth, this.minimumHeight)
+        }
+    }
+    setCompoundDrawables(leftRes, topRes, rightRes, bottomRes)
 }
 
 

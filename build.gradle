@@ -10,13 +10,14 @@ buildscript {
     ext.constraintlayout_version = '2.0.0-rc1'
 
     repositories {
-        maven { url 'https://dl.bintray.com/dinson/android' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.google.com/dl/android/maven2' }
+        maven { url 'https://dl.bintray.com/dinson/android' }
 
         jcenter()
         google()
@@ -37,13 +38,14 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url 'https://dl.bintray.com/dinson/android' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/dinson/android' }
+        maven { url 'https://dl.google.com/dl/android/maven2' }
 
         jcenter()
         google()
