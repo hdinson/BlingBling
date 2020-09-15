@@ -8,9 +8,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
+import com.dinson.blingbase.kotlin.dip
 import com.dinson.blingbase.kotlin.toasty
-import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-
+import com.dinson.blingbase.widget.recycleview.LinearSpaceDecoration
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import dinson.customview.BuildConfig
@@ -57,7 +57,12 @@ class _009GoogleVRActivity : BaseActivity() {
         }
 
         rvContent.apply {
-            addItemDecoration(LinearItemDecoration(this@_009GoogleVRActivity))
+            addItemDecoration(
+                LinearSpaceDecoration.Builder()
+                    .spaceTB(
+                        dip(1)
+                    ).build()
+            )
             layoutManager = LinearLayoutManager(this@_009GoogleVRActivity)
             itemAnimator = null
             adapter = mAdapter
@@ -70,7 +75,13 @@ class _009GoogleVRActivity : BaseActivity() {
 
     private fun loadPanoramaImage(model: _009PanoramaImageModel) {
         val file = File(model.localPath)
-        logi { String.format("File exists? %s and the path is %s", file.exists(), file.absoluteFile) }
+        logi {
+            String.format(
+                "File exists? %s and the path is %s",
+                file.exists(),
+                file.absoluteFile
+            )
+        }
 
         Observable.just(model.localPath)
             .map {

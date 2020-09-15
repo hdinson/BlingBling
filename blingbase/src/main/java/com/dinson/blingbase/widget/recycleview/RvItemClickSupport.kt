@@ -30,7 +30,8 @@ class RvItemClickSupport private constructor(private val mRecyclerView: Recycler
     }
 
 
-    private var mItemLongClick: ((recyclerView: RecyclerView, view: View, position: Int) -> Boolean)? = null
+    private var mItemLongClick: ((recyclerView: RecyclerView, view: View, position: Int) -> Boolean)? =
+        null
 
 
     fun setOnItemLongClickListener(func: (recyclerView: RecyclerView, view: View, position: Int) -> Boolean): RvItemClickSupport {
@@ -38,7 +39,8 @@ class RvItemClickSupport private constructor(private val mRecyclerView: Recycler
         return this
     }
 
-    private var mItemClick: ((recyclerView: RecyclerView, view: View, position: Int) -> Unit)? = null
+    private var mItemClick: ((recyclerView: RecyclerView, view: View, position: Int) -> Unit)? =
+        null
 
     fun setOnItemClickListener(func: (recyclerView: RecyclerView, view: View, position: Int) -> Unit): RvItemClickSupport {
         mItemClick = func
@@ -56,12 +58,14 @@ class RvItemClickSupport private constructor(private val mRecyclerView: Recycler
             mItemClick?.apply {
                 view.click {
                     val pos = mRecyclerView.getChildViewHolder(it).adapterPosition
+                    if (pos == RecyclerView.NO_POSITION) return@click
                     this(mRecyclerView, it, pos)
                 }
             }
             mItemLongClick?.apply {
                 view.longClick {
                     val pos = mRecyclerView.getChildViewHolder(it).adapterPosition
+                    if (pos == RecyclerView.NO_POSITION) return@longClick false
                     this(mRecyclerView, it, pos)
                 }
             }

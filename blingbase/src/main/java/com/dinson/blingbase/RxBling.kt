@@ -54,6 +54,6 @@ object RxBling {
      * 设置崩溃日志
      */
     fun initCrashModule(): CrashProfile.Builder {
-        return CrashProfile.Builder.create()
+        return CrashProfile.Builder.create().enabled(false).enabled(false)
     }
 }

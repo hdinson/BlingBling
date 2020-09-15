@@ -5,10 +5,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-
-/**
- * created by bravin on 2018/7/17.
- */
 public class StyleLayout extends RelativeLayout {
     //    private int style = STYLE_RECTANGLE;
     private int radius;

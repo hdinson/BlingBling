@@ -115,6 +115,9 @@ fun Long.formatFileSize(): String {
 infix fun Int.max(other: Int) = if (this > other) this else other
 infix fun Float.max(other: Float) = if (this > other) this else other
 infix fun Double.max(other: Double) = if (this > other) this else other
+infix fun Number.max(other: Number) = if (this.toFloat() > other.toFloat()) this else other
+
 infix fun Int.min(other: Int) = if (this < other) this else other
 infix fun Float.min(other: Float) = if (this < other) this else other
 infix fun Double.min(other: Double) = if (this < other) this else other
+infix fun Number.min(other: Number) = if (this.toFloat() < other.toFloat()) this else other

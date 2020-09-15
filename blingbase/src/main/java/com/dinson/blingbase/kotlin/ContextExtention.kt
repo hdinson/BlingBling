@@ -1,8 +1,6 @@
 package com.dinson.blingbase.kotlin
 
-import android.content.ClipboardManager
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.util.DisplayMetrics
 import android.view.View
@@ -81,27 +79,11 @@ fun Context.closeKeyboard(view: View) {
 }
 
 /**
- * 获取剪贴板上的所有文本
+ * 打开软键盘
  */
-fun Context.getClipboardStrList(): ArrayList<String>? {
-    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    // 获取剪贴板的剪贴数据集
-    val clipData = clipboard.primaryClip
-    if (clipData == null || clipData.itemCount == 0) return null
-    val arr = java.util.ArrayList<String>()
-    for (i in 0 until clipData.itemCount) {
-        arr.add(clipData.getItemAt(i).text.toString())
-    }
-    return arr
+@Suppress("unused")
+fun Context.openKeyboard(view: View) {
+    val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    imm?.showSoftInput(view, InputMethodManager.SHOW_FORCED)
 }
 
-/**
- * 获取剪切板上最后一条文本
- */
-fun Context.getClipboardStrFirst(): String? {
-    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    // 获取剪贴板的剪贴数据集
-    val clipData = clipboard.primaryClip
-    if (clipData == null || clipData.itemCount == 0) return null
-    return clipData.getItemAt(0).text.toString()
-}
