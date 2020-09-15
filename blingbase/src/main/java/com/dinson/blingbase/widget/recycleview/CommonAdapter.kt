@@ -1,13 +1,15 @@
 package com.dinson.blingbase.widget.recycleview
 
+import android.content.Context
 import android.util.SparseArray
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dinson.blingbase.kotlin.getSimSerialNumber
 
 /**
  * 单一布局通用数据适配器
  */
-abstract class CommonAdapter<T>(var mDataList: MutableList<T>) : RecyclerView.Adapter<CommonViewHolder>() {
+abstract class CommonAdapter<T>(var mDataList: List<T>) : RecyclerView.Adapter<CommonViewHolder>() {
     private val mViewHolder = SparseArray<CommonViewHolder>()
 
     /**

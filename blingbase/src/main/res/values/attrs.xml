@@ -85,4 +85,9 @@
             <enum name="left_to_right" value="3" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="MaxLimitRecyclerView">
+        <attr name="mlMaxHeight" format="reference|dimension" />
+        <attr name="mlMaxWidth" format="reference|dimension" />
+    </declare-styleable>
 </resources>

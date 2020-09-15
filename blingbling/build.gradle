@@ -52,9 +52,9 @@ android {
     }
     buildTypes {
         release {
-            //minifyEnabled true      //开启代码混淆
-            //shrinkResources true    //开启shrinkResources去除无用资源
-            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true      //开启代码混淆
+            shrinkResources true    //开启shrinkResources去除无用资源
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.app
             debuggable true
         }

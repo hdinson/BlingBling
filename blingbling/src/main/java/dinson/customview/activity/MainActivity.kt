@@ -16,10 +16,12 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.dip
 import com.dinson.blingbase.rxcache.rxCache
 import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.utils.TypefaceUtil
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.LinearSpaceDecoration
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -44,6 +46,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import me.stefan.library.mu5viewpager.Mu5Interface
+import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
 
@@ -82,7 +85,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         rvContent.apply {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(LinearItemDecoration(this@MainActivity))
+            addItemDecoration(LinearSpaceDecoration.Builder()
+                .spaceTB(dip(1)).build())
         }
         RvItemClickSupport.addTo(rvContent).setOnItemClickListener { _, _, position ->
             startActivity(Intent(this, mContentData[position].name))
@@ -95,7 +99,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
      */
     private fun initHead() {
         mOneApi.loadDaily()
-            .rxCache("api_one_daily", CacheStrategy.firstCacheTimeout(12 * 3600 * 1000))
+            .rxCache("api_one_daily", CacheStrategy.firstCacheTimeout(12 ,TimeUnit.HOURS))
             .flatMap {
                 logi { "${it.data.data}" }
                 Observable.fromIterable(it.data.data)
@@ -171,7 +175,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
 
         val city = if (location.city.isNullOrEmpty()) location.province else location.city
         HttpHelper.create(XinZhiWeatherApi::class.java).getWeather(city)
-            .rxCache("api_home_weather_cache", CacheStrategy.firstCacheTimeout(3600000))
+            .rxCache("api_home_weather_cache", CacheStrategy.firstCacheTimeout(1,TimeUnit.HOURS))
             .compose(RxSchedulers.io_main())
             .subscribe({
                 initWeatherLayout(it.data) //设置数据

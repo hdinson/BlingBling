@@ -1,5 +1,7 @@
 package com.dinson.blingbase.rxcache.stategy;
 
+import java.util.concurrent.TimeUnit;
+
 public final class CacheStrategy {
 
 
@@ -32,13 +34,29 @@ public final class CacheStrategy {
         return new FirstCacheStrategy(true);
     }
 
+
     /**
      * 优先缓存,并设置超时时间
      *
-     * @param milliSecond 毫秒
+     * @param value    数值
+     * @param timeUnit 时间单位，最低支持毫秒
      */
-    public static IStrategy firstCacheTimeout(long milliSecond) {
-        return new FirstCacheTimeoutStrategy(milliSecond);
+    public static IStrategy firstCacheTimeout(long value, TimeUnit timeUnit) {
+        switch (timeUnit) {
+            case SECONDS:
+                return new FirstCacheTimeoutStrategy(value * 1000);
+            case MINUTES:
+                return new FirstCacheTimeoutStrategy(value * 60000);
+            case HOURS:
+                return new FirstCacheTimeoutStrategy(value * 3600000);
+            case DAYS:
+                return new FirstCacheTimeoutStrategy(value * 3600000 * 24);
+            case NANOSECONDS:
+            case MICROSECONDS:
+            case MILLISECONDS:
+            default:
+                return new FirstCacheTimeoutStrategy(value);
+        }
     }
 
     /**

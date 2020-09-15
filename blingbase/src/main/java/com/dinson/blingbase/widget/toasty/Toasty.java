@@ -36,9 +36,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/**
- * created by bravin on 2018/6/7.
- */
 public class Toasty {
 
     private static Application app;

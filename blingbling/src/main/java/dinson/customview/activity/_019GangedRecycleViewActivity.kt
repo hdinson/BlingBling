@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dinson.blingbase.kotlin.dip
 import com.dinson.blingbase.utils.FileUtils
 import com.dinson.blingbase.utils.StringUtils
 import com.google.gson.Gson
@@ -18,6 +19,7 @@ import dinson.customview.entity.MonsterHunter.DataBean.MonsterBean
 import dinson.customview.utils.GlideUtils
 
 import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.LinearSpaceDecoration
 import kotlinx.android.synthetic.main.activity__019_ganged_recycle_view.*
 import java.util.*
 
@@ -62,7 +64,9 @@ class _019GangedRecycleViewActivity : BaseActivity() {
 
         rvLeft.adapter = leftAdapter
         rvRight.adapter = rightAdapter
-        rvLeft.addItemDecoration(LinearItemDecoration(this))
+        rvLeft.addItemDecoration(
+            LinearSpaceDecoration.Builder()
+            .spaceTB(dip(1)).build())
     }
 
     override fun setWindowBackgroundColor() = android.R.color.white

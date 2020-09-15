@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity__001_wan_android_web.*
 
 class _001WanAndroidWebActivity : BaseActivity() {
 
+
     companion object {
         private const val EXTRA_LINK = "link"
         fun start(context: Context, link: String) {
