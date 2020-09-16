@@ -17,8 +17,8 @@ import org.greenrobot.eventbus.EventBus
 /**
  * 视频数据适配器
  */
-class _004VideoListAdapter(dataList: MutableList<TvShowResp.TvShow>, isEditMode: Boolean)
-    : CommonAdapter<TvShowResp.TvShow>(dataList), View.OnClickListener {
+class _004VideoListAdapter(val mDataList: MutableList<TvShowResp.TvShow>, isEditMode: Boolean)
+    : CommonAdapter<TvShowResp.TvShow>(mDataList), View.OnClickListener {
 
     override fun onClick(v: View) {
         val tag = v.tag as Int

@@ -13,10 +13,11 @@ import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 /**
  * 联动右边的适配器
  */
-class _019RightAdapter(dataList: MutableList<MonsterHunter.DataBean.MonsterBean>)
-    : CommonAdapter<MonsterBean>(dataList) {
+class _019RightAdapter(val mDataList: MutableList<MonsterBean>) :
+    CommonAdapter<MonsterBean>(mDataList) {
 
-    override fun getLayoutId(viewType: Int) = if (viewType == 0) R.layout.item_019_right_title else R.layout.item_019_right_normal
+    override fun getLayoutId(viewType: Int) =
+        if (viewType == 0) R.layout.item_019_right_title else R.layout.item_019_right_normal
 
     override fun getItemViewType(position: Int) = if (mDataList[position].isTitle) 0 else 1
 
@@ -26,7 +27,11 @@ class _019RightAdapter(dataList: MutableList<MonsterHunter.DataBean.MonsterBean>
             0 -> holder.itemView.findViewById<TextView>(R.id.tvTitle).text = monsterBean.family
             1 -> {
                 val iv = holder.itemView.findViewById<ImageView>(R.id.ivImg)
-                GlideUtils.setImage(holder.itemView.context, "${BuildConfig.QINIU_URL}${monsterBean.icon}", iv)
+                GlideUtils.setImage(
+                    holder.itemView.context,
+                    "${BuildConfig.QINIU_URL}${monsterBean.icon}",
+                    iv
+                )
                 holder.itemView.findViewById<TextView>(R.id.tvName).text = monsterBean.name
             }
         }
