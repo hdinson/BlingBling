@@ -17,8 +17,8 @@ import java.util.*
 /**
  * 主页适配器
  */
-class MainContentAdapter(dataList: MutableList<ClassBean>, private val mMoveListener
-: OnItemTouchMoveListener) : CommonAdapter<ClassBean>(dataList), OnItemMoveListener {
+class MainContentAdapter(val mDataList: MutableList<ClassBean>, private val mMoveListener
+: OnItemTouchMoveListener) : CommonAdapter<ClassBean>(mDataList), OnItemMoveListener {
 
     private val mNumberImg = intArrayOf(R.drawable.n_0, R.drawable.n_1, R.drawable.n_2,
         R.drawable.n_3, R.drawable.n_4, R.drawable.n_5, R.drawable.n_6,
