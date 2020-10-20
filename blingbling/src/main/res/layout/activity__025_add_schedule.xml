@@ -90,7 +90,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableEnd="@drawable/ic_arrows_down"
+            app:drawableEndCompat="@drawable/ic_arrows_down"
             android:drawablePadding="8dp"
             android:gravity="end"
             android:padding="16dp"

@@ -19,14 +19,12 @@ import dinson.customview.download.model.DownloadInfoDao;
 /**
  * 断点续传
  * 数据库工具类-geendao运用
- * Created by WZG on 2016/10/25.
  */
-
 public class DbDownUtil {
     private static DbDownUtil db;
     private final static String dbName = "AppDb";
     public DaoMaster.DevOpenHelper openHelper;
-    private Context context = RxBling.INSTANCE.getContext();
+    private Context context = RxBling.getApplicationContext();
 
 
     private DbDownUtil() {
@@ -81,7 +79,7 @@ public class DbDownUtil {
         downInfoDao.insertOrReplace(info);
     }
 
-    public void deleteDowninfo(DownloadInfo info) {
+    public void deleteDownInfo(DownloadInfo info) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         DownloadInfoDao downInfoDao = daoSession.getDownloadInfoDao();

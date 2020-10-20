@@ -17,11 +17,8 @@ import android.view.View
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
-import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.RxNotification
 import com.dinson.blingbase.utils.SystemBarModeUtils
-import com.dinson.blingbase.utils.validations.RxValidator
-import com.dinson.blingbase.utils.validations.executor.EtNotEmptyExecutor
 import com.huawei.hms.mlsdk.MLAnalyzerFactory
 import com.huawei.hms.mlsdk.common.MLException
 import com.huawei.hms.mlsdk.common.MLFrame
@@ -39,6 +36,7 @@ import dinson.customview.kotlin.logi
 import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.GlideEngine
+import dinson.customview.utils.toast
 import kotlinx.android.synthetic.main.activity_test.*
 import java.io.BufferedReader
 import java.io.IOException
@@ -113,7 +111,7 @@ class TestActivity : BaseActivity() {
                         val i = it.indexOf("/", 20)
                         val j = it.indexOf(".", i)
                         val all = it.substring(i + 1, j)
-                        all.toasty()
+                        all.toast()
                         loge { all }
                     }
                 }
@@ -227,7 +225,7 @@ class TestActivity : BaseActivity() {
     }
 
     fun onOpenDelv(view: View) {
-        BlingNdkHelper.getFromC().toasty()
+        BlingNdkHelper.getFromC().toast()
     }
 
     fun onPostNormalMsg(view: View) {

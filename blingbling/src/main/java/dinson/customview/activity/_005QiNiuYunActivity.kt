@@ -10,7 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.dinson.blingbase.kotlin.toasty
 import com.dinson.blingbase.utils.MD5
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -31,7 +30,8 @@ import dinson.customview.kotlin.logi
 import dinson.customview.kotlin.logv
 import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.model._005QiNiuConfig
-import dinson.customview.utils.SPUtils
+import dinson.customview.utils.MMKVUtils
+import dinson.customview.utils.toast
 import dinson.customview.weight.dialog.OnItemClickListener
 import dinson.customview.weight.dialog._005ContentMenuDialog
 import dinson.customview.weight.dialog._005QiNiuConfigDialog
@@ -62,7 +62,7 @@ class _005QiNiuYunActivity : BaseActivity() {
      * 初始化七牛云设置
      */
     private fun initConfig() {
-        val (arrayList, i) = SPUtils.getQiNiuConfig(this)
+        val (arrayList, i) = MMKVUtils.getQiNiuConfig()
         dealQiNiuConfig(arrayList, i)
     }
 
@@ -87,12 +87,12 @@ class _005QiNiuYunActivity : BaseActivity() {
                     val data = ClipData.newPlainText("Label", bean.finalUrl)
                     cm.primaryClip = data
                     logv { bean.finalUrl }
-                    "已复制".toasty()
+                    "已复制".toast()
                 }.setOnItemLongClickListener { _, _, position ->
                     val dialog = _005ContentMenuDialog(this@_005QiNiuYunActivity)
-                    val items = arrayOf("复制", "黏贴")
+                    val items = arrayOf("复制", "删除")
                     dialog.setDatas(items, OnItemClickListener {
-                        items[it].toasty()
+                        items[it].toast()
                         logi { mListData[position].toString() }
                     })
                     dialog.show()
@@ -234,14 +234,13 @@ class _005QiNiuYunActivity : BaseActivity() {
     }
 
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.groupId == R.id.iconGroup) {
             //点击切换七牛云的配置条目
             if (mConfigList[item.itemId].equals(mCurrentConfig)) return true
             mCurrentConfig = mConfigList[item.itemId]
             resetTitleBarText()
-            SPUtils.setQiuNiuDefaultDomain(this, mCurrentConfig!!.Domain)
+            MMKVUtils.setQiuNiuDefaultDomain(mCurrentConfig!!.Domain)
             flCustomRefreshView.isRefreshing = true
         } else {
             when (item.itemId) {
@@ -258,7 +257,7 @@ class _005QiNiuYunActivity : BaseActivity() {
     private fun showAddQiNiuConfigDialog(config: _005QiNiuConfig? = null) {
         val dialog = _005QiNiuConfigDialog(this, config)
         dialog.setOnDismissListener {
-            val (list, domain) = SPUtils.getQiNiuConfig(this)
+            val (list, domain) = MMKVUtils.getQiNiuConfig()
             dealQiNiuConfig(list, domain)
         }
         dialog.show()
@@ -302,7 +301,7 @@ class _005QiNiuYunActivity : BaseActivity() {
      * 上传图片到服务器。path为本地路径
      */
     private fun uploadImg2QiNiu(path: String) {
-        "正在上传".toasty()
+        "正在上传".toast()
         mCurrentConfig?.let { config ->
             val upToken = Auth.create(config.AccessKey, config.SecretKey).uploadToken(config.Bucket)
             val zone = config.getZone()

@@ -28,7 +28,7 @@ object ClipboardUtils {
         // 获取剪贴板的剪贴数据集
         val clipData = clipboard.primaryClip
         if (clipData == null || clipData.itemCount == 0) return null
-        return clipData.getItemAt(0).text.toString()
+        return clipData.getItemAt(0).text?.toString()
     }
 
     /**

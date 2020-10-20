@@ -9,7 +9,8 @@ import com.dinson.blingbase.network.NetworkType
 object NetworkUtils {
 
     fun getNetworkType(): NetworkType {
-        val tm = RxBling.context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val tm = RxBling.getApplicationContext()
+            .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         return when (tm.networkType) {
             TelephonyManager.NETWORK_TYPE_GPRS,
             TelephonyManager.NETWORK_TYPE_EDGE,

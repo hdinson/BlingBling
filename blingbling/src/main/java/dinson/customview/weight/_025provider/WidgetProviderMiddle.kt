@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.RemoteViews
 import dinson.customview.R
 import dinson.customview.activity._025ChooseScheduleActivity
+import dinson.customview.entity._025._025Schedule
 import dinson.customview.kotlin.loge
-import dinson.customview.model._025Schedule
 import kotlin.math.abs
 
 
@@ -62,9 +62,9 @@ class WidgetProviderMiddle : WidgetProviderBig() {
             setAddScheduleClick(context, id, views)
         } else {
             views.setTextViewText(R.id.tvScheduleName, schedule.name)
-            views.setTextViewText(R.id.tvScheduleDateTime, schedule.dateTime + " " + schedule.week)
+            views.setTextViewText(R.id.tvScheduleDateTime, schedule.dateTime + " " + schedule.getWeek())
             views.setViewVisibility(R.id.emptyView, View.GONE)
-            views.setTextViewText(R.id.tvDayCount, abs(schedule.displayDay).toString())
+            views.setTextViewText(R.id.tvDayCount, abs(schedule.getDisplayDay()).toString())
         }
         AppWidgetManager.getInstance(context).updateAppWidget(id, views)
     }

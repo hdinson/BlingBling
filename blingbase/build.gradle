@@ -45,7 +45,7 @@ buildscript {
 
 dependencies {
     api 'androidx.appcompat:appcompat:1.2.0'
-    api 'com.google.android.material:material:1.2.0'
+    api 'com.google.android.material:material:1.2.1'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'/*协程*/
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"/*kotlin标准库*/
 
@@ -62,6 +62,7 @@ dependencies {
     api 'io.reactivex.rxjava2:rxkotlin:2.0.2'/*RxKotlin*/
     api "androidx.constraintlayout:constraintlayout:$constraintlayout_version"/*ConstraintLayout*/
     api "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle"
+    api 'com.tencent:mmkv-static:1.2.2'
 }
 
 ext {
@@ -77,7 +78,7 @@ ext {
     issuesUrl = 'https://github.com/hdinson/BlingBling/issues'
 
     // ./gradlew install  ./gradlew bintrayUpload
-    libraryVersion = '1.3.3.5'
+    libraryVersion = '1.3.4.2'
     libraryVersionDesc = '啥也没更新'
 
     developerId = 'dinson'

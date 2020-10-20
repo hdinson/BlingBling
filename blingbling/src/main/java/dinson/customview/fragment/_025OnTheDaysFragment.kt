@@ -1,12 +1,12 @@
 package dinson.customview.fragment
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.dinson.blingbase.RxBling
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.rxcache.rxCache
 import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.utils.DateUtils
@@ -20,9 +20,7 @@ import dinson.customview.holder._025DailyTodayViewHolder
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.logi
-import dinson.customview.utils.CacheUtils
-import dinson.customview.utils.SPUtils
-
+import dinson.customview.utils.MMKVUtils
 import kotlinx.android.synthetic.main.fragment_025_on_the_days.*
 
 class _025OnTheDaysFragment : ViewPagerLazyFragment() {
@@ -59,10 +57,10 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
             .subscribe({
                 initBanner(it.data)
             }, {
-                it.toString().toasty()
+                it.toString().toast()
             }).addToManaged()
 
-        val todayListStr = SPUtils.getOnTheDay(RxBling.context, date)
+        val todayListStr = MMKVUtils.getOnTheDay(date)
         if (todayListStr.isEmpty()) {
             mApi.loadOnThisDays().compose(RxSchedulers.io_main())
                 .subscribe({
@@ -72,9 +70,9 @@ class _025OnTheDaysFragment : ViewPagerLazyFragment() {
                         } else {
                             initTodayList(it.iterator().next().value)
                         }
-                        SPUtils.setOnTheDay(RxBling.context, it)
+                        MMKVUtils.setOnTheDay(it)
                     }
-                }, { it.toString().toasty() }).addToManaged()
+                }, { it.toString().toast() }).addToManaged()
         } else {
             val type = object : TypeToken<ArrayList<OnTheDay>>() {}.type
             val list = Gson().fromJson<ArrayList<OnTheDay>>(todayListStr, type)

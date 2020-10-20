@@ -34,10 +34,10 @@ public class DrawableTextView extends AppCompatTextView {
     public static final int BOTTOM = 3;
 
     @IntDef({
-        LEFT,
-        TOP,
-        RIGHT,
-        BOTTOM
+            LEFT,
+            TOP,
+            RIGHT,
+            BOTTOM
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface DrawGravity {
@@ -92,8 +92,8 @@ public class DrawableTextView extends AppCompatTextView {
 
     public void setDrawables(Drawable[] drawables, int[] widths, int[] heights) {
         if (drawables != null && drawables.length >= 4
-            && widths != null && widths.length >= 4
-            && heights != null && heights.length >= 4) {
+                && widths != null && widths.length >= 4
+                && heights != null && heights.length >= 4) {
             this.drawables = drawables;
             this.widths = widths;
             this.heights = heights;
@@ -110,18 +110,22 @@ public class DrawableTextView extends AppCompatTextView {
         float centerX = (getWidth() + getPaddingLeft() - getPaddingRight()) / 2f;
         float centerY = (getHeight() + getPaddingTop() - getPaddingBottom()) / 2f;
 
-        float halfTextWidth = getPaint().measureText(getText().toString().isEmpty() ? getHint().toString() : getText().toString()) / 2;
+        float halfTextWidth = 0f;
+        if (getText() != null && !getText().toString().isEmpty()) {
+            halfTextWidth = getPaint().measureText(getText().toString()) / 2;
+        } else if (getHint() != null && !getHint().toString().isEmpty()) {
+            halfTextWidth = getPaint().measureText(getHint().toString()) / 2;
+        }
+//        float halfTextWidth = getPaint().measureText(getText().toString().isEmpty() ? getHint().toString() : getText().toString()) / 2;
         Paint.FontMetrics fontMetrics = getPaint().getFontMetrics();
         float halfTextHeight = (fontMetrics.descent - fontMetrics.ascent) / 2;
 
         if (drawables[0] != null) {
             int left = (int) (centerX - drawablePadding - halfTextWidth - widths[0]);
             int top = (int) (centerY - heights[0] / 2);
-            drawables[0].setBounds(
-                left,
-                top,
-                left + widths[0],
-                top + heights[0]);
+            int right = widths[0] == 0 ? left + drawables[0].getMinimumWidth() : left + widths[0];
+            int bottom = heights[0] == 0 ? top + drawables[0].getMinimumHeight() : top + heights[0];
+            drawables[0].setBounds(left, top, right, bottom);
             canvas.save();
             drawables[0].draw(canvas);
             canvas.restore();
@@ -132,10 +136,10 @@ public class DrawableTextView extends AppCompatTextView {
             int left = (int) (centerX + halfTextWidth + drawablePadding);
             int top = (int) (centerY - heights[2] / 2);
             drawables[2].setBounds(
-                left,
-                top,
-                left + widths[2],
-                top + heights[2]);
+                    left,
+                    top,
+                    left + widths[2],
+                    top + heights[2]);
             canvas.save();
             drawables[2].draw(canvas);
             canvas.restore();
@@ -144,11 +148,9 @@ public class DrawableTextView extends AppCompatTextView {
         if (drawables[1] != null) {
             int left = (int) (centerX - widths[1] / 2);
             int bottom = (int) (centerY - halfTextHeight - drawablePadding);
-            drawables[1].setBounds(
-                left,
-                bottom - heights[1],
-                left + widths[1],
-                bottom);
+            int top = heights[1] == 0 ? bottom - drawables[1].getMinimumHeight() : bottom - heights[1];
+            int right = widths[1] == 0 ? left + drawables[1].getMinimumWidth() : left + widths[1];
+            drawables[1].setBounds(left, top, right, bottom);
             canvas.save();
             drawables[1].draw(canvas);
             canvas.restore();
@@ -159,10 +161,10 @@ public class DrawableTextView extends AppCompatTextView {
             int left = (int) (centerX - widths[3] / 2);
             int top = (int) (centerY + halfTextHeight + drawablePadding);
             drawables[3].setBounds(
-                left,
-                top,
-                left + widths[3],
-                top + heights[3]);
+                    left,
+                    top,
+                    left + widths[3],
+                    top + heights[3]);
             canvas.save();
             drawables[3].draw(canvas);
             canvas.restore();

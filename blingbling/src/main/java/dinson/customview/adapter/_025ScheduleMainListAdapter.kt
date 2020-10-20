@@ -2,9 +2,9 @@ package dinson.customview.adapter
 
 import android.annotation.SuppressLint
 import dinson.customview.R
-import dinson.customview.model._025Schedule
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
+import dinson.customview.entity._025._025Schedule
 import kotlinx.android.synthetic.main.item_025_schedule_main.view.*
 import kotlin.math.abs
 
@@ -17,7 +17,7 @@ class _025ScheduleMainListAdapter(dataList: MutableList<_025Schedule>)
     @SuppressLint("SetTextI18n")
     override fun convert(holder: CommonViewHolder, t: _025Schedule, position: Int) {
         holder.itemView.tvScheduleName.text = t.name
-        holder.itemView.tvTimeCount.text = abs(t.displayDay).toString()
+        holder.itemView.tvTimeCount.text = abs(t.getDisplayDay()).toString()
     }
 
 

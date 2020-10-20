@@ -18,13 +18,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:drawableEnd="@drawable/_006_top_bar_logo"
             android:gravity="center_vertical"
             android:paddingStart="80dp"
             android:paddingEnd="80dp"
             android:text="MACHINE\n  LEARNING"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            app:drawableEndCompat="@drawable/_006_top_bar_logo" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@id/toolbar"

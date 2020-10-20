@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.widget.TextView
 import android.widget.Toast
@@ -96,7 +97,7 @@ class ActivityCrash : FragmentActivity() {
         val now = Date()
         val date = SimpleDateFormat("HH点mm分ss秒", Locale.getDefault()).format(now)
 
-        val path = RxBling.context.externalCacheDirs[0].parentFile!!.path + File.separator + "log" + File.separator +
+        val path = RxBling.getApplicationContext().externalCacheDirs[0].parentFile!!.path + File.separator + "log" + File.separator +
             SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault()).format(now)
         val destDir = File(path)
         if (!destDir.exists()) {

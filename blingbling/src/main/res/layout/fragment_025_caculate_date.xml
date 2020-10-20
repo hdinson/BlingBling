@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mPullZoomView"
     android:layout_width="match_parent"
@@ -37,11 +38,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawableEnd="@drawable/ic_arrows_down"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
             android:text="开始"
             android:textColor="@color/textHint"
+            app:drawableEndCompat="@drawable/ic_arrows_down"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
@@ -160,11 +161,11 @@
             android:id="@+id/selectDateBottom"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawableEnd="@drawable/ic_arrows_down"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
             android:text="还有"
             android:textColor="@color/textHint"
+            app:drawableEndCompat="@drawable/ic_arrows_down"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
@@ -183,9 +184,9 @@
             android:id="@+id/tvTimeDr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="0"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="0" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"

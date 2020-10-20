@@ -71,6 +71,7 @@
         <item name="android:longClickable">false</item>
         <item name="android:background">@drawable/ripple_main_white</item>
     </style>
+
     <style name="TabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
@@ -94,6 +95,8 @@
         <item name="android:paddingEnd">@dimen/spacing_small</item>
         <item name="android:textCursorDrawable">@drawable/_005_bg_input_cursor</item>
         <item name="android:maxLines">1</item>
+        <item name="android:textColorHint">@color/textHint</item>
+        <item name="android:textColor">@color/textSecond</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">text</item>
         <item name="android:digits">

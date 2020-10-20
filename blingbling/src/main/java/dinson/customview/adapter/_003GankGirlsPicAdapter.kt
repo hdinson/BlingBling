@@ -4,17 +4,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import dinson.customview.R
-import dinson.customview.entity.gank.Welfare
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
+import dinson.customview.entity.gank.GankGirlImg
 import kotlinx.android.synthetic.main.item_003_gank_lady_pic.view.*
 
 
 /**
  *
  */
-class _003GankGirlsPicAdapter(dataList: MutableList<Welfare>)
-    : CommonAdapter<Welfare>(dataList) {
+class _003GankGirlsPicAdapter(dataList: MutableList<GankGirlImg>)
+    : CommonAdapter<GankGirlImg>(dataList) {
 
     val options = RequestOptions()
         .placeholder(R.drawable.base_app_default_ic)
@@ -24,14 +24,14 @@ class _003GankGirlsPicAdapter(dataList: MutableList<Welfare>)
 
     override fun getLayoutId(viewType: Int) = R.layout.item_003_gank_lady_pic
 
-    override fun convert(holder: CommonViewHolder, dataBean: Welfare, position: Int) {
+    override fun convert(holder: CommonViewHolder, bean: GankGirlImg, position: Int) {
           holder.itemView.ivGankGirlsPic.apply {
-              if (dataBean.height!=0){
-                  setOriginalSize(dataBean.width,dataBean.height)
+              if (bean.height!=0){
+                  setOriginalSize(bean.width,bean.height)
               }else {
                   setOriginalSize(1, 1)
               }
-            Glide.with(context).load(dataBean.url).apply(options).into(this)
+            Glide.with(context).load(bean.url).apply(options).into(this)
         }
     }
 }

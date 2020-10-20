@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.CheckBox
 import androidx.appcompat.view.menu.MenuBuilder
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -126,7 +126,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 }
             }, {
                 likeView.toggle()
-                it.message?.toasty()
+                it.message?.toast()
                 loge{it.toString()}
             }).addToManaged()
     }
@@ -170,7 +170,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 initToolbarTitle()
                 flCustomRefreshView.isRefreshing = true
             } else {
-                errorMsg.toasty()
+                errorMsg.toast()
             }
         }
     }

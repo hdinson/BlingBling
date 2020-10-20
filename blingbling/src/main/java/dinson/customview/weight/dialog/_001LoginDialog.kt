@@ -7,12 +7,13 @@ import android.content.Context
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
+import com.dinson.blingbase.kotlin.*
 import com.jakewharton.rxbinding2.view.RxView
 import dinson.customview.R
 import dinson.customview.api.WanAndroidApi
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
-import com.dinson.blingbase.kotlin.*
+import dinson.customview.utils.toast
 import kotlinx.android.synthetic.main.dialog_001_login.*
 import kotlinx.android.synthetic.main.dialog_001_register.*
 import java.util.concurrent.TimeUnit
@@ -59,7 +60,7 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) :
      */
     private fun initClick() {
         RxView.clicks(fabButton).throttleFirst(1, TimeUnit.SECONDS).subscribe {
-            context.closeKeyboard(this@_001LoginDialog.currentFocus)
+            currentFocus?.let { context.closeKeyboard(it) }
             if (llRegister?.visibility == View.VISIBLE) {
                 animateRevealClose()
                 return@subscribe
@@ -124,10 +125,10 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) :
         when (v.id) {
             R.id.btnDoLogin -> {
                 if (etLoginUsername.text.isEmpty()) {
-                    "Username must not null".toasty();return
+                    "Username must not null".toast();return
                 }
                 if (etLoginPassword.text.isEmpty()) {
-                    "Password must not null".toasty();return
+                    "Password must not null".toast();return
                 }
                 btnDoLogin.isEnabled = false
                 mWanAndroidApi.login(
@@ -148,15 +149,15 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) :
             }
             R.id.btnDoRegister -> {
                 if (etRegisterUsername.text.isEmpty()) {
-                    "Username must not null".toasty();return
+                    "Username must not null".toast();return
                 }
                 if (etRegisterPassword.text.isEmpty()) {
-                    "Password must not null".toasty();return
+                    "Password must not null".toast();return
                 }
                 if (etRegisterRepeatPassword.text.isEmpty()
                     || etRegisterPassword.text.toString() != etRegisterRepeatPassword.text.toString()
                 ) {
-                    "Two different input".toasty();return
+                    "Two different input".toast();return
                 }
                 btnDoRegister.isEnabled = false
                 mWanAndroidApi.register(
@@ -165,10 +166,10 @@ class _001LoginDialog(context: Context, theme: Int = R.style.BaseDialogTheme) :
                 ).compose(RxSchedulers.io_main())
                     .subscribe({
                         if (it.errorCode == 0) animateRevealClose()
-                        else it.errorMsg.toasty()
+                        else it.errorMsg.toast()
                     }, {
                         it.printStackTrace()
-                        it.toString().toasty()
+                        it.toString().toast()
                     }, {}, { btnDoRegister.isEnabled = true })
             }
             R.id.tvForgotPsw -> {

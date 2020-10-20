@@ -36,7 +36,10 @@ fun Context.getCompatDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(
 @Suppress("unused")
 fun Context.getCompatColor(@ColorRes id: Int) = ContextCompat.getColor(this, id)
 
-infix fun Context.getDimensFloat(@DimenRes id: Int) = resources.getDimension(id)
+infix fun Context.getDimensDp(@DimenRes id: Int) = resources.getDimension(id)
+
+infix fun Context.getDimensPx(@DimenRes id: Int) = resources.getDimensionPixelSize(id)
+
 
 /**
  * 获取App名称

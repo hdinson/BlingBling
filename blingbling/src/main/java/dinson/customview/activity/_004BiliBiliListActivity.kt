@@ -19,7 +19,7 @@ import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.dip
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.utils.CacheUtils
 
@@ -124,7 +124,7 @@ class _004BiliBiliListActivity : BaseActivity() {
                 }
             }, {
                 crvVideoContent.complete()
-                it.message?.toasty()
+                it.message?.toast()
                 loge(it::toString)
             }, {
                 crvVideoContent.complete()

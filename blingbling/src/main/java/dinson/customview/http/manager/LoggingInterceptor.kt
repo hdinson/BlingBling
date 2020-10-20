@@ -51,7 +51,7 @@ class LoggingInterceptor : Interceptor {
      * @return `true`: 是<br></br>`false`: 否
      */
     private fun isNetworkAvailable(): Boolean {
-        val info = (RxBling.context.getSystemService(Context.CONNECTIVITY_SERVICE)
+        val info = (RxBling.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)
             as ConnectivityManager).activeNetworkInfo
         return info != null && info.isConnected
     }

@@ -22,7 +22,7 @@ import dinson.customview.http.RxSchedulers
 import dinson.customview.listener.CalculatorKey
 import dinson.customview.listener.OnItemSwipeOpen
 import dinson.customview.model._007CurrencyModel
-import dinson.customview.utils.SPUtils
+import dinson.customview.utils.MMKVUtils
 import dinson.customview.weight._003toast.LoadToast
 import dinson.customview.weight.swipelayout.SwipeItemLayout
 import io.reactivex.Observable
@@ -70,7 +70,7 @@ class _007ExchangeActivity : BaseActivity(), OnItemSwipeOpen, DrawerLayout.Drawe
 
         mCurrencyData = getCurrencyList()
 
-        val userCurrency = SPUtils.getUserCurrency()
+        val userCurrency = MMKVUtils.getUserCurrency()
 
         if (userCurrency == null) {
             mCurrencyData.asSequence().take(5).toCollection(mUserCurrencyData)

@@ -10,11 +10,12 @@ import com.dinson.blingbase.rxcache.diskconverter.GsonDiskConverter
 import com.huawei.hms.mlsdk.common.MLApplication
 import dinson.customview.BuildConfig
 import dinson.customview.activity.SplashActivity
+import dinson.customview.activity._001WanAndroidActivity
 import dinson.customview.kotlin.logi
 import java.io.File
 
 
-class GlobalApplication : Application() {
+class  GlobalApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
