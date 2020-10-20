@@ -70,7 +70,7 @@ class _025CaculateDateFragment : ViewPagerLazyFragment() {
 
     private fun showStartDateDialog() {
         //实例化DatePickerDialog对象
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
             DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
                 //选择完日期后会调用该回调函数
                 val format = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
@@ -85,7 +85,7 @@ class _025CaculateDateFragment : ViewPagerLazyFragment() {
 
     private fun showEndDateDialog() {
         //实例化DatePickerDialog对象
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
             DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
                 //选择完日期后会调用该回调函数
                 val format = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)

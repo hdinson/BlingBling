@@ -8,11 +8,13 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.RemoteViews
+import com.tencent.mmkv.MMKV
 import dinson.customview.R
 import dinson.customview.activity._025ChooseScheduleActivity
+import dinson.customview.entity._025._025Schedule
 import dinson.customview.kotlin.loge
-import dinson.customview.model._025Schedule
-import dinson.customview.utils.SPUtils
+import dinson.customview.utils.MMKVUtils
+
 
 import kotlin.math.abs
 
@@ -31,7 +33,7 @@ open class WidgetProviderBig : AppWidgetProvider() {
                         val value = mIdsSet[it]
                         if (scheduleId.isEmpty() || scheduleId == value) {
                             loge { "匹配了" }
-                            val bean = SPUtils.getScheduleById(context, scheduleId)
+                            val bean = MMKVUtils.getScheduleById(scheduleId)
                             toggleLayout(context, it, bean)
                         } else {
                             loge { "没匹配" }
@@ -46,14 +48,18 @@ open class WidgetProviderBig : AppWidgetProvider() {
                 val scheduleId = intent.getStringExtra(EXTRA_SCHEDULE_ID)
                 mIdsSet[widgetId] = scheduleId
                 loge { "mIdsSet : ${mIdsSet.toList()}" }
-                val schedule = SPUtils.getScheduleById(context, scheduleId)
+                val schedule = MMKVUtils.getScheduleById(scheduleId)
                 toggleLayout(context, widgetId, schedule)
             }
         }
     }
 
 
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray
+    ) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
         loge { "onUpdate : ${appWidgetIds.asList()}" }
 
@@ -75,9 +81,12 @@ open class WidgetProviderBig : AppWidgetProvider() {
             setAddScheduleClick(context, id, views)
         } else {
             views.setTextViewText(R.id.tvScheduleName, schedule.name)
-            views.setTextViewText(R.id.tvScheduleDateTime, schedule.dateTime + " " + schedule.week)
+            views.setTextViewText(
+                R.id.tvScheduleDateTime,
+                schedule.dateTime + " " + schedule.getWeek()
+            )
             views.setViewVisibility(R.id.emptyView, View.GONE)
-            views.setTextViewText(R.id.tvDayCount, abs(schedule.displayDay).toString())
+            views.setTextViewText(R.id.tvDayCount, abs(schedule.getDisplayDay()).toString())
         }
         AppWidgetManager.getInstance(context).updateAppWidget(id, views)
     }
@@ -87,7 +96,8 @@ open class WidgetProviderBig : AppWidgetProvider() {
         intent.setClass(context, _025ChooseScheduleActivity::class.java)
         intent.putExtra(_025ChooseScheduleActivity.EXTRA_ID, id)
         intent.putExtra(_025ChooseScheduleActivity.EXTRA_FLAG, _025ChooseScheduleActivity.FLAG_BIG)
-        val pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent =
+            PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         view.setOnClickPendingIntent(R.id.emptyView, pendingIntent)
     }
 
@@ -102,13 +112,16 @@ open class WidgetProviderBig : AppWidgetProvider() {
 
         private val mIdsSet = HashMap<Int, String>()
 
-        fun sendToRefresh(context: Context, widgetIds: IntArray = intArrayOf(),
-                          scheduleId: String = "") {
+        fun sendToRefresh(
+            context: Context, widgetIds: IntArray = intArrayOf(),
+            scheduleId: String = ""
+        ) {
             val intent = Intent(REFRESH_ACTION)
             intent.setClass(context, WidgetProviderBig::class.java)
             if (widgetIds.isEmpty()) {
                 val manager = AppWidgetManager.getInstance(context)
-                val ids = manager.getAppWidgetIds(ComponentName(context, WidgetProviderBig::class.java))
+                val ids =
+                    manager.getAppWidgetIds(ComponentName(context, WidgetProviderBig::class.java))
                 intent.putExtra(EXTRA_WIDGET_IDS, ids)
             } else {
                 intent.putExtra(EXTRA_WIDGET_IDS, widgetIds)

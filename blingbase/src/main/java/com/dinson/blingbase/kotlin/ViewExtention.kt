@@ -40,7 +40,7 @@ fun View.halfWidth() = width / 2f
 fun View.halfHeight() = height / 2f
 
 infix fun View.setElevationResource(@DimenRes id: Int) {
-    ViewCompat.setElevation(this, context.getDimensFloat(id))
+    ViewCompat.setElevation(this, context.getDimensDp(id))
 }
 
 
@@ -186,6 +186,19 @@ fun EditText.forbiddenEnter(): EditText {
 fun EditText.forbiddenDoubleDot(): EditText {
     val filter = InputFilter { source, _, _, dest, _, _ ->
         return@InputFilter if (dest.contains('.') && source.toString() == ".") "" else null
+    }
+    val result = filters.copyOf(filters.size + 1)
+    result[result.size - 1] = filter
+    this.filters = result
+    return this
+}
+
+fun EditText.limitDecimal(num: Int): EditText {
+    val filter = InputFilter { source, _, _, dest, _, _ ->
+        if (dest.contains('.').not()) return@InputFilter null
+        if (source.toString() == ".") return@InputFilter ""
+        if (dest.contains('.') && dest.split(".").last().length >= num) return@InputFilter ""
+        return@InputFilter null
     }
     val result = filters.copyOf(filters.size + 1)
     result[result.size - 1] = filter

@@ -10,7 +10,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.BitmapUtils
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.huawei.hms.mlsdk.document.MLDocument
@@ -51,7 +51,7 @@ class _006RemoteDetectionActivity : BaseActivity(), OnMLDocumentListener {
                 RxPermissions(this).request(Manifest.permission.CAMERA)
                     .subscribe {
                         if (it.not()) {
-                            "图像识别需要摄像机权限".toasty()
+                            "图像识别需要摄像机权限".toast()
                             return@subscribe
                         }
                         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)

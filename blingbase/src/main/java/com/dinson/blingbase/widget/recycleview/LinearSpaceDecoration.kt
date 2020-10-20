@@ -2,8 +2,10 @@ package com.dinson.blingbase.widget.recycleview
 
 import android.graphics.Rect
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
+import java.lang.RuntimeException
 
 
 /**
@@ -13,7 +15,11 @@ import androidx.recyclerview.widget.RecyclerView.*
 open class LinearSpaceDecoration(private val b: Builder) : ItemDecoration() {
 
     override fun getItemOffsets(o: Rect, view: View, parent: RecyclerView, state: State) {
-        val orientation = parent.layoutManager?.layoutDirection
+        val manager = parent.layoutManager
+        if (manager==null||manager !is LinearLayoutManager){
+            throw RuntimeException("LayoutManager must be LinearLayoutManager")
+        }
+        val orientation = manager.orientation
         val poi = parent.getChildAdapterPosition(view)
         val c = parent.adapter?.itemCount ?: 0
 

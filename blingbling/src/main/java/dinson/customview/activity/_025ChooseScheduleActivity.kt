@@ -5,12 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._025ChooseScheduleListAdapter
-import dinson.customview.utils.SPUtils
+
 import dinson.customview.weight._025provider.WidgetProviderBig
 import dinson.customview.weight._025provider.WidgetProviderMiddle
 import dinson.customview.weight._025provider.WidgetProviderSmall
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
+import dinson.customview.utils.MMKVUtils
 import kotlinx.android.synthetic.main.activity__025_choose_schedule.*
 
 class _025ChooseScheduleActivity : BaseActivity() {
@@ -30,7 +31,7 @@ class _025ChooseScheduleActivity : BaseActivity() {
     }
 
     private fun initUI() {
-        val scheduleList = SPUtils.getScheduleList(this)
+        val scheduleList = MMKVUtils.getScheduleList()
         rcvScheduleList.adapter = _025ChooseScheduleListAdapter(scheduleList)
         rcvScheduleList.layoutManager = LinearLayoutManager(this)
         RvItemClickSupport.addTo(rcvScheduleList)

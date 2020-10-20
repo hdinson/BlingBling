@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/rootView"
@@ -9,7 +8,7 @@
     android:background="@drawable/ripple_main_white"
     android:clickable="true"
     android:focusable="true"
-    android:padding="17dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@id/tvTitle"
@@ -17,52 +16,65 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:maxLength="10"
-        tools:text="故宫"
         android:textColor="@color/textPrimary"
-        android:textSize="14sp"/>
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="故宫" />
 
     <dinson.customview.weight.IconFontTextView
         android:id="@+id/complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvTitle"
+        android:layout_marginStart="8dp"
         android:text="@string/if_complete"
         android:textColor="#53A749"
         android:textSize="14sp"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvTitle"
+        app:layout_constraintLeft_toRightOf="@id/tvTitle" />
 
     <TextView
         android:id="@id/tvDesc"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="12dp"
         android:layout_toStartOf="@id/ivImg"
         android:ellipsize="end"
-        android:maxLines="5"
-        tools:text="北京故宫于明成祖永乐四年（1406年）开始建设，以南京故宫为蓝本营建，到永乐十八年（1420年）建成。它是一座长方形城池，南北长961米，东西宽753米，四面围有高10米的城墙，城外有宽52米的护城河。紫禁城内的建筑分为外朝和内廷两部分。外朝的中心为太和殿、中和殿、保和殿，统称三大殿，是国家举行大典礼的地方。内廷的中心是乾清宫、交泰殿、坤宁宫，统称后三宫，是皇帝和皇后居住的正宫。"
+        android:maxLines="6"
         android:textColor="@color/textSecond"
-        android:textSize="8sp"
-        tools:ignore="SmallSp"/>
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivImg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ivImg"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="北京故宫于明成祖永乐四年（1406年）开始建设，以南京故宫为蓝本营建，到永乐十八年（1420年）建成。它是一座长方形城池，南北长961米，东西宽753米，四面围有高10米的城墙，城外有宽52米的护城河。紫禁城内的建筑分为外朝和内廷两部分。外朝的中心为太和殿、中和殿、保和殿，统称三大殿，是国家举行大典礼的地方。内廷的中心是乾清宫、交泰殿、坤宁宫，统称后三宫，是皇帝和皇后居住的正宫。" />
 
     <com.dinson.blingbase.widget.RatioImageView
         android:id="@id/ivImg"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:src="@drawable/def_img"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
-        app:rivImgRatio="1.5"/>
+        app:layout_constraintBottom_toBottomOf="@id/tvDesc"
+        app:layout_constraintDimensionRatio="10:15"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        tools:src="@drawable/def_img" />
 
     <dinson.customview.weight.TasksCompletedView
         android:id="@+id/progress"
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@id/ivImg"
-        android:layout_centerVertical="true"
         app:circleColor="#cc303741"
+        app:layout_constraintBottom_toBottomOf="@id/ivImg"
+        app:layout_constraintLeft_toLeftOf="@id/ivImg"
+        app:layout_constraintRight_toRightOf="@id/ivImg"
+        app:layout_constraintTop_toTopOf="@id/ivImg"
         app:radius="23dp"
         app:ringColor="#0EB6D2"
-        app:strokeWidth="2dp"/>
-</RelativeLayout>
+        app:strokeWidth="2dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

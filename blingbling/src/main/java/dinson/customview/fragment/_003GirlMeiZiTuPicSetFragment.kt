@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dinson.blingbase.kotlin.dip
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.R
 import dinson.customview.activity._003PicSetListActivity
@@ -63,7 +63,7 @@ abstract class _003GirlMeiZiTuPicSetFragment : ViewPagerLazyFragment() {
         RvItemClickSupport.addTo(crfGirlsContent.recyclerView)
             .setOnItemClickListener { _, _, position ->
                 if (context != null) {
-                    _003PicSetListActivity.start(context!!, mData[position].id, mData[position].title)
+                    _003PicSetListActivity.start(requireContext(), mData[position].id, mData[position].title)
                 }
             }
     }
@@ -86,7 +86,7 @@ abstract class _003GirlMeiZiTuPicSetFragment : ViewPagerLazyFragment() {
                 mCurrentPage++
             }, {
                 crfGirlsContent.complete()
-                it.toString().toasty()
+                it.toString().toast()
                 loge(it::toString)
             }).addToManaged()
     }

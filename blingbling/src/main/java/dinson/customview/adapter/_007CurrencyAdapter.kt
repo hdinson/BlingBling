@@ -15,7 +15,8 @@ import dinson.customview.listener._003OnCalculatorInput
 import dinson.customview.listener._003OnRvItemChangeListener
 import dinson.customview.model._007CurrencyModel
 import dinson.customview.utils.GlideUtils
-import dinson.customview.utils.SPUtils
+import dinson.customview.utils.MMKVUtils
+
 import kotlinx.android.synthetic.main.item_007_currency.view.*
 import java.util.*
 import java.util.regex.Pattern
@@ -223,7 +224,7 @@ class _007CurrencyAdapter(
             it.targetRate = targetRate
             userCurrency.add(it.currencyCode)
         }
-        SPUtils.setUserCurrency(userCurrency)
+        MMKVUtils.setUserCurrency(userCurrency)
         notifyDataSetChanged()
     }
 

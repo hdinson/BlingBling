@@ -12,7 +12,7 @@ import dinson.customview.db.model.SearchHistory027Dao
 object SearchHistory027DbUtils {
 
     private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(RxBling.context, "History027", null)
+        DaoMaster.DevOpenHelper(RxBling.getApplicationContext(), "History027", null)
     }
 
     /**

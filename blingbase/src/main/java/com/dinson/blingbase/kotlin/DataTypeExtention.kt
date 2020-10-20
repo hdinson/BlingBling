@@ -38,20 +38,17 @@ fun String.lowerFirstLetter(): String {
     else "${(this[0].toInt() + 32).toChar()} ${this.substring(1)}"
 }
 
-fun String.toasty(): String {
-    Toasty.normal(RxBling.context).text(this).show()
-    return this
+fun Toasty.normal(text: String) {
+    Toasty.normal(RxBling.getApplicationContext()).text(text).show()
 }
 
-fun String.toastySuc(): String {
-    Toasty.success(RxBling.context).text(this).show()
-    return this
+fun Toasty.success(text: String) {
+    Toasty.success(RxBling.getApplicationContext()).text(text).show()
 }
 
-
-fun String.toastyTarget(view: View) {
-    Toasty.info(RxBling.context)
-        .text(this)
+fun Toasty.target(view: View,text: String) {
+    Toasty.info(RxBling.getApplicationContext())
+        .text(text)
         .showIcon(false)
         .target(view)
         .animate(true)

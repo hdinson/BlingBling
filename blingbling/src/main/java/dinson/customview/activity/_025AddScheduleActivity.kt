@@ -9,15 +9,14 @@ import android.os.Bundle
 import android.widget.DatePicker
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.show
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.DateUtils
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
+import dinson.customview.entity._025._025Schedule
 import dinson.customview.event._025EditScheduleEvent
-import dinson.customview.model._025Schedule
-import dinson.customview.utils.SPUtils
-
+import dinson.customview.utils.MMKVUtils
 import kotlinx.android.synthetic.main.activity__025_add_schedule.*
 import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
@@ -72,14 +71,14 @@ class _025AddScheduleActivity : BaseActivity() {
             tvChooseDateTime.text = schedule.dateTime
 
             etScheduleName.setText(schedule.name)
-            val top = SPUtils.getScheduleTop(this)
+            val top = MMKVUtils.getScheduleTop()
             switchTop.isChecked = top == schedule.id
             showRepeatDialog.text = mRepeatTypeArr[schedule.repeatType]
             actionDelete.show()
             mScheduleId = schedule.id
             mRepeatType = schedule.repeatType
             actionDelete.click {
-                SPUtils.deleteSchedule(this@_025AddScheduleActivity, mScheduleId)
+                MMKVUtils.deleteSchedule(mScheduleId)
                 EventBus.getDefault().post(_025EditScheduleEvent(mScheduleId))
                 onBackPressed()
             }
@@ -88,19 +87,24 @@ class _025AddScheduleActivity : BaseActivity() {
         actionSave.click {
             val name = etScheduleName.text.toString()
             if (name.isEmpty()) {
-                "请输入日程标题".toasty()
+                "请输入日程标题".toast()
                 return@click
             }
             val time = tvChooseDateTime.text.split(" ")[0]
             if (mScheduleId.isEmpty()) {
                 mScheduleId = DateUtils.currentTimeMillis10().toString()
             }
-            val bean = _025Schedule(mScheduleId, name, time, mRepeatType)
-            SPUtils.addSchedule(this@_025AddScheduleActivity, bean)
+            val bean = _025Schedule(
+                mScheduleId,
+                name,
+                time,
+                mRepeatType
+            )
+            MMKVUtils.addSchedule(bean)//添加倒数日日程
             if (switchTop.isChecked) {
-                SPUtils.setScheduleTop(this@_025AddScheduleActivity, mScheduleId)
+                MMKVUtils.setScheduleTop(mScheduleId)
             }
-            EventBus.getDefault().post(_025EditScheduleEvent(bean.id.toString()))
+            EventBus.getDefault().post(_025EditScheduleEvent(bean.id))
             onBackPressed()
         }
         tvChooseDateTime.click { showStartDateDialog() }
@@ -110,7 +114,8 @@ class _025AddScheduleActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     private fun showStartDateDialog() {
         //实例化DatePickerDialog对象
-        val datePickerDialog = DatePickerDialog(this,
+        val datePickerDialog = DatePickerDialog(
+            this,
             DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
                 //选择完日期后会调用该回调函数
                 val format = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
@@ -120,7 +125,8 @@ class _025AddScheduleActivity : BaseActivity() {
                 mMonth = if (month < 9) "0${month + 1}" else (month + 1).toString()
                 mDay = if (day < 10) "0$day" else day.toString()
                 tvChooseDateTime.text = "$mYear-$mMonth-$mDay $week"
-            }, mYear.toInt(), mMonth.toInt() - 1, mDay.toInt())
+            }, mYear.toInt(), mMonth.toInt() - 1, mDay.toInt()
+        )
         //弹出选择日期对话框
         datePickerDialog.show()
     }

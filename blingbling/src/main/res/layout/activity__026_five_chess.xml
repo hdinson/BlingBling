@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/_026_bg_repeat"
+    android:background="#923c27"
     android:orientation="vertical"
-    android:gravity="center_vertical"
-    tools:context=".activity._026FiveChessActivity">
+    tools:context=".activity._026FiveChessActivity"
+    tools:ignore="HardcodedText,ContentDescription">
 
+    <ImageView
+        android:id="@+id/tempTopImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/_026_bg_repeat"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <dinson.customview.weight._026fivechess.GomokuView
         android:id="@+id/gomokuView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_margin="20dp"
         app:gomoku_line_color="@color/white"
-        android:layout_marginEnd="20dp"   />
-
+        app:layout_constraintTop_toBottomOf="@+id/tempTopImg"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <dinson.customview.weight.elasticview.ElasticView
+        android:id="@+id/evCharts"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:flexibility="7"
-        android:layout_margin="20dp"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toBottomOf="@+id/gomokuView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,44 +44,41 @@
             <TextView
                 android:id="@+id/actionRefresh"
                 style="@style/_026_Action_btn"
-                android:drawableTop="@drawable/_026_restart"
-                android:text="重来" />
+                android:text="重来"
+                app:drawableTopCompat="@drawable/_026_restart" />
 
             <TextView
                 android:id="@+id/actionBack"
                 style="@style/_026_Action_btn"
-                android:drawableTop="@drawable/_026_left"
-                android:text="后退" />
+                android:text="后退"
+                app:drawableTopCompat="@drawable/_026_left" />
 
             <TextView
                 android:id="@+id/actionForward"
                 style="@style/_026_Action_btn"
-                android:drawableTop="@drawable/_026_right"
-                android:text="前进" />
+                android:text="前进"
+                app:drawableTopCompat="@drawable/_026_right" />
 
             <TextView
                 android:id="@+id/actionTips"
                 style="@style/_026_Action_btn"
-                android:drawableTop="@drawable/_026_tips"
-                android:text="提示" />
+                android:text="提示"
+                app:drawableTopCompat="@drawable/_026_tips" />
 
             <TextView
                 android:id="@+id/actionStop"
                 style="@style/_026_Action_btn"
-                android:drawableTop="@drawable/_026_cancel"
-                android:text="停止" />
+                android:text="停止"
+                app:drawableTopCompat="@drawable/_026_cancel" />
 
             <TextView
                 android:id="@+id/actionSetting"
                 style="@style/_026_Action_btn"
-                android:drawableTop="@drawable/_026_setting"
-                android:text="设置" />
-
+                android:text="设置"
+                app:drawableTopCompat="@drawable/_026_setting" />
 
         </LinearLayout>
 
-
     </dinson.customview.weight.elasticview.ElasticView>
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

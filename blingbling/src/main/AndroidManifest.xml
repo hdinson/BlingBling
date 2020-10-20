@@ -22,6 +22,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
+    <!--usesCleartextTraffic 指示应用程序是否打算使用明文网络流量-->
     <application
         android:name="._global.GlobalApplication"
         android:allowBackup="false"
@@ -32,9 +33,10 @@
         android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".activity._006RemoteDetectionActivity"/>
+        <activity android:name=".activity._006RemoteDetectionActivity" />
         <activity android:name=".activity._006HMSCoreMainActivity" />
         <activity android:name=".activity._029NotificationTestActivity" />
         <activity android:name=".activity._028NavigationActivity" />

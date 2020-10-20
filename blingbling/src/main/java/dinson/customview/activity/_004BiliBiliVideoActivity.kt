@@ -6,7 +6,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.player.PlayerFactory
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
@@ -37,7 +37,7 @@ class _004BiliBiliVideoActivity : BaseActivity() {
 
         val mVideoPath = intent.getStringExtra(EXTRA_URL)
         if (mVideoPath.isNullOrEmpty()) {
-            "视频地址错误".toasty()
+            "视频地址错误".toast()
             finish()
             return
         }

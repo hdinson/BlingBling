@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.R
@@ -89,7 +89,7 @@ class _003PicSetListActivity : BaseActivity() {
      */
     private fun getServiceData() {
         if (mId.isEmpty()) {
-            "ID is none. Please go back.".toasty()
+            "ID is none. Please go back.".toast()
         }
         mApi.loadPicSetById(mId)
             .compose(RxSchedulers.io_main())

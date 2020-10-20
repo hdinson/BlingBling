@@ -12,7 +12,7 @@ import dinson.customview.db.model.ZhihuTucaoDao
 object ZhiHuDbUtils {
 
     private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(RxBling.context, "ZhuHuDb", null)
+        DaoMaster.DevOpenHelper(RxBling.getApplicationContext(), "ZhuHuDb", null)
     }
 
     /**

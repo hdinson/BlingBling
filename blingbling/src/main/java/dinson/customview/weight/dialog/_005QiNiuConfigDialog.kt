@@ -5,16 +5,20 @@ import android.content.Context
 import dinson.customview.R
 import com.dinson.blingbase.kotlin.click
 import com.dinson.blingbase.kotlin.show
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import dinson.customview.model._005QiNiuConfig
-import dinson.customview.utils.SPUtils
+import dinson.customview.utils.MMKVUtils
+
 import kotlinx.android.synthetic.main.dialog_005_qi_niu_config.*
 
 /**
  *  七牛云参数设置对话框
  */
-class _005QiNiuConfigDialog(context: Context, private val mConfig: _005QiNiuConfig? = null, theme: Int = R.style.BaseDialogTheme)
-    : Dialog(context, theme) {
+class _005QiNiuConfigDialog(
+    context: Context,
+    private val mConfig: _005QiNiuConfig? = null,
+    theme: Int = R.style.BaseDialogTheme
+) : Dialog(context, theme) {
 
 
     /******************************************************************************************************/
@@ -39,7 +43,7 @@ class _005QiNiuConfigDialog(context: Context, private val mConfig: _005QiNiuConf
             etBucket.setText(it.Bucket)
             etDomain.setText(it.Domain)
             rgArea.check(getId(it.Area))
-            cbIsPrivate.isChecked=it.isPrivate
+            cbIsPrivate.isChecked = it.isPrivate
         }
         initClick()
     }
@@ -50,24 +54,31 @@ class _005QiNiuConfigDialog(context: Context, private val mConfig: _005QiNiuConf
     private fun initClick() {
         btnSave.click {
             if (etAK.text.isEmpty() || etSK.text.isEmpty() ||
-                etBucket.text.isEmpty() || etDomain.text.isEmpty()) {
-                "请完善参数后提交".toasty()
+                etBucket.text.isEmpty() || etDomain.text.isEmpty()
+            ) {
+                "请完善参数后提交".toast()
                 return@click
             }
-            val config = _005QiNiuConfig(etAK.text.toString(), etSK.text.toString(), etDomain.text.toString(),
-                etBucket.text.toString(), cbIsPrivate.isChecked, getArea(rgArea.checkedRadioButtonId))
+            val config = _005QiNiuConfig(
+                etAK.text.toString(),
+                etSK.text.toString(),
+                etDomain.text.toString(),
+                etBucket.text.toString(),
+                cbIsPrivate.isChecked,
+                getArea(rgArea.checkedRadioButtonId)
+            )
 
             if (mConfig == null) {
-                SPUtils.addQiNiuConfig(context, config)
+                MMKVUtils.addQiNiuConfig(config)
             } else {
-                SPUtils.updateQiNiuDefault(context, config)
+                MMKVUtils.updateQiNiuDefault(config)
             }
             dismiss()
         }
 
         btnDel.click {
             mConfig?.let {
-                SPUtils.removeQiNiuConfig(context, it)
+                MMKVUtils.removeQiNiuConfig(it)
                 dismiss()
             }
         }
