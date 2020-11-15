@@ -1,6 +1,5 @@
 package dinson.customview.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R

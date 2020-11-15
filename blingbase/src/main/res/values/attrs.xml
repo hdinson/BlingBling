@@ -90,4 +90,18 @@
         <attr name="mlMaxHeight" format="reference|dimension" />
         <attr name="mlMaxWidth" format="reference|dimension" />
     </declare-styleable>
+
+    <declare-styleable name="ArcLayout">
+        <attr name="alHeight" format="dimension" />
+        <attr name="alPosition">
+            <enum name="bottom" value="1"/>
+            <enum name="top" value="2"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="4"/>
+        </attr>
+        <attr name="alCropDirection" format="enum">
+            <enum name="cropInside" value="1"/>
+            <enum name="cropOutside" value="2"/>
+        </attr>
+    </declare-styleable>
 </resources>
