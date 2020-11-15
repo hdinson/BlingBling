@@ -17,7 +17,7 @@ public class QiNiuFileInfo {
     private int height;
     private int width;
 
-    private String finalUrl;//文件的最终名字，因为私有空间需要加上下载凭证，否则无法访问
+    private final String finalUrl;//文件的最终名字，因为私有空间需要加上下载凭证，否则无法访问
 
     public QiNiuFileInfo(FileInfo info, String finalUrl) {
         this.key = info.key;

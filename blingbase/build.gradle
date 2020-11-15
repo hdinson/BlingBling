@@ -78,7 +78,7 @@ ext {
     issuesUrl = 'https://github.com/hdinson/BlingBling/issues'
 
     // ./gradlew install  ./gradlew bintrayUpload
-    libraryVersion = '1.3.4.2'
+    libraryVersion = '1.3.5'
     libraryVersionDesc = '啥也没更新'
 
     developerId = 'dinson'
