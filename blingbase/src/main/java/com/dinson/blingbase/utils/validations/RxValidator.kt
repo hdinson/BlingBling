@@ -1,14 +1,15 @@
 package com.dinson.blingbase.utils.validations
 
 import android.view.View
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.CompoundButton
+import android.widget.TextView
 import com.dinson.blingbase.kotlin.onTextChanged
 import com.dinson.blingbase.utils.validations.executor.ValidationExecutor
-import java.util.HashMap
 
 class RxValidator(private val builder: Builder) {
 
-    private fun execute(): RxValidator {
+    fun autoValidate(): RxValidator {
         builder.validationModels.forEach { autoValidate(it.getValidateView()) }
         builder.validateView.forEach { autoValidate(it.key) }
         doValidator()
@@ -28,7 +29,7 @@ class RxValidator(private val builder: Builder) {
 
 
     fun doValidator(): Boolean {
-        builder.getApplyBtn().isEnabled = false
+        builder.getApplyBtn()?.isEnabled = false
         builder.validationModels.forEach {
             val result = it.doValidate()
             if (!result) {
@@ -41,15 +42,15 @@ class RxValidator(private val builder: Builder) {
                 return false
             }
         }
-        builder.getApplyBtn().isEnabled = true
+        builder.getApplyBtn()?.isEnabled = true
         return true
     }
 
 
-    class Builder(private val applyBtn: View) {
+    class Builder(private val applyBtn: View? = null) {
 
         val validationModels = ArrayList<ValidationExecutor>()
-        val validateView = HashMap<View, () -> Boolean>()
+        val validateView = LinkedHashMap<View, () -> Boolean>()
 
         fun add(valida: ValidationExecutor): Builder {
             validationModels.add(valida)
@@ -63,7 +64,7 @@ class RxValidator(private val builder: Builder) {
 
 
         fun build(): RxValidator {
-            return RxValidator(this).execute()
+            return RxValidator(this)
         }
 
         fun getApplyBtn() = applyBtn
