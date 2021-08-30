@@ -40,7 +40,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/tvDay"
         app:layout_constraintLeft_toRightOf="@+id/tvDay" />
 
-    <dinson.customview.weight.MessagePicturesLayout
+    <dinson.customview.widget.MessagePicturesLayout
         android:id="@+id/mpGirlsPic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

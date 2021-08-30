@@ -23,8 +23,8 @@ import dinson.customview.listener.CalculatorKey
 import dinson.customview.listener.OnItemSwipeOpen
 import dinson.customview.model._007CurrencyModel
 import dinson.customview.utils.MMKVUtils
-import dinson.customview.weight._003toast.LoadToast
-import dinson.customview.weight.swipelayout.SwipeItemLayout
+import dinson.customview.widget._003toast.LoadToast
+import dinson.customview.widget.swipelayout.SwipeItemLayout
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity__007_exchange.*

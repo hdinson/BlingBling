@@ -1,5 +1,6 @@
 package dinson.customview.download.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -24,7 +25,7 @@ public class DbDownUtil {
     private static DbDownUtil db;
     private final static String dbName = "AppDb";
     public DaoMaster.DevOpenHelper openHelper;
-    private Context context = RxBling.getApplicationContext();
+    private final Context context = RxBling.getApplicationContext();
 
 
     private DbDownUtil() {

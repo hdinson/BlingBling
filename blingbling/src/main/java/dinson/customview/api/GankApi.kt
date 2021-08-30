@@ -53,7 +53,8 @@ interface GankApi {
     /**
      * 获取妹子图精选图片
      */
-    @GET("https://api.mmzztt.com/wp-json/wp/v2/rand")
+//    @GET("https://api.mmzztt.com/wp-json/wp/v2/rand")
+    @GET("https://list.iimzt.com/app/i/rand")
     @Headers("Referer:https://app.mmzztt.com")
     fun meizituTopPic(@Query("page") page: Int): Observable<ArrayList<MeiZiTuPicSet>>
 

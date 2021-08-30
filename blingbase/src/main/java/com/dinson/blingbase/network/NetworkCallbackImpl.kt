@@ -17,9 +17,10 @@ class NetworkCallbackImpl(var mNetType: NetworkType) : ConnectivityManager.Netwo
      */
     override fun onAvailable(network: Network) {
         super.onAvailable(network)
-        val networkType = NetworkUtils.getNetworkType()
-        Log.v("BlingBase", "网络已连接: ${networkType.name}")
-        EventBus.getDefault().post(networkType)
+
+//        val networkType = NetworkUtils.getNetworkType()
+//        Log.v("BlingBase", "网络已连接: ${networkType.name}")
+//        EventBus.getDefault().post(networkType)
     }
 
     /**
@@ -41,8 +42,8 @@ class NetworkCallbackImpl(var mNetType: NetworkType) : ConnectivityManager.Netwo
                     EventBus.getDefault().post(NetworkType.NETWORK_WIFI)
                 }
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                    mNetType = NetworkUtils.getNetworkType()
-                    EventBus.getDefault().post(mNetType)
+//                    mNetType = NetworkUtils.getNetworkType()
+//                    EventBus.getDefault().post(mNetType)
                 }
                 else -> {
                     Log.v("BlingBase", "onCapabilitiesChanged: 其他网络")

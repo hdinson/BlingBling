@@ -1,6 +1,7 @@
 package com.dinson.blingbase.kotlin
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.util.DisplayMetrics
 import android.view.View
@@ -51,6 +52,19 @@ fun Context.getAppName(): String {
     return pi.applicationInfo.loadLabel(packageManager).toString()
 }
 
+/**
+ * 判断是否安装了某包名的应用
+ *
+ * @param packageName 包名
+ */
+@Suppress("unused")
+fun Context.hasInstalled(packageName: String): Boolean {
+    if (packageName.isEmpty()) return false
+    val pag = packageManager.getInstalledPackages(0)
+    if (pag.isEmpty()) return false
+    return pag.find { it.packageName == packageName } != null
+}
+
 
 @Suppress("unused")
 fun Context.screenHeight(): Int {
@@ -89,4 +103,3 @@ fun Context.openKeyboard(view: View) {
     val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
     imm?.showSoftInput(view, InputMethodManager.SHOW_FORCED)
 }
-

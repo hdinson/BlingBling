@@ -16,7 +16,7 @@
         android:theme="@style/BaseToolBarTheme.Black"
         app:titleTextColor="@color/white"/>
 
-    <dinson.customview.weight.refreshview.CustomRefreshView
+    <dinson.customview.widget.refreshview.CustomRefreshView
         android:id="@+id/crvMovieContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

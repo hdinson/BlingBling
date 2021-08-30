@@ -11,9 +11,9 @@ import android.widget.TextView
 import dinson.customview.BuildConfig
 import com.dinson.blingbase.kotlin.dip
 import dinson.customview.utils.GlideUtils
-import dinson.customview.weight._013stepview.Position
-import dinson.customview.weight._013stepview.State
-import dinson.customview.weight._013stepview.StepViewHolder
+import dinson.customview.widget._013stepview.Position
+import dinson.customview.widget._013stepview.State
+import dinson.customview.widget._013stepview.StepViewHolder
 
 /**
  * 步骤holder

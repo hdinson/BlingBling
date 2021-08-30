@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <dinson.customview.weight._013stepview.HorizontalStepsViewIndicator
+    <dinson.customview.widget._013stepview.HorizontalStepsViewIndicator
         android:id="@+id/steps_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

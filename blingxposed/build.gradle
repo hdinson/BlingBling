@@ -24,6 +24,7 @@ android {
 
             storeFile file(prop['keystore.path'])
             storePassword prop['keystore.pwd']
+
             keyAlias prop['keystore.alias']
             keyPassword prop['keystore.aliaspwd']
         }
@@ -37,7 +38,10 @@ android {
             debuggable false
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {

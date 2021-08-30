@@ -16,9 +16,9 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.manager.GlideSimpleLoader
 import dinson.customview.utils.AESUtils
-import dinson.customview.weight._003weight.DecorationLayout
-import dinson.customview.weight.imagewatcher.ImageWatcherHelper
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget._003weight.DecorationLayout
+import dinson.customview.widget.imagewatcher.ImageWatcherHelper
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__003_pic_set_list.*
 import java.util.regex.Pattern
 
@@ -48,6 +48,7 @@ class _003PicSetListActivity : BaseActivity() {
         mId = intent?.extras?.getString(EXTRA_ID) ?: ""
         mApi = HttpHelper.create(GankApi::class.java)
         initUI()
+
 
     }
 

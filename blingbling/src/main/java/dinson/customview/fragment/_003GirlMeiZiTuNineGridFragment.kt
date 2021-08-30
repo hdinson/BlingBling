@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import dinson.customview.R
-import dinson.customview._global.BaseFragment
 import dinson.customview.adapter._003MeiZiTuNineGridAdapter
 import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.MeiZiTuNineGrid
@@ -21,10 +20,10 @@ import dinson.customview.kotlin.loge
 import dinson.customview.utils.toast
 import dinson.customview.manager.GlideSimpleLoader
 
-import dinson.customview.weight.MessagePicturesLayout
-import dinson.customview.weight._003weight.DecorationLayout
-import dinson.customview.weight.imagewatcher.ImageWatcherHelper
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.MessagePicturesLayout
+import dinson.customview.widget._003weight.DecorationLayout
+import dinson.customview.widget.imagewatcher.ImageWatcherHelper
+import dinson.customview.widget.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_003_girl_nine_grid.*
 

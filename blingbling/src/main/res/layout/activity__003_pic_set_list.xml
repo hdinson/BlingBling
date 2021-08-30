@@ -16,7 +16,7 @@
         android:elevation="10dp"
         app:titleTextColor="@color/white"/>
 
-    <dinson.customview.weight.refreshview.CustomRefreshView
+    <dinson.customview.widget.refreshview.CustomRefreshView
         android:id="@+id/flCustomRefreshView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

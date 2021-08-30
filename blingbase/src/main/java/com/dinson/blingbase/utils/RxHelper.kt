@@ -30,6 +30,11 @@ object RxHelper {
      * @param time 从第几秒开始计时 为负数时，自增到0后正计时
      */
     fun timer(time: Int): Observable<Int> {
+
+
+
+
+
         return Observable.interval(0, 1, TimeUnit.SECONDS)
             .map { time - it.toInt() }
             .subscribeOn(Schedulers.io())

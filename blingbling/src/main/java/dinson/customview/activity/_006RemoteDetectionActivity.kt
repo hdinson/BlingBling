@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import dinson.customview.utils.toast
-import com.dinson.blingbase.utils.BitmapUtils
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.huawei.hms.mlsdk.document.MLDocument
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -19,8 +18,8 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
-import dinson.customview.weight._006hms.callback.OnMLDocumentListener
-import dinson.customview.weight._006hms.transactor.DocumentTransactor
+import dinson.customview.widget._006hms.callback.OnMLDocumentListener
+import dinson.customview.widget._006hms.transactor.DocumentTransactor
 import kotlinx.android.synthetic.main.activity__006_remote_detection.*
 
 class _006RemoteDetectionActivity : BaseActivity(), OnMLDocumentListener {

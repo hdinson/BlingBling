@@ -16,12 +16,12 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import dinson.customview.manager.GlideSimpleLoader
-import dinson.customview.weight._003weight.DecorationLayout
-import dinson.customview.weight.imagewatcher.ImageWatcherHelper
+import dinson.customview.widget._003weight.DecorationLayout
+import dinson.customview.widget.imagewatcher.ImageWatcherHelper
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.entity.gank.GankGirlImg
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.fragment_003_girl_pic_set.*
 
 /**

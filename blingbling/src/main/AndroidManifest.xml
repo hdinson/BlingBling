@@ -16,13 +16,10 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.WRITE_SMS" />
-
-    <!--处理一个 wifi worming-->
+    <uses-permission android:name="android.permission.WRITE_SMS" /> <!-- 处理一个 wifi worming -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
-    <!--usesCleartextTraffic 指示应用程序是否打算使用明文网络流量-->
     <application
         android:name="._global.GlobalApplication"
         android:allowBackup="false"
@@ -36,11 +33,13 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
+        <activity
+            android:name=".activity.Paging3TestActivity"
+            android:exported="true" />
         <activity android:name=".activity._006RemoteDetectionActivity" />
         <activity android:name=".activity._006HMSCoreMainActivity" />
         <activity android:name=".activity._029NotificationTestActivity" />
-        <activity android:name=".activity._028NavigationActivity" />
-        <!-- 高德地图设置key -->
+        <activity android:name=".activity._028NavigationActivity" /> <!-- 高德地图设置key -->
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
@@ -139,7 +138,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDBnMuJo4oIS2H3BTwUM_rECvx4IzKNJpI" /> <!-- receiver -->
         <receiver
-            android:name=".weight._025provider.WidgetProviderSmall"
+            android:name=".widget._025provider.WidgetProviderSmall"
             android:label="倒数日控件(小)">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -150,7 +149,7 @@
                 android:resource="@xml/app_widget_025_small" />
         </receiver>
         <receiver
-            android:name=".weight._025provider.WidgetProviderMiddle"
+            android:name=".widget._025provider.WidgetProviderMiddle"
             android:label="倒数日控件(中)">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -161,7 +160,7 @@
                 android:resource="@xml/app_widget_025_middle" />
         </receiver>
         <receiver
-            android:name=".weight._025provider.WidgetProviderBig"
+            android:name=".widget._025provider.WidgetProviderBig"
             android:label="倒数日控件(大)">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

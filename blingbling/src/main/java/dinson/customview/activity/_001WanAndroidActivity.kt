@@ -19,9 +19,9 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.weight.dialog.OnLoginSuccessListener
-import dinson.customview.weight.dialog._001LoginDialog
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.dialog.OnLoginSuccessListener
+import dinson.customview.widget.dialog._001LoginDialog
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__001_wan_android.*
 
 open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener {

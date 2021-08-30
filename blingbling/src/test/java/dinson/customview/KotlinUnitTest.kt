@@ -1,8 +1,11 @@
 package dinson.customview
 
-import com.dinson.blingbase.utils.MD5
+import com.google.zxing.qrcode.encoder.QRCode
+import dinson.customview.utils.QrCodeUtils
 import org.junit.Test
-import java.nio.ByteBuffer
+import java.util.*
+import java.util.ArrayDeque
+import kotlin.collections.ArrayList
 
 
 /**
@@ -13,6 +16,20 @@ class KotlinUnitTest {
 
     @Test
     fun testAdd() {
+        println("===================================================")
+
+
+          val activityLog: Deque<String> = ArrayDeque(50)
+        activityLog.add("dinson1")
+        activityLog.add("dinson2")
+        activityLog.add("dinson3")
+        activityLog.add("dinson4")
+        activityLog.add("dinson5")
+        activityLog.add("dinson6")
+
+        println(activityLog.joinToString(""){it})
+
+        println("===================================================")
 
 
     }
