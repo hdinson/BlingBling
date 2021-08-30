@@ -49,6 +49,7 @@ class _003PicSetListActivity : BaseActivity() {
         mApi = HttpHelper.create(GankApi::class.java)
         initUI()
 
+
     }
 
     private fun initUI() {

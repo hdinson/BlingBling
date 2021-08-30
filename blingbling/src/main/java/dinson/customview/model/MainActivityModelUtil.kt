@@ -13,6 +13,9 @@ object MainActivityModelUtil {
      */
     val dataList: ArrayList<ClassBean> by lazy {
         arrayListOf(
+            ClassBean(Paging3TestActivity::class.java, "WanAndroid",
+                "WanAndroid is a BBS created by many passionate youth who love Android.",
+                "FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp"),
             ClassBean(_001WanAndroidActivity::class.java, "WanAndroid",
                 "WanAndroid is a BBS created by many passionate youth who love Android.",
                 "FvqOjFv6Vt3uW1LHdCzNksREmv3S.webp"),
