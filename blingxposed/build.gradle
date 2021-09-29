@@ -24,6 +24,7 @@ android {
 
             storeFile file(prop['keystore.path'])
             storePassword prop['keystore.pwd']
+
             keyAlias prop['keystore.alias']
             keyPassword prop['keystore.aliaspwd']
         }

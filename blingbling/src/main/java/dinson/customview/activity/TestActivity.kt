@@ -17,6 +17,7 @@ import android.view.View
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import com.dinson.blingbase.kotlin.hasInstalled
 import com.dinson.blingbase.utils.RxNotification
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.huawei.hms.mlsdk.MLAnalyzerFactory
@@ -149,6 +150,11 @@ class TestActivity : BaseActivity() {
                 contentResolver.insert(uri, values)
             }.addToManaged()
     }
+
+    fun onOpenTaobao(v: View) {
+        val url = "taobao://s.click.taobao.com/YonyJiu"
+    }
+
 
     fun getSmsInPhone(): String {
         val SMS_URI_ALL = "content://sms/" // 所有短信
