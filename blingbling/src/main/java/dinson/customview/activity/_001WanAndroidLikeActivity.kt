@@ -15,7 +15,7 @@ import dinson.customview.kotlin.loge
 import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__001_wan_android_like.*
 
 

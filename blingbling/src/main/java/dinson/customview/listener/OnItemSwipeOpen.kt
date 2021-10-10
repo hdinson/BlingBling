@@ -1,6 +1,6 @@
 package dinson.customview.listener
 
-import dinson.customview.weight.swipelayout.SwipeItemLayout
+import dinson.customview.widget.swipelayout.SwipeItemLayout
 
 /**
  *  货币滑动监听

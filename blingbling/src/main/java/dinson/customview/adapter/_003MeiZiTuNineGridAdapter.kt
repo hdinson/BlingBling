@@ -8,7 +8,7 @@ import dinson.customview.R
 import dinson.customview.entity.gank.MeiZiTuNineGrid
 
 
-import dinson.customview.weight.MessagePicturesLayout
+import dinson.customview.widget.MessagePicturesLayout
 import com.dinson.blingbase.widget.recycleview.CommonAdapter
 import com.dinson.blingbase.widget.recycleview.CommonViewHolder
 import dinson.customview._global.ConstantsUtils.APP_FONT_PATH

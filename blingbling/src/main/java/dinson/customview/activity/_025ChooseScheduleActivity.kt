@@ -6,9 +6,9 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._025ChooseScheduleListAdapter
 
-import dinson.customview.weight._025provider.WidgetProviderBig
-import dinson.customview.weight._025provider.WidgetProviderMiddle
-import dinson.customview.weight._025provider.WidgetProviderSmall
+import dinson.customview.widget._025provider.WidgetProviderBig
+import dinson.customview.widget._025provider.WidgetProviderMiddle
+import dinson.customview.widget._025provider.WidgetProviderSmall
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import dinson.customview.utils.MMKVUtils

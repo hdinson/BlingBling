@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import dinson.customview.weight._010parallaxsplash.ParallaxFragment;
+import dinson.customview.widget._010parallaxsplash.ParallaxFragment;
 
 /**
  * 登陆界面

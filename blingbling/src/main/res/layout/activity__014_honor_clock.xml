@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4"/>
 
-    <dinson.customview.weight._014honorclock.HonorClockView
+    <dinson.customview.widget._014honorclock.HonorClockView
         android:id="@+id/clockView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

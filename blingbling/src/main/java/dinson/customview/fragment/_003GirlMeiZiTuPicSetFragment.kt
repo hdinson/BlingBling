@@ -15,7 +15,7 @@ import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.MeiZiTuPicSet
 import dinson.customview.http.HttpHelper
 import dinson.customview.kotlin.loge
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

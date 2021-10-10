@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.kotlin.loge
-import dinson.customview.weight._016parallaximgview.GyroscopeObserver
+import dinson.customview.widget._016parallaximgview.GyroscopeObserver
 import kotlinx.android.synthetic.main.activity__016_parallax_img_view.*
 
 class _016ParallaxImgViewActivity : BaseActivity() {

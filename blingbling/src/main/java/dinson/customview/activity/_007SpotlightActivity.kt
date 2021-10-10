@@ -7,9 +7,9 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview._global.ConstantsUtils.APP_FONT_PATH
 
-import dinson.customview.weight._007spotlight.CustomTarget
-import dinson.customview.weight._007spotlight.SimpleTarget
-import dinson.customview.weight._007spotlight.Spotlight
+import dinson.customview.widget._007spotlight.CustomTarget
+import dinson.customview.widget._007spotlight.SimpleTarget
+import dinson.customview.widget._007spotlight.Spotlight
 import kotlinx.android.synthetic.main.activity__007_spotlight.*
 
 class _007SpotlightActivity : BaseActivity() {

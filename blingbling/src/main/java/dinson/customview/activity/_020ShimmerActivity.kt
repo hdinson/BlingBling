@@ -9,7 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.utils.glide.BlurTransformation
-import dinson.customview.weight._020shimmerlayout.ShimmerFrameLayout
+import dinson.customview.widget._020shimmerlayout.ShimmerFrameLayout
 import kotlinx.android.synthetic.main.activity__020_shimmer.*
 
 class _020ShimmerActivity : BaseActivity() {

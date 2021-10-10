@@ -30,7 +30,7 @@
             android:overScrollMode="never" />
 
 
-        <dinson.customview.weight._027alphaindicator.AlphaIndicator
+        <dinson.customview.widget._027alphaindicator.AlphaIndicator
             android:id="@+id/alphaIndicator"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -38,7 +38,7 @@
             android:elevation="20dp"
             android:orientation="horizontal">
 
-            <dinson.customview.weight._027alphaindicator.AlphaView
+            <dinson.customview.widget._027alphaindicator.AlphaView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 app:av_textColorNormal="#999999"
                 app:av_textColorSelected="#000" />
 
-            <dinson.customview.weight._027alphaindicator.AlphaView
+            <dinson.customview.widget._027alphaindicator.AlphaView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -60,7 +60,7 @@
                 app:av_textColorNormal="#999999"
                 app:av_textColorSelected="#000" />
 
-            <dinson.customview.weight._027alphaindicator.AlphaView
+            <dinson.customview.widget._027alphaindicator.AlphaView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -71,7 +71,7 @@
                 app:av_textColorNormal="#999999"
                 app:av_textColorSelected="#000" />
 
-        </dinson.customview.weight._027alphaindicator.AlphaIndicator>
+        </dinson.customview.widget._027alphaindicator.AlphaIndicator>
     </LinearLayout>
 
     <ListView

@@ -61,7 +61,7 @@
         android:overScrollMode="never" />
 
 
-    <dinson.customview.weight._027alphaindicator.AlphaIndicator
+    <dinson.customview.widget._027alphaindicator.AlphaIndicator
         android:id="@+id/alphaIndicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -69,7 +69,7 @@
         android:elevation="10dp"
         android:orientation="horizontal">
 
-        <dinson.customview.weight._027alphaindicator.AlphaView
+        <dinson.customview.widget._027alphaindicator.AlphaView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -78,7 +78,7 @@
             app:av_tabIconSelected="@drawable/_027_bottom1_selector" />
 
 
-        <dinson.customview.weight._027alphaindicator.AlphaView
+        <dinson.customview.widget._027alphaindicator.AlphaView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -86,7 +86,7 @@
             app:av_tabIconNormal="@drawable/_027_bottom2_normal"
             app:av_tabIconSelected="@drawable/_027_bottom2_selector" />
 
-        <dinson.customview.weight._027alphaindicator.AlphaView
+        <dinson.customview.widget._027alphaindicator.AlphaView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -94,5 +94,5 @@
             app:av_tabIconNormal="@drawable/_027_bottom3_normal"
             app:av_tabIconSelected="@drawable/_027_bottom3_selector" />
 
-    </dinson.customview.weight._027alphaindicator.AlphaIndicator>
+    </dinson.customview.widget._027alphaindicator.AlphaIndicator>
 </LinearLayout>

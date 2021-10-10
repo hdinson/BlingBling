@@ -83,7 +83,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvTags"
         tools:text="12" />
 
-    <dinson.customview.weight.IconFontTextView
+    <dinson.customview.widget.IconFontTextView
         android:id="@+id/ifTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

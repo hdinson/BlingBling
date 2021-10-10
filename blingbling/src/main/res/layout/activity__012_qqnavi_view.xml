@@ -20,7 +20,7 @@
         android:background="@android:color/white"
         android:orientation="horizontal">
 
-        <dinson.customview.weight._012qqnaviview.QQNaviView
+        <dinson.customview.widget._012qqnaviview.QQNaviView
             android:id="@+id/qqViewBubble"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             app:smallIconSrc="@drawable/_012_pre_bubble_small"
             app:smallIconSrcCheck="@drawable/_012_bubble_small"/>
 
-        <dinson.customview.weight._012qqnaviview.QQNaviView
+        <dinson.customview.widget._012qqnaviview.QQNaviView
             android:id="@+id/qqViewPerson"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             app:smallIconSrc="@drawable/_012_pre_person_small"
             app:smallIconSrcCheck="@drawable/_012_person_small"/>
 
-        <dinson.customview.weight._012qqnaviview.QQNaviView
+        <dinson.customview.widget._012qqnaviview.QQNaviView
             android:id="@+id/qqViewStar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

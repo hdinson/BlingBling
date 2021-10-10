@@ -1,5 +1,6 @@
 package dinson.customview.db
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.dinson.blingbase.RxBling
 import dinson.customview.db.model.DaoMaster
@@ -9,10 +10,16 @@ import dinson.customview.db.model.ZhihuTucaoDao
 /**
  * app数据库相关工具类
  */
-object ZhiHuDbUtils {
+class ZhiHuDbUtils private constructor(var openHelper: DaoMaster.DevOpenHelper) {
 
-    private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(RxBling.getApplicationContext(), "ZhuHuDb", null)
+    companion object {
+        @Volatile
+        private var instance: ZhiHuDbUtils? = null
+
+        fun getInstance(ctx: Context) =
+            instance ?: synchronized(this) {
+                instance ?: ZhiHuDbUtils(DaoMaster.DevOpenHelper(ctx, "ZhuHuDb", null))
+            }
     }
 
     /**
@@ -38,7 +45,9 @@ object ZhiHuDbUtils {
      * 插入多条知乎吐槽数据
      */
     fun insertMultiZhihuTucao(zhihuTucaoList: List<ZhihuTucao>) {
-        DaoMaster(getWritableDatabase()).newSession().zhihuTucaoDao.insertOrReplaceInTx(zhihuTucaoList)
+        DaoMaster(getWritableDatabase()).newSession().zhihuTucaoDao.insertOrReplaceInTx(
+            zhihuTucaoList
+        )
     }
 
     /**
@@ -70,6 +79,7 @@ object ZhiHuDbUtils {
      */
     fun getLocalDataBefore(time: Int, limit: Int = 20): List<ZhihuTucao> {
         val builder = DaoMaster(getWritableDatabase()).newSession().zhihuTucaoDao.queryBuilder()
-        return builder.where(ZhihuTucaoDao.Properties.Date.lt(time)).orderDesc(ZhihuTucaoDao.Properties.Date).limit(limit).list()
+        return builder.where(ZhihuTucaoDao.Properties.Date.lt(time))
+            .orderDesc(ZhihuTucaoDao.Properties.Date).limit(limit).list()
     }
 }

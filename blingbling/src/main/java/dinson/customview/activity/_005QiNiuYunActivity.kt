@@ -29,10 +29,10 @@ import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.model._005QiNiuConfig
 import dinson.customview.utils.MMKVUtils
 import dinson.customview.utils.toast
-import dinson.customview.weight.dialog.OnItemClickListener
-import dinson.customview.weight.dialog._005ContentMenuDialog
-import dinson.customview.weight.dialog._005QiNiuConfigDialog
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.dialog.OnItemClickListener
+import dinson.customview.widget.dialog._005ContentMenuDialog
+import dinson.customview.widget.dialog._005QiNiuConfigDialog
+import dinson.customview.widget.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity__005_qi_niu_yun.*
 import java.io.File

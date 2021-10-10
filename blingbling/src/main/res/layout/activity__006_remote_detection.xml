@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true" />
 
-    <dinson.customview.weight._006hms.GraphicOverlay
+    <dinson.customview.widget._006hms.GraphicOverlay
         android:id="@+id/golOverLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

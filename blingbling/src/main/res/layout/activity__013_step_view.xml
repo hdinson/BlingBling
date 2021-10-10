@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:overScrollMode="never">
 
-        <dinson.customview.weight._013stepview.VerticalStepView
+        <dinson.customview.widget._013stepview.VerticalStepView
             android:id="@+id/stepView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -67,7 +67,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
 
     private fun initData() {
         val extraData = intent.getParcelableExtra<ZhihuTucao>(EXTRA_NEWS_BEAN)
-        val mData = ZhiHuDbUtils.queryById(extraData.id)
+        val mData = ZhiHuDbUtils.getInstance(this).queryById(extraData.id)
         if (mData == null) {
             onBackPressed()
             loge { "数据库查不到当前日期的数据" }
@@ -83,7 +83,7 @@ class _002ZhihuTucaoContentActivity : BaseActivity() {
                 .subscribe({
                     //本地数据库存储
                     mData.content = it.string()
-                    ZhiHuDbUtils.updateZhihuTucao(mData)
+                    ZhiHuDbUtils.getInstance(this).updateZhihuTucao(mData)
 
                     //解析数据，设置数据
                     parseJsonAndSetData(mData.content)

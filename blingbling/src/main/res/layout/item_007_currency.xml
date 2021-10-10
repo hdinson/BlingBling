@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dinson.customview.weight.swipelayout.SwipeItemLayout
+<dinson.customview.widget.swipelayout.SwipeItemLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/deleteLayout"
@@ -66,7 +66,7 @@
             android:textSize="20sp"
             tools:text="100.00"/>
 
-        <dinson.customview.weight.LanTingFontTextView
+        <dinson.customview.widget.LanTingFontTextView
             android:id="@+id/tvEquation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,4 +113,4 @@
             android:background="@color/_003_text_color_hint"
             android:visibility="invisible"/>
     </RelativeLayout>
-</dinson.customview.weight.swipelayout.SwipeItemLayout>
+</dinson.customview.widget.swipelayout.SwipeItemLayout>

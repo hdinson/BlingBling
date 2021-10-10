@@ -138,7 +138,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDBnMuJo4oIS2H3BTwUM_rECvx4IzKNJpI" /> <!-- receiver -->
         <receiver
-            android:name=".weight._025provider.WidgetProviderSmall"
+            android:name=".widget._025provider.WidgetProviderSmall"
             android:label="倒数日控件(小)">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -149,7 +149,7 @@
                 android:resource="@xml/app_widget_025_small" />
         </receiver>
         <receiver
-            android:name=".weight._025provider.WidgetProviderMiddle"
+            android:name=".widget._025provider.WidgetProviderMiddle"
             android:label="倒数日控件(中)">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -160,7 +160,7 @@
                 android:resource="@xml/app_widget_025_middle" />
         </receiver>
         <receiver
-            android:name=".weight._025provider.WidgetProviderBig"
+            android:name=".widget._025provider.WidgetProviderBig"
             android:label="倒数日控件(大)">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

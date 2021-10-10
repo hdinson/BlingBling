@@ -1,8 +1,6 @@
 package dinson.customview
 
-import com.dinson.blingbase.utils.MD5
 import org.junit.Test
-import java.nio.ByteBuffer
 
 
 /**
@@ -13,6 +11,7 @@ class KotlinUnitTest {
 
     @Test
     fun testAdd() {
+        println("===================================================")
 
 
     }

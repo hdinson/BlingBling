@@ -13,7 +13,7 @@ import dinson.customview.db.model.ZhihuTucao
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.logd
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__002_zhihu_tucao_list.*
 
 
@@ -39,7 +39,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        mData = ZhiHuDbUtils.getLocalDatas() as ArrayList<ZhihuTucao>
+        mData = ZhiHuDbUtils.getInstance(this).getLocalDatas() as ArrayList<ZhihuTucao>
         mAdapter = _002ZhihuListAdapter(mData)
 
         flCustomRefreshView.setAdapter(mAdapter)
@@ -75,7 +75,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
                     return@subscribe
 
                 val map = response.stories.map { it.convertToZhihuTucao() }
-                ZhiHuDbUtils.insertMultiZhihuTucao(map)
+                ZhiHuDbUtils.getInstance(this).insertMultiZhihuTucao(map)
                 mData.clear()
                 mData.addAll(map)
                 mAdapter.notifyDataSetChanged()
@@ -91,7 +91,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
      */
     private fun loadMoreData() {
         //本地查询
-        val data = ZhiHuDbUtils.getLocalDataBefore(mData.last().date)
+        val data = ZhiHuDbUtils.getInstance(this).getLocalDataBefore(mData.last().date)
         //显示本地数据
         if (data.isNotEmpty()) {
             logd { "本地有更多数据" }
@@ -116,7 +116,7 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
                     return@subscribe
                 }
                 val map = response.stories.map { it.convertToZhihuTucao() }
-                ZhiHuDbUtils.insertMultiZhihuTucao(map)
+                ZhiHuDbUtils.getInstance(this).insertMultiZhihuTucao(map)
                 val index = mData.size - 2
                 mData.addAll(map)
                 mAdapter.notifyItemChanged(index)
@@ -125,6 +125,8 @@ class _002ZhihuTucaoListActivity : BaseActivity() {
             }, {
                 flCustomRefreshView.complete()
             }).addToManaged()
+
+
     }
 
     override fun setWindowBackgroundColor() = R.color._002_window_bg

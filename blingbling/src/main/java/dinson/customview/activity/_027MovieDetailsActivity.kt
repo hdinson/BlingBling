@@ -36,8 +36,8 @@ import dinson.customview.model._027AvModel
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.GlideUtils
 
-import dinson.customview.weight.MessagePicturesLayout
-import dinson.customview.weight.imagewatcher.ImageWatcherHelper
+import dinson.customview.widget.MessagePicturesLayout
+import dinson.customview.widget.imagewatcher.ImageWatcherHelper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

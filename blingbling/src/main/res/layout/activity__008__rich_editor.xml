@@ -64,7 +64,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <dinson.customview.weight._008richeditor.widget.RichEditor
+    <dinson.customview.widget._008richeditor.widget.RichEditor
         android:id="@+id/richEditor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -137,7 +137,7 @@
             android:src="@drawable/selector_008_tab5" />
     </LinearLayout>
 
-    <dinson.customview.weight._008richeditor.widget.EmojiLayout
+    <dinson.customview.widget._008richeditor.widget.EmojiLayout
         android:id="@+id/emojiLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"

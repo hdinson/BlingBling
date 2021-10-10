@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"/>
 
-    <dinson.customview.weight.IconFontTextView
+    <dinson.customview.widget.IconFontTextView
         android:id="@id/tvHead"
         style="@style/_007Text"
         android:layout_width="wrap_content"

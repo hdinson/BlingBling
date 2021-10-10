@@ -79,7 +79,7 @@ class _027MovieActivity : BaseActivity() {
                     val history = SearchHistory027()
                     history.name = query
                     history.pinyin = Pinyin.toPinyin(query, "")
-                    SearchHistory027DbUtils.insertHistory(history)
+                    SearchHistory027DbUtils.getInstance(this@_027MovieActivity).insertHistory(history)
                     _027MovieListByLinkActivity.start(this@_027MovieActivity,
                         query, _027AvModel.getSearchUrl(query))
                 }
@@ -101,7 +101,7 @@ class _027MovieActivity : BaseActivity() {
         } else "select * from ${SearchHistory027Dao.TABLENAME} " +
             "where ${SearchHistory027Dao.Properties.Pinyin.columnName} " +
             "like '%$key%' order by ${SearchHistory027Dao.Properties.Id.columnName} desc limit 0,20"
-        val cursor = SearchHistory027DbUtils.getReadableDatabase().rawQuery(sql, null)
+        val cursor = SearchHistory027DbUtils.getInstance(this).getReadableDatabase().rawQuery(sql, null)
         if (view.suggestionsAdapter == null) {
             val adapter = SimpleCursorAdapter(this@_027MovieActivity,
                 R.layout.item_027_search_history, cursor,

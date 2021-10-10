@@ -63,7 +63,7 @@
             tools:ignore="HardcodedText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <dinson.customview.weight.refreshview.CustomRefreshView
+    <dinson.customview.widget.refreshview.CustomRefreshView
         android:id="@+id/crvVideoContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"

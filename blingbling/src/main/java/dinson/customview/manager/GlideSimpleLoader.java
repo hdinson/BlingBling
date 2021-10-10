@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
-import dinson.customview.weight.imagewatcher.ImageWatcher;
+import dinson.customview.widget.imagewatcher.ImageWatcher;
 
 
 public class GlideSimpleLoader implements ImageWatcher.Loader {

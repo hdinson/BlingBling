@@ -82,7 +82,7 @@
             android:textColor="@android:color/white"
             android:textSize="13sp" />
 
-        <dinson.customview.weight.IconFontTextView
+        <dinson.customview.widget.IconFontTextView
             android:id="@+id/iconFontWeather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

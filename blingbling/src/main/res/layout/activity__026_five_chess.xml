@@ -17,7 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <dinson.customview.weight._026fivechess.GomokuView
+    <dinson.customview.widget._026fivechess.GomokuView
         android:id="@+id/gomokuView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tempTopImg"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <dinson.customview.weight.elasticview.ElasticView
+    <dinson.customview.widget.elasticview.ElasticView
         android:id="@+id/evCharts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,6 +79,6 @@
 
         </LinearLayout>
 
-    </dinson.customview.weight.elasticview.ElasticView>
+    </dinson.customview.widget.elasticview.ElasticView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
