@@ -23,7 +23,7 @@ abstract class CommonAdapter<T>(private var clist: List<T>) :
         return clist[position]
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonViewHolder {
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonViewHolder {
         val layoutId = getLayoutId(viewType)
         return CommonViewHolder.getViewHolder(parent, layoutId)
     }

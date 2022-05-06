@@ -123,4 +123,10 @@
         <attr name="petHideDrawable" format="integer"/>
         <attr name="petPwdVisible" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="RealtimeBlurView">
+        <attr name="rbvBlurRadius" format="dimension"/>
+        <attr name="rbvDownsampleFactor" format="float"/>
+        <attr name="rbvOverlayColor" format="color"/>
+    </declare-styleable>
 </resources>

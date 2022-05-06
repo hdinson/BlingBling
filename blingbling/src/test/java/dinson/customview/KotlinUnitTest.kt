@@ -1,5 +1,6 @@
 package dinson.customview
 
+import com.dinson.blingbase.kotlin.doubleTrans
 import org.junit.Test
 
 
@@ -12,7 +13,9 @@ class KotlinUnitTest {
     @Test
     fun testAdd() {
         println("===================================================")
-
+        println(4.003.doubleTrans())
+        println(4.00.doubleTrans())
+        println(4.0.doubleTrans())
 
     }
 

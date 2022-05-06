@@ -102,8 +102,8 @@ android {
 
 dependencies {
     implementation files('libs/AMap_Location_V3.6.0_20170918.jar')
-    implementation 'cn.hdinson.bling:android-base:1.4'
-//    implementation project(path: ':blingbase')
+//    implementation 'cn.hdinson.bling:android-base:1.4'
+    implementation project(path: ':blingbase')
     //implementation 'com.dinson.bling:blingsocial-alipay:1.0.4'
     /**
      * 官方库

@@ -19,7 +19,7 @@ ext["ossrhUsername"] = ''
 ext["ossrhPassword"] = ''
 ext["PUBLISH_GROUP_ID"] = 'cn.hdinson.bling'
 ext["PUBLISH_ARTIFACT_ID"] = 'android-base'
-ext["PUBLISH_VERSION"] = '1.4.2'
+ext["PUBLISH_VERSION"] = '1.4.5'
 
 File secretPropsFile = project.rootProject.file('local.properties')
 if (secretPropsFile.exists()) {

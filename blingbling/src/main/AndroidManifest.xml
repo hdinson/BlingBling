@@ -58,7 +58,7 @@
             android:launchMode="singleTask" />
         <activity android:name=".activity.DailyPicActivity" />
         <!--
-<activity-alias
+        <activity-alias
             android:name=".activity.WechatActivity"
             android:enabled="true"
             android:icon="@mipmap/wechat"
