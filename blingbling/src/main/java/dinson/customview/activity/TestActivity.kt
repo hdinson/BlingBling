@@ -18,6 +18,7 @@ import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.dinson.blingbase.kotlin.hasInstalled
+import com.dinson.blingbase.utils.ClipboardUtils
 import com.dinson.blingbase.utils.RxNotification
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.huawei.hms.mlsdk.MLAnalyzerFactory
@@ -127,6 +128,9 @@ class TestActivity : BaseActivity() {
          val request = OneTimeWorkRequest.Builder(DeletePng::class.java)
              .setConstraints(constraints).build()
          WorkManager.getInstance().enqueue(request)*/
+
+        ClipboardUtils.copyToClipBoard(this,"vmess://eyJhZGQiOiJ2MmQud2FuZGFuYmEuY29tIiwiYWlkIjoiNDIiLCJob3N0IjoidjJkLndhbmRhbmJhLmNvbSIsImlkIjoiZDYyYmYzZDEtNmE4NS00YTMxLTg4YTQtN2NjNmUyMjdlMzQwIiwibmV0Ijoid3MiLCJwYXRoIjoiL3JheSIsInBvcnQiOiI0NDMiLCJwcyI6ImRpci53ZGIiLCJzY3kiOiJhdXRvIiwic25pIjoidjJkLndhbmRhbmJhLmNvbSIsInRscyI6InRscyIsInR5cGUiOiIiLCJ2IjoiMiJ9")
+        "已经复制".toast()
     }
 
     fun loggg3(func: () -> String) {

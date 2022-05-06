@@ -2,6 +2,7 @@ package com.dinson.blingbase.kotlin
 
 import android.view.View
 import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
 /******************************************************************************************************/
 /**                             String                                                               **/
@@ -47,6 +48,14 @@ fun String.lowerFirstLetter(): String {
 fun Double.formatMoney(): String {
     val df = DecimalFormat("###,##0.00")
     return df.format(this)
+}
+
+/**
+ * 格式化double，如果为整数显示整数
+ */
+fun Double.doubleTrans(): String {
+    val roundToInt = this.roundToInt()
+    return if (roundToInt - this == 0.0)  roundToInt.toString() else this.toString()
 }
 
 

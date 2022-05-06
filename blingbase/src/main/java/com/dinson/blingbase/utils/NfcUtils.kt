@@ -15,22 +15,21 @@ object NfcUtils {
     /**
      * 创建快速启动的app
      */
-    fun writeApplicationRecord(tag: Tag, packageName: String)
-        = write(tag, NdefMessage(arrayOf(NdefRecord.createApplicationRecord(packageName))))
+    fun writeApplicationRecord(tag: Tag, packageName: String) =
+        write(tag, NdefMessage(arrayOf(NdefRecord.createApplicationRecord(packageName))))
 
 
     /**
      * 创建快速启动的app
      */
-    fun writeUri(tag: Tag, uriStr: String)
-        = write(tag, NdefMessage(arrayOf(NdefRecord.createUri(Uri.parse(uriStr)))))
+    fun writeUri(tag: Tag, uriStr: String) =
+        write(tag, NdefMessage(arrayOf(NdefRecord.createUri(Uri.parse(uriStr)))))
 
 
     /**
      * 创建快速启动的app
      */
-    fun writeUri(tag: Tag, uri: Uri)
-        = write(tag, NdefMessage(arrayOf(NdefRecord.createUri(uri))))
+    fun writeUri(tag: Tag, uri: Uri) = write(tag, NdefMessage(arrayOf(NdefRecord.createUri(uri))))
 
 
     /**
@@ -45,24 +44,24 @@ object NfcUtils {
             //判断是否为NDEF标签
             if (ndef == null) {
                 //当我们买回来的NFC标签是没有格式化的，或者没有分区的执行此步
-                val format = NdefFormatable.get(tag) ?: return Pair(false, "该标签非NDEF标签")
+                val format = NdefFormatable.get(tag) ?: return false to "该标签非NDEF标签"
                 //判断是否获得了NdefFormatAble对象，有一些标签是只读的或者不允许格式化的
                 format.connect()
                 //格式化并将信息写入标签
                 format.format(ndefMessage)
-                return Pair(true, "写入成功")
+                return true to "写入成功"
             }
             //判断是否支持可写
-            if (!ndef.isWritable) return Pair(false, "该标签不支持读写")
+            if (!ndef.isWritable) return false to "该标签不支持读写"
             //判断标签的容量是否够用
-            if (ndef.maxSize < size) return Pair(false, "该标签容量不足")
+            if (ndef.maxSize < size) return false to "该标签容量不足"
             //3.写入数据
             ndef.connect()
             ndef.writeNdefMessage(ndefMessage)
-            return Pair(true, "写入成功")
+            return true to "写入成功"
         } catch (e: Exception) {
             e.printStackTrace()
-            return Pair(true, "发生异常")
+            return true to "发生异常"
         }
     }
 }

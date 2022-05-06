@@ -22,14 +22,14 @@ object SchemeUtils {
     }
 
     fun openTaoBaoApp(context: Context, url: String): Pair<Intent?, Int> {
-        if (url.isEmpty()) return Pair(null, NONE)
+        if (url.isEmpty()) return null to NONE
         return if (context.hasInstalled("com.taobao.taobao")) {
             val intent = Intent()
             intent.action = "android.intent.action.VIEW"
             val uri = Uri.parse(url)
             intent.data = uri
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            Pair(intent, SUCCESS)
-        } else Pair(null, Result.NO_INSTALL)
+            intent to SUCCESS
+        } else null to Result.NO_INSTALL
     }
 }

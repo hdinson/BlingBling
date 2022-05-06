@@ -15,4 +15,6 @@
         <attr name="shadowSrc" format="reference" />
         <attr name="shadowColor" format="color" />
     </declare-styleable>
+
+
 </resources>
