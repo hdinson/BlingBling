@@ -11,7 +11,7 @@ import dinson.customview.kotlin.logi
 import dinson.customview.model._027AvModel
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

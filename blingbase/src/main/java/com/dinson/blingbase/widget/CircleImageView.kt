@@ -1,6 +1,7 @@
 package com.dinson.blingbase.widget
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable

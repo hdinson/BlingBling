@@ -36,146 +36,155 @@ object CrashTool {
     private const val SHARED_PREFERENCES_FIELD_TIMESTAMP = "last_crash_timestamp"
     private val activityLog: Deque<String> = ArrayDeque(MAX_ACTIVITIES_IN_LOG)
 
-    @SuppressLint("StaticFieldLeak")
-    private var application: Application? = null
     private var config = CrashProfile()
     private var lastActivityCreated = WeakReference<Activity?>(null)
     private var lastActivityCreatedTimestamp = 0L
     private var isInBackground = true
 
     @RestrictTo(RestrictTo.Scope.LIBRARY)
-    fun install(context: Context?) {
+    fun install(context: Context) {
         try {
-            if (context == null) {
-                Log.e(TAG, "Install failed: context is null!")
-            } else {
-                //INSTALL!
-                val oldHandler = Thread.getDefaultUncaughtExceptionHandler()
-                if (oldHandler != null && oldHandler.javaClass.name.startsWith(TAM_HANDLER_PACKAGE_NAME)) {
-                    Log.v(TAG, "CrashTool was already installed, doing nothing!")
-                } else {
-                    if (oldHandler != null && !oldHandler.javaClass.name.startsWith(DEFAULT_HANDLER_PACKAGE_NAME)) {
-                        Log.w(TAG, "IMPORTANT WARNING! You already have an UncaughtExceptionHandler")
-                    }
-                    application = context.applicationContext as Application
-                    Thread.setDefaultUncaughtExceptionHandler(Thread.UncaughtExceptionHandler { thread, throwable ->
-                        if (config.isEnabled()) {
-                            Log.e(TAG, "App has crashed, executing TCrashTool's UncaughtExceptionHandler")
-                            if (hasCrashedInTheLastSeconds(application!!)) {
-                                Log.e(TAG, "App already crashed recently, not starting custom error activity because we could enter a restart loop. Are you sure that your app does not crash directly on init?", throwable)
-                                if (oldHandler != null) {
-                                    oldHandler.uncaughtException(thread, throwable)
-                                    return@UncaughtExceptionHandler
-                                }
-                            } else {
-                                setLastCrashTimestamp(application!!, Date().time)
-                                var errorActivityClass = config.getErrorActivityClass()
-                                if (errorActivityClass == null) {
-                                    errorActivityClass = guessErrorActivityClass(application!!)
-                                }
-                                if (isStackTraceLikelyConflictive(throwable, errorActivityClass)) {
-                                    if (oldHandler != null) {
-                                        oldHandler.uncaughtException(thread, throwable)
-                                        return@UncaughtExceptionHandler
-                                    }
-                                } else if (config.getBackgroundMode() == CrashProfile.BACKGROUND_MODE_SHOW_CUSTOM || !isInBackground
-                                    || lastActivityCreatedTimestamp >= Date().time - TIME_TO_CONSIDER_FOREGROUND_MS) {
-                                    val intent = Intent(application, errorActivityClass)
-                                    val sw = StringWriter()
-                                    val pw = PrintWriter(sw)
-                                    throwable.printStackTrace(pw)
-                                    var stackTraceString = sw.toString()
-
-                                    if (stackTraceString.length > MAX_STACK_TRACE_SIZE) {
-                                        val disclaimer = " [stack trace too large]"
-                                        stackTraceString = stackTraceString.substring(0, MAX_STACK_TRACE_SIZE - disclaimer.length) + disclaimer
-                                    }
-                                    intent.putExtra(EXTRA_STACK_TRACE, stackTraceString)
-                                    if (config.isTrackActivities()) {
-                                        val activityLogStringBuilder = StringBuilder()
-                                        while (!activityLog.isEmpty()) {
-                                            activityLogStringBuilder.append(activityLog.poll())
-                                        }
-                                        intent.putExtra(EXTRA_ACTIVITY_LOG, activityLogStringBuilder.toString())
-                                    }
-                                    if (config.isShowRestartButton() && config.getRestartActivityClass() == null) {
-                                        config.setRestartActivityClass(guessRestartActivityClass(application!!))
-                                    }
-                                    intent.putExtra(EXTRA_CONFIG, config)
-                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    if (config.getEventListener() != null) {
-                                        config.getEventListener()!!.onLaunchErrorActivity()
-                                    }
-                                    Log.e("test","开启错误布局")
-                                    application!!.startActivity(intent)
-                                } else if (config.getBackgroundMode() == CrashProfile.BACKGROUND_MODE_CRASH) {
-                                    if (oldHandler != null) {
-                                        oldHandler.uncaughtException(thread, throwable)
-                                        return@UncaughtExceptionHandler
-                                    }
-                                }
-                            }
-                            val lastActivity = lastActivityCreated.get()
-                            if (lastActivity != null) {
-                                lastActivity.finish()
-                                lastActivityCreated.clear()
-                            }
-                            killCurrentProcess()
-                        } else oldHandler?.uncaughtException(thread, throwable)
-                    })
-                    application!!.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-                        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
-                        var currentlyStartedActivities = 0
-
-                        override fun onActivityCreated(activity: Activity, p1: Bundle?) {
-                            if (activity.javaClass != config.getErrorActivityClass()) {
-                                lastActivityCreated = WeakReference(activity)
-                                lastActivityCreatedTimestamp = Date().time
-                            }
-                            if (config.isTrackActivities()) {
-                                activityLog.add("""${dateFormat.format(Date())}: ${activity.javaClass.simpleName} created
-""")
-                            }
-                        }
-
-                        override fun onActivityStarted(act: Activity) {
-                            currentlyStartedActivities++
-                            isInBackground = currentlyStartedActivities == 0
-                            //Do nothing
-                        }
-
-                        override fun onActivityResumed(activity: Activity) {
-                            if (config.isTrackActivities()) {
-                                activityLog.add("""${dateFormat.format(Date())}: ${activity.javaClass.simpleName} resumed
-""")
-                            }
-                        }
-
-                        override fun onActivityPaused(activity: Activity) {
-                            if (config.isTrackActivities()) {
-                                activityLog.add("""${dateFormat.format(Date())}: ${activity.javaClass.simpleName} paused
-""")
-                            }
-                        }
-
-                        override fun onActivityStopped(activity: Activity) {
-                            currentlyStartedActivities--
-                            isInBackground = currentlyStartedActivities == 0
-                        }
-
-                        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-                        }
-
-                        override fun onActivityDestroyed(activity: Activity) {
-                            if (config.isTrackActivities()) {
-                                activityLog.add("""${dateFormat.format(Date())}: ${activity.javaClass.simpleName} destroyed
-""")
-                            }
-                        }
-                    })
-                }
-                Log.v(TAG, "CrashTool has been installed.")
+            val oldH = Thread.getDefaultUncaughtExceptionHandler()
+            if (oldH != null && oldH.javaClass.name.startsWith(TAM_HANDLER_PACKAGE_NAME)) {
+                Log.v(TAG, "CrashTool was already installed, doing nothing!")
+                return
             }
+            if (oldH != null && !oldH.javaClass.name.startsWith(DEFAULT_HANDLER_PACKAGE_NAME)) {
+                Log.w(TAG, "IMPORTANT WARNING! You already have an UncaughtExceptionHandler")
+            }
+            val application = context.applicationContext as Application
+            Thread.setDefaultUncaughtExceptionHandler(Thread.UncaughtExceptionHandler { thread, throwable ->
+                if (config.isEnabled()) {
+                    Log.e(TAG, "App has crashed, executing TCrashTool's UncaughtExceptionHandler")
+                    if (hasCrashedInTheLastSeconds(application)) {
+                        Log.e(
+                            TAG,
+                            "App already crashed recently, not starting custom error activity because we could enter a restart loop. Are you sure that your app does not crash directly on init?",
+                            throwable
+                        )
+                        if (oldH != null) {
+                            oldH.uncaughtException(thread, throwable)
+                            return@UncaughtExceptionHandler
+                        }
+                    } else {
+                        setLastCrashTimestamp(application, Date().time)
+                        var errorActivityClass = config.getErrorActivityClass()
+                        if (errorActivityClass == null) {
+                            errorActivityClass = guessErrorActivityClass(application)
+                        }
+                        if (isStackTraceLikelyConflictive(throwable, errorActivityClass)) {
+                            if (oldH != null) {
+                                oldH.uncaughtException(thread, throwable)
+                                return@UncaughtExceptionHandler
+                            }
+                        } else if (config.getBackgroundMode() == CrashProfile.BACKGROUND_MODE_SHOW_CUSTOM || !isInBackground
+                            || lastActivityCreatedTimestamp >= Date().time - TIME_TO_CONSIDER_FOREGROUND_MS
+                        ) {
+                            val intent = Intent(application, errorActivityClass)
+                            val sw = StringWriter()
+                            val pw = PrintWriter(sw)
+                            throwable.printStackTrace(pw)
+                            var stackTraceString = sw.toString()
+
+                            if (stackTraceString.length > MAX_STACK_TRACE_SIZE) {
+                                val disclaimer = " [stack trace too large]"
+                                stackTraceString = stackTraceString.substring(
+                                    0, MAX_STACK_TRACE_SIZE - disclaimer.length
+                                ) + disclaimer
+                            }
+                            intent.putExtra(EXTRA_STACK_TRACE, stackTraceString)
+                            if (config.isTrackActivities()) {
+                                val activityLogStringBuilder = StringBuilder()
+                                while (!activityLog.isEmpty()) {
+                                    activityLogStringBuilder.append(activityLog.poll())
+                                }
+                                intent.putExtra(
+                                    EXTRA_ACTIVITY_LOG,
+                                    activityLogStringBuilder.toString()
+                                )
+                            }
+                            if (config.isShowRestartButton() && config.getRestartActivityClass() == null) {
+                                config.setRestartActivityClass(guessRestartActivityClass(application!!))
+                            }
+                            intent.putExtra(EXTRA_CONFIG, config)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                            if (config.getEventListener() != null) {
+                                config.getEventListener()!!.onLaunchErrorActivity()
+                            }
+                            Log.e("test", "开启错误布局")
+                            application.startActivity(intent)
+                        } else if (config.getBackgroundMode() == CrashProfile.BACKGROUND_MODE_CRASH) {
+                            if (oldH != null) {
+                                oldH.uncaughtException(thread, throwable)
+                                return@UncaughtExceptionHandler
+                            }
+                        }
+                    }
+                    val lastActivity = lastActivityCreated.get()
+                    if (lastActivity != null) {
+                        lastActivity.finish()
+                        lastActivityCreated.clear()
+                    }
+                    killCurrentProcess()
+                } else oldH?.uncaughtException(thread, throwable)
+            })
+            application.registerActivityLifecycleCallbacks(object :
+                Application.ActivityLifecycleCallbacks {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                var currentlyStartedActivities = 0
+
+                override fun onActivityCreated(activity: Activity, p1: Bundle?) {
+                    if (activity.javaClass != config.getErrorActivityClass()) {
+                        lastActivityCreated = WeakReference(activity)
+                        lastActivityCreatedTimestamp = Date().time
+                    }
+                    if (config.isTrackActivities()) {
+                        activityLog.add(
+                            "${dateFormat.format(Date())}: ${activity.javaClass.simpleName} created"
+                        )
+                    }
+                }
+
+                override fun onActivityStarted(act: Activity) {
+                    currentlyStartedActivities++
+                    isInBackground = currentlyStartedActivities == 0
+                    //Do nothing
+                }
+
+                override fun onActivityResumed(activity: Activity) {
+                    if (config.isTrackActivities()) {
+                        activityLog.add(
+                            "${dateFormat.format(Date())}: ${activity.javaClass.simpleName} resumed"
+                        )
+                    }
+                }
+
+                override fun onActivityPaused(activity: Activity) {
+                    if (config.isTrackActivities()) {
+                        activityLog.add(
+                            "${dateFormat.format(Date())}: ${activity.javaClass.simpleName} paused"
+                        )
+                    }
+                }
+
+                override fun onActivityStopped(activity: Activity) {
+                    currentlyStartedActivities--
+                    isInBackground = currentlyStartedActivities == 0
+                }
+
+                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+                }
+
+                override fun onActivityDestroyed(activity: Activity) {
+                    if (config.isTrackActivities()) {
+                        activityLog.add(
+                            "${dateFormat.format(Date())}: ${activity.javaClass.simpleName} destroyed"
+                        )
+                    }
+                }
+            })
+            Log.v(TAG, "CrashTool has been installed.")
         } catch (t: Throwable) {
             Log.e(TAG, "An unknown error occurred while installing CrashTool")
             Log.e(TAG, t.toString())
@@ -199,10 +208,12 @@ object CrashTool {
         if (config.isLogErrorOnRestart()) {
             val stackTrace = getStackTraceFromIntent(intent)
             if (stackTrace != null) {
-                Log.e(TAG, """
+                Log.e(
+                    TAG, """
      The previous app process crashed. This is the stack trace of the crash:
      ${getStackTraceFromIntent(intent)}
-     """.trimIndent())
+     """.trimIndent()
+                )
             }
         }
         return config
@@ -278,7 +289,10 @@ object CrashTool {
     }
 
 
-    private fun isStackTraceLikelyConflictive(throwable: Throwable, activityClass: Class<out Activity?>): Boolean {
+    private fun isStackTraceLikelyConflictive(
+        throwable: Throwable,
+        activityClass: Class<out Activity?>
+    ): Boolean {
         var tempThrow = throwable
         var process: String?
         try {
@@ -363,15 +377,22 @@ object CrashTool {
 
 
     private fun getRestartActivityClassWithIntentFilter(context: Context): Class<out Activity>? {
-        val searchedIntent = Intent().setAction(INTENT_ACTION_RESTART_ACTIVITY).setPackage(context.packageName)
-        val resolveInfos = context.packageManager.queryIntentActivities(searchedIntent,
-            PackageManager.GET_RESOLVED_FILTER)
+        val searchedIntent =
+            Intent().setAction(INTENT_ACTION_RESTART_ACTIVITY).setPackage(context.packageName)
+        val resolveInfos = context.packageManager.queryIntentActivities(
+            searchedIntent,
+            PackageManager.GET_RESOLVED_FILTER
+        )
         if (resolveInfos.size > 0) {
             val resolveInfo = resolveInfos[0]
             try {
                 return Class.forName(resolveInfo.activityInfo.name) as Class<out Activity>
             } catch (e: ClassNotFoundException) {
-                Log.e(TAG, "Failed when resolving the restart activity class via intent filter, stack trace follows!", e)
+                Log.e(
+                    TAG,
+                    "Failed when resolving the restart activity class via intent filter, stack trace follows!",
+                    e
+                )
             }
         }
         return null
@@ -384,7 +405,11 @@ object CrashTool {
             try {
                 return Class.forName(intent.component!!.className) as Class<out Activity?>
             } catch (e: ClassNotFoundException) {
-                Log.e(TAG, "Failed when resolving the restart activity class via getLaunchIntentForPackage, stack trace follows!", e)
+                Log.e(
+                    TAG,
+                    "Failed when resolving the restart activity class via getLaunchIntentForPackage, stack trace follows!",
+                    e
+                )
             }
         }
         return null
@@ -396,15 +421,22 @@ object CrashTool {
     }
 
     private fun getErrorActivityClassWithIntentFilter(context: Context): Class<out Activity?>? {
-        val searchedIntent = Intent().setAction(INTENT_ACTION_ERROR_ACTIVITY).setPackage(context.packageName)
-        val resolveInfos = context.packageManager.queryIntentActivities(searchedIntent,
-            PackageManager.GET_RESOLVED_FILTER)
+        val searchedIntent =
+            Intent().setAction(INTENT_ACTION_ERROR_ACTIVITY).setPackage(context.packageName)
+        val resolveInfos = context.packageManager.queryIntentActivities(
+            searchedIntent,
+            PackageManager.GET_RESOLVED_FILTER
+        )
         if (resolveInfos.size > 0) {
             val resolveInfo = resolveInfos[0]
             try {
                 return Class.forName(resolveInfo.activityInfo.name) as Class<out Activity>
             } catch (e: ClassNotFoundException) {
-                Log.e(TAG, "Failed when resolving the error activity class via intent filter, stack trace follows!", e)
+                Log.e(
+                    TAG,
+                    "Failed when resolving the error activity class via intent filter, stack trace follows!",
+                    e
+                )
             }
         }
         return null
@@ -417,11 +449,13 @@ object CrashTool {
 
     @SuppressLint("ApplySharedPref")
     private fun setLastCrashTimestamp(context: Context, timestamp: Long) {
-        context.getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE).edit().putLong(SHARED_PREFERENCES_FIELD_TIMESTAMP, timestamp).commit()
+        context.getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE).edit()
+            .putLong(SHARED_PREFERENCES_FIELD_TIMESTAMP, timestamp).commit()
     }
 
     private fun getLastCrashTimestamp(context: Context): Long {
-        return context.getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE).getLong(SHARED_PREFERENCES_FIELD_TIMESTAMP, -1)
+        return context.getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE)
+            .getLong(SHARED_PREFERENCES_FIELD_TIMESTAMP, -1)
     }
 
     private fun hasCrashedInTheLastSeconds(context: Context): Boolean {

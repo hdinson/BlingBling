@@ -13,7 +13,6 @@ import java.io.EOFException
 import java.io.IOException
 import java.lang.Exception
 import java.nio.charset.Charset
-import java.nio.charset.StandardCharsets
 
 class Printer private constructor() {
     companion object {
@@ -107,18 +106,14 @@ class Printer private constructor() {
                         }
                     }
 
-                    val contentType = responseBody.contentType()
-                    val charset = contentType?.charset(StandardCharsets.UTF_8)
-                        ?: StandardCharsets.UTF_8
-
                     if (!buffer.isProbablyUtf8()) {
                         return "End request - binary ${buffer.size()}:byte body omitted"
                     }
 
                     if (contentLength != 0L) {
                         return if (builder.isNeedFormatJson) {
-                            getJsonString(buffer.clone().readString(charset))
-                        } else buffer.clone().readString(charset)
+                            getJsonString(buffer.clone().readString(Charset.forName("UTF-8")))
+                        } else buffer.clone().readString(Charset.forName("UTF-8"))
                     }
 
                     return if (gzippedLength != null) {
@@ -158,20 +153,16 @@ class Printer private constructor() {
         private fun bodyToString(requestBody: RequestBody?, headers: Headers): String {
             return requestBody?.let {
                 return try {
-                    when {
+                    return when {
                         bodyHasUnknownEncoding(headers) -> {
-                            return "encoded body omitted)"
+                            "encoded body omitted)"
                         }
                         else -> {
                             val buffer = Buffer()
                             requestBody.writeTo(buffer)
 
-                            val contentType = requestBody.contentType()
-                            val charset: Charset = contentType?.charset(StandardCharsets.UTF_8)
-                                ?: StandardCharsets.UTF_8
-
-                            return if (buffer.isProbablyUtf8()) {
-                                getJsonString(buffer.readString(charset)) + LINE_SEPARATOR + "${requestBody.contentLength()}-byte body"
+                            if (buffer.isProbablyUtf8()) {
+                                getJsonString(buffer.readString(Charset.forName("UTF-8"))) + LINE_SEPARATOR + "${requestBody.contentLength()}-byte body"
                             } else {
                                 "binary ${requestBody.contentLength()}-byte body omitted"
                             }

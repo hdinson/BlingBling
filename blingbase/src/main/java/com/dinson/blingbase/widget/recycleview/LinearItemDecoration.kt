@@ -2,114 +2,361 @@ package com.dinson.blingbase.widget.recycleview
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.annotation.RestrictTo
+import androidx.annotation.StringDef
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+
 
 /**
  * 线性布局分割线
  */
-class LinearItemDecoration(context: Context) : ItemDecoration() {
-    private var mPaint: Paint?
-    private var mDivider: Drawable? = null
-    private var mDividerHeight = 2 //分割线高度，默认为2px
-    private val mOrientation = LinearLayoutManager.VERTICAL //列表的方向：LinearLayoutManager.VERTICAL或LinearLayoutManager.HORIZONTAL = 0
+class LinearItemDecoration(private val b: Builder) : RecyclerView.ItemDecoration() {
 
-    /**
-     * 自定义图片分割线
-     *
-     * @param context    context
-     * @param drawableId 图片id
-     */
-    constructor(context: Context, @DrawableRes drawableId: Int) : this(context) {
-        mDivider = ContextCompat.getDrawable(context, drawableId)
-        mDividerHeight = mDivider!!.intrinsicHeight
+    override fun getItemOffsets(o: Rect, view: View, rv: RecyclerView, state: RecyclerView.State) {
+        val poi = rv.getChildAdapterPosition(view)
+        val c = rv.adapter?.itemCount ?: 0
+        val manager = rv.layoutManager
+        if (manager !is LinearLayoutManager) {
+            throw  IllegalArgumentException("LinearItemDecoration only used on LinearLayout.");
+        }
+
+        if (manager.orientation == LinearLayoutManager.VERTICAL) {
+            val childType: Int = rv.layoutManager?.getItemViewType(view) ?: 0
+            val dLeft = b.getMapLeft()[childType]
+            val dTop = b.getMapTop()[childType]
+            val dRight = b.getMapRight()[childType]
+            val dBottom = b.getMapBottom()[childType]
+
+            //垂直方向的RecycleView，上下都有图片的情况下，不显示上边的图片
+            when {
+                dBottom != null -> {
+                    o.top = getStartDrawableSize(true, poi)
+                    val tEnd = getEndDrawableSize(true, poi, c)
+                    o.bottom = if (dBottom.second == 0) dBottom.first.intrinsicHeight + tEnd
+                    else dBottom.second + tEnd
+                }
+                dTop != null -> {
+                    o.bottom = getEndDrawableSize(true, poi, c)
+                    val tStart = getStartDrawableSize(true, poi)
+                    o.top = if (dTop.second == 0) dTop.first.intrinsicHeight + tStart
+                    else dTop.second + tStart
+                }
+                else -> {
+                    o.top = getStartDrawableSize(true, poi)
+                    o.bottom = getEndDrawableSize(true, poi, c)
+                }
+            }
+            if (dLeft != null) {
+                o.left = if (dLeft.second == 0) dLeft.first.intrinsicWidth else dLeft.second
+            }
+            if (dRight != null) {
+                o.right =
+                    if (dRight.second == 0) dRight.first.intrinsicWidth else dRight.second
+            }
+        } else {
+            val childType: Int = rv.layoutManager?.getItemViewType(view) ?: 0
+            val dLeft = b.getMapLeft()[childType]
+            val dTop = b.getMapTop()[childType]
+            val dRight = b.getMapRight()[childType]
+            val dBottom = b.getMapBottom()[childType]
+
+            //水平方向的RecycleView，左右都有图片的情况下，不显示左边的图片
+            when {
+                dRight != null -> {
+                    o.left = getStartDrawableSize(false, poi)
+                    val tEnd = getEndDrawableSize(false, poi, c)
+                    o.right = if (dRight.second == 0) dRight.first.intrinsicWidth + tEnd
+                    else dRight.second + tEnd
+                }
+                dLeft != null -> {
+                    o.right = getEndDrawableSize(false, poi, c)
+                    val tStart = getStartDrawableSize(false, poi)
+                    o.left = if (dLeft.second == 0) dLeft.first.intrinsicWidth + tStart
+                    else dLeft.second + tStart
+                }
+                else -> {
+                    o.left = getStartDrawableSize(false, poi)
+                    o.right = getEndDrawableSize(false, poi, c)
+                }
+            }
+            if (dTop != null) {
+                o.top = if (dTop.second == 0) dTop.first.intrinsicHeight else dTop.second
+            }
+            if (dBottom != null) {
+                o.bottom =
+                    if (dBottom.second == 0) dBottom.first.intrinsicHeight else dBottom.second
+            }
+        }
     }
 
-    /**
-     * 自定义分割线
-     *
-     * @param context       context
-     * @param dividerHeight 分割线高度--px
-     * @param dividerColor  分割线颜色
-     */
-    @JvmOverloads
-    constructor(context: Context, dividerHeight: Float, dividerColor: Int = Color.parseColor("EEEEEE")) : this(context) {
-        mDividerHeight = dividerHeight.toInt()
-        mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        mPaint!!.color = dividerColor
-        mPaint!!.style = Paint.Style.FILL
+
+    private fun getStartDrawableSize(isV: Boolean, poi: Int): Int {
+        return when {
+            poi != 0 -> 0
+            b.getStartDrawable() == null -> 0
+            b.getStartDrawable()!!.second != 0 -> b.getStartDrawable()!!.second
+            else -> {
+                val first = b.getStartDrawable()!!.first
+                if (isV) first.intrinsicHeight else first.intrinsicWidth
+            }
+        }
     }
 
-    //获取分割线尺寸
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        super.getItemOffsets(outRect, view, parent, state)
-        outRect[0, 0, 0] = mDividerHeight
+    private fun getEndDrawableSize(isV: Boolean, poi: Int, c: Int): Int {
+        return when {
+            poi != c - 1 -> 0
+            b.getEndDrawable() == null -> 0
+            b.getEndDrawable()!!.second != 0 -> b.getEndDrawable()!!.second
+            else -> {
+                val first = b.getEndDrawable()!!.first
+                if (isV) first.intrinsicHeight else first.intrinsicWidth
+            }
+        }
     }
 
-    //绘制分割线
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        super.onDraw(c, parent, state)
-        if (mOrientation == LinearLayoutManager.VERTICAL) {
+        val manager = parent.layoutManager
+        if (manager !is LinearLayoutManager) return
+        if (manager.orientation == LinearLayoutManager.VERTICAL) {
             drawVertical(c, parent)
         } else {
             drawHorizontal(c, parent)
         }
     }
 
-    //绘制横向 item 分割线
-    private fun drawHorizontal(canvas: Canvas, parent: RecyclerView) {
-        val left = parent.paddingLeft
-        val right = parent.measuredWidth - parent.paddingRight
-        val childSize = parent.childCount
-        for (i in 0 until childSize) {
+
+    private fun drawVertical(c: Canvas, parent: RecyclerView) {
+        val manager = parent.layoutManager ?: return
+        val leftO: Int = parent.paddingLeft
+        val rightO: Int = parent.width - parent.paddingRight
+
+        for (i in 0 until parent.childCount) {
             val child = parent.getChildAt(i)
-            val layoutParams = child.layoutParams as RecyclerView.LayoutParams
-            val top = child.bottom + layoutParams.bottomMargin
-            val bottom = top + mDividerHeight
-            if (mDivider != null) {
-                mDivider!!.setBounds(left, top, right, bottom)
-                mDivider!!.draw(canvas)
+            val childViewType = manager.getItemViewType(child)
+            val params = child.layoutParams as RecyclerView.LayoutParams
+            val poi = parent.getChildAdapterPosition(child)
+            val itemCount = parent.adapter?.itemCount ?: 0
+
+            val tStart = getStartDrawableSize(true, poi)
+            val sLeft = manager.getLeftDecorationWidth(child)
+            val sTop = manager.getTopDecorationHeight(child) - tStart
+            val sRight = manager.getRightDecorationWidth(child)
+            val tEnd = getEndDrawableSize(true, poi, itemCount)
+            val sBottom = manager.getBottomDecorationHeight(child) - tEnd
+
+            val bottomD = b.getMapBottom()[childViewType]
+            if (bottomD != null) {
+                val tTop = child.bottom + params.bottomMargin
+                val tBottom = tTop + sBottom
+                bottomD.first.setBounds(child.left, tTop, child.right, tBottom)
+                bottomD.first.draw(c)
             }
-            if (mPaint != null) {
-                canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), mPaint!!)
+            val topD = b.getMapTop()[childViewType]
+            if (topD != null) {
+                val tBottom = child.top - params.topMargin
+                val tTop = tBottom - sTop
+                topD.first.setBounds(child.left, tTop, child.right, tBottom)
+                topD.first.draw(c)
+            }
+            val rightD = b.getMapRight()[childViewType]
+            if (rightD != null) {
+                val tLeft = child.right + params.rightMargin
+                val tRight = tLeft + sRight
+                rightD.first.setBounds(
+                    tLeft, child.top - sTop - params.topMargin,
+                    tRight, child.bottom + sBottom + params.bottomMargin
+                )
+                rightD.first.draw(c)
+            }
+            val leftD = b.getMapLeft()[childViewType]
+            if (leftD != null) {
+                val tRight = child.left - params.leftMargin
+                val tLeft = tRight - sLeft
+                leftD.first.setBounds(
+                    tLeft, child.top - sTop - params.topMargin,
+                    tRight, child.bottom + sBottom + params.bottomMargin
+                )
+                leftD.first.draw(c)
+            }
+
+            if (poi == 0 && b.getStartDrawable() != null) {
+                val first = b.getStartDrawable()!!.first
+                val tBottom = child.top - params.topMargin - sTop
+                val tTop = tBottom - tStart
+                first.setBounds(leftO, tTop, rightO, tBottom)
+                first.draw(c)
+            }
+            if (poi == itemCount - 1 && b.getEndDrawable() != null) {
+                val first = b.getEndDrawable()!!.first
+                val tTop = child.bottom + params.bottomMargin + sBottom
+                val tBottom = tTop + tEnd
+                first.setBounds(leftO, tTop, rightO, tBottom)
+                first.draw(c)
             }
         }
     }
 
-    //绘制纵向 item 分割线
-    private fun drawVertical(canvas: Canvas, parent: RecyclerView) {
-        val top = parent.paddingTop
-        val bottom = parent.measuredHeight - parent.paddingBottom
-        val childSize = parent.childCount
-        for (i in 0 until childSize) {
+    private fun drawHorizontal(c: Canvas, parent: RecyclerView) {
+        val manager = parent.layoutManager ?: return
+
+        for (i in 0 until parent.childCount) {
             val child = parent.getChildAt(i)
-            val layoutParams = child.layoutParams as RecyclerView.LayoutParams
-            val left = child.right + layoutParams.rightMargin
-            val right = left + mDividerHeight
-            if (mDivider != null) {
-                mDivider!!.setBounds(left, top, right, bottom)
-                mDivider!!.draw(canvas)
+            val childViewType = manager.getItemViewType(child)
+            val params = child.layoutParams as RecyclerView.LayoutParams
+            val poi = parent.getChildAdapterPosition(child)
+            val itemCount = parent.adapter?.itemCount ?: 0
+
+
+            val tStart = getStartDrawableSize(false, poi)
+            val sLeft = manager.getLeftDecorationWidth(child) - tStart
+            val sTop = manager.getTopDecorationHeight(child)
+            val tEnd = getEndDrawableSize(false, poi, itemCount)
+            val sRight = manager.getRightDecorationWidth(child) - tEnd
+            val sBottom = manager.getBottomDecorationHeight(child)
+
+
+            val rightD = b.getMapRight()[childViewType]
+            if (rightD != null) {
+                val tLeft = child.right + params.rightMargin
+                val tRight = tLeft + sRight
+                rightD.first.setBounds(tLeft, child.top, tRight, child.bottom)
+                rightD.first.draw(c)
             }
-            if (mPaint != null) {
-                canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), mPaint!!)
+            val leftD = b.getMapLeft()[childViewType]
+            if (leftD != null) {
+                val tRight = child.left - params.leftMargin
+                val tLeft = tRight - sLeft
+                leftD.first.setBounds(tLeft, child.top, tRight, child.bottom)
+                leftD.first.draw(c)
+            }
+            val topD = b.getMapTop()[childViewType]
+            if (topD != null) {
+                val tBottom = child.top - params.topMargin
+                val tTop = tBottom - sTop
+                topD.first.setBounds(
+                    child.left - sLeft - params.leftMargin, tTop,
+                    child.right + sRight + params.rightMargin, tBottom
+                )
+                topD.first.draw(c)
+            }
+            val bottomD = b.getMapBottom()[childViewType]
+            if (bottomD != null) {
+                val tTop = child.bottom + params.bottomMargin
+                val tBottom = tTop + sBottom
+                bottomD.first.setBounds(
+                    child.left - sLeft - params.leftMargin, tTop,
+                    child.right + sRight + params.rightMargin, tBottom
+                )
+                bottomD.first.draw(c)
+            }
+
+            if (poi == 0 && b.getStartDrawable() != null) {
+                val first = b.getStartDrawable()!!.first
+                val tRight = child.left - params.leftMargin - sLeft
+                val tLeft = tRight - tStart
+                first.setBounds(tLeft, child.top - sTop, tRight, child.bottom + sBottom)
+                first.draw(c)
+            }
+            if (poi == itemCount - 1 && b.getEndDrawable() != null) {
+                val first = b.getEndDrawable()!!.first
+                val tLeft = child.right + params.rightMargin + sRight
+                val tRight = tLeft + tEnd
+                first.setBounds(tLeft, child.top - sTop, tRight, child.bottom + sBottom)
+                first.draw(c)
             }
         }
     }
-    //private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
-    /**
-     * 默认分割线：高度为2px，颜色为灰色
-     */
-    init {
-        mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        mPaint!!.color = Color.parseColor("#EEEEEE")
-        mPaint!!.style = Paint.Style.FILL
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP_PREFIX)
+    @StringDef(Direction.TOP, Direction.LEFT, Direction.RIGHT, Direction.BOTTOM)
+    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+    annotation class Direction {
+        companion object {
+            const val LEFT = "left"
+            const val TOP = "top"
+            const val RIGHT = "right"
+            const val BOTTOM = "bottom"
+        }
+    }
+
+    class Builder(val context: Context) {
+
+        private val mDividerViewTypeMapTop = HashMap<Int, Pair<Drawable, Int>>()
+        private val mDividerViewTypeMapRight = HashMap<Int, Pair<Drawable, Int>>()
+        private val mDividerViewTypeMapLeft = HashMap<Int, Pair<Drawable, Int>>()
+        private val mDividerViewTypeMapBottom = HashMap<Int, Pair<Drawable, Int>>()
+        private var mStartDrawable: Pair<Drawable, Int>? = null
+        private var mEndDrawable: Pair<Drawable, Int>? = null
+
+        internal fun getStartDrawable() = mStartDrawable
+        internal fun getEndDrawable() = mEndDrawable
+        internal fun getMapTop() = mDividerViewTypeMapTop
+        internal fun getMapRight() = mDividerViewTypeMapRight
+        internal fun getMapLeft() = mDividerViewTypeMapLeft
+        internal fun getMapBottom() = mDividerViewTypeMapBottom
+
+
+        fun start(@DrawableRes id: Int, spacePx: Int = 0): Builder {
+            ContextCompat.getDrawable(context, id)?.apply {
+                mStartDrawable = Pair(this, spacePx)
+            }
+            return this
+        }
+
+        fun start(drawable: Drawable, spacePx: Int = 0) {
+            mStartDrawable = Pair(drawable, spacePx)
+        }
+
+        fun end(@DrawableRes id: Int, spacePx: Int = 0): Builder {
+            ContextCompat.getDrawable(context, id)?.apply {
+                mEndDrawable = Pair(this, spacePx)
+            }
+            return this
+        }
+
+        fun end(drawable: Drawable, spacePx: Int = 0) {
+            mEndDrawable = Pair(drawable, spacePx)
+        }
+
+
+        fun type(
+            @Direction direction: String,
+            @DrawableRes id: Int,
+            spacePx: Int = 0, viewType: Int = 0
+        ): Builder {
+            ContextCompat.getDrawable(context, id)?.apply {
+                putToMap(viewType, direction, this, spacePx)
+            }
+            return this
+        }
+
+
+        fun type(
+            @Direction direction: String,
+            drawable: Drawable,
+            spacePx: Int = 0, viewType: Int = 0
+        ): Builder {
+            putToMap(viewType, direction, drawable, spacePx)
+            return this
+        }
+
+        private fun putToMap(vt: Int, @Direction dr: String, drawable: Drawable, px: Int) {
+            when (dr) {
+                Direction.LEFT -> mDividerViewTypeMapLeft[vt] = Pair(drawable, px)
+                Direction.TOP -> mDividerViewTypeMapTop[vt] = Pair(drawable, px)
+                Direction.RIGHT -> mDividerViewTypeMapRight[vt] = Pair(drawable, px)
+                Direction.BOTTOM -> mDividerViewTypeMapBottom[vt] = Pair(drawable, px)
+            }
+        }
+
+        fun build(): LinearItemDecoration {
+            return LinearItemDecoration(this)
+        }
     }
 }

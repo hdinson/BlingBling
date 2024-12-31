@@ -1,5 +1,6 @@
 package dinson.customview.db
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.dinson.blingbase.RxBling
 import dinson.customview.db.model.DaoMaster
@@ -9,11 +10,18 @@ import dinson.customview.db.model.SearchHistory027Dao
 /**
  * app数据库相关工具类
  */
-object SearchHistory027DbUtils {
+class SearchHistory027DbUtils private constructor(var openHelper:DaoMaster.DevOpenHelper) {
 
-    private val openHelper by lazy {
-        DaoMaster.DevOpenHelper(RxBling.context, "History027", null)
+    companion object {
+        @Volatile
+        private var instance: SearchHistory027DbUtils? = null
+
+        fun getInstance(ctx: Context) =
+            instance ?: synchronized(this) {
+                instance ?: SearchHistory027DbUtils(DaoMaster.DevOpenHelper(ctx, "History027", null))
+            }
     }
+
 
     /**
      * 获取可读数据库
@@ -38,7 +46,9 @@ object SearchHistory027DbUtils {
      * 插入多条知乎吐槽数据
      */
     fun insertMultiHistory(historyList: List<SearchHistory027>) {
-        DaoMaster(getWritableDatabase()).newSession().searchHistory027Dao.insertOrReplaceInTx(historyList)
+        DaoMaster(getWritableDatabase()).newSession().searchHistory027Dao.insertOrReplaceInTx(
+            historyList
+        )
     }
 
     /**

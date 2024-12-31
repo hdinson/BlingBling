@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape>
+            <size
+                android:width="44dp"
+                android:height="44dp" />
+            <solid android:color="#256EBD" />
+            <corners
+                android:bottomLeftRadius="4dp"
+                android:topLeftRadius="4dp" />
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/view_captcha_arrow_ic"
+        android:gravity="center">
+
+    </item>
+</layer-list>

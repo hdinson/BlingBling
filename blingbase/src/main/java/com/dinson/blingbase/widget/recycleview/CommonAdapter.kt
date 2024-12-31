@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * 单一布局通用数据适配器
  */
-abstract class CommonAdapter<T>(var mDataList: MutableList<T>) : RecyclerView.Adapter<CommonViewHolder>() {
+abstract class CommonAdapter<T>(private var clist: List<T>) :
+    RecyclerView.Adapter<CommonViewHolder>() {
     private val mViewHolder = SparseArray<CommonViewHolder>()
 
     /**
@@ -19,10 +20,10 @@ abstract class CommonAdapter<T>(var mDataList: MutableList<T>) : RecyclerView.Ad
     abstract fun convert(holder: CommonViewHolder, bean: T, position: Int)
 
     private fun getItem(position: Int): T {
-        return mDataList[position]
+        return clist[position]
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonViewHolder {
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonViewHolder {
         val layoutId = getLayoutId(viewType)
         return CommonViewHolder.getViewHolder(parent, layoutId)
     }
@@ -34,7 +35,7 @@ abstract class CommonAdapter<T>(var mDataList: MutableList<T>) : RecyclerView.Ad
     }
 
     override fun getItemCount(): Int {
-        return mDataList.size
+        return clist.size
     }
 
     fun getCommonViewHolder(position: Int): CommonViewHolder {

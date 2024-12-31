@@ -15,7 +15,6 @@ class MultiTypeAdapter(private val modelList: List<MultiType>, private val typeF
         holder.convert(holder, modelList[position], position)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MultiTypeViewHolder<MultiType> {
         val itemView = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return typeFactory.createViewHolder(viewType, itemView)

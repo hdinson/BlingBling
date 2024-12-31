@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription"/>
 
-    <dinson.customview.weight.IconFontTextView
+    <dinson.customview.widget.IconFontTextView
         style="@style/_021TopIcon"
         android:text="@string/if_share"
         android:textColor="@android:color/white"
@@ -28,7 +28,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <dinson.customview.weight.IconFontTextView
+    <dinson.customview.widget.IconFontTextView
         android:id="@id/tvBack"
         style="@style/_021TopIcon"
         android:text="@string/if_arrow_left"
@@ -76,7 +76,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
 
-    <dinson.customview.weight._021likesmileview.LikeSmileView
+    <dinson.customview.widget._021likesmileview.LikeSmileView
         android:id="@+id/likeSmile"
         android:layout_width="0dp"
         android:layout_height="0dp"

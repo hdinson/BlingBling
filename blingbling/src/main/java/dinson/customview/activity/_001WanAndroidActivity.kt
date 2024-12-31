@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.CheckBox
 import androidx.appcompat.view.menu.MenuBuilder
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
@@ -19,9 +19,9 @@ import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import dinson.customview.listener._001OnLikeViewClickListener
-import dinson.customview.weight.dialog.OnLoginSuccessListener
-import dinson.customview.weight.dialog._001LoginDialog
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.dialog.OnLoginSuccessListener
+import dinson.customview.widget.dialog._001LoginDialog
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__001_wan_android.*
 
 open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener {
@@ -126,7 +126,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 }
             }, {
                 likeView.toggle()
-                it.message?.toasty()
+                it.message?.toast()
                 loge{it.toString()}
             }).addToManaged()
     }
@@ -170,7 +170,7 @@ open class _001WanAndroidActivity : BaseActivity(), _001OnLikeViewClickListener 
                 initToolbarTitle()
                 flCustomRefreshView.isRefreshing = true
             } else {
-                errorMsg.toasty()
+                errorMsg.toast()
             }
         }
     }

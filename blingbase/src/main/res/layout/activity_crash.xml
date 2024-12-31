@@ -17,6 +17,8 @@
         android:layout_height="38dp"
         android:layout_marginTop="16dp"
         android:background="#52ba97"
+        android:clickable="true"
+        android:focusable="true"
         android:text="重新启动应用"
         android:textColor="#ffffff" />
 
@@ -28,6 +30,8 @@
         android:layout_marginTop="16dp"
         android:background="#eeeeee"
         android:text="关闭应用"
+        android:clickable="true"
+        android:focusable="true"
         android:textColor="#4B4B4B" />
 
 
@@ -45,6 +49,8 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:text="错误详细资料"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="#3F51B5" />
 
 

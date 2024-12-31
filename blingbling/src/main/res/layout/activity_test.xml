@@ -164,6 +164,10 @@
                     android:onClick="onOCR"
                     android:text="文本识别" />
 
+                <Button
+                    style="@style/TestBtn"
+                    android:onClick="onOpenTaobao"
+                    android:text="打开淘宝" />
 
             </LinearLayout>
 

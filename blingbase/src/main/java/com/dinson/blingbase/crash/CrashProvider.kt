@@ -4,11 +4,17 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
+import android.util.Log
 import com.dinson.blingbase.crash.CrashTool.install
 
 class CrashProvider : ContentProvider() {
+
     override fun onCreate(): Boolean {
-        install(context)
+        if (context == null) {
+            Log.e("CrashTool", "Install failed: context is null!")
+        }else{
+            install(context!!)
+        }
         return false
     }
 

@@ -43,10 +43,10 @@ public class TvShowResp {
          */
 
         private int showOrder = Integer.MAX_VALUE;
-        private String tvName;
-        private String tvUrl;
-        private String tvIcon;
-        private String updatedAt;
+        private String tvName="";
+        private String tvUrl="";
+        private String tvIcon="";
+        private String updatedAt="";
 
         public String getTvIcon() {
             return tvIcon;

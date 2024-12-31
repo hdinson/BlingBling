@@ -12,16 +12,16 @@ import com.bumptech.glide.Glide
 import dinson.customview.R
 import dinson.customview.adapter._003GankGirlsPicAdapter
 import dinson.customview.api.GankApi
-import dinson.customview.entity.gank.Welfare
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
 import dinson.customview.manager.GlideSimpleLoader
-import dinson.customview.weight._003weight.DecorationLayout
-import dinson.customview.weight.imagewatcher.ImageWatcherHelper
+import dinson.customview.widget._003weight.DecorationLayout
+import dinson.customview.widget.imagewatcher.ImageWatcherHelper
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.entity.gank.GankGirlImg
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.fragment_003_girl_pic_set.*
 
 /**
@@ -34,7 +34,7 @@ class _003GirlGankFragment : ViewPagerLazyFragment() {
     }
 
     private var mAdapter: _003GankGirlsPicAdapter? = null
-    private val mData = ArrayList<Welfare>()
+    private val mData = ArrayList<GankGirlImg>()
     private var mCurrentPage = 1
     private val mPageSize = 20
     private val mApi by lazy {
@@ -82,7 +82,7 @@ class _003GirlGankFragment : ViewPagerLazyFragment() {
         if (isRefresh) mCurrentPage = 1
         mApi.gankIOGirlsPic(mPageSize, mCurrentPage)
             .doOnNext { data ->
-                data.results.forEach {
+                data.data.forEach {
                     try {
                         val bitmap = Glide.with(this).asBitmap().load(it.url)
                             .submit().get()
@@ -99,10 +99,10 @@ class _003GirlGankFragment : ViewPagerLazyFragment() {
                 crfGirlsContent.complete()
                 if (isRefresh) mData.clear()
 
-                if (it.results == null || it.results.isEmpty())
+                if (it.data.isEmpty())
                     crfGirlsContent.onNoMore()
 
-                mData.addAll(it.results)
+                mData.addAll(it.data)
                 mAdapter?.notifyDataSetChanged()
                 mCurrentPage++
             }, {

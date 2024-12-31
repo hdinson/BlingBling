@@ -85,4 +85,48 @@
             <enum name="left_to_right" value="3" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="MaxLimitRecyclerView">
+        <attr name="mlMaxHeight" format="reference|dimension" />
+        <attr name="mlMaxWidth" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ArcLayout">
+        <attr name="alHeight" format="dimension" />
+        <attr name="alPosition">
+            <enum name="bottom" value="1" />
+            <enum name="top" value="2" />
+            <enum name="left" value="3" />
+            <enum name="right" value="4" />
+        </attr>
+        <attr name="alCropDirection" format="enum">
+            <enum name="cropInside" value="1" />
+            <enum name="cropOutside" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="DragCaptchaView">
+        <attr name="dcvSrc" format="reference" />
+        <attr name="dcvProgressDrawable" format="reference" />
+        <attr name="dcvThumbDrawable" format="reference" />
+        <attr name="dcvMode" format="enum">
+            <enum name="withBar" value="1" />
+            <enum name="withoutBar" value="2" />
+        </attr>
+        <attr name="dcvMaxFailCount" format="integer" />
+        <attr name="dcvBlockSize" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="PasswordEditText">
+        <attr name="petShowDrawable" format="integer"/>
+        <attr name="petHideDrawable" format="integer"/>
+        <attr name="petPwdVisible" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="RealtimeBlurView">
+        <attr name="rbvBlurRadius" format="dimension"/>
+        <attr name="rbvDownsampleFactor" format="float"/>
+        <attr name="rbvOverlayColor" format="color"/>
+    </declare-styleable>
 </resources>

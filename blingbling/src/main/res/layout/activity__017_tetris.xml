@@ -43,7 +43,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.39"/>
 
-    <dinson.customview.weight._017tetris.TetrisGameView
+    <dinson.customview.widget._017tetris.TetrisGameView
         android:id="@+id/game"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

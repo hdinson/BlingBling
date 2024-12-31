@@ -1,0 +1,85 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+version = libraryVersion
+group = publishedGroupId
+
+// 生成源文件的任务
+task sourcesJar(type: Jar) {
+    // from android.sourceSets.main.java.srcDirs
+    // getArchiveClassifier().convention('sources')
+    // getArchiveClassifier().set('sources')
+}
+
+// 生成文档的任务
+task javadoc(type: Javadoc) {
+    // source = android.sourceSets.main.java.srcDirs
+    // classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+// 生成文档Jar的任务
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    // getArchiveClassifier().convention('javadoc')
+    // getArchiveClassifier().set('javadoc')
+    // from javadoc.destinationDir
+}
+
+// 打包内容
+artifacts {
+    // archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        issueTrackerUrl = issuesUrl
+        licenses = allLicenses
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            name = libraryVersion
+            desc = libraryVersionDesc
+        }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            groupId publishedGroupId
+            artifactId artifactId
+            packaging 'aar'
+            name bintrayName
+            url siteUrl
+            licenses {
+                license {
+                    name licenseName
+                    url licenseUrl
+                }
+            }
+            developers {
+                developer {
+                    id developerId
+                    name developerName
+                    email developerEmail
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+        }
+    }
+}

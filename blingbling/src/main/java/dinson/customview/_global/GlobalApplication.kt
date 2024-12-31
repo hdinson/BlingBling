@@ -14,10 +14,11 @@ import dinson.customview.kotlin.logi
 import java.io.File
 
 
-class GlobalApplication : Application() {
+class  GlobalApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         RxBling.init(this)
             //.initNetWorkListener()
             .initCrashModule()

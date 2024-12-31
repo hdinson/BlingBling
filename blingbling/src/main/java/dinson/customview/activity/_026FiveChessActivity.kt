@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import com.dinson.blingbase.kotlin.click
-import dinson.customview.weight._026fivechess.GameCallBack
-import dinson.customview.weight._026fivechess.GomokuGameState
+import dinson.customview.widget._026fivechess.GameCallBack
+import dinson.customview.widget._026fivechess.GomokuGameState
 import kotlinx.android.synthetic.main.activity__026_five_chess.*
 
 class _026FiveChessActivity : BaseActivity(), GameCallBack {
@@ -28,7 +28,8 @@ class _026FiveChessActivity : BaseActivity(), GameCallBack {
     }
 
     private val mChooseChessDialog by lazy {
-        val view = View.inflate(this as Context, R.layout.dialog_026_choose_chess, null as ViewGroup?)
+        val view =
+            View.inflate(this as Context, R.layout.dialog_026_choose_chess, null as ViewGroup?)
         val dialog = AlertDialog.Builder(this, R.style.BaseDialogTheme)
             .setView(view)
             .create()
@@ -90,7 +91,6 @@ class _026FiveChessActivity : BaseActivity(), GameCallBack {
             actionForward.isEnabled = false
         }
     }
-
 
 
     override fun onGameOver(state: GomokuGameState) {

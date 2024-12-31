@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.view.View.OVER_SCROLL_NEVER
+import com.dinson.blingbase.annotate.BindEventBus
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -16,16 +17,17 @@ import dinson.customview.event._004CheckSelectorAllEvent
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.dip
 import dinson.customview.kotlin.loge
 import dinson.customview.kotlin.logi
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import dinson.customview.utils.CacheUtils
 
-import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.LinearSpaceDecoration
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.activity__004_bili_bili_list.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -81,7 +83,9 @@ class _004BiliBiliListActivity : BaseActivity() {
         crvVideoContent.loadMoreEnable = false
         crvVideoContent.setEmptyView("")
         crvVideoContent.recyclerView.overScrollMode = OVER_SCROLL_NEVER
-        crvVideoContent.recyclerView.addItemDecoration(LinearItemDecoration(this))
+        crvVideoContent.recyclerView.addItemDecoration(
+            LinearSpaceDecoration.Builder()
+            .spaceTB(dip(1)).build())
         btnSelectorAll.click { mAdapter.selectorAll() }
         btnDelete.click {
             val count = mAdapter.deleteSelector()
@@ -120,7 +124,7 @@ class _004BiliBiliListActivity : BaseActivity() {
                 }
             }, {
                 crvVideoContent.complete()
-                it.message?.toasty()
+                it.message?.toast()
                 loge(it::toString)
             }, {
                 crvVideoContent.complete()

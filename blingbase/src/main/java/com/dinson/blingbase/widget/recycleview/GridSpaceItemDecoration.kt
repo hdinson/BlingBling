@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 @Suppress("unused")
 class GridSpaceItemDecoration(private val leftRight: Int, private val topBottom: Int) : ItemDecoration() {
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        super.onDraw(c, parent, state)
-    }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val layoutManager = parent.layoutManager as GridLayoutManager?

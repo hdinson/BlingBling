@@ -1,16 +1,13 @@
 package dinson.customview.activity
 
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.dinson.blingbase.kotlin.toasty
+import com.dinson.blingbase.utils.ClipboardUtils
 import com.dinson.blingbase.utils.MD5
 import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
@@ -27,15 +24,15 @@ import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.adapter._005QiNiuPicAdapter
 import dinson.customview.http.RxSchedulers
-import dinson.customview.kotlin.logi
 import dinson.customview.kotlin.logv
 import dinson.customview.model.QiNiuFileInfo
 import dinson.customview.model._005QiNiuConfig
-import dinson.customview.utils.SPUtils
-import dinson.customview.weight.dialog.OnItemClickListener
-import dinson.customview.weight.dialog._005ContentMenuDialog
-import dinson.customview.weight.dialog._005QiNiuConfigDialog
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.utils.MMKVUtils
+import dinson.customview.utils.toast
+import dinson.customview.widget.dialog.OnItemClickListener
+import dinson.customview.widget.dialog._005ContentMenuDialog
+import dinson.customview.widget.dialog._005QiNiuConfigDialog
+import dinson.customview.widget.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity__005_qi_niu_yun.*
 import java.io.File
@@ -62,7 +59,7 @@ class _005QiNiuYunActivity : BaseActivity() {
      * 初始化七牛云设置
      */
     private fun initConfig() {
-        val (arrayList, i) = SPUtils.getQiNiuConfig(this)
+        val (arrayList, i) = MMKVUtils.getQiNiuConfig()
         dealQiNiuConfig(arrayList, i)
     }
 
@@ -81,19 +78,25 @@ class _005QiNiuYunActivity : BaseActivity() {
             overScrollMode = View.OVER_SCROLL_NEVER
 
             RvItemClickSupport.addTo(this)
-                .setOnItemClickListener { _, _, position ->
-                    val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val bean = mListData[position]
-                    val data = ClipData.newPlainText("Label", bean.finalUrl)
-                    cm.primaryClip = data
-                    logv { bean.finalUrl }
-                    "已复制".toasty()
-                }.setOnItemLongClickListener { _, _, position ->
+                .setOnItemLongClickListener { _, _, position ->
                     val dialog = _005ContentMenuDialog(this@_005QiNiuYunActivity)
-                    val items = arrayOf("复制", "黏贴")
+                    val items = arrayOf("复制", "删除")
                     dialog.setDatas(items, OnItemClickListener {
-                        items[it].toasty()
-                        logi { mListData[position].toString() }
+                        val bean = mListData[position]
+                        when (it) {
+                            0 -> {
+                                //复制
+                                ClipboardUtils.copyToClipBoard(
+                                    this@_005QiNiuYunActivity,
+                                    bean.finalUrl
+                                )
+                                "已复制".toast()
+                            }
+                            1 -> {
+                                //删除
+                                deleteImg(mListData[position])
+                            }
+                        }
                     })
                     dialog.show()
                     return@setOnItemLongClickListener true
@@ -121,9 +124,9 @@ class _005QiNiuYunActivity : BaseActivity() {
     @SuppressLint("SwitchIntDef")
     private fun getDataFromServer(config: _005QiNiuConfig) {
         val auth = Auth.create(config.AccessKey, config.SecretKey)
-        val zone = config.getZone()
+        val zone = config.getRegion()
         Observable.just(BucketManager(auth, Configuration(zone))).doOnNext { manager ->
-            val iterator = manager.createFileListIterator(config.Bucket, "", 1000, "")
+            /*val iterator = manager.createFileListIterator(config.Bucket, "", 100, "")
             mListData.clear()
             while (iterator.hasNext()) {
                 iterator.next().filter {
@@ -144,7 +147,22 @@ class _005QiNiuYunActivity : BaseActivity() {
             }
 
             mListData.sortBy { it.putTime }
-            mListData.reverse()
+            mListData.reverse()*/
+
+            val iterator = manager.listFiles(config.Bucket, "", "", 100, "")
+            mListData.clear()
+            iterator.items.map {
+                val host = if (config.Domain.startsWith("http")) config.Domain
+                else "http://" + config.Domain
+                val finalUrl = if (config.isPrivate) {
+                    //私有空间需要加上上传凭证
+                    val encodedFileName = Uri.encode(it.key, "utf-8")
+                    val publicUrl = String.format("%s/%s", host, encodedFileName)
+                    val token = Auth.create(config.AccessKey, config.SecretKey)
+                    token.privateDownloadUrl(publicUrl, 3600)//1小时,链接过期时间
+                } else "$host/${it.key}"//公共空间
+                mListData.add(QiNiuFileInfo(it, finalUrl))
+            }
             logv { "Load ${mListData.size} pic" }
         }.compose(RxSchedulers.io_main()).subscribe({
             mAdapter.notifyDataSetChanged()
@@ -202,7 +220,6 @@ class _005QiNiuYunActivity : BaseActivity() {
             .isCamera(true)// 是否显示拍照按钮 true or false
             .imageFormat(PictureMimeType.PNG)// 拍照保存图片格式后缀,默认jpeg
             .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
-            .sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
             //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径,可不填
             .enableCrop(false)// 是否裁剪 true or false
             .compress(false)// 是否压缩 true or false
@@ -230,9 +247,7 @@ class _005QiNiuYunActivity : BaseActivity() {
             //.recordVideoSecond()//视频秒数录制 默认60s int
             //.isDragFrame(false)// 是否可拖动裁剪框(固定)
             .forResult(PictureConfig.CHOOSE_REQUEST)//结果回调onActivityResult code
-
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -241,7 +256,7 @@ class _005QiNiuYunActivity : BaseActivity() {
             if (mConfigList[item.itemId].equals(mCurrentConfig)) return true
             mCurrentConfig = mConfigList[item.itemId]
             resetTitleBarText()
-            SPUtils.setQiuNiuDefaultDomain(this, mCurrentConfig!!.Domain)
+            MMKVUtils.setQiuNiuDefaultDomain(mCurrentConfig!!.Domain)
             flCustomRefreshView.isRefreshing = true
         } else {
             when (item.itemId) {
@@ -258,7 +273,7 @@ class _005QiNiuYunActivity : BaseActivity() {
     private fun showAddQiNiuConfigDialog(config: _005QiNiuConfig? = null) {
         val dialog = _005QiNiuConfigDialog(this, config)
         dialog.setOnDismissListener {
-            val (list, domain) = SPUtils.getQiNiuConfig(this)
+            val (list, domain) = MMKVUtils.getQiNiuConfig()
             dealQiNiuConfig(list, domain)
         }
         dialog.show()
@@ -302,10 +317,10 @@ class _005QiNiuYunActivity : BaseActivity() {
      * 上传图片到服务器。path为本地路径
      */
     private fun uploadImg2QiNiu(path: String) {
-        "正在上传".toasty()
+        "正在上传".toast()
         mCurrentConfig?.let { config ->
             val upToken = Auth.create(config.AccessKey, config.SecretKey).uploadToken(config.Bucket)
-            val zone = config.getZone()
+            val zone = config.getRegion()
             val file = File(path)
             if (!file.exists() || !file.isFile) return@let
             val key = file.name.let { MD5.encode(it) + it.substring(it.lastIndexOf(".")) }
@@ -320,6 +335,25 @@ class _005QiNiuYunActivity : BaseActivity() {
             }, {
                 it.printStackTrace()
             })
+        }
+    }
+
+    /**
+     * 从七牛云服务器上删除图片
+     */
+    private fun deleteImg(info: QiNiuFileInfo) {
+        "正在删除".toast()
+        mCurrentConfig?.let { config ->
+            val auth = Auth.create(config.AccessKey, config.SecretKey)
+            val bucketManager = BucketManager(auth, Configuration(config.getRegion()))
+            Observable.just(bucketManager)
+                .map { it.delete(config.Bucket, info.key) }
+                .compose(RxSchedulers.io_main())
+                .subscribe({
+                    it.bodyString().toast()
+                }, {
+                    it.printStackTrace()
+                })
         }
     }
 }

@@ -1,9 +1,8 @@
 package com.dinson.blingbase.kotlin
 
 import android.view.View
-import com.dinson.blingbase.RxBling
-import com.dinson.blingbase.widget.toasty.Toasty
 import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
 /******************************************************************************************************/
 /**                             String                                                               **/
@@ -38,27 +37,6 @@ fun String.lowerFirstLetter(): String {
     else "${(this[0].toInt() + 32).toChar()} ${this.substring(1)}"
 }
 
-fun String.toasty(): String {
-    Toasty.normal(RxBling.context).text(this).show()
-    return this
-}
-
-fun String.toastySuc(): String {
-    Toasty.success(RxBling.context).text(this).show()
-    return this
-}
-
-
-fun String.toastyTarget(view: View) {
-    Toasty.info(RxBling.context)
-        .text(this)
-        .showIcon(false)
-        .target(view)
-        .animate(true)
-        .offsetY(20)
-        .show()
-}
-
 /******************************************************************************************************/
 /**                             Double                                                               **/
 /******************************************************************************************************/
@@ -70,6 +48,14 @@ fun String.toastyTarget(view: View) {
 fun Double.formatMoney(): String {
     val df = DecimalFormat("###,##0.00")
     return df.format(this)
+}
+
+/**
+ * 格式化double，如果为整数显示整数
+ */
+fun Double.doubleTrans(): String {
+    val roundToInt = this.roundToInt()
+    return if (roundToInt - this == 0.0)  roundToInt.toString() else this.toString()
 }
 
 
@@ -115,6 +101,9 @@ fun Long.formatFileSize(): String {
 infix fun Int.max(other: Int) = if (this > other) this else other
 infix fun Float.max(other: Float) = if (this > other) this else other
 infix fun Double.max(other: Double) = if (this > other) this else other
+infix fun Number.max(other: Number) = if (this.toFloat() > other.toFloat()) this else other
+
 infix fun Int.min(other: Int) = if (this < other) this else other
 infix fun Float.min(other: Float) = if (this < other) this else other
 infix fun Double.min(other: Double) = if (this < other) this else other
+infix fun Number.min(other: Number) = if (this.toFloat() < other.toFloat()) this else other

@@ -12,18 +12,20 @@ import android.widget.TextView
 import com.dinson.blingbase.kotlin.dip
 import com.dinson.blingbase.kotlin.screenHeight
 import com.dinson.blingbase.kotlin.screenWidth
+import com.dinson.blingbase.utils.SystemBarModeUtils
 import com.dinson.blingbase.utils.TypefaceUtil
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview._global.ConstantsUtils.APP_FONT_PATH
-import dinson.customview.weight._029floatingview.Floating
-import dinson.customview.weight._029floatingview.FloatingBuilder
-import dinson.customview.weight._029floatingview.effect.EarthFloatingTransition
-import dinson.customview.weight._029floatingview.effect.PlaneFloatingTransition
-import dinson.customview.weight._029floatingview.effect.ScaleFloatingTransition
-import dinson.customview.weight._029floatingview.effect.TranslateFloatingTransition
+import dinson.customview.widget._029floatingview.Floating
+import dinson.customview.widget._029floatingview.FloatingBuilder
+import dinson.customview.widget._029floatingview.effect.EarthFloatingTransition
+import dinson.customview.widget._029floatingview.effect.PlaneFloatingTransition
+import dinson.customview.widget._029floatingview.effect.ScaleFloatingTransition
+import dinson.customview.widget._029floatingview.effect.TranslateFloatingTransition
 import kotlinx.android.synthetic.main.activity__029_floating_view.*
 import java.util.*
+import kotlin.math.hypot
 
 class _029FloatingViewActivity : BaseActivity() {
 
@@ -32,26 +34,31 @@ class _029FloatingViewActivity : BaseActivity() {
 
     private var mCount = 0//点赞计数
     private var toggle = true//背景转变
-    private val mBgColor = arrayOf(Color.parseColor("#6d5f88"),
-        Color.parseColor("#62a465"))
+    private val mBgColor = arrayOf(
+        Color.parseColor("#6d5f88"),
+        Color.parseColor("#62a465")
+    )
 
     //星星的中心点坐标
     private val mStartCenter by lazy {
-        intArrayOf((ivStar.right - ivStar.left) / 2 + ivStar.left,
-            (ivStar.bottom - ivStar.top) / 2 + ivStar.top)
+        intArrayOf(
+            (ivStar.right - ivStar.left) / 2 + ivStar.left,
+            (ivStar.bottom - ivStar.top) / 2 + ivStar.top
+        )
     }
 
     //背景变换半径
     private val mBgChangeRadio by lazy {
         val maxWidth = maxOf(screenWidth() - mStartCenter[0], mStartCenter[0])
         val maxHeight = maxOf(screenHeight() - mStartCenter[1], mStartCenter[1])
-        Math.hypot(maxWidth.toDouble(), maxHeight.toDouble()).toFloat()
+        hypot(maxWidth.toDouble(), maxHeight.toDouble()).toFloat()
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__029_floating_view)
+        SystemBarModeUtils.setPaddingTop(this, ivTitle)
 
         mTypeface = TypefaceUtil.getFontFromAssets(this, APP_FONT_PATH)
         mFloating = Floating(this)

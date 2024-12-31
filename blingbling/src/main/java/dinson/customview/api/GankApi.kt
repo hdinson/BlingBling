@@ -12,25 +12,21 @@ import retrofit2.http.*
 interface GankApi {
 
     companion object {
-        const val SERVER_URL = "https://gank.io/api"
-
+        const val SERVER_URL = "https://gank.io/api/v2"
     }
 
     /**
      * 获取GankIO福利
      */
     @Headers("Cache-Control:public,max-age=7200")
-    @GET("$SERVER_URL/data/福利/{size}/{page}")
-    fun gankIOGirlsPic(@Path("size") size: Int, @Path("page") page: Int)
-        : Observable<GankRoot<ArrayList<Welfare>>>
+    @GET("$SERVER_URL/data/category/Girl/type/Girl/page/{page}/count/{size}")
+    fun gankIOGirlsPic(@Path("size") size: Int, @Path("page") page: Int): Observable<GankGirl>
 
-//https://api.mmzztt.com/wp-json/wp/v2/rand?page=1
-
+    //https://api.mmzztt.com/wp-json/wp/v2/rand?page=1
     //https://mztapi.mmzztt.com/data/api.json?meizitu
     /**
      * 获取妹子图域名
      */
-
     @GET("https://mztapi.mmzztt.com/data/api.json?meizitu")
     fun getMeizituUrl(): Observable<MeiZiTuUrl>
 
@@ -57,7 +53,8 @@ interface GankApi {
     /**
      * 获取妹子图精选图片
      */
-    @GET("https://api.mmzztt.com/wp-json/wp/v2/rand")
+//    @GET("https://api.mmzztt.com/wp-json/wp/v2/rand")
+    @GET("https://list.iimzt.com/app/i/rand")
     @Headers("Referer:https://app.mmzztt.com")
     fun meizituTopPic(@Query("page") page: Int): Observable<ArrayList<MeiZiTuPicSet>>
 
@@ -95,8 +92,10 @@ interface GankApi {
      */
     //https://app.mmzztt.com/wp-json/wp/v2/i?id=197982
     @GET("https://api.mmzztt.com/wp-json/wp/v2/i")
-    @Headers("Referer:https://app.mmzztt.com",
-        "Cache-Control:public,max-age=17200")
+    @Headers(
+        "Referer:https://app.mmzztt.com",
+        "Cache-Control:public,max-age=17200"
+    )
     fun loadPicSetById(@Query("id") id: String): Observable<AesContent>
 
 
@@ -104,7 +103,7 @@ interface GankApi {
      * 获取福利
      */
     @GET("$SERVER_URL/random/data/福利/{size}")
-    fun randomLadyPic(@Path("size") size: Int): Observable<GankRoot<ArrayList<Welfare>>>
+    fun randomLadyPic(@Path("size") size: Int): Observable<GankGirl>
 
 
     /**
@@ -112,5 +111,5 @@ interface GankApi {
      */
     @GET("https://timeline-merger-ms.juejin.im/v1/get_tag_entry?src=web&sort=createdAt&pageSize=20")
     fun loadJueJinArticle(@Query("tagId") tagId: String, @Query("page") page: Int)
-        : Observable<JueJinResponse>
+            : Observable<JueJinResponse>
 }

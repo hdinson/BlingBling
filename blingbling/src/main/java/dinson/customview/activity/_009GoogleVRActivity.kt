@@ -8,9 +8,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
-import com.dinson.blingbase.kotlin.toasty
-import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
-
+import com.dinson.blingbase.kotlin.dip
+import dinson.customview.utils.toast
+import com.dinson.blingbase.widget.recycleview.LinearSpaceDecoration
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import dinson.customview.BuildConfig
@@ -31,8 +31,8 @@ import java.io.File
 
 class _009GoogleVRActivity : BaseActivity() {
 
-    private var mListDatas = _009ModelUtil.getPanoramaImageList()
-    private var mAdapter = _009ContentAdapter(mListDatas)
+    private var mListData = _009ModelUtil.getPanoramaImageList()
+    private var mAdapter = _009ContentAdapter(mListData)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,9 +57,7 @@ class _009GoogleVRActivity : BaseActivity() {
         }
 
         rvContent.apply {
-            addItemDecoration(LinearItemDecoration(this@_009GoogleVRActivity))
             layoutManager = LinearLayoutManager(this@_009GoogleVRActivity)
-            itemAnimator = null
             adapter = mAdapter
             RvItemClickSupport.addTo(this)
                 .setOnItemClickListener { _, _, position ->
@@ -70,7 +68,13 @@ class _009GoogleVRActivity : BaseActivity() {
 
     private fun loadPanoramaImage(model: _009PanoramaImageModel) {
         val file = File(model.localPath)
-        logi { String.format("File exists? %s and the path is %s", file.exists(), file.absoluteFile) }
+        logi {
+            String.format(
+                "File exists? %s and the path is %s",
+                file.exists(),
+                file.absoluteFile
+            )
+        }
 
         Observable.just(model.localPath)
             .map {
@@ -84,7 +88,7 @@ class _009GoogleVRActivity : BaseActivity() {
 
 
     private fun onItemClick(position: Int) {
-        val selector = mListDatas[position]
+        val selector = mListData[position]
         val transform = selector.transform()
         val downloadInfo = DbDownUtil.getInstance().queryDownBy(transform.url)
         if (downloadInfo == null) {
@@ -106,7 +110,7 @@ class _009GoogleVRActivity : BaseActivity() {
             if (downloadInfo.state == DownloadState.FINISH) {
                 loadPanoramaImage(selector)
             } else {
-                "下载失败".toasty()
+                "下载失败".toast()
             }
         }
     }

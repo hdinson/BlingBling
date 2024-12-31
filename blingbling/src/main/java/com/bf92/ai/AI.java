@@ -2,7 +2,7 @@ package com.bf92.ai;
 
 import androidx.annotation.Keep;
 
-import dinson.customview.weight._026fivechess.AICallBack;
+import dinson.customview.widget._026fivechess.AICallBack;
 
 public class AI implements Runnable {
 

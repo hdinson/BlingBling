@@ -15,7 +15,7 @@
         shimmer:layout_constraintRight_toRightOf="parent"
         shimmer:layout_constraintTop_toTopOf="parent"/>
 
-    <dinson.customview.weight._020shimmerlayout.ShimmerFrameLayout
+    <dinson.customview.widget._020shimmerlayout.ShimmerFrameLayout
         android:id="@+id/shimmerContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="24sp"/>
         </LinearLayout>
-    </dinson.customview.weight._020shimmerlayout.ShimmerFrameLayout>
+    </dinson.customview.widget._020shimmerlayout.ShimmerFrameLayout>
 
     <TextView
         android:id="@id/tvTitle"

@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import dinson.customview.R
-import dinson.customview._global.BaseFragment
 import dinson.customview.adapter._003MeiZiTuNineGridAdapter
 import dinson.customview.api.GankApi
 import dinson.customview.entity.gank.MeiZiTuNineGrid
@@ -18,13 +17,13 @@ import dinson.customview.entity.gank.MeiZiTuNinePic
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
-import com.dinson.blingbase.kotlin.toasty
+import dinson.customview.utils.toast
 import dinson.customview.manager.GlideSimpleLoader
 
-import dinson.customview.weight.MessagePicturesLayout
-import dinson.customview.weight._003weight.DecorationLayout
-import dinson.customview.weight.imagewatcher.ImageWatcherHelper
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.MessagePicturesLayout
+import dinson.customview.widget._003weight.DecorationLayout
+import dinson.customview.widget.imagewatcher.ImageWatcherHelper
+import dinson.customview.widget.refreshview.CustomRefreshView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_003_girl_nine_grid.*
 
@@ -115,7 +114,7 @@ abstract class _003GirlMeiZiTuNineGridFragment : ViewPagerLazyFragment(), Messag
 
             }, {
                 crfGirlsContent.complete()
-                it.toString().toasty()
+                it.toString().toast()
                 loge { it.toString() }
             }).addToManaged()
     }

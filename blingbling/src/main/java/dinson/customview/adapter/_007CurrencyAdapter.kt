@@ -15,7 +15,8 @@ import dinson.customview.listener._003OnCalculatorInput
 import dinson.customview.listener._003OnRvItemChangeListener
 import dinson.customview.model._007CurrencyModel
 import dinson.customview.utils.GlideUtils
-import dinson.customview.utils.SPUtils
+import dinson.customview.utils.MMKVUtils
+
 import kotlinx.android.synthetic.main.item_007_currency.view.*
 import java.util.*
 import java.util.regex.Pattern
@@ -23,10 +24,11 @@ import java.util.regex.Pattern
 /**
  * 货币主界面适配器
  */
-class _007CurrencyAdapter(context: Context,
-                          dataList: MutableList<_007CurrencyModel>,
-                          private val mListener: OnItemSwipeOpen)
-    : CommonAdapter<_007CurrencyModel>(dataList), _003OnCalculatorInput, _003OnRvItemChangeListener {
+class _007CurrencyAdapter(
+    context: Context,
+    val mDataList: MutableList<_007CurrencyModel>,
+    private val mListener: OnItemSwipeOpen
+) : CommonAdapter<_007CurrencyModel>(mDataList), _003OnCalculatorInput, _003OnRvItemChangeListener {
 
     private var mTargetMoney = Integer.MAX_VALUE.toDouble()
     private var mEquationStr = ""
@@ -46,13 +48,16 @@ class _007CurrencyAdapter(context: Context,
     override fun getLayoutId(viewType: Int) = R.layout.item_007_currency
 
     override fun convert(holder: CommonViewHolder, dataBean: _007CurrencyModel, position: Int) {
-        GlideUtils.setImage(holder.itemView.context, "${BuildConfig.QINIU_URL}${dataBean.imgUrl}",
-            holder.itemView.ivImg)
+        GlideUtils.setImage(
+            holder.itemView.context, "${BuildConfig.QINIU_URL}${dataBean.imgUrl}",
+            holder.itemView.ivImg
+        )
         holder.itemView.tvCurrencyCode.text = dataBean.currencyCode
         holder.itemView.tvEquation.text = dataBean.equation
             .replace("\\+".toRegex(), "＋").replace("-".toRegex(), "－")
             .replace("\\*".toRegex(), "×").replace("/".toRegex(), "÷")
-        holder.itemView.tvCurrencyCn.text = String.format(Locale.CHINA, "%s %s", dataBean.currencyCn, dataBean.sign)
+        holder.itemView.tvCurrencyCn.text =
+            String.format(Locale.CHINA, "%s %s", dataBean.currencyCn, dataBean.sign)
         holder.itemView.contentLayout.isEnabled = position == mCurrentSelect
 
 
@@ -104,7 +109,9 @@ class _007CurrencyAdapter(context: Context,
             if (mDataList[mCurrentSelect].equation.isEmpty()) {
                 getCommonViewHolder(mCurrentSelect).itemView.tvResult.startAnimation(mShakeAnimation)
             } else {
-                getCommonViewHolder(mCurrentSelect).itemView.tvEquation.startAnimation(mShakeAnimation)
+                getCommonViewHolder(mCurrentSelect).itemView.tvEquation.startAnimation(
+                    mShakeAnimation
+                )
             }
             return
         }
@@ -122,7 +129,10 @@ class _007CurrencyAdapter(context: Context,
             CalculatorKey.ADD, CalculatorKey.SUB, CalculatorKey.MUL, CalculatorKey.DIV ->
                 //运算符
                 mEquationStr = if (isEndWithNum(mEquationStr))
-                    mEquationStr + key.value else mEquationStr.substring(0, mEquationStr.length - 1) + key.value
+                    mEquationStr + key.value else mEquationStr.substring(
+                    0,
+                    mEquationStr.length - 1
+                ) + key.value
 
             CalculatorKey.DOT -> mEquationStr += "."    //小数点
 
@@ -147,7 +157,8 @@ class _007CurrencyAdapter(context: Context,
                 mDataList[mCurrentSelect].equation = mEquationStr
             }
         }
-        mDataList[mCurrentSelect].equation = if (containsOperator(mEquationStr)) mEquationStr else ""
+        mDataList[mCurrentSelect].equation =
+            if (containsOperator(mEquationStr)) mEquationStr else ""
         if (temp != mTargetMoney) {
             notifyDataSetChanged()
         } else {
@@ -159,7 +170,8 @@ class _007CurrencyAdapter(context: Context,
         var flag = true
         when (key) {
             CalculatorKey.N0 -> if (mEquationStr == "0") flag = false
-            CalculatorKey.ADD, CalculatorKey.SUB, CalculatorKey.MUL, CalculatorKey.DIV -> if (mEquationStr.isEmpty()) flag = false
+            CalculatorKey.ADD, CalculatorKey.SUB, CalculatorKey.MUL, CalculatorKey.DIV -> if (mEquationStr.isEmpty()) flag =
+                false
             CalculatorKey.DOT -> if (!isEndWithNum(mEquationStr)) flag = false
             else -> {
             }
@@ -170,7 +182,8 @@ class _007CurrencyAdapter(context: Context,
     /**
      * 是否包含运算符
      */
-    private fun containsOperator(str: String) = str.contains("+") || str.contains("-") || str.contains("*") || str.contains("/")
+    private fun containsOperator(str: String) =
+        str.contains("+") || str.contains("-") || str.contains("*") || str.contains("/")
 
 
     /**
@@ -211,7 +224,7 @@ class _007CurrencyAdapter(context: Context,
             it.targetRate = targetRate
             userCurrency.add(it.currencyCode)
         }
-        SPUtils.setUserCurrency(userCurrency)
+        MMKVUtils.setUserCurrency(userCurrency)
         notifyDataSetChanged()
     }
 

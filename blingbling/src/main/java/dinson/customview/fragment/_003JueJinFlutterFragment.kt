@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dinson.blingbase.kotlin.dip
 import dinson.customview.R
-import dinson.customview._global.BaseFragment
 import dinson.customview.activity.CommonWebActivity
 import dinson.customview.adapter._003JueJinArticleAdapter
 import dinson.customview.api.GankApi
@@ -13,10 +13,10 @@ import dinson.customview.entity.gank.JueJinResponse
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
 import dinson.customview.kotlin.loge
-import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.LinearSpaceDecoration
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
-import dinson.customview.weight.refreshview.CustomRefreshView
+import dinson.customview.widget.refreshview.CustomRefreshView
 import kotlinx.android.synthetic.main.fragment_003_juejin_flutter.*
 
 /**
@@ -58,7 +58,9 @@ class _003JueJinFlutterFragment : ViewPagerLazyFragment() {
 
 
     override fun lazyInit() {
-        crfFlutterContent.recyclerView.addItemDecoration(LinearItemDecoration(crfFlutterContent.context))
+        crfFlutterContent.recyclerView.addItemDecoration(
+            LinearSpaceDecoration.Builder()
+            .spaceTB(dip(1)).build())
         crfFlutterContent.setOnLoadListener(object : CustomRefreshView.OnLoadListener {
             override fun onRefresh() {
                 getDataFromServer(true)

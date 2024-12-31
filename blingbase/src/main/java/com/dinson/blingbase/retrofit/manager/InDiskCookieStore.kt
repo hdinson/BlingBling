@@ -1,8 +1,7 @@
 package com.dinson.blingbase.retrofit.manager
 
-import android.content.Context
-import com.dinson.blingbase.RxBling
 import com.google.gson.Gson
+import com.tencent.mmkv.MMKV
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import java.util.*
@@ -14,24 +13,30 @@ import kotlin.collections.ArrayList
  */
 class InDiskCookieStore {
     companion object {
-        private const val COOKIE_PREFS_FILE_NAME = "Cookies_Prefs"
+        private const val COOKIE_PREFS_FILE_NAME = "cookies"
     }
 
-    private val cookiePrefs = RxBling.context
-        .getSharedPreferences(COOKIE_PREFS_FILE_NAME, Context.MODE_PRIVATE)
+    private val cookiePrefs = MMKV.mmkvWithID(COOKIE_PREFS_FILE_NAME)
+
+
     private val cookies = HashMap<String, ConcurrentHashMap<String, Cookie>>()
 
     init {
-        //将持久化的cookies缓存到内存中 即map cookies
-        cookiePrefs.all.filter { it.key.contains("@") }.forEach {
-            val split = it.key.split("@")
-            if (!cookies.containsKey(split[1])) cookies[split[1]] = ConcurrentHashMap()
+        val allKeys = cookiePrefs.allKeys()
+        if (allKeys.isNullOrEmpty().not()) {
+            //将持久化的cookies缓存到内存中 即map cookies
+            cookiePrefs.allKeys().filter {
+                it.contains("@")
+            }.forEach {
+                val split = it.split("@")
+                if (!cookies.containsKey(split[1])) cookies[split[1]] = ConcurrentHashMap()
 
-            val sp = cookiePrefs.getString(it.key, "")
-            if (sp != null && sp.isEmpty()) {
-                val cookie = decodeCookie(sp)
-                if (cookie.name() != null)
-                    cookies[split[1]]!![cookie.name()] = cookie
+                val sp = cookiePrefs.decodeString(it, "")
+                if (sp != null && sp.isEmpty()) {
+                    val cookie = decodeCookie(sp)
+                    if (cookie?.name() != null)
+                        cookies[split[1]]!![cookie.name()] = cookie
+                }
             }
         }
     }
@@ -49,7 +54,7 @@ class InDiskCookieStore {
             }
             cookies[url.host()]!![cookie.name()] = cookie
             //将cookies持久化到本地
-            cookiePrefs.edit().putString(name, encodeCookie(cookie)).apply()
+            cookiePrefs.encode(name, encodeCookie(cookie))
         } else {
             if (cookies.containsKey(url.host())) {
                 cookies[url.host()]!!.remove(cookie.name())
@@ -95,7 +100,7 @@ class InDiskCookieStore {
     fun removeCookies(domain: String) {
         //本地删除
         cookiePrefs.all.keys.filter { it.contains("@") && it.split("@")[1] == domain }
-            .forEach { cookiePrefs.edit().remove(it).apply() }
+            .forEach { cookiePrefs.removeValueForKey(it) }
         //内存删除
         if (cookies.containsKey(domain)) cookies[domain]?.clear()
     }
@@ -105,7 +110,7 @@ class InDiskCookieStore {
      */
     fun removeAllCookies() {
         cookies.clear()
-        cookiePrefs.edit().clear().apply()
+        cookiePrefs.clearAll()
     }
 
     /**
@@ -122,7 +127,7 @@ class InDiskCookieStore {
     /**
      * 将字符串反序列化成cookies
      */
-    private fun decodeCookie(cookieString: String): Cookie =
+    private fun decodeCookie(cookieString: String): Cookie? =
         Gson().fromJson(cookieString, Cookie::class.java)
 
 

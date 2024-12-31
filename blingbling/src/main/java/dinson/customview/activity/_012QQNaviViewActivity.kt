@@ -6,8 +6,8 @@ import dinson.customview.BuildConfig
 import dinson.customview.R
 import dinson.customview._global.BaseActivity
 import dinson.customview.kotlin.logv
-import dinson.customview.weight._012qqnaviview.QQNaviView
-import dinson.customview.weight._012qqnaviview.QQNaviViewManager
+import dinson.customview.widget._012qqnaviview.QQNaviView
+import dinson.customview.widget._012qqnaviview.QQNaviViewManager
 import kotlinx.android.synthetic.main.activity__012_qqnavi_view.*
 
 class _012QQNaviViewActivity : BaseActivity() {

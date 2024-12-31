@@ -3,6 +3,7 @@ package dinson.customview.model
 import android.annotation.SuppressLint
 import androidx.annotation.IntDef
 import com.qiniu.common.Zone
+import com.qiniu.storage.Region
 
 /**
  * 七牛云配置文件
@@ -33,10 +34,11 @@ class _005QiNiuConfig(val AccessKey: String,
     }
 
     @SuppressLint("SwitchIntDef")
-    fun getZone() = when (this.Area) {
-        _005QiNiuConfig.HUA_DONG -> Zone.zone0()
-        _005QiNiuConfig.HUA_BEI -> Zone.zone1()
-        _005QiNiuConfig.HUA_NAN -> Zone.zone2()
-        else -> Zone.autoZone()
+    fun getRegion() = when (this.Area) {
+        HUA_DONG -> Region.huadong()
+        HUA_BEI -> Region.huabei()
+        HUA_NAN -> Region.huanan()
+        BEI_MEI -> Region.beimei()
+        else -> Region.autoRegion()
     }!!
 }

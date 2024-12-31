@@ -3,7 +3,9 @@ package dinson.customview.activity
 import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.ImageView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,19 +18,20 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.dinson.blingbase.kotlin.click
+import com.dinson.blingbase.kotlin.dip
 import com.dinson.blingbase.rxcache.rxCache
 import com.dinson.blingbase.rxcache.stategy.CacheStrategy
 import com.dinson.blingbase.utils.TypefaceUtil
-import com.dinson.blingbase.widget.recycleview.LinearItemDecoration
+import com.dinson.blingbase.widget.recycleview.LinearSpaceDecoration
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
-import dinson.customview.R
-import dinson.customview._global.BaseActivity
 import dinson.customview._global.ConstantsUtils.APP_FONT_PATH
+import dinson.customview._global.ViewBindingActivity
 import dinson.customview.adapter.MainContentAdapter
 import dinson.customview.api.OneApi
 import dinson.customview.api.XinZhiWeatherApi
+import dinson.customview.databinding.ActivityMainBinding
 import dinson.customview.entity.HomeWeather
 import dinson.customview.http.HttpHelper
 import dinson.customview.http.RxSchedulers
@@ -39,13 +42,14 @@ import dinson.customview.listener.MainItemTouchHelper
 import dinson.customview.listener.OnItemTouchMoveListener
 import dinson.customview.model.HomeWeatherModelUtil
 import dinson.customview.model.MainActivityModelUtil
+import dinson.customview.utils.toast
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
 import me.stefan.library.mu5viewpager.Mu5Interface
+import java.util.concurrent.TimeUnit
 
-class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
+class MainActivity : ViewBindingActivity<ActivityMainBinding>(), OnItemTouchMoveListener, Mu5Interface {
 
     private val mHeadData = ArrayList<String>()
     private var mAMapLocationClient: AMapLocationClient? = null
@@ -54,18 +58,22 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         initContent()
         initHead()
         getLocation()
-        weatherLayout.click {
-            /* RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_MMS, Manifest.permission.READ_CALL_LOG)
+        binding.weatherLayout.click {
+             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_MMS, Manifest.permission.READ_CALL_LOG)
                  .subscribe {
                      if (it) AndroidInfoActivity.start(this)
-                     else "需要电话权限".toasty()
-                 }*/
-            intArrayOf(2)[10]
+                     else {
+                         "需要同意权限才能查看设备信息".toast()
+                         val intent = Intent()
+                         intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                         intent.data = Uri.parse("package:" + this.packageName)
+                         startActivity(intent)
+                     }
+                 }
         }
     }
 
@@ -78,13 +86,14 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     private fun initContent() {
         val mainAdapter = MainContentAdapter(mContentData, this)
         mTouchHelper = ItemTouchHelper(MainItemTouchHelper(mainAdapter))
-        mTouchHelper.attachToRecyclerView(rvContent)
-        rvContent.apply {
+        mTouchHelper.attachToRecyclerView(binding.rvContent)
+        binding.rvContent.apply {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(LinearItemDecoration(this@MainActivity))
+            addItemDecoration(LinearSpaceDecoration.Builder()
+                .spaceTB(dip(1)).build())
         }
-        RvItemClickSupport.addTo(rvContent).setOnItemClickListener { _, _, position ->
+        RvItemClickSupport.addTo(binding.rvContent).setOnItemClickListener { _, _, position ->
             startActivity(Intent(this, mContentData[position].name))
         }
         //mu5Viewpager.setData(mHeadData, this)
@@ -95,7 +104,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
      */
     private fun initHead() {
         mOneApi.loadDaily()
-            .rxCache("api_one_daily", CacheStrategy.firstCacheTimeout(12 * 3600 * 1000))
+            .rxCache("api_one_daily", CacheStrategy.firstCacheTimeout(12 ,TimeUnit.HOURS))
             .flatMap {
                 logi { "${it.data.data}" }
                 Observable.fromIterable(it.data.data)
@@ -118,7 +127,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
             .subscribe({ list ->
                 mHeadData.clear()
                 mHeadData.addAll(list.filter { it.data != null }.map { it.data!!.hp_img_url })
-                mu5Viewpager.setData(mHeadData, this)
+                binding.mu5Viewpager.setData(mHeadData, this)
             }, {
                 loge(it::toString)
             }).addToManaged()
@@ -144,7 +153,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
      * 定位
      */
     private fun getLocation() {
-        weatherLayout.click {
+        binding.weatherLayout.click {
             RxPermissions(this).request(Manifest.permission.READ_PHONE_STATE)
                 .subscribe { AndroidInfoActivity.start(this) }
         }
@@ -164,19 +173,19 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     private var locationListener = AMapLocationListener { location ->
         destroyLocation()//只定位一次
         if (null == location) {
-            tvWeather.text = "定位失败"
+            binding.tvWeather.text = "定位失败"
             return@AMapLocationListener
         }
         if (location.errorCode != 0) return@AMapLocationListener  //errCode等于0代表定位成功
 
         val city = if (location.city.isNullOrEmpty()) location.province else location.city
         HttpHelper.create(XinZhiWeatherApi::class.java).getWeather(city)
-            .rxCache("api_home_weather_cache", CacheStrategy.firstCacheTimeout(3600000))
+            .rxCache("api_home_weather_cache", CacheStrategy.firstCacheTimeout(1,TimeUnit.HOURS))
             .compose(RxSchedulers.io_main())
             .subscribe({
                 initWeatherLayout(it.data) //设置数据
             }, {
-                tvWeather.text = city
+                binding.tvWeather.text = city
                 loge(it::toString)
             })
     }
@@ -184,8 +193,8 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
     private fun initWeatherLayout(weather: HomeWeather) {
         logd { ".$weather" }
         val resultsBean = weather.results[0]
-        iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
-        tvWeather.apply {
+        binding.iconFontWeather.setText(HomeWeatherModelUtil.getWeatherFont(resultsBean.now.code))
+        binding.tvWeather.apply {
             typeface = TypefaceUtil.getFontFromAssets(this@MainActivity, APP_FONT_PATH)
             text = String.format("%s℃", resultsBean.now.temperature)
         }
@@ -239,7 +248,7 @@ class MainActivity : BaseActivity(), OnItemTouchMoveListener, Mu5Interface {
         Glide.with(this).asBitmap().load(url)
             .into(object : SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    mu5Viewpager.bindSource(resource, p2, p0)
+                    binding.mu5Viewpager.bindSource(resource, p2, p0)
                 }
             })
     }

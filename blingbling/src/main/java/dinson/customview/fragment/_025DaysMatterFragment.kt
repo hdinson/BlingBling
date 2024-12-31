@@ -12,13 +12,14 @@ import dinson.customview.adapter._025ScheduleMainListAdapter
 import dinson.customview.event._025EditScheduleEvent
 import com.dinson.blingbase.kotlin.hide
 import com.dinson.blingbase.kotlin.show
-import dinson.customview.model._025Schedule
-import dinson.customview.utils.SPUtils
-import dinson.customview.weight._025provider.WidgetProviderBig
-import dinson.customview.weight._025provider.WidgetProviderMiddle
-import dinson.customview.weight._025provider.WidgetProviderSmall
+
+import dinson.customview.widget._025provider.WidgetProviderBig
+import dinson.customview.widget._025provider.WidgetProviderMiddle
+import dinson.customview.widget._025provider.WidgetProviderSmall
 
 import com.dinson.blingbase.widget.recycleview.RvItemClickSupport
+import dinson.customview.entity._025._025Schedule
+import dinson.customview.utils.MMKVUtils
 import kotlinx.android.synthetic.main.fragment_025_days_matter.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -51,12 +52,12 @@ class _025DaysMatterFragment : ViewPagerLazyFragment() {
     }
 
     private fun initData() {
-        val spData = SPUtils.getScheduleList(requireContext())
+        val spData = MMKVUtils.getScheduleList()
         mData.clear()
         mData.addAll(spData)
         if (mData.isNotEmpty()) {
             emptyView.hide()
-            val top = SPUtils.getScheduleTop(emptyView.context)
+            val top = MMKVUtils.getScheduleTop()
             val find = mData.find { it.id == top }
             initTop(find ?: mData[0])
         } else {
@@ -71,7 +72,7 @@ class _025DaysMatterFragment : ViewPagerLazyFragment() {
         topCard.show()
         tvTopTitle.text = schedule.name
         tvTopDate.text = "目标日: ${schedule.dateTime}"
-        val displayDay = schedule.displayDay
+        val displayDay = schedule.getDisplayDay()
         tvDayCount.text = if (displayDay < 0) "已过 ${-displayDay}" else displayDay.toString()
     }
 

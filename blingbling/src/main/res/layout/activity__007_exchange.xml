@@ -17,7 +17,7 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <dinson.customview.weight.swipelayout.SwipeMenuRecyclerView
+        <dinson.customview.widget.swipelayout.SwipeMenuRecyclerView
             android:id="@id/rvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <dinson.customview.weight.LanTingFontTextView
+        <dinson.customview.widget.LanTingFontTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/_007_list_undercover"

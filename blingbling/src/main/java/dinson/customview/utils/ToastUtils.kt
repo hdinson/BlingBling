@@ -15,7 +15,7 @@ import dinson.customview.R
 @SuppressLint("ShowToast")
 object ToastUtils {
     private val mToast by lazy {
-        val toast = Toast.makeText(RxBling.context, "", Toast.LENGTH_SHORT)
+        val toast = Toast.makeText(RxBling.getApplicationContext(), "", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.view.setBackgroundResource(R.drawable.toast_bg)
         toast.view.findViewById<TextView>(android.R.id.message).apply {
@@ -29,4 +29,8 @@ object ToastUtils {
         mToast.setText(message)
         mToast.show()
     }
+}
+
+fun String.toast() {
+    ToastUtils.showToast(this)
 }

@@ -76,7 +76,8 @@ class BannerView @JvmOverloads constructor(
 
         mIndicatorContainer = LinearLayout(context)
         mIndicatorContainer.setPadding(dip(16), 0, dip(16), mSettings.mIndicatorMarginBottom)
-        val containerParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        val containerParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
+        mIndicatorContainer.gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
         containerParams.addRule(
             when (mSettings.mIndicatorAlign) {
                 0 -> ALIGN_PARENT_LEFT
