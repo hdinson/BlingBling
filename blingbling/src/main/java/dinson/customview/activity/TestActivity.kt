@@ -40,6 +40,12 @@ import dinson.customview.manager.BlingNdkHelper
 import dinson.customview.utils.CacheUtils
 import dinson.customview.utils.GlideEngine
 import kotlinx.android.synthetic.main.activity_test.*
+import kotlinx.coroutines.Dispatchers
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.HeaderMap
+import retrofit2.http.POST
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -124,10 +130,82 @@ class TestActivity : BaseActivity() {
     }
 
     fun onDoWork(v: View) {
-        /* val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-         val request = OneTimeWorkRequest.Builder(DeletePng::class.java)
-             .setConstraints(constraints).build()
-         WorkManager.getInstance().enqueue(request)*/
+
+        //api
+        //@POST("https://amp.gwmapp-h.com/web/haval/v1/sso/account-login?cVer=5.1.800")
+        //fun havalLogin(@HeaderMap headers: Map<String, String>, @Body body: RequestBody): Call<ResponseBody>
+
+
+
+        try {
+
+            val now = (System.currentTimeMillis() / 1000).toString()
+            val pub = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlHZk1BMEdDU3FHU0liM0RRRUJBUVVBQTRHTkFEQ0JpUUtCZ1FDdE94ZnhyZThpek1MMHpYMWN6dEtZRGVpdwpOZVlLYnZLOFhMa1NBc05KUmdTOWNVYXJoVVdveFhHclVOWDVOdVIzUjRYU1N1L0o5WURXSDRBV0R6a2pWQVlpCkdFZ1NTSVFTc0N0YkNlRGRtRmdIV1hqR1pkUHVpU1A1QjZONUZzSVd5djMxSzl2U0c2S2ZmdWF4dGM2djM1RE8KZXdXbk5sMHhUcitUZ2NhYjd3SURBUUFCCi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo="
+            val dto = SSOLoginEncryptionDto()
+
+            dto.setAccount("xxxxx")
+            dto.setPassword("xxxxx")
+            dto.setPushId("")
+            dto.setPushKey("")
+            dto.setTimestamp(now)
+
+            val gson = GsonBuilder().serializeNulls().create()
+            val json = gson.toJson(dto)
+            loge { "json: $json" }
+            val b = DesUtils.b(pub, json)
+            loge { "获取的 secret: ${b.aesSecretKey}" }
+            loge { "获取的 isecret: ${b.aesVector}" }
+            loge { "获取的 content: ${b.content}" }
+
+
+            val key = "AP463000936709619712"
+            val scr = "f90845a088c74b8497b3cc1d3909abcc"
+            val buf = StringBuffer(key).append(now).append(scr)
+            val forStr = SecurityUtils.generateMD5Hash(buf.toString())
+            logi { "----now: $now, forumsecret: $forStr" }
+
+            val headersMap = mapOf(
+                "secret" to b.aesSecretKey,
+                "isecret" to b.aesVector,
+                "User-Agent" to "HUAWEI(VOG-AL00) HAVAL/5.1.800 (com.navinfo.gw; build:284; Android 10) okhttp/4.2.2",
+
+
+                "nowTime" to now.reversed(),
+                "forumSecret" to forStr,
+
+
+                "Content-Type" to "text/html; charset=UTF-8",
+                "Host" to "amp.gwmapp-h.com",
+                "Nolog" to "true",
+                "Accept-Encoding" to "*",
+                "Connection" to "keep-alive",
+                "Accept" to "*/*",
+                "Access-Control-Allow-Origin" to "*",
+                "Access-Control-Allow-Headers" to "X-Requested-With",
+                "Vary" to "Accept-Encoding",
+                "SSOAccessToken" to "SSOAccessToken",
+                "SSOuid" to "SSOuid",
+                "mallToken" to "",
+                "tokenId" to "",
+                "ptToken" to "",
+                "cVer" to "5.1.800",
+            )
+
+
+            lifecycleScope.launch(Dispatchers.IO) {
+
+                val companion = RequestBody
+                val parse = "application/x-www-form-urlencoded".toMediaTypeOrNull()
+                val content = b.content
+                val create = companion.create(parse, content)
+                val result = HttpHelper.create(ServiceApi::class.java).havalLogin(headersMap, create).await()
+                loge { "结果: ${result.string()}" }
+            }
+
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     fun loggg3(func: () -> String) {
